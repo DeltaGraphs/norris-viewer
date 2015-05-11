@@ -3,19 +3,14 @@
 buildscript {
     repositories {
         jcenter()
-        //Aggiunte di Trive
         mavenCentral()
-        maven{
+        maven {
             url 'https://oss.sonatype.org/content/repositories/snapshots'
         }
-        //fine aggiunte
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
-        //Aggiunte
         classpath 'com.novoda.gradle:robolectric-plugin:0.0.1-SNAPSHOT'
-        //Fine aggiunte
-
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -24,11 +19,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        //Aggiunte
         mavenCentral()
-        maven{
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
-        //Fine aggiunte
+
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     }
 }
