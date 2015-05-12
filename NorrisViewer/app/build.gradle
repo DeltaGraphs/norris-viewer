@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'robolectric'
+apply plugin: 'org.robolectric'
 
 android {
     compileSdkVersion 22
@@ -18,12 +18,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+}
+
+robolectric {
+    // configure whether unsupported versions should result in a failure
+    ignoreVersionCheck true
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
 
-    instrumentTestCompile 'org.robolectric:robolectric:2.+'
-    instrumentTestCompile 'junit:junit:4.+'
+    testCompile 'junit:junit:4.12'
+    testCompile 'org.robolectric:robolectric:2.4'
+    testCompile "org.mockito:mockito-core:1.9.5"
 }
