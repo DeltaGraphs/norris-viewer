@@ -1,4 +1,4 @@
-package com.deltagraphs.norrisviewer;
+package com.deltagraphs.norrisviewer.presenter;
 
 import java.net.URISyntaxException;
 
