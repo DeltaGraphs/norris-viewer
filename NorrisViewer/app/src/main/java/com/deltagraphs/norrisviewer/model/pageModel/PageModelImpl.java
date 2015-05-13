@@ -6,9 +6,24 @@ import org.json.JSONObject;
 import java.util.Observable;
 import java.util.ArrayList;
 
-/**
- * Created by Enrico on 12/05/2015.
+/*
+ * Name : PageModelImpl.java
+ * Module : norrisviewer::model::pageModel
+ * Location : /com.deltagraphs.norrisviewer/model/pageModel
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.1.0 2015-05-12  Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-12  Enrico Savoca Creazione del file
+ *
+ * ===============================================================
+ *
  */
+
 public class PageModelImpl extends Observable implements PageModel{
     class Page{
         class PageItem{
