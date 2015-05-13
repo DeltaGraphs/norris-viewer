@@ -6,8 +6,22 @@ import android.support.v7.app.ActionBarActivity;
 import com.deltagraphs.norrisviewer.presenter.SocketManager;
 import com.deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
 
-/**
- * Created by davide on 12/05/15.
+/*
+ * Name : MainActivity.java
+ * Module : norrisviewer::view::mainView
+ * Location : /com.deltagraphs.norrisviewer/view/mainView
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.1.0 2015-05-13  Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-13  Davide Trivellato Creazione del file
+ *
+ * ===============================================================
+ *
  */
 public class MainActivity extends ActionBarActivity implements MainView {
 
