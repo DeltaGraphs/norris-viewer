@@ -1,5 +1,5 @@
 language: android
-install: ant deps
+
 android:
   components:
     - build-tools-20.0.0
@@ -12,5 +12,4 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
     
-gradle build connectedCheck
-./gradlew build connectedCheck
+
