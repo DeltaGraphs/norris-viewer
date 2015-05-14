@@ -89,7 +89,10 @@ public class PageModelImpl extends Observable implements PageModel{
 
     private void JSONParser(JSONObject data, String signal){
         try{
+           //choise of procedure based on arriving signals
+
             switch(signal) {
+                // case of the first initialization
                 case "configPageList": {
                     name = data.getString("name");
                     JSONArray pagesArray = data.getJSONArray("data");
