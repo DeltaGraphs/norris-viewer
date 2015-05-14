@@ -12,10 +12,26 @@ import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by davide on 12/05/15.
- * This class provides an instrument for manage Socket connection and the URL I/O
+/*
+ * Name : SocketManager.java
+ * Module : norrisviewer::presenter
+ * Location : norrisviewer\presenter
+ *
+ * History :
+ *
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.1.0 2015-05-12 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-12 Davide Trivellato Creazione file
+ *
+ * ===============================================================
+ *
  */
+
+//This class provides an instrument for manage Socket connection and the URL I/O
+
 public class SocketManager extends Activity{
 
     private Socket mSocket;
