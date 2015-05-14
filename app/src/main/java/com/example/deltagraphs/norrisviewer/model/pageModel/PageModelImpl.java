@@ -78,7 +78,9 @@ public class PageModelImpl extends Observable implements PageModel{
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
 
-    private PageModelImpl(JSONObject data){
+    public PageModelImpl(){}
+
+    public PageModelImpl(JSONObject data){
         // insert roba XD
     }
 
@@ -94,7 +96,7 @@ public class PageModelImpl extends Observable implements PageModel{
             switch(signal) {
                 case "configPageList": {
 
-                    /* case of the first initialization.
+                    /* this is the case of the first initialization.
                        It uses JSON to create firstly PageModel's attributes, then the Pages List.
                        After this, it creates and populates each page */
 
