@@ -1,35 +1,23 @@
-package com.example.deltagraphs.norrisviewer.model.pageModel;/*
- * Name : { Nome del file }.java
- * Module : com.example.deltagraphs.norrisviewer.model.pageModel
- * Location : norrisviewer { Percorso in cui \'e presente il file }
- *
- * History :
+package com.example.deltagraphs.norrisviewer.model.pageModel;
 
- * Version Date Programmer Description
- * ===============================================================
- * 
- * 0.0.1 2015-05-X davide Creazione file
- *
- * ===============================================================
- *
- */
+import junit.framework.TestCase;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+public class PageModelImplTest extends TestCase {
 
-import static junit.framework.TestCase.assertEquals;
+    @org.junit.Test
+    public void testAddPage() throws Exception {
 
-public class PageModelImplTest {
+    }
 
-    private PageModelImpl mPageModelImpl;
+    @org.junit.Test
+    public void testGetName() throws Exception {
 
-    @Test
-    public void addPagesToList() {
-        mPageModelImpl = new PageModelImpl();
-        mPageModelImpl.addPage("Page1","Pagina Uno","questa è la pagina uno");
-        ArrayList<PageModelImpl.Page> list = mPageModelImpl.getList();
-        int dim = list.size();
-        assertEquals("[New page inserted,]", 1, dim);
+    }
+
+    @org.junit.Test
+    public void testGetList() throws Exception {
+
     }
 }
