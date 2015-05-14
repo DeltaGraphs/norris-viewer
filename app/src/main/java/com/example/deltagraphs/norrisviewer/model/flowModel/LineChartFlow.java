@@ -1,6 +1,6 @@
 package com.example.deltagraphs.norrisviewer.model.flowModel;
 
-import org.json.JSONObject;
+import com.example.deltagraphs.norrisviewer.model.flowModel.*;
 
 /*
  * Name : LineChartFlow.java
@@ -20,18 +20,18 @@ import org.json.JSONObject;
  *
  */
 
-public class LineChartFlow implements Flow {
+public class LineChartFlow implements FlowModel.Flow {
 
-    String xKey;
-    String yKey;
-    String xFormat;
-    String yFormat;
-    String flowColour;
-    String legendOnPoint;
-    String marker;
-    String interpolation;
-    String subAreaColour;
-    int maxItems;
+    private String xKey;
+    private String yKey;
+    private String xFormat;
+    private String yFormat;
+    private String flowColour;
+    private String legendOnPoint;
+    private String marker;
+    private String interpolation;
+    private String subAreaColour;
+    private int maxItems;
 
 
 }

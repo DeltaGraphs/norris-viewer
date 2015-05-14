@@ -20,13 +20,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TableFlow implements Flow{
-    ArrayList<String> columnKeys;
-    ArrayList<String> columnFormat;
-    String fontColourKey;
-    String BackgroundColourKey;
-    String BackgroundColourFormat;
-    int maxItems;
+public class TableFlow implements FlowModel.Flow{
+    private ArrayList<String> columnKeys;
+    private ArrayList<String> columnFormat;
+    private String fontColourKey;
+    private String BackgroundColourKey;
+    private String BackgroundColourFormat;
+    private int maxItems;
 
 
 }

@@ -1,5 +1,7 @@
 package com.example.deltagraphs.norrisviewer.model.flowModel;
 
+
+
 /*
  * Name : MapChartFlow.java
  * Module : com.example.deltagraphs.norrisviewer.model.flowModel
@@ -17,16 +19,16 @@ package com.example.deltagraphs.norrisviewer.model.flowModel;
 
 import org.json.JSONObject;
 
-public class MapChartFlow implements Flow{
+public class MapChartFlow implements FlowModel.Flow {
 
-    String longitudeKey;
-    String latitudeKey;
-    String longitudeFormat;
-    String latitudeFormat;
-    String legendOnPoint;
-    String marker;
-    int maxItems;
-    String trace;
+    private String longitudeKey;
+    private String latitudeKey;
+    private String longitudeFormat;
+    private String latitudeFormat;
+    private String legendOnPoint;
+    private String marker;
+    private int maxItems;
+    private String trace;
 
 
 }

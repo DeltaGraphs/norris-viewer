@@ -20,14 +20,14 @@ import org.json.JSONObject;
  *
  */
 
-public class BarChartFlow implements Flow{
+public class BarChartFlow implements FlowModel.Flow{
 
-    String indexKey;
-    String valueKey;
-    String indexFormat;
-    String valueFormat;
-    String flowColour;
-    String legendOnPoint;
+    private String indexKey;
+    private String valueKey;
+    private String indexFormat;
+    private String valueFormat;
+    private String flowColour;
+    private String legendOnPoint;
 
 
 }

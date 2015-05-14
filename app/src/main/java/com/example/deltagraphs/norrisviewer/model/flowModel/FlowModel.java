@@ -47,13 +47,13 @@ public abstract class FlowModel {
 
         }
 
-        ArrayList<ConditionModel> conditions;
+        private ArrayList<ConditionModel> conditions;
 
         FilterModel(){
             conditions = new ArrayList<ConditionModel>();
         }
 
-        Boolean ValidateRecord(JSONObject record){
+        public Boolean ValidateRecord(JSONObject record){
 
             // test is passed by default ( no tests to do)
             // following rows test if the record is valid within applied conditions
@@ -71,12 +71,12 @@ public abstract class FlowModel {
 
     }
 
-    String flowId;
-    String flowName;
-    ArrayList<Flow> values = new ArrayList<Flow>();
-    FilterModel filters;
+    private String flowId;
+    private String flowName;
+    private ArrayList<Flow> values = new ArrayList<Flow>();
+    private FilterModel filters;
 
-    void addRecord(JSONObject data){
+    public void addRecord(JSONObject data){
         // TO DO!!!
     }
 
@@ -86,8 +86,9 @@ public abstract class FlowModel {
 
     public String getFlowName() { return flowName; }
     public ArrayList<Flow> getValues() { return values; }
+    public String getFlowId() { return flowId; }
 
-
+    public interface Flow {}
 
 }
 

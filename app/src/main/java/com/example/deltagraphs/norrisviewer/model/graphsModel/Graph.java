@@ -16,5 +16,52 @@ package com.example.deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
-public class Graph {
+import java.util.Observable;
+import com.example.deltagraphs.norrisviewer.model.flowModel.*;
+
+import org.json.JSONObject;
+
+import java.util.*;
+
+
+public abstract class Graph extends Observable {
+    private ArrayList<FlowModel> flowList;
+    private String title;
+
+    public void addFlow(FlowModel flow){
+        flowList.add(flow);
+    }
+
+    public void updateFlow(String flowID){
+        int index = -1;
+        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
+            index ++;
+        }
+        if(index != -1) {
+            // TO DO !!!
+            //ALERUTO!!! METODO TOSTO!!! Cambiare nome, id, filtri maybe, non so se anche i valori
+        }//else eccezione
+
+    }
+
+    public void deleteFlow(String flowID){
+        int index = -1;
+        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
+            index ++;
+        }
+        if(index != -1) {
+            flowList.remove(index);
+        }//else eccezione
+    }
+
+    public abstract void setData(JSONObject data);
+    public abstract void setParameters(JSONObject data);
+
+    private void JSONParser(JSONObject data, String signal){
+        // TO DO!!!
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }
