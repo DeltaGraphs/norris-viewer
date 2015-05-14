@@ -31,7 +31,7 @@ public class PageModelImpl extends Observable implements PageModel{
             private String itemType;
             private String itemURL;
 
-
+        // constructor of PageItem
             PageItem(String iI, String iN, String iT, String URL ){
                 itemId = iI;
                 itemName = iN;
@@ -55,7 +55,8 @@ public class PageModelImpl extends Observable implements PageModel{
         private String description;
         private ArrayList<PageItem> pageItemList = new ArrayList<PageItem>();
 
-        public Page(String id, String name, String description){
+    // constructor of Page
+        Page(String id, String name, String description){
             this.id = id;
             this.name = name;
             this.description = description;
@@ -81,6 +82,7 @@ public class PageModelImpl extends Observable implements PageModel{
         // insert roba XD
     }
 
+    //this method inserts a page
     public void addPage(String id, String name, String description){
         pageList.add(new Page(id, name, description));
     }
