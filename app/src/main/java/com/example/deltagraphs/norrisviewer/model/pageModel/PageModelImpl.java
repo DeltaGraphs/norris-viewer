@@ -92,8 +92,12 @@ public class PageModelImpl extends Observable implements PageModel{
            //choise of procedure based on arriving signals
 
             switch(signal) {
-                // case of the first initialization
                 case "configPageList": {
+
+                    /* case of the first initialization.
+                       It uses JSON to create firstly PageModel's attributes, then the Pages List.
+                       After this, it creates and populates each page */
+
                     name = data.getString("name");
                     JSONArray pagesArray = data.getJSONArray("data");
                     int pageArrayDim = pagesArray.length();
@@ -120,6 +124,10 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("insertPage"): {
+
+                    // on the arrival of this signal, a new Page,
+                    // with every parameters, is added to the pages list of PageModel.
+
                     String pageId = data.getString("ID");
                     String pageName = data.getString("name");
                     String pageDescription = data.getString("description");
@@ -140,6 +148,12 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("updatePage"): {
+
+                    // on the arrival of this signal, a page,
+                    // identified by an id, is updated.
+
+                    //first of all it searches a page in the list, with an index equal to the JSON's one
+
                     int pageIndex = -1;
                     for (int i = 0; i < pageList.size(); i++) {
                         if (pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
@@ -152,6 +166,12 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("insertGraph"): {
+
+                    // on the arrival of this signal, a new Graph,
+                    // with every parameters, is added to the item list of the declared Page.
+
+                    //first of all it searches a page in the list, with an index equal to the JSON's one
+
                     int pageIndex = -1;
                     for (int i = 0; i < pageList.size(); i++) {
                         if (pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
@@ -162,28 +182,41 @@ public class PageModelImpl extends Observable implements PageModel{
                         String itemType = data.getString("type");
                         String itemURL = data.getString("URLSocket");
 
+                        //then it insert a graph in the list of the found page, with an index equal to the JSON's one
                         pageList.get(pageIndex).addItem(itemId, itemName, itemType, itemURL);
                     }
                     break;
                 }
 
                 case("updateGraph"):{
+
+                    // on the arrival of this signal, a Graph,
+                    // identified by an id, is updated.
+
+                    //first of all it searches a page in the list, with an index equal to the JSON's one
+
                     int pageIndex = -1;
                     for(int i=0; i < pageList.size(); i++){
                         if(pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
                     }
+
+                    //then it searches a graph in the list of the found page, with an index equal to the JSON's one
+
                     if(pageIndex != -1) {
                         int graphIndex = -1;
                         for (int j = 0; j < pageList.size(); j++) {
                             if (pageList.get(pageIndex).getPageItemList().get(j).getId() == data.getString("ID"))
                                 graphIndex = j;
                         }
+
+                        // found indexes are used to update the item
+
                         if (graphIndex != -1) {
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString("ID"));
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString("title"));
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString("type"));
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString("URLSocket"));
-                        }
+                        }//else exception
                     }
                     break;
                 }
