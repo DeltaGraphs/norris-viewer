@@ -10,8 +10,6 @@ package com.example.deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica di tutti gli attributi e i metodi
- *
  * 0.0.1 2015-05-13 Enrico Savoca Creazione file
  *
  * ===============================================================
@@ -63,5 +61,7 @@ public abstract class Graph extends Observable {
         // TO DO!!!
     }
 
-    public String getTitle() { return title; }
+    public String getTitle() {
+        return title;
+    }
 }
