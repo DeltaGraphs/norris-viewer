@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.example.deltagraphs.norrisviewer.presenter.SocketManager;
 import com.example.deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
+import com.example.deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import com.example.deltagraphs.norrisviewer.view.mainView.MainView;
 
 /*
@@ -32,42 +33,43 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onCreate(Bundle savedInstanceState){
-
+        super.onCreate(savedInstanceState);
+        presenter = new MainPresenterImpl();
     }
 
     @Override
     public void onStart(){
-
+        super.onStart();
     }
 
     @Override
     public void onRestart(){
-
+        super.onRestart();
     }
 
     @Override
     public void onPause(){
-
+        super.onPause();
     }
 
     @Override
     public void onResume(){
-
+        super.onResume();
     }
 
     @Override
     public void onStop(){
-
+        super.onStop();
     }
 
     @Override
     public void onDestroy(){
-
+        super.onDestroy();
     }
 
     @Override
     public void onBackPressed(){
-
+        super.onBackPressed();
     }
 
     public void setTitle(String title) {

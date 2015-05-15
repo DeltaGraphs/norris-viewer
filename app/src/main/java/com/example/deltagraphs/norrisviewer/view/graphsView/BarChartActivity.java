@@ -29,42 +29,43 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView{
 
     @Override
     public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
         barChartPresenter = new BarChartPresenterImpl();
     }
 
     @Override
     public void onStart(){
-
+        super.onStart();
     }
 
     @Override
     public void onRestart(){
-
+        super.onRestart();
     }
 
     @Override
     public void onPause(){
-
+        super.onPause();
     }
 
     @Override
     public void onResume(){
-
+        super.onResume();
     }
 
     @Override
     public void onStop(){
-
+        super.onStop();
     }
 
     @Override
     public void onDestroy(){
-
+        super.onDestroy();
     }
 
     @Override
     public void onBackPressed(){
-
+        super.onBackPressed();
     }
 
     public void setInitialState(){

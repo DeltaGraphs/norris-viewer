@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NorrisViewer</string>
+    <color name="main_color">#26A69A</color>
 </resources>
