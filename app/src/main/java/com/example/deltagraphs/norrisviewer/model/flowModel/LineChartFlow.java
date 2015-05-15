@@ -20,7 +20,7 @@ import com.example.deltagraphs.norrisviewer.model.flowModel.*;
  *
  */
 
-public class LineChartFlow implements FlowModel.Flow {
+public class LineChartFlow implements FlowModel.Record{
 
     private String xKey;
     private String yKey;
