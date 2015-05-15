@@ -14,5 +14,5 @@ package com.example.deltagraphs.norrisviewer.presenter.graphsPresenter;/*
  *
  */
 
-public class TablePresenterImpl {
+public class TablePresenterImpl implements TablePresenter{
 }

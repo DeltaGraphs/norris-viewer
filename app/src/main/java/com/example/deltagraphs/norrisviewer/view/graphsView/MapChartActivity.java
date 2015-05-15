@@ -17,12 +17,12 @@ package com.example.deltagraphs.norrisviewer.view.graphsView;/*
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
+import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
+
 
 public class MapChartActivity extends ActionBarActivity{
 
-    private String title;
-    private MainPresenter presenter;
+    private MapChartPresenter mapChartPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -64,4 +64,5 @@ public class MapChartActivity extends ActionBarActivity{
 
     }
 
+    //public void onMapReady(GoogleMap map){}
 }

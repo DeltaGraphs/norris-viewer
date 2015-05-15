@@ -15,4 +15,5 @@ package com.example.deltagraphs.norrisviewer.presenter.graphsPresenter;/*
  */
 
 public interface TablePresenter {
+
 }
