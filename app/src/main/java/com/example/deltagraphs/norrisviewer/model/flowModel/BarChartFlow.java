@@ -20,7 +20,7 @@ import org.json.JSONObject;
  *
  */
 
-public class BarChartFlow implements FlowModel.Flow{
+public class BarChartFlow implements FlowModel.Record{
 
     private String indexKey;
     private String valueKey;
