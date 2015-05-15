@@ -38,6 +38,9 @@ public class SocketManager extends Activity{
     private String url;
 
     //Constructor
+    public SocketManager(){}
+
+    //Constructor
     public SocketManager(String url){
         setSocketUrl(url);
     }

@@ -1,5 +1,6 @@
 package com.example.deltagraphs.norrisviewer.view.mainView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         presenter = new MainPresenterImpl();
+        showDialog();
     }
 
     @Override
@@ -77,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     public void showDialog(){
-
+        presenter.showDialog(this);
     }
 
     public void showGraphs(){
