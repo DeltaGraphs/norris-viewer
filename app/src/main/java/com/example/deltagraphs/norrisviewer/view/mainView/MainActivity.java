@@ -65,6 +65,11 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -85,8 +90,4 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     }
 
-    @Override
-    public void onBackPressed(){
-
-    }
 }
