@@ -1,16 +1,14 @@
-package com.example.deltagraphs.norrisviewer.view.graphsView;
-
-/*
- * Name : BarChartActivity.java
- * Module : norrisviewer::view::graphsView
+package com.example.deltagraphs.norrisviewer.view.graphsView;/*
+ * Name : MapChartActivity.java
+ * Module : com.example.deltagraphs.norrisviewer.view.graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :
 
  * Version Date Programmer Description
  * ===============================================================
- *
- * 0.0.1 2015-05-13 Enrico Savoca Creazione file
+ * 
+ * 0.0.1 2015-05-15 davide Creazione file
  *
  * ===============================================================
  *
@@ -19,19 +17,20 @@ package com.example.deltagraphs.norrisviewer.view.graphsView;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
-import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
+import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
+import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
 
-public class BarChartActivity extends ActionBarActivity implements BarChartView{
+public class MapChartActivity extends ActionBarActivity{
 
-    private BarChartPresenter barChartPresenter;
+    private MapChartPresenter mapChartPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        barChartPresenter = new BarChartPresenterImpl();
+        mapChartPresenter = new MapChartPresenterImpl();
     }
+
 
     @Override
     public void onStart(){
@@ -68,11 +67,5 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView{
         super.onBackPressed();
     }
 
-    public void setInitialState(){
-
-    }
-
-    public void onValueSelected(){
-
-    }
+    //public void onMapReady(GoogleMap map){}
 }

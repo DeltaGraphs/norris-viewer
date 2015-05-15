@@ -1,16 +1,14 @@
-package com.example.deltagraphs.norrisviewer.view.graphsView;
-
-/*
- * Name : BarChartActivity.java
- * Module : norrisviewer::view::graphsView
+package com.example.deltagraphs.norrisviewer.view.graphsView;/*
+ * Name : LineChartActivity.java
+ * Module : com.example.deltagraphs.norrisviewer.view.graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :
 
  * Version Date Programmer Description
  * ===============================================================
- *
- * 0.0.1 2015-05-13 Enrico Savoca Creazione file
+ * 
+ * 0.0.1 2015-05-15 davide Creazione file
  *
  * ===============================================================
  *
@@ -19,18 +17,18 @@ package com.example.deltagraphs.norrisviewer.view.graphsView;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
-import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
+import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.LineChartPresenter;
+import com.example.deltagraphs.norrisviewer.presenter.graphsPresenter.LineChartPresenterImpl;
 
 
-public class BarChartActivity extends ActionBarActivity implements BarChartView{
+public class LineChartActivity extends ActionBarActivity implements LineChartView{
 
-    private BarChartPresenter barChartPresenter;
+    private LineChartPresenter lineChartPresenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        barChartPresenter = new BarChartPresenterImpl();
+        lineChartPresenter = new LineChartPresenterImpl();
     }
 
     @Override
