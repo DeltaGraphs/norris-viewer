@@ -4,6 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
@@ -31,6 +34,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     private String title;
     private MainPresenter presenter;
+    public static ArrayList pagesList;
 
     @Override
     public void onCreate(Bundle savedInstanceState){

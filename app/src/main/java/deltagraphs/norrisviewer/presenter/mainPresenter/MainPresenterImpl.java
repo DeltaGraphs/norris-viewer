@@ -7,9 +7,12 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import android.text.InputType;
     import android.widget.EditText;
 
+    import com.example.deltagraphs.norrisviewer.R;
+
     import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.presenter.SocketManager;
+    import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
 /*
  * Name : MainPresenterImpl.java
@@ -27,14 +30,21 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  *
  */
 
-public class MainPresenterImpl implements MainPresenter {
+public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks {
 
     private SocketManager mainSocket;
     private MainView mainView = new MainActivity();
+    private PageNavigationFragment mPageNavigationFragment;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
         mainView = view;
+        setUpNavigationFragment();
+    }
+
+    private void setUpNavigationFragment(){
+        //mPageNavigationFragment = (PageNavigationFragment)
+                //getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
     }
 
     public void showDialog(Context context){
@@ -65,4 +75,8 @@ public class MainPresenterImpl implements MainPresenter {
         builder.show();
     }
 
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+
+    }
 }
