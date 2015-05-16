@@ -35,7 +35,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        presenter = new MainPresenterImpl();
+        presenter = new MainPresenterImpl(this);
         showDialog();
     }
 

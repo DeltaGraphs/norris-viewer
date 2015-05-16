@@ -32,8 +32,9 @@ public class MainPresenterImpl implements MainPresenter {
     private SocketManager mainSocket;
     private MainView mainView = new MainActivity();
 
-    public MainPresenterImpl(){
+    public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
+        mainView = view;
     }
 
     public void showDialog(Context context){
