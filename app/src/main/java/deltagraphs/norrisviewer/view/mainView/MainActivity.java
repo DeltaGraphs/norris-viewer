@@ -34,7 +34,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     private String title;
     private MainPresenter presenter;
-    public static ArrayList pagesList;
+    public static List<String> pagesList;
 
     @Override
     public void onCreate(Bundle savedInstanceState){

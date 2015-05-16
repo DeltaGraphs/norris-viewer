@@ -16,5 +16,6 @@ package deltagraphs.norrisviewer.view.mainView;
  *
  */
 
-public interface MainView {
+
+public interface MainView{
 }
