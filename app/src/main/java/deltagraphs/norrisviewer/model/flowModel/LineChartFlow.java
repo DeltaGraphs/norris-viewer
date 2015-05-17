@@ -4,7 +4,7 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 
 /*
  * Name : LineChartFlow.java
- * Module : norrisviewer::model::flowModel
+ * Module : norrisviewer.model.flowModel
  * Location : norrisviewer\model\flowModel
  *
  * History :

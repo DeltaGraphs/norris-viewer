@@ -2,7 +2,7 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
 /*
  * Name : Graph.java
- * Module : norrisviewer::model::graphsModel
+ * Module : norrisviewer.model.graphsModel
  * Location : norrisviewer\model\graphsModel
  *
  * History :

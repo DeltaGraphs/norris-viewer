@@ -4,8 +4,8 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 /*
  * Name : MapChartFlow.java
- * Module : com.example.deltagraphs.norrisviewer.model.flowModel
- * Location : norrisviewer { Percorso in cui \'e presente il file }
+ * Module : deltagraphs.norrisviewer.model.flowModel
+ * Location : norrisviewer\model\flowModel
  *
  * History :
 

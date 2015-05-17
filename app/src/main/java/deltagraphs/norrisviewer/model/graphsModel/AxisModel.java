@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 /*
  * Name : AxisModel.java
- * Module : com.example.deltagraphs.norrisviewer.model.graphsModel
+ * Module : deltagraphs.norrisviewer.model.graphsModel
  * Location : norrisviewer\model\graphsModel
  *
  * History :
@@ -18,7 +18,9 @@ import org.json.JSONObject;
  *
  * ===============================================================
  *
- */public class AxisModel {
+ */
+
+public class AxisModel {
     private String name;
     private String appearance;
     private float maxIndex;

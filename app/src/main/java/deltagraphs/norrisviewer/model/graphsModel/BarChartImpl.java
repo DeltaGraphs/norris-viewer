@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 /*
  * Name : BarChartImpl.java
- * Module : com.example.deltagraphs.norrisviewer.model.graphsModel
+ * Module : deltagraphs.norrisviewer.model.graphsModel
  * Location : norrisviewer\model\graphsModel
  *
  * History :
@@ -20,7 +20,9 @@ import java.util.ArrayList;
  *
  * ===============================================================
  *
- */public class BarChartImpl extends Graph{
+ */
+
+public class BarChartImpl extends Graph{
 
     private AxisModel axisX;
     private AxisModel axisY;

@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 /*
  * Name : BarChartFlow.java
- * Module : norrisviewer::model::flowModel
+ * Module : norrisviewer.model.flowModel
  * Location : norrisviewer\model\flowModel
  *
  * History :

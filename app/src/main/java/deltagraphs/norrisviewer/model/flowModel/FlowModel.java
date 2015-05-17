@@ -2,7 +2,7 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 /*
  * Name : FlowModel.java
- * Module : norrisviewer::model::flowModel
+ * Module : norrisviewer.model.flowModel
  * Location : norrisviewer\model\flowModel
  *
  * History :

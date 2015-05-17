@@ -1,9 +1,9 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
 /*
- * Name : { Nome del file }.java
- * Module : com.example.deltagraphs.norrisviewer.model.flowModel
- * Location : norrisviewer { Percorso in cui \'e presente il file }
+ * Name : TableFlow.java
+ * Module : deltagraphs.norrisviewer.model.flowModel
+ * Location : norrisviewer\model\flowModel
  *
  * History :
 
