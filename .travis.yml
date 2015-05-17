@@ -15,6 +15,7 @@ before_install:
     # environment info
     - ./gradlew -v
     - uname -a
+after_script:
     - ./gradlew test --continue
 # Let's try to build...
 script: ./gradlew clean build
