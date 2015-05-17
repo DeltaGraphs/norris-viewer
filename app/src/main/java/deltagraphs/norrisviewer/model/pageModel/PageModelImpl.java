@@ -158,7 +158,7 @@ public class PageModelImpl extends Observable implements PageModel{
 
                     int pageIndex = -1;
                     for (int i = 0; i < pageList.size(); i++) {
-                        if (pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
+                        if (pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
                     }
                     if (pageIndex != -1) {
                         pageList.get(pageIndex).setName(data.getString("name"));
@@ -176,7 +176,7 @@ public class PageModelImpl extends Observable implements PageModel{
 
                     int pageIndex = -1;
                     for (int i = 0; i < pageList.size(); i++) {
-                        if (pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
+                        if (pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
                     }
                     if (pageIndex != -1) {
                         String itemId = data.getString("ID");
@@ -199,7 +199,7 @@ public class PageModelImpl extends Observable implements PageModel{
 
                     int pageIndex = -1;
                     for(int i=0; i < pageList.size(); i++){
-                        if(pageList.get(i).getId() == data.getString("ID")) pageIndex = i;
+                        if(pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
                     }
 
                     //then it searches a graph in the list of the found page, with an index equal to the JSON's one
@@ -207,7 +207,7 @@ public class PageModelImpl extends Observable implements PageModel{
                     if(pageIndex != -1) {
                         int graphIndex = -1;
                         for (int j = 0; j < pageList.size(); j++) {
-                            if (pageList.get(pageIndex).getPageItemList().get(j).getId() == data.getString("ID"))
+                            if (pageList.get(pageIndex).getPageItemList().get(j).getId().equals(data.getString("ID")))
                                 graphIndex = j;
                         }
 

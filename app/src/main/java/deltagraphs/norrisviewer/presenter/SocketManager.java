@@ -32,7 +32,7 @@ import org.json.JSONObject;
 
 //This class provides an instrument for manage Socket connection and the URL I/O
 
-public class SocketManager extends Activity{
+public class SocketManager{
 
     private Socket mSocket;
     private String url;
