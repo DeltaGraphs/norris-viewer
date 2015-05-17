@@ -21,5 +21,3 @@ after_script:
     - ./gradlew :app:assembleDebugUnitTest
 # Let's try to build...
 script: ./gradlew clean build
-after_success:
-- ./gradlew jacocoTestReport coveralls
