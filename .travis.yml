@@ -18,3 +18,12 @@ before_install:
 # Let's try to build...
 script:
     - ./gradlew clean test
+
+jdk:
+- oraclejdk7
+
+env:
+- TERM=dumb
+
+after_success:
+- ./gradlew jacocoTestReport coveralls
