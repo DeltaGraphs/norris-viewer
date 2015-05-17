@@ -17,6 +17,7 @@ before_install:
     - uname -a
 after_script:
     - gradle check
-    - cat /home/travis/build/DeltaGraphs/norris-viewer/app/build/outputs/lint-results.html
+    - ./gradlew :app:assembleDebug
+    - ./gradlew :app:assembleDebugUnitTest
 # Let's try to build...
 script: ./gradlew clean build
