@@ -36,7 +36,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
  *
  */
 
-public class MainActivity extends ActionBarActivity implements MainView {
+public class MainActivity extends ActionBarActivity implements MainView,PageNavigationFragment.NavigationDrawerCallbacks {
 
     private String title;
     private MainPresenter presenter;
@@ -116,4 +116,12 @@ public class MainActivity extends ActionBarActivity implements MainView {
         return getSupportFragmentManager();
     }
 
+    public void setMainView(){
+        setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+
+    }
 }

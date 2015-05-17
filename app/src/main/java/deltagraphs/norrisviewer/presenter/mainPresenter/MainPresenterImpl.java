@@ -63,10 +63,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mainSocket = new SocketManager();
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
-        setUpNavigationFragment();
+        setUpViews();
     }
 
-    private void setUpNavigationFragment(){
+    private void setUpViews(){
+        mainView.setMainView();
         mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
 
         mPageNavigationFragment.setUp(
