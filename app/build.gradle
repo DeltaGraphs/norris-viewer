@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'org.robolectric'
 
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.1"
