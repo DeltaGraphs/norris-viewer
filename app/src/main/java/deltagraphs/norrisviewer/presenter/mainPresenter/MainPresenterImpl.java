@@ -25,8 +25,6 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import java.util.ArrayList;
     import java.util.List;
 
-    import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
-    import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
@@ -174,16 +172,16 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             switch (position) {
                 case 0:
                     // Line Chart;
-                    intent = new Intent(getActivity(), LineChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", mainSocket.getSocketUrl());
-                    startActivity(intent);
-                    break;
+                  //  intent = new Intent(getActivity(), LineChartActivity.class);
+                   // intent.putExtra("EXTRA_SOURCE_URL", mainSocket.getSocketUrl());
+                  //  startActivity(intent);
+                  //  break;
 
                 case 1:
                     // Column Chart;
-                    intent = new Intent(getActivity(), MapChartActivity.class);
-                    startActivity(intent);
-                    break;
+                  //  intent = new Intent(getActivity(), MapChartActivity.class);
+                   // startActivity(intent);
+                   // break;
                 /*
                 case 2:
                     // Pie Chart;

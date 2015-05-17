@@ -67,6 +67,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            presenter.showDialog();
             return true;
         }
 
