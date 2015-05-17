@@ -1,4 +1,6 @@
-package deltagraphs.norrisviewer.view.graphsView;/*
+package deltagraphs.norrisviewer.view.graphsView;
+
+/*
  * Name : { Nome del file }.java
  * Module : com.example.deltagraphs.norrisviewer.view.graphsView
  * Location : norrisviewer { Percorso in cui \'e presente il file }
