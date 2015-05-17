@@ -17,4 +17,5 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface LineChartPresenter {
+    public void viewPointLegend();
 }

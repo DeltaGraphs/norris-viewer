@@ -1,8 +1,6 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import java.net.URISyntaxException;
-import java.util.Observable;
-import java.util.Observer;
 
 import android.content.res.Configuration;
 import android.util.Log;
@@ -20,6 +18,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
 import lecho.lib.hellocharts.model.LineChartData;
 import org.json.JSONException;
 import org.json.JSONObject;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 
 /*
  * Name : LineChartActivity.java
@@ -39,12 +38,15 @@ import org.json.JSONObject;
  *
  */
 
-public class LineChartActivity extends ActionBarActivity implements Observer, LineChartView {
+public class LineChartActivity extends ActionBarActivity implements LineChartView {
+
+    private LineChartPresenter lineChartPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.line_chart);
+        lineChartPresenter = new LineChartPresenterImpl(this);
     }
 
     @Override

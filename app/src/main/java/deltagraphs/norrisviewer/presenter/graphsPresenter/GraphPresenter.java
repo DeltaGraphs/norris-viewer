@@ -18,13 +18,19 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.app.Activity;
+
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
 public abstract class GraphPresenter {
     private SocketManager graphSocket;
 
-    public GraphPresenter(){}
+    public GraphPresenter(String url){
+        this.graphSocket = new SocketManager();
+        graphSocket.setSocketUrl(url);
+        graphSocket.startListening("graphConfig", new Activity());
+    }
 
-    public abstract void SetUpViews();
+    public abstract void setUpViews();
 
 }

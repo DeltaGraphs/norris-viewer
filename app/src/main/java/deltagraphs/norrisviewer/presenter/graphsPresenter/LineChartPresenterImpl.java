@@ -1,5 +1,13 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
+
+import deltagraphs.norrisviewer.presenter.SocketManager;
+import deltagraphs.norrisviewer.view.graphsView.*;
+import deltagraphs.norrisviewer.model.graphsModel.*;
+
 /*
  * Name : LineChartPresenterImpl.java
  * Module : deltagraphs.norrisviewer.presenter.graphsPresenter
@@ -16,10 +24,29 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter{
+public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter, Observer{
+
+    LineChartView graphView;
+    LineChart lineChartInstance;
+    LineChartPresenterImpl(LineChartView view, String url) {
+        super(url);
+        graphView = view;
+        //lineChartInstance = new LineChartImpl(jsonData);
+        this.setUpViews();
+    }
+
 
     @Override
-    public void SetUpViews() {
+    public void setUpViews() {
+
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+
+    }
+
+    public void viewPointLegend(){
 
     }
 }
