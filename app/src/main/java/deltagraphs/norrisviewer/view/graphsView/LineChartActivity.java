@@ -38,7 +38,7 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
  *
  */
 
-public class LineChartActivity extends ActionBarActivity implements LineChartView {
+public class LineChartActivity {}/*extends ActionBarActivity implements LineChartView {
 
     private LineChartPresenter lineChartPresenter;
 
@@ -71,3 +71,4 @@ public class LineChartActivity extends ActionBarActivity implements LineChartVie
         return super.onOptionsItemSelected(item);
     }
 }
+*/

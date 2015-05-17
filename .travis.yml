@@ -19,5 +19,7 @@ after_script:
     - gradle check
     - ./gradlew :app:assembleDebug
     - ./gradlew :app:assembleDebugUnitTest
+    - ./gradlew connectedCheck lint
+    - ./gradlew connectedInstrumentTest
 # Let's try to build...
 script: ./gradlew clean build
