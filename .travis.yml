@@ -16,6 +16,6 @@ before_install:
     - ./gradlew -v
     - uname -a
 after_script:
-    - ./gradlew test --continue
+    - gradle check
 # Let's try to build...
 script: ./gradlew clean build
