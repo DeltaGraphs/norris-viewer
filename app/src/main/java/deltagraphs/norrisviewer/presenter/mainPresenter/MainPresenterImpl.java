@@ -7,8 +7,6 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import android.content.DialogInterface;
     import android.content.Intent;
     import android.os.Bundle;
-    import android.support.v4.widget.DrawerLayout;
-    import android.support.v7.internal.widget.AdapterViewCompat;
     import android.text.InputType;
     import android.view.LayoutInflater;
     import android.view.View;
@@ -28,8 +26,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import java.util.List;
 
     import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
-    import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
-    import deltagraphs.norrisviewer.view.mainView.MainActivity;
+    import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
@@ -59,10 +56,10 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks {
 
     private static SocketManager mainSocket;
-    private MainView mainView = new MainActivity();
+    private MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
 
-    public MainPresenterImpl(MainActivity view){
+    public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
@@ -71,6 +68,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     private void setUpNavigationFragment(){
         mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
+
         mPageNavigationFragment.setUp(
                 R.id.navigation_drawer,
                 mainView.findDrawer(R.id.drawer_layout));
