@@ -31,6 +31,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
     import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.presenter.SocketManager;
+    import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
     import lecho.lib.hellocharts.view.AbstractChartView;
@@ -58,7 +59,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks {
 
     private static SocketManager mainSocket;
-    private MainActivity mainView = new MainActivity();
+    private MainView mainView = new MainActivity();
     private PageNavigationFragment mPageNavigationFragment;
 
     public MainPresenterImpl(MainActivity view){
@@ -68,7 +69,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     private void setUpNavigationFragment(){
-        mPageNavigationFragment = (PageNavigationFragment) mainView.getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
         mPageNavigationFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) mainView.findViewById(R.id.drawer_layout));

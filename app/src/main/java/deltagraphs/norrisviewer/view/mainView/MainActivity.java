@@ -2,7 +2,10 @@ package deltagraphs.norrisviewer.view.mainView;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+
+import com.example.deltagraphs.norrisviewer.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +99,14 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     public void onSettingsSelected(){
 
+    }
+
+    public PageNavigationFragment getFragment(int id){
+        return (PageNavigationFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+    }
+
+    public DrawerLayout FindDrawer(int id){
+        return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
 }
