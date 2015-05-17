@@ -7,6 +7,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'org.robolectric:robolectric-gradle-plugin:1.0.1'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.0.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
@@ -16,5 +17,12 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
     }
 }
