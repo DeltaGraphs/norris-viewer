@@ -38,10 +38,15 @@ dependencies {
     testCompile 'org.robolectric:robolectric:2.4'
     testCompile "org.mockito:mockito-core:1.9.5"
 }
-
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
 jacocoTestReport {
     reports {
         xml.enabled = true // coveralls plugin depends on xml format report
         html.enabled = true
+        csv.enabled false
+        html.destination "${buildDir}/jacocoHtml"
     }
 }
