@@ -16,9 +16,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter {
+public class MapChartPresenterImpl{}/* extends GraphPresenter implements MapChartPresenter {
     @Override
     public void SetUpViews() {
 
     }
 }
+*/

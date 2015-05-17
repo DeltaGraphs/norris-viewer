@@ -16,9 +16,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-public class TablePresenterImpl extends GraphPresenter implements TablePresenter{
+public class TablePresenterImpl {}/*extends GraphPresenter implements TablePresenter{
     @Override
     public void SetUpViews() {
 
     }
 }
+*/
