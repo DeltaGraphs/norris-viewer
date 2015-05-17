@@ -1,7 +1,7 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
 /*
- * Name : BarChartPresenterImpl.java
+ * Name : GraphPresenter.java
  * Module : deltagraphs.norrisviewer.presenter.graphsPresenter
  * Location : norrisviewer\presenter\graphsPresenter
  *
@@ -10,16 +10,21 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.0.1 2015-05-15 Davide rivellato Creazione file
+ * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-17 Enrico Savoca Creazione file
  *
  * ===============================================================
  *
  */
 
-public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter{
+import deltagraphs.norrisviewer.presenter.SocketManager;
 
-    @Override
-    public void SetUpViews() {
+public abstract class GraphPresenter {
+    private SocketManager graphSocket;
 
-    }
+    public GraphPresenter(){}
+
+    public abstract void SetUpViews();
+
 }
