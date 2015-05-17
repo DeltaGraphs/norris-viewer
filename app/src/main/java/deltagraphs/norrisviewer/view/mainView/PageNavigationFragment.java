@@ -36,7 +36,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

@@ -22,7 +22,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import android.widget.ListView;
     import android.widget.TextView;
 
-    import com.example.deltagraphs.norrisviewer.R;
+    import deltagraphs.norrisviewer.R;
 
     import java.util.ArrayList;
     import java.util.List;
@@ -65,6 +65,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public MainPresenterImpl(MainActivity view){
         mainSocket = new SocketManager();
         mainView = view;
+        mPageNavigationFragment = new PageNavigationFragment();
         setUpNavigationFragment();
     }
 
@@ -159,14 +160,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             listView.setOnItemClickListener(this);
             return rootView;
         }
-
+/*
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
             ((MainActivity) activity).onSectionAttached(
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
-
+*/
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;

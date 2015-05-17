@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.R;
 
 import java.util.ArrayList;
 import java.util.List;
