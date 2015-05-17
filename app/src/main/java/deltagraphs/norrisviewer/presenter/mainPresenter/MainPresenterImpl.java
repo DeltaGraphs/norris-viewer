@@ -72,7 +72,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
         mPageNavigationFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) mainView.findViewById(R.id.drawer_layout));
+                mainView.findDrawer(R.id.drawer_layout));
     }
 
     public void showDialog(Context context){
@@ -106,7 +106,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = mainView.getSupportFragmentManager();
+        FragmentManager fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();

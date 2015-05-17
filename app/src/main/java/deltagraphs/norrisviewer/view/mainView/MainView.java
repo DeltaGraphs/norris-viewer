@@ -17,9 +17,11 @@ package deltagraphs.norrisviewer.view.mainView;
  */
 
 
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 
 public interface MainView{
     PageNavigationFragment getFragment(int id);
-    DrawerLayout FindDrawer(int id);
+    DrawerLayout findDrawer(int id);
+    FragmentManager getSupportManager();
 }
