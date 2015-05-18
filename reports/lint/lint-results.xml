@@ -2,24 +2,6 @@
 <issues format="4" by="lint 24.0.2">
 
     <issue
-        id="MissingRegistered"
-        severity="Error"
-        message="Class referenced in the layout file, `lecho.lib.hellocharts.view.BarChartView`, was not found in the project or the libraries"
-        category="Correctness"
-        priority="8"
-        summary="Missing registered class"
-        explanation="If a class is referenced in the manifest, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly."
-        url="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
-        urls="http://developer.android.com/guide/topics/manifest/manifest-intro.html"
-        errorLine1="&lt;lecho.lib.hellocharts.view.BarChartView"
-        errorLine2="^">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/bar_chart.xml"
-            line="25"
-            column="1"/>
-    </issue>
-
-    <issue
         id="OldTargetApi"
         severity="Warning"
         message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."

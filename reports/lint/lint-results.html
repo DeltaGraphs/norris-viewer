@@ -18,14 +18,10 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Mon May 18 20:28:17 UTC 2015.<br/>
-1 errors and 17 warnings found:<br/><br/>
+Check performed at Mon May 18 22:08:07 UTC 2015.<br/>
+0 errors and 17 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
-</td></tr>
-<tr>
-<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-error.png" alt="Error" />
-<a href="#MissingRegistered">MissingRegistered: Missing registered class</a>
 </td></tr>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
@@ -76,30 +72,6 @@ Check performed at Mon May 18 20:28:17 UTC 2015.<br/>
 <br/>
 <a name="Correctness"></a>
 <div class="category"><a href="#" title="Return to top">Correctness</a><div class="categorySeparator"></div>
-</div>
-<a name="MissingRegistered"></a>
-<div class="issue">
-<div class="id"><a href="#" title="Return to top">MissingRegistered: Missing registered class</a><div class="issueSeparator"></div>
-</div>
-<div class="warningslist">
-<span class="location"><a href="../../src/main/res/layout/bar_chart.xml">../../src/main/res/layout/bar_chart.xml</a>:25</span>: <span class="message">Class referenced in the layout file, <code>lecho.lib.hellocharts.view.BarChartView</code>, was not found in the project or the libraries</span><br /><pre class="errorlines">
-<span class="lineno">  22</span> android:paddingRight="@dimen/activity_horizontal_margin"
-<span class="lineno">  23</span> android:paddingTop="@dimen/activity_vertical_margin">
-<span class="lineno">  24</span> 
-<span class="lineno">  25</span> <span class="errorspan">&lt;lecho.lib.hellocharts.view.BarChartView</span>
-<span class="lineno">  26</span>     android:id="@+id/chart"
-<span class="lineno">  27</span>     android:layout_width="match_parent"
-</pre>
-</div>
-<div class="metadata">Priority: 8 / 10<br/>
-Category: Correctness</div>
-Severity: <span class="error">Error</span><div class="summary">
-Explanation: Missing registered class.</div>
-<div class="explanation">
-If a class is referenced in the manifest, it must also exist in the project (or in one of the libraries included by the project. This check helps uncover typos in registration names, or attempts to rename or move classes without updating the manifest file properly.
-</div>
-<br/><div class="moreinfo">More info: <a href="http://developer.android.com/guide/topics/manifest/manifest-intro.html">http://developer.android.com/guide/topics/manifest/manifest-intro.html</a>
-</div><br/>To suppress this error, use the issue id "MissingRegistered" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 <a name="OldTargetApi"></a>
 <div class="issue">

@@ -9,29 +9,38 @@ import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 import lecho.lib.hellocharts.model.*;
-import lecho.lib.hellocharts.view.PreviewLineChartView;
+import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.Column;
+import lecho.lib.hellocharts.model.ColumnChartData;
+import lecho.lib.hellocharts.model.SubcolumnValue;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.Chart;
+import lecho.lib.hellocharts.view.ColumnChartView;
 
-<span class="nc" id="L14">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
+<span class="nc" id="L23">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
 
     private BarChartPresenter barChartPresenter;
 
-    private lecho.lib.hellocharts.view.ColumnChartView chart;
+    private ColumnChartView chart;
     private ColumnChartData barChartData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L23">        String url = &quot;&quot;;</span>
-<span class="nc" id="L24">        barChartPresenter = new BarChartPresenterImpl(this, url);</span>
-<span class="nc" id="L25">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L26">        setContentView(R.layout.bar_chart);</span>
-<span class="nc" id="L27">        chart = (lecho.lib.hellocharts.view.ColumnChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L28">    }</span>
+<span class="nc" id="L32">        String url = &quot;&quot;;</span>
+<span class="nc" id="L33">        barChartPresenter = new BarChartPresenterImpl(this, url);</span>
+<span class="nc" id="L34">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L35">        setContentView(R.layout.bar_chart);</span>
+<span class="nc" id="L36">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L37">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L33">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
-<span class="nc" id="L34">        return true;</span>
+<span class="nc" id="L42">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
+<span class="nc" id="L43">        return true;</span>
     }
 
     @Override
@@ -39,22 +48,21 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L42">        int id = item.getItemId();</span>
+<span class="nc" id="L51">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L46">            return true;</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L55">            return true;</span>
         }
 
-<span class="nc" id="L49">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L58">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L63">    }</span>
 
     public void setInitialState(){
-
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L66">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
