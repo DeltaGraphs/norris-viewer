@@ -28,7 +28,7 @@ public class PageModelImplTest extends TestCase {
         System.out.println("Testing: AddPagesToList()");
         mPageModelImpl = new PageModelImpl();
         mPageModelImpl.addPage("Page1", "Pagina Uno", "questa è la pagina uno");
-        ArrayList<PageModelImpl.Page> list = mPageModelImpl.getList();
+        ArrayList<Page> list = mPageModelImpl.getPageList();
         int dim = list.size();
         assertEquals("[New page inserted,]", 1, dim);
         System.out.println("Done!");
