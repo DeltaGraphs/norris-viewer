@@ -41,4 +41,12 @@ public class LineChartActivity extends ActionBarActivity implements LineChartVie
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void onValueSelected(){
+
+    }
+
+    public void setInitialState(){
+
+    }
 }

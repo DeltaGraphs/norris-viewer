@@ -25,11 +25,14 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import java.util.ArrayList;
     import java.util.List;
 
+    import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
+    import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
     import lecho.lib.hellocharts.view.AbstractChartView;
+    import lecho.lib.hellocharts.view.Chart;
     import lecho.lib.hellocharts.view.ColumnChartView;
     import lecho.lib.hellocharts.view.LineChartView;
     import lecho.lib.hellocharts.view.PreviewLineChartView;
@@ -56,6 +59,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     private static SocketManager mainSocket;
     private MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
+    private PageModel pageModel = new PageModelImpl();
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
@@ -106,7 +110,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         // update the main content by replacing fragments
         FragmentManager fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
+                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, pageModel))
                 .commit();
     }
 
@@ -122,7 +126,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public static class PlaceholderFragment extends Fragment implements AdapterView.OnItemClickListener {
 
         private ListView listView;
-        private ChartSamplesAdapter adapter;
+        private ChartAdapter adapter;
+        private PageModel pageModel;
 
         /**
          * The fragment argument representing the section number for this
@@ -137,11 +142,12 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
 
 
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, PageModel p) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
+            fragment.pageModel = p;
             return fragment;
         }
 
@@ -152,7 +158,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             listView = (ListView) rootView.findViewById(android.R.id.list);
-            adapter = new ChartSamplesAdapter(getActivity(), 0, generateSamplesDescriptions());
+            adapter = new ChartAdapter(getActivity(), 0, generateSamplesDescriptions());
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
             return rootView;
@@ -171,11 +177,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
             switch (position) {
                 case 0:
-                    // Line Chart;
-                  //  intent = new Intent(getActivity(), LineChartActivity.class);
-                   // intent.putExtra("EXTRA_SOURCE_URL", mainSocket.getSocketUrl());
-                  //  startActivity(intent);
-                  //  break;
+                   //  Line Chart;
+                    intent = new Intent(getActivity(), LineChartActivity.class);
+                    intent.putExtra("EXTRA_SOURCE_URL", mainSocket.getSocketUrl());
+                    startActivity(intent);
+                    break;
 
                 case 1:
                     // Column Chart;
@@ -194,13 +200,23 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             }
         }
 
-        private List<ChartSampleDescription> generateSamplesDescriptions() {
-            List<ChartSampleDescription> list = new ArrayList<ChartSampleDescription>();
 
-            list.add(new ChartSampleDescription("Line Chart", "", ChartType.LINE_CHART));
-            list.add(new ChartSampleDescription("Map Chart", "", ChartType.COLUMN_CHART));
-            list.add(new ChartSampleDescription("Preview Line Chart",
-                    "Control line chart viewport with another line chart.", ChartType.PREVIEW_LINE_CHART));
+        // this is generated after socket connection with the graphs' list
+
+        private List<ChartDescription> generateSamplesDescriptions() {
+            List<ChartDescription> list = new ArrayList<ChartDescription>();
+
+            //number of page needed
+            int PAGE = 1;
+
+            int size = pageModel.getItemListSize(PAGE);
+            ArrayList<PageItem> itemList = pageModel.getItemList(PAGE);
+            for(int i=0; i<size; i++) {
+                String itemName = itemList.get(i).getName();
+                String itemType = itemList.get(i).getType();
+                String itemUrl = itemList.get(i).getUrl();
+                list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
+            }
             return list;
         }
 
@@ -208,9 +224,9 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
 
 
-    public static class ChartSamplesAdapter extends ArrayAdapter<ChartSampleDescription> {
+    public static class ChartAdapter extends ArrayAdapter<ChartDescription> {
 
-        public ChartSamplesAdapter(Context context, int resource, List<ChartSampleDescription> objects) {
+        public ChartAdapter(Context context, int resource, List<ChartDescription> objects) {
             super(context, resource, objects);
         }
 
@@ -231,7 +247,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            ChartSampleDescription item = getItem(position);
+            ChartDescription item = getItem(position);
 
             holder.chartLayout.setVisibility(View.VISIBLE);
             holder.chartLayout.removeAllViews();
@@ -277,12 +293,13 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, OTHER
     }
 
-    public static class ChartSampleDescription {
+    public static class ChartDescription {
         String text1;
         String text2;
+        String url;
         ChartType chartType;
 
-        public ChartSampleDescription(String text1, String text2, ChartType chartType) {
+        public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.text1 = text1;
             this.text2 = text2;
             this.chartType = chartType;

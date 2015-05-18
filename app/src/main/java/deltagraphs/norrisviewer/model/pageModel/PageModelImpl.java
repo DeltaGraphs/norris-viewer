@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
  * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
  *
  * 0.0.1 2015-05-12 Enrico Savoca Creazione file
@@ -24,56 +25,7 @@ import java.util.ArrayList;
  */
 
 public class PageModelImpl extends Observable implements PageModel{
-    class Page{
-        class PageItem{
-            private String itemId;
-            private String itemName;
-            private String itemType;
-            private String itemURL;
 
-        // constructor of PageItem
-            PageItem(String iI, String iN, String iT, String URL ){
-                itemId = iI;
-                itemName = iN;
-                itemType = iT;
-                itemURL = URL;
-            }
-
-            public void setId(String id){ this.itemId = id; }
-            public void setName(String name){ this.itemName = name; }
-            public void setType(String type){ this.itemType = type; }
-            public void setUrl(String url){ this.itemURL = url; }
-
-            public String getId(){ return itemId; }
-            public String getName(){ return itemName; }
-            public String getType(){ return itemType; }
-            public String getUrl(){ return itemURL; }
-        }
-
-        private String id;
-        private String name;
-        private String description;
-        private ArrayList<PageItem> pageItemList = new ArrayList<PageItem>();
-
-    // constructor of Page
-        Page(String id, String name, String description){
-            this.id = id;
-            this.name = name;
-            this.description = description;
-        }
-
-        public void addItem(String id, String name, String type, String URL){
-            pageItemList.add(new PageItem(id, name, type, URL));
-        }
-
-        public void setName(String name){ this.name = name; }
-        public void setDescription(String description){ this.description = description; }
-
-        public ArrayList<PageItem> getPageItemList(){ return pageItemList; }
-        public String getId(){ return id;}
-        public String getName(){ return name;}
-        public String getDescription(){ return description; }
-    }
 
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
@@ -224,9 +176,14 @@ public class PageModelImpl extends Observable implements PageModel{
                 }
             }
         }catch(JSONException e){}
+
+
+
     }
 
     public String getName(){ return name; }
-    public ArrayList<Page> getList(){ return pageList; }
-
+    public ArrayList<Page> getPageList(){ return pageList; }
+    public int getPageListSize(){ return pageList.size(); }
+    public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }
+    public ArrayList<PageItem> getItemList(int page){ return pageList.get(page).getPageItemList(); }
 }

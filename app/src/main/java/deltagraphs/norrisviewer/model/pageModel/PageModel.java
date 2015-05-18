@@ -16,5 +16,11 @@ package deltagraphs.norrisviewer.model.pageModel;
  *
  */
 
+import java.util.ArrayList;
+
 public interface PageModel {
+    public ArrayList<Page> getPageList();
+    public int getPageListSize();
+    public int getItemListSize(int page);
+    public ArrayList<PageItem> getItemList(int page);
 }
