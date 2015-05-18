@@ -128,6 +128,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         private ListView listView;
         private ChartAdapter adapter;
         private PageModel pageModel;
+        private List<ChartDescription> graphsList = new ArrayList<ChartDescription>();
 
         /**
          * The fragment argument representing the section number for this
@@ -158,7 +159,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             listView = (ListView) rootView.findViewById(android.R.id.list);
-            adapter = new ChartAdapter(getActivity(), 0, generateSamplesDescriptions());
+            graphsList = generateDescriptions();
+            adapter = new ChartAdapter(getActivity(), 0, graphsList);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
             return rootView;
@@ -174,12 +176,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;
-
             switch (position) {
                 case 0:
                    //  Line Chart;
                     intent = new Intent(getActivity(), LineChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", mainSocket.getSocketUrl());
+                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
 
@@ -203,7 +204,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
         // this is generated after socket connection with the graphs' list
 
-        private List<ChartDescription> generateSamplesDescriptions() {
+        private List<ChartDescription> generateDescriptions() {
             List<ChartDescription> list = new ArrayList<ChartDescription>();
 
             //number of page needed
@@ -248,6 +249,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             }
 
             ChartDescription item = getItem(position);
+
+            String graphUrl = item.getUrl();
 
             holder.chartLayout.setVisibility(View.VISIBLE);
             holder.chartLayout.removeAllViews();
@@ -294,10 +297,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     public static class ChartDescription {
-        String text1;
-        String text2;
-        String url;
-        ChartType chartType;
+        private String text1;
+        private String text2;
+        private String url;
+        private ChartType chartType;
+
+        public String getUrl(){return url;}
+        public String getText1() {return text1;}
+        public String getText2() {return text2;}
 
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.text1 = text1;
