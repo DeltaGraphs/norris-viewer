@@ -11,7 +11,7 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   git config --global user.name "deltagraphsManager"
   echo "prima clone"
   #using token clone gh-pages branch
-  git clone --branch=gh-pages https://${GH_TOKEN}@github.com/DeltaGraphs/norris-nrti.git  gh-pages
+  git clone --branch=gh-pages https://${GH_TOKEN}@github.com/DeltaGraphs/norris-viewer.git  gh-pages
 
   echo -e "Cloned gh-pages\n"
 fi
