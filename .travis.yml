@@ -27,6 +27,8 @@ env:
 
 after_success:
 - ./gradlew jacocoTestReport coveralls
+- ls -la /home/travis/build/DeltaGraphs/norris-viewer/build
+- ls -la /home/travis/build/DeltaGraphs/norris-viewer/build/reports
 
 env:
   matrix:
