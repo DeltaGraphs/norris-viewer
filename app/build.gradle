@@ -68,7 +68,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.7.5.201504290918"
+    toolVersion = "0.7.4.201502262128"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
