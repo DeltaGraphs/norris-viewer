@@ -27,4 +27,6 @@ after_success:
 - cp -r ./app/build/reports ./gh-pages
 - mv gh-pages/reports/jacoco/.resources gh-pages/reports/jacoco/resources
 - find gh-pages/reports/jacoco -type f -exec sed -i 's/.resources/resources/g' {} +
+- mv gh-pages/reports/jacoco/.sessions.html gh-pages/reports/jacoco/sessions.html
+- find gh-pages/reports/jacoco -type f -exec sed -i 's/.sessions/sessions/g' {} +
 - "./update-gh-pages.sh"
