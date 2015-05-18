@@ -27,7 +27,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
-    import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
+    import deltagraphs.norrisviewer.view.graphsView.*;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
@@ -176,26 +176,31 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;
-            switch (position) {
-                case 0:
+            String graphType = graphsList.get(position).getType();
+            switch (graphType) {
+                case "lineChart":
                    //  Line Chart;
                     intent = new Intent(getActivity(), LineChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
 
-                case 1:
+                case "BarChart":
                     // Column Chart;
-                  //  intent = new Intent(getActivity(), MapChartActivity.class);
+                  //  intent = new Intent(getActivity(), BarChartActivity.class);
                    // startActivity(intent);
                    // break;
-                /*
-                case 2:
-                    // Pie Chart;
-                    intent = new Intent(getActivity(), PieChartActivity.class);
+
+                case "MapChart":
+                    // map chart
+                    intent = new Intent(getActivity(), MapChartActivity.class);
                     startActivity(intent);
                     break;
-                    */
+                case "Table":
+                    // table
+                    //intent = new Intent(getActivity(), TableActivity.class);
+                    //startActivity(intent);
+                    break;
                 default:
                     break;
             }
@@ -277,8 +282,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             if (null != chart) {
                 chart.setInteractive(false);// Disable touch handling for chart on the ListView.
             }
-            holder.text1.setText(item.text1);
-            holder.text2.setText(item.text2);
+            holder.text1.setText(item.name);
+            holder.text2.setText(item.type);
 
             return convertView;
         }
@@ -297,18 +302,18 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     public static class ChartDescription {
-        private String text1;
-        private String text2;
+        private String name;
+        private String type;
         private String url;
         private ChartType chartType;
 
         public String getUrl(){return url;}
-        public String getText1() {return text1;}
-        public String getText2() {return text2;}
+        public String getName() {return name;}
+        public String getType() {return type;}
 
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
-            this.text1 = text1;
-            this.text2 = text2;
+            this.name = text1;
+            this.type = text2;
             this.chartType = chartType;
         }
     }

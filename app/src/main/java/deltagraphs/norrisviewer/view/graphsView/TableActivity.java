@@ -4,33 +4,28 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridLayout;
+import android.widget.GridView;
+import android.widget.TableLayout;
 
 import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.view.PreviewLineChartView;
 
-public class LineChartActivity extends ActionBarActivity implements LineChartView{
-
-    private LineChartPresenter lineChartPresenter;
-
-    //line chart con view finder
-
-    private PreviewLineChartView previewChart;
-    private LineChartData lineChartData;
+public class TableActivity extends ActionBarActivity implements TableView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String url = "";
-        lineChartPresenter = new LineChartPresenterImpl(this, url);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.line_chart);
+        setContentView(R.layout.activity_table);
+        TableLayout tableView = new TableLayout(this);
+        GridLayout grid = new GridLayout(this);
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_line_chart, menu);
+        getMenuInflater().inflate(R.menu.menu_table, menu);
         return true;
     }
 
@@ -49,11 +44,14 @@ public class LineChartActivity extends ActionBarActivity implements LineChartVie
         return super.onOptionsItemSelected(item);
     }
 
-    public void onValueSelected(){
 
-    }
 
-    public void setInitialState(){
 
-    }
+
+
+
+
+
+
+
 }

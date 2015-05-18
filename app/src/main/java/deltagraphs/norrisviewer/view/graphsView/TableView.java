@@ -16,5 +16,5 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  */
 
-public interface TableChartView {
+public interface TableView {
 }

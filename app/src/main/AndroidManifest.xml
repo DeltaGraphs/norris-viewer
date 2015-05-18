@@ -51,6 +51,10 @@
             android:name=".view.graphsView.MapChartActivity"
             android:label="@string/title_activity_map_chart" >
         </activity>
+        <activity
+            android:name=".view.graphsView.TableActivity"
+            android:label="@string/title_activity_table" >
+        </activity>
     </application>
 
 </manifest>
