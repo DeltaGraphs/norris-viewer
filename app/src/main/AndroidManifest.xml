@@ -39,10 +39,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".view.graphsView.LineChartActivity"
-            android:label="@string/title_activity_line_chart" >
-        </activity>
     </application>
 
 </manifest>

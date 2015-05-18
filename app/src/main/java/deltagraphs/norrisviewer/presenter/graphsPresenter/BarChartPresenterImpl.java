@@ -10,7 +10,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.0.1 2015-05-15 Davide rivellato Creazione file
+ * 0.0.1 2015-05-15 Davide Trivellato Creazione file
  *
  * ===============================================================
  *

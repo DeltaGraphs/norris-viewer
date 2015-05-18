@@ -26,14 +26,16 @@ import deltagraphs.norrisviewer.model.graphsModel.*;
 
 public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter, Observer{
 
-    LineChartView graphView;
+    //LineChartView graphView;
     LineChart lineChartInstance;
-    LineChartPresenterImpl(LineChartView view, String url) {
+    /*LineChartPresenterImpl(LineChartView view, String url) {
         super(url);
         graphView = view;
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
-    }
+    }*/
+
+    LineChartPresenterImpl(){super("url");}
 
 
     @Override
