@@ -24,4 +24,6 @@ after_success:
 - "./gradlew jacocoTestReport coveralls"
 - "./clone-gh-pages.sh"
 - cp -r ./app/build/reports ./gh-pages
+- mv gh-pages/reports/jacoco/.resources gh-pages/reports/jacoco/resources
+- sed -i 's/.resources/resources/g' gh-pages/reports/jacoco/*.*
 - "./update-gh-pages.sh"
