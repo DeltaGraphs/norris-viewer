@@ -29,5 +29,5 @@ after_success:
 - find gh-pages/reports/jacoco -type f -exec sed -i 's/.resources/resources/g' {} +
 - mv gh-pages/reports/jacoco/.sessions.html gh-pages/reports/jacoco/sessions.html
 - find gh-pages/reports/jacoco -type f -exec sed -i 's/.sessions/sessions/g' {} +
-- ./gradlew lint ../norris-viewer --html gh-pages/reports/index.html
+- ./gradlew lint app --html gh-pages/reports/index.html
 - "./update-gh-pages.sh"
