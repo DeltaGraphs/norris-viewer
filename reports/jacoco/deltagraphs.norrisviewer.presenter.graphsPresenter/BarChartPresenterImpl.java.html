@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BarChartPresenterImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">BarChartPresenterImpl.java</span></div><h1>BarChartPresenterImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import deltagraphs.norrisviewer.model.graphsModel.BarChart;
+import deltagraphs.norrisviewer.view.graphsView.BarChartView;
+
 /*
  * Name : BarChartPresenterImpl.java
  * Module : deltagraphs.norrisviewer.presenter.graphsPresenter
@@ -16,12 +22,46 @@
  *
  */
 
-<span class="nc" id="L19">public class BarChartPresenterImpl {}/*extends GraphPresenter implements BarChartPresenter{</span>
+public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
 
-    @Override
-    public void SetUpViews() {
+        BarChartView graphView;
+        BarChart lineChartInstance;
+// PreviewLineChartView previewLineChartView;
+// LineChartData lineChartData=new LineChartData();
 
-    }
+
+public BarChartPresenterImpl(BarChartView view,String url){
+<span class="nc" id="L34">        super(url);</span>
+<span class="nc" id="L35">        graphView=view;</span>
+        //lineChartInstance = new LineChartImpl(jsonData);
+<span class="nc" id="L37">        this.setUpViews();</span>
+<span class="nc" id="L38">        }</span>
+
+
+
+@Override
+public void setUpViews(){
+       /* previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
+        previewLineChartView.setLineChartData(dataModel.getData());
+        previewLineChartView.setLineChartData(previewData);
+        // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
+        // zoom/scroll is unnecessary.
+        previewLineChartView.setZoomEnabled(false);
+        previewLineChartView.setScrollEnabled(false);*/
+<span class="nc" id="L51">        }</span>
+
+@Override
+public void update(Observable observable,Object data){
+       /* if(observable instanceof LineChartModel){
+            // in quanto potremmo avere piu modelli dati
+            // verifichiamo su quale modello � avvenuto un cambiamento dei dati
+            // prima di effettuare il cast
+            MyDataModel m=(MyDataModel)observable;
+            myChart.setLineChartData(m.getData());*/
+<span class="nc" id="L61">        }</span>
+
+public void viewPointLegend(){
+
+<span class="nc" id="L65">        }</span>
 }
-*/
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
