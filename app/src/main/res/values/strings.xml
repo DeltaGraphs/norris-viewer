@@ -10,6 +10,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_line_chart">LineChartActivity</string>
     <string name="title_activity_map_chart">MapChartActivity</string>
+    <string name="title_activity_bar_chart">BarChartActivity</string>
+    <string name="title_activity_table">TableActivity</string>
+
+
+
+
+
+
+
 
 
     <!--
@@ -29,6 +38,5 @@ string in this file.
     <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
         AIzaSyBO5xlsE62xK7sABEK8-0zLWlctGRQM5l0
     </string>
-    <string name="title_activity_table">TableActivity</string>
-    <string name="title_activity_bar_chart">BarChartActivity</string>
+
 </resources>

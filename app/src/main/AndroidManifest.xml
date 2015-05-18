@@ -32,12 +32,26 @@
             android:name=".view.graphsView.LineChartActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_line_chart" >
+
+        </activity>
+        <activity
+            android:name=".view.graphsView.BarChartActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_bar_chart" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".view.graphsView.TableActivity"
+            android:label="@string/title_activity_table" >
+        </activity>
+        <activity
+            android:name=".view.graphsView.MapChartActivity"
+            android:label="@string/title_activity_map_chart" >
+        </activity>
+        
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -46,18 +60,7 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".view.graphsView.MapChartActivity"
-            android:label="@string/title_activity_map_chart" >
-        </activity>
-        <activity
-            android:name=".view.graphsView.TableActivity"
-            android:label="@string/title_activity_table" >
-        </activity>
-        <activity
-            android:name=".view.graphsView.BarChartActivity"
-            android:label="@string/title_activity_bar_chart" >
-        </activity>
+
     </application>
 
 </manifest>

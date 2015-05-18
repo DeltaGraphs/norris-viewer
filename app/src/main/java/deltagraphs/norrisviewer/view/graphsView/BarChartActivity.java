@@ -9,13 +9,22 @@ import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 import lecho.lib.hellocharts.model.*;
-import lecho.lib.hellocharts.view.PreviewLineChartView;
+import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.ColumnChartOnValueSelectListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.Column;
+import lecho.lib.hellocharts.model.ColumnChartData;
+import lecho.lib.hellocharts.model.SubcolumnValue;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.Chart;
+import lecho.lib.hellocharts.view.ColumnChartView;
 
 public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {
 
     private BarChartPresenter barChartPresenter;
 
-    private lecho.lib.hellocharts.view.ColumnChartView chart;
+    private ColumnChartView chart;
     private ColumnChartData barChartData;
 
     @Override
@@ -24,7 +33,7 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
         barChartPresenter = new BarChartPresenterImpl(this, url);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bar_chart);
-        chart = (lecho.lib.hellocharts.view.ColumnChartView) findViewById(R.id.chart);
+        chart = (ColumnChartView) findViewById(R.id.chart);
     }
 
     @Override
