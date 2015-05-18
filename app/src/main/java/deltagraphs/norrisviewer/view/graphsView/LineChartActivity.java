@@ -10,12 +10,24 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
-public class LineChartActivity extends ActionBarActivity implements LineChartView{
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.ViewportChangeListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.LineChartView;
+
+
+public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {
 
     private LineChartPresenter lineChartPresenter;
 
     //line chart con view finder
 
+    private LineChartView chart;
     private PreviewLineChartView previewChart;
     private LineChartData lineChartData;
 
@@ -25,6 +37,8 @@ public class LineChartActivity extends ActionBarActivity implements LineChartVie
         lineChartPresenter = new LineChartPresenterImpl(this, url);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.line_chart);
+        chart = (LineChartView) findViewById(R.id.chart);
+        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
     }
 
     @Override
