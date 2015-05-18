@@ -1,4 +1,4 @@
-language: java
+language: android
 android:
   components:
     - platform-tools
@@ -27,3 +27,7 @@ env:
 
 after_success:
 - ./gradlew jacocoTestReport coveralls
+
+env:
+  matrix:
+    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
