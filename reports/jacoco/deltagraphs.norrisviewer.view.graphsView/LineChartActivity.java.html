@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LineChartActivity.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.view.graphsView</a> &gt; <span class="el_source">LineChartActivity.java</span></div><h1>LineChartActivity.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.view.graphsView;
+
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
+
+<span class="nc" id="L11">public class LineChartActivity extends ActionBarActivity implements LineChartView{</span>
+
+    LineChartPresenter lineChartPresenter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L17">        String url = &quot;&quot;;</span>
+<span class="nc" id="L18">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
+<span class="nc" id="L19">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L20">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L21">    }</span>
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+<span class="nc" id="L26">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L27">        return true;</span>
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+<span class="nc" id="L35">        int id = item.getItemId();</span>
+
+        //noinspection SimplifiableIfStatement
+<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L39">            return true;</span>
+        }
+
+<span class="nc" id="L42">        return super.onOptionsItemSelected(item);</span>
+    }
+
+    public void onValueSelected(){
+
+<span class="nc" id="L47">    }</span>
+
+    public void setInitialState(){
+
+<span class="nc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

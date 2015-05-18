@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>PageItem.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.model.pageModel</a> &gt; <span class="el_source">PageItem.java</span></div><h1>PageItem.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.model.pageModel;
+
+/*
+ * Name : Page.java
+ * Module : deltagraphs.norrisviewer.model.pageModel
+ * Location : norrisviewer\model\pageModel
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ * 
+ * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-12 Enrico Savoca Creazione file
+ *
+ * ===============================================================
+ *
+ */
+
+public class PageItem{
+    private String itemId;
+    private String itemName;
+    private String itemType;
+    private String itemURL;
+
+    // constructor of PageItem
+<span class="nc" id="L28">    PageItem(String iI, String iN, String iT, String URL ){</span>
+<span class="nc" id="L29">        itemId = iI;</span>
+<span class="nc" id="L30">        itemName = iN;</span>
+<span class="nc" id="L31">        itemType = iT;</span>
+<span class="nc" id="L32">        itemURL = URL;</span>
+<span class="nc" id="L33">    }</span>
+
+<span class="nc" id="L35">    public void setId(String id){ this.itemId = id; }</span>
+<span class="nc" id="L36">    public void setName(String name){ this.itemName = name; }</span>
+<span class="nc" id="L37">    public void setType(String type){ this.itemType = type; }</span>
+<span class="nc" id="L38">    public void setUrl(String url){ this.itemURL = url; }</span>
+
+<span class="nc" id="L40">    public String getId(){ return itemId; }</span>
+<span class="nc" id="L41">    public String getName(){ return itemName; }</span>
+<span class="nc" id="L42">    public String getType(){ return itemType; }</span>
+<span class="nc" id="L43">    public String getUrl(){ return itemURL; }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

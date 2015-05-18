@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>BarChartImpl.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.model.graphsModel</a> &gt; <span class="el_source">BarChartImpl.java</span></div><h1>BarChartImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.model.graphsModel;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+/*
+ * Name : BarChartImpl.java
+ * Module : deltagraphs.norrisviewer.model.graphsModel
+ * Location : norrisviewer\model\graphsModel
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.1.0 2015-05-15 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-15 Enrico Savoca Creazione file
+ *
+ * ===============================================================
+ *
+ */
+
+public class BarChartImpl extends Graph{
+
+    private AxisModel axisX;
+    private AxisModel axisY;
+    private ArrayList&lt;String&gt; headers;
+    private String barOrientation;
+    private String background;
+    private Boolean sortable;
+    private String type;
+    private Boolean grid;
+
+<span class="nc" id="L36">    public BarChartImpl(JSONObject data){</span>
+        // TO DO
+<span class="nc" id="L38">    }</span>
+
+    @Override
+    public void setData(JSONObject data) {
+
+<span class="nc" id="L43">    }</span>
+
+    @Override
+<span class="nc" id="L46">    public void setParameters(JSONObject data) {}</span>
+
+<span class="nc" id="L48">    public AxisModel getAxisX() { return axisX; }</span>
+<span class="nc" id="L49">    public AxisModel getAxisY() { return axisY; }</span>
+<span class="nc" id="L50">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
+<span class="nc" id="L51">    public String getBackground() { return background; }</span>
+<span class="nc" id="L52">    public String getBarOrientation() { return barOrientation; }</span>
+<span class="nc" id="L53">    public Boolean getSortable() { return sortable; }</span>
+<span class="nc" id="L54">    public String getType() { return type; }</span>
+<span class="nc" id="L55">    public Boolean getGrid() { return grid; }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

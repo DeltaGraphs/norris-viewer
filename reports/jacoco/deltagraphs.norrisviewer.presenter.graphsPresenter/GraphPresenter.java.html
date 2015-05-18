@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>GraphPresenter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">GraphPresenter.java</span></div><h1>GraphPresenter.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
+
+/*
+ * Name : GraphPresenter.java
+ * Module : deltagraphs.norrisviewer.presenter.graphsPresenter
+ * Location : norrisviewer\presenter\graphsPresenter
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ * 
+ * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
+ * 0.0.1 2015-05-17 Enrico Savoca Creazione file
+ *
+ * ===============================================================
+ *
+ */
+
+import android.app.Activity;
+
+import deltagraphs.norrisviewer.presenter.SocketManager;
+
+public abstract class GraphPresenter {
+    private SocketManager graphSocket;
+
+<span class="nc" id="L28">    public GraphPresenter(String url){</span>
+<span class="nc" id="L29">        this.graphSocket = new SocketManager();</span>
+<span class="nc" id="L30">        graphSocket.setSocketUrl(url);</span>
+<span class="nc" id="L31">        graphSocket.startListening(&quot;graphConfig&quot;, new Activity());</span>
+<span class="nc" id="L32">    }</span>
+
+    public abstract void setUpViews();
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
