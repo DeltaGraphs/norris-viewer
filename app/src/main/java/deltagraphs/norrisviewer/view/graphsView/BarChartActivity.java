@@ -63,6 +63,5 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     public void setInitialState(){
-
     }
 }
