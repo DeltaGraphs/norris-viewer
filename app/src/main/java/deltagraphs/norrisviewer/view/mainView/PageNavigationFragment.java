@@ -7,7 +7,7 @@ package deltagraphs.norrisviewer.view.mainView;/*
 
  * Version Date Programmer Description
  * ===============================================================
- * 
+ *
  * 0.0.1 2015-05-16 davide Creazione file
  *
  * ===============================================================
@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import deltagraphs.norrisviewer.R;
 
@@ -118,7 +119,7 @@ public class PageNavigationFragment  extends Fragment {
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                MainActivity.pagesList)); */
+                MainActivity.pagesList));*/
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -145,7 +146,7 @@ public class PageNavigationFragment  extends Fragment {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the the proper interactions
+        // ActionBarDrawerToggle ties together the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
@@ -248,7 +249,7 @@ public class PageNavigationFragment  extends Fragment {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
         if (mDrawerLayout != null && isDrawerOpen()) {
-           // inflater.inflate(R.menu.global, menu);
+            // inflater.inflate(R.menu.global, menu);
             showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
@@ -259,12 +260,12 @@ public class PageNavigationFragment  extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
-    /*if (item.getItemId() == R.id.action_example) {
+/*
+    if (item.getItemId() == R.id.action_example) {
         Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
         return true;
     }
-    */
+*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -275,7 +276,6 @@ public class PageNavigationFragment  extends Fragment {
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
     }
 
