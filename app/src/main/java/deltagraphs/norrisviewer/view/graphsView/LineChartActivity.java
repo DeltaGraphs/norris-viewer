@@ -6,7 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.LineChartPresenter;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 
 public class LineChartActivity extends ActionBarActivity implements LineChartView{
 
