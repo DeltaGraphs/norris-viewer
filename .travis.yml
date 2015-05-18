@@ -1,36 +1,27 @@
 language: android
 android:
   components:
-    - platform-tools
-    - build-tools-21.1.1
-    - android-21
-    - sys-img-x86-android-21
-    - sys-img-armeabi-v7a-android-21
-    - extra
+  - platform-tools
+  - build-tools-21.1.1
+  - android-21
+  - sys-img-x86-android-21
+  - sys-img-armeabi-v7a-android-21
+  - extra
 before_install:
-    - chmod +x gradlew
-    # for gradle output style
-    # - export TERM=dumb
-
-    # environment info
-    - ./gradlew -v
-    - uname -a
-# Let's try to build...
+- chmod +x gradlew
+- "./gradlew -v"
+- uname -a
 script:
-    - ./gradlew clean test
-
+- "./gradlew clean test"
 jdk:
 - oraclejdk7
-
-env:
-- TERM=dumb
-
-after_success:
-- ./gradlew jacocoTestReport coveralls
-- ./clone-gh-pages.sh
-- cp -r ./app/build/reports ./gh-pages
-- ./update-gh-pages.sh
-
 env:
   matrix:
-    - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+  - ANDROID_TARGET=android-21  ANDROID_ABI=armeabi-v7a
+  global:
+    secure: aJf/vu0fre/ji2DO4RYrAwbVfA2kLh3/mSmXPtgRToqjX3eLyVsHxPipU4IXW/LjtdkUa3Ag/pvn+UyvtJFpCWmNtkBXIU0SexLk6mn/3+gFqVP+uS0nvTBR8OB+5uLLWjKtLLrixnZio7H67DZ3CR0F2SZpIS0duWsns6NFRvI=
+after_success:
+- "./gradlew jacocoTestReport coveralls"
+- "./clone-gh-pages.sh"
+- cp -r ./app/build/reports ./gh-pages
+- "./update-gh-pages.sh"
