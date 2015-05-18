@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import deltagraphs.norrisviewer.R;
 
@@ -68,6 +69,17 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             showDialog();
+            return true;
+        }
+
+        if (id == R.id.action_credits) {
+            Context context = getApplicationContext();
+            CharSequence text = "";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
             return true;
         }
 
