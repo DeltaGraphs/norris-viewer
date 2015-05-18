@@ -7,6 +7,9 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.view.graphsView.*;
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.LineChartView;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.view.*;
 
 /*
  * Name : LineChartPresenterImpl.java
@@ -28,28 +31,43 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
     LineChartView graphView;
     LineChart lineChartInstance;
-    public LineChartPresenterImpl(LineChartView view, String url) {
-<span class="nc" id="L32">        super(url);</span>
-<span class="nc" id="L33">        graphView = view;</span>
-        //lineChartInstance = new LineChartImpl(jsonData);
-<span class="nc" id="L35">        this.setUpViews();</span>
-<span class="nc" id="L36">    }</span>
+   // PreviewLineChartView previewLineChartView;
+   // LineChartData lineChartData=new LineChartData();
 
-<span class="nc" id="L38">    LineChartPresenterImpl(){super(&quot;url&quot;);}</span>
+
+    public LineChartPresenterImpl(LineChartView view, String url) {
+<span class="nc" id="L39">        super(url);</span>
+<span class="nc" id="L40">        graphView = view;</span>
+        //lineChartInstance = new LineChartImpl(jsonData);
+<span class="nc" id="L42">        this.setUpViews();</span>
+<span class="nc" id="L43">    }</span>
+
+<span class="nc" id="L45">    LineChartPresenterImpl(){super(&quot;url&quot;);}</span>
 
 
     @Override
     public void setUpViews() {
-
-<span class="nc" id="L44">    }</span>
+       /* previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
+        previewLineChartView.setLineChartData(dataModel.getData());
+        previewLineChartView.setLineChartData(previewData);
+        // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
+        // zoom/scroll is unnecessary.
+        previewLineChartView.setZoomEnabled(false);
+        previewLineChartView.setScrollEnabled(false);*/
+<span class="nc" id="L57">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {
-
-<span class="nc" id="L49">    }</span>
+       /* if(observable instanceof LineChartModel){
+            // in quanto potremmo avere piu modelli dati
+            // verifichiamo su quale modello � avvenuto un cambiamento dei dati
+            // prima di effettuare il cast
+            MyDataModel m=(MyDataModel)observable;
+            myChart.setLineChartData(m.getData());*/
+<span class="nc" id="L67">    }</span>
 
     public void viewPointLegend(){
 
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L71">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

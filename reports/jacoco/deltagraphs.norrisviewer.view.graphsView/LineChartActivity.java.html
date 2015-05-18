@@ -7,24 +7,31 @@ import android.view.MenuItem;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.view.PreviewLineChartView;
 
-<span class="nc" id="L11">public class LineChartActivity extends ActionBarActivity implements LineChartView{</span>
+<span class="nc" id="L13">public class LineChartActivity extends ActionBarActivity implements LineChartView{</span>
 
-    LineChartPresenter lineChartPresenter;
+    private LineChartPresenter lineChartPresenter;
+
+    //line chart con view finder
+
+    private PreviewLineChartView previewChart;
+    private LineChartData lineChartData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L17">        String url = &quot;&quot;;</span>
-<span class="nc" id="L18">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
-<span class="nc" id="L19">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L20">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L21">    }</span>
+<span class="nc" id="L24">        String url = &quot;&quot;;</span>
+<span class="nc" id="L25">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
+<span class="nc" id="L26">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L27">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L28">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L26">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L27">        return true;</span>
+<span class="nc" id="L33">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L34">        return true;</span>
     }
 
     @Override
@@ -32,22 +39,22 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L35">        int id = item.getItemId();</span>
+<span class="nc" id="L42">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L38" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L39">            return true;</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L46">            return true;</span>
         }
 
-<span class="nc" id="L42">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L49">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L54">    }</span>
 
     public void setInitialState(){
 
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L58">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
