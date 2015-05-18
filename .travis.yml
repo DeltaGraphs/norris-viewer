@@ -28,14 +28,15 @@ env:
 after_success:
 - ./gradlew jacocoTestReport coveralls
 - pwd
+- cd app
 - ls -la
-- cd ..
+- cd build
 - pwd
 - ls -la
-- cd ..
+- cd reports
 - pwd
 - ls -la
-- cd ..
+- cd jacoco
 - pwd
 - ls -la
 
