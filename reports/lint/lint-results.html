@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Mon May 18 22:08:07 UTC 2015.<br/>
-0 errors and 17 warnings found:<br/><br/>
+Check performed at Mon May 18 23:02:28 UTC 2015.<br/>
+0 errors and 26 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -38,7 +38,7 @@ Check performed at Mon May 18 22:08:07 UTC 2015.<br/>
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
-<td class="countColumn">2</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">5</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr>
@@ -60,7 +60,11 @@ Check performed at Mon May 18 22:08:07 UTC 2015.<br/>
 <tr><td></td><td class="categoryColumn"><a href="#Bi-directional Text">Bi-directional Text</a>
 </td></tr>
 <tr>
-<td class="countColumn">5</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">2</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#RtlSymmetry">RtlSymmetry: Padding and margin symmetry</a>
+</td></tr>
+<tr>
+<td class="countColumn">9</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#RtlHardcoded">RtlHardcoded: Using left/right instead of start/end attributes</a>
 </td></tr>
 <tr>
@@ -180,7 +184,10 @@ Of course it's possible that your custom drawable is translucent and you want it
 <div class="id"><a href="#" title="Return to top">UnusedResources: Unused resources</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a></span>: <span class="message">The resource <code>R.layout.activity_table</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/menu/global.xml">../../src/main/res/menu/global.xml</a></span>: <span class="message">The resource <code>R.menu.global</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/item_table1.xml">../../src/main/res/drawable/item_table1.xml</a></span>: <span class="message">The resource <code>R.drawable.item_table1</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/item_table1_header.xml">../../src/main/res/drawable/item_table1_header.xml</a></span>: <span class="message">The resource <code>R.drawable.item_table1_header</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:6</span>: <span class="message">The resource <code>R.string.action_example</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">   3</span>     &lt;color name="main_color">#26A69A&lt;/color>
 <span class="lineno">   4</span>     &lt;string name="navigation_drawer_open">Open navigation drawer&lt;/string>
@@ -293,11 +300,74 @@ In Android Studio and Eclipse there are quickfixes to automatically extract this
 <a name="Bi-directional Text"></a>
 <div class="category"><a href="#" title="Return to top">Bi-directional Text</a><div class="categorySeparator"></div>
 </div>
+<a name="RtlSymmetry"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">RtlSymmetry: Padding and margin symmetry</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/item_table_first.xml">../../src/main/res/layout/item_table_first.xml</a>:13</span>: <span class="message">When you define <code>paddingLeft</code> you should probably also define <code>paddingRight</code> for right-to-left symmetry</span><br /><pre class="errorlines">
+<span class="lineno">  10</span>         android:layout_height="match_parent"
+<span class="lineno">  11</span>         android:layout_weight="1"
+<span class="lineno">  12</span>         android:gravity="center_vertical|left"
+<span class="lineno">  13</span>         <span class="errorspan">android:paddingLeft="10dip" /></span>
+<span class="lineno">  14</span> 
+<span class="lineno">  15</span>     &lt;View
+</pre>
+<span class="location"><a href="../../src/main/res/layout/item_table_header_first.xml">../../src/main/res/layout/item_table_header_first.xml</a>:14</span>: <span class="message">When you define <code>paddingLeft</code> you should probably also define <code>paddingRight</code> for right-to-left symmetry</span><br /><pre class="errorlines">
+<span class="lineno">  11</span>         android:layout_height="match_parent"
+<span class="lineno">  12</span>         android:layout_weight="1"
+<span class="lineno">  13</span>         android:gravity="center_vertical|left"
+<span class="lineno">  14</span>         <span class="errorspan">android:paddingLeft="10dip" /></span>
+<span class="lineno">  15</span> 
+<span class="lineno">  16</span>     &lt;View
+</pre>
+</div>
+<div class="metadata">Priority: 6 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Padding and margin symmetry.</div>
+<div class="explanation">
+If you specify padding or margin on the left side of a layout, you should probably also specify padding on the right side (and vice versa) for right-to-left layout symmetry.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlSymmetry" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
 <a name="RtlHardcoded"></a>
 <div class="issue">
 <div class="id"><a href="#" title="Return to top">RtlHardcoded: Using left/right instead of start/end attributes</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/item_table_first.xml">../../src/main/res/layout/item_table_first.xml</a>:12</span>: <span class="message">Use "<code>start</code>" instead of "<code>left</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">   9</span>         android:layout_width="0dip"
+<span class="lineno">  10</span>         android:layout_height="match_parent"
+<span class="lineno">  11</span>         android:layout_weight="1"
+<span class="lineno">  12</span>         <span class="errorspan">android:gravity="center_vertical|left"</span>
+<span class="lineno">  13</span>         android:paddingLeft="10dip" />
+<span class="lineno">  14</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/item_table_first.xml">../../src/main/res/layout/item_table_first.xml</a>:13</span>: <span class="message">Consider adding <code>android:paddingStart="10dip"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  10</span>         android:layout_height="match_parent"
+<span class="lineno">  11</span>         android:layout_weight="1"
+<span class="lineno">  12</span>         android:gravity="center_vertical|left"
+<span class="lineno">  13</span>         <span class="errorspan">android:paddingLeft="10dip" /></span>
+<span class="lineno">  14</span> 
+<span class="lineno">  15</span>     &lt;View
+</pre>
+<span class="location"><a href="../../src/main/res/layout/item_table_header_first.xml">../../src/main/res/layout/item_table_header_first.xml</a>:13</span>: <span class="message">Use "<code>start</code>" instead of "<code>left</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  10</span>         android:layout_width="0dip"
+<span class="lineno">  11</span>         android:layout_height="match_parent"
+<span class="lineno">  12</span>         android:layout_weight="1"
+<span class="lineno">  13</span>         <span class="errorspan">android:gravity="center_vertical|left"</span>
+<span class="lineno">  14</span>         android:paddingLeft="10dip" />
+<span class="lineno">  15</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/item_table_header_first.xml">../../src/main/res/layout/item_table_header_first.xml</a>:14</span>: <span class="message">Consider adding <code>android:paddingStart="10dip"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  11</span>         android:layout_height="match_parent"
+<span class="lineno">  12</span>         android:layout_weight="1"
+<span class="lineno">  13</span>         android:gravity="center_vertical|left"
+<span class="lineno">  14</span>         <span class="errorspan">android:paddingLeft="10dip" /></span>
+<span class="lineno">  15</span> 
+<span class="lineno">  16</span>     &lt;View
+</pre>
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:11</span>: <span class="message">Consider adding <code>android:layout_alignParentStart="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">   8</span>         android:id="@+id/text1"
 <span class="lineno">   9</span>         android:layout_width="wrap_content"
@@ -306,6 +376,8 @@ In Android Studio and Eclipse there are quickfixes to automatically extract this
 <span class="lineno">  12</span>         android:layout_alignParentTop="true"
 <span class="lineno">  13</span>         android:layout_toLeftOf="@+id/chart_layout"
 </pre>
+<button id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 4 More Occurrences...</button>
+<div id="RtlHardcodedDiv" style="display: none">
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:13</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/chart_layout"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  10</span>         android:layout_height="wrap_content"
 <span class="lineno">  11</span>         android:layout_alignParentLeft="true"
@@ -338,6 +410,7 @@ In Android Studio and Eclipse there are quickfixes to automatically extract this
 <span class="lineno">  32</span>         android:visibility="gone" >
 <span class="lineno">  33</span>     &lt;/FrameLayout>
 </pre>
+</div>
 </div>
 <div class="metadata">Priority: 5 / 10<br/>
 Category: Bi-directional Text</div>

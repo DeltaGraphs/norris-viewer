@@ -1,32 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>TableActivity.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.view.graphsView</a> &gt; <span class="el_source">TableActivity.java</span></div><h1>TableActivity.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.view.graphsView;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.GridView;
 import android.widget.TableLayout;
+import android.widget.TextView;
 
 import deltagraphs.norrisviewer.R;
 
-<span class="nc" id="L13">public class TableActivity extends ActionBarActivity implements TableView {</span>
+import com.inqbarna.tablefixheaders.TableFixHeaders;
+import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L23">public class TableActivity extends ActionBarActivity implements TableView {</span>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L17">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L18">        setContentView(R.layout.activity_table);</span>
-<span class="nc" id="L19">        TableLayout tableView = new TableLayout(this);</span>
-<span class="nc" id="L20">        GridLayout grid = new GridLayout(this);</span>
+<span class="nc" id="L27">        super.onCreate(savedInstanceState);</span>
+        //setContentView(R.layout.activity_table);
+<span class="nc" id="L29">        setContentView(R.layout.table);</span>
 
+        //TableLayout tableView = new TableLayout(this);
+        //GridLayout grid = new GridLayout(this);
 
-<span class="nc" id="L23">    }</span>
+<span class="nc" id="L34">        TableFixHeaders tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);</span>
+<span class="nc" id="L35">        BaseTableAdapter baseTableAdapter = new FamilyNexusAdapter(this);</span>
+<span class="nc" id="L36">        tableFixHeaders.setAdapter(baseTableAdapter);</span>
+
+<span class="nc" id="L38">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L28">        getMenuInflater().inflate(R.menu.menu_table, menu);</span>
-<span class="nc" id="L29">        return true;</span>
+<span class="nc" id="L43">        getMenuInflater().inflate(R.menu.menu_table, menu);</span>
+<span class="nc" id="L44">        return true;</span>
     }
 
     @Override
@@ -34,20 +49,247 @@ import deltagraphs.norrisviewer.R;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L37">        int id = item.getItemId();</span>
+<span class="nc" id="L52">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L41">            return true;</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L56">            return true;</span>
         }
 
-<span class="nc" id="L44">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L59">        return super.onOptionsItemSelected(item);</span>
     }
 
 
+    private class NexusTypes {
+        private final String name;
+        private final List&lt;Nexus&gt; list;
 
+<span class="nc" id="L67">        NexusTypes(String name) {</span>
+<span class="nc" id="L68">            this.name = name;</span>
+<span class="nc" id="L69">            list = new ArrayList&lt;Nexus&gt;();</span>
+<span class="nc" id="L70">        }</span>
 
+        public int size() {
+<span class="nc" id="L73">            return list.size();</span>
+        }
 
+        public Nexus get(int i) {
+<span class="nc" id="L77">            return list.get(i);</span>
+        }
+    }
+
+    private class Nexus {
+        private final String[] data;
+
+<span class="nc" id="L84">        private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {</span>
+<span class="nc" id="L85">            data = new String[] {</span>
+                    name,
+                    company,
+                    version,
+                    api,
+                    storage,
+                    inches,
+                    ram };
+<span class="nc" id="L93">        }</span>
+    }
+
+<span class="nc" id="L96">    public class FamilyNexusAdapter extends BaseTableAdapter {</span>
+
+        private final NexusTypes familys[];
+<span class="nc" id="L99">        private final String headers[] = {</span>
+                &quot;Name&quot;,
+                &quot;Company&quot;,
+                &quot;Version&quot;,
+                &quot;API&quot;,
+                &quot;Storage&quot;,
+                &quot;Size&quot;,
+                &quot;RAM&quot;,
+        };
+
+<span class="nc" id="L109">        private final int[] widths = {</span>
+                120,
+                100,
+                140,
+                60,
+                70,
+                60,
+                60,
+        };
+        private final float density;
+
+<span class="nc" id="L120">        public FamilyNexusAdapter(Context context) {</span>
+<span class="nc" id="L121">            familys = new NexusTypes[] {</span>
+                    new NexusTypes(&quot;Mobiles&quot;),
+                    new NexusTypes(&quot;Tablets&quot;),
+                    new NexusTypes(&quot;Others&quot;),
+            };
+
+<span class="nc" id="L127">            density = context.getResources().getDisplayMetrics().density;</span>
+
+<span class="nc" id="L129">            familys[0].list.add(new Nexus(&quot;Nexus One&quot;, &quot;HTC&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;512 MB&quot;, &quot;3.7\&quot;&quot;, &quot;512 MB&quot;));</span>
+<span class="nc" id="L130">            familys[0].list.add(new Nexus(&quot;Nexus S&quot;, &quot;Samsung&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;16 GB&quot;, &quot;4\&quot;&quot;, &quot;512 MB&quot;));</span>
+<span class="nc" id="L131">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (16 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;16 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L132">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (32 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;32 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L133">            familys[0].list.add(new Nexus(&quot;Nexus 4 (8 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;8 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L134">            familys[0].list.add(new Nexus(&quot;Nexus 4 (16 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L135">            familys[1].list.add(new Nexus(&quot;Nexus 7 (16 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;16 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L136">            familys[1].list.add(new Nexus(&quot;Nexus 7 (32 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;32 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L137">            familys[1].list.add(new Nexus(&quot;Nexus 10 (16 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L138">            familys[1].list.add(new Nexus(&quot;Nexus 10 (32 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;32 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L139">            familys[2].list.add(new Nexus(&quot;Nexus Q&quot;, &quot;--&quot;, &quot;Honeycomb&quot;, &quot;13&quot;, &quot;--&quot;, &quot;--&quot;, &quot;--&quot;));</span>
+<span class="nc" id="L140">        }</span>
+
+        @Override
+        public int getRowCount() {
+<span class="nc" id="L144">            return 14;</span>
+        }
+
+        @Override
+        public int getColumnCount() {
+<span class="nc" id="L149">            return 6;</span>
+        }
+
+        @Override
+        public View getView(int row, int column, View convertView, ViewGroup parent) {
+            final View view;
+<span class="nc bnc" id="L155" title="All 6 branches missed.">            switch (getItemViewType(row, column)) {</span>
+                case 0:
+<span class="nc" id="L157">                    view = getFirstHeader(row, column, convertView, parent);</span>
+<span class="nc" id="L158">                    break;</span>
+                case 1:
+<span class="nc" id="L160">                    view = getHeader(row, column, convertView, parent);</span>
+<span class="nc" id="L161">                    break;</span>
+                case 2:
+<span class="nc" id="L163">                    view = getFirstBody(row, column, convertView, parent);</span>
+<span class="nc" id="L164">                    break;</span>
+                case 3:
+<span class="nc" id="L166">                    view = getBody(row, column, convertView, parent);</span>
+<span class="nc" id="L167">                    break;</span>
+                case 4:
+<span class="nc" id="L169">                    view = getFamilyView(row, column, convertView, parent);</span>
+<span class="nc" id="L170">                    break;</span>
+                default:
+<span class="nc" id="L172">                    throw new RuntimeException(&quot;wtf?&quot;);</span>
+            }
+<span class="nc" id="L174">            return view;</span>
+        }
+
+        private View getFirstHeader(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L178" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L179">                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);</span>
+            }
+<span class="nc" id="L181">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);</span>
+<span class="nc" id="L182">            return convertView;</span>
+        }
+
+        private View getHeader(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L187">                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);</span>
+            }
+<span class="nc" id="L189">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);</span>
+<span class="nc" id="L190">            return convertView;</span>
+        }
+
+        private View getFirstBody(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L194" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L195">                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);</span>
+            }
+<span class="nc bnc" id="L197" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
+<span class="nc" id="L198">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
+<span class="nc" id="L199">            return convertView;</span>
+        }
+
+        private View getBody(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L204">                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);</span>
+            }
+<span class="nc bnc" id="L206" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
+<span class="nc" id="L207">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
+<span class="nc" id="L208">            return convertView;</span>
+        }
+
+        private View getFamilyView(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L213">                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);</span>
+            }
+            final String string;
+<span class="nc bnc" id="L216" title="All 2 branches missed.">            if (column == -1) {</span>
+<span class="nc" id="L217">                string = getFamily(row).name;</span>
+            } else {
+<span class="nc" id="L219">                string = &quot;&quot;;</span>
+            }
+<span class="nc" id="L221">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);</span>
+<span class="nc" id="L222">            return convertView;</span>
+        }
+
+        @Override
+        public int getWidth(int column) {
+<span class="nc" id="L227">            return Math.round(widths[column + 1] * density);</span>
+        }
+
+        @Override
+        public int getHeight(int row) {
+            final int height;
+<span class="nc bnc" id="L233" title="All 2 branches missed.">            if (row == -1) {</span>
+<span class="nc" id="L234">                height = 35;</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
+<span class="nc" id="L236">                height = 25;</span>
+            } else {
+<span class="nc" id="L238">                height = 45;</span>
+            }
+<span class="nc" id="L240">            return Math.round(height * density);</span>
+        }
+
+        @Override
+        public int getItemViewType(int row, int column) {
+            final int itemViewType;
+<span class="nc bnc" id="L246" title="All 4 branches missed.">            if (row == -1 &amp;&amp; column == -1) {</span>
+<span class="nc" id="L247">                itemViewType = 0;</span>
+<span class="nc bnc" id="L248" title="All 2 branches missed.">            } else if (row == -1) {</span>
+<span class="nc" id="L249">                itemViewType = 1;</span>
+<span class="nc bnc" id="L250" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
+<span class="nc" id="L251">                itemViewType = 4;</span>
+<span class="nc bnc" id="L252" title="All 2 branches missed.">            } else if (column == -1) {</span>
+<span class="nc" id="L253">                itemViewType = 2;</span>
+            } else {
+<span class="nc" id="L255">                itemViewType = 3;</span>
+            }
+<span class="nc" id="L257">            return itemViewType;</span>
+        }
+
+        private boolean isFamily(int row) {
+<span class="nc" id="L261">            int family = 0;</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">            while (row &gt; 0) {</span>
+<span class="nc" id="L263">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L264">                family++;</span>
+            }
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            return row == 0;</span>
+        }
+
+        private NexusTypes getFamily(int row) {
+<span class="nc" id="L270">            int family = 0;</span>
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
+<span class="nc" id="L272">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L273">                family++;</span>
+            }
+<span class="nc" id="L275">            return familys[family - 1];</span>
+        }
+
+        private Nexus getDevice(int row) {
+<span class="nc" id="L279">            int family = 0;</span>
+<span class="nc bnc" id="L280" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
+<span class="nc" id="L281">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L282">                family++;</span>
+            }
+<span class="nc" id="L284">            family--;</span>
+<span class="nc" id="L285">            return familys[family].get(row + familys[family].size());</span>
+        }
+
+        @Override
+        public int getViewTypeCount() {
+<span class="nc" id="L290">            return 5;</span>
+        }
+    }
 
 
 

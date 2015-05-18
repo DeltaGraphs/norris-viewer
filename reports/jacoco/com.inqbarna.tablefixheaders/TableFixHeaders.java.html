@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>TableFixHeaders.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.inqbarna.tablefixheaders</a> &gt; <span class="el_source">TableFixHeaders.java</span></div><h1>TableFixHeaders.java</h1><pre class="source lang-java linenums">package com.inqbarna.tablefixheaders;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.inqbarna.tablefixheaders.adapters.TableAdapter;
+
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Context;
+import android.database.DataSetObserver;
+import android.graphics.Canvas;
+import android.os.Build;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.VelocityTracker;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.Scroller;
+
+import deltagraphs.norrisviewer.R;
+
+/**
+ * This view shows a table which can scroll in both directions. Also still
+ * leaves the headers fixed.
+ * 
+ * @author Brais Gabin (InQBarna)
+ */
+public class TableFixHeaders extends ViewGroup {
+	private int currentX;
+	private int currentY;
+
+	private TableAdapter adapter;
+	private int scrollX;
+	private int scrollY;
+	private int firstRow;
+	private int firstColumn;
+	private int[] widths;
+	private int[] heights;
+
+	@SuppressWarnings(&quot;unused&quot;)
+	private View headView;
+	private List&lt;View&gt; rowViewList;
+	private List&lt;View&gt; columnViewList;
+	private List&lt;List&lt;View&gt;&gt; bodyViewTable;
+
+	private int rowCount;
+	private int columnCount;
+
+	private int width;
+	private int height;
+
+	private Recycler recycler;
+
+	private TableAdapterDataSetObserver tableAdapterDataSetObserver;
+	private boolean needRelayout;
+
+	private final ImageView[] shadows;
+	private final int shadowSize;
+
+	private final int minimumVelocity;
+	private final int maximumVelocity;
+
+	private final Flinger flinger;
+
+	private VelocityTracker velocityTracker;
+
+	private int touchSlop;
+
+	/**
+	 * Simple constructor to use when creating a view from code.
+	 * 
+	 * @param context
+	 *            The Context the view is running in, through which it can
+	 *            access the current theme,resources, etc.
+	 */
+	public TableFixHeaders(Context context) {
+<span class="nc" id="L80">		this(context, null);</span>
+<span class="nc" id="L81">	}</span>
+
+	/**
+	 * Constructor that is called when inflating a view from XML. This is called
+	 * when a view is being constructed from an XML file, supplying attributes
+	 * that were specified in the XML file. This version uses a default style of
+	 * 0, so the only attribute values applied are those in the Context's Theme
+	 * and the given AttributeSet.
+	 * 
+	 * The method onFinishInflate() will be called after all children have been
+	 * added.
+	 * 
+	 * @param context
+	 *            The Context the view is running in, through which it can
+	 *            access the current theme,resources, etc.
+	 * @param attrs
+	 *            The attributes of the XML tag that is inflating the view.
+	 */
+	public TableFixHeaders(Context context, AttributeSet attrs) {
+<span class="nc" id="L100">		super(context, attrs);</span>
+
+<span class="nc" id="L102">		this.headView = null;</span>
+<span class="nc" id="L103">		this.rowViewList = new ArrayList&lt;View&gt;();</span>
+<span class="nc" id="L104">		this.columnViewList = new ArrayList&lt;View&gt;();</span>
+<span class="nc" id="L105">		this.bodyViewTable = new ArrayList&lt;List&lt;View&gt;&gt;();</span>
+
+<span class="nc" id="L107">		this.needRelayout = true;</span>
+
+<span class="nc" id="L109">		this.shadows = new ImageView[4];</span>
+<span class="nc" id="L110">		this.shadows[0] = new ImageView(context);</span>
+<span class="nc" id="L111">		this.shadows[0].setImageResource(R.drawable.shadow_left);</span>
+<span class="nc" id="L112">		this.shadows[1] = new ImageView(context);</span>
+<span class="nc" id="L113">		this.shadows[1].setImageResource(R.drawable.shadow_top);</span>
+<span class="nc" id="L114">		this.shadows[2] = new ImageView(context);</span>
+<span class="nc" id="L115">		this.shadows[2].setImageResource(R.drawable.shadow_right);</span>
+<span class="nc" id="L116">		this.shadows[3] = new ImageView(context);</span>
+<span class="nc" id="L117">		this.shadows[3].setImageResource(R.drawable.shadow_bottom);</span>
+
+<span class="nc" id="L119">		this.shadowSize = getResources().getDimensionPixelSize(R.dimen.shadow_size);</span>
+
+<span class="nc" id="L121">		this.flinger = new Flinger(context);</span>
+<span class="nc" id="L122">		final ViewConfiguration configuration = ViewConfiguration.get(context);</span>
+<span class="nc" id="L123">		this.touchSlop = configuration.getScaledTouchSlop();</span>
+<span class="nc" id="L124">		this.minimumVelocity = configuration.getScaledMinimumFlingVelocity();</span>
+<span class="nc" id="L125">		this.maximumVelocity = configuration.getScaledMaximumFlingVelocity();</span>
+<span class="nc" id="L126">	}</span>
+
+	/**
+	 * Returns the adapter currently associated with this widget.
+	 * 
+	 * @return The adapter used to provide this view's content.
+	 */
+	public TableAdapter getAdapter() {
+<span class="nc" id="L134">		return adapter;</span>
+	}
+
+	/**
+	 * Sets the data behind this TableFixHeaders.
+	 * 
+	 * @param adapter
+	 *            The TableAdapter which is responsible for maintaining the data
+	 *            backing this list and for producing a view to represent an
+	 *            item in that data set.
+	 */
+	public void setAdapter(TableAdapter adapter) {
+<span class="nc bnc" id="L146" title="All 2 branches missed.">		if (this.adapter != null) {</span>
+<span class="nc" id="L147">			this.adapter.unregisterDataSetObserver(tableAdapterDataSetObserver);</span>
+		}
+
+<span class="nc" id="L150">		this.adapter = adapter;</span>
+<span class="nc" id="L151">		tableAdapterDataSetObserver = new TableAdapterDataSetObserver();</span>
+<span class="nc" id="L152">		this.adapter.registerDataSetObserver(tableAdapterDataSetObserver);</span>
+
+<span class="nc" id="L154">		this.recycler = new Recycler(adapter.getViewTypeCount());</span>
+
+<span class="nc" id="L156">		scrollX = 0;</span>
+<span class="nc" id="L157">		scrollY = 0;</span>
+<span class="nc" id="L158">		firstColumn = 0;</span>
+<span class="nc" id="L159">		firstRow = 0;</span>
+
+<span class="nc" id="L161">		needRelayout = true;</span>
+<span class="nc" id="L162">		requestLayout();</span>
+<span class="nc" id="L163">	}</span>
+
+	@Override
+	public boolean onInterceptTouchEvent(MotionEvent event) {
+<span class="nc" id="L167">		boolean intercept = false;</span>
+<span class="nc bnc" id="L168" title="All 3 branches missed.">		switch (event.getAction()) {</span>
+			case MotionEvent.ACTION_DOWN: {
+<span class="nc" id="L170">				currentX = (int) event.getRawX();</span>
+<span class="nc" id="L171">				currentY = (int) event.getRawY();</span>
+<span class="nc" id="L172">				break;</span>
+			}
+			case MotionEvent.ACTION_MOVE: {
+<span class="nc" id="L175">				int x2 = Math.abs(currentX - (int) event.getRawX());</span>
+<span class="nc" id="L176">				int y2 = Math.abs(currentY - (int) event.getRawY());</span>
+<span class="nc bnc" id="L177" title="All 4 branches missed.">				if (x2 &gt; touchSlop || y2 &gt; touchSlop) {</span>
+<span class="nc" id="L178">					intercept = true;</span>
+				}
+				break;
+			}
+		}
+<span class="nc" id="L183">		return intercept;</span>
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event) {
+<span class="nc bnc" id="L188" title="All 2 branches missed.">		if (velocityTracker == null) { // If we do not have velocity tracker</span>
+<span class="nc" id="L189">			velocityTracker = VelocityTracker.obtain(); // then get one</span>
+		}
+<span class="nc" id="L191">		velocityTracker.addMovement(event); // add this movement to it</span>
+
+<span class="nc bnc" id="L193" title="All 4 branches missed.">		switch (event.getAction()) {</span>
+			case MotionEvent.ACTION_DOWN: {
+<span class="nc bnc" id="L195" title="All 2 branches missed.">				if (!flinger.isFinished()) { // If scrolling, then stop now</span>
+<span class="nc" id="L196">					flinger.forceFinished();</span>
+				}
+<span class="nc" id="L198">				currentX = (int) event.getRawX();</span>
+<span class="nc" id="L199">				currentY = (int) event.getRawY();</span>
+<span class="nc" id="L200">				break;</span>
+			}
+			case MotionEvent.ACTION_MOVE: {
+<span class="nc" id="L203">				final int x2 = (int) event.getRawX();</span>
+<span class="nc" id="L204">				final int y2 = (int) event.getRawY();</span>
+<span class="nc" id="L205">				final int diffX = currentX - x2;</span>
+<span class="nc" id="L206">				final int diffY = currentY - y2;</span>
+<span class="nc" id="L207">				currentX = x2;</span>
+<span class="nc" id="L208">				currentY = y2;</span>
+
+<span class="nc" id="L210">				scrollBy(diffX, diffY);</span>
+<span class="nc" id="L211">				break;</span>
+			}
+			case MotionEvent.ACTION_UP: {
+<span class="nc" id="L214">				final VelocityTracker velocityTracker = this.velocityTracker;</span>
+<span class="nc" id="L215">				velocityTracker.computeCurrentVelocity(1000, maximumVelocity);</span>
+<span class="nc" id="L216">				int velocityX = (int) velocityTracker.getXVelocity();</span>
+<span class="nc" id="L217">				int velocityY = (int) velocityTracker.getYVelocity();</span>
+
+<span class="nc bnc" id="L219" title="All 4 branches missed.">				if (Math.abs(velocityX) &gt; minimumVelocity || Math.abs(velocityY) &gt; minimumVelocity) {</span>
+<span class="nc" id="L220">					flinger.start(getActualScrollX(), getActualScrollY(), velocityX, velocityY, getMaxScrollX(), getMaxScrollY());</span>
+				} else {
+<span class="nc bnc" id="L222" title="All 2 branches missed.">					if (this.velocityTracker != null) { // If the velocity less than threshold</span>
+<span class="nc" id="L223">						this.velocityTracker.recycle(); // recycle the tracker</span>
+<span class="nc" id="L224">						this.velocityTracker = null;</span>
+					}
+				}
+				break;
+			}
+		}
+<span class="nc" id="L230">		return true;</span>
+	}
+
+	@Override
+	public void scrollTo(int x, int y) {
+<span class="nc bnc" id="L235" title="All 2 branches missed.">		if (needRelayout) {</span>
+<span class="nc" id="L236">			scrollX = x;</span>
+<span class="nc" id="L237">			firstColumn = 0;</span>
+
+<span class="nc" id="L239">			scrollY = y;</span>
+<span class="nc" id="L240">			firstRow = 0;</span>
+		} else {
+<span class="nc" id="L242">			scrollBy(x - sumArray(widths, 1, firstColumn) - scrollX, y - sumArray(heights, 1, firstRow) - scrollY);</span>
+		}
+<span class="nc" id="L244">	}</span>
+
+	@Override
+	public void scrollBy(int x, int y) {
+<span class="nc" id="L248">		scrollX += x;</span>
+<span class="nc" id="L249">		scrollY += y;</span>
+
+<span class="nc bnc" id="L251" title="All 2 branches missed.">		if (needRelayout) {</span>
+<span class="nc" id="L252">			return;</span>
+		}
+
+<span class="nc" id="L255">		scrollBounds();</span>
+
+		/*
+		 * TODO Improve the algorithm. Think big diagonal movements. If we are
+		 * in the top left corner and scrollBy to the opposite corner. We will
+		 * have created the views from the top right corner on the X part and we
+		 * will have eliminated to generate the right at the Y.
+		 */
+<span class="nc bnc" id="L263" title="All 2 branches missed.">		if (scrollX == 0) {</span>
+			// no op
+<span class="nc bnc" id="L265" title="All 2 branches missed.">		} else if (scrollX &gt; 0) {</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">			while (widths[firstColumn + 1] &lt; scrollX) {</span>
+<span class="nc bnc" id="L267" title="All 2 branches missed.">				if (!rowViewList.isEmpty()) {</span>
+<span class="nc" id="L268">					removeLeft();</span>
+				}
+<span class="nc" id="L270">				scrollX -= widths[firstColumn + 1];</span>
+<span class="nc" id="L271">				firstColumn++;</span>
+			}
+<span class="nc bnc" id="L273" title="All 2 branches missed.">			while (getFilledWidth() &lt; width) {</span>
+<span class="nc" id="L274">				addRight();</span>
+			}
+		} else {
+<span class="nc bnc" id="L277" title="All 4 branches missed.">			while (!rowViewList.isEmpty() &amp;&amp; getFilledWidth() - widths[firstColumn + rowViewList.size()] &gt;= width) {</span>
+<span class="nc" id="L278">				removeRight();</span>
+			}
+<span class="nc bnc" id="L280" title="All 2 branches missed.">			if (rowViewList.isEmpty()) {</span>
+<span class="nc bnc" id="L281" title="All 2 branches missed.">				while (scrollX &lt; 0) {</span>
+<span class="nc" id="L282">					firstColumn--;</span>
+<span class="nc" id="L283">					scrollX += widths[firstColumn + 1];</span>
+				}
+<span class="nc bnc" id="L285" title="All 2 branches missed.">				while (getFilledWidth() &lt; width) {</span>
+<span class="nc" id="L286">					addRight();</span>
+				}
+			} else {
+<span class="nc bnc" id="L289" title="All 2 branches missed.">				while (0 &gt; scrollX) {</span>
+<span class="nc" id="L290">					addLeft();</span>
+<span class="nc" id="L291">					firstColumn--;</span>
+<span class="nc" id="L292">					scrollX += widths[firstColumn + 1];</span>
+				}
+			}
+		}
+
+<span class="nc bnc" id="L297" title="All 2 branches missed.">		if (scrollY == 0) {</span>
+			// no op
+<span class="nc bnc" id="L299" title="All 2 branches missed.">		} else if (scrollY &gt; 0) {</span>
+<span class="nc bnc" id="L300" title="All 2 branches missed.">			while (heights[firstRow + 1] &lt; scrollY) {</span>
+<span class="nc bnc" id="L301" title="All 2 branches missed.">				if (!columnViewList.isEmpty()) {</span>
+<span class="nc" id="L302">					removeTop();</span>
+				}
+<span class="nc" id="L304">				scrollY -= heights[firstRow + 1];</span>
+<span class="nc" id="L305">				firstRow++;</span>
+			}
+<span class="nc bnc" id="L307" title="All 2 branches missed.">			while (getFilledHeight() &lt; height) {</span>
+<span class="nc" id="L308">				addBottom();</span>
+			}
+		} else {
+<span class="nc bnc" id="L311" title="All 4 branches missed.">			while (!columnViewList.isEmpty() &amp;&amp; getFilledHeight() - heights[firstRow + columnViewList.size()] &gt;= height) {</span>
+<span class="nc" id="L312">				removeBottom();</span>
+			}
+<span class="nc bnc" id="L314" title="All 2 branches missed.">			if (columnViewList.isEmpty()) {</span>
+<span class="nc bnc" id="L315" title="All 2 branches missed.">				while (scrollY &lt; 0) {</span>
+<span class="nc" id="L316">					firstRow--;</span>
+<span class="nc" id="L317">					scrollY += heights[firstRow + 1];</span>
+				}
+<span class="nc bnc" id="L319" title="All 2 branches missed.">				while (getFilledHeight() &lt; height) {</span>
+<span class="nc" id="L320">					addBottom();</span>
+				}
+			} else {
+<span class="nc bnc" id="L323" title="All 2 branches missed.">				while (0 &gt; scrollY) {</span>
+<span class="nc" id="L324">					addTop();</span>
+<span class="nc" id="L325">					firstRow--;</span>
+<span class="nc" id="L326">					scrollY += heights[firstRow + 1];</span>
+				}
+			}
+		}
+
+<span class="nc" id="L331">		repositionViews();</span>
+
+<span class="nc" id="L333">		shadowsVisibility();</span>
+<span class="nc" id="L334">	}</span>
+
+	public int getActualScrollX() {
+<span class="nc" id="L337">		return scrollX + sumArray(widths, 1, firstColumn);</span>
+	}
+
+	public int getActualScrollY() {
+<span class="nc" id="L341">		return scrollY + sumArray(heights, 1, firstRow);</span>
+	}
+
+	private int getMaxScrollX() {
+<span class="nc" id="L345">		return Math.max(0, sumArray(widths) - width);</span>
+	}
+
+	private int getMaxScrollY() {
+<span class="nc" id="L349">		return Math.max(0, sumArray(heights) - height);</span>
+	}
+
+	private int getFilledWidth() {
+<span class="nc" id="L353">		return widths[0] + sumArray(widths, firstColumn + 1, rowViewList.size()) - scrollX;</span>
+	}
+
+	private int getFilledHeight() {
+<span class="nc" id="L357">		return heights[0] + sumArray(heights, firstRow + 1, columnViewList.size()) - scrollY;</span>
+	}
+
+	private void addLeft() {
+<span class="nc" id="L361">		addLeftOrRight(firstColumn - 1, 0);</span>
+<span class="nc" id="L362">	}</span>
+
+	private void addTop() {
+<span class="nc" id="L365">		addTopAndBottom(firstRow - 1, 0);</span>
+<span class="nc" id="L366">	}</span>
+
+	private void addRight() {
+<span class="nc" id="L369">		final int size = rowViewList.size();</span>
+<span class="nc" id="L370">		addLeftOrRight(firstColumn + size, size);</span>
+<span class="nc" id="L371">	}</span>
+
+	private void addBottom() {
+<span class="nc" id="L374">		final int size = columnViewList.size();</span>
+<span class="nc" id="L375">		addTopAndBottom(firstRow + size, size);</span>
+<span class="nc" id="L376">	}</span>
+
+	private void addLeftOrRight(int column, int index) {
+<span class="nc" id="L379">		View view = makeView(-1, column, widths[column + 1], heights[0]);</span>
+<span class="nc" id="L380">		rowViewList.add(index, view);</span>
+
+<span class="nc" id="L382">		int i = firstRow;</span>
+<span class="nc bnc" id="L383" title="All 2 branches missed.">		for (List&lt;View&gt; list : bodyViewTable) {</span>
+<span class="nc" id="L384">			view = makeView(i, column, widths[column + 1], heights[i + 1]);</span>
+<span class="nc" id="L385">			list.add(index, view);</span>
+<span class="nc" id="L386">			i++;</span>
+<span class="nc" id="L387">		}</span>
+<span class="nc" id="L388">	}</span>
+
+	private void addTopAndBottom(int row, int index) {
+<span class="nc" id="L391">		View view = makeView(row, -1, widths[0], heights[row + 1]);</span>
+<span class="nc" id="L392">		columnViewList.add(index, view);</span>
+
+<span class="nc" id="L394">		List&lt;View&gt; list = new ArrayList&lt;View&gt;();</span>
+<span class="nc" id="L395">		final int size = rowViewList.size() + firstColumn;</span>
+<span class="nc bnc" id="L396" title="All 2 branches missed.">		for (int i = firstColumn; i &lt; size; i++) {</span>
+<span class="nc" id="L397">			view = makeView(row, i, widths[i + 1], heights[row + 1]);</span>
+<span class="nc" id="L398">			list.add(view);</span>
+		}
+<span class="nc" id="L400">		bodyViewTable.add(index, list);</span>
+<span class="nc" id="L401">	}</span>
+
+	private void removeLeft() {
+<span class="nc" id="L404">		removeLeftOrRight(0);</span>
+<span class="nc" id="L405">	}</span>
+
+	private void removeTop() {
+<span class="nc" id="L408">		removeTopOrBottom(0);</span>
+<span class="nc" id="L409">	}</span>
+
+	private void removeRight() {
+<span class="nc" id="L412">		removeLeftOrRight(rowViewList.size() - 1);</span>
+<span class="nc" id="L413">	}</span>
+
+	private void removeBottom() {
+<span class="nc" id="L416">		removeTopOrBottom(columnViewList.size() - 1);</span>
+<span class="nc" id="L417">	}</span>
+
+	private void removeLeftOrRight(int position) {
+<span class="nc" id="L420">		removeView(rowViewList.remove(position));</span>
+<span class="nc bnc" id="L421" title="All 2 branches missed.">		for (List&lt;View&gt; list : bodyViewTable) {</span>
+<span class="nc" id="L422">			removeView(list.remove(position));</span>
+<span class="nc" id="L423">		}</span>
+<span class="nc" id="L424">	}</span>
+
+	private void removeTopOrBottom(int position) {
+<span class="nc" id="L427">		removeView(columnViewList.remove(position));</span>
+<span class="nc" id="L428">		List&lt;View&gt; remove = bodyViewTable.remove(position);</span>
+<span class="nc bnc" id="L429" title="All 2 branches missed.">		for (View view : remove) {</span>
+<span class="nc" id="L430">			removeView(view);</span>
+<span class="nc" id="L431">		}</span>
+<span class="nc" id="L432">	}</span>
+
+	@Override
+	public void removeView(View view) {
+<span class="nc" id="L436">		super.removeView(view);</span>
+
+<span class="nc" id="L438">		final int typeView = (Integer) view.getTag(R.id.tag_type_view);</span>
+<span class="nc bnc" id="L439" title="All 2 branches missed.">		if (typeView != TableAdapter.IGNORE_ITEM_VIEW_TYPE) {</span>
+<span class="nc" id="L440">			recycler.addRecycledView(view, typeView);</span>
+		}
+<span class="nc" id="L442">	}</span>
+
+	private void repositionViews() {
+		int left, top, right, bottom, i;
+
+<span class="nc" id="L447">		left = widths[0] - scrollX;</span>
+<span class="nc" id="L448">		i = firstColumn;</span>
+<span class="nc bnc" id="L449" title="All 2 branches missed.">		for (View view : rowViewList) {</span>
+<span class="nc" id="L450">			right = left + widths[++i];</span>
+<span class="nc" id="L451">			view.layout(left, 0, right, heights[0]);</span>
+<span class="nc" id="L452">			left = right;</span>
+<span class="nc" id="L453">		}</span>
+
+<span class="nc" id="L455">		top = heights[0] - scrollY;</span>
+<span class="nc" id="L456">		i = firstRow;</span>
+<span class="nc bnc" id="L457" title="All 2 branches missed.">		for (View view : columnViewList) {</span>
+<span class="nc" id="L458">			bottom = top + heights[++i];</span>
+<span class="nc" id="L459">			view.layout(0, top, widths[0], bottom);</span>
+<span class="nc" id="L460">			top = bottom;</span>
+<span class="nc" id="L461">		}</span>
+
+<span class="nc" id="L463">		top = heights[0] - scrollY;</span>
+<span class="nc" id="L464">		i = firstRow;</span>
+<span class="nc bnc" id="L465" title="All 2 branches missed.">		for (List&lt;View&gt; list : bodyViewTable) {</span>
+<span class="nc" id="L466">			bottom = top + heights[++i];</span>
+<span class="nc" id="L467">			left = widths[0] - scrollX;</span>
+<span class="nc" id="L468">			int j = firstColumn;</span>
+<span class="nc bnc" id="L469" title="All 2 branches missed.">			for (View view : list) {</span>
+<span class="nc" id="L470">				right = left + widths[++j];</span>
+<span class="nc" id="L471">				view.layout(left, top, right, bottom);</span>
+<span class="nc" id="L472">				left = right;</span>
+<span class="nc" id="L473">			}</span>
+<span class="nc" id="L474">			top = bottom;</span>
+<span class="nc" id="L475">		}</span>
+<span class="nc" id="L476">		invalidate();</span>
+<span class="nc" id="L477">	}</span>
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+<span class="nc" id="L481">		final int widthMode = MeasureSpec.getMode(widthMeasureSpec);</span>
+<span class="nc" id="L482">		final int heightMode = MeasureSpec.getMode(heightMeasureSpec);</span>
+<span class="nc" id="L483">		final int widthSize = MeasureSpec.getSize(widthMeasureSpec);</span>
+<span class="nc" id="L484">		final int heightSize = MeasureSpec.getSize(heightMeasureSpec);</span>
+
+		final int w;
+		final int h;
+
+<span class="nc bnc" id="L489" title="All 2 branches missed.">		if (adapter != null) {</span>
+<span class="nc" id="L490">			this.rowCount = adapter.getRowCount();</span>
+<span class="nc" id="L491">			this.columnCount = adapter.getColumnCount();</span>
+
+<span class="nc" id="L493">			widths = new int[columnCount + 1];</span>
+<span class="nc bnc" id="L494" title="All 2 branches missed.">			for (int i = -1; i &lt; columnCount; i++) {</span>
+<span class="nc" id="L495">				widths[i + 1] += adapter.getWidth(i);</span>
+			}
+<span class="nc" id="L497">			heights = new int[rowCount + 1];</span>
+<span class="nc bnc" id="L498" title="All 2 branches missed.">			for (int i = -1; i &lt; rowCount; i++) {</span>
+<span class="nc" id="L499">				heights[i + 1] += adapter.getHeight(i);</span>
+			}
+
+<span class="nc bnc" id="L502" title="All 2 branches missed.">			if (widthMode == MeasureSpec.AT_MOST) {</span>
+<span class="nc" id="L503">				w = Math.min(widthSize, sumArray(widths));</span>
+<span class="nc bnc" id="L504" title="All 2 branches missed.">			} else if (widthMode == MeasureSpec.UNSPECIFIED) {</span>
+<span class="nc" id="L505">				w = sumArray(widths);</span>
+			} else {
+<span class="nc" id="L507">				w = widthSize;</span>
+<span class="nc" id="L508">				int sumArray = sumArray(widths);</span>
+<span class="nc bnc" id="L509" title="All 2 branches missed.">				if (sumArray &lt; widthSize) {</span>
+<span class="nc" id="L510">					final float factor = widthSize / (float) sumArray;</span>
+<span class="nc bnc" id="L511" title="All 2 branches missed.">					for (int i = 1; i &lt; widths.length; i++) {</span>
+<span class="nc" id="L512">						widths[i] = Math.round(widths[i] * factor);</span>
+					}
+<span class="nc" id="L514">					widths[0] = widthSize - sumArray(widths, 1, widths.length - 1);</span>
+				}
+			}
+
+<span class="nc bnc" id="L518" title="All 2 branches missed.">			if (heightMode == MeasureSpec.AT_MOST) {</span>
+<span class="nc" id="L519">				h = Math.min(heightSize, sumArray(heights));</span>
+<span class="nc bnc" id="L520" title="All 2 branches missed.">			} else if (heightMode == MeasureSpec.UNSPECIFIED) {</span>
+<span class="nc" id="L521">				h = sumArray(heights);</span>
+			} else {
+<span class="nc" id="L523">				h = heightSize;</span>
+			}
+		} else {
+<span class="nc bnc" id="L526" title="All 4 branches missed.">			if (heightMode == MeasureSpec.AT_MOST || widthMode == MeasureSpec.UNSPECIFIED) {</span>
+<span class="nc" id="L527">				w = 0;</span>
+<span class="nc" id="L528">				h = 0;</span>
+			} else {
+<span class="nc" id="L530">				w = widthSize;</span>
+<span class="nc" id="L531">				h = heightSize;</span>
+			}
+		}
+
+<span class="nc bnc" id="L535" title="All 4 branches missed.">		if (firstRow &gt;= rowCount || getMaxScrollY() - getActualScrollY() &lt; 0) {</span>
+<span class="nc" id="L536">			firstRow = 0;</span>
+<span class="nc" id="L537">			scrollY = Integer.MAX_VALUE;</span>
+		}
+<span class="nc bnc" id="L539" title="All 4 branches missed.">		if (firstColumn &gt;= columnCount || getMaxScrollX() - getActualScrollX() &lt; 0) {</span>
+<span class="nc" id="L540">			firstColumn = 0;</span>
+<span class="nc" id="L541">			scrollX = Integer.MAX_VALUE;</span>
+		}
+
+<span class="nc" id="L544">		setMeasuredDimension(w, h);</span>
+<span class="nc" id="L545">	}</span>
+
+	private int sumArray(int array[]) {
+<span class="nc" id="L548">		return sumArray(array, 0, array.length);</span>
+	}
+
+	private int sumArray(int array[], int firstIndex, int count) {
+<span class="nc" id="L552">		int sum = 0;</span>
+<span class="nc" id="L553">		count += firstIndex;</span>
+<span class="nc bnc" id="L554" title="All 2 branches missed.">		for (int i = firstIndex; i &lt; count; i++) {</span>
+<span class="nc" id="L555">			sum += array[i];</span>
+		}
+<span class="nc" id="L557">		return sum;</span>
+	}
+
+	@SuppressLint(&quot;DrawAllocation&quot;)
+	@Override
+	protected void onLayout(boolean changed, int l, int t, int r, int b) {
+<span class="nc bnc" id="L563" title="All 4 branches missed.">		if (needRelayout || changed) {</span>
+<span class="nc" id="L564">			needRelayout = false;</span>
+<span class="nc" id="L565">			resetTable();</span>
+
+<span class="nc bnc" id="L567" title="All 2 branches missed.">			if (adapter != null) {</span>
+<span class="nc" id="L568">				width = r - l;</span>
+<span class="nc" id="L569">				height = b - t;</span>
+
+				int left, top, right, bottom;
+
+<span class="nc" id="L573">				right = Math.min(width, sumArray(widths));</span>
+<span class="nc" id="L574">				bottom = Math.min(height, sumArray(heights));</span>
+<span class="nc" id="L575">				addShadow(shadows[0], widths[0], 0, widths[0] + shadowSize, bottom);</span>
+<span class="nc" id="L576">				addShadow(shadows[1], 0, heights[0], right, heights[0] + shadowSize);</span>
+<span class="nc" id="L577">				addShadow(shadows[2], right - shadowSize, 0, right, bottom);</span>
+<span class="nc" id="L578">				addShadow(shadows[3], 0, bottom - shadowSize, right, bottom);</span>
+
+<span class="nc" id="L580">				headView = makeAndSetup(-1, -1, 0, 0, widths[0], heights[0]);</span>
+
+<span class="nc" id="L582">				scrollBounds();</span>
+<span class="nc" id="L583">				adjustFirstCellsAndScroll();</span>
+
+<span class="nc" id="L585">				left = widths[0] - scrollX;</span>
+<span class="nc bnc" id="L586" title="All 4 branches missed.">				for (int i = firstColumn; i &lt; columnCount &amp;&amp; left &lt; width; i++) {</span>
+<span class="nc" id="L587">					right = left + widths[i + 1];</span>
+<span class="nc" id="L588">					final View view = makeAndSetup(-1, i, left, 0, right, heights[0]);</span>
+<span class="nc" id="L589">					rowViewList.add(view);</span>
+<span class="nc" id="L590">					left = right;</span>
+				}
+
+<span class="nc" id="L593">				top = heights[0] - scrollY;</span>
+<span class="nc bnc" id="L594" title="All 4 branches missed.">				for (int i = firstRow; i &lt; rowCount &amp;&amp; top &lt; height; i++) {</span>
+<span class="nc" id="L595">					bottom = top + heights[i + 1];</span>
+<span class="nc" id="L596">					final View view = makeAndSetup(i, -1, 0, top, widths[0], bottom);</span>
+<span class="nc" id="L597">					columnViewList.add(view);</span>
+<span class="nc" id="L598">					top = bottom;</span>
+				}
+
+<span class="nc" id="L601">				top = heights[0] - scrollY;</span>
+<span class="nc bnc" id="L602" title="All 4 branches missed.">				for (int i = firstRow; i &lt; rowCount &amp;&amp; top &lt; height; i++) {</span>
+<span class="nc" id="L603">					bottom = top + heights[i + 1];</span>
+<span class="nc" id="L604">					left = widths[0] - scrollX;</span>
+<span class="nc" id="L605">					List&lt;View&gt; list = new ArrayList&lt;View&gt;();</span>
+<span class="nc bnc" id="L606" title="All 4 branches missed.">					for (int j = firstColumn; j &lt; columnCount &amp;&amp; left &lt; width; j++) {</span>
+<span class="nc" id="L607">						right = left + widths[j + 1];</span>
+<span class="nc" id="L608">						final View view = makeAndSetup(i, j, left, top, right, bottom);</span>
+<span class="nc" id="L609">						list.add(view);</span>
+<span class="nc" id="L610">						left = right;</span>
+					}
+<span class="nc" id="L612">					bodyViewTable.add(list);</span>
+<span class="nc" id="L613">					top = bottom;</span>
+				}
+
+<span class="nc" id="L616">				shadowsVisibility();</span>
+			}
+		}
+<span class="nc" id="L619">	}</span>
+
+	private void scrollBounds() {
+<span class="nc" id="L622">		scrollX = scrollBounds(scrollX, firstColumn, widths, width);</span>
+<span class="nc" id="L623">		scrollY = scrollBounds(scrollY, firstRow, heights, height);</span>
+<span class="nc" id="L624">	}</span>
+
+	private int scrollBounds(int desiredScroll, int firstCell, int sizes[], int viewSize) {
+<span class="nc bnc" id="L627" title="All 2 branches missed.">		if (desiredScroll == 0) {</span>
+			// no op
+<span class="nc bnc" id="L629" title="All 2 branches missed.">		} else if (desiredScroll &lt; 0) {</span>
+<span class="nc" id="L630">			desiredScroll = Math.max(desiredScroll, -sumArray(sizes, 1, firstCell));</span>
+		} else {
+<span class="nc" id="L632">			desiredScroll = Math.min(desiredScroll, Math.max(0, sumArray(sizes, firstCell + 1, sizes.length - 1 - firstCell) + sizes[0] - viewSize));</span>
+		}
+<span class="nc" id="L634">		return desiredScroll;</span>
+	}
+
+	private void adjustFirstCellsAndScroll() {
+		int values[];
+
+<span class="nc" id="L640">		values = adjustFirstCellsAndScroll(scrollX, firstColumn, widths);</span>
+<span class="nc" id="L641">		scrollX = values[0];</span>
+<span class="nc" id="L642">		firstColumn = values[1];</span>
+
+<span class="nc" id="L644">		values = adjustFirstCellsAndScroll(scrollY, firstRow, heights);</span>
+<span class="nc" id="L645">		scrollY = values[0];</span>
+<span class="nc" id="L646">		firstRow = values[1];</span>
+<span class="nc" id="L647">	}</span>
+
+	private int[] adjustFirstCellsAndScroll(int scroll, int firstCell, int sizes[]) {
+<span class="nc bnc" id="L650" title="All 2 branches missed.">		if (scroll == 0) {</span>
+			// no op
+<span class="nc bnc" id="L652" title="All 2 branches missed.">		} else if (scroll &gt; 0) {</span>
+<span class="nc bnc" id="L653" title="All 2 branches missed.">			while (sizes[firstCell + 1] &lt; scroll) {</span>
+<span class="nc" id="L654">				firstCell++;</span>
+<span class="nc" id="L655">				scroll -= sizes[firstCell];</span>
+			}
+		} else {
+<span class="nc bnc" id="L658" title="All 2 branches missed.">			while (scroll &lt; 0) {</span>
+<span class="nc" id="L659">				scroll += sizes[firstCell];</span>
+<span class="nc" id="L660">				firstCell--;</span>
+			}
+		}
+<span class="nc" id="L663">		return new int[] { scroll, firstCell };</span>
+	}
+
+	private void shadowsVisibility() {
+<span class="nc" id="L667">		final int actualScrollX = getActualScrollX();</span>
+<span class="nc" id="L668">		final int actualScrollY = getActualScrollY();</span>
+<span class="nc" id="L669">		final int[] remainPixels = {</span>
+				actualScrollX,
+				actualScrollY,
+				getMaxScrollX() - actualScrollX,
+				getMaxScrollY() - actualScrollY,
+		};
+
+<span class="nc bnc" id="L676" title="All 2 branches missed.">		for (int i = 0; i &lt; shadows.length; i++) {</span>
+<span class="nc" id="L677">			setAlpha(shadows[i], Math.min(remainPixels[i] / (float) shadowSize, 1));</span>
+		}
+<span class="nc" id="L679">	}</span>
+
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	@SuppressWarnings(&quot;deprecation&quot;)
+	private void setAlpha(ImageView imageView, float alpha) {
+<span class="nc bnc" id="L684" title="All 2 branches missed.">		if (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.HONEYCOMB) {</span>
+<span class="nc" id="L685">			imageView.setAlpha(alpha);</span>
+		} else {
+<span class="nc" id="L687">			imageView.setAlpha(Math.round(alpha * 255));</span>
+		}
+<span class="nc" id="L689">	}</span>
+
+	private void addShadow(ImageView imageView, int l, int t, int r, int b) {
+<span class="nc" id="L692">		imageView.layout(l, t, r, b);</span>
+<span class="nc" id="L693">		addView(imageView);</span>
+<span class="nc" id="L694">	}</span>
+
+	private void resetTable() {
+<span class="nc" id="L697">		headView = null;</span>
+<span class="nc" id="L698">		rowViewList.clear();</span>
+<span class="nc" id="L699">		columnViewList.clear();</span>
+<span class="nc" id="L700">		bodyViewTable.clear();</span>
+
+<span class="nc" id="L702">		removeAllViews();</span>
+<span class="nc" id="L703">	}</span>
+
+	private View makeAndSetup(int row, int column, int left, int top, int right, int bottom) {
+<span class="nc" id="L706">		final View view = makeView(row, column, right - left, bottom - top);</span>
+<span class="nc" id="L707">		view.layout(left, top, right, bottom);</span>
+<span class="nc" id="L708">		return view;</span>
+	}
+
+	@Override
+	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
+		final boolean ret;
+
+<span class="nc" id="L715">		final Integer row = (Integer) child.getTag(R.id.tag_row);</span>
+<span class="nc" id="L716">		final Integer column = (Integer) child.getTag(R.id.tag_column);</span>
+		// row == null =&gt; Shadow view
+<span class="nc bnc" id="L718" title="All 6 branches missed.">		if (row == null || (row == -1 &amp;&amp; column == -1)) {</span>
+<span class="nc" id="L719">			ret = super.drawChild(canvas, child, drawingTime);</span>
+		} else {
+<span class="nc" id="L721">			canvas.save();</span>
+<span class="nc bnc" id="L722" title="All 2 branches missed.">			if (row == -1) {</span>
+<span class="nc" id="L723">				canvas.clipRect(widths[0], 0, canvas.getWidth(), canvas.getHeight());</span>
+<span class="nc bnc" id="L724" title="All 2 branches missed.">			} else if (column == -1) {</span>
+<span class="nc" id="L725">				canvas.clipRect(0, heights[0], canvas.getWidth(), canvas.getHeight());</span>
+			} else {
+<span class="nc" id="L727">				canvas.clipRect(widths[0], heights[0], canvas.getWidth(), canvas.getHeight());</span>
+			}
+
+<span class="nc" id="L730">			ret = super.drawChild(canvas, child, drawingTime);</span>
+<span class="nc" id="L731">			canvas.restore();</span>
+		}
+<span class="nc" id="L733">		return ret;</span>
+	}
+
+	private View makeView(int row, int column, int w, int h) {
+<span class="nc" id="L737">		final int itemViewType = adapter.getItemViewType(row, column);</span>
+		final View recycledView;
+<span class="nc bnc" id="L739" title="All 2 branches missed.">		if (itemViewType == TableAdapter.IGNORE_ITEM_VIEW_TYPE) {</span>
+<span class="nc" id="L740">			recycledView = null;</span>
+		} else {
+<span class="nc" id="L742">			recycledView = recycler.getRecycledView(itemViewType);</span>
+		}
+<span class="nc" id="L744">		final View view = adapter.getView(row, column, recycledView, this);</span>
+<span class="nc" id="L745">		view.setTag(R.id.tag_type_view, itemViewType);</span>
+<span class="nc" id="L746">		view.setTag(R.id.tag_row, row);</span>
+<span class="nc" id="L747">		view.setTag(R.id.tag_column, column);</span>
+<span class="nc" id="L748">		view.measure(MeasureSpec.makeMeasureSpec(w, MeasureSpec.EXACTLY), MeasureSpec.makeMeasureSpec(h, MeasureSpec.EXACTLY));</span>
+<span class="nc" id="L749">		addTableView(view, row, column);</span>
+<span class="nc" id="L750">		return view;</span>
+	}
+
+	private void addTableView(View view, int row, int column) {
+<span class="nc bnc" id="L754" title="All 4 branches missed.">		if (row == -1 &amp;&amp; column == -1) {</span>
+<span class="nc" id="L755">			addView(view, getChildCount() - 4);</span>
+<span class="nc bnc" id="L756" title="All 4 branches missed.">		} else if (row == -1 || column == -1) {</span>
+<span class="nc" id="L757">			addView(view, getChildCount() - 5);</span>
+		} else {
+<span class="nc" id="L759">			addView(view, 0);</span>
+		}
+<span class="nc" id="L761">	}</span>
+
+<span class="nc" id="L763">	private class TableAdapterDataSetObserver extends DataSetObserver {</span>
+
+		@Override
+		public void onChanged() {
+<span class="nc" id="L767">			needRelayout = true;</span>
+<span class="nc" id="L768">			requestLayout();</span>
+<span class="nc" id="L769">		}</span>
+
+		@Override
+		public void onInvalidated() {
+			// Do nothing
+<span class="nc" id="L774">		}</span>
+	}
+
+	// http://stackoverflow.com/a/6219382/842697
+	private class Flinger implements Runnable {
+		private final Scroller scroller;
+
+<span class="nc" id="L781">		private int lastX = 0;</span>
+<span class="nc" id="L782">		private int lastY = 0;</span>
+
+<span class="nc" id="L784">		Flinger(Context context) {</span>
+<span class="nc" id="L785">			scroller = new Scroller(context);</span>
+<span class="nc" id="L786">		}</span>
+
+		void start(int initX, int initY, int initialVelocityX, int initialVelocityY, int maxX, int maxY) {
+<span class="nc" id="L789">			scroller.fling(initX, initY, initialVelocityX, initialVelocityY, 0, maxX, 0, maxY);</span>
+
+<span class="nc" id="L791">			lastX = initX;</span>
+<span class="nc" id="L792">			lastY = initY;</span>
+<span class="nc" id="L793">			post(this);</span>
+<span class="nc" id="L794">		}</span>
+
+		public void run() {
+<span class="nc bnc" id="L797" title="All 2 branches missed.">			if (scroller.isFinished()) {</span>
+<span class="nc" id="L798">				return;</span>
+			}
+
+<span class="nc" id="L801">			boolean more = scroller.computeScrollOffset();</span>
+<span class="nc" id="L802">			int x = scroller.getCurrX();</span>
+<span class="nc" id="L803">			int y = scroller.getCurrY();</span>
+<span class="nc" id="L804">			int diffX = lastX - x;</span>
+<span class="nc" id="L805">			int diffY = lastY - y;</span>
+<span class="nc bnc" id="L806" title="All 4 branches missed.">			if (diffX != 0 || diffY != 0) {</span>
+<span class="nc" id="L807">				scrollBy(diffX, diffY);</span>
+<span class="nc" id="L808">				lastX = x;</span>
+<span class="nc" id="L809">				lastY = y;</span>
+			}
+
+<span class="nc bnc" id="L812" title="All 2 branches missed.">			if (more) {</span>
+<span class="nc" id="L813">				post(this);</span>
+			}
+<span class="nc" id="L815">		}</span>
+
+		boolean isFinished() {
+<span class="nc" id="L818">			return scroller.isFinished();</span>
+		}
+
+		void forceFinished() {
+<span class="nc bnc" id="L822" title="All 2 branches missed.">			if (!scroller.isFinished()) {</span>
+<span class="nc" id="L823">				scroller.forceFinished(true);</span>
+			}
+<span class="nc" id="L825">		}</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

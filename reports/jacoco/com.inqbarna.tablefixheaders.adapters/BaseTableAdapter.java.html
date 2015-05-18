@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BaseTableAdapter.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.inqbarna.tablefixheaders.adapters</a> &gt; <span class="el_source">BaseTableAdapter.java</span></div><h1>BaseTableAdapter.java</h1><pre class="source lang-java linenums">package com.inqbarna.tablefixheaders.adapters;
+
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
+
+/**
+ * Common base class of common implementation for an {@link TableAdapter} that
+ * can be used in {@link TableFixHeaders}.
+ * 
+ * @author Brais Gabin (InQBarna)
+ */
+<span class="nc" id="L12">public abstract class BaseTableAdapter implements TableAdapter {</span>
+<span class="nc" id="L13">	private final DataSetObservable mDataSetObservable = new DataSetObservable();</span>
+
+	@Override
+	public void registerDataSetObserver(DataSetObserver observer) {
+<span class="nc" id="L17">		mDataSetObservable.registerObserver(observer);</span>
+<span class="nc" id="L18">	}</span>
+
+	@Override
+	public void unregisterDataSetObserver(DataSetObserver observer) {
+<span class="nc" id="L22">		mDataSetObservable.unregisterObserver(observer);</span>
+<span class="nc" id="L23">	}</span>
+
+	/**
+	 * Notifies the attached observers that the underlying data has been changed
+	 * and any View reflecting the data set should refresh itself.
+	 */
+	public void notifyDataSetChanged() {
+<span class="nc" id="L30">		mDataSetObservable.notifyChanged();</span>
+<span class="nc" id="L31">	}</span>
+
+	/**
+	 * Notifies the attached observers that the underlying data is no longer
+	 * valid or available. Once invoked this adapter is no longer valid and
+	 * should not report further data set changes.
+	 */
+	public void notifyDataSetInvalidated() {
+<span class="nc" id="L39">		mDataSetObservable.notifyInvalidated();</span>
+<span class="nc" id="L40">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
