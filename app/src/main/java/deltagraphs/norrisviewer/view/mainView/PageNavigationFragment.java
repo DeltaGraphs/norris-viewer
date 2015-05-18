@@ -1,7 +1,7 @@
 package deltagraphs.norrisviewer.view.mainView;/*
- * Name : {Nome del file}.java
+ * Name : PageNavigationFragment.java
  * Module : deltagraphs.norrisviewer.view.mainView
- * Location : norrisviewer { Percorso in cui \'e presente il file }
+ * Location : norrisviewer\view\mainView
  *
  * History :
 
