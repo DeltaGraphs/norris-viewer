@@ -23,7 +23,8 @@ env:
 after_success:
 - "./gradlew jacocoTestReport coveralls"
 - "./clone-gh-pages.sh"
+- rm -rf gh-pages/reports
 - cp -r ./app/build/reports ./gh-pages
 - mv gh-pages/reports/jacoco/.resources gh-pages/reports/jacoco/resources
-- sed -i 's/.resources/resources/g' gh-pages/reports/jacoco/index.html
+- find gh-pages/reports/jacoco -type f -exec sed -i 's/.resources/resources/g' {} +
 - "./update-gh-pages.sh"
