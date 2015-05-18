@@ -4,13 +4,15 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import deltagraphs.norrisviewer.R;
 
-public class MapChartActivity extends FragmentActivity {
+public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -18,15 +20,18 @@ public class MapChartActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_chart);
-        setUpMapIfNeeded();
-    }
 
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+/*
     @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
     }
-
+*/
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -63,5 +68,10 @@ public class MapChartActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
     }
 }
