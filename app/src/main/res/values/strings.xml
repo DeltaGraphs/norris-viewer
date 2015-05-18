@@ -30,4 +30,5 @@ string in this file.
         AIzaSyBO5xlsE62xK7sABEK8-0zLWlctGRQM5l0
     </string>
     <string name="title_activity_table">TableActivity</string>
+    <string name="title_activity_bar_chart">BarChartActivity</string>
 </resources>

@@ -54,6 +54,10 @@
             android:name=".view.graphsView.TableActivity"
             android:label="@string/title_activity_table" >
         </activity>
+        <activity
+            android:name=".view.graphsView.BarChartActivity"
+            android:label="@string/title_activity_bar_chart" >
+        </activity>
     </application>
 
 </manifest>
