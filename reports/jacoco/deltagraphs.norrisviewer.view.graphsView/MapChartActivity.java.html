@@ -4,29 +4,34 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import deltagraphs.norrisviewer.R;
 
-<span class="nc" id="L13">public class MapChartActivity extends FragmentActivity {</span>
+<span class="nc" id="L15">public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback {</span>
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L19">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L20">        setContentView(R.layout.activity_map_chart);</span>
-<span class="nc" id="L21">        setUpMapIfNeeded();</span>
-<span class="nc" id="L22">    }</span>
+<span class="nc" id="L21">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L22">        setContentView(R.layout.activity_map_chart);</span>
 
+<span class="nc" id="L24">        MapFragment mapFragment = (MapFragment) getFragmentManager()</span>
+                .findFragmentById(R.id.map);
+<span class="nc" id="L26">        mapFragment.getMapAsync(this);</span>
+<span class="nc" id="L27">    }</span>
+/*
     @Override
     protected void onResume() {
-<span class="nc" id="L26">        super.onResume();</span>
-<span class="nc" id="L27">        setUpMapIfNeeded();</span>
-<span class="nc" id="L28">    }</span>
-
+        super.onResume();
+        setUpMapIfNeeded();
+    }
+*/
     /**
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
@@ -44,16 +49,16 @@ import deltagraphs.norrisviewer.R;
      */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
-<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (mMap == null) {</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (mMap == null) {</span>
             // Try to obtain the map from the SupportMapFragment.
-<span class="nc" id="L49">            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))</span>
+<span class="nc" id="L54">            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))</span>
                     .getMap();
             // Check if we were successful in obtaining the map.
-<span class="nc bnc" id="L52" title="All 2 branches missed.">            if (mMap != null) {</span>
-<span class="nc" id="L53">                setUpMap();</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (mMap != null) {</span>
+<span class="nc" id="L58">                setUpMap();</span>
             }
         }
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L61">    }</span>
 
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
@@ -62,7 +67,12 @@ import deltagraphs.norrisviewer.R;
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-<span class="nc" id="L65">        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title(&quot;Marker&quot;));</span>
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L70">        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title(&quot;Marker&quot;));</span>
+<span class="nc" id="L71">    }</span>
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+<span class="nc" id="L76">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

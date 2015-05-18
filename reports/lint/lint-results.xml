@@ -2,6 +2,25 @@
 <issues format="4" by="lint 24.0.2">
 
     <issue
+        id="MissingPrefix"
+        severity="Error"
+        message="Unexpected namespace prefix &quot;xmlns&quot; found for tag `fragment`"
+        category="Correctness"
+        priority="6"
+        summary="Missing Android XML namespace"
+        explanation="Most Android views have attributes in the Android namespace. When referencing these attributes you *must* include the namespace prefix, or your attribute will be interpreted by `aapt` as just a custom attribute.
+
+Similarly, in manifest files, nearly all attributes should be in the `android:` namespace."
+        errorLine1="    &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio,adt">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_map_chart.xml"
+            line="5"
+            column="15"/>
+    </issue>
+
+    <issue
         id="OldTargetApi"
         severity="Warning"
         message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
