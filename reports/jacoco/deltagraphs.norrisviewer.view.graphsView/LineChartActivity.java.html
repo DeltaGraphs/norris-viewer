@@ -10,28 +10,42 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
-<span class="nc" id="L13">public class LineChartActivity extends ActionBarActivity implements LineChartView{</span>
+import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.listener.ViewportChangeListener;
+import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.Viewport;
+import lecho.lib.hellocharts.util.ChartUtils;
+import lecho.lib.hellocharts.view.LineChartView;
+
+
+<span class="nc" id="L24">public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {</span>
 
     private LineChartPresenter lineChartPresenter;
 
     //line chart con view finder
 
+    private LineChartView chart;
     private PreviewLineChartView previewChart;
     private LineChartData lineChartData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L24">        String url = &quot;&quot;;</span>
-<span class="nc" id="L25">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
-<span class="nc" id="L26">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L27">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L28">    }</span>
+<span class="nc" id="L36">        String url = &quot;&quot;;</span>
+<span class="nc" id="L37">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
+<span class="nc" id="L38">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L39">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L40">        chart = (LineChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L41">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
+<span class="nc" id="L42">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L33">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L34">        return true;</span>
+<span class="nc" id="L47">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L48">        return true;</span>
     }
 
     @Override
@@ -39,22 +53,22 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L42">        int id = item.getItemId();</span>
+<span class="nc" id="L56">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L46">            return true;</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L60">            return true;</span>
         }
 
-<span class="nc" id="L49">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L63">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L68">    }</span>
 
     public void setInitialState(){
 
-<span class="nc" id="L58">    }</span>
+<span class="nc" id="L72">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
