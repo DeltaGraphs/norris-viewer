@@ -44,7 +44,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
     LineChartPresenterImpl(){super("url");}
 
-
     @Override
     public void setUpViews() {
        /* previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
@@ -60,7 +59,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     public void update(Observable observable, Object data) {
        /* if(observable instanceof LineChartModel){
             // in quanto potremmo avere piu modelli dati
-            // verifichiamo su quale modello è avvenuto un cambiamento dei dati
+            // verifichiamo su quale modello ï¿½ avvenuto un cambiamento dei dati
             // prima di effettuare il cast
             MyDataModel m=(MyDataModel)observable;
             myChart.setLineChartData(m.getData());*/
