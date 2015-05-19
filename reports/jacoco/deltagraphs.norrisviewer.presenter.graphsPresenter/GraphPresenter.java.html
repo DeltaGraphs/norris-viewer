@@ -27,8 +27,8 @@ public abstract class GraphPresenter {
 
 <span class="nc" id="L28">    public GraphPresenter(String url){</span>
 <span class="nc" id="L29">        this.graphSocket = new SocketManager();</span>
-<span class="nc" id="L30">        graphSocket.setSocketUrl(url);</span>
-<span class="nc" id="L31">        graphSocket.startListening(&quot;graphConfig&quot;, new Activity());</span>
+        //graphSocket.setSocketUrl(url);
+        //graphSocket.startListening(&quot;graphConfig&quot;, new Activity());
 <span class="nc" id="L32">    }</span>
 
     public abstract void setUpViews();

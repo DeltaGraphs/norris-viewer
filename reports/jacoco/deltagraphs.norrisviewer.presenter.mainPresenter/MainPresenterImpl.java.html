@@ -242,7 +242,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             */
 
 <span class="nc" id="L244">            list.add(new ChartDescription(&quot;BalbyChartBar&quot;, &quot;bablgbn&quot;, &quot;asdasd&quot;, ChartType.COLUMN_CHART));</span>
-<span class="nc" id="L245">            list.add(new ChartDescription(&quot;linebalby&quot;, &quot;&quot;, &quot;&quot;, ChartType.LINE_CHART));</span>
+<span class="nc" id="L245">            list.add(new ChartDescription(&quot;linebalby&quot;, &quot;asd&quot;, &quot;asd&quot;, ChartType.LINE_CHART));</span>
 <span class="nc" id="L246">            list.add(new ChartDescription(&quot;MappaDemmedda&quot;, &quot;ciao&quot;, &quot;Colpa di ross&quot;, ChartType.MAP_CHART));</span>
 <span class="nc" id="L247">            list.add(new ChartDescription(&quot;tabbbbella&quot;, &quot;tabble&quot;, &quot;url&quot;, ChartType.TABLE));</span>
 
@@ -330,7 +330,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
 <span class="nc" id="L332">    public enum ChartType {</span>
-<span class="nc" id="L333">        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE, OTHER</span>
+<span class="nc" id="L333">        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE</span>
     }
 
     public static class ChartDescription {
@@ -347,8 +347,9 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 <span class="nc" id="L347">        public ChartDescription(String text1, String text2, String url, ChartType chartType) {</span>
 <span class="nc" id="L348">            this.name = text1;</span>
 <span class="nc" id="L349">            this.type = text2;</span>
-<span class="nc" id="L350">            this.chartType = chartType;</span>
-<span class="nc" id="L351">        }</span>
+<span class="nc" id="L350">            this.url = url;</span>
+<span class="nc" id="L351">            this.chartType = chartType;</span>
+<span class="nc" id="L352">        }</span>
     }
 
 }

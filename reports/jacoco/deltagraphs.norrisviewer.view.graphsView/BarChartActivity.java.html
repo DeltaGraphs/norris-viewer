@@ -27,17 +27,17 @@ import lecho.lib.hellocharts.view.ColumnChartView;
     private ColumnChartView chart;
     private ColumnChartData barChartData;
 
-    private CharSequence sourceTitle;
+    private String sourceTitle;
     private String sourceURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 <span class="nc" id="L35">        super.onCreate(savedInstanceState);</span>
 <span class="nc" id="L36">        Bundle extras = getIntent().getExtras();</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (extras != null) {</span>
-<span class="nc" id="L38">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L39">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
-        }
+
+<span class="nc" id="L38">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L39">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+
 <span class="nc" id="L41">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
 <span class="nc" id="L42">        setTitle(sourceTitle);</span>
 <span class="nc" id="L43">        setContentView(R.layout.bar_chart);</span>
