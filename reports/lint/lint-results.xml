@@ -95,7 +95,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     <issue
         id="Overdraw"
         severity="Warning"
-        message="Possible overdraw: Root element paints background `#cccc` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        message="Possible overdraw: Root element paints background `#E0F2F1` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
         category="Performance"
         priority="3"
         summary="Overdraw: Painting regions more than once"
@@ -107,11 +107,11 @@ If you want your custom background on multiple pages, then you should consider m
 
 Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
 "
-        errorLine1="    android:background=&quot;#cccc&quot; tools:context=&quot;.NavigationDrawerFragment&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    android:background=&quot;#E0F2F1&quot; tools:context=&quot;.NavigationDrawerFragment&quot; />"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/fragment_navigation_drawer.xml"
-            line="6"
+            line="5"
             column="5"/>
     </issue>
 
@@ -125,18 +125,6 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         explanation="Unused resources make applications larger and slow down builds.">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.menu.global` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/global.xml"/>
     </issue>
 
     <issue

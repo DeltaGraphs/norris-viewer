@@ -27,7 +27,6 @@
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.graphsView.*;
-    import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
@@ -58,29 +57,29 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     private static SocketManager mainSocket;
     public static MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
-<span class="nc" id="L61">    private PageModel pageModel = new PageModelImpl();</span>
+<span class="nc" id="L60">    private PageModel pageModel = new PageModelImpl();</span>
 
-<span class="nc" id="L63">    public MainPresenterImpl(MainView view){</span>
-<span class="nc" id="L64">        mainSocket = new SocketManager();</span>
-<span class="nc" id="L65">        mainView = view;</span>
-<span class="nc" id="L66">        mPageNavigationFragment = new PageNavigationFragment();</span>
-<span class="nc" id="L67">        setUpViews();</span>
+<span class="nc" id="L62">    public MainPresenterImpl(MainView view){</span>
+<span class="nc" id="L63">        mainSocket = new SocketManager();</span>
+<span class="nc" id="L64">        mainView = view;</span>
+<span class="nc" id="L65">        mPageNavigationFragment = new PageNavigationFragment();</span>
+<span class="nc" id="L66">        setUpViews();</span>
 
         //X DEMO
-<span class="nc" id="L70">        FragmentManager fragmentManager = mainView.getSupportManager();</span>
-<span class="nc" id="L71">        fragmentManager.beginTransaction()</span>
+<span class="nc" id="L69">        FragmentManager fragmentManager = mainView.getSupportManager();</span>
+<span class="nc" id="L70">        fragmentManager.beginTransaction()</span>
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
                 .commit();
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L73">    }</span>
 
     private void setUpViews(){
-<span class="nc" id="L77">        mainView.setMainView();</span>
-<span class="nc" id="L78">        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);</span>
+<span class="nc" id="L76">        mainView.setMainView();</span>
+<span class="nc" id="L77">        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);</span>
 
-<span class="nc" id="L80">        mPageNavigationFragment.setUp(</span>
+<span class="nc" id="L79">        mPageNavigationFragment.setUp(</span>
                 R.id.navigation_drawer,
                 mainView.findDrawer(R.id.drawer_layout));
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L82">    }</span>
 
 /*
     public void onSectionAttached(int number) {
@@ -91,41 +90,41 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 */
 
     public void showDialog(Context context){
-<span class="nc" id="L94">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
-<span class="nc" id="L95">        builder.setTitle(&quot;Insert source URL&quot;);</span>
+<span class="nc" id="L93">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
+<span class="nc" id="L94">        builder.setTitle(&quot;Insert source URL&quot;);</span>
 
         // Set up the input
-<span class="nc" id="L98">        final EditText input = new EditText(context);</span>
+<span class="nc" id="L97">        final EditText input = new EditText(context);</span>
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-<span class="nc" id="L100">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
-<span class="nc" id="L101">        input.setText(&quot;http://5.231.33.217:3000/page1&quot;);</span>
-<span class="nc" id="L102">        builder.setView(input);</span>
+<span class="nc" id="L99">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
+<span class="nc" id="L100">        input.setText(&quot;http://5.231.33.217:3000/page1&quot;);</span>
+<span class="nc" id="L101">        builder.setView(input);</span>
 
 // Set up the buttons
-<span class="nc" id="L105">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L104">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc" id="L108">                mainSocket.setSocketUrl(input.getText().toString());</span>
-<span class="nc" id="L109">            }</span>
+<span class="nc" id="L107">                mainSocket.setSocketUrl(input.getText().toString());</span>
+<span class="nc" id="L108">            }</span>
         });
-<span class="nc" id="L111">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L110">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc" id="L114">                dialog.cancel();</span>
-<span class="nc" id="L115">            }</span>
+<span class="nc" id="L113">                dialog.cancel();</span>
+<span class="nc" id="L114">            }</span>
         });
 
-<span class="nc" id="L118">        builder.show();</span>
-<span class="nc" id="L119">    }</span>
+<span class="nc" id="L117">        builder.show();</span>
+<span class="nc" id="L118">    }</span>
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-<span class="nc" id="L124">        FragmentManager fragmentManager = mainView.getSupportManager();</span>
-<span class="nc" id="L125">        fragmentManager.beginTransaction()</span>
+<span class="nc" id="L123">        FragmentManager fragmentManager = mainView.getSupportManager();</span>
+<span class="nc" id="L124">        fragmentManager.beginTransaction()</span>
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, pageModel))
                 .commit();
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L127">    }</span>
 
 
 
@@ -141,7 +140,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         private ListView listView;
         private ChartAdapter adapter;
         private PageModel pageModel;
-<span class="nc" id="L144">        private List&lt;ChartDescription&gt; graphsList = new ArrayList&lt;ChartDescription&gt;();</span>
+<span class="nc" id="L143">        private List&lt;ChartDescription&gt; graphsList = new ArrayList&lt;ChartDescription&gt;();</span>
 
 
         /**
@@ -157,26 +156,26 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
 
         public static PlaceholderFragment newInstance(int sectionNumber, PageModel p) {
-<span class="nc" id="L160">            PlaceholderFragment fragment = new PlaceholderFragment();</span>
-<span class="nc" id="L161">            Bundle args = new Bundle();</span>
-<span class="nc" id="L162">            args.putInt(ARG_SECTION_NUMBER, sectionNumber);</span>
-<span class="nc" id="L163">            fragment.setArguments(args);</span>
-<span class="nc" id="L164">            fragment.pageModel = p;</span>
-<span class="nc" id="L165">            return fragment;</span>
+<span class="nc" id="L159">            PlaceholderFragment fragment = new PlaceholderFragment();</span>
+<span class="nc" id="L160">            Bundle args = new Bundle();</span>
+<span class="nc" id="L161">            args.putInt(ARG_SECTION_NUMBER, sectionNumber);</span>
+<span class="nc" id="L162">            fragment.setArguments(args);</span>
+<span class="nc" id="L163">            fragment.pageModel = p;</span>
+<span class="nc" id="L164">            return fragment;</span>
         }
 
-<span class="nc" id="L168">        public PlaceholderFragment() {}</span>
+<span class="nc" id="L167">        public PlaceholderFragment() {}</span>
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-<span class="nc" id="L173">            View rootView = inflater.inflate(R.layout.fragment_main, container, false);</span>
-<span class="nc" id="L174">            listView = (ListView) rootView.findViewById(android.R.id.list);</span>
-<span class="nc" id="L175">            graphsList = generateDescriptions();</span>
-<span class="nc" id="L176">            adapter = new ChartAdapter(getActivity(), 0, graphsList);</span>
-<span class="nc" id="L177">            listView.setAdapter(adapter);</span>
-<span class="nc" id="L178">            listView.setOnItemClickListener(this);</span>
-<span class="nc" id="L179">            return rootView;</span>
+<span class="nc" id="L172">            View rootView = inflater.inflate(R.layout.fragment_main, container, false);</span>
+<span class="nc" id="L173">            listView = (ListView) rootView.findViewById(android.R.id.list);</span>
+<span class="nc" id="L174">            graphsList = generateDescriptions();</span>
+<span class="nc" id="L175">            adapter = new ChartAdapter(getActivity(), 0, graphsList);</span>
+<span class="nc" id="L176">            listView.setAdapter(adapter);</span>
+<span class="nc" id="L177">            listView.setOnItemClickListener(this);</span>
+<span class="nc" id="L178">            return rootView;</span>
         }
 /*
         @Override
@@ -189,44 +188,44 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         @Override
         public void onItemClick(AdapterView&lt;?&gt; adapter, View view, int position, long id) {
             Intent intent;
-<span class="nc" id="L192">            ChartType graphType = graphsList.get(position).getChartType();</span>
-<span class="nc bnc" id="L193" title="All 5 branches missed.">            switch (graphType) {</span>
+<span class="nc" id="L191">            ChartType graphType = graphsList.get(position).getChartType();</span>
+<span class="nc bnc" id="L192" title="All 5 branches missed.">            switch (graphType) {</span>
                 case LINE_CHART:
-<span class="nc" id="L195">                    intent = new Intent(getActivity(), LineChartActivity.class);</span>
-<span class="nc" id="L196">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
-<span class="nc" id="L197">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
-<span class="nc" id="L198">                    startActivity(intent);</span>
-<span class="nc" id="L199">                    break;</span>
+<span class="nc" id="L194">                    intent = new Intent(getActivity(), LineChartActivity.class);</span>
+<span class="nc" id="L195">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
+<span class="nc" id="L196">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
+<span class="nc" id="L197">                    startActivity(intent);</span>
+<span class="nc" id="L198">                    break;</span>
 
                 case COLUMN_CHART:
-<span class="nc" id="L202">                    intent = new Intent(getActivity(), BarChartActivity.class);</span>
-<span class="nc" id="L203">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
-<span class="nc" id="L204">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
-<span class="nc" id="L205">                    startActivity(intent);</span>
-<span class="nc" id="L206">                    break;</span>
+<span class="nc" id="L201">                    intent = new Intent(getActivity(), BarChartActivity.class);</span>
+<span class="nc" id="L202">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
+<span class="nc" id="L203">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
+<span class="nc" id="L204">                    startActivity(intent);</span>
+<span class="nc" id="L205">                    break;</span>
 
                 case MAP_CHART:
-<span class="nc" id="L209">                    intent = new Intent(getActivity(), MapChartActivity.class);</span>
-<span class="nc" id="L210">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
-<span class="nc" id="L211">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
-<span class="nc" id="L212">                    startActivity(intent);</span>
-<span class="nc" id="L213">                    break;</span>
+<span class="nc" id="L208">                    intent = new Intent(getActivity(), MapChartActivity.class);</span>
+<span class="nc" id="L209">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
+<span class="nc" id="L210">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
+<span class="nc" id="L211">                    startActivity(intent);</span>
+<span class="nc" id="L212">                    break;</span>
                 case TABLE:
-<span class="nc" id="L215">                    intent = new Intent(getActivity(), TableActivity.class);</span>
-<span class="nc" id="L216">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
-<span class="nc" id="L217">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
-<span class="nc" id="L218">                    startActivity(intent);</span>
-<span class="nc" id="L219">                    break;</span>
+<span class="nc" id="L214">                    intent = new Intent(getActivity(), TableActivity.class);</span>
+<span class="nc" id="L215">                    intent.putExtra(&quot;EXTRA_SOURCE_URL&quot;, graphsList.get(position).getUrl());</span>
+<span class="nc" id="L216">                    intent.putExtra(&quot;EXTRA_SOURCE_TITLE&quot;, graphsList.get(position).getName());</span>
+<span class="nc" id="L217">                    startActivity(intent);</span>
+<span class="nc" id="L218">                    break;</span>
                 default:
                     break;
             }
-<span class="nc" id="L223">        }</span>
+<span class="nc" id="L222">        }</span>
 
 
         // this is generated after socket connection with the graphs' list
 
         private List&lt;ChartDescription&gt; generateDescriptions() {
-<span class="nc" id="L229">            List&lt;ChartDescription&gt; list = new ArrayList&lt;ChartDescription&gt;();</span>
+<span class="nc" id="L228">            List&lt;ChartDescription&gt; list = new ArrayList&lt;ChartDescription&gt;();</span>
 /*
             //number of page needed
             int PAGE = 1;
@@ -241,13 +240,13 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             }
             */
 
-<span class="nc" id="L244">            list.add(new ChartDescription(&quot;BalbyChartBar&quot;, &quot;bablgbn&quot;, &quot;asdasd&quot;, ChartType.COLUMN_CHART));</span>
-<span class="nc" id="L245">            list.add(new ChartDescription(&quot;linebalby&quot;, &quot;asd&quot;, &quot;asd&quot;, ChartType.LINE_CHART));</span>
-<span class="nc" id="L246">            list.add(new ChartDescription(&quot;MappaDemmedda&quot;, &quot;ciao&quot;, &quot;Colpa di ross&quot;, ChartType.MAP_CHART));</span>
-<span class="nc" id="L247">            list.add(new ChartDescription(&quot;tabbbbella&quot;, &quot;tabble&quot;, &quot;url&quot;, ChartType.TABLE));</span>
+<span class="nc" id="L243">            list.add(new ChartDescription(&quot;BalbyChartBar&quot;, &quot;bablgbn&quot;, &quot;asdasd&quot;, ChartType.COLUMN_CHART));</span>
+<span class="nc" id="L244">            list.add(new ChartDescription(&quot;linebalby&quot;, &quot;asd&quot;, &quot;asd&quot;, ChartType.LINE_CHART));</span>
+<span class="nc" id="L245">            list.add(new ChartDescription(&quot;MappaDemmedda&quot;, &quot;ciao&quot;, &quot;Colpa di ross&quot;, ChartType.MAP_CHART));</span>
+<span class="nc" id="L246">            list.add(new ChartDescription(&quot;tabbbbella&quot;, &quot;tabble&quot;, &quot;url&quot;, ChartType.TABLE));</span>
 
 
-<span class="nc" id="L250">            return list;</span>
+<span class="nc" id="L249">            return list;</span>
         }
 
     }
@@ -257,70 +256,70 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public static class ChartAdapter extends ArrayAdapter&lt;ChartDescription&gt; {
 
         public ChartAdapter(Context context, int resource, List&lt;ChartDescription&gt; objects) {
-<span class="nc" id="L260">            super(context, resource, objects);</span>
-<span class="nc" id="L261">        }</span>
+<span class="nc" id="L259">            super(context, resource, objects);</span>
+<span class="nc" id="L260">        }</span>
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
 
-<span class="nc bnc" id="L267" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L268">                convertView = View.inflate(getContext(), R.layout.list_item_sample, null);</span>
+<span class="nc bnc" id="L266" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L267">                convertView = View.inflate(getContext(), R.layout.list_item_sample, null);</span>
 
-<span class="nc" id="L270">                holder = new ViewHolder();</span>
-<span class="nc" id="L271">                holder.name = (TextView) convertView.findViewById(R.id.name);</span>
-<span class="nc" id="L272">                holder.type = (TextView) convertView.findViewById(R.id.type);</span>
-<span class="nc" id="L273">                holder.chartLayout = (FrameLayout) convertView.findViewById(R.id.chart_layout);</span>
+<span class="nc" id="L269">                holder = new ViewHolder();</span>
+<span class="nc" id="L270">                holder.name = (TextView) convertView.findViewById(R.id.name);</span>
+<span class="nc" id="L271">                holder.type = (TextView) convertView.findViewById(R.id.type);</span>
+<span class="nc" id="L272">                holder.chartLayout = (FrameLayout) convertView.findViewById(R.id.chart_layout);</span>
 
-<span class="nc" id="L275">                convertView.setTag(holder);</span>
+<span class="nc" id="L274">                convertView.setTag(holder);</span>
             } else {
-<span class="nc" id="L277">                holder = (ViewHolder) convertView.getTag();</span>
+<span class="nc" id="L276">                holder = (ViewHolder) convertView.getTag();</span>
             }
 
-<span class="nc" id="L280">            ChartDescription item = getItem(position);</span>
+<span class="nc" id="L279">            ChartDescription item = getItem(position);</span>
 
-<span class="nc" id="L282">            String graphUrl = item.getUrl();</span>
+<span class="nc" id="L281">            String graphUrl = item.getUrl();</span>
 
-<span class="nc" id="L284">            holder.chartLayout.setVisibility(View.VISIBLE);</span>
-<span class="nc" id="L285">            holder.chartLayout.removeAllViews();</span>
+<span class="nc" id="L283">            holder.chartLayout.setVisibility(View.VISIBLE);</span>
+<span class="nc" id="L284">            holder.chartLayout.removeAllViews();</span>
             AbstractChartView chart;
-<span class="nc bnc" id="L287" title="All 6 branches missed.">            switch (item.chartType) {</span>
+<span class="nc bnc" id="L286" title="All 6 branches missed.">            switch (item.chartType) {</span>
                 case LINE_CHART:
-<span class="nc" id="L289">                    chart = new LineChartView(getContext());</span>
-<span class="nc" id="L290">                    holder.chartLayout.addView(chart);</span>
-<span class="nc" id="L291">                    break;</span>
+<span class="nc" id="L288">                    chart = new LineChartView(getContext());</span>
+<span class="nc" id="L289">                    holder.chartLayout.addView(chart);</span>
+<span class="nc" id="L290">                    break;</span>
                 case COLUMN_CHART:
-<span class="nc" id="L293">                    chart = new ColumnChartView(getContext());</span>
-<span class="nc" id="L294">                    holder.chartLayout.addView(chart);</span>
-<span class="nc" id="L295">                    break;</span>
+<span class="nc" id="L292">                    chart = new ColumnChartView(getContext());</span>
+<span class="nc" id="L293">                    holder.chartLayout.addView(chart);</span>
+<span class="nc" id="L294">                    break;</span>
                 case PREVIEW_LINE_CHART:
-<span class="nc" id="L297">                    chart = new PreviewLineChartView(getContext());</span>
-<span class="nc" id="L298">                    holder.chartLayout.addView(chart);</span>
-<span class="nc" id="L299">                    break;</span>
+<span class="nc" id="L296">                    chart = new PreviewLineChartView(getContext());</span>
+<span class="nc" id="L297">                    holder.chartLayout.addView(chart);</span>
+<span class="nc" id="L298">                    break;</span>
                 case MAP_CHART:
-<span class="nc" id="L301">                    chart = new PreviewLineChartView(getContext());</span>
-<span class="nc" id="L302">                    holder.chartLayout.addView(chart);</span>
-<span class="nc" id="L303">                    break;</span>
+<span class="nc" id="L300">                    chart = new PreviewLineChartView(getContext());</span>
+<span class="nc" id="L301">                    holder.chartLayout.addView(chart);</span>
+<span class="nc" id="L302">                    break;</span>
                 case TABLE:
-<span class="nc" id="L305">                    chart = new PreviewLineChartView(getContext());</span>
-<span class="nc" id="L306">                    holder.chartLayout.addView(chart);</span>
-<span class="nc" id="L307">                    break;</span>
+<span class="nc" id="L304">                    chart = new PreviewLineChartView(getContext());</span>
+<span class="nc" id="L305">                    holder.chartLayout.addView(chart);</span>
+<span class="nc" id="L306">                    break;</span>
                 default:
-<span class="nc" id="L309">                    chart = null;</span>
-<span class="nc" id="L310">                    holder.chartLayout.setVisibility(View.GONE);</span>
+<span class="nc" id="L308">                    chart = null;</span>
+<span class="nc" id="L309">                    holder.chartLayout.setVisibility(View.GONE);</span>
                     break;
             }
 
-<span class="nc bnc" id="L314" title="All 2 branches missed.">            if (null != chart) {</span>
-<span class="nc" id="L315">                chart.setInteractive(false);// Disable touch handling for chart on the ListView.</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">            if (null != chart) {</span>
+<span class="nc" id="L314">                chart.setInteractive(false);// Disable touch handling for chart on the ListView.</span>
             }
-<span class="nc" id="L317">            holder.name.setText(item.name);</span>
-<span class="nc" id="L318">            holder.type.setText(item.type);</span>
+<span class="nc" id="L316">            holder.name.setText(item.name);</span>
+<span class="nc" id="L317">            holder.type.setText(item.type);</span>
 
-<span class="nc" id="L320">            return convertView;</span>
+<span class="nc" id="L319">            return convertView;</span>
         }
 
-<span class="nc" id="L323">        private class ViewHolder {</span>
+<span class="nc" id="L322">        private class ViewHolder {</span>
 
             TextView name;
             TextView type;
@@ -329,8 +328,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     }
 
-<span class="nc" id="L332">    public enum ChartType {</span>
-<span class="nc" id="L333">        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE</span>
+<span class="nc" id="L331">    public enum ChartType {</span>
+<span class="nc" id="L332">        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE</span>
     }
 
     public static class ChartDescription {
@@ -339,17 +338,17 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         private String url;
         private ChartType chartType;
 
-<span class="nc" id="L342">        public String getUrl(){return url;}</span>
-<span class="nc" id="L343">        public String getName() {return name;}</span>
-<span class="nc" id="L344">        public String getType() {return type;}</span>
-<span class="nc" id="L345">        public ChartType getChartType() {return chartType;}</span>
+<span class="nc" id="L341">        public String getUrl(){return url;}</span>
+<span class="nc" id="L342">        public String getName() {return name;}</span>
+<span class="nc" id="L343">        public String getType() {return type;}</span>
+<span class="nc" id="L344">        public ChartType getChartType() {return chartType;}</span>
 
-<span class="nc" id="L347">        public ChartDescription(String text1, String text2, String url, ChartType chartType) {</span>
-<span class="nc" id="L348">            this.name = text1;</span>
-<span class="nc" id="L349">            this.type = text2;</span>
-<span class="nc" id="L350">            this.url = url;</span>
-<span class="nc" id="L351">            this.chartType = chartType;</span>
-<span class="nc" id="L352">        }</span>
+<span class="nc" id="L346">        public ChartDescription(String text1, String text2, String url, ChartType chartType) {</span>
+<span class="nc" id="L347">            this.name = text1;</span>
+<span class="nc" id="L348">            this.type = text2;</span>
+<span class="nc" id="L349">            this.url = url;</span>
+<span class="nc" id="L350">            this.chartType = chartType;</span>
+<span class="nc" id="L351">        }</span>
     }
 
 }
