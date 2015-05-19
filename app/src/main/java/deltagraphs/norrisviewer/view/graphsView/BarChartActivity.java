@@ -27,17 +27,17 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     private ColumnChartView chart;
     private ColumnChartData barChartData;
 
-    private CharSequence sourceTitle;
+    private String sourceTitle;
     private String sourceURL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            sourceURL = extras.getString("EXTRA_SOURCE_URL");
-            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
-        }
+
+        sourceURL = extras.getString("EXTRA_SOURCE_URL");
+        sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
         setTitle(sourceTitle);
         setContentView(R.layout.bar_chart);

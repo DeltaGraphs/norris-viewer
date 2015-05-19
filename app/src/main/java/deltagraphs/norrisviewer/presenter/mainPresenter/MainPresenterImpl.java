@@ -242,7 +242,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             */
 
             list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
-            list.add(new ChartDescription("linebalby", "", "", ChartType.LINE_CHART));
+            list.add(new ChartDescription("linebalby", "asd", "asd", ChartType.LINE_CHART));
             list.add(new ChartDescription("MappaDemmedda", "ciao", "Colpa di ross", ChartType.MAP_CHART));
             list.add(new ChartDescription("tabbbbella", "tabble", "url", ChartType.TABLE));
 
@@ -330,7 +330,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     public enum ChartType {
-        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE, OTHER
+        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE
     }
 
     public static class ChartDescription {
@@ -347,6 +347,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.name = text1;
             this.type = text2;
+            this.url = url;
             this.chartType = chartType;
         }
     }

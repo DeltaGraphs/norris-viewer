@@ -31,7 +31,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private PreviewLineChartView previewChart;
     private LineChartData lineChartData;
 
-    private CharSequence sourceTitle;
+    private String sourceTitle;
     private String sourceURL;
 
     @Override
@@ -81,8 +81,4 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     }
 
-    @Override
-    public void setChartTitle(CharSequence title) {
-        setTitle(title);
-    }
 }

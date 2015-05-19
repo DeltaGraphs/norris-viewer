@@ -19,5 +19,4 @@ package deltagraphs.norrisviewer.view.graphsView;
  */
 
 public interface LineChartView {
-    void setChartTitle(CharSequence title);
 }
