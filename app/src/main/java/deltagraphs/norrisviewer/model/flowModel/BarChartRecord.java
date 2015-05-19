@@ -1,9 +1,11 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
- * Name : BarChartFlow.java
+ * Name : BarChartRecord.java
  * Module : norrisviewer.model.flowModel
  * Location : norrisviewer\model\flowModel
  *
@@ -20,14 +22,21 @@ import org.json.JSONObject;
  *
  */
 
-public class BarChartFlow implements FlowModel.Record{
+public class BarChartRecord implements FlowModel.Record{
 
-    private String indexKey;
-    private String valueKey;
-    private String indexFormat;
-    private String valueFormat;
-    private String flowColour;
+    private int index; // ID of bar
+    private int value; // value for that bar
 
+
+    public BarChartRecord(JSONObject record){
+        try {
+        JSONArray jsonValues = record.getJSONArray("value");
+        index = jsonValues.getInt(0);
+        value = jsonValues.getInt(1);
+        } catch (JSONException e) {}
+
+
+    }
 
 
 }

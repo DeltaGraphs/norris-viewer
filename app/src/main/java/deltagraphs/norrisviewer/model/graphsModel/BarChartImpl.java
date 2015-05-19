@@ -43,10 +43,12 @@ public class BarChartImpl extends Graph{
     @Override
     public void setParameters(JSONObject data) {
        try {
+           setTitle(data.getString("title"));
            background = data.getString("backgroundColor");
            barOrientation = data.getString("barOrientation");
            sortable = data.getBoolean("sortable");
            grid = data.getBoolean("grid");
+           legendOnPoint = data.getBoolean("legendOnPoint");
            JSONArray jsonHeaders = data.getJSONArray("headers");
            int length = jsonHeaders.length();
            if (length > 0) {
@@ -54,16 +56,46 @@ public class BarChartImpl extends Graph{
                    headers.add(jsonHeaders.getString(i));
                }
            }
+           //changes to axises
            JSONObject xAxis = data.getJSONObject("xAxis");
            axisX = new AxisModel(xAxis);
            JSONObject yAxis = data.getJSONObject("yAxis");
            axisY = new AxisModel(yAxis);
+           //changes to flow params
+           JSONArray jsonFlows = data.getJSONArray("flows");
+           int flowLenght = jsonFlows.length();
+           for(int i=0; i< flowLenght; i++){
+               addFlow(jsonFlows.getJSONObject(i));
+           }
+
+
        }catch (JSONException e){}
     }
 
 
     @Override
-    public void setData(JSONObject data) {}
+    public void setData(JSONObject record) {
+        String flowID = null;
+        try {
+            flowID = record.getString("ID");
+        } catch (JSONException e) {
+        }
+
+        int index = -1;
+        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))) {
+            index++;
+        }
+        if (index != -1) {
+            try {
+                JSONArray jsonRecords = record.getJSONArray("records");
+                int recordLength = jsonRecords.length();
+                for (int i = 0; i < recordLength; i++) {
+                    flowList.get(index).addRecord(jsonRecords.getJSONObject(i));
+                }
+            } catch (JSONException e) {
+            }
+        }
+    }
 
 
     public AxisModel getAxisX() { return axisX; }
@@ -75,13 +107,14 @@ public class BarChartImpl extends Graph{
     public Boolean getGrid() { return grid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
-    private void JSONParser(JSONObject data, String signal){
+    private void JSONParser(JSONObject obj, String signal){
         try{
             switch (signal){
                 case "configGraph":{
-                    JSONObject properties = data.getJSONObject("properties");
+                    JSONObject properties = obj.getJSONObject("properties");
                     setParameters(properties);
-
+                    JSONObject data = obj.getJSONObject("data");
+                    setData(data);
                     break;
                 }
                 case "updateGraphProp":{

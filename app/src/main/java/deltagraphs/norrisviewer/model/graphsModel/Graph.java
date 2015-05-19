@@ -21,27 +21,38 @@ package deltagraphs.norrisviewer.model.graphsModel;
 import java.util.Observable;
 import deltagraphs.norrisviewer.model.flowModel.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.*;
 
 
 public abstract class Graph extends Observable {
-    private ArrayList<FlowModel> flowList;
+    protected ArrayList<FlowModel> flowList;
     private String title;
 
-    public void addFlow(FlowModel flow){
-        flowList.add(flow);
+    public void addFlow(JSONObject flow){
+        flowList.add(new FlowModel(flow));
     }
 
-    public void updateFlow(String flowID){
+    public void addRecords(JSONObject record){
+        String flowID = null;
+        try {
+            flowID = record.getString("ID");
+        } catch (JSONException e) {}
+
         int index = -1;
         while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
             index ++;
         }
         if(index != -1) {
+
+
             // TO DO !!!
             //ALERUTO!!! METODO TOSTO!!! Cambiare nome, id, filtri maybe, non so se anche i valori
+
+
         }//else eccezione
 
     }
@@ -62,4 +73,5 @@ public abstract class Graph extends Observable {
 
 
     public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
 }
