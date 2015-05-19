@@ -27,6 +27,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.graphsView.*;
+    import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
@@ -105,6 +106,12 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mainSocket.setSocketUrl(input.getText().toString());
+                mainSocket.startListening("pageListConfig", (MainActivity) mainView);
+                mainSocket.startListening("insertPage", (MainActivity) mainView);
+                mainSocket.startListening("updatePage", (MainActivity) mainView);
+                mainSocket.startListening("insertGraph", (MainActivity) mainView);
+                mainSocket.startListening("updateGraph", (MainActivity) mainView);
+
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
