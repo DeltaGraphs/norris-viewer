@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,7 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
         setTitle(sourceTitle);
         setContentView(R.layout.bar_chart);
         chart = (ColumnChartView) findViewById(R.id.chart);
+        chart.setOnValueTouchListener(new ValueTouchListener());
     }
 
     @Override
@@ -107,6 +109,21 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
 
     @Override
     public void setGrid(Boolean grid) {
+
+    }
+
+    private class ValueTouchListener implements ColumnChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
+            //Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+
+        }
 
     }
 }
