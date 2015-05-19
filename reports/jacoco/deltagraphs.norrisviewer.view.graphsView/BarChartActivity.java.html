@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
@@ -20,7 +22,7 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.ColumnChartView;
 
-<span class="nc" id="L23">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
+<span class="nc" id="L25">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
 
     private BarChartPresenter barChartPresenter;
 
@@ -32,23 +34,23 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L35">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L36">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc" id="L37">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L38">        Bundle extras = getIntent().getExtras();</span>
 
-<span class="nc" id="L38">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L39">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L40">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L41">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
 
-<span class="nc" id="L41">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L42">        setTitle(sourceTitle);</span>
-<span class="nc" id="L43">        setContentView(R.layout.bar_chart);</span>
-<span class="nc" id="L44">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L45">    }</span>
+<span class="nc" id="L43">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L44">        setTitle(sourceTitle);</span>
+<span class="nc" id="L45">        setContentView(R.layout.bar_chart);</span>
+<span class="nc" id="L46">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L47">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L50">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
-<span class="nc" id="L51">        return true;</span>
+<span class="nc" id="L52">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
+<span class="nc" id="L53">        return true;</span>
     }
 
     @Override
@@ -56,22 +58,56 @@ import lecho.lib.hellocharts.view.ColumnChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L59">        int id = item.getItemId();</span>
+<span class="nc" id="L61">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L63">            return true;</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L65">            return true;</span>
         }
 
-<span class="nc" id="L66">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L68">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L71">    }</span>
+<span class="nc" id="L73">    }</span>
 
     public void setInitialState(){
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L76">    }</span>
 
+    @Override
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+
+<span class="nc" id="L81">    }</span>
+
+    @Override
+    public void setHeaders(ArrayList&lt;String&gt; headers) {
+
+<span class="nc" id="L86">    }</span>
+
+    @Override
+    public void setBackground(String bg) {
+
+<span class="nc" id="L91">    }</span>
+
+    @Override
+    public void setBarOrientation(String orientation) {
+
+<span class="nc" id="L96">    }</span>
+
+    @Override
+    public void setSortable(Boolean choise) {
+
+<span class="nc" id="L101">    }</span>
+
+    @Override
+    public void setType(String type) {
+
+<span class="nc" id="L106">    }</span>
+
+    @Override
+    public void setGrid(Boolean grid) {
+
+<span class="nc" id="L111">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
