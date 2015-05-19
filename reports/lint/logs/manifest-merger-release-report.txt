@@ -29,22 +29,26 @@ uses-permission#com.google.android.providers.gsf.permission.READ_GSERVICES
 ADDED from AndroidManifest.xml:8:5
 	android:name
 		ADDED from AndroidManifest.xml:8:22
+uses-permission#android.permission.ACCESS_WIFI_STATE
+ADDED from AndroidManifest.xml:9:5
+	android:name
+		ADDED from AndroidManifest.xml:9:22
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from AndroidManifest.xml:13:5
+ADDED from AndroidManifest.xml:15:5
 	android:name
-		ADDED from AndroidManifest.xml:13:22
+		ADDED from AndroidManifest.xml:15:22
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from AndroidManifest.xml:14:5
-	android:name
-		ADDED from AndroidManifest.xml:14:22
-uses-feature#0x00020000
 ADDED from AndroidManifest.xml:16:5
+	android:name
+		ADDED from AndroidManifest.xml:16:22
+uses-feature#0x00020000
+ADDED from AndroidManifest.xml:18:5
 	android:required
-		ADDED from AndroidManifest.xml:18:9
+		ADDED from AndroidManifest.xml:20:9
 	android:glEsVersion
-		ADDED from AndroidManifest.xml:17:9
+		ADDED from AndroidManifest.xml:19:9
 application
-ADDED from AndroidManifest.xml:22:5
+ADDED from AndroidManifest.xml:24:5
 MERGED from com.android.support:appcompat-v7:22.0.0:22:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 MERGED from com.google.android.gms:play-services:7.0.0:19:5
@@ -126,61 +130,61 @@ MERGED from com.google.android.gms:play-services-wearable:7.0.0:19:5
 MERGED from com.google.android.gms:play-services-base:7.0.0:20:5
 MERGED from com.android.support:support-v4:22.0.0:22:5
 	android:label
-		ADDED from AndroidManifest.xml:25:9
+		ADDED from AndroidManifest.xml:27:9
 	android:allowBackup
-		ADDED from AndroidManifest.xml:23:9
+		ADDED from AndroidManifest.xml:25:9
 	android:icon
-		ADDED from AndroidManifest.xml:24:9
-	android:theme
 		ADDED from AndroidManifest.xml:26:9
+	android:theme
+		ADDED from AndroidManifest.xml:28:9
 activity#deltagraphs.norrisviewer.view.mainView.MainActivity
-ADDED from AndroidManifest.xml:27:9
+ADDED from AndroidManifest.xml:29:9
 	android:label
+		ADDED from AndroidManifest.xml:32:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:31:13
+	android:name
 		ADDED from AndroidManifest.xml:30:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:29:13
-	android:name
-		ADDED from AndroidManifest.xml:28:13
 activity#deltagraphs.norrisviewer.view.graphsView.LineChartActivity
-ADDED from AndroidManifest.xml:32:9
+ADDED from AndroidManifest.xml:34:9
 	android:label
+		ADDED from AndroidManifest.xml:37:13
+	android:configChanges
+		ADDED from AndroidManifest.xml:36:13
+	android:name
 		ADDED from AndroidManifest.xml:35:13
-	android:configChanges
-		ADDED from AndroidManifest.xml:34:13
-	android:name
-		ADDED from AndroidManifest.xml:33:13
 activity#deltagraphs.norrisviewer.view.graphsView.BarChartActivity
-ADDED from AndroidManifest.xml:38:9
+ADDED from AndroidManifest.xml:40:9
 	android:label
-		ADDED from AndroidManifest.xml:41:13
+		ADDED from AndroidManifest.xml:43:13
 	android:configChanges
-		ADDED from AndroidManifest.xml:40:13
+		ADDED from AndroidManifest.xml:42:13
 	android:name
-		ADDED from AndroidManifest.xml:39:13
+		ADDED from AndroidManifest.xml:41:13
 activity#deltagraphs.norrisviewer.view.graphsView.TableActivity
-ADDED from AndroidManifest.xml:43:9
+ADDED from AndroidManifest.xml:45:9
 	android:label
-		ADDED from AndroidManifest.xml:45:13
+		ADDED from AndroidManifest.xml:47:13
 	android:name
-		ADDED from AndroidManifest.xml:44:13
+		ADDED from AndroidManifest.xml:46:13
 activity#deltagraphs.norrisviewer.view.graphsView.MapChartActivity
-ADDED from AndroidManifest.xml:47:9
+ADDED from AndroidManifest.xml:49:9
 	android:label
-		ADDED from AndroidManifest.xml:49:13
+		ADDED from AndroidManifest.xml:51:13
 	android:name
-		ADDED from AndroidManifest.xml:48:13
+		ADDED from AndroidManifest.xml:50:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:50:13
+ADDED from AndroidManifest.xml:52:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:51:17
+ADDED from AndroidManifest.xml:53:17
 	android:name
-		ADDED from AndroidManifest.xml:51:25
+		ADDED from AndroidManifest.xml:53:25
 category#android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:52:17
+ADDED from AndroidManifest.xml:54:17
 	android:name
-		ADDED from AndroidManifest.xml:52:27
+		ADDED from AndroidManifest.xml:54:27
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:57:9
+ADDED from AndroidManifest.xml:59:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
@@ -208,15 +212,15 @@ MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 MERGED from com.google.android.gms:play-services-base:7.0.0:21:9
 	android:name
-		ADDED from AndroidManifest.xml:58:13
+		ADDED from AndroidManifest.xml:60:13
 	android:value
-		ADDED from AndroidManifest.xml:59:13
-meta-data#com.google.android.maps.v2.API_KEY
-ADDED from AndroidManifest.xml:60:9
-	android:name
 		ADDED from AndroidManifest.xml:61:13
+meta-data#com.google.android.maps.v2.API_KEY
+ADDED from AndroidManifest.xml:62:9
+	android:name
+		ADDED from AndroidManifest.xml:63:13
 	android:value
-		ADDED from AndroidManifest.xml:62:13
+		ADDED from AndroidManifest.xml:64:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:22.0.0:20:5
