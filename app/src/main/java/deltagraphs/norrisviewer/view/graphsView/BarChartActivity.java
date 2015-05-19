@@ -38,8 +38,8 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL, sourceTitle);
-
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        setTitle(sourceTitle);
         setContentView(R.layout.bar_chart);
         chart = (ColumnChartView) findViewById(R.id.chart);
     }
@@ -73,8 +73,4 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     public void setInitialState(){
     }
 
-    @Override
-    public void setChartTitle(CharSequence title) {
-        setTitle(title);
-    }
 }

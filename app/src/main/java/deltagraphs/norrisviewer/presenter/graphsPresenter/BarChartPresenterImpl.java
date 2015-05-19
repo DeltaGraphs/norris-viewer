@@ -30,10 +30,9 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 // LineChartData lineChartData=new LineChartData();
 
 
-public BarChartPresenterImpl(BarChartView view,String url, CharSequence title){
-        super(url,title);
+public BarChartPresenterImpl(BarChartView view,String url){
+        super(url);
         graphView=view;
-        graphView.setChartTitle(title);
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
         }
