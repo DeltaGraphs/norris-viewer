@@ -21,8 +21,9 @@
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class TableImpl {
+public class TableImpl extends Observable implements Table {
 
     private String appearance;
     private ArrayList&lt;String&gt; headers;
@@ -31,15 +32,17 @@ public class TableImpl {
     private Boolean sortable;
     private JSONObject sort;
 
-<span class="nc" id="L34">    TableImpl(JSONObject data){</span>
+<span class="nc" id="L35">    TableImpl(JSONObject data){</span>
         // TO DO
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L37">    }</span>
 
-<span class="nc" id="L38">    public String getAppearance() { return appearance; }</span>
-<span class="nc" id="L39">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
-<span class="nc" id="L40">    public String getAddRowOn() { return addRowOn; }</span>
-<span class="nc" id="L41">    public int getMaxItemsDisplayedPerPage() { return maxItemsDisplayedPerPage; }</span>
-<span class="nc" id="L42">    public Boolean getSortable() { return sortable; }</span>
-<span class="nc" id="L43">    public JSONObject getSort() { return sort; }</span>
+<span class="nc" id="L39">    public String getAppearance() { return appearance; }</span>
+<span class="nc" id="L40">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
+<span class="nc" id="L41">    public String getAddRowOn() { return addRowOn; }</span>
+<span class="nc" id="L42">    public int getMaxItemsDisplayedPerPage() { return maxItemsDisplayedPerPage; }</span>
+<span class="nc" id="L43">    public Boolean getSortable() { return sortable; }</span>
+
+    //what???
+<span class="nc" id="L46">    public JSONObject getSort() { return sort; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

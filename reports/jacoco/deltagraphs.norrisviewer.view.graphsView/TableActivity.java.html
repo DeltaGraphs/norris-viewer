@@ -60,29 +60,55 @@ import java.util.List;
     }
 
 
+    @Override
+    public void setAppearance(String appearance) {
+
+<span class="nc" id="L66">    }</span>
+
+    @Override
+    public void setHeaders(ArrayList&lt;String&gt; headers) {
+
+<span class="nc" id="L71">    }</span>
+
+    @Override
+    public void setAddRowOn(String addRowOn) {
+
+<span class="nc" id="L76">    }</span>
+
+    @Override
+    public void setMaxItemsDisplayedPerPage(int maxItemsPerPage) {
+
+<span class="nc" id="L81">    }</span>
+
+    @Override
+    public void setSortable(Boolean Sortable) {
+
+<span class="nc" id="L86">    }</span>
+
+
     private class NexusTypes {
         private final String name;
         private final List&lt;Nexus&gt; list;
 
-<span class="nc" id="L67">        NexusTypes(String name) {</span>
-<span class="nc" id="L68">            this.name = name;</span>
-<span class="nc" id="L69">            list = new ArrayList&lt;Nexus&gt;();</span>
-<span class="nc" id="L70">        }</span>
+<span class="nc" id="L93">        NexusTypes(String name) {</span>
+<span class="nc" id="L94">            this.name = name;</span>
+<span class="nc" id="L95">            list = new ArrayList&lt;Nexus&gt;();</span>
+<span class="nc" id="L96">        }</span>
 
         public int size() {
-<span class="nc" id="L73">            return list.size();</span>
+<span class="nc" id="L99">            return list.size();</span>
         }
 
         public Nexus get(int i) {
-<span class="nc" id="L77">            return list.get(i);</span>
+<span class="nc" id="L103">            return list.get(i);</span>
         }
     }
 
     private class Nexus {
         private final String[] data;
 
-<span class="nc" id="L84">        private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {</span>
-<span class="nc" id="L85">            data = new String[] {</span>
+<span class="nc" id="L110">        private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {</span>
+<span class="nc" id="L111">            data = new String[] {</span>
                     name,
                     company,
                     version,
@@ -90,13 +116,13 @@ import java.util.List;
                     storage,
                     inches,
                     ram };
-<span class="nc" id="L93">        }</span>
+<span class="nc" id="L119">        }</span>
     }
 
-<span class="nc" id="L96">    public class FamilyNexusAdapter extends BaseTableAdapter {</span>
+<span class="nc" id="L122">    public class FamilyNexusAdapter extends BaseTableAdapter {</span>
 
         private final NexusTypes familys[];
-<span class="nc" id="L99">        private final String headers[] = {</span>
+<span class="nc" id="L125">        private final String headers[] = {</span>
                 &quot;Name&quot;,
                 &quot;Company&quot;,
                 &quot;Version&quot;,
@@ -106,7 +132,7 @@ import java.util.List;
                 &quot;RAM&quot;,
         };
 
-<span class="nc" id="L109">        private final int[] widths = {</span>
+<span class="nc" id="L135">        private final int[] widths = {</span>
                 120,
                 100,
                 140,
@@ -117,177 +143,177 @@ import java.util.List;
         };
         private final float density;
 
-<span class="nc" id="L120">        public FamilyNexusAdapter(Context context) {</span>
-<span class="nc" id="L121">            familys = new NexusTypes[] {</span>
+<span class="nc" id="L146">        public FamilyNexusAdapter(Context context) {</span>
+<span class="nc" id="L147">            familys = new NexusTypes[] {</span>
                     new NexusTypes(&quot;Mobiles&quot;),
                     new NexusTypes(&quot;Tablets&quot;),
                     new NexusTypes(&quot;Others&quot;),
             };
 
-<span class="nc" id="L127">            density = context.getResources().getDisplayMetrics().density;</span>
+<span class="nc" id="L153">            density = context.getResources().getDisplayMetrics().density;</span>
 
-<span class="nc" id="L129">            familys[0].list.add(new Nexus(&quot;Nexus One&quot;, &quot;HTC&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;512 MB&quot;, &quot;3.7\&quot;&quot;, &quot;512 MB&quot;));</span>
-<span class="nc" id="L130">            familys[0].list.add(new Nexus(&quot;Nexus S&quot;, &quot;Samsung&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;16 GB&quot;, &quot;4\&quot;&quot;, &quot;512 MB&quot;));</span>
-<span class="nc" id="L131">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (16 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;16 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
-<span class="nc" id="L132">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (32 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;32 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
-<span class="nc" id="L133">            familys[0].list.add(new Nexus(&quot;Nexus 4 (8 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;8 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
-<span class="nc" id="L134">            familys[0].list.add(new Nexus(&quot;Nexus 4 (16 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
-<span class="nc" id="L135">            familys[1].list.add(new Nexus(&quot;Nexus 7 (16 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;16 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
-<span class="nc" id="L136">            familys[1].list.add(new Nexus(&quot;Nexus 7 (32 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;32 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
-<span class="nc" id="L137">            familys[1].list.add(new Nexus(&quot;Nexus 10 (16 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
-<span class="nc" id="L138">            familys[1].list.add(new Nexus(&quot;Nexus 10 (32 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;32 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
-<span class="nc" id="L139">            familys[2].list.add(new Nexus(&quot;Nexus Q&quot;, &quot;--&quot;, &quot;Honeycomb&quot;, &quot;13&quot;, &quot;--&quot;, &quot;--&quot;, &quot;--&quot;));</span>
-<span class="nc" id="L140">        }</span>
+<span class="nc" id="L155">            familys[0].list.add(new Nexus(&quot;Nexus One&quot;, &quot;HTC&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;512 MB&quot;, &quot;3.7\&quot;&quot;, &quot;512 MB&quot;));</span>
+<span class="nc" id="L156">            familys[0].list.add(new Nexus(&quot;Nexus S&quot;, &quot;Samsung&quot;, &quot;Gingerbread&quot;, &quot;10&quot;, &quot;16 GB&quot;, &quot;4\&quot;&quot;, &quot;512 MB&quot;));</span>
+<span class="nc" id="L157">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (16 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;16 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L158">            familys[0].list.add(new Nexus(&quot;Galaxy Nexus (32 GB)&quot;, &quot;Samsung&quot;, &quot;Ice cream Sandwich&quot;, &quot;15&quot;, &quot;32 GB&quot;, &quot;4.65\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L159">            familys[0].list.add(new Nexus(&quot;Nexus 4 (8 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;8 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L160">            familys[0].list.add(new Nexus(&quot;Nexus 4 (16 GB)&quot;, &quot;LG&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;4.7\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L161">            familys[1].list.add(new Nexus(&quot;Nexus 7 (16 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;16 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L162">            familys[1].list.add(new Nexus(&quot;Nexus 7 (32 GB)&quot;, &quot;Asus&quot;, &quot;Jelly Bean&quot;, &quot;16&quot;, &quot;32 GB&quot;, &quot;7\&quot;&quot;, &quot;1 GB&quot;));</span>
+<span class="nc" id="L163">            familys[1].list.add(new Nexus(&quot;Nexus 10 (16 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;16 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L164">            familys[1].list.add(new Nexus(&quot;Nexus 10 (32 GB)&quot;, &quot;Samsung&quot;, &quot;Jelly Bean&quot;, &quot;17&quot;, &quot;32 GB&quot;, &quot;10\&quot;&quot;, &quot;2 GB&quot;));</span>
+<span class="nc" id="L165">            familys[2].list.add(new Nexus(&quot;Nexus Q&quot;, &quot;--&quot;, &quot;Honeycomb&quot;, &quot;13&quot;, &quot;--&quot;, &quot;--&quot;, &quot;--&quot;));</span>
+<span class="nc" id="L166">        }</span>
 
         @Override
         public int getRowCount() {
-<span class="nc" id="L144">            return 14;</span>
+<span class="nc" id="L170">            return 14;</span>
         }
 
         @Override
         public int getColumnCount() {
-<span class="nc" id="L149">            return 6;</span>
+<span class="nc" id="L175">            return 6;</span>
         }
 
         @Override
         public View getView(int row, int column, View convertView, ViewGroup parent) {
             final View view;
-<span class="nc bnc" id="L155" title="All 6 branches missed.">            switch (getItemViewType(row, column)) {</span>
+<span class="nc bnc" id="L181" title="All 6 branches missed.">            switch (getItemViewType(row, column)) {</span>
                 case 0:
-<span class="nc" id="L157">                    view = getFirstHeader(row, column, convertView, parent);</span>
-<span class="nc" id="L158">                    break;</span>
+<span class="nc" id="L183">                    view = getFirstHeader(row, column, convertView, parent);</span>
+<span class="nc" id="L184">                    break;</span>
                 case 1:
-<span class="nc" id="L160">                    view = getHeader(row, column, convertView, parent);</span>
-<span class="nc" id="L161">                    break;</span>
+<span class="nc" id="L186">                    view = getHeader(row, column, convertView, parent);</span>
+<span class="nc" id="L187">                    break;</span>
                 case 2:
-<span class="nc" id="L163">                    view = getFirstBody(row, column, convertView, parent);</span>
-<span class="nc" id="L164">                    break;</span>
+<span class="nc" id="L189">                    view = getFirstBody(row, column, convertView, parent);</span>
+<span class="nc" id="L190">                    break;</span>
                 case 3:
-<span class="nc" id="L166">                    view = getBody(row, column, convertView, parent);</span>
-<span class="nc" id="L167">                    break;</span>
+<span class="nc" id="L192">                    view = getBody(row, column, convertView, parent);</span>
+<span class="nc" id="L193">                    break;</span>
                 case 4:
-<span class="nc" id="L169">                    view = getFamilyView(row, column, convertView, parent);</span>
-<span class="nc" id="L170">                    break;</span>
+<span class="nc" id="L195">                    view = getFamilyView(row, column, convertView, parent);</span>
+<span class="nc" id="L196">                    break;</span>
                 default:
-<span class="nc" id="L172">                    throw new RuntimeException(&quot;wtf?&quot;);</span>
+<span class="nc" id="L198">                    throw new RuntimeException(&quot;wtf?&quot;);</span>
             }
-<span class="nc" id="L174">            return view;</span>
+<span class="nc" id="L200">            return view;</span>
         }
 
         private View getFirstHeader(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L178" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L179">                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L205">                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);</span>
             }
-<span class="nc" id="L181">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);</span>
-<span class="nc" id="L182">            return convertView;</span>
-        }
-
-        private View getHeader(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L187">                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);</span>
-            }
-<span class="nc" id="L189">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);</span>
-<span class="nc" id="L190">            return convertView;</span>
-        }
-
-        private View getFirstBody(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L194" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L195">                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);</span>
-            }
-<span class="nc bnc" id="L197" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
-<span class="nc" id="L198">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
-<span class="nc" id="L199">            return convertView;</span>
-        }
-
-        private View getBody(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L203" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L204">                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);</span>
-            }
-<span class="nc bnc" id="L206" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
-<span class="nc" id="L207">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
+<span class="nc" id="L207">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);</span>
 <span class="nc" id="L208">            return convertView;</span>
         }
 
-        private View getFamilyView(int row, int column, View convertView, ViewGroup parent) {
+        private View getHeader(int row, int column, View convertView, ViewGroup parent) {
 <span class="nc bnc" id="L212" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L213">                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);</span>
+<span class="nc" id="L213">                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);</span>
+            }
+<span class="nc" id="L215">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);</span>
+<span class="nc" id="L216">            return convertView;</span>
+        }
+
+        private View getFirstBody(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L220" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L221">                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);</span>
+            }
+<span class="nc bnc" id="L223" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
+<span class="nc" id="L224">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
+<span class="nc" id="L225">            return convertView;</span>
+        }
+
+        private View getBody(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L229" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L230">                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);</span>
+            }
+<span class="nc bnc" id="L232" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
+<span class="nc" id="L233">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
+<span class="nc" id="L234">            return convertView;</span>
+        }
+
+        private View getFamilyView(int row, int column, View convertView, ViewGroup parent) {
+<span class="nc bnc" id="L238" title="All 2 branches missed.">            if (convertView == null) {</span>
+<span class="nc" id="L239">                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);</span>
             }
             final String string;
-<span class="nc bnc" id="L216" title="All 2 branches missed.">            if (column == -1) {</span>
-<span class="nc" id="L217">                string = getFamily(row).name;</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">            if (column == -1) {</span>
+<span class="nc" id="L243">                string = getFamily(row).name;</span>
             } else {
-<span class="nc" id="L219">                string = &quot;&quot;;</span>
+<span class="nc" id="L245">                string = &quot;&quot;;</span>
             }
-<span class="nc" id="L221">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);</span>
-<span class="nc" id="L222">            return convertView;</span>
+<span class="nc" id="L247">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);</span>
+<span class="nc" id="L248">            return convertView;</span>
         }
 
         @Override
         public int getWidth(int column) {
-<span class="nc" id="L227">            return Math.round(widths[column + 1] * density);</span>
+<span class="nc" id="L253">            return Math.round(widths[column + 1] * density);</span>
         }
 
         @Override
         public int getHeight(int row) {
             final int height;
-<span class="nc bnc" id="L233" title="All 2 branches missed.">            if (row == -1) {</span>
-<span class="nc" id="L234">                height = 35;</span>
-<span class="nc bnc" id="L235" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
-<span class="nc" id="L236">                height = 25;</span>
+<span class="nc bnc" id="L259" title="All 2 branches missed.">            if (row == -1) {</span>
+<span class="nc" id="L260">                height = 35;</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
+<span class="nc" id="L262">                height = 25;</span>
             } else {
-<span class="nc" id="L238">                height = 45;</span>
+<span class="nc" id="L264">                height = 45;</span>
             }
-<span class="nc" id="L240">            return Math.round(height * density);</span>
+<span class="nc" id="L266">            return Math.round(height * density);</span>
         }
 
         @Override
         public int getItemViewType(int row, int column) {
             final int itemViewType;
-<span class="nc bnc" id="L246" title="All 4 branches missed.">            if (row == -1 &amp;&amp; column == -1) {</span>
-<span class="nc" id="L247">                itemViewType = 0;</span>
-<span class="nc bnc" id="L248" title="All 2 branches missed.">            } else if (row == -1) {</span>
-<span class="nc" id="L249">                itemViewType = 1;</span>
-<span class="nc bnc" id="L250" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
-<span class="nc" id="L251">                itemViewType = 4;</span>
-<span class="nc bnc" id="L252" title="All 2 branches missed.">            } else if (column == -1) {</span>
-<span class="nc" id="L253">                itemViewType = 2;</span>
+<span class="nc bnc" id="L272" title="All 4 branches missed.">            if (row == -1 &amp;&amp; column == -1) {</span>
+<span class="nc" id="L273">                itemViewType = 0;</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">            } else if (row == -1) {</span>
+<span class="nc" id="L275">                itemViewType = 1;</span>
+<span class="nc bnc" id="L276" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
+<span class="nc" id="L277">                itemViewType = 4;</span>
+<span class="nc bnc" id="L278" title="All 2 branches missed.">            } else if (column == -1) {</span>
+<span class="nc" id="L279">                itemViewType = 2;</span>
             } else {
-<span class="nc" id="L255">                itemViewType = 3;</span>
+<span class="nc" id="L281">                itemViewType = 3;</span>
             }
-<span class="nc" id="L257">            return itemViewType;</span>
+<span class="nc" id="L283">            return itemViewType;</span>
         }
 
         private boolean isFamily(int row) {
-<span class="nc" id="L261">            int family = 0;</span>
-<span class="nc bnc" id="L262" title="All 2 branches missed.">            while (row &gt; 0) {</span>
-<span class="nc" id="L263">                row -= familys[family].size() + 1;</span>
-<span class="nc" id="L264">                family++;</span>
+<span class="nc" id="L287">            int family = 0;</span>
+<span class="nc bnc" id="L288" title="All 2 branches missed.">            while (row &gt; 0) {</span>
+<span class="nc" id="L289">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L290">                family++;</span>
             }
-<span class="nc bnc" id="L266" title="All 2 branches missed.">            return row == 0;</span>
+<span class="nc bnc" id="L292" title="All 2 branches missed.">            return row == 0;</span>
         }
 
         private NexusTypes getFamily(int row) {
-<span class="nc" id="L270">            int family = 0;</span>
-<span class="nc bnc" id="L271" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
-<span class="nc" id="L272">                row -= familys[family].size() + 1;</span>
-<span class="nc" id="L273">                family++;</span>
+<span class="nc" id="L296">            int family = 0;</span>
+<span class="nc bnc" id="L297" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
+<span class="nc" id="L298">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L299">                family++;</span>
             }
-<span class="nc" id="L275">            return familys[family - 1];</span>
+<span class="nc" id="L301">            return familys[family - 1];</span>
         }
 
         private Nexus getDevice(int row) {
-<span class="nc" id="L279">            int family = 0;</span>
-<span class="nc bnc" id="L280" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
-<span class="nc" id="L281">                row -= familys[family].size() + 1;</span>
-<span class="nc" id="L282">                family++;</span>
+<span class="nc" id="L305">            int family = 0;</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
+<span class="nc" id="L307">                row -= familys[family].size() + 1;</span>
+<span class="nc" id="L308">                family++;</span>
             }
-<span class="nc" id="L284">            family--;</span>
-<span class="nc" id="L285">            return familys[family].get(row + familys[family].size());</span>
+<span class="nc" id="L310">            family--;</span>
+<span class="nc" id="L311">            return familys[family].get(row + familys[family].size());</span>
         }
 
         @Override
         public int getViewTypeCount() {
-<span class="nc" id="L290">            return 5;</span>
+<span class="nc" id="L316">            return 5;</span>
         }
     }
 

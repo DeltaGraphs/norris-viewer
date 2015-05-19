@@ -2,6 +2,8 @@
 
 import org.json.JSONObject;
 
+import java.util.Observable;
+
 /*
  * Name : MapChartImpl.java
  * Module : deltagraphs.norrisviewer.model.graphsModel
@@ -20,7 +22,7 @@ import org.json.JSONObject;
  *
  */
 
-public class MapChartImpl {
+public class MapChartImpl extends Observable implements MapChart {
 
     private float latitude;
     private float longitude;
@@ -28,14 +30,14 @@ public class MapChartImpl {
     private String mapType;
     private Boolean zoom;
 
-<span class="nc" id="L31">    MapChartImpl(JSONObject data){</span>
+<span class="nc" id="L33">    MapChartImpl(JSONObject data){</span>
         // TO DO !!!
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L35">    }</span>
 
-<span class="nc" id="L35">    public float getLatitude() { return latitude; }</span>
-<span class="nc" id="L36">    public float getLongitude() { return longitude; }</span>
-<span class="nc" id="L37">    public int getScale() { return scale; }</span>
-<span class="nc" id="L38">    public String getMapType() { return mapType; }</span>
-<span class="nc" id="L39">    public Boolean getZoom() { return zoom; }</span>
+<span class="nc" id="L37">    public float getLatitude() { return latitude; }</span>
+<span class="nc" id="L38">    public float getLongitude() { return longitude; }</span>
+<span class="nc" id="L39">    public int getScale() { return scale; }</span>
+<span class="nc" id="L40">    public String getMapType() { return mapType; }</span>
+<span class="nc" id="L41">    public Boolean getZoom() { return zoom; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -16,11 +16,40 @@
  *
  */
 
-<span class="nc" id="L19">public class MapChartPresenterImpl{}/* extends GraphPresenter implements MapChartPresenter {</span>
-    @Override
-    public void SetUpViews() {
+import java.util.Observable;
+import java.util.Observer;
 
-    }
+import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.*;
+
+public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter, Observer {
+
+    MapChartView graphView;
+    MapChart mapChartInstance;
+
+    public MapChartPresenterImpl(MapChartView view, String url) {
+<span class="nc" id="L31">        super(url);</span>
+<span class="nc" id="L32">        graphView = view;</span>
+        //lineChartInstance = new LineChartImpl(jsonData);
+<span class="nc" id="L34">        this.setUpViews();</span>
+<span class="nc" id="L35">    }</span>
+
+    @Override
+    public void setUpViews() {
+
+<span class="nc" id="L40">    }</span>
+
+    @Override
+    public void update(Observable observable, Object data) {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
+<span class="nc" id="L45">            graphView.setParams(mapChartInstance.getLatitude(),</span>
+                    mapChartInstance.getLongitude(),
+                    mapChartInstance.getScale()
+            );
+<span class="nc" id="L49">            graphView.setMapType(mapChartInstance.getMapType());</span>
+<span class="nc" id="L50">            graphView.setZoom(mapChartInstance.getZoom());</span>
+        }
+<span class="nc" id="L52">    }</span>
 }
-*/
+
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
