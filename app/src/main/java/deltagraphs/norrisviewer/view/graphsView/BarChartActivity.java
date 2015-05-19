@@ -76,11 +76,6 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     @Override
-    public void setChartTitle(CharSequence title) {
-        setTitle(title);
-    }
-
-    @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
 
     }

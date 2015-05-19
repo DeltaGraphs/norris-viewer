@@ -21,7 +21,6 @@ package deltagraphs.norrisviewer.view.graphsView;
 import java.util.ArrayList;
 
 public interface LineChartView {
-    void setChartTitle(CharSequence title);
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale);
     public void setViewFinder(Boolean withViewFinder);
     public void setBackground(String bg);
