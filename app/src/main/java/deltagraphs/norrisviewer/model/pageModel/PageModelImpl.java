@@ -186,4 +186,5 @@ public class PageModelImpl extends Observable implements PageModel{
     public int getPageListSize(){ return pageList.size(); }
     public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }
     public ArrayList<PageItem> getItemList(int page){ return pageList.get(page).getPageItemList(); }
+    public Page getPage(int index){ return this.getPageList().get(index); }
 }
