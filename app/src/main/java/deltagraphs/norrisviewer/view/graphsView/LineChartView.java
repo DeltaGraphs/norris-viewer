@@ -16,5 +16,8 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  * ===============================================================
  *
- */public interface LineChartView {
+ */
+
+public interface LineChartView {
+    void setChartTitle(CharSequence title);
 }

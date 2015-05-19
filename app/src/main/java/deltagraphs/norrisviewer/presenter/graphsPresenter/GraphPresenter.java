@@ -24,11 +24,17 @@ import deltagraphs.norrisviewer.presenter.SocketManager;
 
 public abstract class GraphPresenter {
     private SocketManager graphSocket;
+    private CharSequence title;
 
-    public GraphPresenter(String url){
+    public GraphPresenter(String url, CharSequence title){
+        this.title = title;
         this.graphSocket = new SocketManager();
         graphSocket.setSocketUrl(url);
         graphSocket.startListening("graphConfig", new Activity());
+    }
+
+    public CharSequence getTitle(){
+        return title;
     }
 
     public abstract void setUpViews();

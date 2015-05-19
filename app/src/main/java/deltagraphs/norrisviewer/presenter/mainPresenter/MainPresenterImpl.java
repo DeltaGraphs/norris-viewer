@@ -189,28 +189,32 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;
-            String graphType = graphsList.get(position).getType();
+            ChartType graphType = graphsList.get(position).getChartType();
             switch (graphType) {
-                case "lineChart":
+                case LINE_CHART:
                     intent = new Intent(getActivity(), LineChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
 
-                case "BarChart":
+                case COLUMN_CHART:
                     intent = new Intent(getActivity(), BarChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
 
-                case "MapChart":
+                case MAP_CHART:
                     intent = new Intent(getActivity(), MapChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
-                case "Table":
+                case TABLE:
                     intent = new Intent(getActivity(), TableActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
                 default:
@@ -338,6 +342,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         public String getUrl(){return url;}
         public String getName() {return name;}
         public String getType() {return type;}
+        public ChartType getChartType() {return chartType;}
 
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.name = text1;

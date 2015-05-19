@@ -31,14 +31,24 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private PreviewLineChartView previewChart;
     private LineChartData lineChartData;
 
+    private CharSequence sourceTitle;
+    private String sourceURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String url = "";
-        lineChartPresenter = new LineChartPresenterImpl(this, url);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
         previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sourceURL = extras.getString("EXTRA_SOURCE_URL");
+            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+        }
+
+        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL, sourceTitle);
     }
 
     @Override
@@ -69,5 +79,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     public void setInitialState(){
 
+    }
+
+    @Override
+    public void setChartTitle(CharSequence title) {
+        setTitle(title);
     }
 }

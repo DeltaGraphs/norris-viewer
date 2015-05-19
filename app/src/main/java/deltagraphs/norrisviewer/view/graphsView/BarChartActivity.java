@@ -27,11 +27,19 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     private ColumnChartView chart;
     private ColumnChartData barChartData;
 
+    private CharSequence sourceTitle;
+    private String sourceURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String url = "";
-        barChartPresenter = new BarChartPresenterImpl(this, url);
         super.onCreate(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sourceURL = extras.getString("EXTRA_SOURCE_URL");
+            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+        }
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL, sourceTitle);
+
         setContentView(R.layout.bar_chart);
         chart = (ColumnChartView) findViewById(R.id.chart);
     }
@@ -63,5 +71,10 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     public void setInitialState(){
+    }
+
+    @Override
+    public void setChartTitle(CharSequence title) {
+        setTitle(title);
     }
 }
