@@ -16,5 +16,12 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  */
 
+import java.util.ArrayList;
+
 public interface TableView {
+    public void setAppearance(String appearance);
+    public void setHeaders(ArrayList<String> headers);
+    public void setAddRowOn(String addRowOn);
+    public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
+    public void setSortable(Boolean Sortable);
 }

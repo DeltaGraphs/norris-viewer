@@ -2,6 +2,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
 import org.json.JSONObject;
 
+import java.util.Observable;
+
 /*
  * Name : MapChartImpl.java
  * Module : deltagraphs.norrisviewer.model.graphsModel
@@ -20,7 +22,7 @@ import org.json.JSONObject;
  *
  */
 
-public class MapChartImpl {
+public class MapChartImpl extends Observable implements MapChart {
 
     private float latitude;
     private float longitude;

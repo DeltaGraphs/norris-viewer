@@ -16,10 +16,39 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-public class MapChartPresenterImpl{}/* extends GraphPresenter implements MapChartPresenter {
+import java.util.Observable;
+import java.util.Observer;
+
+import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.*;
+
+public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter, Observer {
+
+    MapChartView graphView;
+    MapChart mapChartInstance;
+
+    public MapChartPresenterImpl(MapChartView view, String url) {
+        super(url);
+        graphView = view;
+        //lineChartInstance = new LineChartImpl(jsonData);
+        this.setUpViews();
+    }
+
     @Override
-    public void SetUpViews() {
+    public void setUpViews() {
 
     }
+
+    @Override
+    public void update(Observable observable, Object data) {
+        if (observable instanceof MapChartImpl) {
+            graphView.setParams(mapChartInstance.getLatitude(),
+                    mapChartInstance.getLongitude(),
+                    mapChartInstance.getScale()
+            );
+            graphView.setMapType(mapChartInstance.getMapType());
+            graphView.setZoom(mapChartInstance.getZoom());
+        }
+    }
 }
-*/
+

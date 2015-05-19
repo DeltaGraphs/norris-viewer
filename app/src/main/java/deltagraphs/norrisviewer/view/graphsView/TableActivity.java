@@ -60,6 +60,32 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
 
+    @Override
+    public void setAppearance(String appearance) {
+
+    }
+
+    @Override
+    public void setHeaders(ArrayList<String> headers) {
+
+    }
+
+    @Override
+    public void setAddRowOn(String addRowOn) {
+
+    }
+
+    @Override
+    public void setMaxItemsDisplayedPerPage(int maxItemsPerPage) {
+
+    }
+
+    @Override
+    public void setSortable(Boolean Sortable) {
+
+    }
+
+
     private class NexusTypes {
         private final String name;
         private final List<Nexus> list;

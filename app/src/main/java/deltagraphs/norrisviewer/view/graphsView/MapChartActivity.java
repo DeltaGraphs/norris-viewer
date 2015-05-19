@@ -12,7 +12,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import deltagraphs.norrisviewer.R;
 
-public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
@@ -72,6 +72,21 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
+    }
+
+    @Override
+    public void setParams(float latitude, float longitude, int scale) {
+
+    }
+
+    @Override
+    public void setMapType(String type) {
+
+    }
+
+    @Override
+    public void setZoom(Boolean choise) {
 
     }
 }

@@ -21,8 +21,9 @@ package deltagraphs.norrisviewer.model.graphsModel;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class TableImpl {
+public class TableImpl extends Observable implements Table {
 
     private String appearance;
     private ArrayList<String> headers;
@@ -40,5 +41,7 @@ public class TableImpl {
     public String getAddRowOn() { return addRowOn; }
     public int getMaxItemsDisplayedPerPage() { return maxItemsDisplayedPerPage; }
     public Boolean getSortable() { return sortable; }
+
+    //what???
     public JSONObject getSort() { return sort; }
 }
