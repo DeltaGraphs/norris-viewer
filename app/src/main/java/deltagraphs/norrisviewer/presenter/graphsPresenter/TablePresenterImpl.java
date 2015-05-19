@@ -24,11 +24,11 @@ import deltagraphs.norrisviewer.view.graphsView.*;
 
 public class TablePresenterImpl extends GraphPresenter implements TablePresenter, Observer{
 
-    TableView graphView;
-    Table tableInstance;
+    private TableView graphView;
+    private Table tableInstance;
 
     public TablePresenterImpl(TableView view, String url) {
-        super(url);
+        super(url, (TableActivity) view );
         graphView = view;
         this.setUpViews();
     }

@@ -27,7 +27,7 @@ public class BarChartFlow implements FlowModel.Record{
     private String indexFormat;
     private String valueFormat;
     private String flowColour;
-    private String legendOnPoint;
+
 
 
 }

@@ -32,8 +32,8 @@ public class PageModelImpl extends Observable implements PageModel{
 
     public PageModelImpl(){}
 
-    public PageModelImpl(JSONObject data){
-        // insert roba XD
+    public void setPageModel(JSONObject data, String signal){
+        JSONParser(data,signal);
     }
 
     //this method inserts a page

@@ -27,7 +27,6 @@ public class LineChartFlow implements FlowModel.Record{
     private String xFormat;
     private String yFormat;
     private String flowColour;
-    private String legendOnPoint;
     private String marker;
     private String interpolation;
     private String subAreaColour;

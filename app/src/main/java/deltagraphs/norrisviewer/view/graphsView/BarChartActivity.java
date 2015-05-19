@@ -101,12 +101,12 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     @Override
-    public void setType(String type) {
+    public void setGrid(Boolean grid) {
 
     }
 
     @Override
-    public void setGrid(Boolean grid) {
+    public void setLegendOnPoint(Boolean legend) {
 
     }
 }

@@ -29,6 +29,7 @@ public class MapChartImpl extends Observable implements MapChart {
     private int scale;
     private String mapType;
     private Boolean zoom;
+    private Boolean legendOnPoint;
 
     MapChartImpl(JSONObject data){
         // TO DO !!!
@@ -39,4 +40,9 @@ public class MapChartImpl extends Observable implements MapChart {
     public int getScale() { return scale; }
     public String getMapType() { return mapType; }
     public Boolean getZoom() { return zoom; }
+    public Boolean getLegendOnPoint(){ return legendOnPoint; }
+
+    private void JSONParser(JSONObject data, String signal){
+
+    }
 }

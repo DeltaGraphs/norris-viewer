@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,18 +32,39 @@ public class BarChartImpl extends Graph{
     private String barOrientation;
     private String background;
     private Boolean sortable;
-    private String type;
     private Boolean grid;
+    private Boolean legendOnPoint;
 
     public BarChartImpl(JSONObject data){
         // TO DO
     }
 
+
+    @Override
+    public void setParameters(JSONObject data) {
+       try {
+           background = data.getString("backgroundColor");
+           barOrientation = data.getString("barOrientation");
+           sortable = data.getBoolean("sortable");
+           grid = data.getBoolean("grid");
+           JSONArray jsonHeaders = data.getJSONArray("headers");
+           int length = jsonHeaders.length();
+           if (length > 0) {
+               for (int i = 0; i < length; i++) {
+                   headers.add(jsonHeaders.getString(i));
+               }
+           }
+           JSONObject xAxis = data.getJSONObject("xAxis");
+           axisX = new AxisModel(xAxis);
+           JSONObject yAxis = data.getJSONObject("yAxis");
+           axisY = new AxisModel(yAxis);
+       }catch (JSONException e){}
+    }
+
+
     @Override
     public void setData(JSONObject data) {}
 
-    @Override
-    public void setParameters(JSONObject data) {}
 
     public AxisModel getAxisX() { return axisX; }
     public AxisModel getAxisY() { return axisY; }
@@ -49,7 +72,30 @@ public class BarChartImpl extends Graph{
     public String getBackground() { return background; }
     public String getBarOrientation() { return barOrientation; }
     public Boolean getSortable() { return sortable; }
-    public String getType() { return type; }
     public Boolean getGrid() { return grid; }
+    public Boolean getLegendOnPoint(){ return legendOnPoint; }
+
+    private void JSONParser(JSONObject data, String signal){
+        try{
+            switch (signal){
+                case "configGraph":{
+                    JSONObject properties = data.getJSONObject("properties");
+                    setParameters(properties);
+
+                    break;
+                }
+                case "updateGraphProp":{
+
+
+
+                    break;
+                }
+            }
+
+
+        }catch(JSONException e){
+            return;
+        }
+    }
 
 }

@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 /*
@@ -24,14 +25,11 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter, Observer{
 
-    LineChartView graphView;
-    LineChart lineChartInstance;
-   // PreviewLineChartView previewLineChartView;
-   // LineChartData lineChartData=new LineChartData();
-
+    private LineChartView graphView;
+    private LineChart lineChartInstance;
 
     public LineChartPresenterImpl(LineChartView view, String url) {
-        super(url);
+        super(url, (LineChartActivity) view);
         graphView = view;
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
@@ -72,8 +70,8 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
             );
             graphView.setViewFinder(lineChartInstance.getViewFinder());
             graphView.setBackground(lineChartInstance.getBackground());
-            graphView.setGrid(lineChartInstance.getHorizontalGrid(),lineChartInstance.getVerticalGrid());
-
+            graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
+            graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
         }
     }
 

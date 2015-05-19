@@ -44,4 +44,8 @@ public class TableImpl extends Observable implements Table {
 
     //what???
     public JSONObject getSort() { return sort; }
+
+    private void JSONParser(JSONObject data, String signal){
+
+    }
 }

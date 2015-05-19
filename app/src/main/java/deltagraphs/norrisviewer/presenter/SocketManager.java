@@ -12,6 +12,9 @@ import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import deltagraphs.norrisviewer.model.pageModel.PageModel;
+import deltagraphs.norrisviewer.view.mainView.MainView;
+
 /*
  * Name : SocketManager.java
  * Module : norrisviewer::presenter
@@ -73,7 +76,7 @@ public class SocketManager{
         mSocket.close();
     }
 
-    public void startListening(String signal,final Activity activity){
+    public void startListening(final String signal,final Activity activity, final Object model){
 
         mSocket.on(signal, new Emitter.Listener() {
             @Override
@@ -82,12 +85,15 @@ public class SocketManager{
                     @Override
                     public void run() {
                         JSONObject obj = (JSONObject) args[0];
-                        try {
-                            float x = (float) obj.getDouble("item");
+                        //try {
+                            if(activity instanceof MainView){
+                                ((PageModel)model).setPageModel(obj, signal);
+                            }
+                            //float x = (float) obj.getDouble("item");
                             //dataModel.setMyData((float) obj.getDouble("item"));
-                        } catch (JSONException e) {
-                            return;
-                        }
+                        //} catch (JSONException e) {
+                        //    return;
+                        //}
                     }
                 });
             }

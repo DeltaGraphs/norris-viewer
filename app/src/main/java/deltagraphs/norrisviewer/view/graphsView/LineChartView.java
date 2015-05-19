@@ -25,4 +25,5 @@ public interface LineChartView {
     public void setViewFinder(Boolean withViewFinder);
     public void setBackground(String bg);
     public void setGrid(Boolean  horizontal, Boolean vertical);
+    public void setLegendOnPoint(Boolean legend);
 }

@@ -59,9 +59,7 @@ public abstract class Graph extends Observable {
     public abstract void setData(JSONObject data);
     public abstract void setParameters(JSONObject data);
 
-    private void JSONParser(JSONObject data, String signal){
-        // TO DO!!!
-    }
+
 
     public String getTitle() { return title; }
 }

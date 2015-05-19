@@ -89,4 +89,9 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     public void setZoom(Boolean choise) {
 
     }
+
+    @Override
+    public void setLegendOnPoint(Boolean legend) {
+
+    }
 }

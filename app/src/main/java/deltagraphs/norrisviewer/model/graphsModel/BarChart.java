@@ -23,6 +23,6 @@ import java.util.ArrayList;
     public String getBackground();
     public String getBarOrientation();
     public Boolean getSortable();
-    public String getType();
     public Boolean getGrid();
+    public Boolean getLegendOnPoint();
 }

@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import lecho.lib.hellocharts.model.Axis;
 
@@ -26,16 +27,15 @@ import lecho.lib.hellocharts.model.Axis;
 
 public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
 
-        BarChartView graphView;
-        BarChart barChartInstance;
-// PreviewLineChartView previewLineChartView;
-// LineChartData lineChartData=new LineChartData();
+        private BarChartView graphView;
+        private BarChart barChartInstance;
 
 
 public BarChartPresenterImpl(BarChartView view,String url){
-        super(url);
-        graphView=view;
-        //lineChartInstance = new LineChartImpl(jsonData);
+    super(url, (BarChartActivity) view);
+    graphView=view;
+
+    //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
         }
 
@@ -78,8 +78,8 @@ public void update(Observable observable,Object data) {
         graphView.setBackground(barChartInstance.getBackground());
         graphView.setBarOrientation(barChartInstance.getBarOrientation());
         graphView.setSortable(barChartInstance.getSortable());
-        graphView.setType(barChartInstance.getType());
         graphView.setGrid(barChartInstance.getGrid());
+        graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());
     }
 }
 

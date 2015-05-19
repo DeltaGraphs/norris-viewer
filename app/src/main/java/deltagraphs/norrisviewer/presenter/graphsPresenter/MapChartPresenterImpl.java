@@ -24,11 +24,11 @@ import deltagraphs.norrisviewer.view.graphsView.*;
 
 public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter, Observer {
 
-    MapChartView graphView;
-    MapChart mapChartInstance;
+    private MapChartView graphView;
+    private MapChart mapChartInstance;
 
     public MapChartPresenterImpl(MapChartView view, String url) {
-        super(url);
+        super(url, (MapChartActivity) view);
         graphView = view;
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
@@ -48,6 +48,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             );
             graphView.setMapType(mapChartInstance.getMapType());
             graphView.setZoom(mapChartInstance.getZoom());
+            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
         }
     }
 }

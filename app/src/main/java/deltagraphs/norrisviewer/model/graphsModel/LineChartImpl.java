@@ -30,6 +30,7 @@ public class LineChartImpl extends Graph {
     private Boolean viewFinder;
     private Boolean horizontalGrid;
     private Boolean verticalGrid;
+    private Boolean legendOnPoint;
 
     public LineChartImpl(JSONObject data){
         // TO DO!!!
@@ -43,7 +44,7 @@ public class LineChartImpl extends Graph {
     public Boolean getViewFinder() { return viewFinder; }
     public Boolean getHorizontalGrid() { return horizontalGrid; }
     public Boolean getVerticalGrid() { return verticalGrid; }
-
+    public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
     @Override
     public void setData(JSONObject data) {
@@ -52,6 +53,10 @@ public class LineChartImpl extends Graph {
 
     @Override
     public void setParameters(JSONObject data) {
+
+    }
+
+    private void JSONParser(JSONObject data, String signal){
 
     }
 }

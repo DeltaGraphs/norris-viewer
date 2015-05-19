@@ -101,4 +101,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setGrid(Boolean horizontal, Boolean vertical) {
 
     }
+
+    @Override
+    public void setLegendOnPoint(Boolean legend) {
+
+    }
 }

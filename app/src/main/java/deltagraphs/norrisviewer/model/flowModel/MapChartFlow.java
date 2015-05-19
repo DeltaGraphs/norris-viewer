@@ -28,7 +28,6 @@ public class MapChartFlow implements FlowModel.Record {
     private String latitudeKey;
     private String longitudeFormat;
     private String latitudeFormat;
-    private String legendOnPoint;
     private String marker;
     private int maxItems;
     private String trace;

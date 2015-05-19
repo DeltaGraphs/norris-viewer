@@ -22,4 +22,5 @@ public interface MapChart {
     public int getScale();
     public String getMapType();
     public Boolean getZoom();
+    public Boolean getLegendOnPoint();
 }
