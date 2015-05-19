@@ -1,31 +1,16 @@
-package deltagraphs.norrisviewer.view.mainView;/*
- * Name : PageNavigationFragment.java
- * Module : deltagraphs.norrisviewer.view.mainView
- * Location : norrisviewer\view\mainView
- *
- * History :
+package deltagraphs.norrisviewer.view.mainView;
 
- * Version Date Programmer Description
- * ===============================================================
- *
- * 0.0.1 2015-05-16 davide Creazione file
- *
- * ===============================================================
- *
- */
-
+import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
+import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,8 +29,7 @@ import deltagraphs.norrisviewer.R;
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
-
-public class PageNavigationFragment  extends Fragment {
+public class    PageNavigationFragment extends Fragment {
 
     /**
      * Remember the position of the selected item.
@@ -115,11 +99,11 @@ public class PageNavigationFragment  extends Fragment {
                 selectItem(position);
             }
         });
-        /*mDrawerListView.setAdapter(new ArrayAdapter<String>(
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                MainActivity.pagesList));*/
+                MainActivity.pagesList));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
@@ -146,7 +130,7 @@ public class PageNavigationFragment  extends Fragment {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
-        // ActionBarDrawerToggle ties together the proper interactions
+        // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
@@ -249,7 +233,7 @@ public class PageNavigationFragment  extends Fragment {
         // If the drawer is open, show the global app actions in the action bar. See also
         // showGlobalContextActionBar, which controls the top-left area of the action bar.
         if (mDrawerLayout != null && isDrawerOpen()) {
-            // inflater.inflate(R.menu.global, menu);
+            inflater.inflate(R.menu.global, menu);
             showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
@@ -260,12 +244,12 @@ public class PageNavigationFragment  extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-/*
-    if (item.getItemId() == R.id.action_example) {
-        Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
-        return true;
-    }
-*/
+
+        /*if (item.getItemId() == R.id.action_example) {
+            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        */
         return super.onOptionsItemSelected(item);
     }
 
@@ -276,6 +260,7 @@ public class PageNavigationFragment  extends Fragment {
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
     }
 

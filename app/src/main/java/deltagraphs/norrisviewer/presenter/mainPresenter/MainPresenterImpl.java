@@ -27,7 +27,6 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.graphsView.*;
-    import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 

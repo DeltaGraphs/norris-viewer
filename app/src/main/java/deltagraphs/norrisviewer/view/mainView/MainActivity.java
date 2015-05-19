@@ -58,6 +58,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 public class MainActivity extends ActionBarActivity implements MainView,PageNavigationFragment.NavigationDrawerCallbacks {
 
+    public static String[] pagesList= {"ciao","balcky","furlan"};
     private String title;
     private MainPresenter presenter;
 
