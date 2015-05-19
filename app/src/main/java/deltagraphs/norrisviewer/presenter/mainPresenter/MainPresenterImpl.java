@@ -1,7 +1,6 @@
 package deltagraphs.norrisviewer.presenter.mainPresenter;
 
 
-    import android.app.Activity;
     import android.app.AlertDialog;
     import android.content.Context;
     import android.content.DialogInterface;
@@ -28,11 +27,11 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
     import deltagraphs.norrisviewer.view.graphsView.*;
+    import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
     import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
     import lecho.lib.hellocharts.view.AbstractChartView;
-    import lecho.lib.hellocharts.view.Chart;
     import lecho.lib.hellocharts.view.ColumnChartView;
     import lecho.lib.hellocharts.view.LineChartView;
     import lecho.lib.hellocharts.view.PreviewLineChartView;
@@ -57,7 +56,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks {
 
     private static SocketManager mainSocket;
-    private MainView mainView;
+    public static MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl();
 
@@ -66,6 +65,12 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
         setUpViews();
+
+        //X DEMO
+        FragmentManager fragmentManager = mainView.getSupportManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
+                .commit();
     }
 
     private void setUpViews(){
@@ -76,6 +81,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 R.id.navigation_drawer,
                 mainView.findDrawer(R.id.drawer_layout));
     }
+
+/*
+    public void onSectionAttached(int number) {
+        if((number-1)<pagesList.length) {
+            mTitle = pagesList[number-1];
+        }
+    }
+*/
 
     public void showDialog(Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -130,6 +143,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         private PageModel pageModel;
         private List<ChartDescription> graphsList = new ArrayList<ChartDescription>();
 
+
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -140,7 +154,6 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
          * Returns a new instance of this fragment for the given section
          * number.
          */
-
 
 
         public static PlaceholderFragment newInstance(int sectionNumber, PageModel p) {
@@ -179,27 +192,26 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             String graphType = graphsList.get(position).getType();
             switch (graphType) {
                 case "lineChart":
-                   //  Line Chart;
                     intent = new Intent(getActivity(), LineChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
 
                 case "BarChart":
-                    // Column Chart;
-                  //  intent = new Intent(getActivity(), BarChartActivity.class);
-                   // startActivity(intent);
-                   // break;
+                    intent = new Intent(getActivity(), BarChartActivity.class);
+                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    startActivity(intent);
+                    break;
 
                 case "MapChart":
-                    // map chart
                     intent = new Intent(getActivity(), MapChartActivity.class);
+                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
                 case "Table":
-                    // table
-                    //intent = new Intent(getActivity(), TableActivity.class);
-                    //startActivity(intent);
+                    intent = new Intent(getActivity(), TableActivity.class);
+                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    startActivity(intent);
                     break;
                 default:
                     break;
@@ -211,7 +223,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
         private List<ChartDescription> generateDescriptions() {
             List<ChartDescription> list = new ArrayList<ChartDescription>();
-
+/*
             //number of page needed
             int PAGE = 1;
 
@@ -223,6 +235,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 String itemUrl = itemList.get(i).getUrl();
                 list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
             }
+            */
+
+            list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
+            list.add(new ChartDescription("linebalby", "", "", ChartType.LINE_CHART));
+            list.add(new ChartDescription("MappaDemmedda", "ciao", "Colpa di ross", ChartType.MAP_CHART));
+            list.add(new ChartDescription("tabbbbella", "tabble", "url", ChartType.TABLE));
+
+
             return list;
         }
 
@@ -244,8 +264,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 convertView = View.inflate(getContext(), R.layout.list_item_sample, null);
 
                 holder = new ViewHolder();
-                holder.text1 = (TextView) convertView.findViewById(R.id.text1);
-                holder.text2 = (TextView) convertView.findViewById(R.id.text2);
+                holder.name = (TextView) convertView.findViewById(R.id.name);
+                holder.type = (TextView) convertView.findViewById(R.id.type);
                 holder.chartLayout = (FrameLayout) convertView.findViewById(R.id.chart_layout);
 
                 convertView.setTag(holder);
@@ -273,6 +293,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                     chart = new PreviewLineChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
+                case MAP_CHART:
+                    chart = new PreviewLineChartView(getContext());
+                    holder.chartLayout.addView(chart);
+                    break;
+                case TABLE:
+                    chart = new PreviewLineChartView(getContext());
+                    holder.chartLayout.addView(chart);
+                    break;
                 default:
                     chart = null;
                     holder.chartLayout.setVisibility(View.GONE);
@@ -282,23 +310,23 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             if (null != chart) {
                 chart.setInteractive(false);// Disable touch handling for chart on the ListView.
             }
-            holder.text1.setText(item.name);
-            holder.text2.setText(item.type);
+            holder.name.setText(item.name);
+            holder.type.setText(item.type);
 
             return convertView;
         }
 
         private class ViewHolder {
 
-            TextView text1;
-            TextView text2;
+            TextView name;
+            TextView type;
             FrameLayout chartLayout;
         }
 
     }
 
     public enum ChartType {
-        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, OTHER
+        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE, OTHER
     }
 
     public static class ChartDescription {
