@@ -16,5 +16,13 @@ package deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
+import java.util.ArrayList;
+
 public interface LineChart {
+    public AxisModel getAxisX();
+    public AxisModel getAxisY();
+    public String getBackground();
+    public Boolean getViewFinder();
+    public Boolean getHorizontalGrid();
+    public Boolean getVerticalGrid();
 }

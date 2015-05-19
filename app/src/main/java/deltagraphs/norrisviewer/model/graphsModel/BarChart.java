@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
+import java.util.ArrayList;
+
 /*
  * Name : BarChart.java
  * Module : deltagraphs.norrisviewer.model.graphsModel
@@ -15,4 +17,12 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * ===============================================================
  *
  */public interface BarChart {
+    public AxisModel getAxisX();
+    public AxisModel getAxisY();
+    public ArrayList<String> getHeaders();
+    public String getBackground();
+    public String getBarOrientation();
+    public Boolean getSortable();
+    public String getType();
+    public Boolean getGrid();
 }

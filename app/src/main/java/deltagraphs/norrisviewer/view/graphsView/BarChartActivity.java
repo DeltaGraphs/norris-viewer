@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
@@ -73,4 +75,43 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     public void setInitialState(){
     }
 
+    @Override
+    public void setChartTitle(CharSequence title) {
+        setTitle(title);
+    }
+
+    @Override
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+
+    }
+
+    @Override
+    public void setHeaders(ArrayList<String> headers) {
+
+    }
+
+    @Override
+    public void setBackground(String bg) {
+
+    }
+
+    @Override
+    public void setBarOrientation(String orientation) {
+
+    }
+
+    @Override
+    public void setSortable(Boolean choise) {
+
+    }
+
+    @Override
+    public void setType(String type) {
+
+    }
+
+    @Override
+    public void setGrid(Boolean grid) {
+
+    }
 }

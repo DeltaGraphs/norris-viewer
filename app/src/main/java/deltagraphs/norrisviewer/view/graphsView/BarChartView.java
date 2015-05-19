@@ -18,5 +18,14 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  */
 
+import java.util.ArrayList;
+
 public interface BarChartView {
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale);
+    public void setHeaders(ArrayList<String> headers);
+    public void setBackground(String bg);
+    public void setBarOrientation(String orientation);
+    public void setSortable(Boolean choise);
+    public void setType(String type);
+    public void setGrid(Boolean grid);
 }

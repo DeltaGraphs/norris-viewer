@@ -37,8 +37,8 @@ public class LineChartImpl extends Graph {
 
     public void setViewFinder(Boolean choice) { this.viewFinder = choice; }
 
-    public AxisModel getxAxis() { return xAxis; }
-    public AxisModel getyAxis() { return yAxis; }
+    public AxisModel getAxisX() { return xAxis; }
+    public AxisModel getAxisY() { return yAxis; }
     public String getBackground() { return background; }
     public Boolean getViewFinder() { return viewFinder; }
     public Boolean getHorizontalGrid() { return horizontalGrid; }

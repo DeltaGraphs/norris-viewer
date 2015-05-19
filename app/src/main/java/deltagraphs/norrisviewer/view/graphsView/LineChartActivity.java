@@ -81,4 +81,28 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     }
 
+    @Override
+    public void setChartTitle(CharSequence title) {
+        setTitle(title);
+    }
+
+    @Override
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+
+    }
+
+    @Override
+    public void setViewFinder(Boolean withViewFinder) {
+
+    }
+
+    @Override
+    public void setBackground(String bg) {
+
+    }
+
+    @Override
+    public void setGrid(Boolean horizontal, Boolean vertical) {
+
+    }
 }

@@ -1,10 +1,12 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.graphsModel.BarChart;
+import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
+import lecho.lib.hellocharts.model.Axis;
 
 /*
  * Name : BarChartPresenterImpl.java
@@ -25,7 +27,7 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
 
         BarChartView graphView;
-        BarChart lineChartInstance;
+        BarChart barChartInstance;
 // PreviewLineChartView previewLineChartView;
 // LineChartData lineChartData=new LineChartData();
 
@@ -51,14 +53,35 @@ public void setUpViews(){
         }
 
 @Override
-public void update(Observable observable,Object data){
-       /* if(observable instanceof LineChartModel){
-            // in quanto potremmo avere piu modelli dati
-            // verifichiamo su quale modello � avvenuto un cambiamento dei dati
-            // prima di effettuare il cast
-            MyDataModel m=(MyDataModel)observable;
-            myChart.setLineChartData(m.getData());*/
-        }
+public void update(Observable observable,Object data) {
+    if (observable instanceof BarChartImpl) {
+        // in quanto potremmo avere piu modelli dati
+        // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
+        // prima di effettuare il cast
+        graphView.setAxis('x',
+                barChartInstance.getAxisX().getName(),
+                barChartInstance.getAxisX().getAppearance(),
+                barChartInstance.getAxisX().getMaxIndex(),
+                barChartInstance.getAxisX().getMinIndex(),
+                barChartInstance.getAxisX().getTicks(),
+                barChartInstance.getAxisX().getScale()
+        );
+        graphView.setAxis('y',
+                barChartInstance.getAxisY().getName(),
+                barChartInstance.getAxisY().getAppearance(),
+                barChartInstance.getAxisY().getMaxIndex(),
+                barChartInstance.getAxisY().getMinIndex(),
+                barChartInstance.getAxisY().getTicks(),
+                barChartInstance.getAxisY().getScale()
+        );
+        graphView.setHeaders(barChartInstance.getHeaders());
+        graphView.setBackground(barChartInstance.getBackground());
+        graphView.setBarOrientation(barChartInstance.getBarOrientation());
+        graphView.setSortable(barChartInstance.getSortable());
+        graphView.setType(barChartInstance.getType());
+        graphView.setGrid(barChartInstance.getGrid());
+    }
+}
 
 public void viewPointLegend(){
 

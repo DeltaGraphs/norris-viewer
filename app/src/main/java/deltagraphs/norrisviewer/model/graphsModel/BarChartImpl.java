@@ -38,9 +38,7 @@ public class BarChartImpl extends Graph{
     }
 
     @Override
-    public void setData(JSONObject data) {
-
-    }
+    public void setData(JSONObject data) {}
 
     @Override
     public void setParameters(JSONObject data) {}

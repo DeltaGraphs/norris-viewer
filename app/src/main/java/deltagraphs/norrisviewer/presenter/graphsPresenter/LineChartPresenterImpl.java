@@ -3,7 +3,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 import java.util.Observable;
 import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.graphsModel.LineChart;
+import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 /*
@@ -50,12 +50,31 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
     @Override
     public void update(Observable observable, Object data) {
-       /* if(observable instanceof LineChartModel){
+        if (observable instanceof LineChartImpl) {
             // in quanto potremmo avere piu modelli dati
             // verifichiamo su quale modello � avvenuto un cambiamento dei dati
             // prima di effettuare il cast
-            MyDataModel m=(MyDataModel)observable;
-            myChart.setLineChartData(m.getData());*/
+            graphView.setAxis('x',
+                    lineChartInstance.getAxisX().getName(),
+                    lineChartInstance.getAxisX().getAppearance(),
+                    lineChartInstance.getAxisX().getMaxIndex(),
+                    lineChartInstance.getAxisX().getMinIndex(),
+                    lineChartInstance.getAxisX().getTicks(),
+                    lineChartInstance.getAxisX().getScale()
+            );
+            graphView.setAxis('y',
+                    lineChartInstance.getAxisY().getName(),
+                    lineChartInstance.getAxisY().getAppearance(),
+                    lineChartInstance.getAxisY().getMaxIndex(),
+                    lineChartInstance.getAxisY().getMinIndex(),
+                    lineChartInstance.getAxisY().getTicks(),
+                    lineChartInstance.getAxisY().getScale()
+            );
+            graphView.setViewFinder(lineChartInstance.getViewFinder());
+            graphView.setBackground(lineChartInstance.getBackground());
+            graphView.setGrid(lineChartInstance.getHorizontalGrid(),lineChartInstance.getVerticalGrid());
+
+        }
     }
 
     public void viewPointLegend(){
