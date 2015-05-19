@@ -183,8 +183,9 @@ public class PageModelImpl extends Observable implements PageModel{
 
 <span class="nc" id="L184">    public String getName(){ return name; }</span>
 <span class="fc" id="L185">    public ArrayList&lt;Page&gt; getPageList(){ return pageList; }</span>
-<span class="nc" id="L186">    public int getPageListSize(){ return pageList.size(); }</span>
+<span class="fc" id="L186">    public int getPageListSize(){ return pageList.size(); }</span>
 <span class="nc" id="L187">    public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }</span>
 <span class="nc" id="L188">    public ArrayList&lt;PageItem&gt; getItemList(int page){ return pageList.get(page).getPageItemList(); }</span>
+<span class="nc" id="L189">    public Page getPage(int index){ return this.getPageList().get(index); }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
