@@ -38,8 +38,8 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 <span class="nc" id="L38">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
 <span class="nc" id="L39">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-<span class="nc" id="L41">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL, sourceTitle);</span>
-
+<span class="nc" id="L41">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L42">        setTitle(sourceTitle);</span>
 <span class="nc" id="L43">        setContentView(R.layout.bar_chart);</span>
 <span class="nc" id="L44">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
 <span class="nc" id="L45">    }</span>
@@ -73,9 +73,5 @@ import lecho.lib.hellocharts.view.ColumnChartView;
     public void setInitialState(){
 <span class="nc" id="L74">    }</span>
 
-    @Override
-    public void setChartTitle(CharSequence title) {
-<span class="nc" id="L78">        setTitle(title);</span>
-<span class="nc" id="L79">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

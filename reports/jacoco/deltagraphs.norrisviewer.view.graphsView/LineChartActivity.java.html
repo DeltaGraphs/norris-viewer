@@ -47,8 +47,8 @@ import lecho.lib.hellocharts.view.LineChartView;
 <span class="nc" id="L47">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
 <span class="nc" id="L48">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-
-<span class="nc" id="L51">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL, sourceTitle);</span>
+<span class="nc" id="L50">        setTitle(sourceTitle);</span>
+<span class="nc" id="L51">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
 <span class="nc" id="L52">    }</span>
 
     @Override
