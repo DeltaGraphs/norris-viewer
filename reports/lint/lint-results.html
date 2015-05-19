@@ -18,7 +18,7 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Tue May 19 09:48:48 UTC 2015.<br/>
+Check performed at Tue May 19 10:58:19 UTC 2015.<br/>
 1 errors and 26 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
@@ -302,8 +302,8 @@ Low density is not really used much anymore, so this check ignores the ldpi dens
 <span class="lineno">  16</span> 
 </pre>
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:24</span>: <span class="message">[I18N] Hardcoded string "TEXT2", should use <code>@string</code> resource</span><br /><pre class="errorlines">
-<span class="lineno">  21</span>         android:layout_alignLeft="@+id/text1"
-<span class="lineno">  22</span>         android:layout_below="@+id/text1"
+<span class="lineno">  21</span>         android:layout_alignLeft="@+id/name"
+<span class="lineno">  22</span>         android:layout_below="@+id/name"
 <span class="lineno">  23</span>         android:layout_toLeftOf="@id/chart_layout"
 <span class="lineno">  24</span>         <span class="errorspan">android:text="TEXT2"</span>
 <span class="lineno">  25</span>         android:textSize="12sp" />
@@ -400,7 +400,7 @@ If you specify padding or margin on the left side of a layout, you should probab
 <span class="lineno">  16</span>     &lt;View
 </pre>
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:11</span>: <span class="message">Consider adding <code>android:layout_alignParentStart="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
-<span class="lineno">   8</span>         android:id="@+id/text1"
+<span class="lineno">   8</span>         android:id="@+id/name"
 <span class="lineno">   9</span>         android:layout_width="wrap_content"
 <span class="lineno">  10</span>         android:layout_height="wrap_content"
 <span class="lineno">  11</span>         <span class="errorspan">android:layout_alignParentLeft="true"</span>
@@ -417,18 +417,18 @@ If you specify padding or margin on the left side of a layout, you should probab
 <span class="lineno">  14</span>         android:text="TEXT1"
 <span class="lineno">  15</span>         android:textSize="16sp" />
 </pre>
-<span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:21</span>: <span class="message">Consider adding <code>android:layout_alignStart="@+id/text1"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
-<span class="lineno">  18</span>         android:id="@+id/text2"
+<span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:21</span>: <span class="message">Consider adding <code>android:layout_alignStart="@+id/name"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  18</span>         android:id="@+id/type"
 <span class="lineno">  19</span>         android:layout_width="wrap_content"
 <span class="lineno">  20</span>         android:layout_height="wrap_content"
-<span class="lineno">  21</span>         <span class="errorspan">android:layout_alignLeft="@+id/text1"</span>
-<span class="lineno">  22</span>         android:layout_below="@+id/text1"
+<span class="lineno">  21</span>         <span class="errorspan">android:layout_alignLeft="@+id/name"</span>
+<span class="lineno">  22</span>         android:layout_below="@+id/name"
 <span class="lineno">  23</span>         android:layout_toLeftOf="@id/chart_layout"
 </pre>
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:23</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@id/chart_layout"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  20</span>         android:layout_height="wrap_content"
-<span class="lineno">  21</span>         android:layout_alignLeft="@+id/text1"
-<span class="lineno">  22</span>         android:layout_below="@+id/text1"
+<span class="lineno">  21</span>         android:layout_alignLeft="@+id/name"
+<span class="lineno">  22</span>         android:layout_below="@+id/name"
 <span class="lineno">  23</span>         <span class="errorspan">android:layout_toLeftOf="@id/chart_layout"</span>
 <span class="lineno">  24</span>         android:text="TEXT2"
 <span class="lineno">  25</span>         android:textSize="12sp" />
