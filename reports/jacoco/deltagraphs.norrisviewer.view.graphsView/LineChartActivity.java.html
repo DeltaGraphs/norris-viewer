@@ -31,21 +31,31 @@ import lecho.lib.hellocharts.view.LineChartView;
     private PreviewLineChartView previewChart;
     private LineChartData lineChartData;
 
+    private CharSequence sourceTitle;
+    private String sourceURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L36">        String url = &quot;&quot;;</span>
-<span class="nc" id="L37">        lineChartPresenter = new LineChartPresenterImpl(this, url);</span>
-<span class="nc" id="L38">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L39">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L40">        chart = (LineChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L41">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
-<span class="nc" id="L42">    }</span>
+
+<span class="nc" id="L40">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L41">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L42">        chart = (LineChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L43">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
+
+<span class="nc" id="L45">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L47">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L48">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+        }
+
+<span class="nc" id="L51">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL, sourceTitle);</span>
+<span class="nc" id="L52">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L47">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L48">        return true;</span>
+<span class="nc" id="L57">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L58">        return true;</span>
     }
 
     @Override
@@ -53,22 +63,27 @@ import lecho.lib.hellocharts.view.LineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L56">        int id = item.getItemId();</span>
+<span class="nc" id="L66">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L60">            return true;</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L70">            return true;</span>
         }
 
-<span class="nc" id="L63">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L73">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L78">    }</span>
 
     public void setInitialState(){
 
-<span class="nc" id="L72">    }</span>
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public void setChartTitle(CharSequence title) {
+<span class="nc" id="L86">        setTitle(title);</span>
+<span class="nc" id="L87">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

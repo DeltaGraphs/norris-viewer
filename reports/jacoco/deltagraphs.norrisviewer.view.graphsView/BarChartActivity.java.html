@@ -27,20 +27,28 @@ import lecho.lib.hellocharts.view.ColumnChartView;
     private ColumnChartView chart;
     private ColumnChartData barChartData;
 
+    private CharSequence sourceTitle;
+    private String sourceURL;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L32">        String url = &quot;&quot;;</span>
-<span class="nc" id="L33">        barChartPresenter = new BarChartPresenterImpl(this, url);</span>
-<span class="nc" id="L34">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L35">        setContentView(R.layout.bar_chart);</span>
-<span class="nc" id="L36">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L35">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L36">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L38">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L39">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+        }
+<span class="nc" id="L41">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL, sourceTitle);</span>
+
+<span class="nc" id="L43">        setContentView(R.layout.bar_chart);</span>
+<span class="nc" id="L44">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L45">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L42">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
-<span class="nc" id="L43">        return true;</span>
+<span class="nc" id="L50">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
+<span class="nc" id="L51">        return true;</span>
     }
 
     @Override
@@ -48,21 +56,26 @@ import lecho.lib.hellocharts.view.ColumnChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L51">        int id = item.getItemId();</span>
+<span class="nc" id="L59">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L55">            return true;</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L63">            return true;</span>
         }
 
-<span class="nc" id="L58">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L66">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L71">    }</span>
 
     public void setInitialState(){
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L74">    }</span>
+
+    @Override
+    public void setChartTitle(CharSequence title) {
+<span class="nc" id="L78">        setTitle(title);</span>
+<span class="nc" id="L79">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -30,12 +30,13 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 // LineChartData lineChartData=new LineChartData();
 
 
-public BarChartPresenterImpl(BarChartView view,String url){
-<span class="nc" id="L34">        super(url);</span>
+public BarChartPresenterImpl(BarChartView view,String url, CharSequence title){
+<span class="nc" id="L34">        super(url,title);</span>
 <span class="nc" id="L35">        graphView=view;</span>
+<span class="nc" id="L36">        graphView.setChartTitle(title);</span>
         //lineChartInstance = new LineChartImpl(jsonData);
-<span class="nc" id="L37">        this.setUpViews();</span>
-<span class="nc" id="L38">        }</span>
+<span class="nc" id="L38">        this.setUpViews();</span>
+<span class="nc" id="L39">        }</span>
 
 
 
@@ -48,7 +49,7 @@ public void setUpViews(){
         // zoom/scroll is unnecessary.
         previewLineChartView.setZoomEnabled(false);
         previewLineChartView.setScrollEnabled(false);*/
-<span class="nc" id="L51">        }</span>
+<span class="nc" id="L52">        }</span>
 
 @Override
 public void update(Observable observable,Object data){
@@ -58,10 +59,10 @@ public void update(Observable observable,Object data){
             // prima di effettuare il cast
             MyDataModel m=(MyDataModel)observable;
             myChart.setLineChartData(m.getData());*/
-<span class="nc" id="L61">        }</span>
+<span class="nc" id="L62">        }</span>
 
 public void viewPointLegend(){
 
-<span class="nc" id="L65">        }</span>
+<span class="nc" id="L66">        }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
