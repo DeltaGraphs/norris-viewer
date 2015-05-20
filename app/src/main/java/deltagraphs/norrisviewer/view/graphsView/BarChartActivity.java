@@ -25,13 +25,25 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 
 public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {
 
+    private static final int DEFAULT_DATA = 0;
+    private static final int SUBCOLUMNS_DATA = 1;
+    private static final int STACKED_DATA = 2;
+    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
+    private static final int NEGATIVE_STACKED_DATA = 4;
+
     private BarChartPresenter barChartPresenter;
 
     private ColumnChartView chart;
-    private ColumnChartData barChartData;
+    private ColumnChartData data;
 
     private String sourceTitle;
     private String sourceURL;
+
+    private boolean hasAxes = true;
+    private boolean hasAxesNames = true;
+    private boolean hasLabels = false;
+    private boolean hasLabelForSelected = false;
+    private int dataType = DEFAULT_DATA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +87,35 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     public void setInitialState(){
+        hasAxes = true;
+        hasAxesNames = true;
+        hasLabels = false;
+        hasLabelForSelected = false;
+        dataType = DEFAULT_DATA;
+        chart.setValueSelectionEnabled(hasLabelForSelected);
     }
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+        if (hasAxes) {
+            if(axisXorY == 'x') {
+                Axis axisX = new Axis();
+                if (hasAxesNames) {
+                    axisX.setName("Axis X");
+                }
+                data.setAxisXBottom(axisX);
+            }
+            if(axisXorY == 'x') {
+                Axis axisY = new Axis().setHasLines(true);
+                if (hasAxesNames) {
+                    axisY.setName("Axis Y");
+                }
+                data.setAxisYLeft(axisY);
+            }
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
 
     }
 
