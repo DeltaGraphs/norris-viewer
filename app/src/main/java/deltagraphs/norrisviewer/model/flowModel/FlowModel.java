@@ -21,39 +21,22 @@ package deltagraphs.norrisviewer.model.flowModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Objects;
+public abstract class FlowModel {
 
-public class FlowModel {
+    protected String flowId;
+    protected String flowName;
 
-    private String flowId;
-    private String flowName;
-    private String flowColour = "#FFFFFF"; //default
-    private ArrayList<Record> values = new ArrayList<Record>();
+    public abstract void addRecord(JSONObject data);
 
-
-    public FlowModel(JSONObject obj){
-        try {
-            flowId = obj.getString("ID");
-            flowName = obj.getString("name");
-            flowColour = obj.getString("color");
-        } catch (JSONException e) {}
-
-    }
-
-    public void addRecord(JSONObject data){
-        values.add(new BarChartRecord(data));
-    }
-
-    public void createRecord(JSONObject data){}
+    public void createFlow(JSONObject data){}
+    public void updateFlow(JSONObject data){}
+    public void deleteFlow(JSONObject data){}
     public void updateRecord(JSONObject data){}
     public void deleteRecord(JSONObject data){}
 
     public String getFlowName() { return flowName; }
-    public ArrayList<Record> getValues() { return values; }
     public String getFlowId() { return flowId; }
 
-    public interface Record{}
 
 }
 

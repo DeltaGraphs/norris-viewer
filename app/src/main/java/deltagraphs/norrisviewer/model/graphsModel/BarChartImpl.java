@@ -6,6 +6,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
+
 /*
  * Name : BarChartImpl.java
  * Module : deltagraphs.norrisviewer.model.graphsModel
@@ -65,7 +67,10 @@ public class BarChartImpl extends Graph{
            JSONArray jsonFlows = data.getJSONArray("flows");
            int flowLenght = jsonFlows.length();
            for(int i=0; i< flowLenght; i++){
-               addFlow(jsonFlows.getJSONObject(i));
+               String flowId = jsonFlows.getJSONObject(i).getString("ID");
+               String name = jsonFlows.getJSONObject(i).getString("name");
+               String color = jsonFlows.getJSONObject(i).getString("color");
+               addFlow(new BarChartFlow(flowId, name, color));
            }
 
 

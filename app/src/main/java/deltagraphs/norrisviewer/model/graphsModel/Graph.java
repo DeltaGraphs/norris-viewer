@@ -29,11 +29,11 @@ import java.util.*;
 
 
 public abstract class Graph extends Observable {
-    protected ArrayList<FlowModel> flowList;
+    protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
     private String title;
 
-    public void addFlow(JSONObject flow){
-        flowList.add(new FlowModel(flow));
+    public void addFlow(FlowModel flow){
+        flowList.add(flow);
     }
 
     public void addRecords(JSONObject record){
@@ -47,12 +47,7 @@ public abstract class Graph extends Observable {
             index ++;
         }
         if(index != -1) {
-
-
             // TO DO !!!
-            //ALERUTO!!! METODO TOSTO!!! Cambiare nome, id, filtri maybe, non so se anche i valori
-
-
         }//else eccezione
 
     }
