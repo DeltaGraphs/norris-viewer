@@ -18,11 +18,13 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class TableFlow implements FlowModel.Record {
+public class TableFlow extends FlowModel {
     private ArrayList<String> columnKeys;
     private ArrayList<String> columnFormat;
     private String fontColourKey;
@@ -30,5 +32,38 @@ public class TableFlow implements FlowModel.Record {
     private String BackgroundColourFormat;
     private int maxItems;
 
+    private ArrayList<Record> records;
+    public ArrayList<Record> getRecords() { return records; }
 
+
+
+    class Record{
+        private int index; // ID of bar
+        private int value; // value for that bar
+
+        public Record(int index, int value){
+
+        }
+
+        public void setIndex(int index) { this.index = index; }
+        public void setValue(int value) { this.value = value; }
+
+        public int getIndex() { return index; }
+        public int getValue() { return value; }
+
+    }
+
+    public TableFlow(String id, String name, String color) {
+
+    }
+
+    @Override
+    public void addRecord(JSONObject record){
+        try {
+            JSONArray jsonValues = record.getJSONArray("value");
+            int index = jsonValues.getInt(0);
+            int value = jsonValues.getInt(1);
+            records.add(new Record(index, value));
+        }catch (JSONException e) {}
+    }
 }
