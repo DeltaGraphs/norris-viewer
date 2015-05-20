@@ -31,9 +31,9 @@ public class MapChartImpl extends Observable implements MapChart {
     private Boolean zoom;
     private Boolean legendOnPoint;
 
-    MapChartImpl(JSONObject data){
-        // TO DO !!!
-    }
+    public MapChartImpl(){}
+
+    public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     public float getLatitude() { return latitude; }
     public float getLongitude() { return longitude; }

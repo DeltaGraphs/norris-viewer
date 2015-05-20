@@ -37,10 +37,9 @@ public class BarChartImpl extends Graph{
     private Boolean grid;
     private Boolean legendOnPoint;
 
-    public BarChartImpl(JSONObject data){
-        // TO DO
-    }
+    public BarChartImpl(){}
 
+    public void setBarChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     @Override
     public void setParameters(JSONObject data) {

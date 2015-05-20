@@ -32,9 +32,9 @@ public class LineChartImpl extends Graph {
     private Boolean verticalGrid;
     private Boolean legendOnPoint;
 
-    public LineChartImpl(JSONObject data){
-        // TO DO!!!
-    }
+    public LineChartImpl(){}
+
+    public void setLineChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     public void setViewFinder(Boolean choice) { this.viewFinder = choice; }
 

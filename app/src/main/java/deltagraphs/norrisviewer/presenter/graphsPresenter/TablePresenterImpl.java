@@ -28,8 +28,10 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     private Table tableInstance;
 
     public TablePresenterImpl(TableView view, String url) {
-        super(url, (TableActivity) view );
+        super(url);
         graphView = view;
+        tableInstance = (Table) new TableImpl();
+        startSocket((TableActivity) view, tableInstance);
         this.setUpViews();
     }
 

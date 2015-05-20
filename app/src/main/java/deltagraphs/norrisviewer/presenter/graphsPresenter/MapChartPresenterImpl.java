@@ -28,8 +28,10 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     private MapChart mapChartInstance;
 
     public MapChartPresenterImpl(MapChartView view, String url) {
-        super(url, (MapChartActivity) view);
+        super(url);
         graphView = view;
+        mapChartInstance = (MapChart) new MapChartImpl();
+        startSocket((MapChartActivity) view, mapChartInstance);
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
     }

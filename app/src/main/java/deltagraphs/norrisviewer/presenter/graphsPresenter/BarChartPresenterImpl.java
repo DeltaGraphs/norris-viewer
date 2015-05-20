@@ -32,9 +32,10 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 
 
 public BarChartPresenterImpl(BarChartView view,String url){
-    super(url, (BarChartActivity) view);
+    super(url);
     graphView=view;
-
+    barChartInstance = (BarChart) new BarChartImpl();
+    startSocket((BarChartActivity) view, barChartInstance);
     //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
         }

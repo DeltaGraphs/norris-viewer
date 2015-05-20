@@ -25,17 +25,22 @@ import deltagraphs.norrisviewer.presenter.SocketManager;
 public abstract class GraphPresenter {
     private SocketManager graphSocket;
 
-    public GraphPresenter(String url, Activity graphActivity){
+    public GraphPresenter(String url) {
         this.graphSocket = new SocketManager();
         graphSocket.setSocketUrl(url);
-        graphSocket.startConnection();
-        graphSocket.startListening("graphConfig", graphActivity);
-        graphSocket.startListening("updateGraphProp", graphActivity);
-        graphSocket.startListening("insertFlow", graphActivity);
-        graphSocket.startListening("deleteFlow", graphActivity);
-        graphSocket.startListening("updateFlowProp", graphActivity);
-        graphSocket.startListening("updateFlowData", graphActivity);
     }
+
+    public void startSocket( Activity graphActivity, Object graphModel){
+        graphSocket.startConnection();
+        graphSocket.startListening("graphConfig", graphActivity, graphModel);
+        graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
+        graphSocket.startListening("insertFlow", graphActivity, graphModel);
+        graphSocket.startListening("deleteFlow", graphActivity, graphModel);
+        graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
+        graphSocket.startListening("updateFlowData", graphActivity, graphModel);
+    }
+
+    public void stopSocket(){}
 
     public abstract void setUpViews();
 

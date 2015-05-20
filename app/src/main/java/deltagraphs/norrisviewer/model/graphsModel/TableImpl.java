@@ -32,9 +32,9 @@ public class TableImpl extends Observable implements Table {
     private Boolean sortable;
     private JSONObject sort;
 
-    TableImpl(JSONObject data){
-        // TO DO
-    }
+    public TableImpl(){}
+
+    public void setTableImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     public String getAppearance() { return appearance; }
     public ArrayList<String> getHeaders() { return headers; }

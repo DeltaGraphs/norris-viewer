@@ -29,8 +29,10 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     private LineChart lineChartInstance;
 
     public LineChartPresenterImpl(LineChartView view, String url) {
-        super(url, (LineChartActivity) view);
+        super(url);
         graphView = view;
+        lineChartInstance = (LineChart) new LineChartImpl();
+        startSocket((LineChartActivity) view, lineChartInstance);
         //lineChartInstance = new LineChartImpl(jsonData);
         this.setUpViews();
     }

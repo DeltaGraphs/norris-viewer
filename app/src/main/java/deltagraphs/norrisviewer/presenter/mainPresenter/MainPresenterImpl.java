@@ -106,11 +106,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mainSocket.setSocketUrl(input.getText().toString());
-                mainSocket.startListening("pageListConfig", (MainActivity) mainView);
-                mainSocket.startListening("insertPage", (MainActivity) mainView);
-                mainSocket.startListening("updatePage", (MainActivity) mainView);
-                mainSocket.startListening("insertGraph", (MainActivity) mainView);
-                mainSocket.startListening("updateGraph", (MainActivity) mainView);
+                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
 
             }
         });
