@@ -44,7 +44,7 @@ public class PageModelImplTest extends TestCase {
         assertEquals("", mPageModelImpl.getPageList().size(), mPageModelImpl.getPageListSize());
         System.out.println("Done!");
     }
-
+/*
     @org.junit.After
     public void testGetPage() throws Exception{
         page = mPageModelImpl.getPage(0);
@@ -58,7 +58,7 @@ public class PageModelImplTest extends TestCase {
         assertEquals("", mPageModelImpl.getPageList().get(0).getPageItemList().size(),  mPageModelImpl.getItemListSize(0));
         System.out.println("Done!");
     }
-/*
+
     @org.junit.Test
     public void testParser() throws Exception {
         JSONObject obj = new JSONObject();
