@@ -12,6 +12,9 @@ import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import deltagraphs.norrisviewer.model.pageModel.PageModel;
+import deltagraphs.norrisviewer.view.mainView.MainView;
+
 /*
  * Name : SocketManager.java
  * Module : norrisviewer::presenter
@@ -38,60 +41,63 @@ public class SocketManager{
     private String url;
 
     //Constructor
-<span class="nc" id="L41">    public SocketManager(){}</span>
+<span class="nc" id="L44">    public SocketManager(){}</span>
 
     //Constructor
-<span class="nc" id="L44">    public SocketManager(String url){</span>
-<span class="nc" id="L45">        setSocketUrl(url);</span>
-<span class="nc" id="L46">    }</span>
+<span class="nc" id="L47">    public SocketManager(String url){</span>
+<span class="nc" id="L48">        setSocketUrl(url);</span>
+<span class="nc" id="L49">    }</span>
 
     //setter method
     public void setSocketUrl(String url){
-<span class="nc" id="L50">        this.url = url;</span>
+<span class="nc" id="L53">        this.url = url;</span>
         try {
-<span class="nc" id="L52">            mSocket = IO.socket(url);</span>
-<span class="nc" id="L53">        } catch (URISyntaxException e) {}</span>
-<span class="nc" id="L54">    }</span>
+<span class="nc" id="L55">            mSocket = IO.socket(url);</span>
+<span class="nc" id="L56">        } catch (URISyntaxException e) {}</span>
+<span class="nc" id="L57">    }</span>
 
     //getter method
     public String getSocketUrl(){
-<span class="nc" id="L58">        return url;</span>
+<span class="nc" id="L61">        return url;</span>
     }
 
     //start the connection with socket
     public void startConnection(){
-<span class="nc" id="L63">        mSocket.connect();</span>
-<span class="nc" id="L64">    }</span>
+<span class="nc" id="L66">        mSocket.connect();</span>
+<span class="nc" id="L67">    }</span>
 
     //stop the connection with the socket
     public void stopConnection(){
-<span class="nc" id="L68">        mSocket.disconnect();</span>
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L71">        mSocket.disconnect();</span>
+<span class="nc" id="L72">    }</span>
 
     //close the connection with the socket
     public void closeSocket(){
-<span class="nc" id="L73">        mSocket.close();</span>
-<span class="nc" id="L74">    }</span>
+<span class="nc" id="L76">        mSocket.close();</span>
+<span class="nc" id="L77">    }</span>
 
-    public void startListening(String signal,final Activity activity){
+    public void startListening(final String signal,final Activity activity, final Object model){
 
-<span class="nc" id="L78">        mSocket.on(signal, new Emitter.Listener() {</span>
+<span class="nc" id="L81">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="nc" id="L81">                activity.runOnUiThread(new Runnable() {</span>
+<span class="nc" id="L84">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
-<span class="nc" id="L84">                        JSONObject obj = (JSONObject) args[0];</span>
-                        try {
-<span class="nc" id="L86">                            float x = (float) obj.getDouble(&quot;item&quot;);</span>
+<span class="nc" id="L87">                        JSONObject obj = (JSONObject) args[0];</span>
+                        //try {
+<span class="nc bnc" id="L89" title="All 2 branches missed.">                            if(activity instanceof MainView){</span>
+<span class="nc" id="L90">                                ((PageModel)model).setPageModel(obj, signal);</span>
+                            }
+                            //float x = (float) obj.getDouble(&quot;item&quot;);
                             //dataModel.setMyData((float) obj.getDouble(&quot;item&quot;));
-<span class="nc" id="L88">                        } catch (JSONException e) {</span>
-<span class="nc" id="L89">                            return;</span>
-<span class="nc" id="L90">                        }</span>
-<span class="nc" id="L91">                    }</span>
+                        //} catch (JSONException e) {
+                        //    return;
+                        //}
+<span class="nc" id="L97">                    }</span>
                 });
-<span class="nc" id="L93">            }</span>
+<span class="nc" id="L99">            }</span>
         });
-<span class="nc" id="L95">    }</span>
+<span class="nc" id="L101">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

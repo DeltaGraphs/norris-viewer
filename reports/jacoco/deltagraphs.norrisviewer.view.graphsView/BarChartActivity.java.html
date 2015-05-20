@@ -4,6 +4,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -22,35 +23,48 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.ColumnChartView;
 
-<span class="nc" id="L25">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
+<span class="nc" id="L26">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
+
+    private static final int DEFAULT_DATA = 0;
+    private static final int SUBCOLUMNS_DATA = 1;
+    private static final int STACKED_DATA = 2;
+    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
+    private static final int NEGATIVE_STACKED_DATA = 4;
 
     private BarChartPresenter barChartPresenter;
 
     private ColumnChartView chart;
-    private ColumnChartData barChartData;
+    private ColumnChartData data;
 
     private String sourceTitle;
     private String sourceURL;
 
+<span class="nc" id="L42">    private boolean hasAxes = true;</span>
+<span class="nc" id="L43">    private boolean hasAxesNames = true;</span>
+<span class="nc" id="L44">    private boolean hasLabels = false;</span>
+<span class="nc" id="L45">    private boolean hasLabelForSelected = false;</span>
+<span class="nc" id="L46">    private int dataType = DEFAULT_DATA;</span>
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L37">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L38">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc" id="L50">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L51">        Bundle extras = getIntent().getExtras();</span>
 
-<span class="nc" id="L40">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L41">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L53">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L54">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
 
-<span class="nc" id="L43">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L44">        setTitle(sourceTitle);</span>
-<span class="nc" id="L45">        setContentView(R.layout.bar_chart);</span>
-<span class="nc" id="L46">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L56">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L57">        setTitle(sourceTitle);</span>
+<span class="nc" id="L58">        setContentView(R.layout.bar_chart);</span>
+<span class="nc" id="L59">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L60">        chart.setOnValueTouchListener(new ValueTouchListener());</span>
+<span class="nc" id="L61">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L52">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
-<span class="nc" id="L53">        return true;</span>
+<span class="nc" id="L66">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
+<span class="nc" id="L67">        return true;</span>
     }
 
     @Override
@@ -58,56 +72,96 @@ import lecho.lib.hellocharts.view.ColumnChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L61">        int id = item.getItemId();</span>
+<span class="nc" id="L75">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L65">            return true;</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L79">            return true;</span>
         }
 
-<span class="nc" id="L68">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L82">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L87">    }</span>
 
     public void setInitialState(){
-<span class="nc" id="L76">    }</span>
+<span class="nc" id="L90">        hasAxes = true;</span>
+<span class="nc" id="L91">        hasAxesNames = true;</span>
+<span class="nc" id="L92">        hasLabels = false;</span>
+<span class="nc" id="L93">        hasLabelForSelected = false;</span>
+<span class="nc" id="L94">        dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L95">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
+<span class="nc" id="L96">    }</span>
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (hasAxes) {</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
+<span class="nc" id="L102">                Axis axisX = new Axis();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L104">                    axisX.setName(&quot;Axis X&quot;);</span>
+                }
+<span class="nc" id="L106">                data.setAxisXBottom(axisX);</span>
+            }
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
+<span class="nc" id="L109">                Axis axisY = new Axis().setHasLines(true);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L111">                    axisY.setName(&quot;Axis Y&quot;);</span>
+                }
+<span class="nc" id="L113">                data.setAxisYLeft(axisY);</span>
+<span class="nc" id="L114">            }</span>
+        } else {
+<span class="nc" id="L116">            data.setAxisXBottom(null);</span>
+<span class="nc" id="L117">            data.setAxisYLeft(null);</span>
+        }
 
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L120">    }</span>
 
     @Override
     public void setHeaders(ArrayList&lt;String&gt; headers) {
 
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L125">    }</span>
 
     @Override
     public void setBackground(String bg) {
 
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L130">    }</span>
 
     @Override
     public void setBarOrientation(String orientation) {
 
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L135">    }</span>
 
     @Override
     public void setSortable(Boolean choise) {
 
-<span class="nc" id="L101">    }</span>
-
-    @Override
-    public void setType(String type) {
-
-<span class="nc" id="L106">    }</span>
+<span class="nc" id="L140">    }</span>
 
     @Override
     public void setGrid(Boolean grid) {
 
-<span class="nc" id="L111">    }</span>
+<span class="nc" id="L145">    }</span>
+
+    @Override
+    public void setLegendOnPoint(Boolean legend) {
+
+<span class="nc" id="L150">    }</span>
+
+<span class="nc" id="L152">    private class ValueTouchListener implements ColumnChartOnValueSelectListener {</span>
+
+        @Override
+        public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
+            //Toast.makeText(getActivity(), &quot;Selected: &quot; + value, Toast.LENGTH_SHORT).show();
+<span class="nc" id="L157">        }</span>
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+
+<span class="nc" id="L163">        }</span>
+
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

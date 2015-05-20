@@ -32,9 +32,9 @@ public class TableImpl extends Observable implements Table {
     private Boolean sortable;
     private JSONObject sort;
 
-<span class="nc" id="L35">    TableImpl(JSONObject data){</span>
-        // TO DO
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L35">    public TableImpl(){}</span>
+
+<span class="nc" id="L37">    public void setTableImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
 
 <span class="nc" id="L39">    public String getAppearance() { return appearance; }</span>
 <span class="nc" id="L40">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
@@ -44,5 +44,9 @@ public class TableImpl extends Observable implements Table {
 
     //what???
 <span class="nc" id="L46">    public JSONObject getSort() { return sort; }</span>
+
+    private void JSONParser(JSONObject data, String signal){
+
+<span class="nc" id="L50">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

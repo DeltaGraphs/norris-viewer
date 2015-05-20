@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BarChartImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.model.graphsModel</a> &gt; <span class="el_source">BarChartImpl.java</span></div><h1>BarChartImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.model.graphsModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 
 /*
  * Name : BarChartImpl.java
@@ -30,27 +34,106 @@ public class BarChartImpl extends Graph{
     private String barOrientation;
     private String background;
     private Boolean sortable;
-    private String type;
     private Boolean grid;
+    private Boolean legendOnPoint;
 
-<span class="nc" id="L36">    public BarChartImpl(JSONObject data){</span>
-        // TO DO
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L40">    public BarChartImpl(){}</span>
 
-    @Override
-<span class="nc" id="L41">    public void setData(JSONObject data) {}</span>
+<span class="nc" id="L42">    public void setBarChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
 
     @Override
-<span class="nc" id="L44">    public void setParameters(JSONObject data) {}</span>
+    public void setParameters(JSONObject data) {
+       try {
+<span class="nc" id="L47">           setTitle(data.getString(&quot;title&quot;));</span>
+<span class="nc" id="L48">           background = data.getString(&quot;backgroundColor&quot;);</span>
+<span class="nc" id="L49">           barOrientation = data.getString(&quot;barOrientation&quot;);</span>
+<span class="nc" id="L50">           sortable = data.getBoolean(&quot;sortable&quot;);</span>
+<span class="nc" id="L51">           grid = data.getBoolean(&quot;grid&quot;);</span>
+<span class="nc" id="L52">           legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
+<span class="nc" id="L53">           JSONArray jsonHeaders = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="nc" id="L54">           int length = jsonHeaders.length();</span>
+<span class="nc bnc" id="L55" title="All 2 branches missed.">           if (length &gt; 0) {</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">               for (int i = 0; i &lt; length; i++) {</span>
+<span class="nc" id="L57">                   headers.add(jsonHeaders.getString(i));</span>
+               }
+           }
+           //changes to axises
+<span class="nc" id="L61">           JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="nc" id="L62">           axisX = new AxisModel(xAxis);</span>
+<span class="nc" id="L63">           JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="nc" id="L64">           axisY = new AxisModel(yAxis);</span>
+           //changes to flow params
+<span class="nc" id="L66">           JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="nc" id="L67">           int flowLenght = jsonFlows.length();</span>
+<span class="nc bnc" id="L68" title="All 2 branches missed.">           for(int i=0; i&lt; flowLenght; i++){</span>
+<span class="nc" id="L69">               String flowId = jsonFlows.getJSONObject(i).getString(&quot;ID&quot;);</span>
+<span class="nc" id="L70">               String name = jsonFlows.getJSONObject(i).getString(&quot;name&quot;);</span>
+<span class="nc" id="L71">               String color = jsonFlows.getJSONObject(i).getString(&quot;color&quot;);</span>
+<span class="nc" id="L72">               addFlow(new BarChartFlow(flowId, name, color));</span>
+           }
 
-<span class="nc" id="L46">    public AxisModel getAxisX() { return axisX; }</span>
-<span class="nc" id="L47">    public AxisModel getAxisY() { return axisY; }</span>
-<span class="nc" id="L48">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
-<span class="nc" id="L49">    public String getBackground() { return background; }</span>
-<span class="nc" id="L50">    public String getBarOrientation() { return barOrientation; }</span>
-<span class="nc" id="L51">    public Boolean getSortable() { return sortable; }</span>
-<span class="nc" id="L52">    public String getType() { return type; }</span>
-<span class="nc" id="L53">    public Boolean getGrid() { return grid; }</span>
+
+<span class="nc" id="L76">       }catch (JSONException e){}</span>
+<span class="nc" id="L77">    }</span>
+
+
+    @Override
+    public void setData(JSONObject record) {
+<span class="nc" id="L82">        String flowID = null;</span>
+        try {
+<span class="nc" id="L84">            flowID = record.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L85">        } catch (JSONException e) {</span>
+<span class="nc" id="L86">        }</span>
+
+<span class="nc" id="L88">        int index = -1;</span>
+<span class="nc bnc" id="L89" title="All 4 branches missed.">        while ((index &lt; flowList.size()) &amp;&amp; (flowList.get(index).getFlowId().equals(flowID))) {</span>
+<span class="nc" id="L90">            index++;</span>
+        }
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        if (index != -1) {</span>
+            try {
+<span class="nc" id="L94">                JSONArray jsonRecords = record.getJSONArray(&quot;records&quot;);</span>
+<span class="nc" id="L95">                int recordLength = jsonRecords.length();</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">                for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="nc" id="L97">                    flowList.get(index).addRecord(jsonRecords.getJSONObject(i));</span>
+                }
+<span class="nc" id="L99">            } catch (JSONException e) {</span>
+<span class="nc" id="L100">            }</span>
+        }
+<span class="nc" id="L102">    }</span>
+
+
+<span class="nc" id="L105">    public AxisModel getAxisX() { return axisX; }</span>
+<span class="nc" id="L106">    public AxisModel getAxisY() { return axisY; }</span>
+<span class="nc" id="L107">    public ArrayList&lt;String&gt; getHeaders() { return headers; }</span>
+<span class="nc" id="L108">    public String getBackground() { return background; }</span>
+<span class="nc" id="L109">    public String getBarOrientation() { return barOrientation; }</span>
+<span class="nc" id="L110">    public Boolean getSortable() { return sortable; }</span>
+<span class="nc" id="L111">    public Boolean getGrid() { return grid; }</span>
+<span class="nc" id="L112">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
+
+    private void JSONParser(JSONObject obj, String signal){
+        try{
+<span class="nc bnc" id="L116" title="All 9 branches missed.">            switch (signal){</span>
+                case &quot;configGraph&quot;:{
+<span class="nc" id="L118">                    JSONObject properties = obj.getJSONObject(&quot;properties&quot;);</span>
+<span class="nc" id="L119">                    setParameters(properties);</span>
+<span class="nc" id="L120">                    JSONObject data = obj.getJSONObject(&quot;data&quot;);</span>
+<span class="nc" id="L121">                    setData(data);</span>
+<span class="nc" id="L122">                    break;</span>
+                }
+                case &quot;updateGraphProp&quot;:{
+
+
+
+                    break;
+                }
+            }
+
+
+<span class="nc" id="L133">        }catch(JSONException e){</span>
+<span class="nc" id="L134">            return;</span>
+<span class="nc" id="L135">        }</span>
+<span class="nc" id="L136">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

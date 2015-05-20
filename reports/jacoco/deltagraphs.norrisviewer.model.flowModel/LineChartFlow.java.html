@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>LineChartFlow.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.model.flowModel</a> &gt; <span class="el_source">LineChartFlow.java</span></div><h1>LineChartFlow.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.model.flowModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.model.flowModel.*;
 
 /*
@@ -20,19 +26,51 @@ import deltagraphs.norrisviewer.model.flowModel.*;
  *
  */
 
-<span class="nc" id="L23">public class LineChartFlow implements FlowModel.Record{</span>
+public class LineChartFlow extends FlowModel{
 
     private String xKey;
     private String yKey;
     private String xFormat;
     private String yFormat;
     private String flowColour;
-    private String legendOnPoint;
     private String marker;
     private String interpolation;
     private String subAreaColour;
     private int maxItems;
+    private ArrayList&lt;Record&gt; records;
+<span class="nc" id="L41">    public ArrayList&lt;Record&gt; getRecords() { return records; }</span>
 
+
+
+    class Record{
+        private int index; // ID of bar
+        private int value; // value for that bar
+
+<span class="nc" id="L49">        public Record(int index, int value){</span>
+
+<span class="nc" id="L51">        }</span>
+
+<span class="nc" id="L53">        public void setIndex(int index) { this.index = index; }</span>
+<span class="nc" id="L54">        public void setValue(int value) { this.value = value; }</span>
+
+<span class="nc" id="L56">        public int getIndex() { return index; }</span>
+<span class="nc" id="L57">        public int getValue() { return value; }</span>
+
+    }
+
+<span class="nc" id="L61">    public LineChartFlow(String id, String name, String color) {</span>
+
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public void addRecord(JSONObject record){
+        try {
+<span class="nc" id="L68">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L69">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L70">            int value = jsonValues.getInt(1);</span>
+<span class="nc" id="L71">            records.add(new Record(index, value));</span>
+<span class="nc" id="L72">        }catch (JSONException e) {}</span>
+<span class="nc" id="L73">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

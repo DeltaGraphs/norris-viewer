@@ -20,19 +20,54 @@
  *
  */
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-<span class="nc" id="L25">public class MapChartFlow implements FlowModel.Record {</span>
+import java.util.ArrayList;
+
+public class MapChartFlow extends FlowModel {
 
     private String longitudeKey;
     private String latitudeKey;
     private String longitudeFormat;
     private String latitudeFormat;
-    private String legendOnPoint;
     private String marker;
     private int maxItems;
     private String trace;
+    private ArrayList&lt;Record&gt; records;
+<span class="nc" id="L39">    public ArrayList&lt;Record&gt; getRecords() { return records; }</span>
 
+
+
+    class Record{
+        private int index; // ID of bar
+        private int value; // value for that bar
+
+<span class="nc" id="L47">        public Record(int index, int value){</span>
+<span class="nc" id="L48">        }</span>
+
+<span class="nc" id="L50">        public void setIndex(int index) { this.index = index; }</span>
+<span class="nc" id="L51">        public void setValue(int value) { this.value = value; }</span>
+
+<span class="nc" id="L53">        public int getIndex() { return index; }</span>
+<span class="nc" id="L54">        public int getValue() { return value; }</span>
+
+    }
+
+<span class="nc" id="L58">    public MapChartFlow(String id, String name, String color) {</span>
+
+<span class="nc" id="L60">    }</span>
+
+    @Override
+    public void addRecord(JSONObject record){
+        try {
+<span class="nc" id="L65">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L66">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L67">            int value = jsonValues.getInt(1);</span>
+<span class="nc" id="L68">            records.add(new Record(index, value));</span>
+<span class="nc" id="L69">        }catch (JSONException e) {}</span>
+<span class="nc" id="L70">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

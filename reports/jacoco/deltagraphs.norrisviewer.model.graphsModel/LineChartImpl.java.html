@@ -30,29 +30,34 @@ public class LineChartImpl extends Graph {
     private Boolean viewFinder;
     private Boolean horizontalGrid;
     private Boolean verticalGrid;
+    private Boolean legendOnPoint;
 
-<span class="nc" id="L34">    public LineChartImpl(JSONObject data){</span>
-        // TO DO!!!
-<span class="nc" id="L36">    }</span>
+<span class="nc" id="L35">    public LineChartImpl(){}</span>
 
-<span class="nc" id="L38">    public void setViewFinder(Boolean choice) { this.viewFinder = choice; }</span>
+<span class="nc" id="L37">    public void setLineChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
 
-<span class="nc" id="L40">    public AxisModel getAxisX() { return xAxis; }</span>
-<span class="nc" id="L41">    public AxisModel getAxisY() { return yAxis; }</span>
-<span class="nc" id="L42">    public String getBackground() { return background; }</span>
-<span class="nc" id="L43">    public Boolean getViewFinder() { return viewFinder; }</span>
-<span class="nc" id="L44">    public Boolean getHorizontalGrid() { return horizontalGrid; }</span>
-<span class="nc" id="L45">    public Boolean getVerticalGrid() { return verticalGrid; }</span>
+<span class="nc" id="L39">    public void setViewFinder(Boolean choice) { this.viewFinder = choice; }</span>
 
+<span class="nc" id="L41">    public AxisModel getAxisX() { return xAxis; }</span>
+<span class="nc" id="L42">    public AxisModel getAxisY() { return yAxis; }</span>
+<span class="nc" id="L43">    public String getBackground() { return background; }</span>
+<span class="nc" id="L44">    public Boolean getViewFinder() { return viewFinder; }</span>
+<span class="nc" id="L45">    public Boolean getHorizontalGrid() { return horizontalGrid; }</span>
+<span class="nc" id="L46">    public Boolean getVerticalGrid() { return verticalGrid; }</span>
+<span class="nc" id="L47">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
 
     @Override
     public void setData(JSONObject data) {
 
-<span class="nc" id="L51">    }</span>
+<span class="nc" id="L52">    }</span>
 
     @Override
     public void setParameters(JSONObject data) {
 
-<span class="nc" id="L56">    }</span>
+<span class="nc" id="L57">    }</span>
+
+    private void JSONParser(JSONObject data, String signal){
+
+<span class="nc" id="L61">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

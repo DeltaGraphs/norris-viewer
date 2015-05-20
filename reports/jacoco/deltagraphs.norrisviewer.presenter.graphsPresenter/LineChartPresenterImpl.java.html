@@ -4,6 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 /*
@@ -24,15 +25,14 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter, Observer{
 
-    LineChartView graphView;
-    LineChart lineChartInstance;
-   // PreviewLineChartView previewLineChartView;
-   // LineChartData lineChartData=new LineChartData();
-
+    private LineChartView graphView;
+    private LineChart lineChartInstance;
 
     public LineChartPresenterImpl(LineChartView view, String url) {
-<span class="nc" id="L34">        super(url);</span>
-<span class="nc" id="L35">        graphView = view;</span>
+<span class="nc" id="L32">        super(url);</span>
+<span class="nc" id="L33">        graphView = view;</span>
+<span class="nc" id="L34">        lineChartInstance = (LineChart) new LineChartImpl();</span>
+<span class="nc" id="L35">        startSocket((LineChartActivity) view, lineChartInstance);</span>
         //lineChartInstance = new LineChartImpl(jsonData);
 <span class="nc" id="L37">        this.setUpViews();</span>
 <span class="nc" id="L38">    }</span>
@@ -72,8 +72,8 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
             );
 <span class="nc" id="L73">            graphView.setViewFinder(lineChartInstance.getViewFinder());</span>
 <span class="nc" id="L74">            graphView.setBackground(lineChartInstance.getBackground());</span>
-<span class="nc" id="L75">            graphView.setGrid(lineChartInstance.getHorizontalGrid(),lineChartInstance.getVerticalGrid());</span>
-
+<span class="nc" id="L75">            graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
+<span class="nc" id="L76">            graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());</span>
         }
 <span class="nc" id="L78">    }</span>
 

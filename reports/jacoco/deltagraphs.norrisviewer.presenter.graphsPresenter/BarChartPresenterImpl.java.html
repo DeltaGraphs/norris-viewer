@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import lecho.lib.hellocharts.model.Axis;
 
@@ -26,18 +27,18 @@ import lecho.lib.hellocharts.model.Axis;
 
 public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
 
-        BarChartView graphView;
-        BarChart barChartInstance;
-// PreviewLineChartView previewLineChartView;
-// LineChartData lineChartData=new LineChartData();
+        private BarChartView graphView;
+        private BarChart barChartInstance;
 
 
 public BarChartPresenterImpl(BarChartView view,String url){
-<span class="nc" id="L36">        super(url);</span>
-<span class="nc" id="L37">        graphView=view;</span>
-        //lineChartInstance = new LineChartImpl(jsonData);
-<span class="nc" id="L39">        this.setUpViews();</span>
-<span class="nc" id="L40">        }</span>
+<span class="nc" id="L35">    super(url);</span>
+<span class="nc" id="L36">    graphView=view;</span>
+<span class="nc" id="L37">    barChartInstance = (BarChart) new BarChartImpl();</span>
+<span class="nc" id="L38">    startSocket((BarChartActivity) view, barChartInstance);</span>
+    //lineChartInstance = new LineChartImpl(jsonData);
+<span class="nc" id="L40">        this.setUpViews();</span>
+<span class="nc" id="L41">        }</span>
 
 
 
@@ -50,15 +51,15 @@ public void setUpViews(){
         // zoom/scroll is unnecessary.
         previewLineChartView.setZoomEnabled(false);
         previewLineChartView.setScrollEnabled(false);*/
-<span class="nc" id="L53">        }</span>
+<span class="nc" id="L54">        }</span>
 
 @Override
 public void update(Observable observable,Object data) {
-<span class="nc bnc" id="L57" title="All 2 branches missed.">    if (observable instanceof BarChartImpl) {</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">    if (observable instanceof BarChartImpl) {</span>
         // in quanto potremmo avere piu modelli dati
         // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
         // prima di effettuare il cast
-<span class="nc" id="L61">        graphView.setAxis('x',</span>
+<span class="nc" id="L62">        graphView.setAxis('x',</span>
                 barChartInstance.getAxisX().getName(),
                 barChartInstance.getAxisX().getAppearance(),
                 barChartInstance.getAxisX().getMaxIndex(),
@@ -66,7 +67,7 @@ public void update(Observable observable,Object data) {
                 barChartInstance.getAxisX().getTicks(),
                 barChartInstance.getAxisX().getScale()
         );
-<span class="nc" id="L69">        graphView.setAxis('y',</span>
+<span class="nc" id="L70">        graphView.setAxis('y',</span>
                 barChartInstance.getAxisY().getName(),
                 barChartInstance.getAxisY().getAppearance(),
                 barChartInstance.getAxisY().getMaxIndex(),
@@ -74,17 +75,17 @@ public void update(Observable observable,Object data) {
                 barChartInstance.getAxisY().getTicks(),
                 barChartInstance.getAxisY().getScale()
         );
-<span class="nc" id="L77">        graphView.setHeaders(barChartInstance.getHeaders());</span>
-<span class="nc" id="L78">        graphView.setBackground(barChartInstance.getBackground());</span>
-<span class="nc" id="L79">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
-<span class="nc" id="L80">        graphView.setSortable(barChartInstance.getSortable());</span>
-<span class="nc" id="L81">        graphView.setType(barChartInstance.getType());</span>
+<span class="nc" id="L78">        graphView.setHeaders(barChartInstance.getHeaders());</span>
+<span class="nc" id="L79">        graphView.setBackground(barChartInstance.getBackground());</span>
+<span class="nc" id="L80">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
+<span class="nc" id="L81">        graphView.setSortable(barChartInstance.getSortable());</span>
 <span class="nc" id="L82">        graphView.setGrid(barChartInstance.getGrid());</span>
+<span class="nc" id="L83">        graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());</span>
     }
-<span class="nc" id="L84">}</span>
+<span class="nc" id="L85">}</span>
 
 public void viewPointLegend(){
 
-<span class="nc" id="L88">        }</span>
+<span class="nc" id="L89">        }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

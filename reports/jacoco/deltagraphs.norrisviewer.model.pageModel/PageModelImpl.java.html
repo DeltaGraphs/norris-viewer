@@ -28,12 +28,12 @@ public class PageModelImpl extends Observable implements PageModel{
 
 
     private String name;
-<span class="pc" id="L31">    private ArrayList&lt;Page&gt; pageList = new ArrayList&lt;Page&gt;();</span>
+<span class="fc" id="L31">    private ArrayList&lt;Page&gt; pageList = new ArrayList&lt;Page&gt;();</span>
 
 <span class="fc" id="L33">    public PageModelImpl(){}</span>
 
-<span class="nc" id="L35">    public PageModelImpl(JSONObject data){</span>
-        // insert roba XD
+    public void setPageModel(JSONObject data, String signal){
+<span class="nc" id="L36">        JSONParser(data,signal);</span>
 <span class="nc" id="L37">    }</span>
 
     //this method inserts a page

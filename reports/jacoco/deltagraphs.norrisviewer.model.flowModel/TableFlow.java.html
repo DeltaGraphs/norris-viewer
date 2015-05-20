@@ -18,11 +18,13 @@
  *
  */
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-<span class="nc" id="L25">public class TableFlow implements FlowModel.Record {</span>
+public class TableFlow extends FlowModel {
     private ArrayList&lt;String&gt; columnKeys;
     private ArrayList&lt;String&gt; columnFormat;
     private String fontColourKey;
@@ -30,6 +32,39 @@ import java.util.ArrayList;
     private String BackgroundColourFormat;
     private int maxItems;
 
+    private ArrayList&lt;Record&gt; records;
+<span class="nc" id="L36">    public ArrayList&lt;Record&gt; getRecords() { return records; }</span>
 
+
+
+    class Record{
+        private int index; // ID of bar
+        private int value; // value for that bar
+
+<span class="nc" id="L44">        public Record(int index, int value){</span>
+
+<span class="nc" id="L46">        }</span>
+
+<span class="nc" id="L48">        public void setIndex(int index) { this.index = index; }</span>
+<span class="nc" id="L49">        public void setValue(int value) { this.value = value; }</span>
+
+<span class="nc" id="L51">        public int getIndex() { return index; }</span>
+<span class="nc" id="L52">        public int getValue() { return value; }</span>
+
+    }
+
+<span class="nc" id="L56">    public TableFlow(String id, String name, String color) {</span>
+
+<span class="nc" id="L58">    }</span>
+
+    @Override
+    public void addRecord(JSONObject record){
+        try {
+<span class="nc" id="L63">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L64">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L65">            int value = jsonValues.getInt(1);</span>
+<span class="nc" id="L66">            records.add(new Record(index, value));</span>
+<span class="nc" id="L67">        }catch (JSONException e) {}</span>
+<span class="nc" id="L68">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

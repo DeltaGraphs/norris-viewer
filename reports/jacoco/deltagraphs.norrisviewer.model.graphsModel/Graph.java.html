@@ -21,48 +21,53 @@
 import java.util.Observable;
 import deltagraphs.norrisviewer.model.flowModel.*;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.*;
 
 
-<span class="nc" id="L29">public abstract class Graph extends Observable {</span>
-    private ArrayList&lt;FlowModel&gt; flowList;
+<span class="nc" id="L31">public abstract class Graph extends Observable {</span>
+<span class="nc" id="L32">    protected ArrayList&lt;FlowModel&gt; flowList = new ArrayList&lt;FlowModel&gt;();</span>
     private String title;
 
     public void addFlow(FlowModel flow){
-<span class="nc" id="L34">        flowList.add(flow);</span>
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L36">        flowList.add(flow);</span>
+<span class="nc" id="L37">    }</span>
 
-    public void updateFlow(String flowID){
-<span class="nc" id="L38">        int index = -1;</span>
-<span class="nc bnc" id="L39" title="All 4 branches missed.">        while ((index &lt; flowList.size()) &amp;&amp; (flowList.get(index).getFlowId().equals(flowID))){</span>
-<span class="nc" id="L40">            index ++;</span>
+    public void addRecords(JSONObject record){
+<span class="nc" id="L40">        String flowID = null;</span>
+        try {
+<span class="nc" id="L42">            flowID = record.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L43">        } catch (JSONException e) {}</span>
+
+<span class="nc" id="L45">        int index = -1;</span>
+<span class="nc bnc" id="L46" title="All 4 branches missed.">        while ((index &lt; flowList.size()) &amp;&amp; (flowList.get(index).getFlowId().equals(flowID))){</span>
+<span class="nc" id="L47">            index ++;</span>
         }
-<span class="nc bnc" id="L42" title="All 2 branches missed.">        if(index != -1) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if(index != -1) {</span>
             // TO DO !!!
-            //ALERUTO!!! METODO TOSTO!!! Cambiare nome, id, filtri maybe, non so se anche i valori
         }//else eccezione
 
-<span class="nc" id="L47">    }</span>
+<span class="nc" id="L53">    }</span>
 
     public void deleteFlow(String flowID){
-<span class="nc" id="L50">        int index = -1;</span>
-<span class="nc bnc" id="L51" title="All 4 branches missed.">        while ((index &lt; flowList.size()) &amp;&amp; (flowList.get(index).getFlowId().equals(flowID))){</span>
-<span class="nc" id="L52">            index ++;</span>
+<span class="nc" id="L56">        int index = -1;</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        while ((index &lt; flowList.size()) &amp;&amp; (flowList.get(index).getFlowId().equals(flowID))){</span>
+<span class="nc" id="L58">            index ++;</span>
         }
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        if(index != -1) {</span>
-<span class="nc" id="L55">            flowList.remove(index);</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">        if(index != -1) {</span>
+<span class="nc" id="L61">            flowList.remove(index);</span>
         }//else eccezione
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L63">    }</span>
 
     public abstract void setData(JSONObject data);
     public abstract void setParameters(JSONObject data);
 
-    private void JSONParser(JSONObject data, String signal){
-        // TO DO!!!
-<span class="nc" id="L64">    }</span>
 
-<span class="nc" id="L66">    public String getTitle() { return title; }</span>
+
+<span class="nc" id="L70">    public String getTitle() { return title; }</span>
+<span class="nc" id="L71">    public void setTitle(String title) { this.title = title; }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

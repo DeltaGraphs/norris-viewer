@@ -18,30 +18,25 @@
  *
  */
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Objects;
+<span class="nc" id="L24">public abstract class FlowModel {</span>
 
-<span class="nc" id="L26">public abstract class FlowModel {</span>
+    protected String flowId;
+    protected String flowName;
 
-    private String flowId;
-    private String flowName;
-<span class="nc" id="L30">    private ArrayList&lt;Record&gt; values = new ArrayList&lt;Record&gt;();</span>
+    public abstract void addRecord(JSONObject data);
 
-    public void addRecord(JSONObject data){
-        // TO DO!!!
-<span class="nc" id="L34">    }</span>
+<span class="nc" id="L31">    public void createFlow(JSONObject data){}</span>
+<span class="nc" id="L32">    public void updateFlow(JSONObject data){}</span>
+<span class="nc" id="L33">    public void deleteFlow(JSONObject data){}</span>
+<span class="nc" id="L34">    public void updateRecord(JSONObject data){}</span>
+<span class="nc" id="L35">    public void deleteRecord(JSONObject data){}</span>
 
-    public abstract void createRecord(JSONObject data);
-    public abstract void updateRecord(JSONObject data);
-    public abstract void deleteRecord(JSONObject data);
+<span class="nc" id="L37">    public String getFlowName() { return flowName; }</span>
+<span class="nc" id="L38">    public String getFlowId() { return flowId; }</span>
 
-<span class="nc" id="L40">    public String getFlowName() { return flowName; }</span>
-<span class="nc" id="L41">    public ArrayList&lt;Record&gt; getValues() { return values; }</span>
-<span class="nc" id="L42">    public String getFlowId() { return flowId; }</span>
-
-<span class="nc" id="L44">    public interface Record{}</span>
 
 }
 

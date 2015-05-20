@@ -29,15 +29,21 @@ public class MapChartImpl extends Observable implements MapChart {
     private int scale;
     private String mapType;
     private Boolean zoom;
+    private Boolean legendOnPoint;
 
-<span class="nc" id="L33">    MapChartImpl(JSONObject data){</span>
-        // TO DO !!!
-<span class="nc" id="L35">    }</span>
+<span class="nc" id="L34">    public MapChartImpl(){}</span>
 
-<span class="nc" id="L37">    public float getLatitude() { return latitude; }</span>
-<span class="nc" id="L38">    public float getLongitude() { return longitude; }</span>
-<span class="nc" id="L39">    public int getScale() { return scale; }</span>
-<span class="nc" id="L40">    public String getMapType() { return mapType; }</span>
-<span class="nc" id="L41">    public Boolean getZoom() { return zoom; }</span>
+<span class="nc" id="L36">    public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
+
+<span class="nc" id="L38">    public float getLatitude() { return latitude; }</span>
+<span class="nc" id="L39">    public float getLongitude() { return longitude; }</span>
+<span class="nc" id="L40">    public int getScale() { return scale; }</span>
+<span class="nc" id="L41">    public String getMapType() { return mapType; }</span>
+<span class="nc" id="L42">    public Boolean getZoom() { return zoom; }</span>
+<span class="nc" id="L43">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
+
+    private void JSONParser(JSONObject data, String signal){
+
+<span class="nc" id="L47">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
