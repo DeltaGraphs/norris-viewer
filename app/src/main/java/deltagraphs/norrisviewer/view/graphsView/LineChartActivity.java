@@ -23,16 +23,33 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {
 
+    private static final int DEFAULT_DATA = 0;
+    private static final int SUBCOLUMNS_DATA = 1;
+    private static final int STACKED_DATA = 2;
+    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
+    private static final int NEGATIVE_STACKED_DATA = 4;
+
+
     private LineChartPresenter lineChartPresenter;
 
     //line chart con view finder
 
     private LineChartView chart;
     private PreviewLineChartView previewChart;
-    private LineChartData lineChartData;
+    private LineChartData data;
 
     private String sourceTitle;
     private String sourceURL;
+
+    private boolean hasAxes = true;
+    private boolean hasAxesNames = true;
+    private boolean hasLabels = false;
+    private boolean hasLabelForSelected = false;
+    private boolean hasViewFinder = false;
+    private int dataType = DEFAULT_DATA;
+
+    private Axis axisX;
+    private Axis axisY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +95,45 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     }
 
     public void setInitialState(){
-
+        hasAxes = true;
+        hasAxesNames = true;
+        hasLabels = false;
+        hasLabelForSelected = false;
+        dataType = DEFAULT_DATA;
+        chart.setValueSelectionEnabled(hasLabelForSelected);
     }
 
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+        if (hasAxes) {
 
+            float step = (maxIndex-minIndex)/ticks;
+
+            if(axisXorY == 'x') {
+                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+                axisX.setHasLines(true);
+                if (hasAxesNames) {
+                    axisX.setName(name);
+                }
+
+                data.setAxisXBottom(axisX);
+            }
+            if(axisXorY == 'y') {
+                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+                axisY.setHasLines(true);
+                if (hasAxesNames) {
+                    axisY.setName(name);
+                }
+                data.setAxisYLeft(axisY);
+            }
+            // TODO: Insert the possibility to change the scale.
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
     }
+
 
     @Override
     public void setViewFinder(Boolean withViewFinder) {
@@ -99,7 +147,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
-
+        axisX.setHasSeparationLine(vertical);
+        axisY.setHasSeparationLine(horizontal);
     }
 
     @Override

@@ -7,10 +7,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
+import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
 import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -43,7 +45,11 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     private boolean hasAxesNames = true;
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
+    private boolean hasLegend = true;
     private int dataType = DEFAULT_DATA;
+
+    Axis axisY;
+    Axis axisX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,25 +104,31 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
         if (hasAxes) {
+
+            float step = (maxIndex-minIndex)/ticks;
+
             if(axisXorY == 'x') {
-                Axis axisX = new Axis();
+                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+                axisX.setHasLines(true);
                 if (hasAxesNames) {
-                    axisX.setName("Axis X");
+                    axisX.setName(name);
                 }
+
                 data.setAxisXBottom(axisX);
             }
-            if(axisXorY == 'x') {
-                Axis axisY = new Axis().setHasLines(true);
+            if(axisXorY == 'y') {
+                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+                axisY.setHasLines(true);
                 if (hasAxesNames) {
-                    axisY.setName("Axis Y");
+                    axisY.setName(name);
                 }
                 data.setAxisYLeft(axisY);
             }
+            // TODO: Insert the possibility to change the scale.
         } else {
             data.setAxisXBottom(null);
             data.setAxisYLeft(null);
         }
-
     }
 
     @Override
@@ -140,20 +152,23 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
     }
 
     @Override
-    public void setGrid(Boolean grid) {
-
+    public void setGrid(Boolean horizontal, Boolean vertical) {
+        axisX.setHasSeparationLine(vertical);
+        axisY.setHasSeparationLine(horizontal);
     }
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
-
+        hasLegend = legend;
     }
 
     private class ValueTouchListener implements ColumnChartOnValueSelectListener {
 
         @Override
         public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            //Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+            if(hasLegend) {
+                //Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
+            }
         }
 
         @Override
