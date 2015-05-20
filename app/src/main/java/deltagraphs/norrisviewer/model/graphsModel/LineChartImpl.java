@@ -22,7 +22,7 @@ import lecho.lib.hellocharts.model.Axis;
  *
  */
 
-public class LineChartImpl extends Graph {
+public class LineChartImpl extends Graph  implements LineChart{
 
     private AxisModel xAxis;
     private AxisModel yAxis;
@@ -32,7 +32,6 @@ public class LineChartImpl extends Graph {
     private Boolean verticalGrid;
     private Boolean legendOnPoint;
 
-    public LineChartImpl(){}
 
     public void setLineChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
@@ -52,7 +51,22 @@ public class LineChartImpl extends Graph {
     }
 
     @Override
+    public void updateData(JSONObject data) {
+
+    }
+
+    @Override
     public void setParameters(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateParameters(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateFlowProp(JSONObject data) {
 
     }
 

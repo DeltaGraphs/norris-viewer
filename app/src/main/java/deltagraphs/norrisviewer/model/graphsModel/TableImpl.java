@@ -32,7 +32,6 @@ public class TableImpl extends Observable implements Table {
     private Boolean sortable;
     private JSONObject sort;
 
-    public TableImpl(){}
 
     public void setTableImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 

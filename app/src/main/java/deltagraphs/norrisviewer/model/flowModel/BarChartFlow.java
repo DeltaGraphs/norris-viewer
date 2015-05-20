@@ -30,13 +30,16 @@ public class BarChartFlow extends FlowModel{
     private ArrayList<Record> records;
     public ArrayList<Record> getRecords() { return records; }
 
-
+    public String getFlowColour(){ return flowColour;}
+    public void setFlowColour(String colour){ flowColour = colour;}
 
     class Record{
+        private String recordId;
         private int index; // ID of bar
         private int value; // value for that bar
 
-        public Record(int index, int value){
+        public Record(String id, int index, int value){
+            this.recordId = id;
             this.index = index;
             this.value = value;
         }
@@ -46,7 +49,6 @@ public class BarChartFlow extends FlowModel{
 
         public int getIndex() { return index; }
         public int getValue() { return value; }
-
     }
 
     public BarChartFlow(String id, String name, String color) {
@@ -58,11 +60,21 @@ public class BarChartFlow extends FlowModel{
     @Override
     public void addRecord(JSONObject record){
         try {
+            String id = record.getString("norrisRecordID");
             JSONArray jsonValues = record.getJSONArray("value");
             int index = jsonValues.getInt(0);
             int value = jsonValues.getInt(1);
-            records.add(new Record(index, value));
+            records.add(new Record(id, index, value));
        }catch (JSONException e) {}
     }
 
+    @Override
+    public void updateRecord(JSONObject data) {
+
+    }
+
+    @Override
+    public void deleteRecord(JSONObject data) {
+
+    }
 }

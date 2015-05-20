@@ -22,7 +22,7 @@ import java.util.Observable;
  *
  */
 
-public class MapChartImpl extends Observable implements MapChart {
+public class MapChartImpl extends Graph implements MapChart {
 
     private float latitude;
     private float longitude;
@@ -31,7 +31,6 @@ public class MapChartImpl extends Observable implements MapChart {
     private Boolean zoom;
     private Boolean legendOnPoint;
 
-    public MapChartImpl(){}
 
     public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
@@ -43,6 +42,31 @@ public class MapChartImpl extends Observable implements MapChart {
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
     private void JSONParser(JSONObject data, String signal){
+
+    }
+
+    @Override
+    public void setData(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateData(JSONObject data) {
+
+    }
+
+    @Override
+    public void setParameters(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateParameters(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateFlowProp(JSONObject data) {
 
     }
 }

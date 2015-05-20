@@ -26,7 +26,7 @@ import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
  *
  */
 
-public class BarChartImpl extends Graph{
+public class BarChartImpl extends Graph implements BarChart{
 
     private AxisModel axisX;
     private AxisModel axisY;
@@ -37,14 +37,21 @@ public class BarChartImpl extends Graph{
     private Boolean grid;
     private Boolean legendOnPoint;
 
-    public BarChartImpl(){}
+    public AxisModel getAxisX() { return axisX; }
+    public AxisModel getAxisY() { return axisY; }
+    public ArrayList<String> getHeaders() { return headers; }
+    public String getBackground() { return background; }
+    public String getBarOrientation() { return barOrientation; }
+    public Boolean getSortable() { return sortable; }
+    public Boolean getGrid() { return grid; }
+    public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
     public void setBarChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     @Override
     public void setParameters(JSONObject data) {
        try {
-           setTitle(data.getString("title"));
+           title = data.getString("title");
            background = data.getString("backgroundColor");
            barOrientation = data.getString("barOrientation");
            sortable = data.getBoolean("sortable");
@@ -62,6 +69,7 @@ public class BarChartImpl extends Graph{
            axisX = new AxisModel(xAxis);
            JSONObject yAxis = data.getJSONObject("yAxis");
            axisY = new AxisModel(yAxis);
+
            //changes to flow params
            JSONArray jsonFlows = data.getJSONArray("flows");
            int flowLenght = jsonFlows.length();
@@ -69,11 +77,66 @@ public class BarChartImpl extends Graph{
                String flowId = jsonFlows.getJSONObject(i).getString("ID");
                String name = jsonFlows.getJSONObject(i).getString("name");
                String color = jsonFlows.getJSONObject(i).getString("color");
-               addFlow(new BarChartFlow(flowId, name, color));
+               flowList.add(new BarChartFlow(flowId, name, color));
            }
 
 
        }catch (JSONException e){}
+    }
+
+    @Override
+    public void updateParameters(JSONObject data) {
+        try {
+            if (data.has("title"))
+                title = data.getString("title");
+            if(data.has("backgroundColor"))
+                background = data.getString("backgroundColor");
+            if(data.has("barOrientation"))
+                barOrientation = data.getString("barOrientation");
+            if(data.has("sortable"))
+                sortable = data.getBoolean("sortable");
+            if(data.has("grid"))
+                grid = data.getBoolean("grid");
+            if(data.has("legendOnPoint"))
+                legendOnPoint = data.getBoolean("legendOnPoint");
+            if(data.has("headers")){
+            JSONArray jsonHeaders = data.getJSONArray("headers");
+            int length = jsonHeaders.length();
+            if (length > 0) {
+                for (int i = 0; i < length; i++) {
+                    headers.add(jsonHeaders.getString(i));
+                }
+                }
+            }
+            //changes to axises
+            if(data.has("xAxis")) {
+                JSONObject xAxis = data.getJSONObject("xAxis");
+                axisX = new AxisModel(xAxis);
+            }
+            if(data.has("yAxis")) {
+                JSONObject yAxis = data.getJSONObject("yAxis");
+                axisY = new AxisModel(yAxis);
+            }
+        }catch(Exception e){}
+    }
+
+    @Override
+    public void updateFlowProp(JSONObject data) {
+        int index = -1;
+        try {
+            String flowID = data.getString("ID");
+
+        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
+            index ++;
+        }
+        if(index != -1) {
+            String name = data.getString("name");
+            String colour = data.getString("color");
+            flowList.remove(index);
+            flowList.get(index).setFlowName(name);
+            ((BarChartFlow)flowList.get(index)).setFlowColour(colour);
+        }//else eccezione
+        } catch (JSONException e) {}
     }
 
 
@@ -101,15 +164,29 @@ public class BarChartImpl extends Graph{
         }
     }
 
+    @Override
+    public void updateData(JSONObject data) {
+        try {
+            String action = data.getString("action");
+            switch (action){
+                case "insertRecord": {
+                    break;
+                }
+                case "deleteRecord": {
+                    break;
+                }
+                case "updateRecord": {
+                    break;
+                }
+                case "filtersChanged": {
+                    break;
+                }
+            }
+        } catch (JSONException e) {}
 
-    public AxisModel getAxisX() { return axisX; }
-    public AxisModel getAxisY() { return axisY; }
-    public ArrayList<String> getHeaders() { return headers; }
-    public String getBackground() { return background; }
-    public String getBarOrientation() { return barOrientation; }
-    public Boolean getSortable() { return sortable; }
-    public Boolean getGrid() { return grid; }
-    public Boolean getLegendOnPoint(){ return legendOnPoint; }
+    }
+
+
 
     private void JSONParser(JSONObject obj, String signal){
         try{
@@ -121,11 +198,40 @@ public class BarChartImpl extends Graph{
                     setData(data);
                     break;
                 }
-                case "updateGraphProp":{
-
-
-
+                case "updateGraphProp": {
+                    updateParameters(obj);
                     break;
+                }
+                case "insertFlow": {
+                    JSONObject jsonFlowParam = obj.getJSONObject("flows");
+                    String flowId = jsonFlowParam.getString("ID");
+                    String name = jsonFlowParam.getString("name");
+                    String color = jsonFlowParam.getString("color");
+                    flowList.add(new BarChartFlow(flowId, name, color));
+                    setData(obj.getJSONObject("data"));
+                    break;
+                }
+                case "deleteFlow": {
+                    String id = obj.getString("ID");
+                    deleteFlow(id);
+                    break;
+                }
+                case "updateFlowProp": {
+                    //changes to flow params
+                    if (obj.has("flows")) {
+                        JSONArray jsonFlows = obj.getJSONArray("flows");
+                        int flowLenght = jsonFlows.length();
+                        for (int i = 0; i < flowLenght; i++) {
+                            String flowId = jsonFlows.getJSONObject(i).getString("ID");
+                            String name = jsonFlows.getJSONObject(i).getString("name");
+                            String color = jsonFlows.getJSONObject(i).getString("color");
+                            flowList.add(new BarChartFlow(flowId, name, color));
+                        }
+                    }
+                break;
+                }
+                case "updateFlowData": {
+                    updateData(obj);
                 }
             }
 

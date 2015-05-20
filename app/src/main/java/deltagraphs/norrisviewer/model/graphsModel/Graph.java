@@ -30,27 +30,10 @@ import java.util.*;
 
 public abstract class Graph extends Observable {
     protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
-    private String title;
+    protected String title;
 
-    public void addFlow(FlowModel flow){
-        flowList.add(flow);
-    }
+    public String getTitle() { return title; }
 
-    public void addRecords(JSONObject record){
-        String flowID = null;
-        try {
-            flowID = record.getString("ID");
-        } catch (JSONException e) {}
-
-        int index = -1;
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
-            index ++;
-        }
-        if(index != -1) {
-            // TO DO !!!
-        }//else eccezione
-
-    }
 
     public void deleteFlow(String flowID){
         int index = -1;
@@ -63,10 +46,9 @@ public abstract class Graph extends Observable {
     }
 
     public abstract void setData(JSONObject data);
+    public abstract void updateData(JSONObject data);
     public abstract void setParameters(JSONObject data);
+    public abstract void updateParameters(JSONObject data);
+    public abstract void updateFlowProp(JSONObject data);
 
-
-
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
 }
