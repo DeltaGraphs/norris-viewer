@@ -139,6 +139,14 @@ public class BarChartImpl extends Graph implements BarChart{
         } catch (JSONException e) {}
     }
 
+    // it searches the flow index in the list of flows
+    private int searchFlowIndex(String flowId){
+        int index = -1;
+        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowId))) {
+            index++;
+        }
+        return index;
+    }
 
     @Override
     public void setData(JSONObject record) {
@@ -148,19 +156,10 @@ public class BarChartImpl extends Graph implements BarChart{
         } catch (JSONException e) {
         }
 
-        int index = -1;
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))) {
-            index++;
-        }
+        int index = searchFlowIndex(flowID);
+
         if (index != -1) {
-            try {
-                JSONArray jsonRecords = record.getJSONArray("records");
-                int recordLength = jsonRecords.length();
-                for (int i = 0; i < recordLength; i++) {
-                    flowList.get(index).addRecord(jsonRecords.getJSONObject(i));
-                }
-            } catch (JSONException e) {
-            }
+            flowList.get(index).addRecords(record);
         }
     }
 
@@ -170,15 +169,28 @@ public class BarChartImpl extends Graph implements BarChart{
             String action = data.getString("action");
             switch (action){
                 case "insertRecord": {
+                    String id = data.getString("ID");
+                    int flowIndex = searchFlowIndex(id);
+                    flowList.get(flowIndex).addRecord(data);
                     break;
                 }
                 case "deleteRecord": {
+                    String id = data.getString("ID");
+                    int flowIndex = searchFlowIndex(id);
+                    flowList.get(flowIndex).deleteRecord(data);
                     break;
                 }
                 case "updateRecord": {
+                    String id = data.getString("ID");
+                    int flowIndex = searchFlowIndex(id);
+                    flowList.get(flowIndex).updateRecord(data);
                     break;
                 }
                 case "filtersChanged": {
+                    String id = data.getString("ID");
+                    int flowIndex = searchFlowIndex(id);
+                    flowList.get(flowIndex).deleteFlow();
+                    flowList.get(flowIndex).createFlow(data);
                     break;
                 }
             }

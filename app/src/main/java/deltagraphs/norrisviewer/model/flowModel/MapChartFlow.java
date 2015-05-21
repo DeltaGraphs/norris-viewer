@@ -60,6 +60,16 @@ public class MapChartFlow extends FlowModel {
     }
 
     @Override
+    public void createFlow(JSONObject data) {
+
+    }
+
+    @Override
+    public void deleteFlow() {
+
+    }
+
+    @Override
     public void addRecord(JSONObject record){
         try {
             JSONArray jsonValues = record.getJSONArray("value");
@@ -67,6 +77,21 @@ public class MapChartFlow extends FlowModel {
             int value = jsonValues.getInt(1);
             records.add(new Record(index, value));
         }catch (JSONException e) {}
+    }
+
+    @Override
+    public void addRecords(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateRecord(JSONObject data) {
+
+    }
+
+    @Override
+    public void deleteRecord(JSONObject data) {
+
     }
 
 }

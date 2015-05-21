@@ -58,23 +58,71 @@ public class BarChartFlow extends FlowModel{
     }
 
     @Override
-    public void addRecord(JSONObject record){
+    public void createFlow(JSONObject data) {
+        records = new ArrayList<Record>();
+        JSONObject recordList = null;
         try {
-            String id = record.getString("norrisRecordID");
-            JSONArray jsonValues = record.getJSONArray("value");
+            recordList = data.getJSONObject("records");
+        } catch (JSONException e) {}
+        addRecords(recordList);
+    }
+
+    @Override
+    public void deleteFlow() {
+        records = null;
+    }
+
+    @Override
+    public void addRecord(JSONObject data) {
+        String id = null;
+        try {
+            id = data.getString("norrisRecordID");
+            JSONArray jsonValues = data.getJSONArray("value");
             int index = jsonValues.getInt(0);
             int value = jsonValues.getInt(1);
             records.add(new Record(id, index, value));
+        } catch (JSONException e) {}
+    }
+
+    @Override
+    public void addRecords(JSONObject recordArray){
+        try {
+            JSONArray jsonRecords = recordArray.getJSONArray("records");
+            int recordLength = jsonRecords.length();
+            for (int i = 0; i < recordLength; i++) {
+                JSONObject record = jsonRecords.getJSONObject(i);
+                addRecord(record);
+            }
        }catch (JSONException e) {}
     }
 
     @Override
     public void updateRecord(JSONObject data) {
+        try {
+            String recordId = data.getString("norrisRecordID");
+            int recordIndex = searchRecordIndex(recordId);
+            JSONArray jsonValues = data.getJSONArray("value");
+            records.get(recordIndex).index = jsonValues.getInt(0);
+            records.get(recordIndex).value = jsonValues.getInt(1);
+        } catch (JSONException e) {}
+    }
 
+
+    // it searches the record index in the list of records
+    protected int searchRecordIndex(String id){
+        int index = -1;
+        while ((index < records.size()) && (records.get(index).recordId.equals(id))) {
+            index++;
+        }
+        return index;
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
-
+        try {
+            String recordId = data.getString("norrisRecordID");
+            int recordIndex = searchRecordIndex(recordId);
+            records.remove(recordIndex);
+        } catch (JSONException e) {}
     }
 }
