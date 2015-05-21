@@ -60,14 +60,44 @@ public class MapChartFlow extends FlowModel {
 <span class="nc" id="L60">    }</span>
 
     @Override
+    public void createFlow(JSONObject data) {
+
+<span class="nc" id="L65">    }</span>
+
+    @Override
+    public void updateFlow(JSONObject data) {
+
+<span class="nc" id="L70">    }</span>
+
+    @Override
+    public void deleteFlow() {
+
+<span class="nc" id="L75">    }</span>
+
+    @Override
     public void addRecord(JSONObject record){
         try {
-<span class="nc" id="L65">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L66">            int index = jsonValues.getInt(0);</span>
-<span class="nc" id="L67">            int value = jsonValues.getInt(1);</span>
-<span class="nc" id="L68">            records.add(new Record(index, value));</span>
-<span class="nc" id="L69">        }catch (JSONException e) {}</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L80">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L81">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L82">            int value = jsonValues.getInt(1);</span>
+<span class="nc" id="L83">            records.add(new Record(index, value));</span>
+<span class="nc" id="L84">        }catch (JSONException e) {}</span>
+<span class="nc" id="L85">    }</span>
+
+    @Override
+    public void addRecords(JSONObject data) {
+
+<span class="nc" id="L90">    }</span>
+
+    @Override
+    public void updateRecord(JSONObject data) {
+
+<span class="nc" id="L95">    }</span>
+
+    @Override
+    public void deleteRecord(JSONObject data) {
+
+<span class="nc" id="L100">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

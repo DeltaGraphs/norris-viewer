@@ -23,39 +23,56 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 <span class="nc" id="L24">public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {</span>
 
+    private static final int DEFAULT_DATA = 0;
+    private static final int SUBCOLUMNS_DATA = 1;
+    private static final int STACKED_DATA = 2;
+    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
+    private static final int NEGATIVE_STACKED_DATA = 4;
+
+
     private LineChartPresenter lineChartPresenter;
 
     //line chart con view finder
 
     private LineChartView chart;
     private PreviewLineChartView previewChart;
-    private LineChartData lineChartData;
+    private LineChartData data;
 
     private String sourceTitle;
     private String sourceURL;
 
+<span class="nc" id="L44">    private boolean hasAxes = true;</span>
+<span class="nc" id="L45">    private boolean hasAxesNames = true;</span>
+<span class="nc" id="L46">    private boolean hasLabels = false;</span>
+<span class="nc" id="L47">    private boolean hasLabelForSelected = false;</span>
+<span class="nc" id="L48">    private boolean hasViewFinder = false;</span>
+<span class="nc" id="L49">    private int dataType = DEFAULT_DATA;</span>
+
+    private Axis axisX;
+    private Axis axisY;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-<span class="nc" id="L40">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L41">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L42">        chart = (LineChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L43">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
+<span class="nc" id="L57">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L58">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L59">        chart = (LineChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L60">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
 
-<span class="nc" id="L45">        Bundle extras = getIntent().getExtras();</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (extras != null) {</span>
-<span class="nc" id="L47">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L48">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L62">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L64">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L65">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-<span class="nc" id="L50">        setTitle(sourceTitle);</span>
-<span class="nc" id="L51">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L67">        setTitle(sourceTitle);</span>
+<span class="nc" id="L68">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L69">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L57">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L58">        return true;</span>
+<span class="nc" id="L74">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L75">        return true;</span>
     }
 
     @Override
@@ -63,48 +80,80 @@ import lecho.lib.hellocharts.view.LineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L66">        int id = item.getItemId();</span>
+<span class="nc" id="L83">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L69" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L70">            return true;</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L87">            return true;</span>
         }
 
-<span class="nc" id="L73">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L90">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L95">    }</span>
 
     public void setInitialState(){
-
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L98">        hasAxes = true;</span>
+<span class="nc" id="L99">        hasAxesNames = true;</span>
+<span class="nc" id="L100">        hasLabels = false;</span>
+<span class="nc" id="L101">        hasLabelForSelected = false;</span>
+<span class="nc" id="L102">        dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L103">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
+<span class="nc" id="L104">    }</span>
 
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (hasAxes) {</span>
 
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L111">            float step = (maxIndex-minIndex)/ticks;</span>
+
+<span class="nc bnc" id="L113" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
+<span class="nc" id="L114">                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
+<span class="nc" id="L115">                axisX.setHasLines(true);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L117">                    axisX.setName(name);</span>
+                }
+
+<span class="nc" id="L120">                data.setAxisXBottom(axisX);</span>
+            }
+<span class="nc bnc" id="L122" title="All 2 branches missed.">            if(axisXorY == 'y') {</span>
+<span class="nc" id="L123">                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
+<span class="nc" id="L124">                axisY.setHasLines(true);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L126">                    axisY.setName(name);</span>
+                }
+<span class="nc" id="L128">                data.setAxisYLeft(axisY);</span>
+            }
+            // TODO: Insert the possibility to change the scale.
+<span class="nc" id="L131">        } else {</span>
+<span class="nc" id="L132">            data.setAxisXBottom(null);</span>
+<span class="nc" id="L133">            data.setAxisYLeft(null);</span>
+        }
+<span class="nc" id="L135">    }</span>
+
 
     @Override
     public void setViewFinder(Boolean withViewFinder) {
 
-<span class="nc" id="L93">    }</span>
+<span class="nc" id="L141">    }</span>
 
     @Override
     public void setBackground(String bg) {
 
-<span class="nc" id="L98">    }</span>
+<span class="nc" id="L146">    }</span>
 
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
-
-<span class="nc" id="L103">    }</span>
+<span class="nc" id="L150">        axisX.setHasSeparationLine(vertical);</span>
+<span class="nc" id="L151">        axisY.setHasSeparationLine(horizontal);</span>
+<span class="nc" id="L152">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
 
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L157">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

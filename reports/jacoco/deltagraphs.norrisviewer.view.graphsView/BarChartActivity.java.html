@@ -1,16 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BarChartActivity.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.view.graphsView</a> &gt; <span class="el_source">BarChartActivity.java</span></div><h1>BarChartActivity.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.view.graphsView;
 
+import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.Highlight;
+import com.github.mikephil.charting.utils.ValueFormatter;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
+import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
 import lecho.lib.hellocharts.model.*;
 import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -23,7 +41,8 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.ColumnChartView;
 
-<span class="nc" id="L26">public class BarChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.BarChartView {</span>
+<span class="nc" id="L44">public class BarChartActivity extends ActionBarActivity implements BarChartView, SeekBar.OnSeekBarChangeListener,</span>
+        OnChartValueSelectedListener {
 
     private static final int DEFAULT_DATA = 0;
     private static final int SUBCOLUMNS_DATA = 1;
@@ -31,40 +50,107 @@ import lecho.lib.hellocharts.view.ColumnChartView;
     private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
     private static final int NEGATIVE_STACKED_DATA = 4;
 
+<span class="nc" id="L53">    private String[] mMonths = {&quot;Gen&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;Mag&quot;,&quot;Giu&quot;,&quot;Lug&quot;,&quot;Ago&quot;,&quot;Set&quot;,&quot;Ott&quot;,&quot;Nov&quot;,&quot;Dic&quot;};</span>
+
     private BarChartPresenter barChartPresenter;
 
-    private ColumnChartView chart;
-    private ColumnChartData data;
+    protected BarChart mChart;
+    private SeekBar mSeekBarX, mSeekBarY;
+    private TextView tvX, tvY;
 
     private String sourceTitle;
     private String sourceURL;
 
-<span class="nc" id="L42">    private boolean hasAxes = true;</span>
-<span class="nc" id="L43">    private boolean hasAxesNames = true;</span>
-<span class="nc" id="L44">    private boolean hasLabels = false;</span>
-<span class="nc" id="L45">    private boolean hasLabelForSelected = false;</span>
-<span class="nc" id="L46">    private int dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L64">    private boolean hasAxes = true;</span>
+<span class="nc" id="L65">    private boolean hasAxesNames = true;</span>
+<span class="nc" id="L66">    private boolean hasLabels = false;</span>
+<span class="nc" id="L67">    private boolean hasLabelForSelected = false;</span>
+<span class="nc" id="L68">    private boolean hasLegend = true;</span>
+<span class="nc" id="L69">    private int dataType = DEFAULT_DATA;</span>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L50">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L51">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc" id="L73">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L74">        Bundle extras = getIntent().getExtras();</span>
+/*
+        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);
+        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);
 
-<span class="nc" id="L53">        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L54">        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        setTitle(sourceTitle);
+*/
+<span class="nc" id="L82">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+<span class="nc" id="L84">        setContentView(R.layout.activity_bar_chart);</span>
 
-<span class="nc" id="L56">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L57">        setTitle(sourceTitle);</span>
-<span class="nc" id="L58">        setContentView(R.layout.bar_chart);</span>
-<span class="nc" id="L59">        chart = (ColumnChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L60">        chart.setOnValueTouchListener(new ValueTouchListener());</span>
-<span class="nc" id="L61">    }</span>
+<span class="nc" id="L86">        tvX = (TextView) findViewById(R.id.tvXMax);</span>
+<span class="nc" id="L87">        tvY = (TextView) findViewById(R.id.tvYMax);</span>
+
+<span class="nc" id="L89">        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);</span>
+<span class="nc" id="L90">        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);</span>
+
+<span class="nc" id="L92">        mChart = (BarChart) findViewById(R.id.chart1);</span>
+<span class="nc" id="L93">        mChart.setOnChartValueSelectedListener(this);</span>
+
+<span class="nc" id="L95">        mChart.setDrawBarShadow(false);</span>
+<span class="nc" id="L96">        mChart.setDrawValueAboveBar(true);</span>
+
+<span class="nc" id="L98">        mChart.setDescription(&quot;&quot;);</span>
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+<span class="nc" id="L102">        mChart.setMaxVisibleValueCount(60);</span>
+
+        // scaling can now only be done on x- and y-axis separately
+<span class="nc" id="L105">        mChart.setPinchZoom(true);</span>
+
+        // draw shadows for each bar that show the maximum value
+        // mChart.setDrawBarShadow(true);
+
+        // mChart.setDrawXLabels(false);
+
+        // mChart.setDrawYLabels(false);
+
+<span class="nc" id="L114">        XAxis xAxis = mChart.getXAxis();</span>
+<span class="nc" id="L115">        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
+<span class="nc" id="L116">        xAxis.setDrawGridLines(false);</span>
+<span class="nc" id="L117">        xAxis.setSpaceBetweenLabels(2);</span>
+
+<span class="nc" id="L119">        YAxis leftAxis = mChart.getAxisLeft();</span>
+<span class="nc" id="L120">        leftAxis.setLabelCount(8);</span>
+<span class="nc" id="L121">        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);</span>
+<span class="nc" id="L122">        leftAxis.setSpaceTop(15f);</span>
+
+<span class="nc" id="L124">        YAxis rightAxis = mChart.getAxisRight();</span>
+<span class="nc" id="L125">        rightAxis.setDrawGridLines(false);</span>
+<span class="nc" id="L126">        rightAxis.setLabelCount(8);</span>
+<span class="nc" id="L127">        rightAxis.setSpaceTop(15f);</span>
+
+
+<span class="nc" id="L130">        Legend l = mChart.getLegend();</span>
+<span class="nc" id="L131">        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);</span>
+<span class="nc" id="L132">        l.setForm(Legend.LegendForm.SQUARE);</span>
+<span class="nc" id="L133">        l.setFormSize(9f);</span>
+<span class="nc" id="L134">        l.setTextSize(11f);</span>
+<span class="nc" id="L135">        l.setXEntrySpace(4f);</span>
+
+<span class="nc" id="L137">        setData(12, 50);</span>
+
+        // setting data
+<span class="nc" id="L140">        mSeekBarY.setProgress(50);</span>
+<span class="nc" id="L141">        mSeekBarX.setProgress(12);</span>
+
+<span class="nc" id="L143">        mSeekBarY.setOnSeekBarChangeListener(this);</span>
+<span class="nc" id="L144">        mSeekBarX.setOnSeekBarChangeListener(this);</span>
+
+        // mChart.setDrawLegend(false);
+<span class="nc" id="L147">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L66">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
-<span class="nc" id="L67">        return true;</span>
+<span class="nc" id="L152">        getMenuInflater().inflate(R.menu.menu_bar_chart, menu);</span>
+<span class="nc" id="L153">        return true;</span>
     }
 
     @Override
@@ -72,96 +158,115 @@ import lecho.lib.hellocharts.view.ColumnChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L75">        int id = item.getItemId();</span>
+<span class="nc" id="L161">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L79">            return true;</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L165">            return true;</span>
         }
 
-<span class="nc" id="L82">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L168">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L173">    }</span>
 
     public void setInitialState(){
-<span class="nc" id="L90">        hasAxes = true;</span>
-<span class="nc" id="L91">        hasAxesNames = true;</span>
-<span class="nc" id="L92">        hasLabels = false;</span>
-<span class="nc" id="L93">        hasLabelForSelected = false;</span>
-<span class="nc" id="L94">        dataType = DEFAULT_DATA;</span>
-<span class="nc" id="L95">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L176">        hasAxes = true;</span>
+<span class="nc" id="L177">        hasAxesNames = true;</span>
+<span class="nc" id="L178">        hasLabels = false;</span>
+<span class="nc" id="L179">        hasLabelForSelected = false;</span>
+<span class="nc" id="L180">        dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L181">    }</span>
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
-<span class="nc bnc" id="L100" title="All 2 branches missed.">        if (hasAxes) {</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
-<span class="nc" id="L102">                Axis axisX = new Axis();</span>
-<span class="nc bnc" id="L103" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L104">                    axisX.setName(&quot;Axis X&quot;);</span>
-                }
-<span class="nc" id="L106">                data.setAxisXBottom(axisX);</span>
-            }
-<span class="nc bnc" id="L108" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
-<span class="nc" id="L109">                Axis axisY = new Axis().setHasLines(true);</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L111">                    axisY.setName(&quot;Axis Y&quot;);</span>
-                }
-<span class="nc" id="L113">                data.setAxisYLeft(axisY);</span>
-<span class="nc" id="L114">            }</span>
-        } else {
-<span class="nc" id="L116">            data.setAxisXBottom(null);</span>
-<span class="nc" id="L117">            data.setAxisYLeft(null);</span>
-        }
 
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L186">    }</span>
 
     @Override
     public void setHeaders(ArrayList&lt;String&gt; headers) {
 
-<span class="nc" id="L125">    }</span>
+<span class="nc" id="L191">    }</span>
 
     @Override
     public void setBackground(String bg) {
 
-<span class="nc" id="L130">    }</span>
+<span class="nc" id="L196">    }</span>
 
     @Override
     public void setBarOrientation(String orientation) {
 
-<span class="nc" id="L135">    }</span>
+<span class="nc" id="L201">    }</span>
 
     @Override
     public void setSortable(Boolean choise) {
 
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L206">    }</span>
+
 
     @Override
-    public void setGrid(Boolean grid) {
-
-<span class="nc" id="L145">    }</span>
+    public void setGrid(Boolean hasGrid) {
+<span class="nc" id="L211">        mChart.setDrawGridBackground(hasGrid);</span>
+<span class="nc" id="L212">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
+<span class="nc" id="L216">        hasLegend = legend;</span>
+<span class="nc" id="L217">    }</span>
 
-<span class="nc" id="L150">    }</span>
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
 
-<span class="nc" id="L152">    private class ValueTouchListener implements ColumnChartOnValueSelectListener {</span>
+<span class="nc" id="L222">    }</span>
 
-        @Override
-        public void onValueSelected(int columnIndex, int subcolumnIndex, SubcolumnValue value) {
-            //Toast.makeText(getActivity(), &quot;Selected: &quot; + value, Toast.LENGTH_SHORT).show();
-<span class="nc" id="L157">        }</span>
+    @Override
+    public void onNothingSelected() {
 
-        @Override
-        public void onValueDeselected() {
-            // TODO Auto-generated method stub
+<span class="nc" id="L227">    }</span>
 
-<span class="nc" id="L163">        }</span>
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-    }
+<span class="nc" id="L232">    }</span>
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+<span class="nc" id="L237">    }</span>
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+<span class="nc" id="L242">    }</span>
+
+    private void setData(int count, float range) {
+
+<span class="nc" id="L246">        ArrayList&lt;String&gt; xVals = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L247" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L248">            xVals.add(mMonths[i % 12]);</span>
+        }
+
+<span class="nc" id="L251">        ArrayList&lt;BarEntry&gt; yVals1 = new ArrayList&lt;BarEntry&gt;();</span>
+
+<span class="nc bnc" id="L253" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L254">            float mult = (range + 1);</span>
+<span class="nc" id="L255">            float val = (float) (Math.random() * -mult);</span>
+<span class="nc" id="L256">            yVals1.add(new BarEntry(val, i));</span>
+        }
+
+<span class="nc" id="L259">        BarDataSet set1 = new BarDataSet(yVals1, &quot;DataSet&quot;);</span>
+<span class="nc" id="L260">        set1.setBarSpacePercent(35f);</span>
+
+<span class="nc" id="L262">        ArrayList&lt;BarDataSet&gt; dataSets = new ArrayList&lt;BarDataSet&gt;();</span>
+<span class="nc" id="L263">        dataSets.add(set1);</span>
+
+<span class="nc" id="L265">        BarData data = new BarData(xVals, dataSets);</span>
+//        data.setValueFormatter(new MyValueFormatter());
+<span class="nc" id="L267">        data.setValueTextSize(10f);</span>
+
+<span class="nc" id="L269">        mChart.setData(data);</span>
+<span class="nc" id="L270">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

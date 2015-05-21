@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>HorizontalBarChartActivity.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.view.graphsView</a> &gt; <span class="el_source">HorizontalBarChartActivity.java</span></div><h1>HorizontalBarChartActivity.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.view.graphsView;
+
+import android.graphics.Typeface;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.WindowManager;
+import android.widget.SeekBar;
+import android.widget.TextView;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.Highlight;
+import com.github.mikephil.charting.utils.ValueFormatter;
+
+import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.R;
+
+<span class="nc" id="L29">public class HorizontalBarChartActivity extends ActionBarActivity implements BarChartView,SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {</span>
+
+    protected HorizontalBarChart mChart;
+    private SeekBar mSeekBarX, mSeekBarY;
+    private TextView tvX, tvY;
+
+<span class="nc" id="L35">    private String[] mMonths = {&quot;Gen&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;Mag&quot;,&quot;Giu&quot;,&quot;Lug&quot;,&quot;Ago&quot;,&quot;Set&quot;,&quot;Ott&quot;,&quot;Nov&quot;,&quot;Dic&quot;};</span>
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L39">        super.onCreate(savedInstanceState);</span>
+
+<span class="nc" id="L41">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+<span class="nc" id="L44">        setContentView(R.layout.activity_horizontal_bar_chart);</span>
+
+
+<span class="nc" id="L47">        tvX = (TextView) findViewById(R.id.tvXMax);</span>
+<span class="nc" id="L48">        tvY = (TextView) findViewById(R.id.tvYMax);</span>
+
+<span class="nc" id="L50">        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);</span>
+<span class="nc" id="L51">        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);</span>
+
+<span class="nc" id="L53">        mChart = (HorizontalBarChart) findViewById(R.id.chart1);</span>
+<span class="nc" id="L54">        mChart.setOnChartValueSelectedListener(this);</span>
+        // mChart.setHighlightEnabled(false);
+
+<span class="nc" id="L57">        mChart.setDrawBarShadow(false);</span>
+
+<span class="nc" id="L59">        mChart.setDrawValueAboveBar(true);</span>
+
+<span class="nc" id="L61">        mChart.setDescription(&quot;&quot;);</span>
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+<span class="nc" id="L65">        mChart.setMaxVisibleValueCount(60);</span>
+
+        // scaling can now only be done on x- and y-axis separately
+<span class="nc" id="L68">        mChart.setPinchZoom(false);</span>
+
+        // draw shadows for each bar that show the maximum value
+        // mChart.setDrawBarShadow(true);
+
+        // mChart.setDrawXLabels(false);
+
+<span class="nc" id="L75">        mChart.setDrawGridBackground(false);</span>
+
+        // mChart.setDrawYLabels(false);
+
+<span class="nc" id="L79">        XAxis xl = mChart.getXAxis();</span>
+<span class="nc" id="L80">        xl.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
+<span class="nc" id="L81">        xl.setDrawAxisLine(true);</span>
+<span class="nc" id="L82">        xl.setDrawGridLines(true);</span>
+<span class="nc" id="L83">        xl.setGridLineWidth(0.3f);</span>
+
+<span class="nc" id="L85">        YAxis yl = mChart.getAxisLeft();</span>
+<span class="nc" id="L86">        yl.setDrawAxisLine(true);</span>
+<span class="nc" id="L87">        yl.setDrawGridLines(true);</span>
+<span class="nc" id="L88">        yl.setGridLineWidth(0.3f);</span>
+//        yl.setInverted(true);
+
+<span class="nc" id="L91">        YAxis yr = mChart.getAxisRight();</span>
+<span class="nc" id="L92">        yr.setDrawAxisLine(true);</span>
+<span class="nc" id="L93">        yr.setDrawGridLines(false);</span>
+//        yr.setInverted(true);
+
+<span class="nc" id="L96">        setData(12, 50);</span>
+<span class="nc" id="L97">        mChart.animateY(2500);</span>
+
+        // setting data
+<span class="nc" id="L100">        mSeekBarY.setProgress(50);</span>
+<span class="nc" id="L101">        mSeekBarX.setProgress(12);</span>
+
+<span class="nc" id="L103">        mSeekBarY.setOnSeekBarChangeListener(this);</span>
+<span class="nc" id="L104">        mSeekBarX.setOnSeekBarChangeListener(this);</span>
+
+<span class="nc" id="L106">        Legend l = mChart.getLegend();</span>
+<span class="nc" id="L107">        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);</span>
+<span class="nc" id="L108">        l.setFormSize(8f);</span>
+<span class="nc" id="L109">        l.setXEntrySpace(4f);</span>
+
+        // mChart.setDrawLegend(false);
+<span class="nc" id="L112">    }</span>
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+<span class="nc" id="L117">        getMenuInflater().inflate(R.menu.menu_horizontal_bar_chart, menu);</span>
+<span class="nc" id="L118">        return true;</span>
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+<span class="nc" id="L126">        int id = item.getItemId();</span>
+
+        //noinspection SimplifiableIfStatement
+<span class="nc bnc" id="L129" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L130">            return true;</span>
+        }
+
+<span class="nc" id="L133">        return super.onOptionsItemSelected(item);</span>
+    }
+
+    @Override
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+
+<span class="nc" id="L139">    }</span>
+
+    @Override
+    public void setHeaders(ArrayList&lt;String&gt; headers) {
+
+<span class="nc" id="L144">    }</span>
+
+    @Override
+    public void setBackground(String bg) {
+
+<span class="nc" id="L149">    }</span>
+
+    @Override
+    public void setBarOrientation(String orientation) {
+
+<span class="nc" id="L154">    }</span>
+
+    @Override
+    public void setSortable(Boolean choise) {
+
+<span class="nc" id="L159">    }</span>
+
+    @Override
+    public void setGrid(Boolean grid) {
+
+<span class="nc" id="L164">    }</span>
+
+    @Override
+    public void setLegendOnPoint(Boolean legend) {
+
+<span class="nc" id="L169">    }</span>
+
+    @Override
+    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
+
+<span class="nc" id="L174">    }</span>
+
+    @Override
+    public void onNothingSelected() {
+
+<span class="nc" id="L179">    }</span>
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+<span class="nc" id="L184">    }</span>
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+
+<span class="nc" id="L189">    }</span>
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+<span class="nc" id="L194">    }</span>
+
+    private void setData(int count, float range) {
+
+<span class="nc" id="L198">        ArrayList&lt;String&gt; xVals = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L200">            xVals.add(mMonths[i % 12]);</span>
+        }
+
+<span class="nc" id="L203">        ArrayList&lt;BarEntry&gt; yVals1 = new ArrayList&lt;BarEntry&gt;();</span>
+
+<span class="nc bnc" id="L205" title="All 2 branches missed.">        for (int i = 0; i &lt; count; i++) {</span>
+<span class="nc" id="L206">            float mult = (range + 1);</span>
+<span class="nc" id="L207">            float val = (float) (Math.random() * mult);</span>
+<span class="nc" id="L208">            yVals1.add(new BarEntry(val, i));</span>
+        }
+
+<span class="nc" id="L211">        BarDataSet set1 = new BarDataSet(yVals1, &quot;DataSet&quot;);</span>
+<span class="nc" id="L212">        set1.setBarSpacePercent(35f);</span>
+
+<span class="nc" id="L214">        ArrayList&lt;BarDataSet&gt; dataSets = new ArrayList&lt;BarDataSet&gt;();</span>
+<span class="nc" id="L215">        dataSets.add(set1);</span>
+
+<span class="nc" id="L217">        BarData data = new BarData(xVals, dataSets);</span>
+<span class="nc" id="L218">        data.setValueTextSize(10f);</span>
+
+<span class="nc" id="L220">        mChart.setData(data);</span>
+<span class="nc" id="L221">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

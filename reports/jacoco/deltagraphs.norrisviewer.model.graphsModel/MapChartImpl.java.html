@@ -22,7 +22,7 @@ import java.util.Observable;
  *
  */
 
-public class MapChartImpl extends Observable implements MapChart {
+<span class="nc" id="L25">public class MapChartImpl extends Graph implements MapChart {</span>
 
     private float latitude;
     private float longitude;
@@ -31,19 +31,47 @@ public class MapChartImpl extends Observable implements MapChart {
     private Boolean zoom;
     private Boolean legendOnPoint;
 
-<span class="nc" id="L34">    public MapChartImpl(){}</span>
 
-<span class="nc" id="L36">    public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
+<span class="nc" id="L35">    public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}</span>
 
-<span class="nc" id="L38">    public float getLatitude() { return latitude; }</span>
-<span class="nc" id="L39">    public float getLongitude() { return longitude; }</span>
-<span class="nc" id="L40">    public int getScale() { return scale; }</span>
-<span class="nc" id="L41">    public String getMapType() { return mapType; }</span>
-<span class="nc" id="L42">    public Boolean getZoom() { return zoom; }</span>
-<span class="nc" id="L43">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
+<span class="nc" id="L37">    public float getLatitude() { return latitude; }</span>
+<span class="nc" id="L38">    public float getLongitude() { return longitude; }</span>
+<span class="nc" id="L39">    public int getScale() { return scale; }</span>
+<span class="nc" id="L40">    public String getMapType() { return mapType; }</span>
+<span class="nc" id="L41">    public Boolean getZoom() { return zoom; }</span>
+<span class="nc" id="L42">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
 
-    private void JSONParser(JSONObject data, String signal){
 
-<span class="nc" id="L47">    }</span>
+    @Override
+    public void addFlow(JSONObject data) {
+
+<span class="nc" id="L48">    }</span>
+
+    @Override
+    public void updateFlow(JSONObject data) {
+
+<span class="nc" id="L53">    }</span>
+
+    @Override
+    public void setData(JSONObject data) {
+
+<span class="nc" id="L58">    }</span>
+
+    @Override
+    public void updateData(JSONObject data) {
+
+<span class="nc" id="L63">    }</span>
+
+    @Override
+    public void setParameters(JSONObject data) {
+
+<span class="nc" id="L68">    }</span>
+
+    @Override
+    public void updateParameters(JSONObject data) {
+
+<span class="nc" id="L73">    }</span>
+
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

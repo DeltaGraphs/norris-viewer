@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Wed May 20 10:47:56 UTC 2015.<br/>
-1 errors and 25 warnings found:<br/><br/>
+Check performed at Thu May 21 13:46:42 UTC 2015.<br/>
+1 errors and 51 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -58,7 +58,7 @@ Check performed at Wed May 20 10:47:56 UTC 2015.<br/>
 <tr><td></td><td class="categoryColumn"><a href="#Internationalization">Internationalization</a>
 </td></tr>
 <tr>
-<td class="countColumn">2</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">6</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#HardcodedText">HardcodedText: Hardcoded text</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#Bi-directional Text">Bi-directional Text</a>
@@ -68,7 +68,7 @@ Check performed at Wed May 20 10:47:56 UTC 2015.<br/>
 <a href="#RtlSymmetry">RtlSymmetry: Padding and margin symmetry</a>
 </td></tr>
 <tr>
-<td class="countColumn">9</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">31</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#RtlHardcoded">RtlHardcoded: Using left/right instead of start/end attributes</a>
 </td></tr>
 <tr>
@@ -162,8 +162,8 @@ To fix this issue, set the <code>targetSdkVersion</code> to the highest availabl
 <span class="lineno">  65</span>     compile 'com.github.lecho:hellocharts-library:1.5.4@aar'
 <span class="lineno">  66</span>     compile 'com.github.nkzawa:socket.io-client:0.3.0'
 <span class="lineno">  67</span>     <span class="errorspan">compile 'com.google.android.gms:play-services:7.0.0'</span>
-<span class="lineno">  68</span> }
-<span class="lineno">  69</span> 
+<span class="lineno">  68</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+<span class="lineno">  69</span> }
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -293,6 +293,38 @@ Low density is not really used much anymore, so this check ignores the ldpi dens
 <div class="id"><a href="#" title="Return to top">HardcodedText: Hardcoded text</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:42</span>: <span class="message">[I18N] Hardcoded string "500", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno">  39</span>         android:layout_height="wrap_content"
+<span class="lineno">  40</span>         android:layout_alignBottom="@+id/seekBar1"
+<span class="lineno">  41</span>         android:layout_alignParentRight="true"
+<span class="lineno">  42</span>         <span class="errorspan">android:text="500"</span>
+<span class="lineno">  43</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  44</span>         android:layout_marginRight="10dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:54</span>: <span class="message">[I18N] Hardcoded string "500", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno">  51</span>         android:layout_height="wrap_content"
+<span class="lineno">  52</span>         android:layout_alignBottom="@+id/seekBar2"
+<span class="lineno">  53</span>         android:layout_alignParentRight="true"
+<span class="lineno">  54</span>         <span class="errorspan">android:text="500"</span>
+<span class="lineno">  55</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  56</span>         android:layout_marginRight="10dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:43</span>: <span class="message">[I18N] Hardcoded string "500", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno">  40</span>         android:layout_height="wrap_content"
+<span class="lineno">  41</span>         android:layout_alignBottom="@+id/seekBar1"
+<span class="lineno">  42</span>         android:layout_alignParentRight="true"
+<span class="lineno">  43</span>         <span class="errorspan">android:text="500"</span>
+<span class="lineno">  44</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  45</span>         android:layout_marginRight="10dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:55</span>: <span class="message">[I18N] Hardcoded string "500", should use <code>@string</code> resource</span><br /><pre class="errorlines">
+<span class="lineno">  52</span>         android:layout_height="wrap_content"
+<span class="lineno">  53</span>         android:layout_alignBottom="@+id/seekBar2"
+<span class="lineno">  54</span>         android:layout_alignParentRight="true"
+<span class="lineno">  55</span>         <span class="errorspan">android:text="500"</span>
+<span class="lineno">  56</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  57</span>         android:layout_marginRight="10dp"
+</pre>
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:14</span>: <span class="message">[I18N] Hardcoded string "TEXT1", should use <code>@string</code> resource</span><br /><pre class="errorlines">
 <span class="lineno">  11</span>         android:layout_alignParentLeft="true"
 <span class="lineno">  12</span>         android:layout_alignParentTop="true"
@@ -367,6 +399,184 @@ If you specify padding or margin on the left side of a layout, you should probab
 <div class="id"><a href="#" title="Return to top">RtlHardcoded: Using left/right instead of start/end attributes</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:17</span>: <span class="message">Consider adding <code>android:layout_alignParentStart="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  14</span>         android:layout_width="match_parent"
+<span class="lineno">  15</span>         android:layout_height="wrap_content"
+<span class="lineno">  16</span>         android:layout_alignParentBottom="true"
+<span class="lineno">  17</span>         <span class="errorspan">android:layout_alignParentLeft="true"</span>
+<span class="lineno">  18</span>         android:layout_margin="8dp"
+<span class="lineno">  19</span>         android:layout_toLeftOf="@+id/tvYMax"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:19</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/tvYMax"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  16</span>         android:layout_alignParentBottom="true"
+<span class="lineno">  17</span>         android:layout_alignParentLeft="true"
+<span class="lineno">  18</span>         android:layout_margin="8dp"
+<span class="lineno">  19</span>         <span class="errorspan">android:layout_toLeftOf="@+id/tvYMax"</span>
+<span class="lineno">  20</span>         android:layout_marginRight="5dp"
+<span class="lineno">  21</span>         android:max="200"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:20</span>: <span class="message">Consider adding <code>android:layout_marginEnd="5dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  17</span>         android:layout_alignParentLeft="true"
+<span class="lineno">  18</span>         android:layout_margin="8dp"
+<span class="lineno">  19</span>         android:layout_toLeftOf="@+id/tvYMax"
+<span class="lineno">  20</span>         <span class="errorspan">android:layout_marginRight="5dp"</span>
+<span class="lineno">  21</span>         android:max="200"
+<span class="lineno">  22</span>         android:paddingBottom="12dp" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:31</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/tvXMax"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  28</span>         android:layout_above="@+id/seekBar2"
+<span class="lineno">  29</span>         android:layout_margin="8dp"
+<span class="lineno">  30</span>         android:layout_marginBottom="35dp"
+<span class="lineno">  31</span>         <span class="errorspan">android:layout_toLeftOf="@+id/tvXMax"</span>
+<span class="lineno">  32</span>         android:layout_marginRight="5dp"
+<span class="lineno">  33</span>         android:max="1500"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:32</span>: <span class="message">Consider adding <code>android:layout_marginEnd="5dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  29</span>         android:layout_margin="8dp"
+<span class="lineno">  30</span>         android:layout_marginBottom="35dp"
+<span class="lineno">  31</span>         android:layout_toLeftOf="@+id/tvXMax"
+<span class="lineno">  32</span>         <span class="errorspan">android:layout_marginRight="5dp"</span>
+<span class="lineno">  33</span>         android:max="1500"
+<span class="lineno">  34</span>         android:paddingBottom="12dp" />
+</pre>
+<button id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 26 More Occurrences...</button>
+<div id="RtlHardcodedDiv" style="display: none">
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:41</span>: <span class="message">Consider adding <code>android:layout_alignParentEnd="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  38</span>         android:layout_width="50dp"
+<span class="lineno">  39</span>         android:layout_height="wrap_content"
+<span class="lineno">  40</span>         android:layout_alignBottom="@+id/seekBar1"
+<span class="lineno">  41</span>         <span class="errorspan">android:layout_alignParentRight="true"</span>
+<span class="lineno">  42</span>         android:text="500"
+<span class="lineno">  43</span>         android:layout_marginBottom="15dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:44</span>: <span class="message">Consider adding <code>android:layout_marginEnd="10dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  41</span>         android:layout_alignParentRight="true"
+<span class="lineno">  42</span>         android:text="500"
+<span class="lineno">  43</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  44</span>         <span class="errorspan">android:layout_marginRight="10dp"</span>
+<span class="lineno">  45</span>         android:gravity="right"
+<span class="lineno">  46</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:45</span>: <span class="message">Use "<code>end</code>" instead of "<code>right</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  42</span>         android:text="500"
+<span class="lineno">  43</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  44</span>         android:layout_marginRight="10dp"
+<span class="lineno">  45</span>         <span class="errorspan">android:gravity="right"</span>
+<span class="lineno">  46</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+<span class="lineno">  47</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:53</span>: <span class="message">Consider adding <code>android:layout_alignParentEnd="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  50</span>         android:layout_width="50dp"
+<span class="lineno">  51</span>         android:layout_height="wrap_content"
+<span class="lineno">  52</span>         android:layout_alignBottom="@+id/seekBar2"
+<span class="lineno">  53</span>         <span class="errorspan">android:layout_alignParentRight="true"</span>
+<span class="lineno">  54</span>         android:text="500"
+<span class="lineno">  55</span>         android:layout_marginBottom="15dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:56</span>: <span class="message">Consider adding <code>android:layout_marginEnd="10dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  53</span>         android:layout_alignParentRight="true"
+<span class="lineno">  54</span>         android:text="500"
+<span class="lineno">  55</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  56</span>         <span class="errorspan">android:layout_marginRight="10dp"</span>
+<span class="lineno">  57</span>         android:gravity="right"
+<span class="lineno">  58</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:57</span>: <span class="message">Use "<code>end</code>" instead of "<code>right</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  54</span>         android:text="500"
+<span class="lineno">  55</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  56</span>         android:layout_marginRight="10dp"
+<span class="lineno">  57</span>         <span class="errorspan">android:gravity="right"</span>
+<span class="lineno">  58</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+<span class="lineno">  59</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:18</span>: <span class="message">Consider adding <code>android:layout_alignParentStart="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  15</span>         android:layout_width="match_parent"
+<span class="lineno">  16</span>         android:layout_height="wrap_content"
+<span class="lineno">  17</span>         android:layout_alignParentBottom="true"
+<span class="lineno">  18</span>         <span class="errorspan">android:layout_alignParentLeft="true"</span>
+<span class="lineno">  19</span>         android:layout_margin="8dp"
+<span class="lineno">  20</span>         android:layout_toLeftOf="@+id/tvYMax"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:20</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/tvYMax"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  17</span>         android:layout_alignParentBottom="true"
+<span class="lineno">  18</span>         android:layout_alignParentLeft="true"
+<span class="lineno">  19</span>         android:layout_margin="8dp"
+<span class="lineno">  20</span>         <span class="errorspan">android:layout_toLeftOf="@+id/tvYMax"</span>
+<span class="lineno">  21</span>         android:layout_marginRight="5dp"
+<span class="lineno">  22</span>         android:max="200"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:21</span>: <span class="message">Consider adding <code>android:layout_marginEnd="5dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  18</span>         android:layout_alignParentLeft="true"
+<span class="lineno">  19</span>         android:layout_margin="8dp"
+<span class="lineno">  20</span>         android:layout_toLeftOf="@+id/tvYMax"
+<span class="lineno">  21</span>         <span class="errorspan">android:layout_marginRight="5dp"</span>
+<span class="lineno">  22</span>         android:max="200"
+<span class="lineno">  23</span>         android:paddingBottom="12dp" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:32</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/tvXMax"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  29</span>         android:layout_above="@+id/seekBar2"
+<span class="lineno">  30</span>         android:layout_margin="8dp"
+<span class="lineno">  31</span>         android:layout_marginBottom="35dp"
+<span class="lineno">  32</span>         <span class="errorspan">android:layout_toLeftOf="@+id/tvXMax"</span>
+<span class="lineno">  33</span>         android:layout_marginRight="5dp"
+<span class="lineno">  34</span>         android:max="500"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:33</span>: <span class="message">Consider adding <code>android:layout_marginEnd="5dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  30</span>         android:layout_margin="8dp"
+<span class="lineno">  31</span>         android:layout_marginBottom="35dp"
+<span class="lineno">  32</span>         android:layout_toLeftOf="@+id/tvXMax"
+<span class="lineno">  33</span>         <span class="errorspan">android:layout_marginRight="5dp"</span>
+<span class="lineno">  34</span>         android:max="500"
+<span class="lineno">  35</span>         android:paddingBottom="12dp" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:42</span>: <span class="message">Consider adding <code>android:layout_alignParentEnd="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  39</span>         android:layout_width="50dp"
+<span class="lineno">  40</span>         android:layout_height="wrap_content"
+<span class="lineno">  41</span>         android:layout_alignBottom="@+id/seekBar1"
+<span class="lineno">  42</span>         <span class="errorspan">android:layout_alignParentRight="true"</span>
+<span class="lineno">  43</span>         android:text="500"
+<span class="lineno">  44</span>         android:layout_marginBottom="15dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:45</span>: <span class="message">Consider adding <code>android:layout_marginEnd="10dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  42</span>         android:layout_alignParentRight="true"
+<span class="lineno">  43</span>         android:text="500"
+<span class="lineno">  44</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  45</span>         <span class="errorspan">android:layout_marginRight="10dp"</span>
+<span class="lineno">  46</span>         android:gravity="right"
+<span class="lineno">  47</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:46</span>: <span class="message">Use "<code>end</code>" instead of "<code>right</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  43</span>         android:text="500"
+<span class="lineno">  44</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  45</span>         android:layout_marginRight="10dp"
+<span class="lineno">  46</span>         <span class="errorspan">android:gravity="right"</span>
+<span class="lineno">  47</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+<span class="lineno">  48</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:54</span>: <span class="message">Consider adding <code>android:layout_alignParentEnd="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  51</span>         android:layout_width="50dp"
+<span class="lineno">  52</span>         android:layout_height="wrap_content"
+<span class="lineno">  53</span>         android:layout_alignBottom="@+id/seekBar2"
+<span class="lineno">  54</span>         <span class="errorspan">android:layout_alignParentRight="true"</span>
+<span class="lineno">  55</span>         android:text="500"
+<span class="lineno">  56</span>         android:layout_marginBottom="15dp"
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:57</span>: <span class="message">Consider adding <code>android:layout_marginEnd="10dp"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
+<span class="lineno">  54</span>         android:layout_alignParentRight="true"
+<span class="lineno">  55</span>         android:text="500"
+<span class="lineno">  56</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  57</span>         <span class="errorspan">android:layout_marginRight="10dp"</span>
+<span class="lineno">  58</span>         android:gravity="right"
+<span class="lineno">  59</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:58</span>: <span class="message">Use "<code>end</code>" instead of "<code>right</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  55</span>         android:text="500"
+<span class="lineno">  56</span>         android:layout_marginBottom="15dp"
+<span class="lineno">  57</span>         android:layout_marginRight="10dp"
+<span class="lineno">  58</span>         <span class="errorspan">android:gravity="right"</span>
+<span class="lineno">  59</span>         android:textAppearance="?android:attr/textAppearanceMedium" />
+<span class="lineno">  60</span> 
+</pre>
 <span class="location"><a href="../../src/main/res/layout/item_table_first.xml">../../src/main/res/layout/item_table_first.xml</a>:12</span>: <span class="message">Use "<code>start</code>" instead of "<code>left</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
 <span class="lineno">   9</span>         android:layout_width="0dip"
 <span class="lineno">  10</span>         android:layout_height="match_parent"
@@ -407,8 +617,6 @@ If you specify padding or margin on the left side of a layout, you should probab
 <span class="lineno">  12</span>         android:layout_alignParentTop="true"
 <span class="lineno">  13</span>         android:layout_toLeftOf="@+id/chart_layout"
 </pre>
-<button id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 4 More Occurrences...</button>
-<div id="RtlHardcodedDiv" style="display: none">
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:13</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/chart_layout"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  10</span>         android:layout_height="wrap_content"
 <span class="lineno">  11</span>         android:layout_alignParentLeft="true"

@@ -40,37 +40,104 @@ public class LineChartFlow extends FlowModel{
     private ArrayList&lt;Record&gt; records;
 <span class="nc" id="L41">    public ArrayList&lt;Record&gt; getRecords() { return records; }</span>
 
-
+<span class="nc" id="L43">    public void setFlowColour(String colour){ flowColour = colour;}</span>
 
     class Record{
+        private String recordId;
         private int index; // ID of bar
         private int value; // value for that bar
 
-<span class="nc" id="L49">        public Record(int index, int value){</span>
+<span class="nc" id="L50">        public Record(String id, int index, int value){</span>
+<span class="nc" id="L51">            this.recordId = id;</span>
+<span class="nc" id="L52">            this.index = index;</span>
+<span class="nc" id="L53">            this.value = value;</span>
+<span class="nc" id="L54">        }</span>
 
-<span class="nc" id="L51">        }</span>
+<span class="nc" id="L56">        public void setIndex(int index) { this.index = index; }</span>
+<span class="nc" id="L57">        public void setValue(int value) { this.value = value; }</span>
 
-<span class="nc" id="L53">        public void setIndex(int index) { this.index = index; }</span>
-<span class="nc" id="L54">        public void setValue(int value) { this.value = value; }</span>
-
-<span class="nc" id="L56">        public int getIndex() { return index; }</span>
-<span class="nc" id="L57">        public int getValue() { return value; }</span>
-
+<span class="nc" id="L59">        public int getIndex() { return index; }</span>
+<span class="nc" id="L60">        public int getValue() { return value; }</span>
     }
 
-<span class="nc" id="L61">    public LineChartFlow(String id, String name, String color) {</span>
-
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L63">    public LineChartFlow(String id, String name, String color) {</span>
+<span class="nc" id="L64">        this.flowId = id;</span>
+<span class="nc" id="L65">        this.flowName = name;</span>
+<span class="nc" id="L66">        this.flowColour = color;</span>
+<span class="nc" id="L67">    }</span>
 
     @Override
-    public void addRecord(JSONObject record){
+    public void createFlow(JSONObject data) {
+<span class="nc" id="L71">        records = new ArrayList&lt;Record&gt;();</span>
+<span class="nc" id="L72">        JSONObject recordList = null;</span>
         try {
-<span class="nc" id="L68">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L69">            int index = jsonValues.getInt(0);</span>
-<span class="nc" id="L70">            int value = jsonValues.getInt(1);</span>
-<span class="nc" id="L71">            records.add(new Record(index, value));</span>
-<span class="nc" id="L72">        }catch (JSONException e) {}</span>
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L74">            recordList = data.getJSONObject(&quot;records&quot;);</span>
+<span class="nc" id="L75">        } catch (JSONException e) {}</span>
+<span class="nc" id="L76">        addRecords(recordList);</span>
+<span class="nc" id="L77">    }</span>
 
+    @Override
+    public void updateFlow(JSONObject data) {
+
+<span class="nc" id="L82">    }</span>
+
+    @Override
+    public void deleteFlow() {
+<span class="nc" id="L86">        records = null;</span>
+<span class="nc" id="L87">    }</span>
+
+    @Override
+    public void addRecord(JSONObject data) {
+<span class="nc" id="L91">        String id = null;</span>
+        try {
+<span class="nc" id="L93">            id = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L94">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L95">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L96">            int value = jsonValues.getInt(1);</span>
+<span class="nc" id="L97">            records.add(new Record(id, index, value));</span>
+<span class="nc" id="L98">        } catch (JSONException e) {}</span>
+<span class="nc" id="L99">    }</span>
+
+    @Override
+    public void addRecords(JSONObject recordArray){
+        try {
+<span class="nc" id="L104">            JSONArray jsonRecords = recordArray.getJSONArray(&quot;records&quot;);</span>
+<span class="nc" id="L105">            int recordLength = jsonRecords.length();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="nc" id="L107">                JSONObject record = jsonRecords.getJSONObject(i);</span>
+<span class="nc" id="L108">                addRecord(record);</span>
+            }
+<span class="nc" id="L110">        }catch (JSONException e) {}</span>
+<span class="nc" id="L111">    }</span>
+
+    @Override
+    public void updateRecord(JSONObject data) {
+        try {
+<span class="nc" id="L116">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L117">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L118">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L119">            records.get(recordIndex).index = jsonValues.getInt(0);</span>
+<span class="nc" id="L120">            records.get(recordIndex).value = jsonValues.getInt(1);</span>
+<span class="nc" id="L121">        } catch (JSONException e) {}</span>
+<span class="nc" id="L122">    }</span>
+
+
+    // it searches the record index in the list of records
+    protected int searchRecordIndex(String id){
+<span class="nc" id="L127">        int index = -1;</span>
+<span class="nc bnc" id="L128" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (records.get(index).recordId.equals(id))) {</span>
+<span class="nc" id="L129">            index++;</span>
+        }
+<span class="nc" id="L131">        return index;</span>
+    }
+
+    @Override
+    public void deleteRecord(JSONObject data) {
+        try {
+<span class="nc" id="L137">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L138">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L139">            records.remove(recordIndex);</span>
+<span class="nc" id="L140">        } catch (JSONException e) {}</span>
+<span class="nc" id="L141">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
