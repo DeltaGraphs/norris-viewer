@@ -26,6 +26,6 @@ public interface BarChartView {
     public void setBackground(String bg);
     public void setBarOrientation(String orientation);
     public void setSortable(Boolean choise);
-    public void setGrid(Boolean horizontal, Boolean vertical);
+    public void setGrid(Boolean grid);
     public void setLegendOnPoint(Boolean legend);
 }
