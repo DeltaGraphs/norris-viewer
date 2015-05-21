@@ -61,7 +61,6 @@ public abstract class Graph extends Observable {
     public abstract void setData(JSONObject data);
     public abstract void setParameters(JSONObject data);
     public abstract void updateParameters(JSONObject data);
-    public abstract void updateFlowProp(JSONObject data);
 
 
     protected void JSONParser(JSONObject obj, String signal){

@@ -63,6 +63,11 @@ public class TableFlow extends FlowModel {
     }
 
     @Override
+    public void updateFlow(JSONObject data) {
+
+    }
+
+    @Override
     public void deleteFlow() {
 
     }

@@ -41,7 +41,14 @@ public class MapChartImpl extends Graph implements MapChart {
     public Boolean getZoom() { return zoom; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
-    private void JSONParser(JSONObject data, String signal){
+
+    @Override
+    public void addFlow(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateFlow(JSONObject data) {
 
     }
 
@@ -65,8 +72,5 @@ public class MapChartImpl extends Graph implements MapChart {
 
     }
 
-    @Override
-    public void updateFlowProp(JSONObject data) {
 
-    }
 }

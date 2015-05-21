@@ -77,6 +77,11 @@ public class LineChartFlow extends FlowModel{
     }
 
     @Override
+    public void updateFlow(JSONObject data) {
+
+    }
+
+    @Override
     public void deleteFlow() {
         records = null;
     }

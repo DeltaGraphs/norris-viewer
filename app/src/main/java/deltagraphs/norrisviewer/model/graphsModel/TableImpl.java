@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class TableImpl extends Observable implements Table {
+public class TableImpl extends Graph implements Table {
 
     private String appearance;
     private ArrayList<String> headers;
@@ -40,11 +40,32 @@ public class TableImpl extends Observable implements Table {
     public String getAddRowOn() { return addRowOn; }
     public int getMaxItemsDisplayedPerPage() { return maxItemsDisplayedPerPage; }
     public Boolean getSortable() { return sortable; }
-
     //what???
     public JSONObject getSort() { return sort; }
 
-    private void JSONParser(JSONObject data, String signal){
+
+    @Override
+    public void addFlow(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateFlow(JSONObject data) {
+
+    }
+
+    @Override
+    public void setData(JSONObject data) {
+
+    }
+
+    @Override
+    public void setParameters(JSONObject data) {
+
+    }
+
+    @Override
+    public void updateParameters(JSONObject data) {
 
     }
 }

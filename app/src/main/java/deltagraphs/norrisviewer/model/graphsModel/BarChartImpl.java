@@ -118,21 +118,7 @@ public class BarChartImpl extends Graph implements BarChart{
         }catch(Exception e){}
     }
 
-    @Override
-    public void updateFlowProp(JSONObject data) {
-        int index = -1;
-        try {
-            String flowID = data.getString("ID");
-        index = searchFlowIndex(flowID);
-        if(index != -1) {
-            String name = data.getString("name");
-            String colour = data.getString("color");
-            //flowList.remove(index);                 perchè?!?
-            flowList.get(index).setFlowName(name);
-            ((BarChartFlow)flowList.get(index)).setFlowColour(colour);
-        }//else eccezione
-        } catch (JSONException e) {}
-    }
+
 
 
     @Override
