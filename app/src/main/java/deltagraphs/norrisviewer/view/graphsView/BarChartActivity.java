@@ -102,14 +102,13 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         mChart.setMaxVisibleValueCount(60);
 
         // scaling can now only be done on x- and y-axis separately
-        mChart.setPinchZoom(false);
+        mChart.setPinchZoom(true);
 
         // draw shadows for each bar that show the maximum value
         // mChart.setDrawBarShadow(true);
 
         // mChart.setDrawXLabels(false);
 
-        mChart.setDrawGridBackground(false);
         // mChart.setDrawYLabels(false);
 
         XAxis xAxis = mChart.getXAxis();
@@ -126,6 +125,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         rightAxis.setDrawGridLines(false);
         rightAxis.setLabelCount(8);
         rightAxis.setSpaceTop(15f);
+
 
         Legend l = mChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
@@ -208,6 +208,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
     @Override
     public void setGrid(Boolean hasGrid) {
+        mChart.setDrawGridBackground(hasGrid);
     }
 
     @Override
@@ -251,7 +252,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
         for (int i = 0; i < count; i++) {
             float mult = (range + 1);
-            float val = (float) (Math.random() * mult);
+            float val = (float) (Math.random() * -mult);
             yVals1.add(new BarEntry(val, i));
         }
 
