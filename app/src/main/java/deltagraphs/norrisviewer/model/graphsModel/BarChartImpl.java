@@ -74,10 +74,8 @@ public class BarChartImpl extends Graph implements BarChart{
            JSONArray jsonFlows = data.getJSONArray("flows");
            int flowLenght = jsonFlows.length();
            for(int i=0; i< flowLenght; i++){
-               String flowId = jsonFlows.getJSONObject(i).getString("ID");
-               String name = jsonFlows.getJSONObject(i).getString("name");
-               String color = jsonFlows.getJSONObject(i).getString("color");
-               flowList.add(new BarChartFlow(flowId, name, color));
+               JSONObject flow = jsonFlows.getJSONObject(i);
+               addFlow(flow);
            }
 
 
@@ -100,12 +98,12 @@ public class BarChartImpl extends Graph implements BarChart{
             if(data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
             if(data.has("headers")){
-            JSONArray jsonHeaders = data.getJSONArray("headers");
-            int length = jsonHeaders.length();
-            if (length > 0) {
-                for (int i = 0; i < length; i++) {
-                    headers.add(jsonHeaders.getString(i));
-                }
+                JSONArray jsonHeaders = data.getJSONArray("headers");
+                int length = jsonHeaders.length();
+                if (length > 0) {
+                    for (int i = 0; i < length; i++) {
+                       headers.add(jsonHeaders.getString(i));
+                    }
                 }
             }
             //changes to axises
@@ -125,132 +123,47 @@ public class BarChartImpl extends Graph implements BarChart{
         int index = -1;
         try {
             String flowID = data.getString("ID");
-
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
-            index ++;
-        }
+        index = searchFlowIndex(flowID);
         if(index != -1) {
             String name = data.getString("name");
             String colour = data.getString("color");
-            flowList.remove(index);
+            //flowList.remove(index);                 perchè?!?
             flowList.get(index).setFlowName(name);
             ((BarChartFlow)flowList.get(index)).setFlowColour(colour);
         }//else eccezione
         } catch (JSONException e) {}
     }
 
-    // it searches the flow index in the list of flows
-    private int searchFlowIndex(String flowId){
-        int index = -1;
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowId))) {
-            index++;
-        }
-        return index;
+
+    @Override
+    public void addFlow(JSONObject data) {
+        try {
+            String flowId = data.getString("ID");
+            String name = data.getString("name");
+            String color = data.getString("color");
+            flowList.add(new BarChartFlow(flowId, name, color));
+        }catch(JSONException e){}
+    }
+
+    @Override
+    public void updateFlow(JSONObject data) {
+        try {
+            String flowId = data.getString("ID");
+            int index = searchFlowIndex(flowId);
+            flowList.get(index).updateFlow(data);
+
+        } catch (JSONException e) {}
     }
 
     @Override
     public void setData(JSONObject record) {
-        String flowID = null;
         try {
-            flowID = record.getString("ID");
-        } catch (JSONException e) {
-        }
-
-        int index = searchFlowIndex(flowID);
-
-        if (index != -1) {
-            flowList.get(index).addRecords(record);
-        }
-    }
-
-    @Override
-    public void updateData(JSONObject data) {
-        try {
-            String action = data.getString("action");
-            switch (action){
-                case "insertRecord": {
-                    String id = data.getString("ID");
-                    int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).addRecord(data);
-                    break;
-                }
-                case "deleteRecord": {
-                    String id = data.getString("ID");
-                    int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).deleteRecord(data);
-                    break;
-                }
-                case "updateRecord": {
-                    String id = data.getString("ID");
-                    int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).updateRecord(data);
-                    break;
-                }
-                case "filtersChanged": {
-                    String id = data.getString("ID");
-                    int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).deleteFlow();
-                    flowList.get(flowIndex).createFlow(data);
-                    break;
-                }
+            String flowID = record.getString("ID");
+            int index = searchFlowIndex(flowID);
+            if (index != -1) {
+               flowList.get(index).addRecords(record);
             }
         } catch (JSONException e) {}
-
-    }
-
-
-
-    private void JSONParser(JSONObject obj, String signal){
-        try{
-            switch (signal){
-                case "configGraph":{
-                    JSONObject properties = obj.getJSONObject("properties");
-                    setParameters(properties);
-                    JSONObject data = obj.getJSONObject("data");
-                    setData(data);
-                    break;
-                }
-                case "updateGraphProp": {
-                    updateParameters(obj);
-                    break;
-                }
-                case "insertFlow": {
-                    JSONObject jsonFlowParam = obj.getJSONObject("flows");
-                    String flowId = jsonFlowParam.getString("ID");
-                    String name = jsonFlowParam.getString("name");
-                    String color = jsonFlowParam.getString("color");
-                    flowList.add(new BarChartFlow(flowId, name, color));
-                    setData(obj.getJSONObject("data"));
-                    break;
-                }
-                case "deleteFlow": {
-                    String id = obj.getString("ID");
-                    deleteFlow(id);
-                    break;
-                }
-                case "updateFlowProp": {
-                    //changes to flow params
-                    if (obj.has("flows")) {
-                        JSONArray jsonFlows = obj.getJSONArray("flows");
-                        int flowLenght = jsonFlows.length();
-                        for (int i = 0; i < flowLenght; i++) {
-                            String flowId = jsonFlows.getJSONObject(i).getString("ID");
-                            String name = jsonFlows.getJSONObject(i).getString("name");
-                            String color = jsonFlows.getJSONObject(i).getString("color");
-                            flowList.add(new BarChartFlow(flowId, name, color));
-                        }
-                    }
-                break;
-                }
-                case "updateFlowData": {
-                    updateData(obj);
-                }
-            }
-
-
-        }catch(JSONException e){
-            return;
-        }
     }
 
 }

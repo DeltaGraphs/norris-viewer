@@ -27,7 +27,7 @@ public abstract class FlowModel {
     protected String flowName;
 
     public abstract void createFlow(JSONObject data);
-    public void updateFlow(JSONObject data){}
+    public abstract void updateFlow(JSONObject data);
     public abstract void deleteFlow();
     public abstract void addRecord(JSONObject data);
     public abstract void addRecords(JSONObject data);

@@ -1,5 +1,6 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /*
@@ -29,7 +30,15 @@ public class AxisModel {
     private int scale;
 
     AxisModel(JSONObject params){
-        // TO DO !!!
+       try {
+           name = params.getString("name");
+           appearance = params.getString("color");
+           maxIndex = (float) params.getDouble("maxIndex");
+           minIndex = (float) params.getDouble("minIndex");
+           ticks = params.getInt("ticks");
+           scale = params.getInt("scale");
+
+       }catch(JSONException e){}
     }
 
     public String getName() { return name; }

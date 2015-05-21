@@ -30,7 +30,6 @@ public class BarChartFlow extends FlowModel{
     private ArrayList<Record> records;
     public ArrayList<Record> getRecords() { return records; }
 
-    public String getFlowColour(){ return flowColour;}
     public void setFlowColour(String colour){ flowColour = colour;}
 
     class Record{
@@ -65,6 +64,15 @@ public class BarChartFlow extends FlowModel{
             recordList = data.getJSONObject("records");
         } catch (JSONException e) {}
         addRecords(recordList);
+    }
+
+    @Override
+    public void updateFlow(JSONObject data) {
+        try {
+            flowName = data.getString("name");
+
+        flowColour = data.getString("color");
+        } catch (JSONException e) {}
     }
 
     @Override
