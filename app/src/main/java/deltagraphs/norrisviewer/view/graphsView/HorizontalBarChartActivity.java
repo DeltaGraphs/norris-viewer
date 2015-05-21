@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -33,11 +34,13 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     private String[] mMonths = {"Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"};
 
-    private Typeface tf;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_horizontal_bar_chart);
 
 
@@ -73,24 +76,19 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
         // mChart.setDrawYLabels(false);
 
-        tf = Typeface.createFromAsset(getAssets(), "OpenSans-Regular.ttf");
-
         XAxis xl = mChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xl.setTypeface(tf);
         xl.setDrawAxisLine(true);
         xl.setDrawGridLines(true);
         xl.setGridLineWidth(0.3f);
 
         YAxis yl = mChart.getAxisLeft();
-        yl.setTypeface(tf);
         yl.setDrawAxisLine(true);
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
 //        yl.setInverted(true);
 
         YAxis yr = mChart.getAxisRight();
-        yr.setTypeface(tf);
         yr.setDrawAxisLine(true);
         yr.setDrawGridLines(false);
 //        yr.setInverted(true);
@@ -218,7 +216,6 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
-        data.setValueTypeface(tf);
 
         mChart.setData(data);
     }
