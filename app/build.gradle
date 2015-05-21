@@ -65,6 +65,7 @@ dependencies {
     compile 'com.github.lecho:hellocharts-library:1.5.4@aar'
     compile 'com.github.nkzawa:socket.io-client:0.3.0'
     compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 }
 
 jacoco {

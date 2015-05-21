@@ -151,10 +151,11 @@ public class BarChartActivity extends ActionBarActivity implements deltagraphs.n
 
     }
 
+
     @Override
-    public void setGrid(Boolean horizontal, Boolean vertical) {
-        axisX.setHasSeparationLine(vertical);
-        axisY.setHasSeparationLine(horizontal);
+    public void setGrid(Boolean hasGrid) {
+        axisX.setHasSeparationLine(hasGrid);
+        axisY.setHasSeparationLine(hasGrid);
     }
 
     @Override
