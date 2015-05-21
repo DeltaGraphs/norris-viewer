@@ -28,7 +28,7 @@ public abstract class FlowModel {
 
     public abstract void createFlow(JSONObject data);
     public abstract void updateFlow(JSONObject data);
-    public abstract void deleteFlow();
+    public abstract void deleteRecordList();
     public abstract void addRecord(JSONObject data);
     public abstract void addRecords(JSONObject data);
     public abstract void updateRecord(JSONObject data);
@@ -38,7 +38,6 @@ public abstract class FlowModel {
 
     public String getFlowName() { return flowName; }
     public String getFlowId() { return flowId; }
-
 
 }
 

@@ -28,10 +28,6 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 
 public class LineChartFlow extends FlowModel{
 
-    private String xKey;
-    private String yKey;
-    private String xFormat;
-    private String yFormat;
     private String flowColour;
     private String marker;
     private String interpolation;
@@ -44,20 +40,20 @@ public class LineChartFlow extends FlowModel{
 
     class Record{
         private String recordId;
-        private int index; // ID of bar
-        private int value; // value for that bar
+        private int xValue; // x value
+        private int yValue; // y value
 
-        public Record(String id, int index, int value){
+        public Record(String id, int xValue, int yValue){
             this.recordId = id;
-            this.index = index;
-            this.value = value;
+            this.xValue = xValue;
+            this.yValue = yValue;
         }
 
-        public void setIndex(int index) { this.index = index; }
-        public void setValue(int value) { this.value = value; }
+        public void setIndex(int xValue) { this.xValue = xValue; }
+        public void setValue(int yValue) { this.yValue = yValue; }
 
-        public int getIndex() { return index; }
-        public int getValue() { return value; }
+        public int getYValue() { return xValue; }
+        public int getXValue() { return yValue; }
     }
 
     public LineChartFlow(String id, String name, String color) {
@@ -82,7 +78,7 @@ public class LineChartFlow extends FlowModel{
     }
 
     @Override
-    public void deleteFlow() {
+    public void deleteRecordList() {
         records = null;
     }
 
@@ -92,9 +88,9 @@ public class LineChartFlow extends FlowModel{
         try {
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
-            int index = jsonValues.getInt(0);
-            int value = jsonValues.getInt(1);
-            records.add(new Record(id, index, value));
+            int xValue = jsonValues.getInt(0);
+            int yValue = jsonValues.getInt(1);
+            records.add(new Record(id, xValue, yValue));
         } catch (JSONException e) {}
     }
 
@@ -116,8 +112,8 @@ public class LineChartFlow extends FlowModel{
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             JSONArray jsonValues = data.getJSONArray("value");
-            records.get(recordIndex).index = jsonValues.getInt(0);
-            records.get(recordIndex).value = jsonValues.getInt(1);
+            records.get(recordIndex).xValue = jsonValues.getInt(0);
+            records.get(recordIndex).yValue = jsonValues.getInt(1);
         } catch (JSONException e) {}
     }
 

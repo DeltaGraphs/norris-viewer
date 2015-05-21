@@ -77,8 +77,6 @@ public class BarChartImpl extends Graph implements BarChart{
                JSONObject flow = jsonFlows.getJSONObject(i);
                addFlow(flow);
            }
-
-
        }catch (JSONException e){}
     }
 
@@ -118,9 +116,6 @@ public class BarChartImpl extends Graph implements BarChart{
         }catch(Exception e){}
     }
 
-
-
-
     @Override
     public void addFlow(JSONObject data) {
         try {
@@ -142,7 +137,7 @@ public class BarChartImpl extends Graph implements BarChart{
     }
 
     @Override
-    public void setData(JSONObject record) {
+    public void setRecords(JSONObject record) {
         try {
             String flowID = record.getString("ID");
             int index = searchFlowIndex(flowID);

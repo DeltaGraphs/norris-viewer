@@ -27,22 +27,20 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-
 public abstract class Graph extends Observable {
     protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
     protected String title;
 
     public String getTitle() { return title; }
 
-
+    public abstract void setRecords(JSONObject data);
+    public abstract void setParameters(JSONObject data);
+    public abstract void updateParameters(JSONObject data);
     public abstract void addFlow(JSONObject data);
     public abstract void updateFlow(JSONObject data);
 
     public void deleteFlow(String flowID){
-        int index = -1;
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowID))){
-            index ++;
-        }
+        int index = searchFlowIndex(flowID);
         if(index != -1) {
             flowList.remove(index);
         }//else eccezione
@@ -57,12 +55,6 @@ public abstract class Graph extends Observable {
         return index;
     }
 
-
-    public abstract void setData(JSONObject data);
-    public abstract void setParameters(JSONObject data);
-    public abstract void updateParameters(JSONObject data);
-
-
     protected void JSONParser(JSONObject obj, String signal){
         try{
             switch (signal) {
@@ -70,7 +62,7 @@ public abstract class Graph extends Observable {
                     JSONObject properties = obj.getJSONObject("properties");
                     setParameters(properties);
                     JSONObject data = obj.getJSONObject("data");
-                    setData(data);
+                    setRecords(data);
                     break;
                 }
                 case "updateGraphProp": {
@@ -80,7 +72,7 @@ public abstract class Graph extends Observable {
                 case "insertFlow": {
                     JSONObject jsonFlowParam = obj.getJSONObject("properties");
                     addFlow(jsonFlowParam);
-                    setData(obj.getJSONObject("data"));
+                    setRecords(obj.getJSONObject("data"));
                     break;
                 }
                 case "deleteFlow": {
@@ -90,12 +82,11 @@ public abstract class Graph extends Observable {
                 }
                 case "updateFlowProp": {
                     //changes to flow params
-
                     updateFlow(obj);
                     break;
                 }
                 case "updateFlowData": {
-                    updateData(obj);
+                    updateRecords(obj);
                     break;
                 }
             }
@@ -104,8 +95,7 @@ public abstract class Graph extends Observable {
         }
     }
 
-
-    protected void updateData(JSONObject data) {
+    protected void updateRecords(JSONObject data) {
         try {
             String action = data.getString("action");
             switch (action){
@@ -130,13 +120,11 @@ public abstract class Graph extends Observable {
                 case "filtersChanged": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).deleteFlow();
+                    flowList.get(flowIndex).deleteRecordList();
                     flowList.get(flowIndex).createFlow(data);
                     break;
                 }
             }
         } catch (JSONException e) {}
-
     }
-
 }

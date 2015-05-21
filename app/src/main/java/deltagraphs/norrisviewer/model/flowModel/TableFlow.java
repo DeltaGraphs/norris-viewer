@@ -68,7 +68,7 @@ public class TableFlow extends FlowModel {
     }
 
     @Override
-    public void deleteFlow() {
+    public void deleteRecordList() {
 
     }
 

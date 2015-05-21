@@ -70,7 +70,7 @@ public class MapChartFlow extends FlowModel {
     }
 
     @Override
-    public void deleteFlow() {
+    public void deleteRecordList() {
 
     }
 

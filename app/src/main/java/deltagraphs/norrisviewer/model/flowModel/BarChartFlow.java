@@ -27,38 +27,35 @@ import java.util.ArrayList;
 public class BarChartFlow extends FlowModel{
 
     private String flowColour = "#FFFFFF"; //default
-    private ArrayList<Record> records;
-    public ArrayList<Record> getRecords() { return records; }
+    private ArrayList<BarChartRecord> records;
+    public ArrayList<BarChartRecord> getRecordList() { return records; }
+    public int getRecordIndex(int index) { return records.get(index).index; }
+    public int getRecordValue(int index) { return records.get(index).value; }
 
     public void setFlowColour(String colour){ flowColour = colour;}
 
-    class Record{
+    public BarChartFlow(String id, String name, String colour) {
+        this.flowId = id;
+        this.flowName = name;
+        this.flowColour = colour;
+    }
+
+    class BarChartRecord{
         private String recordId;
         private int index; // ID of bar
         private int value; // value for that bar
 
-        public Record(String id, int index, int value){
+        public BarChartRecord(String id, int index, int value){
             this.recordId = id;
             this.index = index;
             this.value = value;
         }
-
-        public void setIndex(int index) { this.index = index; }
-        public void setValue(int value) { this.value = value; }
-
-        public int getIndex() { return index; }
-        public int getValue() { return value; }
     }
 
-    public BarChartFlow(String id, String name, String color) {
-        this.flowId = id;
-        this.flowName = name;
-        this.flowColour = color;
-    }
 
     @Override
     public void createFlow(JSONObject data) {
-        records = new ArrayList<Record>();
+        records = new ArrayList<BarChartRecord>();
         JSONObject recordList = null;
         try {
             recordList = data.getJSONObject("records");
@@ -70,13 +67,12 @@ public class BarChartFlow extends FlowModel{
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-
-        flowColour = data.getString("color");
+            flowColour = data.getString("color");
         } catch (JSONException e) {}
     }
 
     @Override
-    public void deleteFlow() {
+    public void deleteRecordList() {
         records = null;
     }
 
@@ -88,7 +84,7 @@ public class BarChartFlow extends FlowModel{
             JSONArray jsonValues = data.getJSONArray("value");
             int index = jsonValues.getInt(0);
             int value = jsonValues.getInt(1);
-            records.add(new Record(id, index, value));
+            records.add(new BarChartRecord(id, index, value));
         } catch (JSONException e) {}
     }
 
