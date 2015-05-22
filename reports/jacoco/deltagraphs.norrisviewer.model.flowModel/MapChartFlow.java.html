@@ -42,9 +42,9 @@ import java.util.ArrayList;
         private float valueX;
         private float valueY;
 
-<span class="nc" id="L45">        public MapChartRecord(String recordId, String markerId, float x, float y){</span>
-<span class="nc" id="L46">            this.recordId = recordId;</span>
-<span class="nc" id="L47">            this.markerId = markerId;</span>
+<span class="nc" id="L45">        public MapChartRecord(String rId, String mId, float x, float y){</span>
+<span class="nc" id="L46">            this.recordId = rId;</span>
+<span class="nc" id="L47">            this.markerId = mId;</span>
 <span class="nc" id="L48">            valueX = x;</span>
 <span class="nc" id="L49">            valueY = y;</span>
 <span class="nc" id="L50">        }</span>
@@ -65,11 +65,11 @@ import java.util.ArrayList;
     }
 
 <span class="nc" id="L67">    class TraceModel{</span>
-        String type;
-        String stokeColour;  // colour of the polyline
-        String fillColour;  // colour of the area subtended by the polyline
-<span class="nc" id="L71">        ArrayList&lt;Float&gt; coordinatesX = new ArrayList&lt;Float&gt;();</span>
-<span class="nc" id="L72">        ArrayList&lt;Float&gt; coordinatesY = new ArrayList&lt;Float&gt;();</span>
+        private String type;
+        private String stokeColour;  // colour of the polyline
+        private String fillColour;  // colour of the area subtended by the polyline
+<span class="nc" id="L71">        private ArrayList&lt;Float&gt; coordinatesX = new ArrayList&lt;Float&gt;();</span>
+<span class="nc" id="L72">        private ArrayList&lt;Float&gt; coordinatesY = new ArrayList&lt;Float&gt;();</span>
     }
 
     @Override
