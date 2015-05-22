@@ -36,12 +36,30 @@ public abstract class Graph extends Observable {
 
     public void setGraph(JSONObject obj, String signal){JSONParser(obj, signal);}
 
-    public abstract void setRecords(JSONObject data);
     public abstract void setParameters(JSONObject data);
     public abstract void updateParameters(JSONObject data);
-    public abstract void addFlow(JSONObject data);
-    public abstract void updateFlow(JSONObject data);
 
+    public void addFlow(JSONObject data) {
+        flowList.add(new LineChartFlow(data));
+    }
+
+    public void updateFlow(JSONObject data) {
+        try {
+            String flowId = data.getString("ID");
+            int index = searchFlowIndex(flowId);
+            flowList.get(index).updateFlow(data);
+        } catch (JSONException e) {}
+    }
+
+    public void setRecords(JSONObject record) {
+        try {
+            String flowID = record.getString("ID");
+            int index = searchFlowIndex(flowID);
+            if (index != -1) {
+                flowList.get(index).addRecords(record);
+            }
+        } catch (JSONException e) {}
+    }
 
     public void deleteFlow(String flowID){
         int index = searchFlowIndex(flowID);
@@ -51,7 +69,7 @@ public abstract class Graph extends Observable {
     }
 
     // it searches the flow index in the list of flows
-    protected int searchFlowIndex(String flowId){
+    private int searchFlowIndex(String flowId){
         int index = -1;
         while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowId))) {
             index++;
@@ -59,7 +77,7 @@ public abstract class Graph extends Observable {
         return index;
     }
 
-    protected void JSONParser(JSONObject obj, String signal){
+    private void JSONParser(JSONObject obj, String signal){
         try{
             switch (signal) {
                 case "configGraph": {
@@ -99,7 +117,7 @@ public abstract class Graph extends Observable {
         }
     }
 
-    protected void updateRecords(JSONObject data) {
+    private void updateRecords(JSONObject data) {
         try {
             String action = data.getString("action");
             switch (action){

@@ -114,30 +114,4 @@ public class BarChartImpl extends Graph implements BarChart{
         }catch(Exception e){}
     }
 
-    @Override
-    public void addFlow(JSONObject data) {
-        flowList.add(new BarChartFlow(data));
-    }
-
-    @Override
-    public void updateFlow(JSONObject data) {
-        try {
-            String flowId = data.getString("ID");
-            int index = searchFlowIndex(flowId);
-            flowList.get(index).updateFlow(data);
-
-        } catch (JSONException e) {}
-    }
-
-    @Override
-    public void setRecords(JSONObject record) {
-        try {
-            String flowID = record.getString("ID");
-            int index = searchFlowIndex(flowID);
-            if (index != -1) {
-               flowList.get(index).addRecords(record);
-            }
-        } catch (JSONException e) {}
-    }
-
 }
