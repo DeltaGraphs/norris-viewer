@@ -19,8 +19,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
 public interface MapChart {
     public float getLatitude();
     public float getLongitude();
-    public int getScale();
-    public String getMapType();
-    public Boolean getZoom();
+    public float getMapWidth();
+    public float getMapHeight();
     public Boolean getLegendOnPoint();
+    public String getMapType();
 }

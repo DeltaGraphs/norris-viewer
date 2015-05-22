@@ -139,7 +139,7 @@ public abstract class Graph extends Observable {
                     flowList.get(flowIndex).updateRecord(data);
                     break;
                 }
-                case "filtersChanged": {
+                case "replaceData": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
                     flowList.get(flowIndex).deleteRecordList();

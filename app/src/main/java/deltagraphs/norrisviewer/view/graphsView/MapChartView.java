@@ -19,7 +19,7 @@ package deltagraphs.norrisviewer.view.graphsView;
  */
 
 public interface MapChartView {
-    public void setParams(float latitude, float longitude, int scale);
+    public void setParams(float latitude, float longitude);
     public void setMapType(String type);
     public void setZoom(Boolean choise);
     public void setLegendOnPoint(Boolean legend);

@@ -60,7 +60,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
 
     @Override
-    public void setParams(float latitude, float longitude, int scale) {
+    public void setParams(float latitude, float longitude) {
 
     }
 

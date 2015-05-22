@@ -28,13 +28,9 @@ import java.util.ArrayList;
 
 public class MapChartFlow extends FlowModel {
 
-    private String longitudeKey;
-    private String latitudeKey;
-    private String longitudeFormat;
-    private String latitudeFormat;
-    private String marker;
+    private Marker markerProperties;
     private int maxItems;
-    private String trace;
+    private TraceModel trace;
     private ArrayList<MapChartRecord> records;
     public ArrayList<MapChartRecord> getRecords() { return records; }
 
@@ -42,31 +38,67 @@ public class MapChartFlow extends FlowModel {
 
     class MapChartRecord{
         private String recordId;
-        private int value; // value for that bar
+        private String markerId;
+        private float valueX;
+        private float valueY;
 
-        public MapChartRecord(int index, int value){
+        public MapChartRecord(String recordId, String markerId, float x, float y){
+            this.recordId = recordId;
+            this.markerId = markerId;
+            valueX = x;
+            valueY = y;
         }
+    }
+
+    class Marker{
+        private String type;
+        private String shape = null;
+        private String icon = null;
+        private String text = null;
+        private String colour;
+
+        public Marker(JSONObject data){
+            try {
+                type = data.getString("type");
+            } catch (JSONException e) {}
+        }
+    }
+
+    class TraceModel{
+        String type;
+        String stokeColour;  // colour of the polyline
+        String fillColour;  // colour of the area subtended by the polyline
+        ArrayList<Float> coordinatesX = new ArrayList<Float>();
+        ArrayList<Float> coordinatesY = new ArrayList<Float>();
     }
 
     @Override
     public void createFlow(JSONObject data) {
         records = new ArrayList<MapChartRecord>();
-        JSONObject recordList = null;
         try {
-            recordList = data.getJSONObject("records");
+            JSONObject recordList = data.getJSONObject("records");
+            addRecords(recordList);
         } catch (JSONException e) {}
-        addRecords(recordList);
     }
 
     @Override
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            //flowColour = data.getString("color");
-            marker = data.getString("marker");
-            //interpolation = data.getString("interpolation");
-            //subAreaColour = data.getString("area");
-            maxItems = data.getInt("maxItems");
+            maxItems = data.getInt("maxItemsPage");
+            markerProperties.type = data.getJSONObject("marker").getString("type");
+            markerProperties.shape = data.getJSONObject("marker").getString("shape");
+            markerProperties.icon = data.getJSONObject("marker").getString("icon");
+            markerProperties.text = data.getJSONObject("marker").getString("text");
+            markerProperties.colour = data.getJSONObject("marker").getString("color");
+            trace.type = data.getJSONObject("trace").getString("type");
+            trace.stokeColour = data.getJSONObject("trace").getString("stokeColor");
+            trace.fillColour = data.getJSONObject("trace").getString("fillColor");
+            JSONArray jsonCoordinates = data.getJSONArray("coordinates");
+            for(int i=0; i< jsonCoordinates.length(); i++) {
+                trace.coordinatesX.add((float) jsonCoordinates.getJSONArray(i).getDouble(0));
+                trace.coordinatesY.add((float)jsonCoordinates.getJSONArray(i).getDouble(1));
+            }
         } catch (JSONException e) {}
     }
 
@@ -77,13 +109,12 @@ public class MapChartFlow extends FlowModel {
 
     @Override
     public void addRecord(JSONObject data) {
-        String id = null;
         try {
-            id = data.getString("norrisRecordID");
-            JSONArray jsonValues = data.getJSONArray("value");
-            int xValue = jsonValues.getInt(0);
-            int yValue = jsonValues.getInt(1);
-            //records.add(new LineChartRecord(id, xValue, yValue));
+            String recordId = data.getString("norrisRecordID");
+            String markerId = data.getString("markerID");
+            float valueX = (float) data.getJSONArray("value").getDouble(0);
+            float valueY = (float) data.getJSONArray("value").getDouble(1);
+            records.add(new MapChartRecord(recordId, markerId, valueX, valueY));
         } catch (JSONException e) {}
     }
 
@@ -104,9 +135,9 @@ public class MapChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            JSONArray jsonValues = data.getJSONArray("value");
-            //records.get(recordIndex).xValue = jsonValues.getInt(0);
-            //records.get(recordIndex).yValue = jsonValues.getInt(1);
+            records.get(recordIndex).markerId = data.getString("markerID");
+            records.get(recordIndex).valueX = (float) data.getJSONArray("value").getDouble(0);
+            records.get(recordIndex).valueY = (float) data.getJSONArray("value").getDouble(1);
         } catch (JSONException e) {}
     }
 
@@ -129,3 +160,4 @@ public class MapChartFlow extends FlowModel {
         } catch (JSONException e) {}
     }
 }
+
