@@ -45,14 +45,13 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     public void update(Observable observable, Object data) {
 <span class="nc bnc" id="L46" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
 <span class="nc" id="L47">            graphView.setParams(mapChartInstance.getLatitude(),</span>
-                    mapChartInstance.getLongitude(),
-                    mapChartInstance.getScale()
+                    mapChartInstance.getLongitude()
+
             );
 <span class="nc" id="L51">            graphView.setMapType(mapChartInstance.getMapType());</span>
-<span class="nc" id="L52">            graphView.setZoom(mapChartInstance.getZoom());</span>
-<span class="nc" id="L53">            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
+<span class="nc" id="L52">            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
         }
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L54">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
