@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MapChartFlow extends FlowModel {
-/*
+
     private String longitudeKey;
     private String latitudeKey;
     private String longitudeFormat;
@@ -62,10 +62,10 @@ public class MapChartFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            flowColour = data.getString("color");
+            //flowColour = data.getString("color");
             marker = data.getString("marker");
-            interpolation = data.getString("interpolation");
-            subAreaColour = data.getString("area");
+            //interpolation = data.getString("interpolation");
+            //subAreaColour = data.getString("area");
             maxItems = data.getInt("maxItems");
         } catch (JSONException e) {}
     }
@@ -83,7 +83,7 @@ public class MapChartFlow extends FlowModel {
             JSONArray jsonValues = data.getJSONArray("value");
             int xValue = jsonValues.getInt(0);
             int yValue = jsonValues.getInt(1);
-            records.add(new LineChartRecord(id, xValue, yValue));
+            //records.add(new LineChartRecord(id, xValue, yValue));
         } catch (JSONException e) {}
     }
 
@@ -105,8 +105,8 @@ public class MapChartFlow extends FlowModel {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             JSONArray jsonValues = data.getJSONArray("value");
-            records.get(recordIndex).xValue = jsonValues.getInt(0);
-            records.get(recordIndex).yValue = jsonValues.getInt(1);
+            //records.get(recordIndex).xValue = jsonValues.getInt(0);
+            //records.get(recordIndex).yValue = jsonValues.getInt(1);
         } catch (JSONException e) {}
     }
 
@@ -128,6 +128,4 @@ public class MapChartFlow extends FlowModel {
             records.remove(recordIndex);
         } catch (JSONException e) {}
     }
-}
-*/
 }

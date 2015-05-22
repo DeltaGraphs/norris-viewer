@@ -82,7 +82,7 @@ public class TableFlow extends FlowModel {
 
             int index = jsonValues.getInt(0);
             int value = jsonValues.getInt(1);
-            records.add(new TableRecord( ));
+            //records.add(new TableRecord( ));
         }catch (JSONException e) {}
     }
 
