@@ -46,8 +46,6 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getGrid() { return grid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
 
-    public void setBarChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
-
     @Override
     public void setParameters(JSONObject data) {
        try {
@@ -118,12 +116,7 @@ public class BarChartImpl extends Graph implements BarChart{
 
     @Override
     public void addFlow(JSONObject data) {
-        try {
-            String flowId = data.getString("ID");
-            String name = data.getString("name");
-            String color = data.getString("color");
-            flowList.add(new BarChartFlow(flowId, name, color));
-        }catch(JSONException e){}
+        flowList.add(new BarChartFlow(data));
     }
 
     @Override

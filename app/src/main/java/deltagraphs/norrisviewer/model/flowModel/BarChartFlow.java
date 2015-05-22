@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /*
- * Name : BarChartRecord.java
+ * Name : BarChartFlow.java
  * Module : norrisviewer.model.flowModel
  * Location : norrisviewer\model\flowModel
  *
@@ -32,12 +32,12 @@ public class BarChartFlow extends FlowModel{
     public int getRecordIndex(int index) { return records.get(index).index; }
     public int getRecordValue(int index) { return records.get(index).value; }
 
-    public void setFlowColour(String colour){ flowColour = colour;}
-
-    public BarChartFlow(String id, String name, String colour) {
-        this.flowId = id;
-        this.flowName = name;
-        this.flowColour = colour;
+    public BarChartFlow(JSONObject data) {
+        try {
+            flowId = data.getString("ID");
+            flowName = data.getString("name");
+            flowColour = data.getString("color");
+        }catch(JSONException e){}
     }
 
     class BarChartRecord{

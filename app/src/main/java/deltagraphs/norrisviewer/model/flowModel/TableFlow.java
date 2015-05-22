@@ -22,40 +22,43 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TableFlow extends FlowModel {
-    private ArrayList<String> columnKeys;
-    private ArrayList<String> columnFormat;
-    private String fontColourKey;
-    private String BackgroundColourKey;
-    private String BackgroundColourFormat;
     private int maxItems;
 
-    private ArrayList<Record> records;
-    public ArrayList<Record> getRecords() { return records; }
+    private ArrayList<TableRecord> records;
+    public ArrayList<TableRecord> getRecords() { return records; }
 
 
+    public TableFlow(JSONObject data) {
 
-    class Record{
-        private int index; // ID of bar
-        private int value; // value for that bar
+    }
 
-        public Record(int index, int value){
+    class TableRecord{
+        private String recordId;
+        private ArrayList<Value> values = new ArrayList<Value>();
 
+        public TableRecord(String id, ArrayList<Value> valuesList){
+            recordId = id;
+            values = valuesList;
         }
 
-        public void setIndex(int index) { this.index = index; }
-        public void setValue(int value) { this.value = value; }
+        class Value{
+            String data;
+            String background;
+            String textColour;
 
-        public int getIndex() { return index; }
-        public int getValue() { return value; }
+            Value(String data, String bg, String tC){
+                this.data = data;
+                background = bg;
+                textColour = tC;
+            }
+        }
 
     }
 
-    public TableFlow(String id, String name, String color) {
-
-    }
 
     @Override
     public void createFlow(JSONObject data) {
@@ -76,9 +79,10 @@ public class TableFlow extends FlowModel {
     public void addRecord(JSONObject record){
         try {
             JSONArray jsonValues = record.getJSONArray("value");
+
             int index = jsonValues.getInt(0);
             int value = jsonValues.getInt(1);
-            records.add(new Record(index, value));
+            records.add(new TableRecord( ));
         }catch (JSONException e) {}
     }
 

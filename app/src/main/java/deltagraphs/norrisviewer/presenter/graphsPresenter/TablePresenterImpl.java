@@ -43,10 +43,9 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof TableImpl) {
-            graphView.setAppearance(tableInstance.getAddRowOn());
-            graphView.setHeaders(tableInstance.getHeaders());
+            //graphView.setHeaders(tableInstance.getHeader(1));
             graphView.setAddRowOn(tableInstance.getAddRowOn());
-            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItemsDisplayedPerPage());
+            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
             graphView.setSortable(tableInstance.getSortable());
         }
     }

@@ -21,7 +21,6 @@ package deltagraphs.norrisviewer.model.graphsModel;
 import java.util.Observable;
 import deltagraphs.norrisviewer.model.flowModel.*;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,15 +28,20 @@ import java.util.*;
 
 public abstract class Graph extends Observable {
     protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
+
     protected String title;
 
     public String getTitle() { return title; }
+    public ArrayList<FlowModel> getFlowList(){ return flowList; }
+
+    public void setGraph(JSONObject obj, String signal){JSONParser(obj, signal);}
 
     public abstract void setRecords(JSONObject data);
     public abstract void setParameters(JSONObject data);
     public abstract void updateParameters(JSONObject data);
     public abstract void addFlow(JSONObject data);
     public abstract void updateFlow(JSONObject data);
+
 
     public void deleteFlow(String flowID){
         int index = searchFlowIndex(flowID);

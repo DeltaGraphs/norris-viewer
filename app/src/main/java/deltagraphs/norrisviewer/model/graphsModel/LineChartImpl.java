@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
-import lecho.lib.hellocharts.model.Axis;
+
 
 /*
  * Name : LineChartImpl.java
@@ -35,10 +35,6 @@ public class LineChartImpl extends Graph  implements LineChart{
     private Boolean verticalGrid;
     private Boolean legendOnPoint;
 
-
-    public void setLineChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
-    public void setViewFinder(Boolean choice) { this.viewFinder = choice; }
-
     public AxisModel getAxisX() { return axisX; }
     public AxisModel getAxisY() { return axisY; }
     public String getBackground() { return background; }
@@ -46,6 +42,8 @@ public class LineChartImpl extends Graph  implements LineChart{
     public Boolean getHorizontalGrid() { return horizontalGrid; }
     public Boolean getVerticalGrid() { return verticalGrid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
+
+
 
     public void setParameters(JSONObject data) {
         try {
@@ -66,10 +64,8 @@ public class LineChartImpl extends Graph  implements LineChart{
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
             for(int i=0; i< flowLenght; i++){
-                String flowId = jsonFlows.getJSONObject(i).getString("ID");
-                String name = jsonFlows.getJSONObject(i).getString("name");
-                String color = jsonFlows.getJSONObject(i).getString("color");
-                flowList.add(new LineChartFlow(flowId, name, color));
+                JSONObject flow = jsonFlows.getJSONObject(i);
+                flowList.add(new LineChartFlow(flow));
             }
         }catch (JSONException e){}
     }
@@ -101,34 +97,29 @@ public class LineChartImpl extends Graph  implements LineChart{
         }catch(Exception e){}
     }
 
-
-
-
     @Override
     public void addFlow(JSONObject data) {
-
+        flowList.add(new LineChartFlow(data));
     }
 
     @Override
     public void updateFlow(JSONObject data) {
-
+        try {
+            String flowId = data.getString("ID");
+            int index = searchFlowIndex(flowId);
+            flowList.get(index).updateFlow(data);
+        } catch (JSONException e) {}
     }
 
     @Override
-    public void setData(JSONObject record) {
-        String flowID = null;
+    public void setRecords(JSONObject record) {
         try {
-            flowID = record.getString("ID");
-        } catch (JSONException e) {
-        }
-
-        int index = searchFlowIndex(flowID);
-
-        if (index != -1) {
-            flowList.get(index).addRecords(record);
-        }
+            String flowID = record.getString("ID");
+            int index = searchFlowIndex(flowID);
+            if (index != -1) {
+                flowList.get(index).addRecords(record);
+            }
+        } catch (JSONException e) {}
     }
 
-
 }
-

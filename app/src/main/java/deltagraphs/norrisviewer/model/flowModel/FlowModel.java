@@ -18,7 +18,6 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public abstract class FlowModel {

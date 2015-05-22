@@ -6,8 +6,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import deltagraphs.norrisviewer.model.flowModel.*;
-
 /*
  * Name : LineChartFlow.java
  * Module : norrisviewer.model.flowModel
@@ -33,38 +31,42 @@ public class LineChartFlow extends FlowModel{
     private String interpolation;
     private String subAreaColour;
     private int maxItems;
-    private ArrayList<Record> records;
-    public ArrayList<Record> getRecords() { return records; }
+    private ArrayList<LineChartRecord> records;
 
-    public void setFlowColour(String colour){ flowColour = colour;}
+    public String getFlowColour(){ return flowColour; }
+    public String getMarker(){ return marker; }
+    public String getInterpolation() { return interpolation; }
+    public String getSubAreaColour(){ return subAreaColour; }
+    public int maxItems() { return maxItems; }
+    public ArrayList<LineChartRecord> getRecords() { return records; }
 
-    class Record{
+    public LineChartFlow(JSONObject data) {
+        try {
+            this.flowId = data.getString("ID");
+            this.flowName = data.getString("name");
+            this.flowColour = data.getString("color");
+            this.marker = data.getString("marker");
+            this.interpolation = data.getString("interpolation");
+            this.subAreaColour = data.getString("area");
+            this.maxItems = data.getInt("maxItems");
+        } catch (JSONException e) {}
+    }
+
+    class LineChartRecord{
         private String recordId;
         private int xValue; // x value
         private int yValue; // y value
 
-        public Record(String id, int xValue, int yValue){
+        public LineChartRecord(String id, int xValue, int yValue){
             this.recordId = id;
             this.xValue = xValue;
             this.yValue = yValue;
         }
-
-        public void setIndex(int xValue) { this.xValue = xValue; }
-        public void setValue(int yValue) { this.yValue = yValue; }
-
-        public int getYValue() { return xValue; }
-        public int getXValue() { return yValue; }
-    }
-
-    public LineChartFlow(String id, String name, String color) {
-        this.flowId = id;
-        this.flowName = name;
-        this.flowColour = color;
     }
 
     @Override
     public void createFlow(JSONObject data) {
-        records = new ArrayList<Record>();
+        records = new ArrayList<LineChartRecord>();
         JSONObject recordList = null;
         try {
             recordList = data.getJSONObject("records");
@@ -74,7 +76,14 @@ public class LineChartFlow extends FlowModel{
 
     @Override
     public void updateFlow(JSONObject data) {
-
+        try {
+            flowName = data.getString("name");
+            flowColour = data.getString("color");
+            marker = data.getString("marker");
+            interpolation = data.getString("interpolation");
+            subAreaColour = data.getString("area");
+            maxItems = data.getInt("maxItems");
+        } catch (JSONException e) {}
     }
 
     @Override
@@ -90,7 +99,7 @@ public class LineChartFlow extends FlowModel{
             JSONArray jsonValues = data.getJSONArray("value");
             int xValue = jsonValues.getInt(0);
             int yValue = jsonValues.getInt(1);
-            records.add(new Record(id, xValue, yValue));
+            records.add(new LineChartRecord(id, xValue, yValue));
         } catch (JSONException e) {}
     }
 

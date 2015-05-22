@@ -31,9 +31,6 @@ public class MapChartImpl extends Graph implements MapChart {
     private Boolean zoom;
     private Boolean legendOnPoint;
 
-
-    public void setMapChartImpl(JSONObject obj, String signal){JSONParser(obj, signal);}
-
     public float getLatitude() { return latitude; }
     public float getLongitude() { return longitude; }
     public int getScale() { return scale; }
@@ -53,12 +50,7 @@ public class MapChartImpl extends Graph implements MapChart {
     }
 
     @Override
-    public void setData(JSONObject data) {
-
-    }
-
-    @Override
-    public void updateData(JSONObject data) {
+    public void setRecords(JSONObject data) {
 
     }
 
