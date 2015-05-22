@@ -42,9 +42,9 @@ public class MapChartFlow extends FlowModel {
         private float valueX;
         private float valueY;
 
-        public MapChartRecord(String recordId, String markerId, float x, float y){
-            this.recordId = recordId;
-            this.markerId = markerId;
+        public MapChartRecord(String rId, String mId, float x, float y){
+            this.recordId = rId;
+            this.markerId = mId;
             valueX = x;
             valueY = y;
         }
@@ -65,11 +65,11 @@ public class MapChartFlow extends FlowModel {
     }
 
     class TraceModel{
-        String type;
-        String stokeColour;  // colour of the polyline
-        String fillColour;  // colour of the area subtended by the polyline
-        ArrayList<Float> coordinatesX = new ArrayList<Float>();
-        ArrayList<Float> coordinatesY = new ArrayList<Float>();
+        private String type;
+        private String stokeColour;  // colour of the polyline
+        private String fillColour;  // colour of the area subtended by the polyline
+        private ArrayList<Float> coordinatesX = new ArrayList<Float>();
+        private ArrayList<Float> coordinatesY = new ArrayList<Float>();
     }
 
     @Override
