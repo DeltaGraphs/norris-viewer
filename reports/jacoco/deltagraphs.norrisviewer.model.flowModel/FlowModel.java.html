@@ -18,27 +18,25 @@
  *
  */
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
-<span class="nc" id="L24">public abstract class FlowModel {</span>
+<span class="nc" id="L23">public abstract class FlowModel {</span>
 
     protected String flowId;
     protected String flowName;
 
     public abstract void createFlow(JSONObject data);
     public abstract void updateFlow(JSONObject data);
-    public abstract void deleteFlow();
+    public abstract void deleteRecordList();
     public abstract void addRecord(JSONObject data);
     public abstract void addRecords(JSONObject data);
     public abstract void updateRecord(JSONObject data);
     public abstract void deleteRecord(JSONObject data);
 
-<span class="nc" id="L37">    public void setFlowName(String name){ flowName = name;  }</span>
+<span class="nc" id="L36">    public void setFlowName(String name){ flowName = name;  }</span>
 
-<span class="nc" id="L39">    public String getFlowName() { return flowName; }</span>
-<span class="nc" id="L40">    public String getFlowId() { return flowId; }</span>
-
+<span class="nc" id="L38">    public String getFlowName() { return flowName; }</span>
+<span class="nc" id="L39">    public String getFlowId() { return flowId; }</span>
 
 }
 

@@ -43,13 +43,12 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     @Override
     public void update(Observable observable, Object data) {
 <span class="nc bnc" id="L45" title="All 2 branches missed.">        if (observable instanceof TableImpl) {</span>
-<span class="nc" id="L46">            graphView.setAppearance(tableInstance.getAddRowOn());</span>
-<span class="nc" id="L47">            graphView.setHeaders(tableInstance.getHeaders());</span>
-<span class="nc" id="L48">            graphView.setAddRowOn(tableInstance.getAddRowOn());</span>
-<span class="nc" id="L49">            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItemsDisplayedPerPage());</span>
-<span class="nc" id="L50">            graphView.setSortable(tableInstance.getSortable());</span>
+            //graphView.setHeaders(tableInstance.getHeader(1));
+<span class="nc" id="L47">            graphView.setAddRowOn(tableInstance.getAddRowOn());</span>
+<span class="nc" id="L48">            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());</span>
+<span class="nc" id="L49">            graphView.setSortable(tableInstance.getSortable());</span>
         }
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L51">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

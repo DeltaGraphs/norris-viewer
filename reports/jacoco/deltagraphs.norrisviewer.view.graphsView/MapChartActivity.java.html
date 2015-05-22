@@ -3,28 +3,24 @@
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.*;
+
 
 import deltagraphs.norrisviewer.R;
 
-<span class="nc" id="L15">public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {</span>
+<span class="nc" id="L12">public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {</span>
 
-    private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private GoogleMap map; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L21">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L22">        setContentView(R.layout.activity_map_chart);</span>
-
-<span class="nc" id="L24">        MapFragment mapFragment = (MapFragment) getFragmentManager()</span>
+<span class="nc" id="L18">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L19">        setContentView(R.layout.activity_map_chart);</span>
+<span class="nc" id="L20">        MapFragment mapFragment = (MapFragment) getFragmentManager()</span>
                 .findFragmentById(R.id.map);
-<span class="nc" id="L26">        mapFragment.getMapAsync(this);</span>
-<span class="nc" id="L27">    }</span>
+<span class="nc" id="L22">        mapFragment.getMapAsync(this);</span>
+<span class="nc" id="L23">    }</span>
 /*
     @Override
     protected void onResume() {
@@ -32,67 +28,55 @@ import deltagraphs.norrisviewer.R;
         setUpMapIfNeeded();
     }
 */
-    /**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * &lt;p/&gt;
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * &lt;p/&gt;
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
-    private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
-<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (mMap == null) {</span>
-            // Try to obtain the map from the SupportMapFragment.
-<span class="nc" id="L54">            mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))</span>
-                    .getMap();
-            // Check if we were successful in obtaining the map.
-<span class="nc bnc" id="L57" title="All 2 branches missed.">            if (mMap != null) {</span>
-<span class="nc" id="L58">                setUpMap();</span>
-            }
-        }
-<span class="nc" id="L61">    }</span>
-
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * &lt;p/&gt;
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
-    private void setUpMap() {
-<span class="nc" id="L70">        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title(&quot;Marker&quot;));</span>
-<span class="nc" id="L71">    }</span>
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap map) {
+<span class="nc" id="L34">        map.addMarker(new MarkerOptions()</span>
+                .position(new LatLng(10, 10))
+                .title(&quot;Hello world&quot;));
+<span class="nc" id="L37">    }</span>
 
-<span class="nc" id="L76">    }</span>
+    public void newMarker(GoogleMap map, float lat, float lng,String type, String shape, String icon, String text, String color){
+<span class="nc" id="L40">        map.addMarker(new MarkerOptions()</span>
+                .position(new LatLng(lat, lng))
+                .title(text));
+<span class="nc" id="L43">    }</span>
+
+    public void setType(GoogleMap map,String type){
+        //satellite, hybrid, terrain
+<span class="nc bnc" id="L47" title="All 18 branches missed.">        switch (type) {</span>
+            case &quot;roadMap&quot;:
+<span class="nc" id="L49">                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);</span>
+            case &quot;satellite&quot;:
+<span class="nc" id="L51">                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);</span>
+            case &quot;hybrid&quot;:
+<span class="nc" id="L53">                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);</span>
+            case &quot;terrain&quot;:
+<span class="nc" id="L55">                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);</span>
+            default:
+<span class="nc" id="L57">                map.setMapType(GoogleMap.MAP_TYPE_NONE);</span>
+        }
+<span class="nc" id="L59">    }</span>
+
 
     @Override
     public void setParams(float latitude, float longitude, int scale) {
 
-<span class="nc" id="L81">    }</span>
+<span class="nc" id="L65">    }</span>
 
     @Override
     public void setMapType(String type) {
 
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
     public void setZoom(Boolean choise) {
 
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L75">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
 
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L80">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

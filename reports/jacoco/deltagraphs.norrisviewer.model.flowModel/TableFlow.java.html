@@ -22,79 +22,83 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TableFlow extends FlowModel {
-    private ArrayList&lt;String&gt; columnKeys;
-    private ArrayList&lt;String&gt; columnFormat;
-    private String fontColourKey;
-    private String BackgroundColourKey;
-    private String BackgroundColourFormat;
     private int maxItems;
 
-    private ArrayList&lt;Record&gt; records;
-<span class="nc" id="L36">    public ArrayList&lt;Record&gt; getRecords() { return records; }</span>
+    private ArrayList&lt;TableRecord&gt; records;
+<span class="nc" id="L32">    public ArrayList&lt;TableRecord&gt; getRecords() { return records; }</span>
 
 
+<span class="nc" id="L35">    public TableFlow(JSONObject data) {</span>
 
-    class Record{
-        private int index; // ID of bar
-        private int value; // value for that bar
+<span class="nc" id="L37">    }</span>
 
-<span class="nc" id="L44">        public Record(int index, int value){</span>
+    class TableRecord{
+        private String recordId;
+<span class="nc" id="L41">        private ArrayList&lt;Value&gt; values = new ArrayList&lt;Value&gt;();</span>
 
+<span class="nc" id="L43">        public TableRecord(String id, ArrayList&lt;Value&gt; valuesList){</span>
+<span class="nc" id="L44">            recordId = id;</span>
+<span class="nc" id="L45">            values = valuesList;</span>
 <span class="nc" id="L46">        }</span>
 
-<span class="nc" id="L48">        public void setIndex(int index) { this.index = index; }</span>
-<span class="nc" id="L49">        public void setValue(int value) { this.value = value; }</span>
+        class Value{
+            String data;
+            String background;
+            String textColour;
 
-<span class="nc" id="L51">        public int getIndex() { return index; }</span>
-<span class="nc" id="L52">        public int getValue() { return value; }</span>
+<span class="nc" id="L53">            Value(String data, String bg, String tC){</span>
+<span class="nc" id="L54">                this.data = data;</span>
+<span class="nc" id="L55">                background = bg;</span>
+<span class="nc" id="L56">                textColour = tC;</span>
+<span class="nc" id="L57">            }</span>
+        }
 
     }
 
-<span class="nc" id="L56">    public TableFlow(String id, String name, String color) {</span>
-
-<span class="nc" id="L58">    }</span>
 
     @Override
     public void createFlow(JSONObject data) {
 
-<span class="nc" id="L63">    }</span>
+<span class="nc" id="L66">    }</span>
 
     @Override
     public void updateFlow(JSONObject data) {
 
-<span class="nc" id="L68">    }</span>
+<span class="nc" id="L71">    }</span>
 
     @Override
-    public void deleteFlow() {
+    public void deleteRecordList() {
 
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L76">    }</span>
 
     @Override
     public void addRecord(JSONObject record){
         try {
-<span class="nc" id="L78">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L79">            int index = jsonValues.getInt(0);</span>
-<span class="nc" id="L80">            int value = jsonValues.getInt(1);</span>
-<span class="nc" id="L81">            records.add(new Record(index, value));</span>
-<span class="nc" id="L82">        }catch (JSONException e) {}</span>
-<span class="nc" id="L83">    }</span>
+<span class="nc" id="L81">            JSONArray jsonValues = record.getJSONArray(&quot;value&quot;);</span>
+
+<span class="nc" id="L83">            int index = jsonValues.getInt(0);</span>
+<span class="nc" id="L84">            int value = jsonValues.getInt(1);</span>
+            //records.add(new TableRecord( ));
+<span class="nc" id="L86">        }catch (JSONException e) {}</span>
+<span class="nc" id="L87">    }</span>
 
     @Override
     public void addRecords(JSONObject data) {
 
-<span class="nc" id="L88">    }</span>
+<span class="nc" id="L92">    }</span>
 
     @Override
     public void updateRecord(JSONObject data) {
 
-<span class="nc" id="L93">    }</span>
+<span class="nc" id="L97">    }</span>
 
     @Override
     public void deleteRecord(JSONObject data) {
 
-<span class="nc" id="L98">    }</span>
+<span class="nc" id="L102">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
