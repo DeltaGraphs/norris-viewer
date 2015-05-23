@@ -31,15 +31,91 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap map) {
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(10, 10))
-                .title("Hello world"));
+        MarkerOptions mOpt = newMarker(map,"801", 10, 10, "shape", "default", "", "", "green");
+        map.addMarker(mOpt);
     }
 
-    public void newMarker(GoogleMap map, float lat, float lng,String type, String shape, String icon, String text, String color){
-        map.addMarker(new MarkerOptions()
-                .position(new LatLng(lat, lng))
-                .title(text));
+    public void addMarker(GoogleMap map, MarkerOptions mMarkerOptions){
+        map.addMarker(mMarkerOptions);
+    }
+
+    public MarkerOptions newMarker(GoogleMap map, String id, float lat, float lng,String type, String shape, String icon, String text, String color){
+
+        MarkerOptions m = new MarkerOptions();
+
+        switch (type) {
+            // shape marker
+            case "shape":
+                switch(shape) {
+
+
+                    //normal marker
+                    default:
+                        m.position(new LatLng(lat, lng));
+                        m.title(id);
+                        switch (color) {
+                            case "red":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                break;
+                            case "blue":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                                break;
+                            case "azure":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                                break;
+                            case "cyan":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+                                break;
+                            case "green":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                                break;
+                            case "magenta":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
+                                break;
+                            case "orange":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                                break;
+                            case "rose":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+                                break;
+                            case "violet":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
+                                break;
+                            case "yellow":
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                                break;
+                        }
+                }
+
+            case "icon":
+                m.position(new LatLng(lat, lng));
+                m.title(id);
+                switch (icon){
+                    /*
+                    case "bus":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker)));
+                        break;
+                    case "flag":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.flag_marker)));
+                        break;
+                    case "car":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_marker)));
+                        break;
+                    case "house":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.house_marker)));
+                        break;
+                    case "man":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.man_marker)));
+                        break;
+                    case "woman":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker)));
+                        break;
+                    */
+                }
+            case "text":
+            default:
+        }
+        return m;
     }
 
     public void setType(GoogleMap map,String type){
@@ -66,7 +142,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void setMapType(String type) {
-
     }
 
     @Override

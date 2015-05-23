@@ -66,6 +66,7 @@ dependencies {
     compile 'com.github.nkzawa:socket.io-client:0.3.0'
     compile 'com.google.android.gms:play-services:7.0.0'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+    compile 'com.google.maps.android:android-maps-utils:0.3+'
 }
 
 jacoco {
