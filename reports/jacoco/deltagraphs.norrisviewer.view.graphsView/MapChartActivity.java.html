@@ -31,52 +31,127 @@ import deltagraphs.norrisviewer.R;
 
     @Override
     public void onMapReady(GoogleMap map) {
-<span class="nc" id="L34">        map.addMarker(new MarkerOptions()</span>
-                .position(new LatLng(10, 10))
-                .title(&quot;Hello world&quot;));
-<span class="nc" id="L37">    }</span>
+<span class="nc" id="L34">        MarkerOptions mOpt = newMarker(map,&quot;801&quot;, 10, 10, &quot;shape&quot;, &quot;default&quot;, &quot;&quot;, &quot;&quot;, &quot;green&quot;);</span>
+<span class="nc" id="L35">        map.addMarker(mOpt);</span>
+<span class="nc" id="L36">    }</span>
 
-    public void newMarker(GoogleMap map, float lat, float lng,String type, String shape, String icon, String text, String color){
-<span class="nc" id="L40">        map.addMarker(new MarkerOptions()</span>
-                .position(new LatLng(lat, lng))
-                .title(text));
-<span class="nc" id="L43">    }</span>
+    public void addMarker(GoogleMap map, MarkerOptions mMarkerOptions){
+<span class="nc" id="L39">        map.addMarker(mMarkerOptions);</span>
+<span class="nc" id="L40">    }</span>
+
+    public MarkerOptions newMarker(GoogleMap map, String id, float lat, float lng,String type, String shape, String icon, String text, String color){
+
+<span class="nc" id="L44">        MarkerOptions m = new MarkerOptions();</span>
+
+<span class="nc bnc" id="L46" title="All 13 branches missed.">        switch (type) {</span>
+            // shape marker
+            case &quot;shape&quot;:
+<span class="nc" id="L49">                switch(shape) {</span>
+
+
+                    //normal marker
+                    default:
+<span class="nc" id="L54">                        m.position(new LatLng(lat, lng));</span>
+<span class="nc" id="L55">                        m.title(id);</span>
+<span class="nc bnc" id="L56" title="All 42 branches missed.">                        switch (color) {</span>
+                            case &quot;red&quot;:
+<span class="nc" id="L58">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));</span>
+<span class="nc" id="L59">                                break;</span>
+                            case &quot;blue&quot;:
+<span class="nc" id="L61">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));</span>
+<span class="nc" id="L62">                                break;</span>
+                            case &quot;azure&quot;:
+<span class="nc" id="L64">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));</span>
+<span class="nc" id="L65">                                break;</span>
+                            case &quot;cyan&quot;:
+<span class="nc" id="L67">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));</span>
+<span class="nc" id="L68">                                break;</span>
+                            case &quot;green&quot;:
+<span class="nc" id="L70">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));</span>
+<span class="nc" id="L71">                                break;</span>
+                            case &quot;magenta&quot;:
+<span class="nc" id="L73">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));</span>
+<span class="nc" id="L74">                                break;</span>
+                            case &quot;orange&quot;:
+<span class="nc" id="L76">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));</span>
+<span class="nc" id="L77">                                break;</span>
+                            case &quot;rose&quot;:
+<span class="nc" id="L79">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));</span>
+<span class="nc" id="L80">                                break;</span>
+                            case &quot;violet&quot;:
+<span class="nc" id="L82">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));</span>
+<span class="nc" id="L83">                                break;</span>
+                            case &quot;yellow&quot;:
+<span class="nc" id="L85">                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));</span>
+                                break;
+                        }
+                }
+
+            case &quot;icon&quot;:
+<span class="nc" id="L91">                m.position(new LatLng(lat, lng));</span>
+<span class="nc" id="L92">                m.title(id);</span>
+<span class="nc" id="L93">                switch (icon){</span>
+                    /*
+                    case &quot;bus&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker)));
+                        break;
+                    case &quot;flag&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.flag_marker)));
+                        break;
+                    case &quot;car&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_marker)));
+                        break;
+                    case &quot;house&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.house_marker)));
+                        break;
+                    case &quot;man&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.man_marker)));
+                        break;
+                    case &quot;woman&quot;:
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker)));
+                        break;
+                    */
+                }
+            case &quot;text&quot;:
+            default:
+        }
+<span class="nc" id="L118">        return m;</span>
+    }
 
     public void setType(GoogleMap map,String type){
         //satellite, hybrid, terrain
-<span class="nc bnc" id="L47" title="All 18 branches missed.">        switch (type) {</span>
+<span class="nc bnc" id="L123" title="All 18 branches missed.">        switch (type) {</span>
             case &quot;roadMap&quot;:
-<span class="nc" id="L49">                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);</span>
+<span class="nc" id="L125">                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);</span>
             case &quot;satellite&quot;:
-<span class="nc" id="L51">                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);</span>
+<span class="nc" id="L127">                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);</span>
             case &quot;hybrid&quot;:
-<span class="nc" id="L53">                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);</span>
+<span class="nc" id="L129">                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);</span>
             case &quot;terrain&quot;:
-<span class="nc" id="L55">                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);</span>
+<span class="nc" id="L131">                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);</span>
             default:
-<span class="nc" id="L57">                map.setMapType(GoogleMap.MAP_TYPE_NONE);</span>
+<span class="nc" id="L133">                map.setMapType(GoogleMap.MAP_TYPE_NONE);</span>
         }
-<span class="nc" id="L59">    }</span>
+<span class="nc" id="L135">    }</span>
 
 
     @Override
     public void setParams(float latitude, float longitude) {
 
-<span class="nc" id="L65">    }</span>
+<span class="nc" id="L141">    }</span>
 
     @Override
     public void setMapType(String type) {
-
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L145">    }</span>
 
     @Override
     public void setZoom(Boolean choise) {
 
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L150">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
 
-<span class="nc" id="L80">    }</span>
+<span class="nc" id="L155">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

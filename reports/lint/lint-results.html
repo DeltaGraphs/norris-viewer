@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Fri May 22 18:47:17 UTC 2015.<br/>
-1 errors and 51 warnings found:<br/><br/>
+Check performed at Sat May 23 12:06:57 UTC 2015.<br/>
+1 errors and 52 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -34,6 +34,10 @@ Check performed at Fri May 22 18:47:17 UTC 2015.<br/>
 <tr>
 <td class="countColumn">3</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#GradleDependency">GradleDependency: Obsolete Gradle Dependency</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#GradleDynamicVersion">GradleDynamicVersion: Gradle Dynamic Version</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#Performance">Performance</a>
 </td></tr>
@@ -163,7 +167,7 @@ To fix this issue, set the <code>targetSdkVersion</code> to the highest availabl
 <span class="lineno">  66</span>     compile 'com.github.nkzawa:socket.io-client:0.3.0'
 <span class="lineno">  67</span>     <span class="errorspan">compile 'com.google.android.gms:play-services:7.0.0'</span>
 <span class="lineno">  68</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
-<span class="lineno">  69</span> }
+<span class="lineno">  69</span>     compile 'com.google.maps.android:android-maps-utils:0.3+'
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -176,6 +180,31 @@ Explanation: Obsolete Gradle Dependency.</div>
 This detector looks for usages of libraries where the version you are using is not the current stable release. Using older versions is fine, and there are cases where you deliberately want to stick with an older version. However, you may simply not be aware that a more recent version is available, and that is what this lint check helps find.
 </div>
 <br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "GradleDependency" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="GradleDynamicVersion"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">GradleDynamicVersion: Gradle Dynamic Version</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:69</span>: <span class="message">Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.google.maps.android:android-maps-utils:0.3+)</span><br /><pre class="errorlines">
+<span class="lineno">  66</span>     compile 'com.github.nkzawa:socket.io-client:0.3.0'
+<span class="lineno">  67</span>     compile 'com.google.android.gms:play-services:7.0.0'
+<span class="lineno">  68</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
+<span class="lineno">  69</span>     <span class="errorspan">compile 'com.google.maps.android:android-maps-utils:0.3+'</span>
+<span class="lineno">  70</span> }
+<span class="lineno">  71</span> 
+</pre>
+</div>
+<div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
+<br>
+Priority: 4 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Gradle Dynamic Version.</div>
+<div class="explanation">
+Using <code>+</code> in dependencies lets you automatically pick up the latest available version rather than a specific, named version. However, this is not recommended; your builds are not repeatable; you may have tested with a slightly different version than what the build server used. (Using a dynamic version as the major version number is more problematic than using it in the minor version position.)
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "GradleDynamicVersion" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 
 <a name="Performance"></a>
