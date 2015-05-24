@@ -16,6 +16,10 @@ package deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
+import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+
 public interface MapChart {
     public float getLatitude();
     public float getLongitude();
@@ -23,4 +27,5 @@ public interface MapChart {
     public float getMapHeight();
     public Boolean getLegendOnPoint();
     public String getMapType();
+    public ArrayList<FlowModel> getFlowList();
 }

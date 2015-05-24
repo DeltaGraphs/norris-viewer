@@ -19,6 +19,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 import java.util.Observable;
 import java.util.Observer;
 
+import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 

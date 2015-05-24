@@ -34,6 +34,8 @@ public class PageModelImpl extends Observable implements PageModel{
 
     public void setPageModel(JSONObject data, String signal){
         JSONParser(data,signal);
+        setChanged();
+        notifyObservers();
     }
 
     //this method inserts a page

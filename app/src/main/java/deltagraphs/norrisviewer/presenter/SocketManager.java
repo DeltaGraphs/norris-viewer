@@ -12,7 +12,10 @@ import com.github.nkzawa.socketio.client.Socket;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.model.graphsModel.Graph;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
+import deltagraphs.norrisviewer.model.pageModel.PageModelImpl;
 import deltagraphs.norrisviewer.view.mainView.MainView;
 
 /*
@@ -86,9 +89,21 @@ public class SocketManager{
                     public void run() {
                         JSONObject obj = (JSONObject) args[0];
                         //try {
-                            if(activity instanceof MainView){
+                            if(activity instanceof MainView)
                                 ((PageModel)model).setPageModel(obj, signal);
-                            }
+                            else
+                                if(activity instanceof BarChart)
+                                    ((Graph)model).setGraph(obj, signal);
+                                    else
+                                    if(activity instanceof LineChart)
+                                        ((Graph)model).setGraph(obj, signal);
+                                        else
+                                        if(activity instanceof MapChart)
+                                            ((Graph)model).setGraph(obj, signal);
+                                            else
+                                            if(activity instanceof Table)
+                                                ((Graph)model).setGraph(obj, signal);
+
                             //float x = (float) obj.getDouble("item");
                             //dataModel.setMyData((float) obj.getDouble("item"));
                         //} catch (JSONException e) {

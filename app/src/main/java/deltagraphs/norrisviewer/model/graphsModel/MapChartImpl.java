@@ -4,8 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Observable;
 
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 
 /*
@@ -41,6 +43,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
     public float getMapHeight() { return mapHeight; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public String getMapType() { return mapType; }
+    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
 
     public void setParameters(JSONObject data) {
