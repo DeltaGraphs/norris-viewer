@@ -26,6 +26,6 @@ public interface MapChartView {
     public void setParams(float latitude, float longitude);
     public void setMapType(String type);
     public void setLegendOnPoint(Boolean legend);
-    public void setMapSize(float height, float width);
+    public void setZoom(float height, float width);
     public void setData(ArrayList<FlowModel> flowList);
 }

@@ -7,7 +7,10 @@ import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
 
 
+import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {
 
@@ -192,12 +195,17 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     @Override
-    public void setZoom(Boolean choise) {
+    public void setLegendOnPoint(Boolean legend) {
 
     }
 
     @Override
-    public void setLegendOnPoint(Boolean legend) {
+    public void setZoom(float height, float width) {
+
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList) {
 
     }
 }
