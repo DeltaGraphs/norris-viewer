@@ -35,10 +35,10 @@ public class MapChartFlow extends FlowModel {
     public ArrayList<MapChartRecord> getRecords() { return records; }
 
     public int getMaxItems() { return maxItems; }
-    public Marker getMarkerProperties() { return markerProperties; }
     public TraceModel getTrace() { return trace; }
 
-    public String getRecordRecordId(int index){ return records.get(index).recordId; }
+    public int getRecordSize(){return records.size(); }
+    public String getRecordId(int index){ return records.get(index).recordId; }
     public String getRecordMarkerId(int index){ return records.get(index).markerId; }
     public float getRecordLatitude(int index){ return records.get(index).latitude; }
     public float getRecordLongitude(int index){ return records.get(index).longitude; }

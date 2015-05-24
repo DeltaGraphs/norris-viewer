@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {
 
@@ -206,6 +207,20 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void setData(ArrayList<FlowModel> flowList) {
-
+        for(int i=0; i<flowList.size(); i++){
+            flowList.get(i).getFlowId();
+            flowList.get(i).getFlowName();
+            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
+            mapChartFlow.getMaxItems();
+            String markerType = mapChartFlow.getMarkerType();
+            mapChartFlow.getMarkerProperty(markerType);
+            mapChartFlow.getMarkerColour();
+            for(int j =0; j< mapChartFlow.getRecordSize(); j++) {
+                mapChartFlow.getRecordMarkerId(j);
+                mapChartFlow.getRecordLatitude(j);
+                mapChartFlow.getRecordLongitude(j);
+                mapChartFlow.getRecordId(j);
+            }
+        }
     }
 }
