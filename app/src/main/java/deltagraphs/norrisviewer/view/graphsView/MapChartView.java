@@ -18,9 +18,14 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  */
 
+import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+
 public interface MapChartView {
     public void setParams(float latitude, float longitude);
     public void setMapType(String type);
-    public void setZoom(Boolean choise);
     public void setLegendOnPoint(Boolean legend);
+    public void setMapSize(float height, float width);
+    public void setData(ArrayList<FlowModel> flowList);
 }
