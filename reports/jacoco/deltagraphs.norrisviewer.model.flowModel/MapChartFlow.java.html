@@ -35,10 +35,10 @@ import java.util.ArrayList;
 <span class="nc" id="L35">    public ArrayList&lt;MapChartRecord&gt; getRecords() { return records; }</span>
 
 <span class="nc" id="L37">    public int getMaxItems() { return maxItems; }</span>
-<span class="nc" id="L38">    public Marker getMarkerProperties() { return markerProperties; }</span>
-<span class="nc" id="L39">    public TraceModel getTrace() { return trace; }</span>
+<span class="nc" id="L38">    public TraceModel getTrace() { return trace; }</span>
 
-<span class="nc" id="L41">    public String getRecordRecordId(int index){ return records.get(index).recordId; }</span>
+<span class="nc" id="L40">    public int getRecordSize(){return records.size(); }</span>
+<span class="nc" id="L41">    public String getRecordId(int index){ return records.get(index).recordId; }</span>
 <span class="nc" id="L42">    public String getRecordMarkerId(int index){ return records.get(index).markerId; }</span>
 <span class="nc" id="L43">    public float getRecordLatitude(int index){ return records.get(index).latitude; }</span>
 <span class="nc" id="L44">    public float getRecordLongitude(int index){ return records.get(index).longitude; }</span>
