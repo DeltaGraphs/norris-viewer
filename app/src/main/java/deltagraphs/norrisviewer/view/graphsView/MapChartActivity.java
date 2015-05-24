@@ -33,7 +33,8 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap map) {
         MarkerOptions mOpt = newMarker(map,"823", 10, 10, "icon", "", "bus", "", "green");
         Marker m = map.addMarker(mOpt);
-        zoomAtPoint(map, m, 400, 500);
+        cameraPosition(map, 1000, 1000);
+        //zoomAtPoint(map, m, 400, 500);
     }
 
     public void addMarker(GoogleMap map, MarkerOptions mMarkerOptions){
@@ -50,6 +51,11 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         mMarker = map.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
     }
 
+    public void cameraPosition(GoogleMap map, float lat, float lng){
+        LatLng position = new LatLng(lat, lng);
+        map.moveCamera(CameraUpdateFactory.newLatLng(position));
+    }
+
     public MarkerOptions newMarker(GoogleMap map, String id, float lat, float lng,String type, String shape, String icon, String text, String color){
 
         MarkerOptions m = new MarkerOptions();
@@ -60,7 +66,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             case "shape":
                 switch(shape) {
                     //normal marker
-                    default:
+                    case "normal":
                         switch (color) {
                             case "red":
                                 m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
@@ -118,7 +124,10 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
                 }
             case "text":
+
             default:
+                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                break;
         }
         return m;
     }
@@ -150,7 +159,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     private double[] getBoundingBox(final double pLatitude, final double pLongitude, final int widthInMeters, final int heightInMeters) {
 
-        final double[] boundingBox = new double[4];
+        double[] boundingBox = new double[4];
 
         final double latRadian = Math.toRadians(pLatitude);
 
