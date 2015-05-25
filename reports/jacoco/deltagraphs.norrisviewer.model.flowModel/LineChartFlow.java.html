@@ -38,111 +38,115 @@ public class LineChartFlow extends FlowModel{
 <span class="nc" id="L38">    public String getInterpolation() { return interpolation; }</span>
 <span class="nc" id="L39">    public String getSubAreaColour(){ return subAreaColour; }</span>
 <span class="nc" id="L40">    public int maxItems() { return maxItems; }</span>
-<span class="nc" id="L41">    public ArrayList&lt;LineChartRecord&gt; getRecords() { return records; }</span>
 
-<span class="nc" id="L43">    public LineChartFlow(JSONObject data) {</span>
+<span class="nc" id="L42">    public int getRecordSize(){return records.size(); }</span>
+<span class="nc" id="L43">    public String getRecordId(int index){ return records.get(index).recordId; }</span>
+<span class="nc" id="L44">    public float getRecordValueX(int index){ return records.get(index).xValue; }</span>
+<span class="nc" id="L45">    public float getRecordValueY(int index){ return records.get(index).yValue; }</span>
+
+<span class="nc" id="L47">    public LineChartFlow(JSONObject data) {</span>
         try {
-<span class="nc" id="L45">            this.flowId = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L46">            this.flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L47">            this.flowColour = data.getString(&quot;color&quot;);</span>
-<span class="nc" id="L48">            this.marker = data.getString(&quot;marker&quot;);</span>
-<span class="nc" id="L49">            this.interpolation = data.getString(&quot;interpolation&quot;);</span>
-<span class="nc" id="L50">            this.subAreaColour = data.getString(&quot;area&quot;);</span>
-<span class="nc" id="L51">            this.maxItems = data.getInt(&quot;maxItems&quot;);</span>
-<span class="nc" id="L52">        } catch (JSONException e) {}</span>
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L49">            this.flowId = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L50">            this.flowName = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L51">            this.flowColour = data.getString(&quot;color&quot;);</span>
+<span class="nc" id="L52">            this.marker = data.getString(&quot;marker&quot;);</span>
+<span class="nc" id="L53">            this.interpolation = data.getString(&quot;interpolation&quot;);</span>
+<span class="nc" id="L54">            this.subAreaColour = data.getString(&quot;area&quot;);</span>
+<span class="nc" id="L55">            this.maxItems = data.getInt(&quot;maxItems&quot;);</span>
+<span class="nc" id="L56">        } catch (JSONException e) {}</span>
+<span class="nc" id="L57">    }</span>
 
     class LineChartRecord{
         private String recordId;
-        private int xValue; // x value
-        private int yValue; // y value
+        private float xValue; // x value
+        private float yValue; // y value
 
-<span class="nc" id="L60">        public LineChartRecord(String id, int xValue, int yValue){</span>
-<span class="nc" id="L61">            this.recordId = id;</span>
-<span class="nc" id="L62">            this.xValue = xValue;</span>
-<span class="nc" id="L63">            this.yValue = yValue;</span>
-<span class="nc" id="L64">        }</span>
+<span class="nc" id="L64">        public LineChartRecord(String id, float xValue, float yValue){</span>
+<span class="nc" id="L65">            this.recordId = id;</span>
+<span class="nc" id="L66">            this.xValue = xValue;</span>
+<span class="nc" id="L67">            this.yValue = yValue;</span>
+<span class="nc" id="L68">        }</span>
     }
 
     @Override
     public void createFlow(JSONObject data) {
-<span class="nc" id="L69">        records = new ArrayList&lt;LineChartRecord&gt;();</span>
-<span class="nc" id="L70">        JSONObject recordList = null;</span>
+<span class="nc" id="L73">        records = new ArrayList&lt;LineChartRecord&gt;();</span>
+<span class="nc" id="L74">        JSONObject recordList = null;</span>
         try {
-<span class="nc" id="L72">            recordList = data.getJSONObject(&quot;records&quot;);</span>
-<span class="nc" id="L73">        } catch (JSONException e) {}</span>
-<span class="nc" id="L74">        addRecords(recordList);</span>
-<span class="nc" id="L75">    }</span>
+<span class="nc" id="L76">            recordList = data.getJSONObject(&quot;records&quot;);</span>
+<span class="nc" id="L77">        } catch (JSONException e) {}</span>
+<span class="nc" id="L78">        addRecords(recordList);</span>
+<span class="nc" id="L79">    }</span>
 
     @Override
     public void updateFlow(JSONObject data) {
         try {
-<span class="nc" id="L80">            flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L81">            flowColour = data.getString(&quot;color&quot;);</span>
-<span class="nc" id="L82">            marker = data.getString(&quot;marker&quot;);</span>
-<span class="nc" id="L83">            interpolation = data.getString(&quot;interpolation&quot;);</span>
-<span class="nc" id="L84">            subAreaColour = data.getString(&quot;area&quot;);</span>
-<span class="nc" id="L85">            maxItems = data.getInt(&quot;maxItems&quot;);</span>
-<span class="nc" id="L86">        } catch (JSONException e) {}</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc" id="L84">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L85">            flowColour = data.getString(&quot;color&quot;);</span>
+<span class="nc" id="L86">            marker = data.getString(&quot;marker&quot;);</span>
+<span class="nc" id="L87">            interpolation = data.getString(&quot;interpolation&quot;);</span>
+<span class="nc" id="L88">            subAreaColour = data.getString(&quot;area&quot;);</span>
+<span class="nc" id="L89">            maxItems = data.getInt(&quot;maxItems&quot;);</span>
+<span class="nc" id="L90">        } catch (JSONException e) {}</span>
+<span class="nc" id="L91">    }</span>
 
     @Override
     public void deleteRecordList() {
-<span class="nc" id="L91">        records = null;</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L95">        records = null;</span>
+<span class="nc" id="L96">    }</span>
 
     @Override
     public void addRecord(JSONObject data) {
-<span class="nc" id="L96">        String id = null;</span>
+<span class="nc" id="L100">        String id = null;</span>
         try {
-<span class="nc" id="L98">            id = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L99">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L100">            int xValue = jsonValues.getInt(0);</span>
-<span class="nc" id="L101">            int yValue = jsonValues.getInt(1);</span>
-<span class="nc" id="L102">            records.add(new LineChartRecord(id, xValue, yValue));</span>
-<span class="nc" id="L103">        } catch (JSONException e) {}</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L102">            id = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L103">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L104">            float xValue = (float) jsonValues.getDouble(0);</span>
+<span class="nc" id="L105">            float yValue = (float) jsonValues.getDouble(1);</span>
+<span class="nc" id="L106">            records.add(new LineChartRecord(id, xValue, yValue));</span>
+<span class="nc" id="L107">        } catch (JSONException e) {}</span>
+<span class="nc" id="L108">    }</span>
 
     @Override
     public void addRecords(JSONObject recordArray){
         try {
-<span class="nc" id="L109">            JSONArray jsonRecords = recordArray.getJSONArray(&quot;records&quot;);</span>
-<span class="nc" id="L110">            int recordLength = jsonRecords.length();</span>
-<span class="nc bnc" id="L111" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
-<span class="nc" id="L112">                JSONObject record = jsonRecords.getJSONObject(i);</span>
-<span class="nc" id="L113">                addRecord(record);</span>
+<span class="nc" id="L113">            JSONArray jsonRecords = recordArray.getJSONArray(&quot;records&quot;);</span>
+<span class="nc" id="L114">            int recordLength = jsonRecords.length();</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="nc" id="L116">                JSONObject record = jsonRecords.getJSONObject(i);</span>
+<span class="nc" id="L117">                addRecord(record);</span>
             }
-<span class="nc" id="L115">        }catch (JSONException e) {}</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L119">        }catch (JSONException e) {}</span>
+<span class="nc" id="L120">    }</span>
 
     @Override
     public void updateRecord(JSONObject data) {
         try {
-<span class="nc" id="L121">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L122">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L123">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L124">            records.get(recordIndex).xValue = jsonValues.getInt(0);</span>
-<span class="nc" id="L125">            records.get(recordIndex).yValue = jsonValues.getInt(1);</span>
-<span class="nc" id="L126">        } catch (JSONException e) {}</span>
-<span class="nc" id="L127">    }</span>
+<span class="nc" id="L125">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L126">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L127">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="nc" id="L128">            records.get(recordIndex).xValue = jsonValues.getInt(0);</span>
+<span class="nc" id="L129">            records.get(recordIndex).yValue = jsonValues.getInt(1);</span>
+<span class="nc" id="L130">        } catch (JSONException e) {}</span>
+<span class="nc" id="L131">    }</span>
 
 
     // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-<span class="nc" id="L132">        int index = -1;</span>
-<span class="nc bnc" id="L133" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (records.get(index).recordId.equals(id))) {</span>
-<span class="nc" id="L134">            index++;</span>
+<span class="nc" id="L136">        int index = -1;</span>
+<span class="nc bnc" id="L137" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (records.get(index).recordId.equals(id))) {</span>
+<span class="nc" id="L138">            index++;</span>
         }
-<span class="nc" id="L136">        return index;</span>
+<span class="nc" id="L140">        return index;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L142">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L143">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L144">            records.remove(recordIndex);</span>
-<span class="nc" id="L145">        } catch (JSONException e) {}</span>
-<span class="nc" id="L146">    }</span>
+<span class="nc" id="L146">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L147">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L148">            records.remove(recordIndex);</span>
+<span class="nc" id="L149">        } catch (JSONException e) {}</span>
+<span class="nc" id="L150">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
