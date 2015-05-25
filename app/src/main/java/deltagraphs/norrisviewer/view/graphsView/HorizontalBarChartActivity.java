@@ -25,6 +25,7 @@ import com.github.mikephil.charting.utils.ValueFormatter;
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public class HorizontalBarChartActivity extends ActionBarActivity implements BarChartView,SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
 
@@ -165,6 +166,11 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
+
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList) {
 
     }
 
