@@ -38,7 +38,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
                     .getMap();
             // Check if we were successful in obtaining the map.
 <span class="nc bnc" id="L40" title="All 2 branches missed.">            if (map != null) {</span>
-<span class="nc" id="L41">                addMapMarker(&quot;345&quot;, 10, 10, &quot;icon&quot;, &quot;bus&quot;, &quot;&quot;);</span>
+<span class="nc" id="L41">                addMapMarker(&quot;345&quot;, 10, 10, &quot;icon&quot;, &quot;car&quot;, &quot;yellow&quot;);</span>
             }
         }
 <span class="nc" id="L44">    }</span>
@@ -47,7 +47,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
     public void onMapReady(GoogleMap mMap) {
 <span class="nc" id="L48">    }</span>
 
-    public void addMapMarker(String id, float lat, float lng,String type, String property, String color){
+    public void addMapMarker(String id, float lat, float lng, String type, String property, String color){
 <span class="nc" id="L51">        MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);</span>
 <span class="nc" id="L52">        map.addMarker(mMarkerOptions);</span>
 <span class="nc" id="L53">    }</span>
@@ -114,125 +114,127 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
                                 break;
                         }
                 }
+<span class="nc" id="L117">                break;</span>
 
             case &quot;icon&quot;:
-<span class="nc bnc" id="L119" title="All 26 branches missed.">                switch (property){</span>
+<span class="nc bnc" id="L120" title="All 26 branches missed.">                switch (property){</span>
                     case &quot;bus&quot;:
-<span class="nc" id="L121">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));</span>
-<span class="nc" id="L122">                        break;</span>
+<span class="nc" id="L122">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));</span>
+<span class="nc" id="L123">                        break;</span>
                     case &quot;flag&quot;:
-<span class="nc" id="L124">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.flag_marker));</span>
-<span class="nc" id="L125">                        break;</span>
+<span class="nc" id="L125">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.flag_marker));</span>
+<span class="nc" id="L126">                        break;</span>
                     case &quot;car&quot;:
-<span class="nc" id="L127">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_marker));</span>
-<span class="nc" id="L128">                        break;</span>
+<span class="nc" id="L128">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_marker));</span>
+<span class="nc" id="L129">                        break;</span>
                     case &quot;house&quot;:
-<span class="nc" id="L130">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.house_marker));</span>
-<span class="nc" id="L131">                        break;</span>
+<span class="nc" id="L131">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.house_marker));</span>
+<span class="nc" id="L132">                        break;</span>
                     case &quot;man&quot;:
-<span class="nc" id="L133">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.man_marker));</span>
-<span class="nc" id="L134">                        break;</span>
+<span class="nc" id="L134">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.man_marker));</span>
+<span class="nc" id="L135">                        break;</span>
                     case &quot;woman&quot;:
-<span class="nc" id="L136">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker));</span>
+<span class="nc" id="L137">                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker));</span>
                         break;
 
                 }
+<span class="nc" id="L141">                break;</span>
             case &quot;text&quot;:
 
             default:
-<span class="nc" id="L143">                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));</span>
+<span class="nc" id="L145">                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));</span>
                 break;
         }
-<span class="nc" id="L146">        return m;</span>
+<span class="nc" id="L148">        return m;</span>
     }
 
     public void setType(String type){
         //satellite, hybrid, terrain
-<span class="nc bnc" id="L151" title="All 18 branches missed.">        switch (type) {</span>
+<span class="nc bnc" id="L153" title="All 18 branches missed.">        switch (type) {</span>
             case &quot;roadMap&quot;:
-<span class="nc" id="L153">                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);</span>
+<span class="nc" id="L155">                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);</span>
             case &quot;satellite&quot;:
-<span class="nc" id="L155">                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);</span>
+<span class="nc" id="L157">                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);</span>
             case &quot;hybrid&quot;:
-<span class="nc" id="L157">                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);</span>
+<span class="nc" id="L159">                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);</span>
             case &quot;terrain&quot;:
-<span class="nc" id="L159">                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);</span>
+<span class="nc" id="L161">                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);</span>
             default:
-<span class="nc" id="L161">                map.setMapType(GoogleMap.MAP_TYPE_NONE);</span>
+<span class="nc" id="L163">                map.setMapType(GoogleMap.MAP_TYPE_NONE);</span>
         }
-<span class="nc" id="L163">    }</span>
+<span class="nc" id="L165">    }</span>
 
 
     public void zoomAtPoint(Marker mMarker, int width, int height){
-<span class="nc" id="L167">        LatLng position = mMarker.getPosition();</span>
-<span class="nc" id="L168">        double[] ref = getBoundingBox(position.latitude, position.longitude, width, height);</span>
-<span class="nc" id="L169">        LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng( ref[2], ref[3]));</span>
-<span class="nc" id="L170">        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));</span>
-<span class="nc" id="L171">        map.animateCamera(CameraUpdateFactory.zoomIn());</span>
-<span class="nc" id="L172">    }</span>
+<span class="nc" id="L169">        LatLng position = mMarker.getPosition();</span>
+<span class="nc" id="L170">        double[] ref = getBoundingBox(position.latitude, position.longitude, width, height);</span>
+<span class="nc" id="L171">        LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng( ref[2], ref[3]));</span>
+<span class="nc" id="L172">        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));</span>
+<span class="nc" id="L173">        map.animateCamera(CameraUpdateFactory.zoomIn());</span>
+<span class="nc" id="L174">    }</span>
 
     private double[] getBoundingBox(final double pLatitude, final double pLongitude, final int widthInMeters, final int heightInMeters) {
 
-<span class="nc" id="L176">        double[] boundingBox = new double[4];</span>
+<span class="nc" id="L178">        double[] boundingBox = new double[4];</span>
 
-<span class="nc" id="L178">        final double latRadian = Math.toRadians(pLatitude);</span>
+<span class="nc" id="L180">        final double latRadian = Math.toRadians(pLatitude);</span>
 
-<span class="nc" id="L180">        final double degLatKm = 110.574235;</span>
-<span class="nc" id="L181">        final double degLongKm = 110.572833 * Math.cos(latRadian);</span>
-<span class="nc" id="L182">        final double deltaLat = widthInMeters / 1000.0 / degLatKm;</span>
-<span class="nc" id="L183">        final double deltaLong = heightInMeters / 1000.0 / degLongKm;</span>
+<span class="nc" id="L182">        final double degLatKm = 110.574235;</span>
+<span class="nc" id="L183">        final double degLongKm = 110.572833 * Math.cos(latRadian);</span>
+<span class="nc" id="L184">        final double deltaLat = widthInMeters / 1000.0 / degLatKm;</span>
+<span class="nc" id="L185">        final double deltaLong = heightInMeters / 1000.0 / degLongKm;</span>
 
-<span class="nc" id="L185">        final double minLat = pLatitude - deltaLat;</span>
-<span class="nc" id="L186">        final double minLong = pLongitude - deltaLong;</span>
-<span class="nc" id="L187">        final double maxLat = pLatitude + deltaLat;</span>
-<span class="nc" id="L188">        final double maxLong = pLongitude + deltaLong;</span>
+<span class="nc" id="L187">        final double minLat = pLatitude - deltaLat;</span>
+<span class="nc" id="L188">        final double minLong = pLongitude - deltaLong;</span>
+<span class="nc" id="L189">        final double maxLat = pLatitude + deltaLat;</span>
+<span class="nc" id="L190">        final double maxLong = pLongitude + deltaLong;</span>
 
-<span class="nc" id="L190">        boundingBox[0] = minLat;</span>
-<span class="nc" id="L191">        boundingBox[1] = minLong;</span>
-<span class="nc" id="L192">        boundingBox[2] = maxLat;</span>
-<span class="nc" id="L193">        boundingBox[3] = maxLong;</span>
+<span class="nc" id="L192">        boundingBox[0] = minLat;</span>
+<span class="nc" id="L193">        boundingBox[1] = minLong;</span>
+<span class="nc" id="L194">        boundingBox[2] = maxLat;</span>
+<span class="nc" id="L195">        boundingBox[3] = maxLong;</span>
 
-<span class="nc" id="L195">        return boundingBox;</span>
+<span class="nc" id="L197">        return boundingBox;</span>
     }
 
 
     @Override
     public void setParams(float latitude, float longitude) {
 
-<span class="nc" id="L202">    }</span>
+<span class="nc" id="L204">    }</span>
 
     @Override
     public void setMapType(String type) {
-<span class="nc" id="L206">    }</span>
+<span class="nc" id="L208">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
 
-<span class="nc" id="L211">    }</span>
+<span class="nc" id="L213">    }</span>
 
     @Override
     public void setZoom(float height, float width) {
 
-<span class="nc" id="L216">    }</span>
+<span class="nc" id="L218">    }</span>
 
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList) {
-<span class="nc bnc" id="L220" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++){</span>
-<span class="nc" id="L221">            flowList.get(i).getFlowId();</span>
-<span class="nc" id="L222">            flowList.get(i).getFlowName();</span>
-<span class="nc" id="L223">            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);</span>
-<span class="nc" id="L224">            mapChartFlow.getMaxItems();</span>
-<span class="nc" id="L225">            String markerType = mapChartFlow.getMarkerType();</span>
-<span class="nc" id="L226">            String markerProperty = mapChartFlow.getMarkerProperty(markerType);</span>
-<span class="nc" id="L227">            String color = mapChartFlow.getMarkerColour();</span>
-<span class="nc bnc" id="L228" title="All 2 branches missed.">            for(int j =0; j&lt; mapChartFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L229">                String id = mapChartFlow.getRecordMarkerId(j);</span>
-<span class="nc" id="L230">                float lat = mapChartFlow.getRecordLatitude(j);</span>
-<span class="nc" id="L231">                float lng = mapChartFlow.getRecordLongitude(j);</span>
-<span class="nc" id="L232">                String recordId = mapChartFlow.getRecordId(j);</span>
-<span class="nc" id="L233">                addMapMarker(id, lat, lng, markerType, markerProperty, color);</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++){</span>
+<span class="nc" id="L223">            flowList.get(i).getFlowId();</span>
+<span class="nc" id="L224">            flowList.get(i).getFlowName();</span>
+<span class="nc" id="L225">            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);</span>
+<span class="nc" id="L226">            mapChartFlow.getMaxItems();</span>
+<span class="nc" id="L227">            String markerType = mapChartFlow.getMarkerType();</span>
+<span class="nc" id="L228">            String markerProperty = mapChartFlow.getMarkerProperty(markerType);</span>
+<span class="nc" id="L229">            String color = mapChartFlow.getMarkerColour();</span>
+<span class="nc bnc" id="L230" title="All 2 branches missed.">            for(int j =0; j&lt; mapChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L231">                String id = mapChartFlow.getRecordMarkerId(j);</span>
+<span class="nc" id="L232">                float lat = mapChartFlow.getRecordLatitude(j);</span>
+<span class="nc" id="L233">                float lng = mapChartFlow.getRecordLongitude(j);</span>
+<span class="nc" id="L234">                String recordId = mapChartFlow.getRecordId(j);</span>
+<span class="nc" id="L235">                addMapMarker(id, lat, lng, markerType, markerProperty, color);</span>
             }
         }
-<span class="nc" id="L236">    }</span>
+<span class="nc" id="L238">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
