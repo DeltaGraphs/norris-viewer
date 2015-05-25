@@ -38,7 +38,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (map != null) {
-                addMapMarker("345", 10, 10, "icon", "bus", "");
+                addMapMarker("345", 10, 10, "icon", "car", "yellow");
             }
         }
     }
@@ -47,7 +47,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap mMap) {
     }
 
-    public void addMapMarker(String id, float lat, float lng,String type, String property, String color){
+    public void addMapMarker(String id, float lat, float lng, String type, String property, String color){
         MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
         map.addMarker(mMarkerOptions);
     }
@@ -114,6 +114,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                                 break;
                         }
                 }
+                break;
 
             case "icon":
                 switch (property){
@@ -137,6 +138,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                         break;
 
                 }
+                break;
             case "text":
 
             default:

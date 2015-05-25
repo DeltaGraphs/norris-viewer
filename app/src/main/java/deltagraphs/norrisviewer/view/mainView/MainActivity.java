@@ -93,7 +93,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
 
         if (id == R.id.action_credits) {
             Context context = getApplicationContext();
-            CharSequence text = "";
+            CharSequence text = "Credits to DeltaGraphs 2015";
             int duration = Toast.LENGTH_SHORT;
 
             Toast toast = Toast.makeText(context, text, duration);

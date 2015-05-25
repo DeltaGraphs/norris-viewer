@@ -37,7 +37,9 @@ public abstract class Graph extends Observable {
     public void setGraph(JSONObject obj, String signal){
         JSONParser(obj, signal);
         setChanged();
-        notifyObservers();}
+        notifyObservers();
+        System.out.print("fatto il notify");
+    }
 
     public abstract void setParameters(JSONObject data);
     public abstract void updateParameters(JSONObject data);
