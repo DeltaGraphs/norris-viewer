@@ -2,25 +2,6 @@
 <issues format="4" by="lint 24.0.2">
 
     <issue
-        id="MissingPrefix"
-        severity="Error"
-        message="Unexpected namespace prefix &quot;xmlns&quot; found for tag `fragment`"
-        category="Correctness"
-        priority="6"
-        summary="Missing Android XML namespace"
-        explanation="Most Android views have attributes in the Android namespace. When referencing these attributes you *must* include the namespace prefix, or your attribute will be interpreted by `aapt` as just a custom attribute.
-
-Similarly, in manifest files, nearly all attributes should be in the `android:` namespace."
-        errorLine1="    &lt;fragment xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
-        errorLine2="              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-        quickfix="studio,adt">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_map_chart.xml"
-            line="5"
-            column="15"/>
-    </issue>
-
-    <issue
         id="OldTargetApi"
         severity="Warning"
         message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details."
@@ -95,13 +76,13 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     <issue
         id="GradleDynamicVersion"
         severity="Warning"
-        message="Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.google.maps.android:android-maps-utils:0.3+)"
+        message="Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.google.maps.android:android-maps-utils:0.3.+)"
         category="Correctness"
         priority="4"
         summary="Gradle Dynamic Version"
         explanation="Using `+` in dependencies lets you automatically pick up the latest available version rather than a specific, named version. However, this is not recommended; your builds are not repeatable; you may have tested with a slightly different version than what the build server used. (Using a dynamic version as the major version number is more problematic than using it in the minor version position.)"
-        errorLine1="    compile &apos;com.google.maps.android:android-maps-utils:0.3+&apos;"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        errorLine1="    compile &apos;com.google.maps.android:android-maps-utils:0.3.+&apos;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         quickfix="studio">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/build.gradle"
@@ -181,6 +162,22 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
             line="6"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.title_activity_maps` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;title_activity_maps&quot;>Map&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="18"
             column="13"/>
     </issue>
 

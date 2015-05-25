@@ -18,14 +18,10 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Mon May 25 10:06:34 UTC 2015.<br/>
-1 errors and 52 warnings found:<br/><br/>
+Check performed at Mon May 25 10:15:08 UTC 2015.<br/>
+0 errors and 53 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
-</td></tr>
-<tr>
-<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-error.png" alt="Error" />
-<a href="#MissingPrefix">MissingPrefix: Missing Android XML namespace</a>
 </td></tr>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
@@ -46,7 +42,7 @@ Check performed at Mon May 25 10:06:34 UTC 2015.<br/>
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
-<td class="countColumn">4</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">5</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr>
@@ -84,33 +80,6 @@ Check performed at Mon May 25 10:06:34 UTC 2015.<br/>
 <br/>
 <a name="Correctness"></a>
 <div class="category"><a href="#" title="Return to top">Correctness</a><div class="categorySeparator"></div>
-</div>
-<a name="MissingPrefix"></a>
-<div class="issue">
-<div class="id"><a href="#" title="Return to top">MissingPrefix: Missing Android XML namespace</a><div class="issueSeparator"></div>
-</div>
-<div class="warningslist">
-<span class="location"><a href="../../src/main/res/layout/activity_map_chart.xml">../../src/main/res/layout/activity_map_chart.xml</a>:5</span>: <span class="message">Unexpected namespace prefix "xmlns" found for tag <code>fragment</code></span><br /><pre class="errorlines">
-<span class="lineno">   2</span> &lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-<span class="lineno">   3</span>     android:orientation="vertical" android:layout_width="match_parent"
-<span class="lineno">   4</span>     android:layout_height="match_parent">
-<span class="lineno">   5</span>     &lt;fragment <span class="errorspan">xmlns:android="http://schemas.android.com/apk/res/android"</span>
-<span class="lineno">   6</span>         android:id="@+id/map"
-<span class="lineno">   7</span>         android:layout_width="match_parent"
-</pre>
-</div>
-<div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT & Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
-<br>
-Priority: 6 / 10<br/>
-Category: Correctness</div>
-Severity: <span class="error">Error</span><div class="summary">
-Explanation: Missing Android XML namespace.</div>
-<div class="explanation">
-Most Android views have attributes in the Android namespace. When referencing these attributes you <b>must</b> include the namespace prefix, or your attribute will be interpreted by <code>aapt</code> as just a custom attribute.<br/>
-<br/>
-Similarly, in manifest files, nearly all attributes should be in the <code>android:</code> namespace.
-</div>
-<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "MissingPrefix" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 <a name="OldTargetApi"></a>
 <div class="issue">
@@ -167,7 +136,7 @@ To fix this issue, set the <code>targetSdkVersion</code> to the highest availabl
 <span class="lineno">  66</span>     compile 'com.github.nkzawa:socket.io-client:0.3.0'
 <span class="lineno">  67</span>     <span class="errorspan">compile 'com.google.android.gms:play-services:7.0.0'</span>
 <span class="lineno">  68</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
-<span class="lineno">  69</span>     compile 'com.google.maps.android:android-maps-utils:0.3+'
+<span class="lineno">  69</span>     compile 'com.google.maps.android:android-maps-utils:0.3.+'
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -186,11 +155,11 @@ This detector looks for usages of libraries where the version you are using is n
 <div class="id"><a href="#" title="Return to top">GradleDynamicVersion: Gradle Dynamic Version</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="../../build.gradle">../../build.gradle</a>:69</span>: <span class="message">Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.google.maps.android:android-maps-utils:0.3+)</span><br /><pre class="errorlines">
+<span class="location"><a href="../../build.gradle">../../build.gradle</a>:69</span>: <span class="message">Avoid using + in version numbers; can lead to unpredictable and unrepeatable builds (com.google.maps.android:android-maps-utils:0.3.+)</span><br /><pre class="errorlines">
 <span class="lineno">  66</span>     compile 'com.github.nkzawa:socket.io-client:0.3.0'
 <span class="lineno">  67</span>     compile 'com.google.android.gms:play-services:7.0.0'
 <span class="lineno">  68</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
-<span class="lineno">  69</span>     <span class="errorspan">compile 'com.google.maps.android:android-maps-utils:0.3+'</span>
+<span class="lineno">  69</span>     <span class="errorspan">compile 'com.google.maps.android:android-maps-utils:0.3.+'</span>
 <span class="lineno">  70</span> }
 <span class="lineno">  71</span> 
 </pre>
@@ -255,6 +224,14 @@ Of course it's possible that your custom drawable is translucent and you want it
 <span class="lineno">   6</span>     &lt;string <span class="errorspan">name="action_example">Example action&lt;/string></span>
 <span class="lineno">   7</span>     &lt;string name="action_settings">Settings&lt;/string>
 <span class="lineno">   8</span>     &lt;string name="action_credits">Credits&lt;/string>
+</pre>
+<span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:18</span>: <span class="message">The resource <code>R.string.title_activity_maps</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  15</span> 
+<span class="lineno">  16</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  17</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
+<span class="lineno">  18</span>     &lt;string <span class="errorspan">name="title_activity_maps">Map&lt;/string></span>
+<span class="lineno">  19</span> 
+<span class="lineno">  20</span> &lt;/resources>
 </pre>
 </div>
 <div class="metadata">Priority: 3 / 10<br/>
