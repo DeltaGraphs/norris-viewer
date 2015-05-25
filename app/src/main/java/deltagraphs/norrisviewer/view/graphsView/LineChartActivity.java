@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
@@ -153,6 +156,11 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
+
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList) {
 
     }
 }

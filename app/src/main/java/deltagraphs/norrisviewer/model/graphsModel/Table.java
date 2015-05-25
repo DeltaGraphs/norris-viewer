@@ -29,6 +29,7 @@ public interface Table {
     public ArrayList<FlowModel> getFlowList();
     public int getBorderWidth();
     public String getBorderColour();
+    public int getNumberOfColumns();
 
     //column parameters
     public String getHeaderValue(int index);

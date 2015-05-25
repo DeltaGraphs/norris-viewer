@@ -81,6 +81,7 @@ public void update(Observable observable,Object data) {
         graphView.setSortable(barChartInstance.getSortable());
         graphView.setGrid(barChartInstance.getGrid());
         graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());
+        graphView.setData(barChartInstance.getFlowList());
     }
 }
 

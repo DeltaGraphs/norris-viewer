@@ -13,6 +13,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
@@ -66,11 +67,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
     @Override
-    public void setHeaders(ArrayList<String> headers) {
-
-    }
-
-    @Override
     public void setAddRowOn(String addRowOn) {
 
     }
@@ -82,6 +78,48 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
     @Override
     public void setSortable(Boolean Sortable) {
+
+    }
+
+    @Override
+    public void setSortByCol(String sortingColumn) {
+
+    }
+
+    @Override
+    public void setSortOrder(String sortOrder) {
+
+    }
+
+    @Override
+    public void setBorderWidth(int borderWidth) {
+
+    }
+
+    @Override
+    public void setBorderColour(String borderColour) {
+
+    }
+
+    @Override
+    public void setHeader(int index, String value, String textColour, String bgColour) {
+
+    }
+
+    @Override
+    public void setRowEven(int index, String textColour, String bgColour) {
+
+    }
+
+    @Override
+    public void setRowOdd(int index, String textColour, String bgColour) {
+
+    }
+
+
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList) {
 
     }
 

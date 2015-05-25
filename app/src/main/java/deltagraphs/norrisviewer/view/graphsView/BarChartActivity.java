@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 import lecho.lib.hellocharts.formatter.SimpleAxisValueFormatter;
@@ -214,6 +215,11 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
     @Override
     public void setLegendOnPoint(Boolean legend) {
         hasLegend = legend;
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList) {
+
     }
 
     @Override
