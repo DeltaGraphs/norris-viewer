@@ -52,7 +52,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     public void update(Observable observable, Object data) {
 <span class="nc bnc" id="L53" title="All 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
             // in quanto potremmo avere piu modelli dati
-            // verifichiamo su quale modello � avvenuto un cambiamento dei dati
+            // verifichiamo su quale modello é avvenuto un cambiamento dei dati
             // prima di effettuare il cast
 <span class="nc" id="L57">            graphView.setAxis('x',</span>
                     lineChartInstance.getAxisX().getName(),
@@ -74,11 +74,12 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 <span class="nc" id="L74">            graphView.setBackground(lineChartInstance.getBackground());</span>
 <span class="nc" id="L75">            graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
 <span class="nc" id="L76">            graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());</span>
+<span class="nc" id="L77">            graphView.setData(lineChartInstance.getFlowList());</span>
         }
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L79">    }</span>
 
     public void viewPointLegend(){
 
-<span class="nc" id="L82">    }</span>
+<span class="nc" id="L83">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
