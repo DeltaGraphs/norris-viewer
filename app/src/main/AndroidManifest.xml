@@ -19,8 +19,6 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,6 +48,7 @@
             android:label="@string/title_activity_map_chart" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

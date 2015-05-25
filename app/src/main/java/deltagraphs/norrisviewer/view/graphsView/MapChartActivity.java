@@ -21,46 +21,53 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_chart);
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        setUpMapIfNeeded();
     }
-/*
+
     @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
     }
-*/
 
-    @Override
-    public void onMapReady(GoogleMap map) {
-        MarkerOptions mOpt = newMarker(map,"823", 10, 10, "icon", "", "bus", "", "green");
-        Marker m = map.addMarker(mOpt);
-        cameraPosition(map, 1000, 1000);
-        //zoomAtPoint(map, m, 400, 500);
+    private void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (map == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                    .getMap();
+            // Check if we were successful in obtaining the map.
+            if (map != null) {
+                addMapMarker("345", 10, 10, "icon", "bus", "");
+            }
+        }
     }
 
-    public void addMarker(GoogleMap map, MarkerOptions mMarkerOptions){
+    @Override
+    public void onMapReady(GoogleMap mMap) {
+    }
+
+    public void addMapMarker(String id, float lat, float lng,String type, String property, String color){
+        MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
         map.addMarker(mMarkerOptions);
     }
 
-    public void removeMarker(GoogleMap map, Marker mMarker){
+    public void removeMarker(Marker mMarker){
         if(mMarker != null)
             mMarker.remove();
     }
 
-    public void updateMarkerPosition(GoogleMap map, Marker mMarker, float lat, float lng){
-        removeMarker(map, mMarker);
+    public void updateMarkerPosition(Marker mMarker, float lat, float lng){
+        removeMarker(mMarker);
         mMarker = map.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
     }
 
-    public void cameraPosition(GoogleMap map, float lat, float lng){
+    public void cameraPosition(float lat, float lng){
         LatLng position = new LatLng(lat, lng);
         map.moveCamera(CameraUpdateFactory.newLatLng(position));
     }
 
-    public MarkerOptions newMarker(GoogleMap map, String id, float lat, float lng,String type, String shape, String icon, String text, String color){
+    public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color){
 
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
@@ -68,7 +75,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         switch (type) {
             // shape marker
             case "shape":
-                switch(shape) {
+                switch(property) {
                     //normal marker
                     case "normal":
                         switch (color) {
@@ -102,11 +109,14 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                             case "yellow":
                                 m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                                 break;
+                            default:
+                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                                break;
                         }
                 }
 
             case "icon":
-                switch (icon){
+                switch (property){
                     case "bus":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));
                         break;
@@ -136,7 +146,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         return m;
     }
 
-    public void setType(GoogleMap map,String type){
+    public void setType(String type){
         //satellite, hybrid, terrain
         switch (type) {
             case "roadMap":
@@ -153,7 +163,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     }
 
 
-    public void zoomAtPoint(GoogleMap map, Marker mMarker, int width, int height){
+    public void zoomAtPoint(Marker mMarker, int width, int height){
         LatLng position = mMarker.getPosition();
         double[] ref = getBoundingBox(position.latitude, position.longitude, width, height);
         LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng( ref[2], ref[3]));
@@ -213,13 +223,14 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
             mapChartFlow.getMaxItems();
             String markerType = mapChartFlow.getMarkerType();
-            mapChartFlow.getMarkerProperty(markerType);
-            mapChartFlow.getMarkerColour();
+            String markerProperty = mapChartFlow.getMarkerProperty(markerType);
+            String color = mapChartFlow.getMarkerColour();
             for(int j =0; j< mapChartFlow.getRecordSize(); j++) {
-                mapChartFlow.getRecordMarkerId(j);
-                mapChartFlow.getRecordLatitude(j);
-                mapChartFlow.getRecordLongitude(j);
-                mapChartFlow.getRecordId(j);
+                String id = mapChartFlow.getRecordMarkerId(j);
+                float lat = mapChartFlow.getRecordLatitude(j);
+                float lng = mapChartFlow.getRecordLongitude(j);
+                String recordId = mapChartFlow.getRecordId(j);
+                addMapMarker(id, lat, lng, markerType, markerProperty, color);
             }
         }
     }
