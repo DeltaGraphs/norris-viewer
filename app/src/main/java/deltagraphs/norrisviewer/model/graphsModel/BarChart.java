@@ -2,6 +2,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
 import java.util.ArrayList;
 
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+
 /*
  * Name : BarChart.java
  * Module : deltagraphs.norrisviewer.model.graphsModel
@@ -25,4 +27,6 @@ import java.util.ArrayList;
     public Boolean getSortable();
     public Boolean getGrid();
     public Boolean getLegendOnPoint();
+    public ArrayList<FlowModel> getFlowList();
+
 }

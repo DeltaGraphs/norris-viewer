@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 /*
  * Name : BarChartImpl.java
@@ -45,6 +46,7 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getSortable() { return sortable; }
     public Boolean getGrid() { return grid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
+    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
     @Override
     public void setParameters(JSONObject data) {

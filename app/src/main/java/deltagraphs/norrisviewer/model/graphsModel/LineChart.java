@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
 import java.util.ArrayList;
 
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+
 public interface LineChart {
     public AxisModel getAxisX();
     public AxisModel getAxisY();
@@ -26,4 +28,6 @@ public interface LineChart {
     public Boolean getHorizontalGrid();
     public Boolean getVerticalGrid();
     public Boolean getLegendOnPoint();
+    public ArrayList<FlowModel> getFlowList();
+
 }

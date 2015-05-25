@@ -29,7 +29,14 @@ public class TableFlow extends FlowModel {
     private int maxItems;
     private ArrayList<TableRecord> records;
 
-    public ArrayList<TableRecord> getRecords() { return records; }
+    public int getMaxItemsPerPage(){ return maxItems; }
+    public int getRecordSize(){return records.size(); }
+    public String getRecordId(int index){ return records.get(index).recordId; }
+    public int getNumberOfColumns(int index){ return records.get(index).values.size(); }
+    public String getCellTextColour(int index, int columnIndex){ return records.get(index).values.get(columnIndex).textColour; }
+    public String getCellBackgroundColour(int index, int columnIndex){ return records.get(index).values.get(columnIndex).background; }
+    public String getCellData(int index, int columnIndex){ return records.get(index).values.get(columnIndex).data; }
+
 
     public TableFlow(JSONObject data) {
         try {

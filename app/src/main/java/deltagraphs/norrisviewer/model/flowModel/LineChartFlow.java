@@ -38,7 +38,11 @@ public class LineChartFlow extends FlowModel{
     public String getInterpolation() { return interpolation; }
     public String getSubAreaColour(){ return subAreaColour; }
     public int maxItems() { return maxItems; }
-    public ArrayList<LineChartRecord> getRecords() { return records; }
+
+    public int getRecordSize(){return records.size(); }
+    public String getRecordId(int index){ return records.get(index).recordId; }
+    public float getRecordValueX(int index){ return records.get(index).xValue; }
+    public float getRecordValueY(int index){ return records.get(index).yValue; }
 
     public LineChartFlow(JSONObject data) {
         try {
@@ -54,10 +58,10 @@ public class LineChartFlow extends FlowModel{
 
     class LineChartRecord{
         private String recordId;
-        private int xValue; // x value
-        private int yValue; // y value
+        private float xValue; // x value
+        private float yValue; // y value
 
-        public LineChartRecord(String id, int xValue, int yValue){
+        public LineChartRecord(String id, float xValue, float yValue){
             this.recordId = id;
             this.xValue = xValue;
             this.yValue = yValue;
@@ -97,8 +101,8 @@ public class LineChartFlow extends FlowModel{
         try {
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
-            int xValue = jsonValues.getInt(0);
-            int yValue = jsonValues.getInt(1);
+            float xValue = (float) jsonValues.getDouble(0);
+            float yValue = (float) jsonValues.getDouble(1);
             records.add(new LineChartRecord(id, xValue, yValue));
         } catch (JSONException e) {}
     }

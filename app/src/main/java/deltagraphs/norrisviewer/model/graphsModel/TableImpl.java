@@ -32,8 +32,8 @@ public class TableImpl extends Graph implements Table {
     private Boolean sortable;
     private String sortOrder; //ascendent or descendent
     private String sortColumn; // sorted by column "sortColumn"
-    private String borderColour;
     private int borderWidth = 1;
+    private String borderColour;
 
     private ArrayList<Column> tableColumns;
 
@@ -69,6 +69,7 @@ public class TableImpl extends Graph implements Table {
     public String getSortOrder() { return sortOrder; }
     public int getBorderWidth() { return borderWidth; }
     public String getBorderColour() { return borderColour; }
+    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
     //column parameters
     public String getHeaderValue(int index) { return tableColumns.get(index).headerValue; }

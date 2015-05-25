@@ -4,6 +4,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 
 
@@ -42,7 +45,7 @@ public class LineChartImpl extends Graph  implements LineChart{
     public Boolean getHorizontalGrid() { return horizontalGrid; }
     public Boolean getVerticalGrid() { return verticalGrid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
-
+    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
 
     public void setParameters(JSONObject data) {
