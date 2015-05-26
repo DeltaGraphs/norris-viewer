@@ -12,15 +12,27 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
 public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {
 
     private GoogleMap map; // Might be null if Google Play services APK is not available.
+    private MapChartPresenter mapChartPresenter;
+    private String sourceURL;
+    private String sourceTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_chart);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sourceURL = extras.getString("EXTRA_SOURCE_URL");
+            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+        }
+        setTitle(sourceTitle);
+        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         setUpMapIfNeeded();
     }
 

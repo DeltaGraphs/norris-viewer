@@ -26,18 +26,18 @@ public abstract class GraphPresenter {
     private SocketManager graphSocket;
 
     public GraphPresenter(String url) {
-        this.graphSocket = new SocketManager();
-        graphSocket.setSocketUrl(url);
+        this.graphSocket = new SocketManager(url);
     }
 
     public void startSocket( Activity graphActivity, Object graphModel){
-        graphSocket.startConnection();
+
         graphSocket.startListening("graphConfig", graphActivity, graphModel);
         graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
         graphSocket.startListening("insertFlow", graphActivity, graphModel);
         graphSocket.startListening("deleteFlow", graphActivity, graphModel);
         graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
         graphSocket.startListening("updateFlowData", graphActivity, graphModel);
+        graphSocket.startConnection();
     }
 
     public void stopSocket(){}
