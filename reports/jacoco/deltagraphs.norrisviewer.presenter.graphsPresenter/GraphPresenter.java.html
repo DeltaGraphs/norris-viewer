@@ -33,21 +33,23 @@ public abstract class GraphPresenter {
 
     public void startSocket( Activity graphActivity, Object graphModel){
 <span class="nc" id="L35">        Log.d(&quot;graphPresenter&quot;, &quot;prima degli start listening&quot;);</span>
-<span class="nc" id="L36">        graphSocket.startConnection();</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        if(firstConnection == true)</span>
-<span class="nc" id="L38">            graphSocket.startListening(&quot;graphConfig&quot;, graphActivity, graphModel);</span>
-        else {
-<span class="nc" id="L40">            graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L41">            graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L42">            graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L43">            graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L44">            graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if(firstConnection) {</span>
+<span class="nc" id="L37">            graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L38">            Log.d(&quot;graphPresenter&quot;, &quot;dentro if&quot;);</span>
         }
-<span class="nc" id="L46">        graphSocket.startConnection();</span>
-<span class="nc" id="L47">        Log.d(&quot;graphPresenter&quot;, &quot;dopo gli start listening&quot;);</span>
-<span class="nc" id="L48">    }</span>
+        else {
+<span class="nc" id="L41">            Log.d(&quot;graphPresenter&quot;, &quot;dentro else&quot;);</span>
+<span class="nc" id="L42">            graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L43">            graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L44">            graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L45">            graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L46">            graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+        }
+<span class="nc" id="L48">        graphSocket.startConnection();</span>
+<span class="nc" id="L49">        Log.d(&quot;graphPresenter&quot;, &quot;dopo gli start listening&quot;);</span>
+<span class="nc" id="L50">    }</span>
 
-<span class="nc" id="L50">    public void stopSocket(){}</span>
+<span class="nc" id="L52">    public void stopSocket(){}</span>
 
     public abstract void setUpViews();
 
