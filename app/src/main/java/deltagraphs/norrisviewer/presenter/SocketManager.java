@@ -1,6 +1,7 @@
 package deltagraphs.norrisviewer.presenter;
 
 import java.net.URISyntaxException;
+import java.util.Observer;
 
 import android.app.Activity;
 import android.util.Log;
@@ -80,7 +81,7 @@ public class SocketManager{
         mSocket.close();
     }
 
-    public void startListening(final String signal,final Activity activity, final Object model){
+    public void startListening(final String signal,final Activity activity, final Object model, final Observer x){
 
         mSocket.on(signal, new Emitter.Listener() {
             @Override
@@ -97,18 +98,18 @@ public class SocketManager{
                             }
                             else
                                 if(activity instanceof BarChart)
-                                    ((Graph)model).setGraph(obj, signal);
+                                    ((Graph)model).setGraph(obj, signal, x);
                                     else
                                     if(activity instanceof LineChart)
-                                        ((Graph)model).setGraph(obj, signal);
+                                        ((Graph)model).setGraph(obj, signal, x);
                                         else
                                         if(activity instanceof MapChartView) {
                                             Log.d("SocketManager", "dentro l'if del map");
-                                            ((Graph) model).setGraph(obj, signal);
+                                            ((Graph) model).setGraph(obj, signal, x);
                                         }
                                         else
                                             if(activity instanceof Table)
-                                                ((Graph)model).setGraph(obj, signal);
+                                                ((Graph)model).setGraph(obj, signal, x);
 
 
                             //float x = (float) obj.getDouble("item");

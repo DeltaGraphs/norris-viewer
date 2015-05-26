@@ -36,9 +36,10 @@ public abstract class Graph extends Observable {
     public String getTitle() { return title; }
     public ArrayList<FlowModel> getFlowList(){ return flowList; }
 
-    public void setGraph(JSONObject obj, String signal){
+    public void setGraph(JSONObject obj, String signal, Observer chartPresenter){
         Log.d("Graph", "dentro il setGraph");
         JSONParser(obj, signal);
+        addObserver(chartPresenter);
         setChanged();
         notifyObservers();
         Log.d("Graph", "fatto il notify");

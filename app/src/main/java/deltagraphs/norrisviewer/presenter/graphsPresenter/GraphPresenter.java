@@ -34,16 +34,16 @@ public abstract class GraphPresenter {
     public void startSocket( Activity graphActivity, Object graphModel){
         Log.d("graphPresenter", "prima degli start listening");
         if(firstConnection) {
-            graphSocket.startListening("configGraph", graphActivity, graphModel);
+            graphSocket.startListening("configGraph", graphActivity, graphModel, (MapChartPresenterImpl) this);
             Log.d("graphPresenter", "dentro if");
         }
         else {
             Log.d("graphPresenter", "dentro else");
-            graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
-            graphSocket.startListening("insertFlow", graphActivity, graphModel);
-            graphSocket.startListening("deleteFlow", graphActivity, graphModel);
-            graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
-            graphSocket.startListening("updateFlowData", graphActivity, graphModel);
+            graphSocket.startListening("updateGraphProp", graphActivity, graphModel, (MapChartPresenterImpl) this);
+            graphSocket.startListening("insertFlow", graphActivity, graphModel,(MapChartPresenterImpl) this );
+            graphSocket.startListening("deleteFlow", graphActivity, graphModel, (MapChartPresenterImpl) this);
+            graphSocket.startListening("updateFlowProp", graphActivity, graphModel, (MapChartPresenterImpl) this);
+            graphSocket.startListening("updateFlowData", graphActivity, graphModel, (MapChartPresenterImpl) this);
         }
         graphSocket.startConnection();
         Log.d("graphPresenter", "dopo gli start listening");
