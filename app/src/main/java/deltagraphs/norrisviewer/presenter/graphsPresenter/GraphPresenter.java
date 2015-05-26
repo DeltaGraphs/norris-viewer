@@ -33,10 +33,12 @@ public abstract class GraphPresenter {
 
     public void startSocket( Activity graphActivity, Object graphModel){
         Log.d("graphPresenter", "prima degli start listening");
-        graphSocket.startConnection();
-        if(firstConnection == true)
-            graphSocket.startListening("graphConfig", graphActivity, graphModel);
+        if(firstConnection) {
+            graphSocket.startListening("configGraph", graphActivity, graphModel);
+            Log.d("graphPresenter", "dentro if");
+        }
         else {
+            Log.d("graphPresenter", "dentro else");
             graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
             graphSocket.startListening("insertFlow", graphActivity, graphModel);
             graphSocket.startListening("deleteFlow", graphActivity, graphModel);

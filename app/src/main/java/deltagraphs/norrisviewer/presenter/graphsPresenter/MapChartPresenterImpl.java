@@ -46,6 +46,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
 
     @Override
     public void update(Observable observable, Object data) {
+        Log.d("MapChartPresenterImpl","dentro update");
         if (observable instanceof MapChartImpl) {
             graphView.setParams(mapChartInstance.getLatitude(),
                     mapChartInstance.getLongitude()
@@ -53,7 +54,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             graphView.setZoom(mapChartInstance.getMapHeight(), mapChartInstance.getMapWidth());
             graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
             graphView.setData(mapChartInstance.getFlowList());
-            System.out.print("fine update");
+            Log.d("MapChartPresenterImpl","fine update");
             firstConnection = false;
             startNewConnections();
         }
