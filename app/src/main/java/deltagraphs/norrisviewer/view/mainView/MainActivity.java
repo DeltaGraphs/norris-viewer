@@ -245,6 +245,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
                 case "lineChart":
                     intent = new Intent(getActivity(), LineChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
 
@@ -256,7 +257,9 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
 
                 case "MapChart":
                     intent = new Intent(getActivity(), MapChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_URL", "http://norris-nrti-dev.herokuapp.com/page1/map1");
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
+                    //intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
                 case "Table":

@@ -31,6 +31,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
+        sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/map1";
         setTitle(sourceTitle);
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         setUpMapIfNeeded();
