@@ -19,28 +19,31 @@
  */
 
 import android.app.Activity;
+import android.util.Log;
 
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
 public abstract class GraphPresenter {
     private SocketManager graphSocket;
 
-<span class="nc" id="L28">    public GraphPresenter(String url) {</span>
-<span class="nc" id="L29">        this.graphSocket = new SocketManager(url);</span>
-<span class="nc" id="L30">    }</span>
+<span class="nc" id="L29">    public GraphPresenter(String url) {</span>
+<span class="nc" id="L30">        this.graphSocket = new SocketManager(url);</span>
+<span class="nc" id="L31">    }</span>
 
     public void startSocket( Activity graphActivity, Object graphModel){
+<span class="nc" id="L34">        Log.d(&quot;graphPresenter&quot;, &quot;prima degli start listening&quot;);</span>
+<span class="nc" id="L35">        graphSocket.startConnection();</span>
+<span class="nc" id="L36">        graphSocket.startListening(&quot;graphConfig&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L37">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L38">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L39">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L40">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L41">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L42">        graphSocket.startConnection();</span>
+<span class="nc" id="L43">        Log.d(&quot;graphPresenter&quot;, &quot;dopo gli start listening&quot;);</span>
+<span class="nc" id="L44">    }</span>
 
-<span class="nc" id="L34">        graphSocket.startListening(&quot;graphConfig&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L35">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L36">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L37">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L38">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L39">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
-<span class="nc" id="L40">        graphSocket.startConnection();</span>
-<span class="nc" id="L41">    }</span>
-
-<span class="nc" id="L43">    public void stopSocket(){}</span>
+<span class="nc" id="L46">    public void stopSocket(){}</span>
 
     public abstract void setUpViews();
 

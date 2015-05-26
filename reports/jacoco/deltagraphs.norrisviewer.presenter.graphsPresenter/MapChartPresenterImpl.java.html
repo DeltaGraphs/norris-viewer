@@ -16,6 +16,8 @@
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -29,30 +31,31 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     private MapChart mapChartInstance;
 
     public MapChartPresenterImpl(MapChartView view, String url) {
-<span class="nc" id="L32">        super(url);</span>
-<span class="nc" id="L33">        graphView = view;</span>
-<span class="nc" id="L34">        mapChartInstance = (MapChart) new MapChartImpl();</span>
-<span class="nc" id="L35">        startSocket((MapChartActivity) view, mapChartInstance);</span>
+<span class="nc" id="L34">        super(url);</span>
+<span class="nc" id="L35">        graphView = view;</span>
+<span class="nc" id="L36">        mapChartInstance = (MapChart) new MapChartImpl();</span>
+<span class="nc" id="L37">        startSocket((MapChartActivity) view, mapChartInstance);</span>
         //lineChartInstance = new LineChartImpl(jsonData);
-<span class="nc" id="L37">        this.setUpViews();</span>
-<span class="nc" id="L38">    }</span>
+<span class="nc" id="L39">        this.setUpViews();</span>
+<span class="nc" id="L40">    }</span>
 
     @Override
     public void setUpViews() {
 
-<span class="nc" id="L43">    }</span>
+<span class="nc" id="L45">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc bnc" id="L47" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
-<span class="nc" id="L48">            graphView.setParams(mapChartInstance.getLatitude(),</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
+<span class="nc" id="L50">            graphView.setParams(mapChartInstance.getLatitude(),</span>
                     mapChartInstance.getLongitude()
             );
-<span class="nc" id="L51">            graphView.setZoom(mapChartInstance.getMapHeight(), mapChartInstance.getMapWidth());</span>
-<span class="nc" id="L52">            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
-<span class="nc" id="L53">            graphView.setData(mapChartInstance.getFlowList());</span>
+<span class="nc" id="L53">            graphView.setZoom(mapChartInstance.getMapHeight(), mapChartInstance.getMapWidth());</span>
+<span class="nc" id="L54">            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
+<span class="nc" id="L55">            graphView.setData(mapChartInstance.getFlowList());</span>
+<span class="nc" id="L56">            System.out.print(&quot;fine update&quot;);</span>
         }
-<span class="nc" id="L55">    }</span>
+<span class="nc" id="L58">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
