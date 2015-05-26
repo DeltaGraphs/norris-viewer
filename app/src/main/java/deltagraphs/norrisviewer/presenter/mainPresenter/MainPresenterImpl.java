@@ -23,6 +23,8 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 
     import java.util.ArrayList;
     import java.util.List;
+    import java.util.Observable;
+    import java.util.Observer;
 
     import deltagraphs.norrisviewer.model.pageModel.*;
     import deltagraphs.norrisviewer.presenter.SocketManager;
@@ -105,12 +107,12 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mainSocket.setSocketUrl(input.getText().toString());
-                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
+                //mainSocket.setSocketUrl(input.getText().toString());
+                //mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel,(Observer) this);
+                //mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
+                //mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
+                //mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
+                //mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
 
             }
         });
@@ -132,7 +134,6 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, pageModel))
                 .commit();
     }
-
 
 
     //QUESTO GESTISCE IL FRAGMENT DOVE ANDRANNO INSERITI I GRAFICI
