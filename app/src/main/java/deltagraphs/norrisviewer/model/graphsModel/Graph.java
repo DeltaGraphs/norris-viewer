@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 import deltagraphs.norrisviewer.model.flowModel.*;
 
@@ -35,10 +37,11 @@ public abstract class Graph extends Observable {
     public ArrayList<FlowModel> getFlowList(){ return flowList; }
 
     public void setGraph(JSONObject obj, String signal){
+        Log.d("Graph", "dentro il setGraph");
         JSONParser(obj, signal);
         setChanged();
         notifyObservers();
-        System.out.print("fatto il notify");
+        Log.d("Graph", "fatto il notify");
     }
 
     public abstract void setParameters(JSONObject data);

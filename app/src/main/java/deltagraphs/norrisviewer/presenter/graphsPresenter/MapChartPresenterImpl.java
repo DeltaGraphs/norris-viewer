@@ -16,6 +16,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -51,6 +53,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             graphView.setZoom(mapChartInstance.getMapHeight(), mapChartInstance.getMapWidth());
             graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
             graphView.setData(mapChartInstance.getFlowList());
+            System.out.print("fine update");
         }
     }
 }

@@ -16,6 +16,7 @@ import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.model.graphsModel.Graph;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 import deltagraphs.norrisviewer.model.pageModel.PageModelImpl;
+import deltagraphs.norrisviewer.view.graphsView.MapChartView;
 import deltagraphs.norrisviewer.view.mainView.MainView;
 
 /*
@@ -87,10 +88,13 @@ public class SocketManager{
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("SocketManager", "dentro la run");
                         JSONObject obj = (JSONObject) args[0];
                         //try {
-                            if(activity instanceof MainView)
-                                ((PageModel)model).setPageModel(obj, signal);
+                            if(activity instanceof MainView) {
+                                Log.d("SocketManager", "dentro if mainview");
+                                ((PageModel) model).setPageModel(obj, signal);
+                            }
                             else
                                 if(activity instanceof BarChart)
                                     ((Graph)model).setGraph(obj, signal);
@@ -98,11 +102,14 @@ public class SocketManager{
                                     if(activity instanceof LineChart)
                                         ((Graph)model).setGraph(obj, signal);
                                         else
-                                        if(activity instanceof MapChart)
-                                            ((Graph)model).setGraph(obj, signal);
-                                            else
+                                        if(activity instanceof MapChartView) {
+                                            Log.d("SocketManager", "dentro l'if del map");
+                                            ((Graph) model).setGraph(obj, signal);
+                                        }
+                                        else
                                             if(activity instanceof Table)
                                                 ((Graph)model).setGraph(obj, signal);
+
 
                             //float x = (float) obj.getDouble("item");
                             //dataModel.setMyData((float) obj.getDouble("item"));

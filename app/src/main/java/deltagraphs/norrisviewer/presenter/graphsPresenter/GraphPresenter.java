@@ -19,6 +19,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 import android.app.Activity;
+import android.util.Log;
 
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
@@ -30,7 +31,8 @@ public abstract class GraphPresenter {
     }
 
     public void startSocket( Activity graphActivity, Object graphModel){
-
+        Log.d("graphPresenter", "prima degli start listening");
+        graphSocket.startConnection();
         graphSocket.startListening("graphConfig", graphActivity, graphModel);
         graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
         graphSocket.startListening("insertFlow", graphActivity, graphModel);
@@ -38,6 +40,7 @@ public abstract class GraphPresenter {
         graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
         graphSocket.startListening("updateFlowData", graphActivity, graphModel);
         graphSocket.startConnection();
+        Log.d("graphPresenter", "dopo gli start listening");
     }
 
     public void stopSocket(){}
