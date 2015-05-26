@@ -248,5 +248,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                 addMapMarker(id, lat, lng, markerType, markerProperty, color);
             }
         }
+        map.clear();
     }
 }

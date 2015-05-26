@@ -54,7 +54,11 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
             graphView.setData(mapChartInstance.getFlowList());
             System.out.print("fine update");
+            firstConnection = false;
+            startNewConnections();
         }
     }
+
+    private void startNewConnections(){ startSocket((MapChartActivity) graphView, mapChartInstance);}
 }
 
