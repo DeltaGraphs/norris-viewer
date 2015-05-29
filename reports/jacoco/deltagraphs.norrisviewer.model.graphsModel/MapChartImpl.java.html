@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>MapChartImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.model.graphsModel</a> &gt; <span class="el_source">MapChartImpl.java</span></div><h1>MapChartImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.model.graphsModel;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +30,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
  *
  */
 
-<span class="nc" id="L31"> public class MapChartImpl extends Graph implements MapChart {</span>
+<span class="nc" id="L33"> public class MapChartImpl extends Graph implements MapChart {</span>
 
     private float mapWidth;
     private float mapHeight;
@@ -37,53 +39,54 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
     private Boolean legendOnPoint;
     private String mapType;
 
-<span class="nc" id="L40">    public float getLatitude() { return latitude; }</span>
-<span class="nc" id="L41">    public float getLongitude() { return longitude; }</span>
-<span class="nc" id="L42">    public float getMapWidth() { return mapWidth; }</span>
-<span class="nc" id="L43">    public float getMapHeight() { return mapHeight; }</span>
-<span class="nc" id="L44">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
-<span class="nc" id="L45">    public String getMapType() { return mapType; }</span>
-<span class="nc" id="L46">    public ArrayList&lt;FlowModel&gt; getFlowList(){ return super.getFlowList(); }</span>
+<span class="nc" id="L42">    public float getLatitude() { return latitude; }</span>
+<span class="nc" id="L43">    public float getLongitude() { return longitude; }</span>
+<span class="nc" id="L44">    public float getMapWidth() { return mapWidth; }</span>
+<span class="nc" id="L45">    public float getMapHeight() { return mapHeight; }</span>
+<span class="nc" id="L46">    public Boolean getLegendOnPoint(){ return legendOnPoint; }</span>
+<span class="nc" id="L47">    public String getMapType() { return mapType; }</span>
+<span class="nc" id="L48">    public ArrayList&lt;FlowModel&gt; getFlowList(){ return super.getFlowList(); }</span>
 
 
     public void setParameters(JSONObject data) {
         try {
-<span class="nc" id="L51">            title = data.getString(&quot;title&quot;);</span>
-<span class="nc" id="L52">            mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
-<span class="nc" id="L53">            mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
-<span class="nc" id="L54">            latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
-<span class="nc" id="L55">            longitude = (float) data.getDouble(&quot;longitude&quot;);;</span>
-<span class="nc" id="L56">            legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
-<span class="nc" id="L57">            mapType = data.getString(&quot;mapType&quot;);</span>
+<span class="nc" id="L53">            title = data.getString(&quot;title&quot;);</span>
+<span class="nc" id="L54">            mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
+<span class="nc" id="L55">            mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
+<span class="nc" id="L56">            latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
+<span class="nc" id="L57">            longitude = (float) data.getDouble(&quot;longitude&quot;);;</span>
+<span class="nc" id="L58">            legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
+<span class="nc" id="L59">            mapType = data.getString(&quot;mapType&quot;);</span>
 
             //changes to flow params
-<span class="nc" id="L60">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="nc" id="L61">            int flowLenght = jsonFlows.length();</span>
-<span class="nc bnc" id="L62" title="All 2 branches missed.">            for(int i=0; i&lt; flowLenght; i++){</span>
-<span class="nc" id="L63">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="nc" id="L64">                flowList.add(new TableFlow(flow));</span>
+<span class="nc" id="L62">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="nc" id="L63">            int flowLenght = jsonFlows.length();</span>
+<span class="nc" id="L64">            Log.d(&quot;MapChartImpl&quot;, &quot;DIMENSIONE FLUSSO: &quot; + String.valueOf(jsonFlows.length()));</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            for(int i=0; i&lt; flowLenght; i++){</span>
+<span class="nc" id="L66">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="nc" id="L67">                flowList.add(new TableFlow(flow));</span>
             }
-<span class="nc" id="L66">        }catch (JSONException e){}</span>
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L69">        }catch (JSONException e){}</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="nc bnc" id="L72" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="nc" id="L73">                title = data.getString(&quot;title&quot;);</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">            if(data.has(&quot;mapWidth&quot;))</span>
-<span class="nc" id="L75">                mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            if(data.has(&quot;mapHeight&quot;))</span>
-<span class="nc" id="L77">                mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">            if(data.has(&quot;latitude&quot;))</span>
-<span class="nc" id="L79">                latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">            if(data.has(&quot;longitude&quot;))</span>
-<span class="nc" id="L81">                longitude = (float) data.getDouble(&quot;longitude&quot;);;</span>
-<span class="nc bnc" id="L82" title="All 2 branches missed.">            if(data.has(&quot;legendOnPoint&quot;))</span>
-<span class="nc" id="L83">                legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
-<span class="nc bnc" id="L84" title="All 2 branches missed.">            if(data.has(&quot;mapType&quot;))</span>
-<span class="nc" id="L85">                mapType = data.getString(&quot;mapType&quot;);</span>
-<span class="nc" id="L86">        }catch(Exception e){}</span>
-<span class="nc" id="L87">    }</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="nc" id="L76">                title = data.getString(&quot;title&quot;);</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if(data.has(&quot;mapWidth&quot;))</span>
+<span class="nc" id="L78">                mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">            if(data.has(&quot;mapHeight&quot;))</span>
+<span class="nc" id="L80">                mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">            if(data.has(&quot;latitude&quot;))</span>
+<span class="nc" id="L82">                latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if(data.has(&quot;longitude&quot;))</span>
+<span class="nc" id="L84">                longitude = (float) data.getDouble(&quot;longitude&quot;);;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            if(data.has(&quot;legendOnPoint&quot;))</span>
+<span class="nc" id="L86">                legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if(data.has(&quot;mapType&quot;))</span>
+<span class="nc" id="L88">                mapType = data.getString(&quot;mapType&quot;);</span>
+<span class="nc" id="L89">        }catch(Exception e){}</span>
+<span class="nc" id="L90">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
