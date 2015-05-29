@@ -81,14 +81,12 @@ public abstract class Graph extends Observable {
     private int searchFlowIndex(String flowId){
         int index = 0;
         Boolean found = false;
-        while ((index < flowList.size()) && (!found)){
+        while (index < flowList.size()){
             if (flowList.get(index).getFlowId().equals(flowId))
-                found = true;
+                return index;
             index++;
         }
-        if(!found)
-            index = -1;
-        return index;
+        return -1;
     }
 
     private void JSONParser(JSONObject obj, String signal){
@@ -108,7 +106,7 @@ public abstract class Graph extends Observable {
                 case "insertFlow": {
                     JSONObject jsonFlowParam = obj.getJSONObject("properties");
                     addFlow(jsonFlowParam);
-                    setRecords(obj.getJSONObject("data"));
+                    setRecords(obj.getJSONObject("records"));
                     break;
                 }
                 case "deleteFlow": {
