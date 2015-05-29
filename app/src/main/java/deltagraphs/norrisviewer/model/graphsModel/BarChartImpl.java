@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 
 /*
  * Name : BarChartImpl.java
@@ -47,6 +48,9 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getGrid() { return grid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
+
+
+
 
     @Override
     public void setParameters(JSONObject data) {
@@ -113,7 +117,14 @@ public class BarChartImpl extends Graph implements BarChart{
                 JSONObject yAxis = data.getJSONObject("yAxis");
                 axisY = new AxisModel(yAxis);
             }
+
         }catch(Exception e){}
     }
+
+    @Override
+    public void addFlow(JSONObject flow) {
+        flowList.add(new BarChartFlow(flow));
+    }
+
 
 }

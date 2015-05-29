@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 
 /*
@@ -64,7 +66,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
             Log.d("MapChartImpl", "DIMENSIONE FLUSSO: " + String.valueOf(jsonFlows.length()));
             for(int i=0; i< flowLenght; i++){
                 JSONObject flow = jsonFlows.getJSONObject(i);
-                flowList.add(new TableFlow(flow));
+                addFlow(flow);
             }
         }catch (JSONException e){}
     }
@@ -88,4 +90,9 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
                 mapType = data.getString("mapType");
         }catch(Exception e){}
     }
+
+     @Override
+     public void addFlow(JSONObject flow){
+         flowList.add(new MapChartFlow(flow));
+     }
 }

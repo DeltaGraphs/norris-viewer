@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 
@@ -68,7 +69,7 @@ public class LineChartImpl extends Graph  implements LineChart{
             int flowLenght = jsonFlows.length();
             for(int i=0; i< flowLenght; i++){
                 JSONObject flow = jsonFlows.getJSONObject(i);
-                flowList.add(new LineChartFlow(flow));
+                addFlow(flow);
             }
         }catch (JSONException e){}
     }
@@ -98,6 +99,11 @@ public class LineChartImpl extends Graph  implements LineChart{
                 axisY = new AxisModel(yAxis);
             }
         }catch(Exception e){}
+    }
+
+    @Override
+    public void addFlow(JSONObject flow) {
+        flowList.add(new LineChartFlow(flow));
     }
 
 }

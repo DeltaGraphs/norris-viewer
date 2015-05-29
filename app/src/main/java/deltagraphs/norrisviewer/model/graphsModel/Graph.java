@@ -27,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.util.*;
 
 public abstract class Graph extends Observable {
@@ -50,10 +51,8 @@ public abstract class Graph extends Observable {
 
     public abstract void setParameters(JSONObject data);
     public abstract void updateParameters(JSONObject data);
+    public abstract void addFlow(JSONObject flow);
 
-    public void addFlow(JSONObject data) {
-        flowList.add(new LineChartFlow(data));
-    }
 
     public void updateFlow(JSONObject data) {
         try {
@@ -100,6 +99,9 @@ public abstract class Graph extends Observable {
                 case "configGraph": {
                     Log.d("Graph", "dentro configGraph");
                     JSONObject properties = obj.getJSONObject("properties");
+                    Log.d("configGraph: ",properties.toString());
+                    Log.d("Graph", properties.getString("title"));
+
                     setParameters(properties);
                     JSONArray data = obj.getJSONArray("data");
                     for(int i=0; i< data.length(); i++) {

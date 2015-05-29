@@ -20,6 +20,8 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
+import com.google.android.gms.maps.model.Marker;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,10 +64,16 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
-    private String shape = null;
-    private String icon = null;
-    private String text = null;
-    private String colour;
+
+
+    public MapChartFlow(JSONObject data) {
+        try {
+            flowId = data.getString("ID");
+            flowName = data.getString("name");
+            markerProperties = new Marker(data.getJSONObject("marker"));
+        }catch(JSONException e){}
+    }
+
 
     class MapChartRecord{
         private String recordId;

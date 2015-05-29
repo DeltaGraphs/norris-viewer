@@ -104,7 +104,7 @@ public class TableImpl extends Graph implements Table {
             int flowLenght = jsonFlows.length();
             for(int i=0; i< flowLenght; i++){
                 JSONObject flow = jsonFlows.getJSONObject(i);
-                flowList.add(new TableFlow(flow));
+                addFlow(flow);
             }
         }catch (JSONException e){}
     }
@@ -201,5 +201,10 @@ public class TableImpl extends Graph implements Table {
             }
 
         }catch(Exception e){}
+    }
+
+    @Override
+    public void addFlow(JSONObject flow){
+        flowList.add(new TableFlow(flow));
     }
 }
