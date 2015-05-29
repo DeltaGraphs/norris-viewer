@@ -108,7 +108,7 @@ public abstract class Graph extends Observable {
                 case "insertFlow": {
                     JSONObject jsonFlowParam = obj.getJSONObject("properties");
                     addFlow(jsonFlowParam);
-                    setRecords(obj.getJSONObject("data"));
+                    setRecords(obj.getJSONObject("records"));
                     break;
                 }
                 case "deleteFlow": {
