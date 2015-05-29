@@ -134,22 +134,21 @@ public class LineChartFlow extends FlowModel{
     // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
 <span class="nc" id="L136">        int index = 0;</span>
-<span class="nc" id="L137">        Boolean found = false;</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L140">                return index;</span>
-<span class="nc" id="L141">            index++;</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L139">                return index;</span>
+<span class="nc" id="L140">            index++;</span>
         }
-<span class="nc" id="L143">        return -1;</span>
+<span class="nc" id="L142">        return -1;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L149">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L150">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L151">            records.remove(recordIndex);</span>
-<span class="nc" id="L152">        } catch (JSONException e) {}</span>
-<span class="nc" id="L153">    }</span>
+<span class="nc" id="L148">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L149">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L150">            records.remove(recordIndex);</span>
+<span class="nc" id="L151">        } catch (JSONException e) {}</span>
+<span class="nc" id="L152">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

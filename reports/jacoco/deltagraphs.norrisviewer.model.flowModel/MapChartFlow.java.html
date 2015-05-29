@@ -180,23 +180,22 @@ import java.util.ArrayList;
     // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
 <span class="nc" id="L182">        int index = 0;</span>
-<span class="nc" id="L183">        Boolean found = false;</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
-<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L186">                return index;</span>
-<span class="nc" id="L187">            index++;</span>
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L185">                return index;</span>
+<span class="nc" id="L186">            index++;</span>
         }
-<span class="nc" id="L189">        return -1;</span>
+<span class="nc" id="L188">        return -1;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L195">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L196">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L197">            records.remove(recordIndex);</span>
-<span class="nc" id="L198">        } catch (JSONException e) {}</span>
-<span class="nc" id="L199">    }</span>
+<span class="nc" id="L194">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L195">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L196">            records.remove(recordIndex);</span>
+<span class="nc" id="L197">        } catch (JSONException e) {}</span>
+<span class="nc" id="L198">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
