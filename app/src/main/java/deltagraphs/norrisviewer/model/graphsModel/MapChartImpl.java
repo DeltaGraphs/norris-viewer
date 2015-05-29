@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,6 +61,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
+            Log.d("MapChartImpl", "DIMENSIONE FLUSSO: " + String.valueOf(jsonFlows.length()));
             for(int i=0; i< flowLenght; i++){
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 flowList.add(new TableFlow(flow));

@@ -2,6 +2,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
@@ -232,7 +233,10 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void setData(ArrayList<FlowModel> flowList) {
+        Log.d("MapChartActivity", "Dentro a setData()");
+        Log.d("MapChartActivity", String.valueOf(flowList.size()));
         for(int i=0; i<flowList.size(); i++){
+            Log.d("MapChartActivity", "Dentro primo for");
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
@@ -241,11 +245,13 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
             String color = mapChartFlow.getMarkerColour();
             for(int j =0; j< mapChartFlow.getRecordSize(); j++) {
+                Log.d("MapChartActivity", "Dentro secondo for");
                 String id = mapChartFlow.getRecordMarkerId(j);
                 float lat = mapChartFlow.getRecordLatitude(j);
                 float lng = mapChartFlow.getRecordLongitude(j);
                 String recordId = mapChartFlow.getRecordId(j);
                 addMapMarker(id, lat, lng, markerType, markerProperty, color);
+                Log.d("MapChartActivity", "Dopo addMapMarker()");
             }
         }
         map.clear();
