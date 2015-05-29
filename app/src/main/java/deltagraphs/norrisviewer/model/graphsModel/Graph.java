@@ -23,6 +23,7 @@ import android.util.Log;
 import java.util.Observable;
 import deltagraphs.norrisviewer.model.flowModel.*;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -95,8 +96,9 @@ public abstract class Graph extends Observable {
                 case "configGraph": {
                     JSONObject properties = obj.getJSONObject("properties");
                     setParameters(properties);
-                    JSONObject data = obj.getJSONObject("data");
-                    setRecords(data);
+                    JSONArray data = obj.getJSONArray("data");
+                    for(int i=0; i< data.length(); i++)
+                        setRecords(data.getJSONObject(i));
                     break;
                 }
                 case "updateGraphProp": {
