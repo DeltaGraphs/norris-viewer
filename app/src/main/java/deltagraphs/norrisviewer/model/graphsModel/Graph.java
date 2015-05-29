@@ -79,10 +79,15 @@ public abstract class Graph extends Observable {
 
     // it searches the flow index in the list of flows
     private int searchFlowIndex(String flowId){
-        int index = -1;
-        while ((index < flowList.size()) && (flowList.get(index).getFlowId().equals(flowId))) {
+        int index = 0;
+        Boolean found = false;
+        while ((index < flowList.size()) && (!found)){
+            if (flowList.get(index).getFlowId().equals(flowId))
+                found = true;
             index++;
         }
+        if(!found)
+            index = -1;
         return index;
     }
 

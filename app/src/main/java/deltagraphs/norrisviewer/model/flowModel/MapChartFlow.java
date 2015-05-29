@@ -177,12 +177,16 @@ public class MapChartFlow extends FlowModel {
     }
 
 
-    // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-        int index = -1;
-        while ((index < records.size()) && (records.get(index).recordId.equals(id))) {
+        int index = 0;
+        Boolean found = false;
+        while ((index < records.size()) && (!found)){
+            if (records.get(index).recordId.equals(id))
+                found = true;
             index++;
         }
+        if(!found)
+            index = -1;
         return index;
     }
 
