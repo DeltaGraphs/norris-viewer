@@ -18,6 +18,7 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public abstract class FlowModel {
@@ -29,7 +30,7 @@ public abstract class FlowModel {
     public abstract void updateFlow(JSONObject data);
     public abstract void deleteRecordList();
     public abstract void addRecord(JSONObject data);
-    public abstract void addRecords(JSONObject data);
+    public abstract void addRecords(JSONArray data);
     public abstract void updateRecord(JSONObject data);
     public abstract void deleteRecord(JSONObject data);
 

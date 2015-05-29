@@ -59,9 +59,9 @@ public class BarChartFlow extends FlowModel{
     @Override
     public void createFlow(JSONObject data) {
         records = new ArrayList<BarChartRecord>();
-        JSONObject recordList = null;
+        JSONArray recordList = null;
         try {
-            recordList = data.getJSONObject("records");
+            recordList = data.getJSONArray("records");
         } catch (JSONException e) {}
         addRecords(recordList);
     }
@@ -92,9 +92,8 @@ public class BarChartFlow extends FlowModel{
     }
 
     @Override
-    public void addRecords(JSONObject recordArray){
+    public void addRecords(JSONArray jsonRecords){
         try {
-            JSONArray jsonRecords = recordArray.getJSONArray("records");
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);

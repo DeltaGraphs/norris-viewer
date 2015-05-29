@@ -80,7 +80,7 @@ public class TableFlow extends FlowModel {
     public void createFlow(JSONObject data) {
         records = new ArrayList<TableRecord>();
         try {
-            JSONObject recordList = data.getJSONObject("records");
+            JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);
         } catch (JSONException e) {}
     }
@@ -110,9 +110,8 @@ public class TableFlow extends FlowModel {
     }
 
     @Override
-    public void addRecords(JSONObject recordArray){
+    public void addRecords(JSONArray jsonRecords){
         try {
-            JSONArray jsonRecords = recordArray.getJSONArray("records");
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);

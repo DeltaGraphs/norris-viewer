@@ -20,6 +20,8 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.Marker;
 
 import org.json.JSONArray;
@@ -71,7 +73,9 @@ public class MapChartFlow extends FlowModel {
             flowId = data.getString("ID");
             flowName = data.getString("name");
             markerProperties = new Marker(data.getJSONObject("marker"));
-        }catch(JSONException e){}
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
     }
 
 
@@ -82,8 +86,8 @@ public class MapChartFlow extends FlowModel {
         private float longitude;
 
         public MapChartRecord(String rId, String mId, float lat, float longit){
-            this.recordId = rId;
-            this.markerId = mId;
+            recordId = rId;
+            markerId = mId;
             latitude = lat;
             longitude = longit;
         }
@@ -103,7 +107,9 @@ public class MapChartFlow extends FlowModel {
                 icon = data.getString("icon");
                 text = data.getString("text");
                 colour = data.getString("color");
-            } catch (JSONException e) {}
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -119,9 +125,11 @@ public class MapChartFlow extends FlowModel {
     public void createFlow(JSONObject data) {
         records = new ArrayList<MapChartRecord>();
         try {
-            JSONObject recordList = data.getJSONObject("records");
+            JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -142,7 +150,9 @@ public class MapChartFlow extends FlowModel {
                 trace.latitudeCoords.add((float) jsonCoordinates.getJSONArray(i).getDouble(0));
                 trace.longitudeCoords.add((float) jsonCoordinates.getJSONArray(i).getDouble(1));
             }
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -157,20 +167,25 @@ public class MapChartFlow extends FlowModel {
             String markerId = data.getString("markerID");
             float latitude = (float) data.getJSONArray("value").getDouble(0);
             float longitude = (float) data.getJSONArray("value").getDouble(1);
+            Log.d("addRecordJSONObjectdata", recordId+" "+markerId+" "+latitude+" "+longitude);
             records.add(new MapChartRecord(recordId, markerId, latitude, longitude));
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public void addRecords(JSONObject recordArray){
+    public void addRecords(JSONArray jsonRecords){
         try {
-            JSONArray jsonRecords = recordArray.getJSONArray("records");
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);
+                Log.d("addRecords"+i, record.toString());
                 addRecord(record);
             }
-        }catch (JSONException e) {}
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -181,7 +196,9 @@ public class MapChartFlow extends FlowModel {
             records.get(recordIndex).markerId = data.getString("markerID");
             records.get(recordIndex).latitude = (float) data.getJSONArray("value").getDouble(0);
             records.get(recordIndex).longitude = (float) data.getJSONArray("value").getDouble(1);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -202,7 +219,9 @@ public class MapChartFlow extends FlowModel {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
 
