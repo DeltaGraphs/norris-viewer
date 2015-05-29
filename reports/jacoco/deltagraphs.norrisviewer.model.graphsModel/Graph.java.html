@@ -136,30 +136,35 @@ import java.util.*;
                 case &quot;insertRecord&quot;: {
 <span class="nc" id="L137">                    String id = data.getString(&quot;ID&quot;);</span>
 <span class="nc" id="L138">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc" id="L139">                    flowList.get(flowIndex).addRecord(data);</span>
-<span class="nc" id="L140">                    break;</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L140">                        flowList.get(flowIndex).addRecord(data);</span>
+                    break;
                 }
                 case &quot;deleteRecord&quot;: {
-<span class="nc" id="L143">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L144">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc" id="L145">                    flowList.get(flowIndex).deleteRecord(data);</span>
-<span class="nc" id="L146">                    break;</span>
+<span class="nc" id="L144">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L145">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L147">                        flowList.get(flowIndex).deleteRecord(data);</span>
+                    break;
                 }
                 case &quot;updateRecord&quot;: {
-<span class="nc" id="L149">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L150">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc" id="L151">                    flowList.get(flowIndex).updateRecord(data);</span>
-<span class="nc" id="L152">                    break;</span>
+<span class="nc" id="L151">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L152">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L153" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L154">                        flowList.get(flowIndex).updateRecord(data);</span>
+                    break;
                 }
                 case &quot;replaceData&quot;: {
-<span class="nc" id="L155">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L156">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc" id="L157">                    flowList.get(flowIndex).deleteRecordList();</span>
-<span class="nc" id="L158">                    flowList.get(flowIndex).createFlow(data);</span>
-<span class="nc" id="L159">                    break;</span>
+<span class="nc" id="L158">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L159">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L160" title="All 2 branches missed.">                    if(flowIndex != -1) {</span>
+<span class="nc" id="L161">                        flowList.get(flowIndex).deleteRecordList();</span>
+<span class="nc" id="L162">                        flowList.get(flowIndex).createFlow(data);</span>
+                    }
+                    break;
                 }
             }
-<span class="nc" id="L162">        } catch (JSONException e) {}</span>
-<span class="nc" id="L163">    }</span>
+<span class="nc" id="L167">        } catch (JSONException e) {}</span>
+<span class="nc" id="L168">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
