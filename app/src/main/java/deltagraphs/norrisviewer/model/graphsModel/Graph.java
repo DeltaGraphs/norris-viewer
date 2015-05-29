@@ -94,7 +94,9 @@ public abstract class Graph extends Observable {
         try{
             switch (signal) {
                 case "configGraph": {
+                    Log.d("Graph", "dentro configGraph");
                     JSONObject properties = obj.getJSONObject("properties");
+                    Log.d("Graph", properties.getString("title"));
                     setParameters(properties);
                     JSONArray data = obj.getJSONArray("data");
                     for(int i=0; i< data.length(); i++)
