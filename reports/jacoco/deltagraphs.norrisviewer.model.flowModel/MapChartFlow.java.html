@@ -177,27 +177,26 @@ import java.util.ArrayList;
 <span class="nc" id="L177">    }</span>
 
 
+    // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-<span class="nc" id="L181">        int index = 0;</span>
-<span class="nc" id="L182">        Boolean found = false;</span>
-<span class="nc bnc" id="L183" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (!found)){</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L185">                found = true;</span>
-<span class="nc" id="L186">            index++;</span>
+<span class="nc" id="L182">        int index = 0;</span>
+<span class="nc" id="L183">        Boolean found = false;</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L186">                return index;</span>
+<span class="nc" id="L187">            index++;</span>
         }
-<span class="nc bnc" id="L188" title="All 2 branches missed.">        if(!found)</span>
-<span class="nc" id="L189">            index = -1;</span>
-<span class="nc" id="L190">        return index;</span>
+<span class="nc" id="L189">        return -1;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L196">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L197">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L198">            records.remove(recordIndex);</span>
-<span class="nc" id="L199">        } catch (JSONException e) {}</span>
-<span class="nc" id="L200">    }</span>
+<span class="nc" id="L195">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L196">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L197">            records.remove(recordIndex);</span>
+<span class="nc" id="L198">        } catch (JSONException e) {}</span>
+<span class="nc" id="L199">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

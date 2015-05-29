@@ -115,26 +115,25 @@ public class BarChartFlow extends FlowModel{
 <span class="nc" id="L115">    }</span>
 
 
+    // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-<span class="nc" id="L119">        int index = 0;</span>
-<span class="nc" id="L120">        Boolean found = false;</span>
-<span class="nc bnc" id="L121" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (!found)){</span>
-<span class="nc bnc" id="L122" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L123">                found = true;</span>
-<span class="nc" id="L124">            index++;</span>
+<span class="nc" id="L120">        int index = 0;</span>
+<span class="nc" id="L121">        Boolean found = false;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">        while (index &lt; records.size()){</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L124">                return index;</span>
+<span class="nc" id="L125">            index++;</span>
         }
-<span class="nc bnc" id="L126" title="All 2 branches missed.">        if(!found)</span>
-<span class="nc" id="L127">            index = -1;</span>
-<span class="nc" id="L128">        return index;</span>
+<span class="nc" id="L127">        return -1;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L134">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L135">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L136">            records.remove(recordIndex);</span>
-<span class="nc" id="L137">        } catch (JSONException e) {}</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L133">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L134">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L135">            records.remove(recordIndex);</span>
+<span class="nc" id="L136">        } catch (JSONException e) {}</span>
+<span class="nc" id="L137">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
