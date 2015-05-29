@@ -59,17 +59,17 @@ public abstract class Graph extends Observable {
             String flowId = data.getString("ID");
             int index = searchFlowIndex(flowId);
             flowList.get(index).updateFlow(data);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setRecords(JSONObject record) {
-        try {
-            String flowID = record.getString("ID");
-            int index = searchFlowIndex(flowID);
-            if (index != -1) {
-                flowList.get(index).addRecords(record);
-            }
-        } catch (JSONException e) {}
+    public void setRecords(String flowID,JSONObject record) {
+        int index = searchFlowIndex(flowID);
+        Log.d("setRecords", flowID +" "+ index);
+        if (index != -1) {
+            flowList.get(index).addRecord(record);
+        }
     }
 
     public void deleteFlow(String flowID){
@@ -136,6 +136,7 @@ public abstract class Graph extends Observable {
                 }
             }
         }catch(JSONException e){
+            e.printStackTrace();
             return;
         }
     }
@@ -176,6 +177,8 @@ public abstract class Graph extends Observable {
                     break;
                 }
             }
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

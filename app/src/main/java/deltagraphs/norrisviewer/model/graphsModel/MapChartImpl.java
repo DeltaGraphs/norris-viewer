@@ -51,6 +51,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 
 
     public void setParameters(JSONObject data) {
+        Log.d("setParameters","setParameters(JSONObject data)");
         try {
             title = data.getString("title");
             mapWidth = (float) data.getDouble("mapWidth");
@@ -59,16 +60,19 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
             longitude = (float) data.getDouble("longitude");;
             legendOnPoint = data.getBoolean("legendOnPoint");
             mapType = data.getString("mapType");
-
+            Log.d("setParameters","--------------");
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
-            Log.d("MapChartImpl", "DIMENSIONE FLUSSO: " + String.valueOf(jsonFlows.length()));
+            Log.d("setParameters", "DIMENSIONE FLUSSO: " + flowLenght);
             for(int i=0; i< flowLenght; i++){
+                Log.d("getJSONObject", jsonFlows.getJSONObject(i).toString());
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 addFlow(flow);
             }
-        }catch (JSONException e){}
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
