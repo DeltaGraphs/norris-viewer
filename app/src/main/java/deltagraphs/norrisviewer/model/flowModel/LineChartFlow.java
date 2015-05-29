@@ -134,7 +134,6 @@ public class LineChartFlow extends FlowModel{
     // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
         int index = 0;
-        Boolean found = false;
         while (index < records.size()){
             if (records.get(index).recordId.equals(id))
                 return index;

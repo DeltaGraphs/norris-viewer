@@ -39,11 +39,13 @@ public abstract class Graph extends Observable {
 
     public void setGraph(JSONObject obj, String signal, Observer chartPresenter){
         Log.d("Graph", "dentro il setGraph");
+        Log.d("obj: ",obj.toString());
+        Log.d("signal: ",signal);
         JSONParser(obj, signal);
         addObserver(chartPresenter);
         setChanged();
         notifyObservers();
-        Log.d("Graph", "fatto il notify");
+        Log.d("Graph", "fatto il notify\n\n\n");
     }
 
     public abstract void setParameters(JSONObject data);
@@ -81,10 +83,12 @@ public abstract class Graph extends Observable {
     // it searches the flow index in the list of flows
     private int searchFlowIndex(String flowId){
         int index = 0;
-        Boolean found = false;
+        Log.d("searchFlowIndex","searchFlowIndex(String flowId) "+index+" "+flowList.size());
         while (index < flowList.size()){
-            if (flowList.get(index).getFlowId().equals(flowId))
+            Log.d(index+"flowId "+flowId,flowList.get(index).getFlowId());
+            if (flowList.get(index).getFlowId().equals(flowId)) {
                 return index;
+            }
             index++;
         }
         return -1;
@@ -95,10 +99,13 @@ public abstract class Graph extends Observable {
             switch (signal) {
                 case "configGraph": {
                     JSONObject properties = obj.getJSONObject("properties");
+                    Log.d("configGraph: ",properties.toString());
                     setParameters(properties);
                     JSONArray data = obj.getJSONArray("data");
-                    for(int i=0; i< data.length(); i++)
+                    for(int i=0; i< data.length(); i++) {
+                        Log.d(""+i,data.getJSONObject(i).toString());
                         setRecords(data.getJSONObject(i));
+                    }
                     break;
                 }
                 case "updateGraphProp": {
@@ -158,6 +165,7 @@ public abstract class Graph extends Observable {
                 }
                 case "replaceData": {
                     String id = data.getString("ID");
+                    Log.d("replaceDataID",id);
                     int flowIndex = searchFlowIndex(id);
                     if(flowIndex != -1) {
                         flowList.get(flowIndex).deleteRecordList();
