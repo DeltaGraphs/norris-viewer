@@ -94,79 +94,81 @@ import java.util.*;
         try{
 <span class="nc bnc" id="L95" title="All 26 branches missed.">            switch (signal) {</span>
                 case &quot;configGraph&quot;: {
-<span class="nc" id="L97">                    JSONObject properties = obj.getJSONObject(&quot;properties&quot;);</span>
-<span class="nc" id="L98">                    setParameters(properties);</span>
-<span class="nc" id="L99">                    JSONArray data = obj.getJSONArray(&quot;data&quot;);</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">                    for(int i=0; i&lt; data.length(); i++)</span>
-<span class="nc" id="L101">                        setRecords(data.getJSONObject(i));</span>
-<span class="nc" id="L102">                    break;</span>
+<span class="nc" id="L97">                    Log.d(&quot;Graph&quot;, &quot;dentro configGraph&quot;);</span>
+<span class="nc" id="L98">                    JSONObject properties = obj.getJSONObject(&quot;properties&quot;);</span>
+<span class="nc" id="L99">                    Log.d(&quot;Graph&quot;, properties.getString(&quot;title&quot;));</span>
+<span class="nc" id="L100">                    setParameters(properties);</span>
+<span class="nc" id="L101">                    JSONArray data = obj.getJSONArray(&quot;data&quot;);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">                    for(int i=0; i&lt; data.length(); i++)</span>
+<span class="nc" id="L103">                        setRecords(data.getJSONObject(i));</span>
+<span class="nc" id="L104">                    break;</span>
                 }
                 case &quot;updateGraphProp&quot;: {
-<span class="nc" id="L105">                    updateParameters(obj);</span>
-<span class="nc" id="L106">                    break;</span>
+<span class="nc" id="L107">                    updateParameters(obj);</span>
+<span class="nc" id="L108">                    break;</span>
                 }
                 case &quot;insertFlow&quot;: {
-<span class="nc" id="L109">                    JSONObject jsonFlowParam = obj.getJSONObject(&quot;properties&quot;);</span>
-<span class="nc" id="L110">                    addFlow(jsonFlowParam);</span>
-<span class="nc" id="L111">                    setRecords(obj.getJSONObject(&quot;records&quot;));</span>
-<span class="nc" id="L112">                    break;</span>
+<span class="nc" id="L111">                    JSONObject jsonFlowParam = obj.getJSONObject(&quot;properties&quot;);</span>
+<span class="nc" id="L112">                    addFlow(jsonFlowParam);</span>
+<span class="nc" id="L113">                    setRecords(obj.getJSONObject(&quot;records&quot;));</span>
+<span class="nc" id="L114">                    break;</span>
                 }
                 case &quot;deleteFlow&quot;: {
-<span class="nc" id="L115">                    String id = obj.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L116">                    deleteFlow(id);</span>
-<span class="nc" id="L117">                    break;</span>
+<span class="nc" id="L117">                    String id = obj.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L118">                    deleteFlow(id);</span>
+<span class="nc" id="L119">                    break;</span>
                 }
                 case &quot;updateFlowProp&quot;: {
                     //changes to flow params
-<span class="nc" id="L121">                    updateFlow(obj);</span>
-<span class="nc" id="L122">                    break;</span>
+<span class="nc" id="L123">                    updateFlow(obj);</span>
+<span class="nc" id="L124">                    break;</span>
                 }
                 case &quot;updateFlowData&quot;: {
-<span class="nc" id="L125">                    updateRecords(obj);</span>
+<span class="nc" id="L127">                    updateRecords(obj);</span>
                     break;
                 }
             }
-<span class="nc" id="L129">        }catch(JSONException e){</span>
-<span class="nc" id="L130">            return;</span>
-<span class="nc" id="L131">        }</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L131">        }catch(JSONException e){</span>
+<span class="nc" id="L132">            return;</span>
+<span class="nc" id="L133">        }</span>
+<span class="nc" id="L134">    }</span>
 
     private void updateRecords(JSONObject data) {
         try {
-<span class="nc" id="L136">            String action = data.getString(&quot;action&quot;);</span>
-<span class="nc bnc" id="L137" title="All 18 branches missed.">            switch (action){</span>
+<span class="nc" id="L138">            String action = data.getString(&quot;action&quot;);</span>
+<span class="nc bnc" id="L139" title="All 18 branches missed.">            switch (action){</span>
                 case &quot;insertRecord&quot;: {
-<span class="nc" id="L139">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L140">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc bnc" id="L141" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
-<span class="nc" id="L142">                        flowList.get(flowIndex).addRecord(data);</span>
+<span class="nc" id="L141">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L142">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L144">                        flowList.get(flowIndex).addRecord(data);</span>
                     break;
                 }
                 case &quot;deleteRecord&quot;: {
-<span class="nc" id="L146">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L147">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc bnc" id="L148" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
-<span class="nc" id="L149">                        flowList.get(flowIndex).deleteRecord(data);</span>
+<span class="nc" id="L148">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L149">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L151">                        flowList.get(flowIndex).deleteRecord(data);</span>
                     break;
                 }
                 case &quot;updateRecord&quot;: {
-<span class="nc" id="L153">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L154">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc bnc" id="L155" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
-<span class="nc" id="L156">                        flowList.get(flowIndex).updateRecord(data);</span>
+<span class="nc" id="L155">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L156">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">                    if(flowIndex != -1)</span>
+<span class="nc" id="L158">                        flowList.get(flowIndex).updateRecord(data);</span>
                     break;
                 }
                 case &quot;replaceData&quot;: {
-<span class="nc" id="L160">                    String id = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L161">                    int flowIndex = searchFlowIndex(id);</span>
-<span class="nc bnc" id="L162" title="All 2 branches missed.">                    if(flowIndex != -1) {</span>
-<span class="nc" id="L163">                        flowList.get(flowIndex).deleteRecordList();</span>
-<span class="nc" id="L164">                        flowList.get(flowIndex).createFlow(data);</span>
+<span class="nc" id="L162">                    String id = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L163">                    int flowIndex = searchFlowIndex(id);</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">                    if(flowIndex != -1) {</span>
+<span class="nc" id="L165">                        flowList.get(flowIndex).deleteRecordList();</span>
+<span class="nc" id="L166">                        flowList.get(flowIndex).createFlow(data);</span>
                     }
                     break;
                 }
             }
-<span class="nc" id="L169">        } catch (JSONException e) {}</span>
-<span class="nc" id="L170">    }</span>
+<span class="nc" id="L171">        } catch (JSONException e) {}</span>
+<span class="nc" id="L172">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
