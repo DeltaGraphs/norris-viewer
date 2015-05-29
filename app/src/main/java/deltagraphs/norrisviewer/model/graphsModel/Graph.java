@@ -136,26 +136,31 @@ public abstract class Graph extends Observable {
                 case "insertRecord": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).addRecord(data);
+                    if(flowIndex != -1)
+                        flowList.get(flowIndex).addRecord(data);
                     break;
                 }
                 case "deleteRecord": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).deleteRecord(data);
+                    if(flowIndex != -1)
+                        flowList.get(flowIndex).deleteRecord(data);
                     break;
                 }
                 case "updateRecord": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).updateRecord(data);
+                    if(flowIndex != -1)
+                        flowList.get(flowIndex).updateRecord(data);
                     break;
                 }
                 case "replaceData": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    flowList.get(flowIndex).deleteRecordList();
-                    flowList.get(flowIndex).createFlow(data);
+                    if(flowIndex != -1) {
+                        flowList.get(flowIndex).deleteRecordList();
+                        flowList.get(flowIndex).createFlow(data);
+                    }
                     break;
                 }
             }
