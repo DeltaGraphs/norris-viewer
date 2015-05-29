@@ -138,22 +138,26 @@ public class TableFlow extends FlowModel {
 <span class="nc" id="L138">    }</span>
 
 
-    // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-<span class="nc" id="L143">        int index = -1;</span>
-<span class="nc bnc" id="L144" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (records.get(index).recordId.equals(id))) {</span>
-<span class="nc" id="L145">            index++;</span>
+<span class="nc" id="L142">        int index = 0;</span>
+<span class="nc" id="L143">        Boolean found = false;</span>
+<span class="nc bnc" id="L144" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (!found)){</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L146">                found = true;</span>
+<span class="nc" id="L147">            index++;</span>
         }
-<span class="nc" id="L147">        return index;</span>
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if(!found)</span>
+<span class="nc" id="L150">            index = -1;</span>
+<span class="nc" id="L151">        return index;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L153">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L154">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L155">            records.remove(recordIndex);</span>
-<span class="nc" id="L156">        } catch (JSONException e) {}</span>
-<span class="nc" id="L157">    }</span>
+<span class="nc" id="L157">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L158">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L159">            records.remove(recordIndex);</span>
+<span class="nc" id="L160">        } catch (JSONException e) {}</span>
+<span class="nc" id="L161">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

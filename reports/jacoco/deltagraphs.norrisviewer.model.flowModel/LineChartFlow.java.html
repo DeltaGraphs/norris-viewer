@@ -133,20 +133,25 @@ public class LineChartFlow extends FlowModel{
 
     // it searches the record index in the list of records
     protected int searchRecordIndex(String id){
-<span class="nc" id="L136">        int index = -1;</span>
-<span class="nc bnc" id="L137" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (records.get(index).recordId.equals(id))) {</span>
-<span class="nc" id="L138">            index++;</span>
+<span class="nc" id="L136">        int index = 0;</span>
+<span class="nc" id="L137">        Boolean found = false;</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">        while ((index &lt; records.size()) &amp;&amp; (!found)){</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L140">                found = true;</span>
+<span class="nc" id="L141">            index++;</span>
         }
-<span class="nc" id="L140">        return index;</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">        if(!found)</span>
+<span class="nc" id="L144">            index = -1;</span>
+<span class="nc" id="L145">        return index;</span>
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L146">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L147">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L148">            records.remove(recordIndex);</span>
-<span class="nc" id="L149">        } catch (JSONException e) {}</span>
-<span class="nc" id="L150">    }</span>
+<span class="nc" id="L151">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L152">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L153">            records.remove(recordIndex);</span>
+<span class="nc" id="L154">        } catch (JSONException e) {}</span>
+<span class="nc" id="L155">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
