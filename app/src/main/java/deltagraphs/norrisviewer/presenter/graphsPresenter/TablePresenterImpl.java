@@ -32,13 +32,10 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         graphView = view;
         tableInstance = (Table) new TableImpl();
         startSocket((TableActivity) view, tableInstance);
-        this.setUpViews();
+//        this.setUpViews();
     }
 
-    @Override
-    public void setUpViews() {
 
-    }
 
     @Override
     public void update(Observable observable, Object data) {
@@ -65,4 +62,8 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         }
     }
 
+    @Override
+    protected void setGraphParameters() {
+
+    }
 }

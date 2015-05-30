@@ -45,7 +45,7 @@ public abstract class Graph extends Observable {
         JSONParser(obj, signal);
         addObserver(chartPresenter);
         setChanged();
-        notifyObservers();
+        notifyObservers(signal);
         Log.d("Graph", "fatto il notify\n\n\n");
     }
 

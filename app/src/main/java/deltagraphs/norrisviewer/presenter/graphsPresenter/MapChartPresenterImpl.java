@@ -36,11 +36,19 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         mapChartInstance = (MapChart) new MapChartImpl();
         startSocket((MapChartActivity) view, mapChartInstance);
         //lineChartInstance = new LineChartImpl(jsonData);
-        this.setUpViews();
+        //this.setUpViews();
     }
 
+    private void startNewConnections(){ startSocket((MapChartActivity) graphView, mapChartInstance);}
+
     @Override
-    public void setUpViews() {
+    protected void setGraphParameters(){
+        graphView.cameraPosition(mapChartInstance.getLatitude(),
+                mapChartInstance.getLongitude()
+        );
+        graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());
+        graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
+
 
     }
 
@@ -48,18 +56,18 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     public void update(Observable observable, Object data) {
         Log.d("MapChartPresenterImpl","dentro update");
         if (observable instanceof MapChartImpl) {
-            graphView.cameraPosition(mapChartInstance.getLatitude(),
-                    mapChartInstance.getLongitude()
-            );
-            graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());
-            graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
-            graphView.setData(mapChartInstance.getFlowList());
-            Log.d("MapChartPresenterImpl","fine update");
+            String signal = (String) data;
+            if((signal == "configGraph") || (signal=="updateGraphProp"))
+                setGraphParameters();
+            graphView.setData(mapChartInstance.getFlowList(), signal);
+
             firstConnection = false;
             startNewConnections();
+
+            Log.d("MapChartPresenterImpl", "fine update");
         }
     }
 
-    private void startNewConnections(){ startSocket((MapChartActivity) graphView, mapChartInstance);}
+
 }
 

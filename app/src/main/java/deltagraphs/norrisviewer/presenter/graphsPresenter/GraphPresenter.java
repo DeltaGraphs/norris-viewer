@@ -51,6 +51,6 @@ public abstract class GraphPresenter {
 
     public void stopSocket(){}
 
-    public abstract void setUpViews();
+   protected abstract void setGraphParameters();
 
 }

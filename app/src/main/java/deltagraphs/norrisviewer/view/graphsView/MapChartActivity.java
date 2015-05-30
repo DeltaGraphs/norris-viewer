@@ -219,7 +219,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList) {
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
         map.clear();
         for(int i=0; i<flowList.size(); i++){
             Log.d("MapChartActivity", "Dentro primo for");

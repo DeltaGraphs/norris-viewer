@@ -27,5 +27,5 @@ public interface MapChartView {
     public void setMapType(String type);
     public void setLegendOnPoint(Boolean legend);
     public void setZoom(float width, float height);
-    public void setData(ArrayList<FlowModel> flowList);
+    public void setData(ArrayList<FlowModel> flowList, String signal);
 }

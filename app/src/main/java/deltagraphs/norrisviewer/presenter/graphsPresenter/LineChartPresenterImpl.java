@@ -34,19 +34,19 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         lineChartInstance = (LineChart) new LineChartImpl();
         startSocket((LineChartActivity) view, lineChartInstance);
         //lineChartInstance = new LineChartImpl(jsonData);
-        this.setUpViews();
+        //this.setUpViews();
     }
 
-    @Override
+         /*  @Override
     public void setUpViews() {
-       /* previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
+ previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
         previewLineChartView.setLineChartData(dataModel.getData());
         previewLineChartView.setLineChartData(previewData);
         // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
         // zoom/scroll is unnecessary.
         previewLineChartView.setZoomEnabled(false);
-        previewLineChartView.setScrollEnabled(false);*/
-    }
+        previewLineChartView.setScrollEnabled(false);
+    }*/
 
     @Override
     public void update(Observable observable, Object data) {
@@ -79,6 +79,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     }
 
     public void viewPointLegend(){
+
+    }
+
+    @Override
+    protected void setGraphParameters() {
 
     }
 }
