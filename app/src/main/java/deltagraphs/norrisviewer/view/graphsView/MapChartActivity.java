@@ -23,6 +23,8 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     private String sourceURL;
     private String sourceTitle;
     LatLng center;
+    private boolean hasLegend = true;
+    private ArrayList<Marker> markers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/map1";
         setTitle(sourceTitle);
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+        markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
     }
 
@@ -83,6 +86,8 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
         m.title(id);
+        if(hasLegend){
+        }
         switch (type) {
             // shape marker
             case "shape":
@@ -215,7 +220,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
-
+        hasLegend = legend;
     }
 
     @Override
