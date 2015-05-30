@@ -48,25 +48,23 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         );
 <span class="nc" id="L49">        graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());</span>
 <span class="nc" id="L50">        graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
-
-
-<span class="nc" id="L53">    }</span>
+<span class="nc" id="L51">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc" id="L57">        Log.d(&quot;MapChartPresenterImpl&quot;,&quot;dentro update&quot;);</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
-<span class="nc" id="L59">            String signal = (String) data;</span>
-<span class="nc bnc" id="L60" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
-<span class="nc" id="L61">                setGraphParameters();</span>
-<span class="nc" id="L62">            graphView.setData(mapChartInstance.getFlowList(), signal);</span>
+<span class="nc" id="L55">        Log.d(&quot;MapChartPresenterImpl&quot;,&quot;dentro update&quot;);</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
+<span class="nc" id="L57">            String signal = (String) data;</span>
+<span class="nc bnc" id="L58" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
+<span class="nc" id="L59">                setGraphParameters();</span>
+<span class="nc" id="L60">            graphView.setData(mapChartInstance.getFlowList(), signal);</span>
 
-<span class="nc" id="L64">            firstConnection = false;</span>
-<span class="nc" id="L65">            startNewConnections();</span>
+<span class="nc" id="L62">            firstConnection = false;</span>
+<span class="nc" id="L63">            startNewConnections();</span>
 
-<span class="nc" id="L67">            Log.d(&quot;MapChartPresenterImpl&quot;, &quot;fine update&quot;);</span>
+<span class="nc" id="L65">            Log.d(&quot;MapChartPresenterImpl&quot;, &quot;fine update&quot;);</span>
         }
-<span class="nc" id="L69">    }</span>
+<span class="nc" id="L67">    }</span>
 
 
 }
