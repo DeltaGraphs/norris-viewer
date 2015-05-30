@@ -78,7 +78,7 @@ public class TableFlow extends FlowModel {
 
     @Override
     public void createFlow(JSONObject data) {
-        //records = new ArrayList<TableRecord>();
+        records = new ArrayList<TableRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);

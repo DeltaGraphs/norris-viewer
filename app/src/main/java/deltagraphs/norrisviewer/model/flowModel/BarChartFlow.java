@@ -58,7 +58,7 @@ public class BarChartFlow extends FlowModel{
 
     @Override
     public void createFlow(JSONObject data) {
-        //records = new ArrayList<BarChartRecord>();
+        records = new ArrayList<BarChartRecord>();
         JSONArray recordList = null;
         try {
             recordList = data.getJSONArray("records");

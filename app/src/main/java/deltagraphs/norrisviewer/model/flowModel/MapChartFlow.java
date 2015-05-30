@@ -123,7 +123,7 @@ public class MapChartFlow extends FlowModel {
 
     @Override
     public void createFlow(JSONObject data) {
-        //records = new ArrayList<MapChartRecord>();
+        records = new ArrayList<MapChartRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);
