@@ -41,7 +41,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     protected void onResume() {
         super.onResume();
-        setUpMapIfNeeded();
     }
 
     private void setUpMapIfNeeded() {
@@ -50,10 +49,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             // Try to obtain the map from the SupportMapFragment.
             map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
-            if (map != null) {
-                addMapMarker("345", 10, 10, "icon", "car", "yellow");
-            }
         }
     }
 
@@ -63,6 +58,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     public void addMapMarker(String id, float lat, float lng, String type, String property, String color){
         MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
+        setUpMapIfNeeded();
         map.addMarker(mMarkerOptions);
     }
 
@@ -233,8 +229,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void setData(ArrayList<FlowModel> flowList) {
-        Log.d("MapChartActivity", "Dentro a setData()");
-        Log.d("MapChartActivity", String.valueOf(flowList.size()));
+        map.clear();
         for(int i=0; i<flowList.size(); i++){
             Log.d("MapChartActivity", "Dentro primo for");
             flowList.get(i).getFlowId();
@@ -254,6 +249,5 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
                 Log.d("MapChartActivity", "Dopo addMapMarker()");
             }
         }
-        map.clear();
     }
 }
