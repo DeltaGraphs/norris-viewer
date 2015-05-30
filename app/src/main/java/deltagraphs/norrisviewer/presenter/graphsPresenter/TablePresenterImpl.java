@@ -16,6 +16,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -36,10 +38,23 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     }
 
 
+    private void startNewConnections(){ startSocket((MapChartActivity) graphView, tableInstance);}
 
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof TableImpl) {
+            String signal = (String) data;
+            if((signal == "configGraph") || (signal=="updateGraphProp"))
+                setGraphParameters();
+            graphView.setData(tableInstance.getFlowList(), signal);
+
+            firstConnection = false;
+            startNewConnections();
+        }
+    }
+
+    @Override
+    protected void setGraphParameters() {
             graphView.setAddRowOn(tableInstance.getAddRowOn());
             graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
             graphView.setSortable(tableInstance.getSortable());
@@ -57,13 +72,5 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
                 graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));
                 graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));
             }
-
-            graphView.setData(tableInstance.getFlowList());
-        }
-    }
-
-    @Override
-    protected void setGraphParameters() {
-
     }
 }

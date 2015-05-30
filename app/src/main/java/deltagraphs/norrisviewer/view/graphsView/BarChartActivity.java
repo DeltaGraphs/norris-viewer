@@ -218,7 +218,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
     }
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList) {
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
 
     }
 

@@ -37,5 +37,5 @@ public interface TableView {
     public void setRowOdd(int index, String textColour, String bgColour);
 
 
-    public void setData(ArrayList<FlowModel> flowList);
+    public void setData(ArrayList<FlowModel> flowList, String signal);
 }

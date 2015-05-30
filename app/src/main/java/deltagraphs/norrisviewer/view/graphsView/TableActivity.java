@@ -119,7 +119,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList) {
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
 
     }
 

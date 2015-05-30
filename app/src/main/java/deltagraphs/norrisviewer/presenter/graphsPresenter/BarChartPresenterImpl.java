@@ -7,6 +7,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
+import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import lecho.lib.hellocharts.model.Axis;
 
 /*
@@ -31,20 +32,20 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         private BarChart barChartInstance;
 
 
-public BarChartPresenterImpl(BarChartView view,String url){
-    super(url);
-    graphView=view;
-    barChartInstance = (BarChart) new BarChartImpl();
-    startSocket((BarChartActivity) view, barChartInstance);
+    public BarChartPresenterImpl(BarChartView view,String url){
+        super(url);
+        graphView=view;
+        barChartInstance = (BarChart) new BarChartImpl();
+        startSocket((BarChartActivity) view, barChartInstance);
     //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
-        }
+    }
 
 
-  /*
-@Override
-public void setUpViews(){
-      previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
+    /*
+    @Override
+    public void setUpViews(){
+        previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
         previewLineChartView.setLineChartData(dataModel.getData());
         previewLineChartView.setLineChartData(previewData);
         // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
@@ -53,12 +54,26 @@ public void setUpViews(){
         previewLineChartView.setScrollEnabled(false);
         }*/
 
-@Override
-public void update(Observable observable,Object data) {
-    if (observable instanceof BarChartImpl) {
+
+    private void startNewConnections(){ startSocket((MapChartActivity) graphView, barChartInstance);}
+
+    @Override
+    public void update(Observable observable,Object data) {
+        if (observable instanceof BarChartImpl) {
         // in quanto potremmo avere piu modelli dati
         // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
         // prima di effettuare il cast
+            String signal = (String) data;
+            if((signal == "configGraph") || (signal=="updateGraphProp"))
+                setGraphParameters();
+            graphView.setData(barChartInstance.getFlowList(), signal);
+            firstConnection = false;
+            startNewConnections();
+        }
+    }
+
+    @Override
+    protected void setGraphParameters() {
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
                 barChartInstance.getAxisX().getAppearance(),
@@ -81,16 +96,10 @@ public void update(Observable observable,Object data) {
         graphView.setSortable(barChartInstance.getSortable());
         graphView.setGrid(barChartInstance.getGrid());
         graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());
-        graphView.setData(barChartInstance.getFlowList());
     }
-}
 
-public void viewPointLegend(){
-
-        }
-
-    @Override
-    protected void setGraphParameters() {
+    public void viewPointLegend(){
 
     }
+
 }

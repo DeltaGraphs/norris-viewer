@@ -6,6 +6,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
+import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 
 /*
  * Name : LineChartPresenterImpl.java
@@ -48,42 +49,50 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         previewLineChartView.setScrollEnabled(false);
     }*/
 
+    private void startNewConnections(){ startSocket((MapChartActivity) graphView, lineChartInstance);}
+
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
             // in quanto potremmo avere piu modelli dati
             // verifichiamo su quale modello é avvenuto un cambiamento dei dati
             // prima di effettuare il cast
-            graphView.setAxis('x',
-                    lineChartInstance.getAxisX().getName(),
-                    lineChartInstance.getAxisX().getAppearance(),
-                    lineChartInstance.getAxisX().getMaxIndex(),
-                    lineChartInstance.getAxisX().getMinIndex(),
-                    lineChartInstance.getAxisX().getTicks(),
-                    lineChartInstance.getAxisX().getScale()
-            );
-            graphView.setAxis('y',
-                    lineChartInstance.getAxisY().getName(),
-                    lineChartInstance.getAxisY().getAppearance(),
-                    lineChartInstance.getAxisY().getMaxIndex(),
-                    lineChartInstance.getAxisY().getMinIndex(),
-                    lineChartInstance.getAxisY().getTicks(),
-                    lineChartInstance.getAxisY().getScale()
-            );
-            graphView.setViewFinder(lineChartInstance.getViewFinder());
-            graphView.setBackground(lineChartInstance.getBackground());
-            graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
-            graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
-            graphView.setData(lineChartInstance.getFlowList());
+            String signal = (String) data;
+            if((signal == "configGraph") || (signal=="updateGraphProp"))
+                setGraphParameters();
+            graphView.setData(lineChartInstance.getFlowList(), signal);
+            firstConnection = false;
+            startNewConnections();
         }
     }
+
+    @Override
+    protected void setGraphParameters() {
+        graphView.setAxis('x',
+                lineChartInstance.getAxisX().getName(),
+                lineChartInstance.getAxisX().getAppearance(),
+                lineChartInstance.getAxisX().getMaxIndex(),
+                lineChartInstance.getAxisX().getMinIndex(),
+                lineChartInstance.getAxisX().getTicks(),
+                lineChartInstance.getAxisX().getScale()
+        );
+        graphView.setAxis('y',
+                lineChartInstance.getAxisY().getName(),
+                lineChartInstance.getAxisY().getAppearance(),
+                lineChartInstance.getAxisY().getMaxIndex(),
+                lineChartInstance.getAxisY().getMinIndex(),
+                lineChartInstance.getAxisY().getTicks(),
+                lineChartInstance.getAxisY().getScale()
+        );
+        graphView.setViewFinder(lineChartInstance.getViewFinder());
+        graphView.setBackground(lineChartInstance.getBackground());
+        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
+        graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
+    }
+
 
     public void viewPointLegend(){
 
     }
 
-    @Override
-    protected void setGraphParameters() {
-
-    }
 }

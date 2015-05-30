@@ -28,5 +28,5 @@ public interface LineChartView {
     public void setBackground(String bg);
     public void setGrid(Boolean  horizontal, Boolean vertical);
     public void setLegendOnPoint(Boolean legend);
-    public void setData(ArrayList<FlowModel> flowList);
+    public void setData(ArrayList<FlowModel> flowList, String signal);
 }

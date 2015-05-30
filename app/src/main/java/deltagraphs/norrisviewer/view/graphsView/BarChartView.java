@@ -30,5 +30,5 @@ public interface BarChartView {
     public void setSortable(Boolean choise);
     public void setGrid(Boolean grid);
     public void setLegendOnPoint(Boolean legend);
-    public void setData(ArrayList<FlowModel> flowList);
+    public void setData(ArrayList<FlowModel> flowList, String signal);
 }

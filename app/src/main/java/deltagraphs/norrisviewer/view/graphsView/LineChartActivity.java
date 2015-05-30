@@ -160,7 +160,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     }
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList) {
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
 
     }
 }
