@@ -35,7 +35,7 @@ public class MapChartFlow extends FlowModel {
     private Marker markerProperties;
     private int maxItems;
     private TraceModel trace;
-    private ArrayList<MapChartRecord> records;
+    private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>();
     public ArrayList<MapChartRecord> getRecords() { return records; }
 
     public int getMaxItems() { return maxItems; }

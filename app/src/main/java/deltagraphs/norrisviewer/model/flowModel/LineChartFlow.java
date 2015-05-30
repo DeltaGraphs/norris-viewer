@@ -31,7 +31,7 @@ public class LineChartFlow extends FlowModel{
     private String interpolation;
     private String subAreaColour;
     private int maxItems;
-    private ArrayList<LineChartRecord> records;
+    private ArrayList<LineChartRecord> records = new ArrayList<LineChartRecord>();
 
     public String getFlowColour(){ return flowColour; }
     public String getMarker(){ return marker; }

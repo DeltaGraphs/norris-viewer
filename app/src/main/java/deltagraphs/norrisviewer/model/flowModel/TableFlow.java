@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 public class TableFlow extends FlowModel {
     private int maxItems;
-    private ArrayList<TableRecord> records;
+    private ArrayList<TableRecord> records = new ArrayList<TableRecord>();
 
     public int getMaxItemsPerPage(){ return maxItems; }
     public int getRecordSize(){return records.size(); }
