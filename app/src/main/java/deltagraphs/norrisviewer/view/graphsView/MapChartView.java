@@ -23,9 +23,9 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface MapChartView {
-    public void setParams(float latitude, float longitude);
+    public void cameraPosition(float latitude, float longitude);
     public void setMapType(String type);
     public void setLegendOnPoint(Boolean legend);
-    public void setZoom(float height, float width);
+    public void setZoom(float width, float height);
     public void setData(ArrayList<FlowModel> flowList);
 }

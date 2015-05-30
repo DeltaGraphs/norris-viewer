@@ -22,6 +22,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     private MapChartPresenter mapChartPresenter;
     private String sourceURL;
     private String sourceTitle;
+    LatLng center;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +74,8 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     public void cameraPosition(float lat, float lng){
-        LatLng position = new LatLng(lat, lng);
-        map.moveCamera(CameraUpdateFactory.newLatLng(position));
+        center = new LatLng(lat, lng);
+        map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
 
     public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color){
@@ -175,12 +176,13 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     }
 
 
-    public void zoomAtPoint(Marker mMarker, int width, int height){
-        LatLng position = mMarker.getPosition();
-        double[] ref = getBoundingBox(position.latitude, position.longitude, width, height);
-        LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng( ref[2], ref[3]));
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
-        map.animateCamera(CameraUpdateFactory.zoomIn());
+    public void setZoom(float width, float height){
+        if(center!= null) {
+            double[] ref = getBoundingBox(center.latitude, center.longitude, (int)width, (int)height);
+            LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng(ref[2], ref[3]));
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
+            map.animateCamera(CameraUpdateFactory.zoomIn());
+        }
     }
 
     private double[] getBoundingBox(final double pLatitude, final double pLongitude, final int widthInMeters, final int heightInMeters) {
@@ -207,23 +209,12 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         return boundingBox;
     }
 
-
-    @Override
-    public void setParams(float latitude, float longitude) {
-
-    }
-
     @Override
     public void setMapType(String type) {
     }
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
-
-    }
-
-    @Override
-    public void setZoom(float height, float width) {
 
     }
 
