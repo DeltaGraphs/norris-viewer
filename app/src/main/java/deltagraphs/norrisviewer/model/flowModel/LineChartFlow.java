@@ -70,7 +70,7 @@ public class LineChartFlow extends FlowModel{
 
     @Override
     public void createFlow(JSONObject data) {
-        records = new ArrayList<LineChartRecord>();
+        //records = new ArrayList<LineChartRecord>();
         JSONArray recordList = null;
         try {
             recordList = data.getJSONArray("records");

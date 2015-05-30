@@ -64,14 +64,6 @@ public abstract class Graph extends Observable {
         }
     }
 
-    public void setRecords(String flowID,JSONArray records) {
-        int index = searchFlowIndex(flowID);
-        Log.d("setRecords", flowID +" "+ index);
-        if (index != -1) {
-            flowList.get(index).addRecords(records);
-        }
-    }
-
     public void deleteFlow(String flowID){
         int index = searchFlowIndex(flowID);
         if(index != -1) {
@@ -104,7 +96,10 @@ public abstract class Graph extends Observable {
 
                     setParameters(properties);
                     JSONObject data=obj.getJSONObject("data");
-                    setRecords(data.getString("ID"),data.getJSONArray("records"));
+                    int flowIndex = searchFlowIndex(data.getString("ID"));
+                    if(flowIndex != -1) {
+                        flowList.get(flowIndex).createFlow(data);
+                    }
                     break;
                 }
                 case "updateGraphProp": {
@@ -114,7 +109,11 @@ public abstract class Graph extends Observable {
                 case "insertFlow": {
                     JSONObject jsonFlowParam = obj.getJSONObject("properties");
                     addFlow(jsonFlowParam);
-                    setRecords(jsonFlowParam.getString("ID"),obj.getJSONArray("records"));
+                    JSONObject data=obj.getJSONObject("data");
+                    int flowIndex = searchFlowIndex(data.getString("ID"));
+                    if(flowIndex != -1) {
+                        flowList.get(flowIndex).createFlow(data);
+                    }
                     break;
                 }
                 case "deleteFlow": {
