@@ -170,7 +170,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList) {
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
 
     }
 
