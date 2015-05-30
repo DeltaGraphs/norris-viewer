@@ -34,19 +34,19 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 <span class="nc" id="L34">        lineChartInstance = (LineChart) new LineChartImpl();</span>
 <span class="nc" id="L35">        startSocket((LineChartActivity) view, lineChartInstance);</span>
         //lineChartInstance = new LineChartImpl(jsonData);
-<span class="nc" id="L37">        this.setUpViews();</span>
+        //this.setUpViews();
 <span class="nc" id="L38">    }</span>
 
-    @Override
+         /*  @Override
     public void setUpViews() {
-       /* previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
+ previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
         previewLineChartView.setLineChartData(dataModel.getData());
         previewLineChartView.setLineChartData(previewData);
         // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
         // zoom/scroll is unnecessary.
         previewLineChartView.setZoomEnabled(false);
-        previewLineChartView.setScrollEnabled(false);*/
-<span class="nc" id="L49">    }</span>
+        previewLineChartView.setScrollEnabled(false);
+    }*/
 
     @Override
     public void update(Observable observable, Object data) {
@@ -81,5 +81,10 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     public void viewPointLegend(){
 
 <span class="nc" id="L83">    }</span>
+
+    @Override
+    protected void setGraphParameters() {
+
+<span class="nc" id="L88">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

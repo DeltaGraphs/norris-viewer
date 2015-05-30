@@ -32,38 +32,39 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 <span class="nc" id="L32">        graphView = view;</span>
 <span class="nc" id="L33">        tableInstance = (Table) new TableImpl();</span>
 <span class="nc" id="L34">        startSocket((TableActivity) view, tableInstance);</span>
-<span class="nc" id="L35">        this.setUpViews();</span>
+//        this.setUpViews();
 <span class="nc" id="L36">    }</span>
 
-    @Override
-    public void setUpViews() {
 
-<span class="nc" id="L41">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc bnc" id="L45" title="All 2 branches missed.">        if (observable instanceof TableImpl) {</span>
-<span class="nc" id="L46">            graphView.setAddRowOn(tableInstance.getAddRowOn());</span>
-<span class="nc" id="L47">            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());</span>
-<span class="nc" id="L48">            graphView.setSortable(tableInstance.getSortable());</span>
-<span class="nc" id="L49">            graphView.setSortByCol(tableInstance.sortByCol());</span>
-<span class="nc" id="L50">            graphView.setSortOrder(tableInstance.getSortOrder());</span>
-<span class="nc" id="L51">            graphView.setBorderWidth(tableInstance.getBorderWidth());</span>
-<span class="nc" id="L52">            graphView.setBorderColour(tableInstance.getBorderColour());</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        if (observable instanceof TableImpl) {</span>
+<span class="nc" id="L43">            graphView.setAddRowOn(tableInstance.getAddRowOn());</span>
+<span class="nc" id="L44">            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());</span>
+<span class="nc" id="L45">            graphView.setSortable(tableInstance.getSortable());</span>
+<span class="nc" id="L46">            graphView.setSortByCol(tableInstance.sortByCol());</span>
+<span class="nc" id="L47">            graphView.setSortOrder(tableInstance.getSortOrder());</span>
+<span class="nc" id="L48">            graphView.setBorderWidth(tableInstance.getBorderWidth());</span>
+<span class="nc" id="L49">            graphView.setBorderColour(tableInstance.getBorderColour());</span>
 
             //column parameters
-<span class="nc bnc" id="L55" title="All 2 branches missed.">            for(int index=0; index&lt;tableInstance.getNumberOfColumns(); index++) {</span>
-<span class="nc" id="L56">                graphView.setHeader(index,</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            for(int index=0; index&lt;tableInstance.getNumberOfColumns(); index++) {</span>
+<span class="nc" id="L53">                graphView.setHeader(index,</span>
                         tableInstance.getHeaderValue(index),
                         tableInstance.getHeaderTextColour(index),
                         tableInstance.getHeaderBGColour(index));
-<span class="nc" id="L60">                graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));</span>
-<span class="nc" id="L61">                graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));</span>
+<span class="nc" id="L57">                graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));</span>
+<span class="nc" id="L58">                graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));</span>
             }
 
-<span class="nc" id="L64">            graphView.setData(tableInstance.getFlowList());</span>
+<span class="nc" id="L61">            graphView.setData(tableInstance.getFlowList());</span>
         }
-<span class="nc" id="L66">    }</span>
+<span class="nc" id="L63">    }</span>
 
+    @Override
+    protected void setGraphParameters() {
+
+<span class="nc" id="L68">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
