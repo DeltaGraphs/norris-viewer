@@ -89,27 +89,24 @@ public class SocketManager{
 <span class="nc" id="L89">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
-<span class="nc" id="L92">                        Log.d(&quot;SocketManager&quot;, &quot;dentro la run&quot;);</span>
-<span class="nc" id="L93">                        JSONObject obj = (JSONObject) args[0];</span>
+<span class="nc" id="L92">                        JSONObject obj = (JSONObject) args[0];</span>
                         //try {
-<span class="nc bnc" id="L95" title="All 2 branches missed.">                            if(activity instanceof MainView) {</span>
-<span class="nc" id="L96">                                Log.d(&quot;SocketManager&quot;, &quot;dentro if mainview&quot;);</span>
-<span class="nc" id="L97">                                ((PageModel) model).setPageModel(obj, signal);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                            if(activity instanceof MainView) {</span>
+<span class="nc" id="L95">                                ((PageModel) model).setPageModel(obj, signal);</span>
                             }
                             else
-<span class="nc bnc" id="L100" title="All 2 branches missed.">                                if(activity instanceof BarChart)</span>
-<span class="nc" id="L101">                                    ((Graph)model).setGraph(obj, signal, x);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                                if(activity instanceof BarChart)</span>
+<span class="nc" id="L99">                                    ((Graph)model).setGraph(obj, signal, x);</span>
                                     else
-<span class="nc bnc" id="L103" title="All 2 branches missed.">                                    if(activity instanceof LineChart)</span>
-<span class="nc" id="L104">                                        ((Graph)model).setGraph(obj, signal, x);</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">                                    if(activity instanceof LineChart)</span>
+<span class="nc" id="L102">                                        ((Graph)model).setGraph(obj, signal, x);</span>
                                         else
-<span class="nc bnc" id="L106" title="All 2 branches missed.">                                        if(activity instanceof MapChartView) {</span>
-<span class="nc" id="L107">                                            Log.d(&quot;SocketManager&quot;, &quot;dentro l'if del map&quot;);</span>
-<span class="nc" id="L108">                                            ((Graph) model).setGraph(obj, signal, x);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">                                        if(activity instanceof MapChartView) {</span>
+<span class="nc" id="L105">                                            ((Graph) model).setGraph(obj, signal, x);</span>
                                         }
                                         else
-<span class="nc bnc" id="L111" title="All 2 branches missed.">                                            if(activity instanceof Table)</span>
-<span class="nc" id="L112">                                                ((Graph)model).setGraph(obj, signal, x);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                                            if(activity instanceof Table)</span>
+<span class="nc" id="L109">                                                ((Graph)model).setGraph(obj, signal, x);</span>
 
 
                             //float x = (float) obj.getDouble(&quot;item&quot;);
@@ -117,10 +114,10 @@ public class SocketManager{
                         //} catch (JSONException e) {
                         //    return;
                         //}
-<span class="nc" id="L120">                    }</span>
+<span class="nc" id="L117">                    }</span>
                 });
-<span class="nc" id="L122">            }</span>
+<span class="nc" id="L119">            }</span>
         });
-<span class="nc" id="L124">    }</span>
+<span class="nc" id="L121">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

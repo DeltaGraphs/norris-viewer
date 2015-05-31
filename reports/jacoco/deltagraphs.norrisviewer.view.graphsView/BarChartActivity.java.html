@@ -73,17 +73,17 @@ import lecho.lib.hellocharts.view.ColumnChartView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 <span class="nc" id="L75">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L76">        Bundle extras = getIntent().getExtras();</span>
-/*
-        sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);
-        sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);
+<span class="nc" id="L76">        setContentView(R.layout.activity_bar_chart);</span>
+<span class="nc" id="L77">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L79">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L80">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+        }
+<span class="nc" id="L82">        sourceURL = &quot;http://norris-nrti-dev.herokuapp.com/page1/map1&quot;;</span>
+<span class="nc" id="L83">        setTitle(sourceTitle);</span>
 
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        setTitle(sourceTitle);
-*/
-<span class="nc" id="L84">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+<span class="nc" id="L85">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-<span class="nc" id="L86">        setContentView(R.layout.activity_bar_chart);</span>
 
 <span class="nc" id="L88">        tvX = (TextView) findViewById(R.id.tvXMax);</span>
 <span class="nc" id="L89">        tvY = (TextView) findViewById(R.id.tvYMax);</span>

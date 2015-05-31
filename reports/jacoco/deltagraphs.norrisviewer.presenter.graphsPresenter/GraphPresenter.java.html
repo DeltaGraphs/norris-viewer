@@ -32,24 +32,20 @@ public abstract class GraphPresenter {
 <span class="nc" id="L32">    }</span>
 
     public void startSocket( Activity graphActivity, Object graphModel){
-<span class="nc" id="L35">        Log.d(&quot;graphPresenter&quot;, &quot;prima degli start listening&quot;);</span>
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        if(firstConnection) {</span>
-<span class="nc" id="L37">            graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L38">            Log.d(&quot;graphPresenter&quot;, &quot;dentro if&quot;);</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">        if(firstConnection) {</span>
+<span class="nc" id="L36">            graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
         }
         else {
-<span class="nc" id="L41">            Log.d(&quot;graphPresenter&quot;, &quot;dentro else&quot;);</span>
-<span class="nc" id="L42">            graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L43">            graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel,(MapChartPresenterImpl) this );</span>
-<span class="nc" id="L44">            graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L45">            graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L46">            graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
+<span class="nc" id="L39">            graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
+<span class="nc" id="L40">            graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel,(MapChartPresenterImpl) this );</span>
+<span class="nc" id="L41">            graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
+<span class="nc" id="L42">            graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
+<span class="nc" id="L43">            graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
         }
-<span class="nc" id="L48">        graphSocket.startConnection();</span>
-<span class="nc" id="L49">        Log.d(&quot;graphPresenter&quot;, &quot;dopo gli start listening&quot;);</span>
-<span class="nc" id="L50">    }</span>
+<span class="nc" id="L45">        graphSocket.startConnection();</span>
+<span class="nc" id="L46">    }</span>
 
-<span class="nc" id="L52">    public void stopSocket(){}</span>
+<span class="nc" id="L48">    public void stopSocket(){}</span>
 
    protected abstract void setGraphParameters();
 

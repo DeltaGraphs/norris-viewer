@@ -227,24 +227,21 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
     public void setData(ArrayList&lt;FlowModel&gt; flowList, String signal) {
 <span class="nc" id="L228">        map.clear();</span>
 <span class="nc bnc" id="L229" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++){</span>
-<span class="nc" id="L230">            Log.d(&quot;MapChartActivity&quot;, &quot;Dentro primo for&quot;);</span>
-<span class="nc" id="L231">            flowList.get(i).getFlowId();</span>
-<span class="nc" id="L232">            flowList.get(i).getFlowName();</span>
-<span class="nc" id="L233">            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);</span>
-<span class="nc" id="L234">            mapChartFlow.getMaxItems();</span>
-<span class="nc" id="L235">            String markerType = mapChartFlow.getMarkerType();</span>
-<span class="nc" id="L236">            String markerProperty = mapChartFlow.getMarkerProperty(markerType);</span>
-<span class="nc" id="L237">            String color = mapChartFlow.getMarkerColour();</span>
-<span class="nc bnc" id="L238" title="All 2 branches missed.">            for(int j =0; j&lt; mapChartFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L239">                Log.d(&quot;MapChartActivity&quot;, &quot;Dentro secondo for&quot;);</span>
-<span class="nc" id="L240">                String id = mapChartFlow.getRecordMarkerId(j);</span>
-<span class="nc" id="L241">                float lat = mapChartFlow.getRecordLatitude(j);</span>
-<span class="nc" id="L242">                float lng = mapChartFlow.getRecordLongitude(j);</span>
-<span class="nc" id="L243">                String recordId = mapChartFlow.getRecordId(j);</span>
-<span class="nc" id="L244">                addMapMarker(id, lat, lng, markerType, markerProperty, color);</span>
-<span class="nc" id="L245">                Log.d(&quot;MapChartActivity&quot;, &quot;Dopo addMapMarker()&quot;);</span>
+<span class="nc" id="L230">            flowList.get(i).getFlowId();</span>
+<span class="nc" id="L231">            flowList.get(i).getFlowName();</span>
+<span class="nc" id="L232">            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);</span>
+<span class="nc" id="L233">            mapChartFlow.getMaxItems();</span>
+<span class="nc" id="L234">            String markerType = mapChartFlow.getMarkerType();</span>
+<span class="nc" id="L235">            String markerProperty = mapChartFlow.getMarkerProperty(markerType);</span>
+<span class="nc" id="L236">            String color = mapChartFlow.getMarkerColour();</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">            for(int j =0; j&lt; mapChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L238">                String id = mapChartFlow.getRecordMarkerId(j);</span>
+<span class="nc" id="L239">                float lat = mapChartFlow.getRecordLatitude(j);</span>
+<span class="nc" id="L240">                float lng = mapChartFlow.getRecordLongitude(j);</span>
+<span class="nc" id="L241">                String recordId = mapChartFlow.getRecordId(j);</span>
+<span class="nc" id="L242">                addMapMarker(id, lat, lng, markerType, markerProperty, color);</span>
             }
         }
-<span class="nc" id="L248">    }</span>
+<span class="nc" id="L245">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
