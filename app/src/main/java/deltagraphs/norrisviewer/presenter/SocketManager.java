@@ -89,11 +89,9 @@ public class SocketManager{
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.d("SocketManager", "dentro la run");
                         JSONObject obj = (JSONObject) args[0];
                         //try {
                             if(activity instanceof MainView) {
-                                Log.d("SocketManager", "dentro if mainview");
                                 ((PageModel) model).setPageModel(obj, signal);
                             }
                             else
@@ -104,7 +102,6 @@ public class SocketManager{
                                         ((Graph)model).setGraph(obj, signal, x);
                                         else
                                         if(activity instanceof MapChartView) {
-                                            Log.d("SocketManager", "dentro l'if del map");
                                             ((Graph) model).setGraph(obj, signal, x);
                                         }
                                         else

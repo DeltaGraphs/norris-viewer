@@ -52,7 +52,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
 
     @Override
     public void update(Observable observable, Object data) {
-        Log.d("MapChartPresenterImpl","dentro update");
         if (observable instanceof MapChartImpl) {
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
@@ -61,8 +60,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
 
             firstConnection = false;
             startNewConnections();
-
-            Log.d("MapChartPresenterImpl", "fine update");
         }
     }
 

@@ -32,13 +32,10 @@ public abstract class GraphPresenter {
     }
 
     public void startSocket( Activity graphActivity, Object graphModel){
-        Log.d("graphPresenter", "prima degli start listening");
         if(firstConnection) {
             graphSocket.startListening("configGraph", graphActivity, graphModel, (MapChartPresenterImpl) this);
-            Log.d("graphPresenter", "dentro if");
         }
         else {
-            Log.d("graphPresenter", "dentro else");
             graphSocket.startListening("updateGraphProp", graphActivity, graphModel, (MapChartPresenterImpl) this);
             graphSocket.startListening("insertFlow", graphActivity, graphModel,(MapChartPresenterImpl) this );
             graphSocket.startListening("deleteFlow", graphActivity, graphModel, (MapChartPresenterImpl) this);
@@ -46,7 +43,6 @@ public abstract class GraphPresenter {
             graphSocket.startListening("updateFlowData", graphActivity, graphModel, (MapChartPresenterImpl) this);
         }
         graphSocket.startConnection();
-        Log.d("graphPresenter", "dopo gli start listening");
     }
 
     public void stopSocket(){}

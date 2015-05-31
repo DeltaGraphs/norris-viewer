@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.*;
@@ -32,6 +33,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
     private static final int NEGATIVE_STACKED_DATA = 4;
 
+    private List<Line> lines;
 
     private LineChartPresenter lineChartPresenter;
 
@@ -69,6 +71,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
+        lines = new ArrayList<Line>();
     }
 
     @Override
@@ -161,19 +164,44 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
+        String color = "";
         for(int i=0; i<flowList.size(); i++) {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
-            lineChartFlow.getFlowColour();
+            color = lineChartFlow.getFlowColour();
             lineChartFlow.getMarker();
             lineChartFlow.getInterpolation();
-            lineChartFlow.getRecordSize();
+            List<PointValue> values = new ArrayList<PointValue>();
             for(int j =0; j< lineChartFlow.getRecordSize(); j++) {
-                lineChartFlow.getRecordId(j);
-                lineChartFlow.getRecordValueX(j);
-                lineChartFlow.getRecordValueY(j);
+                //lineChartFlow.getRecordId(j);
+                float x = lineChartFlow.getRecordValueX(j);
+                float y = lineChartFlow.getRecordValueY(j);
+                values.add(new PointValue(x, y));
             }
+            Line line = new Line(values);
+            switch (color){
+                case "green":
+                    line.setColor(ChartUtils.COLOR_GREEN);
+                    break;
+                case "blue":
+                    line.setColor(ChartUtils.COLOR_BLUE);
+                    break;
+                case "orange":
+                    line.setColor(ChartUtils.COLOR_ORANGE);
+                    break;
+                case "red":
+                    line.setColor(ChartUtils.COLOR_RED);
+                    break;
+                case "violet":
+                    line.setColor(ChartUtils.COLOR_VIOLET);
+                    break;
+                default:
+                    line.setColor(ChartUtils.DEFAULT_COLOR);
+                    break;
+            }
+            line.setHasLabels(hasLabels);
+            lines.add(line);
         }
     }
 }

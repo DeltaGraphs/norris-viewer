@@ -227,7 +227,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         map.clear();
         for(int i=0; i<flowList.size(); i++){
-            Log.d("MapChartActivity", "Dentro primo for");
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
@@ -236,13 +235,11 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
             String color = mapChartFlow.getMarkerColour();
             for(int j =0; j< mapChartFlow.getRecordSize(); j++) {
-                Log.d("MapChartActivity", "Dentro secondo for");
                 String id = mapChartFlow.getRecordMarkerId(j);
                 float lat = mapChartFlow.getRecordLatitude(j);
                 float lng = mapChartFlow.getRecordLongitude(j);
                 String recordId = mapChartFlow.getRecordId(j);
                 addMapMarker(id, lat, lng, markerType, markerProperty, color);
-                Log.d("MapChartActivity", "Dopo addMapMarker()");
             }
         }
     }

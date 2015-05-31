@@ -73,17 +73,17 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_bar_chart);
         Bundle extras = getIntent().getExtras();
-/*
-        sourceURL = extras.getString("EXTRA_SOURCE_URL");
-        sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
-
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        if (extras != null) {
+            sourceURL = extras.getString("EXTRA_SOURCE_URL");
+            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+        }
+        sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/map1";
         setTitle(sourceTitle);
-*/
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_bar_chart);
 
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
