@@ -177,6 +177,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             flowList.get(i).getFlowName();
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
             color = lineChartFlow.getFlowColour();
+            lineChartFlow.maxItems();
             lineChartFlow.getMarker();
             lineChartFlow.getInterpolation();
             List<PointValue> values = new ArrayList<PointValue>();

@@ -100,7 +100,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         final EditText input = new EditText(context);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
-        input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
+        //input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
+        input.setText("http://norris-nrti-dev.herokuapp.com/page1/line");
         builder.setView(input);
 
 // Set up the buttons

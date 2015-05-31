@@ -86,10 +86,12 @@ public abstract class Graph extends Observable {
                 case "configGraph": {
                     JSONObject properties = obj.getJSONObject("properties");
                     setParameters(properties);
-                    JSONObject data=obj.getJSONObject("data");
-                    int flowIndex = searchFlowIndex(data.getString("ID"));
-                    if(flowIndex != -1) {
-                        flowList.get(flowIndex).createFlow(data);
+                    JSONArray data=obj.getJSONArray("data");
+                    for(int i=0; i<data.length(); i++){
+                        int flowIndex = searchFlowIndex(data.getJSONObject(i).getString("ID"));
+                        if(flowIndex != -1) {
+                            flowList.get(flowIndex).createFlow(data.getJSONObject(i));
+                        }
                     }
                     break;
                 }
