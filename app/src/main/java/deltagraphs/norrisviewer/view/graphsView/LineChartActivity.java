@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.*;
@@ -34,6 +35,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private static final int NEGATIVE_STACKED_DATA = 4;
 
     private List<Line> lines;
+    // Map< flowIndex, lineIndex>
+    private Map<String, Integer> indexesMap;
 
     private LineChartPresenter lineChartPresenter;
 
@@ -166,7 +169,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         String color = "";
         for(int i=0; i<flowList.size(); i++) {
-            flowList.get(i).getFlowId();
+
+            indexesMap.put(flowList.get(i).getFlowId(), 10000);
+
             flowList.get(i).getFlowName();
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
             color = lineChartFlow.getFlowColour();
