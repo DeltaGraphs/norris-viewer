@@ -36,7 +36,7 @@ import lecho.lib.hellocharts.view.LineChartView;
 
     private List&lt;Line&gt; lines;
     // Map&lt; flowIndex, lineIndex&gt;
-    private Map&lt;String, Integer&gt; indexesMap;
+    private List&lt;String&gt; indexesList;
 
     private LineChartPresenter lineChartPresenter;
 
@@ -61,27 +61,26 @@ import lecho.lib.hellocharts.view.LineChartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+<span class="nc" id="L64">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L65">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L66">        chart = (LineChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L67">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
 
-<span class="nc" id="L65">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L66">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L67">        chart = (LineChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L68">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
-
-<span class="nc" id="L70">        Bundle extras = getIntent().getExtras();</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">        if (extras != null) {</span>
-<span class="nc" id="L72">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L73">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L69">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L71">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L72">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-<span class="nc" id="L75">        setTitle(sourceTitle);</span>
-<span class="nc" id="L76">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L77">        lines = new ArrayList&lt;Line&gt;();</span>
-<span class="nc" id="L78">    }</span>
+<span class="nc" id="L74">        setTitle(sourceTitle);</span>
+<span class="nc" id="L75">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L76">        lines = new ArrayList&lt;Line&gt;();</span>
+<span class="nc" id="L77">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L83">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L84">        return true;</span>
+<span class="nc" id="L82">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L83">        return true;</span>
     }
 
     @Override
@@ -89,125 +88,125 @@ import lecho.lib.hellocharts.view.LineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L92">        int id = item.getItemId();</span>
+<span class="nc" id="L91">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L96">            return true;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L95">            return true;</span>
         }
 
-<span class="nc" id="L99">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L98">        return super.onOptionsItemSelected(item);</span>
     }
 
     public void onValueSelected(){
 
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L103">    }</span>
 
     public void setInitialState(){
-<span class="nc" id="L107">        hasAxes = true;</span>
-<span class="nc" id="L108">        hasAxesNames = true;</span>
-<span class="nc" id="L109">        hasLabels = false;</span>
-<span class="nc" id="L110">        hasLabelForSelected = false;</span>
-<span class="nc" id="L111">        dataType = DEFAULT_DATA;</span>
-<span class="nc" id="L112">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
-<span class="nc" id="L113">    }</span>
+<span class="nc" id="L106">        hasAxes = true;</span>
+<span class="nc" id="L107">        hasAxesNames = true;</span>
+<span class="nc" id="L108">        hasLabels = false;</span>
+<span class="nc" id="L109">        hasLabelForSelected = false;</span>
+<span class="nc" id="L110">        dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L111">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
+<span class="nc" id="L112">    }</span>
 
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
-<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (hasAxes) {</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">        if (hasAxes) {</span>
 
-<span class="nc" id="L120">            float step = (maxIndex-minIndex)/ticks;</span>
+<span class="nc" id="L119">            float step = (maxIndex-minIndex)/ticks;</span>
 
-<span class="nc bnc" id="L122" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
-<span class="nc" id="L123">                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
-<span class="nc" id="L124">                axisX.setHasLines(true);</span>
-<span class="nc bnc" id="L125" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L126">                    axisX.setName(name);</span>
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
+<span class="nc" id="L122">                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
+<span class="nc" id="L123">                axisX.setHasLines(true);</span>
+<span class="nc bnc" id="L124" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L125">                    axisX.setName(name);</span>
                 }
 
-<span class="nc" id="L129">                data.setAxisXBottom(axisX);</span>
+<span class="nc" id="L128">                data.setAxisXBottom(axisX);</span>
             }
-<span class="nc bnc" id="L131" title="All 2 branches missed.">            if(axisXorY == 'y') {</span>
-<span class="nc" id="L132">                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
-<span class="nc" id="L133">                axisY.setHasLines(true);</span>
-<span class="nc bnc" id="L134" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L135">                    axisY.setName(name);</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">            if(axisXorY == 'y') {</span>
+<span class="nc" id="L131">                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
+<span class="nc" id="L132">                axisY.setHasLines(true);</span>
+<span class="nc bnc" id="L133" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L134">                    axisY.setName(name);</span>
                 }
-<span class="nc" id="L137">                data.setAxisYLeft(axisY);</span>
+<span class="nc" id="L136">                data.setAxisYLeft(axisY);</span>
             }
             // TODO: Insert the possibility to change the scale.
-<span class="nc" id="L140">        } else {</span>
-<span class="nc" id="L141">            data.setAxisXBottom(null);</span>
-<span class="nc" id="L142">            data.setAxisYLeft(null);</span>
+<span class="nc" id="L139">        } else {</span>
+<span class="nc" id="L140">            data.setAxisXBottom(null);</span>
+<span class="nc" id="L141">            data.setAxisYLeft(null);</span>
         }
-<span class="nc" id="L144">    }</span>
+<span class="nc" id="L143">    }</span>
 
 
     @Override
     public void setViewFinder(Boolean withViewFinder) {
 
-<span class="nc" id="L150">    }</span>
+<span class="nc" id="L149">    }</span>
 
     @Override
     public void setBackground(String bg) {
 
-<span class="nc" id="L155">    }</span>
+<span class="nc" id="L154">    }</span>
 
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
-<span class="nc" id="L159">        axisX.setHasSeparationLine(vertical);</span>
-<span class="nc" id="L160">        axisY.setHasSeparationLine(horizontal);</span>
-<span class="nc" id="L161">    }</span>
+<span class="nc" id="L158">        axisX.setHasSeparationLine(vertical);</span>
+<span class="nc" id="L159">        axisY.setHasSeparationLine(horizontal);</span>
+<span class="nc" id="L160">    }</span>
 
     @Override
     public void setLegendOnPoint(Boolean legend) {
 
-<span class="nc" id="L166">    }</span>
+<span class="nc" id="L165">    }</span>
 
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, String signal) {
-<span class="nc" id="L170">        String color = &quot;&quot;;</span>
-<span class="nc bnc" id="L171" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++) {</span>
+<span class="nc" id="L169">        String color = &quot;&quot;;</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++) {</span>
 
-<span class="nc" id="L173">            indexesMap.put(flowList.get(i).getFlowId(), 10000);</span>
+<span class="nc" id="L172">            indexesList.add(flowList.get(i).getFlowId());</span>
 
-<span class="nc" id="L175">            flowList.get(i).getFlowName();</span>
-<span class="nc" id="L176">            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);</span>
-<span class="nc" id="L177">            color = lineChartFlow.getFlowColour();</span>
-<span class="nc" id="L178">            lineChartFlow.getMarker();</span>
-<span class="nc" id="L179">            lineChartFlow.getInterpolation();</span>
-<span class="nc" id="L180">            List&lt;PointValue&gt; values = new ArrayList&lt;PointValue&gt;();</span>
-<span class="nc bnc" id="L181" title="All 2 branches missed.">            for(int j =0; j&lt; lineChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L174">            flowList.get(i).getFlowName();</span>
+<span class="nc" id="L175">            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);</span>
+<span class="nc" id="L176">            color = lineChartFlow.getFlowColour();</span>
+<span class="nc" id="L177">            lineChartFlow.getMarker();</span>
+<span class="nc" id="L178">            lineChartFlow.getInterpolation();</span>
+<span class="nc" id="L179">            List&lt;PointValue&gt; values = new ArrayList&lt;PointValue&gt;();</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">            for(int j =0; j&lt; lineChartFlow.getRecordSize(); j++) {</span>
                 //lineChartFlow.getRecordId(j);
-<span class="nc" id="L183">                float x = lineChartFlow.getRecordValueX(j);</span>
-<span class="nc" id="L184">                float y = lineChartFlow.getRecordValueY(j);</span>
-<span class="nc" id="L185">                values.add(new PointValue(x, y));</span>
+<span class="nc" id="L182">                float x = lineChartFlow.getRecordValueX(j);</span>
+<span class="nc" id="L183">                float y = lineChartFlow.getRecordValueY(j);</span>
+<span class="nc" id="L184">                values.add(new PointValue(x, y));</span>
             }
-<span class="nc" id="L187">            Line line = new Line(values);</span>
-<span class="nc bnc" id="L188" title="All 22 branches missed.">            switch (color){</span>
+<span class="nc" id="L186">            Line line = new Line(values);</span>
+<span class="nc bnc" id="L187" title="All 22 branches missed.">            switch (color){</span>
                 case &quot;green&quot;:
-<span class="nc" id="L190">                    line.setColor(ChartUtils.COLOR_GREEN);</span>
-<span class="nc" id="L191">                    break;</span>
+<span class="nc" id="L189">                    line.setColor(ChartUtils.COLOR_GREEN);</span>
+<span class="nc" id="L190">                    break;</span>
                 case &quot;blue&quot;:
-<span class="nc" id="L193">                    line.setColor(ChartUtils.COLOR_BLUE);</span>
-<span class="nc" id="L194">                    break;</span>
+<span class="nc" id="L192">                    line.setColor(ChartUtils.COLOR_BLUE);</span>
+<span class="nc" id="L193">                    break;</span>
                 case &quot;orange&quot;:
-<span class="nc" id="L196">                    line.setColor(ChartUtils.COLOR_ORANGE);</span>
-<span class="nc" id="L197">                    break;</span>
+<span class="nc" id="L195">                    line.setColor(ChartUtils.COLOR_ORANGE);</span>
+<span class="nc" id="L196">                    break;</span>
                 case &quot;red&quot;:
-<span class="nc" id="L199">                    line.setColor(ChartUtils.COLOR_RED);</span>
-<span class="nc" id="L200">                    break;</span>
+<span class="nc" id="L198">                    line.setColor(ChartUtils.COLOR_RED);</span>
+<span class="nc" id="L199">                    break;</span>
                 case &quot;violet&quot;:
-<span class="nc" id="L202">                    line.setColor(ChartUtils.COLOR_VIOLET);</span>
-<span class="nc" id="L203">                    break;</span>
+<span class="nc" id="L201">                    line.setColor(ChartUtils.COLOR_VIOLET);</span>
+<span class="nc" id="L202">                    break;</span>
                 default:
-<span class="nc" id="L205">                    line.setColor(ChartUtils.DEFAULT_COLOR);</span>
+<span class="nc" id="L204">                    line.setColor(ChartUtils.DEFAULT_COLOR);</span>
                     break;
             }
-<span class="nc" id="L208">            line.setHasLabels(hasLabels);</span>
-<span class="nc" id="L209">            lines.add(line);</span>
+<span class="nc" id="L207">            line.setHasLabels(hasLabels);</span>
+<span class="nc" id="L208">            lines.add(line);</span>
         }
-<span class="nc" id="L211">    }</span>
+<span class="nc" id="L210">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
