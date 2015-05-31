@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
@@ -119,8 +120,21 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList, String signal) {
-
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
+        for(int i=0; i<flowList.size(); i++) {
+            flowList.get(i).getFlowId();
+            flowList.get(i).getFlowName();
+            TableFlow tableFlow = (TableFlow) flowList.get(i);
+            tableFlow.getMaxItemsPerPage();
+            for(int j=0; j< tableFlow.getRecordSize(); j++){
+                tableFlow.getRecordId(j);
+                for(int indexCol = 0; indexCol<numOfColumns; indexCol++ ){
+                    tableFlow.getCellBackgroundColour(j, indexCol);
+                    tableFlow.getCellData(j, indexCol);
+                    tableFlow.getCellTextColour(j, indexCol);
+                }
+            }
+        }
     }
 
 

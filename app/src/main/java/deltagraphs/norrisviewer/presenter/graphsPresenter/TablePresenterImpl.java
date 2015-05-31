@@ -46,7 +46,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
                 setGraphParameters();
-            graphView.setData(tableInstance.getFlowList(), signal);
+            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns(), signal);
 
             firstConnection = false;
             startNewConnections();

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
@@ -219,6 +220,18 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
+        for(int i=0; i<flowList.size(); i++){
+            flowList.get(i).getFlowId();
+            flowList.get(i).getFlowName();
+            BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
+            barChartFlow.getFlowColour();
+            for(int j =0; j< barChartFlow.getRecordSize(); j++) {
+                barChartFlow.getRecordId(j);
+                barChartFlow.getRecordIndex(j);
+                barChartFlow.getRecordValue(j);
+            }
+        }
+
 
     }
 
