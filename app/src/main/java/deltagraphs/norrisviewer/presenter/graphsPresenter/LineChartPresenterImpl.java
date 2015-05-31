@@ -1,8 +1,10 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
@@ -60,6 +62,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
                 setGraphParameters();
+
             graphView.setData(lineChartInstance.getFlowList(), signal);
             firstConnection = false;
             startNewConnections();

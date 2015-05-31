@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.*;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
@@ -161,6 +161,19 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
-
+        for(int i=0; i<flowList.size(); i++) {
+            flowList.get(i).getFlowId();
+            flowList.get(i).getFlowName();
+            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
+            lineChartFlow.getFlowColour();
+            lineChartFlow.getMarker();
+            lineChartFlow.getInterpolation();
+            lineChartFlow.getRecordSize();
+            for(int j =0; j< lineChartFlow.getRecordSize(); j++) {
+                lineChartFlow.getRecordId(j);
+                lineChartFlow.getRecordValueX(j);
+                lineChartFlow.getRecordValueY(j);
+            }
+        }
     }
 }
