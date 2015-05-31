@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.*;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
@@ -161,7 +161,20 @@ import lecho.lib.hellocharts.view.LineChartView;
 
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, String signal) {
-
-<span class="nc" id="L165">    }</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++) {</span>
+<span class="nc" id="L165">            flowList.get(i).getFlowId();</span>
+<span class="nc" id="L166">            flowList.get(i).getFlowName();</span>
+<span class="nc" id="L167">            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);</span>
+<span class="nc" id="L168">            lineChartFlow.getFlowColour();</span>
+<span class="nc" id="L169">            lineChartFlow.getMarker();</span>
+<span class="nc" id="L170">            lineChartFlow.getInterpolation();</span>
+<span class="nc" id="L171">            lineChartFlow.getRecordSize();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            for(int j =0; j&lt; lineChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L173">                lineChartFlow.getRecordId(j);</span>
+<span class="nc" id="L174">                lineChartFlow.getRecordValueX(j);</span>
+<span class="nc" id="L175">                lineChartFlow.getRecordValueY(j);</span>
+            }
+        }
+<span class="nc" id="L178">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

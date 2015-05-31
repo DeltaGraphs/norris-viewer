@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>LineChartPresenterImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">LineChartPresenterImpl.java</span></div><h1>LineChartPresenterImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
@@ -30,13 +32,13 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     private LineChart lineChartInstance;
 
     public LineChartPresenterImpl(LineChartView view, String url) {
-<span class="nc" id="L33">        super(url);</span>
-<span class="nc" id="L34">        graphView = view;</span>
-<span class="nc" id="L35">        lineChartInstance = (LineChart) new LineChartImpl();</span>
-<span class="nc" id="L36">        startSocket((LineChartActivity) view, lineChartInstance);</span>
+<span class="nc" id="L35">        super(url);</span>
+<span class="nc" id="L36">        graphView = view;</span>
+<span class="nc" id="L37">        lineChartInstance = (LineChart) new LineChartImpl();</span>
+<span class="nc" id="L38">        startSocket((LineChartActivity) view, lineChartInstance);</span>
         //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
-<span class="nc" id="L39">    }</span>
+<span class="nc" id="L41">    }</span>
 
          /*  @Override
     public void setUpViews() {
@@ -49,26 +51,27 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         previewLineChartView.setScrollEnabled(false);
     }*/
 
-<span class="nc" id="L52">    private void startNewConnections(){ startSocket((MapChartActivity) graphView, lineChartInstance);}</span>
+<span class="nc" id="L54">    private void startNewConnections(){ startSocket((MapChartActivity) graphView, lineChartInstance);}</span>
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc bnc" id="L56" title="All 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
             // in quanto potremmo avere piu modelli dati
             // verifichiamo su quale modello é avvenuto un cambiamento dei dati
             // prima di effettuare il cast
-<span class="nc" id="L60">            String signal = (String) data;</span>
-<span class="nc bnc" id="L61" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
-<span class="nc" id="L62">                setGraphParameters();</span>
-<span class="nc" id="L63">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
-<span class="nc" id="L64">            firstConnection = false;</span>
-<span class="nc" id="L65">            startNewConnections();</span>
+<span class="nc" id="L62">            String signal = (String) data;</span>
+<span class="nc bnc" id="L63" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
+<span class="nc" id="L64">                setGraphParameters();</span>
+
+<span class="nc" id="L66">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
+<span class="nc" id="L67">            firstConnection = false;</span>
+<span class="nc" id="L68">            startNewConnections();</span>
         }
-<span class="nc" id="L67">    }</span>
+<span class="nc" id="L70">    }</span>
 
     @Override
     protected void setGraphParameters() {
-<span class="nc" id="L71">        graphView.setAxis('x',</span>
+<span class="nc" id="L74">        graphView.setAxis('x',</span>
                 lineChartInstance.getAxisX().getName(),
                 lineChartInstance.getAxisX().getAppearance(),
                 lineChartInstance.getAxisX().getMaxIndex(),
@@ -76,7 +79,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
                 lineChartInstance.getAxisX().getTicks(),
                 lineChartInstance.getAxisX().getScale()
         );
-<span class="nc" id="L79">        graphView.setAxis('y',</span>
+<span class="nc" id="L82">        graphView.setAxis('y',</span>
                 lineChartInstance.getAxisY().getName(),
                 lineChartInstance.getAxisY().getAppearance(),
                 lineChartInstance.getAxisY().getMaxIndex(),
@@ -84,16 +87,16 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
                 lineChartInstance.getAxisY().getTicks(),
                 lineChartInstance.getAxisY().getScale()
         );
-<span class="nc" id="L87">        graphView.setViewFinder(lineChartInstance.getViewFinder());</span>
-<span class="nc" id="L88">        graphView.setBackground(lineChartInstance.getBackground());</span>
-<span class="nc" id="L89">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
-<span class="nc" id="L90">        graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L90">        graphView.setViewFinder(lineChartInstance.getViewFinder());</span>
+<span class="nc" id="L91">        graphView.setBackground(lineChartInstance.getBackground());</span>
+<span class="nc" id="L92">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
+<span class="nc" id="L93">        graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());</span>
+<span class="nc" id="L94">    }</span>
 
 
     public void viewPointLegend(){
 
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L99">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
