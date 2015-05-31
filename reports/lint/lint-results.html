@@ -18,14 +18,18 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Sun May 31 17:18:26 UTC 2015.<br/>
-0 errors and 53 warnings found:<br/><br/>
+Check performed at Sun May 31 20:54:47 UTC 2015.<br/>
+1 errors and 55 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
 <tr>
 <td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#OldTargetApi">OldTargetApi: Target SDK attribute is not targeting latest version</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-error.png" alt="Error" />
+<a href="#ValidFragment">ValidFragment: Fragment not instantiatable</a>
 </td></tr>
 <tr>
 <td class="countColumn">3</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
@@ -42,7 +46,7 @@ Check performed at Sun May 31 17:18:26 UTC 2015.<br/>
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
-<td class="countColumn">5</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">7</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr>
@@ -108,6 +112,31 @@ To fix this issue, set the <code>targetSdkVersion</code> to the highest availabl
 </div>
 <br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/android/os/Build.VERSION_CODES.html">http://developer.android.com/reference/android/os/Build.VERSION_CODES.html</a>
 </div><br/>To suppress this error, use the issue id "OldTargetApi" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="ValidFragment"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">ValidFragment: Fragment not instantiatable</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/java/deltagraphs/norrisviewer/view/graphsView/LineChartActivity.java">../../src/main/java/deltagraphs/norrisviewer/view/graphsView/LineChartActivity.java</a>:231</span>: <span class="message">This fragment inner class should be static (deltagraphs.norrisviewer.view.graphsView.LineChartActivity.FireMissilesDialogFragment)</span><br /><pre class="errorlines">
+<span class="lineno"> 228</span> 
+<span class="lineno"> 229</span>     }
+<span class="lineno"> 230</span> 
+<span class="lineno"> 231</span>     public class <span class="errorspan">FireMissilesDialogFragment extends DialogFragment {</span>
+<span class="lineno"> 232</span>         @Override
+<span class="lineno"> 233</span>         public Dialog onCreateDialog(Bundle savedInstanceState) {
+</pre>
+</div>
+<div class="metadata">Priority: 6 / 10<br/>
+Category: Correctness</div>
+Severity: <span class="error">Fatal</span><div class="summary">
+Explanation: Fragment not instantiatable.</div>
+<div class="explanation">
+From the Fragment documentation:<br/>
+<b>Every</b> fragment must have an empty constructor, so it can be instantiated when restoring its activity's state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with <code>setArguments(Bundle)</code> and later retrieved by the Fragment with <code>getArguments()</code>.
+</div>
+<br/><div class="moreinfo">More info: <a href="http://developer.android.com/reference/android/app/Fragment.html#Fragment()">http://developer.android.com/reference/android/app/Fragment.html#Fragment()</a>
+</div><br/>To suppress this error, use the issue id "ValidFragment" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 <a name="GradleDependency"></a>
 <div class="issue">
@@ -215,6 +244,7 @@ Of course it's possible that your custom drawable is translucent and you want it
 </div>
 <div class="warningslist">
 <span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a></span>: <span class="message">The resource <code>R.layout.activity_table</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/green_square.xml">../../src/main/res/drawable/green_square.xml</a></span>: <span class="message">The resource <code>R.drawable.green_square</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable/item_table1.xml">../../src/main/res/drawable/item_table1.xml</a></span>: <span class="message">The resource <code>R.drawable.item_table1</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable/item_table1_header.xml">../../src/main/res/drawable/item_table1_header.xml</a></span>: <span class="message">The resource <code>R.drawable.item_table1_header</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:6</span>: <span class="message">The resource <code>R.string.action_example</code> appears to be unused</span><br /><pre class="errorlines">
@@ -230,8 +260,16 @@ Of course it's possible that your custom drawable is translucent and you want it
 <span class="lineno">  16</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
 <span class="lineno">  17</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
 <span class="lineno">  18</span>     &lt;string <span class="errorspan">name="title_activity_maps">Map&lt;/string></span>
-<span class="lineno">  19</span> 
-<span class="lineno">  20</span> &lt;/resources>
+<span class="lineno">  19</span>     &lt;string name="ok">OK&lt;/string>
+<span class="lineno">  20</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:19</span>: <span class="message">The resource <code>R.string.ok</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">  16</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  17</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
+<span class="lineno">  18</span>     &lt;string name="title_activity_maps">Map&lt;/string>
+<span class="lineno">  19</span>     &lt;string <span class="errorspan">name="ok">OK&lt;/string></span>
+<span class="lineno">  20</span> 
+<span class="lineno">  21</span> &lt;/resources>
 </pre>
 </div>
 <div class="metadata">Priority: 3 / 10<br/>

@@ -23,6 +23,25 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     </issue>
 
     <issue
+        id="ValidFragment"
+        severity="Fatal"
+        message="This fragment inner class should be static (deltagraphs.norrisviewer.view.graphsView.LineChartActivity.FireMissilesDialogFragment)"
+        category="Correctness"
+        priority="6"
+        summary="Fragment not instantiatable"
+        explanation="From the Fragment documentation:
+*Every* fragment must have an empty constructor, so it can be instantiated when restoring its activity&apos;s state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with `setArguments(Bundle)` and later retrieved by the Fragment with `getArguments()`."
+        url="http://developer.android.com/reference/android/app/Fragment.html#Fragment()"
+        urls="http://developer.android.com/reference/android/app/Fragment.html#Fragment()"
+        errorLine1="    public class FireMissilesDialogFragment extends DialogFragment {"
+        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/view/graphsView/LineChartActivity.java"
+            line="231"
+            column="18"/>
+    </issue>
+
+    <issue
         id="GradleDependency"
         severity="Warning"
         message="Old buildToolsVersion 21.1.1; recommended version is 21.1.2 or later"
@@ -128,6 +147,18 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.drawable.green_square` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/green_square.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.drawable.item_table1` appears to be unused"
         category="Performance"
         priority="3"
@@ -178,6 +209,22 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
             line="18"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.ok` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;ok&quot;>OK&lt;/string>"
+        errorLine2="            ~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="19"
             column="13"/>
     </issue>
 
