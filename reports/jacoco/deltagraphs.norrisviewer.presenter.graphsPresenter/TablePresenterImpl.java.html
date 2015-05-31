@@ -46,7 +46,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 <span class="nc" id="L46">            String signal = (String) data;</span>
 <span class="nc bnc" id="L47" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
 <span class="nc" id="L48">                setGraphParameters();</span>
-<span class="nc" id="L49">            graphView.setData(tableInstance.getFlowList(), signal);</span>
+<span class="nc" id="L49">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns(), signal);</span>
 
 <span class="nc" id="L51">            firstConnection = false;</span>
 <span class="nc" id="L52">            startNewConnections();</span>
