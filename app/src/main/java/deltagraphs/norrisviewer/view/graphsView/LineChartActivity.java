@@ -36,7 +36,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     private List<Line> lines;
     // Map< flowIndex, lineIndex>
-    private Map<String, Integer> indexesMap;
+    private List<String> indexesList;
 
     private LineChartPresenter lineChartPresenter;
 
@@ -61,7 +61,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
@@ -170,7 +169,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         String color = "";
         for(int i=0; i<flowList.size(); i++) {
 
-            indexesMap.put(flowList.get(i).getFlowId(), 10000);
+            indexesList.add(flowList.get(i).getFlowId());
 
             flowList.get(i).getFlowName();
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
