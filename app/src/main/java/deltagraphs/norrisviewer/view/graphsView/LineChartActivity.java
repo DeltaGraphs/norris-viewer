@@ -1,9 +1,14 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +17,7 @@ import java.util.Map;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.*;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
+import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
@@ -64,6 +70,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
+        chart.setOnValueTouchListener(new ValueTouchListener());
         previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
 
         Bundle extras = getIntent().getExtras();
@@ -96,10 +103,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void onValueSelected(){
-
     }
 
     public void setInitialState(){
@@ -206,6 +209,33 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             }
             line.setHasLabels(hasLabels);
             lines.add(line);
+        }
+    }
+
+    private class ValueTouchListener implements LineChartOnValueSelectListener {
+
+        @Override
+        public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
+            //Toast.makeText(getActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onValueDeselected() {
+            // TODO Auto-generated method stub
+
+        }
+
+    }
+
+    public class FireMissilesDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Legend");
+
+            // Create the AlertDialog object and return it
+            return builder.create();
         }
     }
 }
