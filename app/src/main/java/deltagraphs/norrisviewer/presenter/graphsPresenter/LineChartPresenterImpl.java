@@ -26,7 +26,7 @@ import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
  *
  */
 
-public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter, Observer{
+public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter{
 
     private LineChartView graphView;
     private LineChart lineChartInstance;
@@ -51,7 +51,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         previewLineChartView.setScrollEnabled(false);
     }*/
 
-    private void startNewConnections(){ startSocket((MapChartActivity) graphView, lineChartInstance);}
+    private void startNewConnections(){ startSocket((LineChartActivity) graphView, lineChartInstance);}
 
     @Override
     public void update(Observable observable, Object data) {

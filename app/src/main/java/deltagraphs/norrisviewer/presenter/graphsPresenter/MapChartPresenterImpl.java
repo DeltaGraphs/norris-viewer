@@ -25,7 +25,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 
-public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter, Observer {
+public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter{
 
     private MapChartView graphView;
     private MapChart mapChartInstance;

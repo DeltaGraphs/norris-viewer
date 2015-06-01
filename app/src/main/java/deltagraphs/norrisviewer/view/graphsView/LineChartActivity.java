@@ -227,7 +227,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
 
     }
-
+/*
     public class FireMissilesDialogFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -239,4 +239,5 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             return builder.create();
         }
     }
+    */
 }

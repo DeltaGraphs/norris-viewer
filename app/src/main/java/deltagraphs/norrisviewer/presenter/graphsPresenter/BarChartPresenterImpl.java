@@ -26,7 +26,7 @@ import lecho.lib.hellocharts.model.Axis;
  *
  */
 
-public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
+public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter{
 
         private BarChartView graphView;
         private BarChart barChartInstance;
@@ -55,7 +55,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         }*/
 
 
-    private void startNewConnections(){ startSocket((MapChartActivity) graphView, barChartInstance);}
+    private void startNewConnections(){ startSocket((BarChartActivity) graphView, barChartInstance);}
 
     @Override
     public void update(Observable observable,Object data) {

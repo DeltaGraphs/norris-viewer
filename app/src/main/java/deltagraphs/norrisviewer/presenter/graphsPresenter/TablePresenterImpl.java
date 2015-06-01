@@ -24,7 +24,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 
-public class TablePresenterImpl extends GraphPresenter implements TablePresenter, Observer{
+public class TablePresenterImpl extends GraphPresenter implements TablePresenter{
 
     private TableView graphView;
     private Table tableInstance;
@@ -38,7 +38,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     }
 
 
-    private void startNewConnections(){ startSocket((MapChartActivity) graphView, tableInstance);}
+    private void startNewConnections(){ startSocket((TableActivity) graphView, tableInstance);}
 
     @Override
     public void update(Observable observable, Object data) {

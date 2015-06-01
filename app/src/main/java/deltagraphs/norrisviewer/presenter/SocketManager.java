@@ -17,7 +17,7 @@ import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.model.graphsModel.Graph;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 import deltagraphs.norrisviewer.model.pageModel.PageModelImpl;
-import deltagraphs.norrisviewer.view.graphsView.MapChartView;
+import deltagraphs.norrisviewer.view.graphsView.*;
 import deltagraphs.norrisviewer.view.mainView.MainView;
 
 /*
@@ -95,17 +95,17 @@ public class SocketManager{
                                 ((PageModel) model).setPageModel(obj, signal);
                             }
                             else
-                                if(activity instanceof BarChart)
+                                if(activity instanceof BarChartView)
                                     ((Graph)model).setGraph(obj, signal, x);
                                     else
-                                    if(activity instanceof LineChart)
+                                    if(activity instanceof LineChartView)
                                         ((Graph)model).setGraph(obj, signal, x);
                                         else
                                         if(activity instanceof MapChartView) {
                                             ((Graph) model).setGraph(obj, signal, x);
                                         }
                                         else
-                                            if(activity instanceof Table)
+                                            if(activity instanceof TableView)
                                                 ((Graph)model).setGraph(obj, signal, x);
 
 
