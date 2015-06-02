@@ -52,6 +52,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private LineChartView chart;
     private PreviewLineChartView previewChart;
     private LineChartData data;
+    private LineChartData previewData;
 
     private String sourceTitle;
     private String sourceURL;
@@ -82,6 +83,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/line1";
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
+
+        previewY();
     }
 
     @Override
@@ -197,17 +200,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         for (int i = 0; i < flowList.size(); i++) {
 
             String flowId = flowList.get(i).getFlowId();
-            boolean flowExists = false;
-/*
-            for (int k = 0; i <= indexesList.size(); k++) {
-                if(flowId == indexesList.get(k)){
-                    flowExists = true;
-                }
-            }
-*/
-            if(flowExists == false){
-                indexesList.add(flowList.get(i).getFlowId());
-            }
 
             //flowList.get(i).getFlowName();
 
@@ -236,11 +228,13 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
         data = new LineChartData(lines);
 
+        previewData = new LineChartData(data);
+        previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
+
         chart.setLineChartData(data);
+        previewChart.setLineChartData(previewData);
         Log.d("LineActivity", "line chart data settato");
     }
-
-
 
 
     private void setLineColor(Line line, String color){
@@ -293,4 +287,44 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
     }
     */
+
+    private void previewY() {
+        Viewport tempViewport = new Viewport(chart.getMaximumViewport());
+        float dy = tempViewport.height() / 4;
+        tempViewport.inset(0, dy);
+        previewChart.setCurrentViewportWithAnimation(tempViewport);
+        previewChart.setZoomType(ZoomType.VERTICAL);
+    }
+
+    private void previewX(boolean animate) {
+        Viewport tempViewport = new Viewport(chart.getMaximumViewport());
+        float dx = tempViewport.width() / 4;
+        tempViewport.inset(dx, 0);
+        if (animate) {
+            previewChart.setCurrentViewportWithAnimation(tempViewport);
+        } else {
+            previewChart.setCurrentViewport(tempViewport);
+        }
+        previewChart.setZoomType(ZoomType.HORIZONTAL);
+    }
+
+    private void previewXY() {
+        // Better to not modify viewport of any chart directly so create a copy.
+        Viewport tempViewport = new Viewport(chart.getMaximumViewport());
+        // Make temp viewport smaller.
+        float dx = tempViewport.width() / 4;
+        float dy = tempViewport.height() / 4;
+        tempViewport.inset(dx, dy);
+        previewChart.setCurrentViewportWithAnimation(tempViewport);
+    }
+
+    private class ViewportListener implements ViewportChangeListener {
+
+        @Override
+        public void onViewportChanged(Viewport newViewport) {
+            // don't use animation, it is unnecessary when using preview chart.
+            chart.setCurrentViewport(newViewport);
+        }
+
+    }
 }
