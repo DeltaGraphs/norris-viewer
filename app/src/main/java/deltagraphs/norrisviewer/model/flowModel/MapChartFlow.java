@@ -72,7 +72,7 @@ public class MapChartFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            markerProperties = new Marker(data.getJSONObject("marker"));
+//            markerProperties = new Marker(data.getJSONObject("marker"));
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -94,11 +94,11 @@ public class MapChartFlow extends FlowModel {
     }
 
     class Marker{
-        private String type;
+        private String type = null;
         private String shape = null;
         private String icon = null;
         private String text = null;
-        private String colour;
+        private String colour = null;
 
         public Marker(JSONObject data){
             try {

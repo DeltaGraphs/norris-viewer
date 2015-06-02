@@ -5,8 +5,9 @@ import junit.framework.TestCase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.*;
 
-
+import static org.mockito.Mockito.*;
 
 /*
  * Name : { Nome del file }.java
@@ -26,32 +27,44 @@ import org.json.JSONObject;
  *
  */public class MapChartFlowTest extends TestCase {
 
-    private MapChartFlow flow;
-    JSONArray array;
-    JSONObject obj;
-    JSONArray rec;
-    JSONObject data;
+    @Rule private  MapChartFlow flow;
+    @Rule JSONArray array;
+    @Rule JSONObject obj;
+    @Rule JSONArray rec;
+    @Rule JSONObject data;
+    @Rule JSONObject marker;
 
-    @org.junit.Before
-    public void initialize() throws JSONException {
+    @BeforeClass
+    public void setUp() throws Exception {
         try {
-            array = new JSONArray().put(0, 45.399394989014).put(1, 11.877456665039);
-            obj = new JSONObject().put("norrisRecordID", "flow114331692096017");
+
+            marker=new JSONObject();
+            marker.put("type", "roba");
+            marker.put("shape", "b");
+            marker.put("icon", "c");
+            marker.put("text", "d");
+            marker.put("color", "e");
+            array = new JSONArray();
+            array.put( 45.399394989014);
+            array.put(11.877456665039);
+            obj = new JSONObject();
+            obj.put("norrisRecordID", "flow114331692096017");
             obj.put("markerID", 837);
             obj.put("value", array);
-            rec = new JSONArray().put(0, obj);
-            data = new JSONObject().put("records", rec);
-
+            rec = new JSONArray();
+            rec.put(0, obj);
+            data = new JSONObject();
+            data.put("records", rec);
+            data.put("ID", "ciao");
+            data.put("name", "ciao");
+            data.put("marker", marker);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-
     @org.junit.Test
-    public void testCreateFlow() throws JSONException {
-        initialize();
-
+    public void testCreateFlow() throws Exception {
         flow = new MapChartFlow(data);
         flow.createFlow(data);
         Boolean x = false;
