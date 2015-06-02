@@ -84,7 +84,13 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
 
-        previewY();
+        chart.setZoomEnabled(false);
+        chart.setScrollEnabled(false);
+
+        previewChart.setLineChartData(previewData);
+        previewChart.setViewportChangeListener(new ViewportListener());
+
+        previewX(true);
     }
 
     @Override
