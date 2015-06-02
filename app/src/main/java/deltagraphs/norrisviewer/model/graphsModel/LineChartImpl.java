@@ -71,7 +71,9 @@ public class LineChartImpl extends Graph  implements LineChart{
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 addFlow(flow);
             }
-        }catch (JSONException e){}
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -98,7 +100,9 @@ public class LineChartImpl extends Graph  implements LineChart{
                 JSONObject yAxis = data.getJSONObject("yAxis");
                 axisY = new AxisModel(yAxis);
             }
-        }catch(Exception e){}
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -71,7 +71,9 @@ public class LineChartFlow extends FlowModel{
                 this.maxItems = data.getInt("maxItems");
             else
                 this.maxItems = 0;
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     class LineChartRecord{
@@ -92,7 +94,9 @@ public class LineChartFlow extends FlowModel{
         JSONArray recordList = null;
         try {
             recordList = data.getJSONArray("records");
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         addRecords(recordList);
     }
 
@@ -122,7 +126,9 @@ public class LineChartFlow extends FlowModel{
             float xValue = (float) jsonValues.getDouble(0);
             float yValue = (float) jsonValues.getDouble(1);
             records.add(new LineChartRecord(id, xValue, yValue));
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -133,7 +139,9 @@ public class LineChartFlow extends FlowModel{
                 JSONObject record = jsonRecords.getJSONObject(i);
                 addRecord(record);
             }
-        }catch (JSONException e) {}
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -144,7 +152,9 @@ public class LineChartFlow extends FlowModel{
             JSONArray jsonValues = data.getJSONArray("value");
             records.get(recordIndex).xValue = jsonValues.getInt(0);
             records.get(recordIndex).yValue = jsonValues.getInt(1);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -165,6 +175,8 @@ public class LineChartFlow extends FlowModel{
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
