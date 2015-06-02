@@ -55,11 +55,11 @@ public class BarChartFlowTest extends TestCase {
     @org.junit.Test
     public void testCreateFlow() throws Exception {
         try {
-            JSONArray array= new JSONArray().put(0, 45.399394989014).put(1, 11.877456665039);
-            JSONObject obj = new JSONObject().put("norrisRecordID","flow114331692096017");
+            array= new JSONArray().put(0, 45.399394989014).put(1, 11.877456665039);
+            obj = new JSONObject().put("norrisRecordID","flow114331692096017");
             obj.put("markerID", 837);
             obj.put("value", array);
-            JSONArray rec = new JSONArray().put(0, obj);
+            rec = new JSONArray().put(0, obj);
             data = new JSONObject().put("records", rec);
 
             flow = new BarChartFlow(data);
