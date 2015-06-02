@@ -36,6 +36,7 @@ public class BarChartFlow extends FlowModel{
     public float getRecordValue(int index) { return records.get(index).value; }
 
     public BarChartFlow(JSONObject data) {
+        records=new ArrayList<BarChartRecord>();
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
