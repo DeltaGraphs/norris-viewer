@@ -72,7 +72,7 @@ public class PageModelImpl extends Observable implements PageModel{
                             String itemId = item.getString("ID");
                             String itemName = item.getString("title");
                             String itemType = item.getString("type");
-                            String itemURL = item.getString("URLSocket");
+                            String itemURL = item.getString("socketURL");
 
                             pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);
                         }
@@ -97,7 +97,7 @@ public class PageModelImpl extends Observable implements PageModel{
                         String itemId = item.getString("ID");
                         String itemName = item.getString("title");
                         String itemType = item.getString("type");
-                        String itemURL = item.getString("URLSocket");
+                        String itemURL = item.getString("socketURL");
 
                         pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);
                     }
@@ -136,7 +136,7 @@ public class PageModelImpl extends Observable implements PageModel{
                         String itemId = data.getString("ID");
                         String itemName = data.getString("title");
                         String itemType = data.getString("type");
-                        String itemURL = data.getString("URLSocket");
+                        String itemURL = data.getString("socketURL");
 
                         //then it insert a graph in the list of the found page, with an index equal to the JSON's one
                         pageList.get(pageIndex).addItem(itemId, itemName, itemType, itemURL);
@@ -171,7 +171,7 @@ public class PageModelImpl extends Observable implements PageModel{
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString("ID"));
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString("title"));
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString("type"));
-                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString("URLSocket"));
+                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString("socketURL"));
                         }//else exception
                     }
                     break;
