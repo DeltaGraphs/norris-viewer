@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -73,8 +74,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setOnValueTouchListener(new ValueTouchListener());
         previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
 
-        data = new LineChartData();
-
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
@@ -83,8 +82,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/line1";
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
-        lines = new ArrayList<Line>();
-        data = new LineChartData();
     }
 
     @Override
@@ -171,58 +168,102 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     }
 
+    //se il flusso esiste già ma non è stato aggiornato
+    //List<PointValue> oldValues = lines.get(indice_flusso).getValues();
+    //List<PointValue> newValues = oldValues
+    //e poi creo la linea
+
+    //se il flusso esiste già ed è stato aggiornato
+    //List<PointValue> oldValues lines.get(indice_flusso).getValues();
+    //List<PointValue> newValues
+    //dentro al for si farà newValues.add(nuovi_valori)
+    //Line line = new Line(values);
+
+    //se il flusso viene creato
+    //indexesList.add(flowList.get(i).getFlowId());
+    //si fa tutto normalmente
+
+    //se il flusso viene eliminato
+    //indexesList.remove(flowList.get(i).getFlowId());
+    //non viene inserita la linea nel data model
+
+    //ogni volta viene ricreato tutto il data model del grafico
+    //bisogna capire se è troppo pesante
+
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         String color = "";
-        List<Line> flows = chart.getLineChartData().getLines();
-        for(int i=0; i<flowList.size(); i++) {
+        lines = new ArrayList<Line>();
+        for (int i = 0; i < flowList.size(); i++) {
 
-            indexesList.add(flowList.get(i).getFlowId());
+            String flowId = flowList.get(i).getFlowId();
+            boolean flowExists = false;
+/*
+            for (int k = 0; i <= indexesList.size(); k++) {
+                if(flowId == indexesList.get(k)){
+                    flowExists = true;
+                }
+            }
+*/
+            if(flowExists == false){
+                indexesList.add(flowList.get(i).getFlowId());
+            }
 
-            flowList.get(i).getFlowName();
+            //flowList.get(i).getFlowName();
 
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
-            color = lineChartFlow.getFlowColour();
-            lineChartFlow.maxItems();
-            lineChartFlow.getMarker();
-            lineChartFlow.getInterpolation();
-            List<PointValue> values = new ArrayList<PointValue>();
 
-            for(int j =0; j< lineChartFlow.getRecordSize(); j++) {
+            color = lineChartFlow.getFlowColour();
+            //lineChartFlow.maxItems();
+            //lineChartFlow.getMarker();
+            //lineChartFlow.getInterpolation();
+
+            List<PointValue> values = new ArrayList<>();
+
+            for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
                 //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
+                Log.d("LineActivity", "valore aggiunto");
             }
 
             Line line = new Line(values);
-            switch (color){
-                case "green":
-                    line.setColor(ChartUtils.COLOR_GREEN);
-                    break;
-                case "blue":
-                    line.setColor(ChartUtils.COLOR_BLUE);
-                    break;
-                case "orange":
-                    line.setColor(ChartUtils.COLOR_ORANGE);
-                    break;
-                case "red":
-                    line.setColor(ChartUtils.COLOR_RED);
-                    break;
-                case "violet":
-                    line.setColor(ChartUtils.COLOR_VIOLET);
-                    break;
-                default:
-                    line.setColor(ChartUtils.DEFAULT_COLOR);
-                    break;
-            }
+            setLineColor(line, color);
             line.setHasLabels(hasLabels);
             lines.add(line);
+            Log.d("LineActivity", "linea aggiunta");
         }
-        data.setLines(lines);
+        data = new LineChartData(lines);
 
         chart.setLineChartData(data);
+        Log.d("LineActivity", "line chart data settato");
+    }
 
+
+
+
+    private void setLineColor(Line line, String color){
+        switch (color) {
+            case "green":
+                line.setColor(ChartUtils.COLOR_GREEN);
+                break;
+            case "blue":
+                line.setColor(ChartUtils.COLOR_BLUE);
+                break;
+            case "orange":
+                line.setColor(ChartUtils.COLOR_ORANGE);
+                break;
+            case "red":
+                line.setColor(ChartUtils.COLOR_RED);
+                break;
+            case "violet":
+                line.setColor(ChartUtils.COLOR_VIOLET);
+                break;
+            default:
+                line.setColor(ChartUtils.DEFAULT_COLOR);
+                break;
+        }
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {

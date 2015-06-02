@@ -71,7 +71,6 @@ public abstract class Graph extends Observable {
     private int searchFlowIndex(String flowId){
         int index = 0;
         while (index < flowList.size()){
-            Log.d(index+"flowId "+flowId,flowList.get(index).getFlowId());
             if (flowList.get(index).getFlowId().equals(flowId)) {
                 return index;
             }
@@ -84,6 +83,7 @@ public abstract class Graph extends Observable {
         try{
             switch (signal) {
                 case "configGraph": {
+                    Log.d("graph","dentro configGraph");
                     JSONObject properties = obj.getJSONObject("properties");
                     setParameters(properties);
                     JSONArray data=obj.getJSONArray("data");
@@ -120,6 +120,7 @@ public abstract class Graph extends Observable {
                     break;
                 }
                 case "updateFlowData": {
+                    Log.d("graph","dentro updateFlowData");
                     updateRecords(obj);
                     break;
                 }
