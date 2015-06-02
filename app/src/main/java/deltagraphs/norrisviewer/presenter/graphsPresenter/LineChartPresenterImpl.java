@@ -59,13 +59,14 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
             // in quanto potremmo avere piu modelli dati
             // verifichiamo su quale modello é avvenuto un cambiamento dei dati
             // prima di effettuare il cast
+            firstConnection = false;
+            startNewConnections();
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
                 setGraphParameters();
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
-            firstConnection = false;
-            startNewConnections();
+
         }
     }
 

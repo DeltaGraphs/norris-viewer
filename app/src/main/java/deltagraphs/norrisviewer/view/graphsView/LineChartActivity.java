@@ -73,6 +73,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setOnValueTouchListener(new ValueTouchListener());
         previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
 
+        data = new LineChartData();
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
@@ -82,6 +84,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         lines = new ArrayList<Line>();
+        data = new LineChartData();
     }
 
     @Override
@@ -171,25 +174,29 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         String color = "";
+        List<Line> flows = chart.getLineChartData().getLines();
         for(int i=0; i<flowList.size(); i++) {
 
             indexesList.add(flowList.get(i).getFlowId());
 
             flowList.get(i).getFlowName();
+
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
             color = lineChartFlow.getFlowColour();
             lineChartFlow.maxItems();
             lineChartFlow.getMarker();
             lineChartFlow.getInterpolation();
             List<PointValue> values = new ArrayList<PointValue>();
+
             for(int j =0; j< lineChartFlow.getRecordSize(); j++) {
                 //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
             }
+
             Line line = new Line(values);
-            /*switch (color){
+            switch (color){
                 case "green":
                     line.setColor(ChartUtils.COLOR_GREEN);
                     break;
@@ -208,17 +215,21 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 default:
                     line.setColor(ChartUtils.DEFAULT_COLOR);
                     break;
-            }*/
+            }
             line.setHasLabels(hasLabels);
             lines.add(line);
         }
+        data.setLines(lines);
+
+        chart.setLineChartData(data);
+
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {
 
         @Override
         public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-            //Toast.makeText(getActivity(), "Value: " + value, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "VALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
