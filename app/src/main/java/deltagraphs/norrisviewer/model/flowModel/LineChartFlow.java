@@ -47,12 +47,30 @@ public class LineChartFlow extends FlowModel{
     public LineChartFlow(JSONObject data) {
         try {
             this.flowId = data.getString("ID");
-            this.flowName = data.getString("name");
-            this.flowColour = data.getString("color");
-            this.marker = data.getString("marker");
-            this.interpolation = data.getString("interpolation");
-            this.subAreaColour = data.getString("area");
-            this.maxItems = data.getInt("maxItems");
+            if(data.has("name"))
+                this.flowName = data.getString("name");
+            else
+                this.flowName="";
+            if(data.has("color"))
+                this.flowColour = data.getString("color");
+            else
+                this.flowColour = "random";
+            if(data.has("marker"))
+                this.marker = data.getString("marker");
+            else
+                this.marker = "none";
+            if(data.has("interpolation"))
+                this.interpolation = data.getString("interpolation");
+            else
+                this.interpolation = "standard";
+            if(data.has("area"))
+                this.subAreaColour = data.getString("area");
+            else
+                this.subAreaColour = "none";
+            if(data.has("maxItems"))
+                this.maxItems = data.getInt("maxItems");
+            else
+                this.maxItems = 0;
         } catch (JSONException e) {}
     }
 

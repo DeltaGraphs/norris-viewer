@@ -42,7 +42,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     private List<Line> lines;
     // Map< flowIndex, lineIndex>
-    private List<String> indexesList;
+    private List<String> indexesList = new ArrayList<String>();
 
     private LineChartPresenter lineChartPresenter;
 
@@ -78,6 +78,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
+        sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/line1";
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         lines = new ArrayList<Line>();
@@ -188,7 +189,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 values.add(new PointValue(x, y));
             }
             Line line = new Line(values);
-            switch (color){
+            /*switch (color){
                 case "green":
                     line.setColor(ChartUtils.COLOR_GREEN);
                     break;
@@ -207,7 +208,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 default:
                     line.setColor(ChartUtils.DEFAULT_COLOR);
                     break;
-            }
+            }*/
             line.setHasLabels(hasLabels);
             lines.add(line);
         }
