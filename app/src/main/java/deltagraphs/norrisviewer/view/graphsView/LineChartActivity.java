@@ -83,6 +83,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/line1";
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
+        data = new LineChartData();
 
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
@@ -216,7 +217,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             //lineChartFlow.getMarker();
             //lineChartFlow.getInterpolation();
 
-            List<PointValue> values = new ArrayList<>();
+            List<PointValue> values = new ArrayList<PointValue>();
 
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
                 //lineChartFlow.getRecordId(j);
@@ -232,8 +233,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             lines.add(line);
             Log.d("LineActivity", "linea aggiunta");
         }
-        data = new LineChartData(lines);
-
+        data.setLines(lines);
         previewData = new LineChartData(data);
         previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
 
