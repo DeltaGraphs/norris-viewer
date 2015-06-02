@@ -2,8 +2,11 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 import junit.framework.TestCase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+
 
 /*
  * Name : { Nome del file }.java
@@ -23,18 +26,39 @@ import org.json.JSONObject;
  *
  */public class MapChartFlowTest extends TestCase {
 
-    private BarChartFlow flow;
+    private MapChartFlow flow;
+    JSONArray array;
+    JSONObject obj;
+    JSONArray rec;
     JSONObject data;
 
     @org.junit.Before
     public void initialize() throws JSONException {
-        data=new JSONObject("");
-        flow = new BarChartFlow(data);
+        try {
+            array = new JSONArray().put(0, 45.399394989014).put(1, 11.877456665039);
+            obj = new JSONObject().put("norrisRecordID", "flow114331692096017");
+            obj.put("markerID", 837);
+            obj.put("value", array);
+            rec = new JSONArray().put(0, obj);
+            data = new JSONObject().put("records", rec);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @org.junit.Test
     public void testCreateFlow() throws JSONException {
-        flow.createFlow(new JSONObject("{\"records\":[{\"norrisRecordID\":\"flow114331692096017\",\"markerID\":837,\"value\":[45.399394989014,11.877456665039]}]}"));
+        initialize();
+
+        flow = new MapChartFlow(data);
+        flow.createFlow(data);
+        Boolean x = false;
+        System.out.println("ciaooo " + data.toString());
+        if (data.has("records"))
+            x = true;
+        assertTrue("", x);
         assertEquals(1, flow.getRecordSize());
     }
 
