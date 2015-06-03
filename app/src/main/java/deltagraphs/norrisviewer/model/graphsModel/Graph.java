@@ -103,6 +103,7 @@ public abstract class Graph extends Observable {
                     JSONObject jsonFlowParam = obj.getJSONObject("properties");
                     addFlow(jsonFlowParam);
                     JSONObject data=obj.getJSONObject("data");
+                    Log.d("insert", "insertFlow");
                     int flowIndex = searchFlowIndex(data.getString("ID"));
                     if(flowIndex != -1) {
                         flowList.get(flowIndex).createFlow(data);
@@ -110,6 +111,7 @@ public abstract class Graph extends Observable {
                     break;
                 }
                 case "deleteFlow": {
+                    Log.d("delete", "deleteFlow");
                     String id = obj.getString("ID");
                     deleteFlow(id);
                     break;

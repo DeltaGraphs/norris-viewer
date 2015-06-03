@@ -97,6 +97,7 @@ public class LineChartFlow extends FlowModel{
     public void createFlow(JSONObject data) {
         records = new ArrayList<LineChartRecord>();
         JSONArray recordList = null;
+        Log.d("flow", "createFlow");
         try {
             recordList = data.getJSONArray("records");
         } catch (JSONException e) {
@@ -108,6 +109,7 @@ public class LineChartFlow extends FlowModel{
     @Override
     public void updateFlow(JSONObject data) {
         try {
+            Log.d("flow", "updateFlow");
             flowName = data.getString("name");
             flowColour = data.getString("color");
             marker = data.getString("marker");
@@ -126,6 +128,7 @@ public class LineChartFlow extends FlowModel{
     public void addRecord(JSONObject data) {
         String id = null;
         try {
+            Log.d("flow", "addRecord");
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             float xValue = (float) jsonValues.getDouble(0);
@@ -139,6 +142,7 @@ public class LineChartFlow extends FlowModel{
     @Override
     public void addRecords(JSONArray jsonRecords){
         try {
+            Log.d("flow", "addRecords");
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);
@@ -152,6 +156,7 @@ public class LineChartFlow extends FlowModel{
     @Override
     public void updateRecord(JSONObject data) {
         try {
+            Log.d("flow", "updateRecord");
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             JSONArray jsonValues = data.getJSONArray("value");
@@ -177,6 +182,7 @@ public class LineChartFlow extends FlowModel{
     @Override
     public void deleteRecord(JSONObject data) {
         try {
+            Log.d("flow", "deleteRecord");
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);

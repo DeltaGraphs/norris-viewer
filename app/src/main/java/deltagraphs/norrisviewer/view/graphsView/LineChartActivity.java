@@ -207,7 +207,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         for (int i = 0; i < flowList.size(); i++) {
 
             String flowId = flowList.get(i).getFlowId();
-
+            Log.d("",flowId);
             //flowList.get(i).getFlowName();
 
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
@@ -222,8 +222,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
                 //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
+                Log.d("", String.valueOf(x));
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
+                Log.d("", String.valueOf(y));
                 Log.d("LineActivity", "valore aggiunto");
             }
 
