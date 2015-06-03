@@ -177,7 +177,9 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
             }
-        }catch(JSONException e){}
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
 
 
 

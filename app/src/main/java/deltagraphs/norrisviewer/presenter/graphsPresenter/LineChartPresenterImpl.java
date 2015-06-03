@@ -60,7 +60,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
             // in quanto potremmo avere piu modelli dati
-            // verifichiamo su quale modello é avvenuto un cambiamento dei dati
+            // verifichiamo su quale modello  avvenuto un cambiamento dei dati
             // prima di effettuare il cast
             firstConnection = false;
             startNewConnections();

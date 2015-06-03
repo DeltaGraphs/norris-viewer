@@ -138,7 +138,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     @Override
     public void update(Observable observable, Object data) {
-
+        onNavigationDrawerItemSelected(0);
     }
 
 
@@ -185,7 +185,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             listView = (ListView) rootView.findViewById(android.R.id.list);
-            graphsList = generateDescriptions();
+
             adapter = new ChartAdapter(getActivity(), 0, graphsList);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
