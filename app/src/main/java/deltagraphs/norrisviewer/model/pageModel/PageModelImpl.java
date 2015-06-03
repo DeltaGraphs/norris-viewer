@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Observable;
 import java.util.ArrayList;
+import java.util.Observer;
 
 /*
  * Name : PageModelImpl.java
@@ -30,7 +31,7 @@ public class PageModelImpl extends Observable implements PageModel{
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
 
-    public PageModelImpl(){}
+    public PageModelImpl(Observer presenter){ addObserver(presenter);}
 
     public void setPageModel(JSONObject data, String signal){
         JSONParser(data,signal);

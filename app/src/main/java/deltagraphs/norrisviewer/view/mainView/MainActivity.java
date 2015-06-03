@@ -145,7 +145,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
     }
 
     public void showDialog(){
-        presenter.showDialog(this, presenter);
+        presenter.showDialog(this);
     }
 
     public void showGraphs(){

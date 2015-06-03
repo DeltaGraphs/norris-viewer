@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
@@ -49,6 +50,7 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
+    BarChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
 
 

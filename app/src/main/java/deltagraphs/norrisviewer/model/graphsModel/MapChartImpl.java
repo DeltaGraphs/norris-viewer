@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
@@ -49,6 +50,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
     public String getMapType() { return mapType; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
+    MapChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
     public void setParameters(JSONObject data) {
         try {

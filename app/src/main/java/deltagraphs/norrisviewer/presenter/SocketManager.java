@@ -81,7 +81,7 @@ public class SocketManager{
         mSocket.close();
     }
 
-    public void startListening(final String signal,final Activity activity, final Object model, final Observer x){
+    public void startListening(final String signal,final Activity activity, final Object model){
 
         mSocket.on(signal, new Emitter.Listener() {
             @Override
@@ -96,17 +96,17 @@ public class SocketManager{
                             }
                             else
                                 if(activity instanceof BarChartView)
-                                    ((Graph)model).setGraph(obj, signal, x);
+                                    ((Graph)model).setGraph(obj, signal);
                                     else
                                     if(activity instanceof LineChartView)
-                                        ((Graph)model).setGraph(obj, signal, x);
+                                        ((Graph)model).setGraph(obj, signal);
                                         else
                                         if(activity instanceof MapChartView) {
-                                            ((Graph) model).setGraph(obj, signal, x);
+                                            ((Graph) model).setGraph(obj, signal);
                                         }
                                         else
                                             if(activity instanceof TableView)
-                                                ((Graph)model).setGraph(obj, signal, x);
+                                                ((Graph)model).setGraph(obj, signal);
 
 
                             //float x = (float) obj.getDouble("item");

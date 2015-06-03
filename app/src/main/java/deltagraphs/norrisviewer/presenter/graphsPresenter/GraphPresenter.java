@@ -36,15 +36,15 @@ public abstract class GraphPresenter implements Observer {
 
     public void startSocket( Activity graphActivity, Object graphModel){
         if(firstConnection) {
-            graphSocket.startListening("configGraph", graphActivity, graphModel, this);
+            graphSocket.startListening("configGraph", graphActivity, graphModel);
         }
         else {
-            graphSocket.startListening("configGraph", graphActivity, graphModel, this);
-            graphSocket.startListening("updateGraphProp", graphActivity, graphModel,  this);
-            graphSocket.startListening("insertFlow", graphActivity, graphModel,this );
-            graphSocket.startListening("deleteFlow", graphActivity, graphModel, this);
-            graphSocket.startListening("updateFlowProp", graphActivity, graphModel, this);
-            graphSocket.startListening("updateFlowData", graphActivity, graphModel, this);
+            graphSocket.startListening("configGraph", graphActivity, graphModel);
+            graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
+            graphSocket.startListening("insertFlow", graphActivity, graphModel);
+            graphSocket.startListening("deleteFlow", graphActivity, graphModel);
+            graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
+            graphSocket.startListening("updateFlowData", graphActivity, graphModel);
         }
         graphSocket.startConnection();
     }

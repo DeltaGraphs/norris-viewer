@@ -60,7 +60,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     private static SocketManager mainSocket;
     public static MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
-    private PageModel pageModel = new PageModelImpl();
+    private PageModel pageModel = new PageModelImpl(this);
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
@@ -109,11 +109,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mainSocket.setSocketUrl(input.getText().toString());
-                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel, (Observer)context);
-                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel, (Observer)context);
-                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel, (Observer)context);
-                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel, (Observer)context);
-                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel, (Observer)context);
+                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
 
             }
         });
