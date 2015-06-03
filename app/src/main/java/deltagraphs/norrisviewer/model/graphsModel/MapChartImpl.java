@@ -50,7 +50,7 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
     public String getMapType() { return mapType; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
-    MapChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public MapChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
     public void setParameters(JSONObject data) {
         try {

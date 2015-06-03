@@ -50,7 +50,7 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
-    BarChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public BarChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
 
 

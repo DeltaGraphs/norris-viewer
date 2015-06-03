@@ -83,7 +83,7 @@ public class TableImpl extends Graph implements Table {
     public String getRowOddTC(int index) { return tableColumns.get(index).rowOddTextColour; }
     public String getRowOddBGColour(int index) { return tableColumns.get(index).rowOddBGColour; }
 
-    TableImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public TableImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
     public void setParameters(JSONObject data) {
         try {

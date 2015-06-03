@@ -49,7 +49,7 @@ public class LineChartImpl extends Graph  implements LineChart{
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
-    LineChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public LineChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 
     public void setParameters(JSONObject data) {
         try {
