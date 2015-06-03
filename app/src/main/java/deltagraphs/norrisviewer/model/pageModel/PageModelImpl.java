@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.pageModel;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -56,6 +58,7 @@ public class PageModelImpl extends Observable implements PageModel{
                        After this, it creates and populates each page */
 
                     name = data.getString("name");
+                    Log.d("", "qualcosa arriva");
                     JSONArray pagesArray = data.getJSONArray("data");
                     int pageArrayDim = pagesArray.length();
                     for (int i = 0; i < pageArrayDim; i++) {
@@ -81,7 +84,7 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("insertPage"): {
-
+                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a new Page,
                     // with every parameters, is added to the pages list of PageModel.
 
@@ -105,7 +108,7 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("updatePage"): {
-
+                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a page,
                     // identified by an id, is updated.
 
@@ -123,7 +126,7 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
                 case ("insertGraph"): {
-
+                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a new Graph,
                     // with every parameters, is added to the item list of the declared Page.
 
@@ -146,7 +149,7 @@ public class PageModelImpl extends Observable implements PageModel{
                 }
 
                 case("updateGraph"):{
-
+                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a Graph,
                     // identified by an id, is updated.
 

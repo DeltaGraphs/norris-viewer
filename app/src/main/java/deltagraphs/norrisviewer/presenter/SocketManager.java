@@ -81,17 +81,19 @@ public class SocketManager{
         mSocket.close();
     }
 
-    public void startListening(final String signal,final Activity activity, final Object model){
-
+    public void startListening(final String signal, final Activity activity, final Object model){
+        Log.d("ciao", "ciao");
         mSocket.on(signal, new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("ciao", "arrrg");
                         JSONObject obj = (JSONObject) args[0];
                         //try {
                             if(activity instanceof MainView) {
+                                Log.d("", "mainview");
                                 ((PageModel) model).setPageModel(obj, signal);
                             }
                             else

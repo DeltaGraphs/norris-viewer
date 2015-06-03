@@ -7,6 +7,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import android.content.Intent;
     import android.os.Bundle;
     import android.text.InputType;
+    import android.util.Log;
     import android.view.LayoutInflater;
     import android.view.View;
     import android.view.ViewGroup;
@@ -101,7 +102,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         //input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
-        input.setText("http://norris-nrti-dev.herokuapp.com/norris");
+        input.setText("https://norris-nrti-dev.herokuapp.com/norris/");
+        mainSocket.setSocketUrl("https://norris-nrti-dev.herokuapp.com/norris/");
         builder.setView(input);
 
 // Set up the buttons
@@ -109,7 +111,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mainSocket.setSocketUrl(input.getText().toString());
-                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel);
+                mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
                 mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
                 mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
                 mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
@@ -139,6 +141,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     @Override
     public void update(Observable observable, Object data) {
         onNavigationDrawerItemSelected(0);
+        Log.d("", "update");
     }
 
 
