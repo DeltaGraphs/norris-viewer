@@ -252,7 +252,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 String itemUrl = itemList.get(i).getUrl();
                 list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
             }
-            /*
+            /*d
 
             list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
             list.add(new ChartDescription("linebalby", "asd", "asd", ChartType.LINE_CHART));
