@@ -86,6 +86,7 @@ public class SocketManager{
         mSocket.on(signal, new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
+                Log.d("ciao", "roar");
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -110,7 +111,9 @@ public class SocketManager{
                                             if(activity instanceof TableView)
                                                 ((Graph)model).setGraph(obj, signal);
 
-
+                                            else {
+                                                Log.d("","qualcosa non va");
+                                            }
                             //float x = (float) obj.getDouble("item");
                             //dataModel.setMyData((float) obj.getDouble("item"));
                         //} catch (JSONException e) {

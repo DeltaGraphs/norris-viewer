@@ -25,12 +25,11 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".view.mainView.MainActivity"
+            android:name=".view.mainView.HomeActivity"
             android:configChanges="orientation|screenSize"
             android:label="Chart Norris" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -63,6 +62,10 @@
         <activity
             android:name=".view.graphsView.HorizontalBarChartActivity"
             android:label="@string/title_activity_horizontal_bar_chart" >
+        </activity>
+        <activity
+            android:name=".view.mainView.MainActivity"
+            android:label="@string/title_activity_main" >
         </activity>
     </application>
 

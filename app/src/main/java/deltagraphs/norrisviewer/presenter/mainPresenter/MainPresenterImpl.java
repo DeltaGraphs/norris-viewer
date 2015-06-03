@@ -58,8 +58,8 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 
 public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks, Observer {
 
-    private static SocketManager mainSocket;
-    public static MainView mainView;
+    private SocketManager mainSocket;
+    public MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
 
@@ -68,7 +68,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
         setUpViews();
-
+        setUpSocket("a");
         //X DEMO
         FragmentManager fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
@@ -93,6 +93,17 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 */
 
+    public void setUpSocket(String url){
+        mainSocket.setSocketUrl("http://norris-nrti-dev.herokuapp.com/norris");
+        mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
+        mainSocket.startConnection();
+        Log.d("",mainSocket.getSocketUrl());
+    }
+
     public void showDialog(final Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
@@ -102,20 +113,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         //input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
-        input.setText("https://norris-nrti-dev.herokuapp.com/norris/");
-        mainSocket.setSocketUrl("https://norris-nrti-dev.herokuapp.com/norris/");
+        input.setText("http://norris-nrti-dev.herokuapp.com/norris");
         builder.setView(input);
 
 // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mainSocket.setSocketUrl(input.getText().toString());
-                mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
-                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
+                setUpSocket(input.getText().toString());
 
             }
         });
@@ -141,8 +146,10 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     @Override
     public void update(Observable observable, Object data) {
         onNavigationDrawerItemSelected(0);
+        mainView.setPages(pageModel);
         Log.d("", "update");
     }
+
 
 
     //QUESTO GESTISCE IL FRAGMENT DOVE ANDRANNO INSERITI I GRAFICI

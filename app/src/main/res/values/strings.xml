@@ -17,5 +17,6 @@
     <string name="title_activity_horizontal_bar_chart">HorizontalBarChart</string>
     <string name="title_activity_maps">Map</string>
     <string name="ok">OK</string>
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

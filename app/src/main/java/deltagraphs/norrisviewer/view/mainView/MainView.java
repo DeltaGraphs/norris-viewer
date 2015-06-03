@@ -21,10 +21,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.pageModel.PageModel;
 
 public interface MainView{
     PageNavigationFragment getFragment(int id);
     DrawerLayout findDrawer(int id);
     FragmentManager getSupportManager();
     void setMainView();
+    public void setPages(PageModel pages);
 }

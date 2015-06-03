@@ -60,18 +60,17 @@ public class PageModelImpl extends Observable implements PageModel{
                     name = data.getString("name");
                     Log.d("", "qualcosa arriva");
                     JSONArray pagesArray = data.getJSONArray("data");
-                    int pageArrayDim = pagesArray.length();
-                    for (int i = 0; i < pageArrayDim; i++) {
+                    for (int i = 0; i < pagesArray.length(); i++) {
                         JSONObject page = pagesArray.getJSONObject(i);
-                        String pageId = page.getString("ID");
-                        String pageName = page.getString("name");
-                        String pageDescription = page.getString("description");
+                        JSONObject properties = page.getJSONObject("properties");
+                        String pageId = properties.getString("ID");
+                        String pageName = properties.getString("name");
+                        String pageDescription = properties.getString("description");
 
                         addPage(pageId, pageName, pageDescription);
 
-                        JSONArray itemsArray = page.getJSONArray("graphs");
-                        int itemArrayDim = itemsArray.length();
-                        for (int j = 0; j < itemArrayDim; j++) {
+                        JSONArray itemsArray = page.getJSONArray("data");
+                        for (int j = 0; j < itemsArray.length(); j++) {
                             JSONObject item = itemsArray.getJSONObject(j);
                             String itemId = item.getString("ID");
                             String itemName = item.getString("title");

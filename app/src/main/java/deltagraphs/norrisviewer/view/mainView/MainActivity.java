@@ -58,7 +58,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 public class MainActivity extends ActionBarActivity implements MainView,PageNavigationFragment.NavigationDrawerCallbacks {
 
-    public static String[] pagesList= {"ciao","balcky","furlan"};
+    public static String[] pagesList = {};
     private String title;
     private MainPresenter presenter;
 
@@ -174,6 +174,14 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
 
     public void setMainView(){
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    public void setPages(PageModel pages) {
+        pagesList = new String[pages.getPageListSize()];
+        for(int i=0; i<pages.getPageList().size(); i++){
+            pagesList[i] = pages.getPage(i).getName();
+        }
     }
 
     @Override
