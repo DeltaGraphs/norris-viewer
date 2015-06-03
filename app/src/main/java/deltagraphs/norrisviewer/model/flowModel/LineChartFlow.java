@@ -1,10 +1,15 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import lecho.lib.hellocharts.model.PointValue;
 
 /*
  * Name : LineChartFlow.java
@@ -178,5 +183,11 @@ public class LineChartFlow extends FlowModel{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    public String toString(){
+        String s = "";
+
+        return s;
     }
 }

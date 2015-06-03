@@ -235,7 +235,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
         data.setLines(lines);
         previewData = new LineChartData(data);
-        previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
+        //previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
 
         chart.setLineChartData(data);
         previewChart.setLineChartData(previewData);
