@@ -48,18 +48,6 @@ public class LineChartImpl extends Graph  implements LineChart{
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
-    static LineChart singleInstance;
-    // Singleton design pattern
-    // usando questo pattern, siamo sicuri di avere
-    // una sola istanza del nostro modello dati
-    // e lo rendiamo reperibile agli utilizzatori
-    public static LineChart getInstance(){
-        if(singleInstance==null){
-            singleInstance=new LineChartImpl();
-        }
-        return singleInstance;
-    }
-
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");

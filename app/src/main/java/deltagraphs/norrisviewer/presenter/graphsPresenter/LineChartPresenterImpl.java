@@ -36,9 +36,8 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     public LineChartPresenterImpl(LineChartView view, String url) {
         super(url);
         graphView = view;
-        lineChartInstance = LineChartImpl.getInstance();
+        lineChartInstance = (LineChart) new LineChartImpl();
         startSocket((LineChartActivity) view, lineChartInstance);
-        startNewConnections();
         //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
     }
@@ -59,12 +58,15 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
-
+            // in quanto potremmo avere piu modelli dati
+            // verifichiamo su quale modello é avvenuto un cambiamento dei dati
+            // prima di effettuare il cast
+            firstConnection = false;
+            startNewConnections();
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
                 setGraphParameters();
 
-            lineChartInstance=(LineChart)observable;
             graphView.setData(lineChartInstance.getFlowList(), signal);
             Log.d("LineChartPresenterImpl","Chiamato il setData");
         }
