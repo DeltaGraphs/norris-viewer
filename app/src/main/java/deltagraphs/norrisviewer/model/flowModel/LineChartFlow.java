@@ -95,7 +95,6 @@ public class LineChartFlow extends FlowModel{
 
     @Override
     public void createFlow(JSONObject data) {
-        records = new ArrayList<LineChartRecord>();
         JSONArray recordList = null;
         Log.d("flow", "createFlow");
         try {
