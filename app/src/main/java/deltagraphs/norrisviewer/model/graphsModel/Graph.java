@@ -43,6 +43,7 @@ public abstract class Graph extends Observable {
         addObserver(chartPresenter);
         setChanged();
         notifyObservers(signal);
+        /*
         LineChartFlow x= (LineChartFlow)flowList.get(0);
         for(int i=0; i<x.getRecordSize(); i++){
             Log.d("", String.valueOf(x.getRecordValueX(i)));
@@ -50,6 +51,7 @@ public abstract class Graph extends Observable {
             Log.d("", "fine flusso 1 connessione");
         }
         Log.d("", "fine flusso 1 connessione");
+        */
     }
 
     public abstract void setParameters(JSONObject data);
