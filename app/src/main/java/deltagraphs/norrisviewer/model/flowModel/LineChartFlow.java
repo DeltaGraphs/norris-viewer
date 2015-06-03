@@ -37,7 +37,7 @@ public class LineChartFlow extends FlowModel{
     public String getMarker(){ return marker; }
     public String getInterpolation() { return interpolation; }
     public String getSubAreaColour(){ return subAreaColour; }
-    public int maxItems() { return maxItems; }
+    public int getMaxItems() { return maxItems; }
 
     public int getRecordSize(){return records.size(); }
     public String getRecordId(int index){ return records.get(index).recordId; }

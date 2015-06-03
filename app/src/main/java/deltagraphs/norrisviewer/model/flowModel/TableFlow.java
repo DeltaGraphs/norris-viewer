@@ -29,7 +29,7 @@ public class TableFlow extends FlowModel {
     private int maxItems;
     private ArrayList<TableRecord> records = new ArrayList<TableRecord>();
 
-    public int getMaxItemsPerPage(){ return maxItems; }
+    public int getMaxItems(){ return maxItems; } //per page
     public int getRecordSize(){return records.size(); }
     public String getRecordId(int index){ return records.get(index).recordId; }
 
@@ -64,9 +64,9 @@ public class TableFlow extends FlowModel {
         }
 
         class Value{
-            String data;
-            String background;
-            String textColour;
+            private String data;
+            private String background;
+            private String textColour;
 
             Value(String data, String bg, String tC){
                 this.data = data;

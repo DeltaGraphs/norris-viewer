@@ -36,16 +36,20 @@ public class MapChartFlow extends FlowModel {
     private int maxItems;
     private TraceModel trace;
     private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>();
-    public ArrayList<MapChartRecord> getRecords() { return records; }
 
     public int getMaxItems() { return maxItems; }
-    public TraceModel getTrace() { return trace; }
 
     public int getRecordSize(){return records.size(); }
     public String getRecordId(int index){ return records.get(index).recordId; }
     public String getRecordMarkerId(int index){ return records.get(index).markerId; }
     public float getRecordLatitude(int index){ return records.get(index).latitude; }
     public float getRecordLongitude(int index){ return records.get(index).longitude; }
+
+    public String getTraceType(){return trace.type;}
+    public String getTraceStokeColour(){return trace.stokeColour;} // colour of the polyline
+    public String getTraceFillColour(){return trace.fillColour;} // colour of the area subtended by the polyline
+    public ArrayList<Float> getTraceLatCoords(){ return trace.latitudeCoords; }
+    public ArrayList<Float> getTraceLongCoords(){ return trace.longitudeCoords; }
 
     public String getMarkerType(){ return markerProperties.type; };
     public String getMarkerColour(){ return markerProperties.colour; }
@@ -72,6 +76,8 @@ public class MapChartFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
+            maxItems = data.getInt("maxItems");
+            //TODO : set properties of Marker and trace
 //            markerProperties = new Marker(data.getJSONObject("marker"));
         }catch(JSONException e){
             e.printStackTrace();
@@ -119,10 +125,13 @@ public class MapChartFlow extends FlowModel {
         private String fillColour;  // colour of the area subtended by the polyline
         private ArrayList<Float> latitudeCoords = new ArrayList<Float>();
         private ArrayList<Float> longitudeCoords = new ArrayList<Float>();
+
+        public TraceModel(JSONObject data){}
     }
 
     @Override
     public void createFlow(JSONObject data) {
+
         records = new ArrayList<MapChartRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");

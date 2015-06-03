@@ -125,7 +125,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             TableFlow tableFlow = (TableFlow) flowList.get(i);
-            tableFlow.getMaxItemsPerPage();
+            tableFlow.getMaxItems();
             for(int j=0; j< tableFlow.getRecordSize(); j++){
                 tableFlow.getRecordId(j);
                 for(int indexCol = 0; indexCol<numOfColumns; indexCol++ ){

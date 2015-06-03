@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel{
 
-    private String flowColour = "#FFFFFF"; //default
+    private String flowColour = "random"; //default
     private ArrayList<BarChartRecord> records= new ArrayList<BarChartRecord>();
 
     public String getFlowColour(){ return flowColour; }
