@@ -55,7 +55,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  *
  */
 
-public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks {
+public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks, Observer {
 
     private static SocketManager mainSocket;
     public static MainView mainView;
@@ -92,7 +92,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 */
 
-    public void showDialog(Context context){
+    public void showDialog(final Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
 
@@ -101,19 +101,19 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         //input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
-        input.setText("http://norris-nrti-dev.herokuapp.com/page1/line1");
+        input.setText("http://norris-nrti-dev.herokuapp.com/norris");
         builder.setView(input);
 
 // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //mainSocket.setSocketUrl(input.getText().toString());
-                //mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel,(Observer) this);
-                //mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
-                //mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
-                //mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
-                //mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
+                mainSocket.setSocketUrl(input.getText().toString());
+                mainSocket.startListening("pageListConfig", (MainActivity) mainView, pageModel, (Observer)context);
+                mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel, (Observer)context);
+                mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel, (Observer)context);
+                mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel, (Observer)context);
+                mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel, (Observer)context);
 
             }
         });
@@ -134,6 +134,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, pageModel))
                 .commit();
+    }
+
+    @Override
+    public void update(Observable observable, Object data) {
+
     }
 
 
@@ -235,7 +240,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
         private List<ChartDescription> generateDescriptions() {
             List<ChartDescription> list = new ArrayList<ChartDescription>();
-/*
+
             //number of page needed
             int PAGE = 1;
 
@@ -247,14 +252,14 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                 String itemUrl = itemList.get(i).getUrl();
                 list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
             }
-            */
+            /*
 
             list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
             list.add(new ChartDescription("linebalby", "asd", "asd", ChartType.LINE_CHART));
             list.add(new ChartDescription("MappaDemmedda", "ciao", "Colpa di ross", ChartType.MAP_CHART));
             list.add(new ChartDescription("tabbbbella", "tabble", "url", ChartType.TABLE));
 
-
+*/
             return list;
         }
 
