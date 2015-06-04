@@ -1,5 +1,6 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import com.google.android.gms.maps.model.*;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
@@ -24,7 +26,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     private String sourceTitle;
     LatLng center;
     private boolean hasLegend = true;
-    private ArrayList<Marker> markers;
+    private List<Marker> markers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +62,28 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(GoogleMap mMap) {
     }
 
-    public void addMapMarker(String id, float lat, float lng, String type, String property, String color){
+    public Marker addMapMarker(String id, float lat, float lng, String type, String property, String color){
         MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
-        map.addMarker(mMarkerOptions);
+        Marker m = map.addMarker(mMarkerOptions);
+        markers.add(m);
+        return m;
     }
 
-    public void removeMarker(Marker mMarker){
-        if(mMarker != null)
-            mMarker.remove();
+    public void removeMarker(String id){
+        for(int i=0; i < markers.size(); i++) {
+            //se gli Id sono uguali lo elimina dalla lista
+            if(markers.get(i).getId() == id) {
+                markers.get(i).remove();
+                markers.remove(i);
+            }
+        }
     }
 
-    public void updateMarkerPosition(Marker mMarker, float lat, float lng){
-        removeMarker(mMarker);
-        mMarker = map.addMarker(new MarkerOptions().position(new LatLng(lat, lng)));
+    public Marker updateMarkerPosition(String id, float lat, float lng, String type, String property, String color){
+        removeMarker(id);
+        Marker m = addMapMarker(id, lat, lng, type, property, color);
+        return m;
     }
 
     public void cameraPosition(float lat, float lng){
@@ -164,6 +174,13 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
         return m;
     }
 
+    public void setPolyline(){
+        Polyline line = map.addPolyline(new PolylineOptions()
+                .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
+                .width(5)
+                .color(Color.RED));
+    }
+
     public void setType(String type){
         //satellite, hybrid, terrain
         switch (type) {
@@ -226,6 +243,7 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         map.clear();
+        setPolyline();
         for(int i=0; i<flowList.size(); i++){
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
