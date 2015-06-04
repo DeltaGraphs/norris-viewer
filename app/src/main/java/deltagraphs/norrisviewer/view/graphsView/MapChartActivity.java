@@ -3,6 +3,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.*;
@@ -18,7 +19,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
-public class MapChartActivity extends FragmentActivity implements OnMapReadyCallback, MapChartView {
+public class MapChartActivity extends ActionBarActivity implements OnMapReadyCallback, MapChartView {
 
     private GoogleMap map; // Might be null if Google Play services APK is not available.
     private MapChartPresenter mapChartPresenter;
@@ -37,7 +38,6 @@ public class MapChartActivity extends FragmentActivity implements OnMapReadyCall
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/map1";
         setTitle(sourceTitle);
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         markers = new ArrayList<Marker>();

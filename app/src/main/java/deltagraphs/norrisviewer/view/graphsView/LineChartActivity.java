@@ -81,7 +81,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        sourceURL = "http://norris-nrti-dev.herokuapp.com/page1/line1";
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         data = new LineChartData();
@@ -89,9 +88,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
 
-        previewChart.setLineChartData(previewData);
         previewChart.setViewportChangeListener(new ViewportListener());
-
+        previewChart.setPreviewColor(Color.GREEN);
         previewX(true);
     }
 
@@ -178,28 +176,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setLegendOnPoint(Boolean legend) {
 
     }
-
-    //se il flusso esiste già ma non è stato aggiornato
-    //List<PointValue> oldValues = lines.get(indice_flusso).getValues();
-    //List<PointValue> newValues = oldValues
-    //e poi creo la linea
-
-    //se il flusso esiste già ed è stato aggiornato
-    //List<PointValue> oldValues lines.get(indice_flusso).getValues();
-    //List<PointValue> newValues
-    //dentro al for si farà newValues.add(nuovi_valori)
-    //Line line = new Line(values);
-
-    //se il flusso viene creato
-    //indexesList.add(flowList.get(i).getFlowId());
-    //si fa tutto normalmente
-
-    //se il flusso viene eliminato
-    //indexesList.remove(flowList.get(i).getFlowId());
-    //non viene inserita la linea nel data model
-
-    //ogni volta viene ricreato tutto il data model del grafico
-    //bisogna capire se è troppo pesante
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
