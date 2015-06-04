@@ -67,11 +67,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        String sourceURL=null;
-        if (extras != null) {
-            sourceURL = extras.getString("EXTRA_SOURCE_URL");
-        }
-        presenter = new MainPresenterImpl(this, sourceURL);
+        presenter = new MainPresenterImpl(this);
         showDialog();
     }
 

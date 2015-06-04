@@ -63,12 +63,12 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
 
-    public MainPresenterImpl(MainView view, String url){
+    public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
-        setUpSocket(url);
         //X DEMO
+        setUpViews();
         FragmentManager fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
@@ -144,9 +144,9 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     @Override
     public void update(Observable observable, Object data) {
-        onNavigationDrawerItemSelected(0);
         mainView.setPages(pageModel);
-        setUpViews();
+        //setUpViews();
+        onNavigationDrawerItemSelected(0);
         Log.d("", "update");
     }
 
