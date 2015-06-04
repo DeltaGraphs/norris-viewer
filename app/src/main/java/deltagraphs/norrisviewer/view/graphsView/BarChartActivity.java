@@ -220,16 +220,32 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
+        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         for(int i=0; i<flowList.size(); i++){
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
             barChartFlow.getFlowColour();
+            ArrayList<String> xVals = new ArrayList<String>();
+            ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
             for(int j =0; j< barChartFlow.getRecordSize(); j++) {
                 barChartFlow.getRecordId(j);
-                barChartFlow.getRecordIndex(j);
-                barChartFlow.getRecordValue(j);
+                String x = barChartFlow.getRecordIndex(j);
+                float y = barChartFlow.getRecordValue(j);
+                xVals.add(x);
+                yVals1.add(new BarEntry(y, j));
             }
+
+            BarDataSet set1 = new BarDataSet(yVals1, "DataSet");
+            set1.setBarSpacePercent(35f);
+
+            dataSets.add(set1);
+
+            BarData data = new BarData(xVals, dataSets);
+            // data.setValueFormatter(new MyValueFormatter());
+            data.setValueTextSize(10f);
+
+            mChart.setData(data);
         }
 
 
