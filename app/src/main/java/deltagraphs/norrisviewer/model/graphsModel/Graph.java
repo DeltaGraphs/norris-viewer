@@ -109,8 +109,10 @@ public abstract class Graph extends Observable {
                     break;
                 }
                 case "insertFlow": {
-                    JSONObject jsonFlowParam = obj.getJSONObject("properties");
-                    addFlow(jsonFlowParam);
+                    if(obj.has("properties")) {
+                        JSONObject jsonFlowParam = obj.getJSONObject("properties");
+                        addFlow(jsonFlowParam);
+                    }
                     JSONObject data=obj.getJSONObject("data");
                     Log.d("insert", "insertFlow");
                     int flowIndex = searchFlowIndex(data.getString("ID"));

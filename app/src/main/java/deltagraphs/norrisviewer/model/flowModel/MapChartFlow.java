@@ -76,9 +76,9 @@ public class MapChartFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            maxItems = data.getInt("maxItems");
-            //TODO : set properties of Marker and trace
-//            markerProperties = new Marker(data.getJSONObject("marker"));
+            maxItems = data.getInt("maxItemsSaved");
+            if(data.has("marker"))
+                markerProperties = new Marker(data.getJSONObject("marker"));
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -100,11 +100,11 @@ public class MapChartFlow extends FlowModel {
     }
 
     class Marker{
-        private String type = null;
-        private String shape = null;
-        private String icon = null;
-        private String text = null;
-        private String colour = null;
+        String type = "default";
+        String shape = null;
+        String icon = null;
+        String text = null;
+        String colour = null;
 
         public Marker(JSONObject data){
             try {
@@ -121,12 +121,29 @@ public class MapChartFlow extends FlowModel {
 
     class TraceModel{
         private String type;
-        private String stokeColour;  // colour of the polyline
-        private String fillColour;  // colour of the area subtended by the polyline
+        private String stokeColour="default";  // colour of the polyline
+        private String fillColour="default";  // colour of the area subtended by the polyline
         private ArrayList<Float> latitudeCoords = new ArrayList<Float>();
         private ArrayList<Float> longitudeCoords = new ArrayList<Float>();
 
-        public TraceModel(JSONObject data){}
+        public TraceModel(JSONObject data) {
+            try {
+                type = data.getString("type");
+                stokeColour = data.getString("stokeColor");
+                fillColour = data.getString("fillColor");
+                JSONArray line = data.getJSONArray("coordinates");
+                for(int i=0; i<line.length(); i++){
+                    JSONArray coordinates = line.getJSONArray(i);
+                    latitudeCoords.add((float) coordinates.getDouble(0));
+                    longitudeCoords.add((float)coordinates.getDouble(1));
+                }
+
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     @Override

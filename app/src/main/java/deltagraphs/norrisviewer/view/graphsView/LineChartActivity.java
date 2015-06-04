@@ -229,6 +229,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
             Line line = new Line(values);
             setLineColor(line, color);
+
             line.setHasLabels(hasLabels);
             lines.add(line);
         }
