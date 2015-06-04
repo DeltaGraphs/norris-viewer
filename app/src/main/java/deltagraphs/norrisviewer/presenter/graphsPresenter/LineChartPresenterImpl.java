@@ -99,4 +99,8 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
     }
 
+    public void destroy(){
+        stopSocket();
+    }
+
 }

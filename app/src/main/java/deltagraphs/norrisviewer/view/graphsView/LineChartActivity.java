@@ -2,6 +2,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
@@ -71,6 +72,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("","onCreate");
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
         chart.setOnValueTouchListener(new ValueTouchListener());
@@ -100,21 +102,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void setInitialState(){
         hasAxes = true;
         hasAxesNames = true;
@@ -124,6 +111,43 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setValueSelectionEnabled(hasLabelForSelected);
     }
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_previewX) {
+            previewX(true);
+            return true;
+        }
+
+        if (id == R.id.action_previewY) {
+            previewY();
+            return true;
+        }
+
+        if (id == R.id.action_previewXY) {
+            previewXY();
+            return true;
+        }
+
+        if (id == R.id.action_credits) {
+            Context context = getApplicationContext();
+            CharSequence text = "Credits to DeltaGraphs 2015";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
@@ -242,6 +266,22 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
 
     }
+
+    /*@Override
+    public void onBackPressed() {
+        // Otherwise defer to system default behavior.
+        super.onBackPressed();
+        this.onDestroy();
+    }*/
+
+    public void onDestroy() {
+        // Otherwise defer to system default behavior.
+        super.onDestroy();
+        lineChartPresenter.destroy();
+    }
+
+
+
 /*
     public class FireMissilesDialogFragment extends DialogFragment {
         @Override

@@ -2,6 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="deltagraphs.norrisviewer.view.graphsView.LineChartActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+    <item android:id="@+id/action_previewXY" android:title="@string/action_previewXY"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_previewX" android:title="@string/action_previewX"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_previewY" android:title="@string/action_previewY"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

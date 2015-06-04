@@ -44,7 +44,10 @@ public abstract class GraphPresenter implements Observer {
             graphSocket.startListening("updateFlowData", graphActivity, graphModel);
     }
 
-    public void stopSocket(){}
+    public void stopSocket(){
+        graphSocket.stopConnection();
+
+    }
 
     protected abstract void setGraphParameters();
 

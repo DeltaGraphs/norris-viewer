@@ -36,6 +36,7 @@
         <activity
             android:name=".view.graphsView.LineChartActivity"
             android:configChanges="orientation|screenSize"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_line_chart" >
         </activity>
         <activity
@@ -49,7 +50,8 @@
         </activity>
         <activity
             android:name=".view.graphsView.MapChartActivity"
-            android:label="@string/title_activity_map_chart" >
+            android:launchMode="singleTask"
+            android:label="@string/title_activity_map_chart">
         </activity>
 
         <meta-data
