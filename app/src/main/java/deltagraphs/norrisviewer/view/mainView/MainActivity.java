@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -182,6 +183,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
         pagesList = new String[pages.getPageListSize()];
         for(int i=0; i<pages.getPageList().size(); i++){
             pagesList[i] = pages.getPage(i).getName();
+            Log.d("","position: " + i + " title: " + pagesList[i]);
         }
     }
 

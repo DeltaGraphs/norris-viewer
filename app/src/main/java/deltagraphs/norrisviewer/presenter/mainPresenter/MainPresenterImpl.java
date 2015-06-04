@@ -68,7 +68,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mainView = view;
         mPageNavigationFragment = new PageNavigationFragment();
         //X DEMO
-        setUpViews();
+        mainView.setMainView();
         FragmentManager fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
@@ -76,7 +76,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     private void setUpViews(){
-        mainView.setMainView();
+
         mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
 
         mPageNavigationFragment.setUp(
@@ -93,13 +93,13 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 */
 
     public void setUpSocket(String url){
-        mainSocket.setSocketUrl("http://norris-nrti-dev.herokuapp.com/norris");
+        mainSocket.setSocketUrl(url);
+        mainSocket.startConnection();
         mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
         mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
         mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
         mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
         mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
-        mainSocket.startConnection();
         Log.d("",mainSocket.getSocketUrl());
     }
 
@@ -145,7 +145,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     @Override
     public void update(Observable observable, Object data) {
         mainView.setPages(pageModel);
-        //setUpViews();
+        setUpViews();
         onNavigationDrawerItemSelected(0);
         Log.d("", "update");
     }
