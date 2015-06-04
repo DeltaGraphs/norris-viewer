@@ -62,6 +62,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
+    public String[] pagesList = {};
+    FragmentManager fragmentManager;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
@@ -69,19 +71,16 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mPageNavigationFragment = new PageNavigationFragment();
         //X DEMO
         setUpViews();
-        FragmentManager fragmentManager = mainView.getSupportManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
-                .commit();
+        //fragmentManager = mainView.getSupportManager();
+        //fragmentManager.beginTransaction()
+         //       .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
+         //       .commit();
     }
 
     private void setUpViews(){
         mainView.setMainView();
-        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
 
-        mPageNavigationFragment.setUp(
-                R.id.navigation_drawer,
-                mainView.findDrawer(R.id.drawer_layout));
+
     }
 
 /*
@@ -134,6 +133,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     @Override
+    public String[] getPages() {
+        return pagesList;
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         FragmentManager fragmentManager = mainView.getSupportManager();
@@ -144,12 +148,29 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     @Override
     public void update(Observable observable, Object data) {
+        setPages(pageModel);
         mainView.setPages(pageModel);
         //setUpViews();
+        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
+
+        mPageNavigationFragment.setUp(
+                R.id.navigation_drawer,
+                mainView.findDrawer(R.id.drawer_layout));
         onNavigationDrawerItemSelected(0);
+        fragmentManager = mainView.getSupportManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
+                .commit();
         Log.d("", "update");
+
     }
 
+    public void setPages(PageModel pages) {
+        pagesList = new String[pages.getPageListSize()];
+        for(int i=0; i<pages.getPageList().size(); i++){
+            pagesList[i] = pages.getPage(i).getName();
+        }
+    }
 
 
     //QUESTO GESTISCE IL FRAGMENT DOVE ANDRANNO INSERITI I GRAFICI
@@ -195,7 +216,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             listView = (ListView) rootView.findViewById(android.R.id.list);
-
+            graphsList = generateDescriptions();
             adapter = new ChartAdapter(getActivity(), 0, graphsList);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
@@ -252,17 +273,36 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             List<ChartDescription> list = new ArrayList<ChartDescription>();
 
             //number of page needed
-            int PAGE = 1;
+            for(int j=0; j<pageModel.getPageListSize(); j++){
+                int size = pageModel.getItemListSize(j);
+                ArrayList<PageItem> itemList = pageModel.getItemList(j);
+                for(int i=0; i<size; i++) {
+                    String itemName = itemList.get(i).getName();
+                    String itemType = pageModel.getPage(j).getName() +" - "+ itemList.get(i).getType();
+                    String itemUrl = itemList.get(i).getUrl();
+                    String chartType= itemList.get(i).getType();
+                    switch (chartType){
+                        case "MapChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.MAP_CHART));
+                            break;
+                        }
+                        case "LineChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.LINE_CHART));
+                            break;
+                        }
+                        case "BarChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
+                            break;
+                        }
+                        case "Table":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.TABLE));
+                            break;
+                        }
+                    }
 
-            int size = pageModel.getItemListSize(PAGE);
-            ArrayList<PageItem> itemList = pageModel.getItemList(PAGE);
-            for(int i=0; i<size; i++) {
-                String itemName = itemList.get(i).getName();
-                String itemType = itemList.get(i).getType();
-                String itemUrl = itemList.get(i).getUrl();
-                list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
+                }
             }
-            /*d
+            /*
 
             list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
             list.add(new ChartDescription("linebalby", "asd", "asd", ChartType.LINE_CHART));
@@ -308,15 +348,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             holder.chartLayout.removeAllViews();
             AbstractChartView chart;
             switch (item.chartType) {
-                case LINE_CHART:
-                    chart = new LineChartView(getContext());
-                    holder.chartLayout.addView(chart);
-                    break;
                 case COLUMN_CHART:
                     chart = new ColumnChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
-                case PREVIEW_LINE_CHART:
+                case LINE_CHART:
                     chart = new PreviewLineChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
@@ -353,7 +389,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     public enum ChartType {
-        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE
+        LINE_CHART, COLUMN_CHART, MAP_CHART, TABLE
     }
 
     public static class ChartDescription {

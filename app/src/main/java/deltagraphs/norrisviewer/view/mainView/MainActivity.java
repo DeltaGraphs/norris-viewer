@@ -63,6 +63,10 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
     private MainPresenter presenter;
 
 
+    public String[] setPages(){
+        return presenter.getPages();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
