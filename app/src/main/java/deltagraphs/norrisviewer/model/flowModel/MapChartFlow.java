@@ -46,7 +46,7 @@ public class MapChartFlow extends FlowModel {
     public float getRecordLongitude(int index){ return records.get(index).longitude; }
 
     public String getTraceType(){return trace.type;}
-    public String getTraceStokeColour(){return trace.stokeColour;} // colour of the polyline
+    public String getTraceStrokeColour(){return trace.strokeColour;} // colour of the polyline
     public String getTraceFillColour(){return trace.fillColour;} // colour of the area subtended by the polyline
     public ArrayList<Float> getTraceLatCoords(){ return trace.latitudeCoords; }
     public ArrayList<Float> getTraceLongCoords(){ return trace.longitudeCoords; }
@@ -121,7 +121,7 @@ public class MapChartFlow extends FlowModel {
 
     class TraceModel{
         private String type;
-        private String stokeColour="default";  // colour of the polyline
+        private String strokeColour="default";  // colour of the polyline
         private String fillColour="default";  // colour of the area subtended by the polyline
         private ArrayList<Float> latitudeCoords = new ArrayList<Float>();
         private ArrayList<Float> longitudeCoords = new ArrayList<Float>();
@@ -129,8 +129,10 @@ public class MapChartFlow extends FlowModel {
         public TraceModel(JSONObject data) {
             try {
                 type = data.getString("type");
-                stokeColour = data.getString("stokeColor");
-                fillColour = data.getString("fillColor");
+                if(data.has("strokeColor"))
+                    strokeColour = data.getString("strokeColor");
+                if(data.has("fillColor"))
+                    fillColour = data.getString("fillColor");
                 JSONArray line = data.getJSONArray("coordinates");
                 for(int i=0; i<line.length(); i++){
                     JSONArray coordinates = line.getJSONArray(i);
@@ -169,7 +171,7 @@ public class MapChartFlow extends FlowModel {
             markerProperties.text = data.getJSONObject("marker").getString("text");
             markerProperties.colour = data.getJSONObject("marker").getString("color");
             trace.type = data.getJSONObject("trace").getString("type");
-            trace.stokeColour = data.getJSONObject("trace").getString("stokeColor");
+            trace.strokeColour = data.getJSONObject("trace").getString("strokeColor");
             trace.fillColour = data.getJSONObject("trace").getString("fillColor");
             JSONArray jsonCoordinates = data.getJSONArray("coordinates");
             for(int i=0; i< jsonCoordinates.length(); i++) {
