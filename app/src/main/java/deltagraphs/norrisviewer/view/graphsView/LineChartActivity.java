@@ -225,6 +225,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
+                Log.d("", String.valueOf(x));
+                Log.d("", String.valueOf(y));
             }
 
             Line line = new Line(values);

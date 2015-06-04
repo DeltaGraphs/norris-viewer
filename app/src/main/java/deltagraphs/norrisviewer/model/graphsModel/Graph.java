@@ -113,11 +113,13 @@ public abstract class Graph extends Observable {
                         JSONObject jsonFlowParam = obj.getJSONObject("properties");
                         addFlow(jsonFlowParam);
                     }
-                    JSONObject data=obj.getJSONObject("data");
-                    Log.d("insert", "insertFlow");
-                    int flowIndex = searchFlowIndex(data.getString("ID"));
-                    if(flowIndex != -1) {
-                        flowList.get(flowIndex).createFlow(data);
+                    if(obj.has("data")) {
+                        JSONObject data = obj.getJSONObject("data");
+                        Log.d("insert", "insertFlow");
+                        int flowIndex = searchFlowIndex(data.getString("ID"));
+                        if (flowIndex != -1) {
+                            flowList.get(flowIndex).createFlow(data);
+                        }
                     }
                     break;
                 }
@@ -148,11 +150,12 @@ public abstract class Graph extends Observable {
         try {
             String action = data.getString("action");
             switch (action){
-                case "insertRecord": {
+                case "insertRecords": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
                     if(flowIndex != -1)
-                        flowList.get(flowIndex).addRecord(data);
+                        flowList.get(flowIndex).addRecords(data.getJSONArray("records"));
+                    else flowList.add(new LineChartFlow(data));
                     break;
                 }
                 case "deleteRecord": {
