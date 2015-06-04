@@ -208,7 +208,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         for (int i = 0; i < flowList.size(); i++) {
 
             String flowId = flowList.get(i).getFlowId();
-            Log.d("",flowId);
+
             //flowList.get(i).getFlowName();
 
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
@@ -243,7 +243,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
 
     private void setLineColor(Line line, String color){
-        Log.d("COLORE ",color);
         if(color != null && color != "random")
             line.setColor(Color.parseColor(color));
         else

@@ -39,7 +39,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         lineChartInstance = new LineChartImpl(this);
         startSocket((LineChartActivity) view, lineChartInstance);
 
-        //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
     }
 
@@ -70,7 +69,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
             Log.d("LineChartPresenterImpl","Chiamato il setData");
-            startNewConnections();
         }
     }
 
