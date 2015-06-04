@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -101,7 +99,6 @@ public class    PageNavigationFragment extends Fragment {
                 selectItem(position);
             }
         });
-        Log.d("", "title: " + MainActivity.pagesList[0]);
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,

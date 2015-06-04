@@ -27,6 +27,6 @@ public interface MainView{
     PageNavigationFragment getFragment(int id);
     DrawerLayout findDrawer(int id);
     FragmentManager getSupportManager();
-    void setMainView();
+    //void setMainView();
     public void setPages(PageModel pages);
 }

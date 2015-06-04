@@ -20,5 +20,4 @@ import android.content.Context;
 
 public interface MainPresenter {
     public void showDialog(Context context);
-    public String[] getPages();
 }

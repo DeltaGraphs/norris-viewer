@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -64,13 +63,10 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
     private MainPresenter presenter;
 
 
-    public String[] setPages(){
-        return presenter.getPages();
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         Bundle extras = getIntent().getExtras();
         presenter = new MainPresenterImpl(this);
         showDialog();
@@ -178,16 +174,15 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
         return getSupportFragmentManager();
     }
 
-    public void setMainView(){
-        setContentView(R.layout.activity_main);
-    }
+   // public void setMainView(){
+   //
+   // }
 
     @Override
     public void setPages(PageModel pages) {
         pagesList = new String[pages.getPageListSize()];
         for(int i=0; i<pages.getPageList().size(); i++){
             pagesList[i] = pages.getPage(i).getName();
-            Log.d("","position: " + i + " title: " + pagesList[i]);
         }
     }
 

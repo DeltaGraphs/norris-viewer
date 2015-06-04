@@ -62,6 +62,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
+    FragmentManager fragmentManager;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
@@ -69,18 +70,19 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mPageNavigationFragment = new PageNavigationFragment();
         //X DEMO
         setUpViews();
-        //fragmentManager = mainView.getSupportManager();
-        //fragmentManager.beginTransaction()
-         //       .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
-         //       .commit();
+       // FragmentManager fragmentManager = mainView.getSupportManager();
+      //  fragmentManager.beginTransaction()
+        //        .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
+          //      .commit();
     }
 
     private void setUpViews(){
-        mainView.setMainView();
+        //mainView.setMainView();
+        //mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
 
-        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
-
-
+       // mPageNavigationFragment.setUp(
+       //         R.id.navigation_drawer,
+       //         mainView.findDrawer(R.id.drawer_layout));
     }
 
 /*
@@ -99,7 +101,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
         mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
         mainSocket.startConnection();
-        Log.d("",mainSocket.getSocketUrl());
+        Log.d("", mainSocket.getSocketUrl());
     }
 
     public void showDialog(final Context context){
@@ -132,8 +134,6 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         builder.show();
     }
 
-
-
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -145,29 +145,16 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     @Override
     public void update(Observable observable, Object data) {
-        setPages(pageModel);
         mainView.setPages(pageModel);
         //setUpViews();
-        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
-
-        mPageNavigationFragment.setUp(
-                R.id.navigation_drawer,
-                mainView.findDrawer(R.id.drawer_layout));
         onNavigationDrawerItemSelected(0);
+        Log.d("", "update");
         fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
                 .commit();
-        Log.d("", "update");
-
     }
 
-    public void setPages(PageModel pages) {
-        pagesList = new String[pages.getPageListSize()];
-        for(int i=0; i<pages.getPageList().size(); i++){
-            pagesList[i] = pages.getPage(i).getName();
-        }
-    }
 
 
     //QUESTO GESTISCE IL FRAGMENT DOVE ANDRANNO INSERITI I GRAFICI
