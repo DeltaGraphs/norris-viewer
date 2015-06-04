@@ -1,5 +1,6 @@
 package deltagraphs.norrisviewer.view.mainView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,12 +11,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.github.nkzawa.socketio.client.Socket;
+
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.presenter.SocketManager;
+import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
+import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 
 public class HomeActivity extends ActionBarActivity {
 
-    private String url = "";
+    private SocketManager sm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,11 +49,19 @@ public class HomeActivity extends ActionBarActivity {
     }
 
     void onSetURLButtonClicked(){
+
         String url = ((EditText)findViewById(R.id.editURL)).getText().toString();
+        sm = new SocketManager(url);
+        sm.startConnection();
+        if(sm.isConnected() == true){
+            //MainPresenter mp = new MainPresenterImpl();
+        }
+        /*
         Intent intent;
         intent = new Intent(this, MainActivity.class);
         intent.putExtra("EXTRA_SOURCE_URL", url);
         startActivity(intent);
+        */
     }
 
     @Override
