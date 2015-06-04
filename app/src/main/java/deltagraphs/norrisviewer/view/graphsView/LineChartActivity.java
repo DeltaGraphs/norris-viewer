@@ -89,7 +89,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setScrollEnabled(false);
 
         previewChart.setViewportChangeListener(new ViewportListener());
-        previewChart.setPreviewColor(Color.GREEN);
+        previewChart.setPreviewColor(Color.parseColor("#80CBC4"));
         previewX(true);
     }
 
