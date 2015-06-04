@@ -62,8 +62,6 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     public MainView mainView;
     private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
-    public String[] pagesList = {};
-    FragmentManager fragmentManager;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
@@ -79,6 +77,8 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 
     private void setUpViews(){
         mainView.setMainView();
+
+        mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
 
 
     }
@@ -132,10 +132,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
         builder.show();
     }
 
-    @Override
-    public String[] getPages() {
-        return pagesList;
-    }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
