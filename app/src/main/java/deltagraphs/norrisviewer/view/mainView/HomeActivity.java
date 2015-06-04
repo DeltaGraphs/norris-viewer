@@ -1,5 +1,6 @@
 package deltagraphs.norrisviewer.view.mainView;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,8 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 
 public class HomeActivity extends ActionBarActivity {
+
+    private String url = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +23,11 @@ public class HomeActivity extends ActionBarActivity {
         setContentView(R.layout.activity_home);
         EditText t = (EditText)findViewById(R.id.editURL);
         t.setGravity(Gravity.CENTER);
+        t.setText("http://norris-nrti-dev.herokuapp.com/norris");
         final Button button = (Button) findViewById(R.id.setURLbutton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 onSetURLButtonClicked();
-
             }
         });
 
@@ -40,6 +44,10 @@ public class HomeActivity extends ActionBarActivity {
 
     void onSetURLButtonClicked(){
         String url = ((EditText)findViewById(R.id.editURL)).getText().toString();
+        Intent intent;
+        intent = new Intent(this, MainActivity.class);
+        intent.putExtra("EXTRA_SOURCE_URL", url);
+        startActivity(intent);
     }
 
     @Override
