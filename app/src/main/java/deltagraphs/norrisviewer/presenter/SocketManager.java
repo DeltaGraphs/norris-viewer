@@ -69,6 +69,10 @@ public class SocketManager{
     //start the connection with socket
     public void startConnection(){
         mSocket.connect();
+
+    }
+    public Boolean isConnected(){
+        return mSocket.connected();
     }
 
     //stop the connection with the socket
