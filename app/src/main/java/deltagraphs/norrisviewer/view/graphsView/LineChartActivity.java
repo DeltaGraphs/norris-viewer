@@ -3,6 +3,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -222,18 +223,14 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
                 //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
-                Log.d("", String.valueOf(x));
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
-                Log.d("", String.valueOf(y));
-                Log.d("LineActivity", "valore aggiunto");
             }
 
             Line line = new Line(values);
             setLineColor(line, color);
             line.setHasLabels(hasLabels);
             lines.add(line);
-            Log.d("LineActivity", "linea aggiunta");
         }
         data.setLines(lines);
         previewData = new LineChartData(data);
@@ -246,26 +243,11 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
 
     private void setLineColor(Line line, String color){
-        switch (color) {
-            case "green":
-                line.setColor(ChartUtils.COLOR_GREEN);
-                break;
-            case "blue":
-                line.setColor(ChartUtils.COLOR_BLUE);
-                break;
-            case "orange":
-                line.setColor(ChartUtils.COLOR_ORANGE);
-                break;
-            case "red":
-                line.setColor(ChartUtils.COLOR_RED);
-                break;
-            case "violet":
-                line.setColor(ChartUtils.COLOR_VIOLET);
-                break;
-            default:
-                line.setColor(ChartUtils.DEFAULT_COLOR);
-                break;
-        }
+        Log.d("COLORE ",color);
+        if(color != null && color != "random")
+            line.setColor(Color.parseColor(color));
+        else
+            line.setColor(ChartUtils.DEFAULT_COLOR);
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {
