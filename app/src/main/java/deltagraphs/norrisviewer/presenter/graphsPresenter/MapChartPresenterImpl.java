@@ -59,7 +59,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             graphView.setData(mapChartInstance.getFlowList(), signal);
 
             firstConnection = false;
-            startNewConnections();
         }
     }
 
