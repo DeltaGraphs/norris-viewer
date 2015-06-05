@@ -27,17 +27,7 @@ public class Convert {
         }
     }
 
-    public static void main(String[] args) {
-        String color = "#c7d92c"; // A nice shade of green.
-        int r = Integer.parseInt(color.substring(1, 3), 16); // Grab the hex representation of red (chars 1-2) and convert to decimal (base 10).
-        int g = Integer.parseInt(color.substring(3, 5), 16);
-        int b = Integer.parseInt(color.substring(5, 7), 16);
-
-        double hue = rgbToHsl(r, g, b).h * 360;
-
-    }
-
-    private static Hsl rgbToHsl(double r, double g, double b) {
+    public static Hsl rgbToHsl(double r, double g, double b) {
         r /= 255d; g /= 255d; b /= 255d;
 
         double max = Math.max(Math.max(r, g), b), min = Math.min(Math.min(r, g), b);

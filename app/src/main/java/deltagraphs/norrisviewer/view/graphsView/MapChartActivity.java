@@ -16,6 +16,7 @@ import java.util.List;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
+import deltagraphs.norrisviewer.presenter.Convert;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
@@ -91,6 +92,18 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
 
+    public float getHueFromString(String c){
+        String color = c;
+
+        int r = Integer.parseInt(color.substring(1, 3), 16); // Grab the hex representation of red (chars 1-2) and convert to decimal (base 10).
+        int g = Integer.parseInt(color.substring(3, 5), 16);
+        int b = Integer.parseInt(color.substring(5, 7), 16);
+
+        float hue = (float)Convert.rgbToHsl(r, g, b).h * 360;
+        return hue;
+    }
+
+
     public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color){
 
         MarkerOptions m = new MarkerOptions();
@@ -104,41 +117,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 switch(property) {
                     //normal marker
                     case "normal":
-                        switch (color) {
-                            case "red":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                                break;
-                            case "blue":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                                break;
-                            case "azure":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                                break;
-                            case "cyan":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-                                break;
-                            case "green":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                                break;
-                            case "magenta":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-                                break;
-                            case "orange":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                                break;
-                            case "rose":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-                                break;
-                            case "violet":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET));
-                                break;
-                            case "yellow":
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                                break;
-                            default:
-                                m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                                break;
-                        }
+                        float hue = getHueFromString(color);
+                        m.icon(BitmapDescriptorFactory.defaultMarker(hue));
                     case "circle":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.red_circle_marker));
                         break;
@@ -182,7 +162,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color){
 
         PolylineOptions mPolylineOptions = new PolylineOptions()
-                .width(5)
+                .width(8)
                 .color(Color.parseColor(color));
 
         for(int i=0; i < polyline.size(); i++){
