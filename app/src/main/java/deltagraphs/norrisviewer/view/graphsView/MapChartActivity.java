@@ -246,7 +246,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 for (int i = 0; i < flowList.size(); i++) {
 
                     flowList.get(i).getFlowId();
-                    flowList.get(i).getFlowName();
+                    String idLine = flowList.get(i).getFlowName();
 
                     MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
                     String polyLineColour = mapChartFlow.getTraceStrokeColour();
@@ -257,7 +257,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                     String markerProperty = mapChartFlow.getMarkerProperty(markerType);
                     String color = mapChartFlow.getMarkerColour();
                     for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
-                        String id = mapChartFlow.getRecordMarkerId(j);
+                        String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
                         float lat = mapChartFlow.getRecordLatitude(j);
                         float lng = mapChartFlow.getRecordLongitude(j);
                         String recordId = mapChartFlow.getRecordId(j);
