@@ -3,6 +3,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.graphics.Typeface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -49,7 +50,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_horizontal_bar_chart);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
@@ -65,6 +66,9 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
 
     private void initializeHorizontalBarChart(){
+        Log.d("", "Matteo ha perso");
+        setContentView(R.layout.activity_horizontal_bar_chart);
+
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
@@ -131,13 +135,15 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
     private void initializeBarChart(){
+        Log.d("","John spaccia log");
+        setContentView(R.layout.activity_bar_chart);
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
         mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
         mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
-        vBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
+        vBarChart = (BarChart) findViewById(R.id.chart1);
         vBarChart.setOnChartValueSelectedListener(this);
         // vBarChart.setHighlightEnabled(false);
 
@@ -236,7 +242,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setBarOrientation(String orientation) {
-        if(orientation=="V")
+        if(orientation=="v")
             initializeBarChart();
         else
             initializeHorizontalBarChart();
@@ -258,18 +264,33 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
     @Override
-    public void setData(ArrayList<FlowModel> flowList, String signal) {
-        for(int i=0; i<flowList.size(); i++){
+    public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
+        Log.d("","Mery e gli unicorni");
+        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
+        BarData data=new BarData();
+        for(int i=0; i<flowList.size(); i++) {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
             barChartFlow.getFlowColour();
-            for(int j =0; j< barChartFlow.getRecordSize(); j++) {
+            ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+            for (int j = 0; j < barChartFlow.getRecordSize(); j++) {
                 barChartFlow.getRecordId(j);
-                barChartFlow.getRecordIndex(j);
-                barChartFlow.getRecordValue(j);
+                float y = barChartFlow.getRecordValue(j);
+                yVals1.add(new BarEntry(y, j));
             }
+
+            BarDataSet set1 = new BarDataSet(yVals1, "Dati");
+            set1.setBarSpacePercent(35f);
+
+            dataSets.add(set1);
+
+            data = new BarData(headers, dataSets);
+            // data.setValueFormatter(new MyValueFormatter());
+            data.setValueTextSize(10f);
         }
+        hBarChart.setData(data);
+//        vBarChart.setData(data);
     }
 
     @Override

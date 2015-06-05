@@ -64,7 +64,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
             String signal = (String) data;
             if((signal == "configGraph") || (signal=="updateGraphProp"))
                 setGraphParameters();
-            graphView.setData(barChartInstance.getFlowList(), signal);
+            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());
             firstConnection = false;
         }
     }

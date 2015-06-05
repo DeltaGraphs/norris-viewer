@@ -43,7 +43,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager{
 
     private Socket mSocket;
-    private String url;
+    private String url="http://norris-nrti-dev.herokuapp.com/norris";
 
     //Constructor
     public SocketManager(){}
@@ -90,6 +90,7 @@ public class SocketManager{
     }
 
     public void startListening(final String signal, final Activity activity, final Object model){
+        Log.d("","onSocket");
         mSocket.on(signal, new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
