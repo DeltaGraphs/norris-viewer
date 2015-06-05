@@ -7,6 +7,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
+import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import lecho.lib.hellocharts.model.Axis;
 
@@ -36,7 +37,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         super(url);
         graphView=view;
         barChartInstance = (BarChart) new BarChartImpl(this);
-        startSocket((BarChartActivity) view, barChartInstance);
+        startSocket((HorizontalBarChartActivity) view, barChartInstance);
     //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
     }
@@ -54,9 +55,6 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         previewLineChartView.setScrollEnabled(false);
         }*/
 
-
-    private void startNewConnections(){ startSocket((BarChartActivity) graphView, barChartInstance);}
-
     @Override
     public void update(Observable observable,Object data) {
         if (observable instanceof BarChartImpl) {
@@ -68,12 +66,12 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 setGraphParameters();
             graphView.setData(barChartInstance.getFlowList(), signal);
             firstConnection = false;
-            startNewConnections();
         }
     }
 
     @Override
     protected void setGraphParameters() {
+        graphView.setBarOrientation(barChartInstance.getBarOrientation());
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
                 barChartInstance.getAxisX().getAppearance(),
@@ -92,7 +90,6 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         );
         graphView.setHeaders(barChartInstance.getHeaders());
         graphView.setBackground(barChartInstance.getBackground());
-        graphView.setBarOrientation(barChartInstance.getBarOrientation());
         graphView.setSortable(barChartInstance.getSortable());
         graphView.setGrid(barChartInstance.getGrid());
         graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());

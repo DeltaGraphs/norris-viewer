@@ -110,11 +110,16 @@ public class MapChartFlow extends FlowModel {
 
         public Marker(JSONObject data){
             try {
-                type = data.getString("type");
-                shape = data.getString("shape");
-                icon = data.getString("icon");
-                text = data.getString("text");
-                colour = data.getString("color");
+                if(data.has("type"))
+                    type = data.getString("type");
+                if(data.has("shape"))
+                    shape = data.getString("shape");
+                if(data.has("icon"))
+                    icon = data.getString("icon");
+                if(data.has("text"))
+                    text = data.getString("text");
+                if(data.has("colour"))
+                    colour = data.getString("color");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

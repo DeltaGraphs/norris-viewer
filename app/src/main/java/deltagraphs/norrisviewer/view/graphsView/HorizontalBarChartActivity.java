@@ -27,12 +27,18 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 
 public class HorizontalBarChartActivity extends ActionBarActivity implements BarChartView,SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
 
-    protected HorizontalBarChart mChart;
+    protected HorizontalBarChart hBarChart;
+    protected BarChart vBarChart;
     private SeekBar mSeekBarX, mSeekBarY;
     private TextView tvX, tvY;
+    private BarChartPresenter barChartPresenter;
+    private String sourceTitle;
+    private String sourceURL;
 
     private String[] mMonths = {"Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"};
 
@@ -44,59 +50,72 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_horizontal_bar_chart);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            sourceURL = extras.getString("EXTRA_SOURCE_URL");
+            sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
+        }
+        setTitle(sourceTitle);
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
 
 
+
+        // hBarChart.setDrawLegend(false);
+    }
+
+
+    private void initializeHorizontalBarChart(){
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
         mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
         mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
-        mChart = (HorizontalBarChart) findViewById(R.id.chart1);
-        mChart.setOnChartValueSelectedListener(this);
-        // mChart.setHighlightEnabled(false);
+        hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
+        hBarChart.setOnChartValueSelectedListener(this);
+        // hBarChart.setHighlightEnabled(false);
 
-        mChart.setDrawBarShadow(false);
+        hBarChart.setDrawBarShadow(false);
 
-        mChart.setDrawValueAboveBar(true);
+        hBarChart.setDrawValueAboveBar(true);
 
-        mChart.setDescription("");
+        hBarChart.setDescription("");
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-        mChart.setMaxVisibleValueCount(60);
+        hBarChart.setMaxVisibleValueCount(60);
 
         // scaling can now only be done on x- and y-axis separately
-        mChart.setPinchZoom(false);
+        hBarChart.setPinchZoom(false);
 
         // draw shadows for each bar that show the maximum value
-        // mChart.setDrawBarShadow(true);
+        // hBarChart.setDrawBarShadow(true);
 
-        // mChart.setDrawXLabels(false);
+        // hBarChart.setDrawXLabels(false);
 
-        mChart.setDrawGridBackground(false);
+        hBarChart.setDrawGridBackground(false);
 
-        // mChart.setDrawYLabels(false);
+        // hBarChart.setDrawYLabels(false);
 
-        XAxis xl = mChart.getXAxis();
+        XAxis xl = hBarChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setDrawAxisLine(true);
         xl.setDrawGridLines(true);
         xl.setGridLineWidth(0.3f);
 
-        YAxis yl = mChart.getAxisLeft();
+        YAxis yl = hBarChart.getAxisLeft();
         yl.setDrawAxisLine(true);
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
 //        yl.setInverted(true);
 
-        YAxis yr = mChart.getAxisRight();
+        YAxis yr = hBarChart.getAxisRight();
         yr.setDrawAxisLine(true);
         yr.setDrawGridLines(false);
 //        yr.setInverted(true);
 
         setData(12, 50);
-        mChart.animateY(2500);
+        hBarChart.animateY(2500);
 
         // setting data
         mSeekBarY.setProgress(50);
@@ -105,13 +124,78 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         mSeekBarY.setOnSeekBarChangeListener(this);
         mSeekBarX.setOnSeekBarChangeListener(this);
 
-        Legend l = mChart.getLegend();
+        Legend l = hBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setFormSize(8f);
         l.setXEntrySpace(4f);
-
-        // mChart.setDrawLegend(false);
     }
+
+    private void initializeBarChart(){
+        tvX = (TextView) findViewById(R.id.tvXMax);
+        tvY = (TextView) findViewById(R.id.tvYMax);
+
+        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+
+        vBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
+        vBarChart.setOnChartValueSelectedListener(this);
+        // vBarChart.setHighlightEnabled(false);
+
+        vBarChart.setDrawBarShadow(false);
+
+        vBarChart.setDrawValueAboveBar(true);
+
+        vBarChart.setDescription("");
+
+        // if more than 60 entries are displayed in the chart, no values will be
+        // drawn
+        vBarChart.setMaxVisibleValueCount(60);
+
+        // scaling can now only be done on x- and y-axis separately
+        vBarChart.setPinchZoom(false);
+
+        // draw shadows for each bar that show the maximum value
+        // vBarChart.setDrawBarShadow(true);
+
+        // vBarChart.setDrawXLabels(false);
+
+        vBarChart.setDrawGridBackground(false);
+
+        // vBarChart.setDrawYLabels(false);
+
+        XAxis xl = vBarChart.getXAxis();
+        xl.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xl.setDrawAxisLine(true);
+        xl.setDrawGridLines(true);
+        xl.setGridLineWidth(0.3f);
+
+        YAxis yl = vBarChart.getAxisLeft();
+        yl.setDrawAxisLine(true);
+        yl.setDrawGridLines(true);
+        yl.setGridLineWidth(0.3f);
+//        yl.setInverted(true);
+
+        YAxis yr = vBarChart.getAxisRight();
+        yr.setDrawAxisLine(true);
+        yr.setDrawGridLines(false);
+//        yr.setInverted(true);
+
+        setData(12, 50);
+        vBarChart.animateY(2500);
+
+        // setting data
+        mSeekBarY.setProgress(50);
+        mSeekBarX.setProgress(12);
+
+        mSeekBarY.setOnSeekBarChangeListener(this);
+        mSeekBarX.setOnSeekBarChangeListener(this);
+
+        Legend l = vBarChart.getLegend();
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        l.setFormSize(8f);
+        l.setXEntrySpace(4f);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -152,7 +236,10 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setBarOrientation(String orientation) {
-
+        if(orientation=="V")
+            initializeBarChart();
+        else
+            initializeHorizontalBarChart();
     }
 
     @Override
@@ -234,6 +321,6 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
 
-        mChart.setData(data);
+        hBarChart.setData(data);
     }
 }

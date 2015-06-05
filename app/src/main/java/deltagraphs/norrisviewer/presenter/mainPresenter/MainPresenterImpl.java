@@ -227,7 +227,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                     break;
 
                 case COLUMN_CHART:
-                    intent = new Intent(getActivity(), BarChartActivity.class);
+                    intent = new Intent(getActivity(), HorizontalBarChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
@@ -341,11 +341,11 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
                     holder.chartLayout.addView(chart);
                     break;
                 case MAP_CHART:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for map Chart
                     holder.chartLayout.addView(chart);
                     break;
                 case TABLE:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for table
                     holder.chartLayout.addView(chart);
                     break;
                 default:

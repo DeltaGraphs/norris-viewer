@@ -38,7 +38,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     }
 
 
-    private void startNewConnections(){ startSocket((TableActivity) graphView, tableInstance);}
 
     @Override
     public void update(Observable observable, Object data) {
@@ -49,7 +48,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns(), signal);
 
             firstConnection = false;
-            startNewConnections();
         }
     }
 
