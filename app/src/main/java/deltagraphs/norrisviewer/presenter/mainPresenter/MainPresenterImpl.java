@@ -94,7 +94,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
 */
 
     public void setUpSocket(String url){
-        mainSocket.setSocketUrl("http://norris-nrti-dev.herokuapp.com/norris");
+        mainSocket.setSocketUrl(url);
         mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
         mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
         mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);

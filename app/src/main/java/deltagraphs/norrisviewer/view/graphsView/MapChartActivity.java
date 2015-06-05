@@ -244,8 +244,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                     flowList.get(i).getFlowName();
 
                     MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
-
-                    setPolyline(mapChartFlow.getTraceCoords(),mapChartFlow.getTraceStrokeColour());
+                    String polyLineColour = mapChartFlow.getTraceStrokeColour();
+                    if(polyLineColour == "default")
+                        polyLineColour = "RED";
+                    setPolyline(mapChartFlow.getTraceCoords(),polyLineColour);
 
                     mapChartFlow.getMaxItems();
                     String markerType = mapChartFlow.getMarkerType();
