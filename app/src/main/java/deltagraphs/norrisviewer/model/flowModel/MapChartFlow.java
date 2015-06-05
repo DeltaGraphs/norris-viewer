@@ -22,6 +22,7 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 import org.json.JSONArray;
@@ -48,8 +49,7 @@ public class MapChartFlow extends FlowModel {
     public String getTraceType(){return trace.type;}
     public String getTraceStrokeColour(){return trace.strokeColour;} // colour of the polyline
     public String getTraceFillColour(){return trace.fillColour;} // colour of the area subtended by the polyline
-    public ArrayList<Float> getTraceLatCoords(){ return trace.latitudeCoords; }
-    public ArrayList<Float> getTraceLongCoords(){ return trace.longitudeCoords; }
+    public ArrayList<LatLng> getTraceCoords(){ return trace.coords; }
 
     public String getMarkerType(){ return markerProperties.type; };
     public String getMarkerColour(){ return markerProperties.colour; }
@@ -123,8 +123,7 @@ public class MapChartFlow extends FlowModel {
         private String type;
         private String strokeColour="default";  // colour of the polyline
         private String fillColour="default";  // colour of the area subtended by the polyline
-        private ArrayList<Float> latitudeCoords = new ArrayList<Float>();
-        private ArrayList<Float> longitudeCoords = new ArrayList<Float>();
+        private ArrayList<LatLng> coords = new ArrayList<LatLng>();;
 
         public TraceModel(JSONObject data) {
             try {
@@ -136,15 +135,11 @@ public class MapChartFlow extends FlowModel {
                 JSONArray line = data.getJSONArray("coordinates");
                 for(int i=0; i<line.length(); i++){
                     JSONArray coordinates = line.getJSONArray(i);
-                    latitudeCoords.add((float) coordinates.getDouble(0));
-                    longitudeCoords.add((float)coordinates.getDouble(1));
+                    coords.add(new LatLng((float) coordinates.getDouble(0),(float)coordinates.getDouble(1)));
                 }
-
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -175,8 +170,8 @@ public class MapChartFlow extends FlowModel {
             trace.fillColour = data.getJSONObject("trace").getString("fillColor");
             JSONArray jsonCoordinates = data.getJSONArray("coordinates");
             for(int i=0; i< jsonCoordinates.length(); i++) {
-                trace.latitudeCoords.add((float) jsonCoordinates.getJSONArray(i).getDouble(0));
-                trace.longitudeCoords.add((float) jsonCoordinates.getJSONArray(i).getDouble(1));
+                trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),
+                        (float)jsonCoordinates.getJSONArray(i).getDouble(1)));
             }
         } catch (JSONException e) {
             e.printStackTrace();

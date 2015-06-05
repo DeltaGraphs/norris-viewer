@@ -139,6 +139,9 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                                 m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 break;
                         }
+                    case "circle":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.red_circle_marker));
+                        break;
                 }
                 break;
 
@@ -174,12 +177,22 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return m;
     }
 
-    public void setPolyline(){
-        Polyline line = map.addPolyline(new PolylineOptions()
-                .add(new LatLng(51.5, -0.1), new LatLng(40.7, -74.0))
+    //Gestione della traccia
+
+    public Polyline setPolyline(ArrayList<LatLng> polyline, String color){
+
+        PolylineOptions mPolylineOptions = new PolylineOptions()
                 .width(5)
-                .color(Color.RED));
+                .color(Color.parseColor(color));
+
+        for(int i=0; i < polyline.size(); i++){
+            mPolylineOptions.add(polyline.get(i));
+        }
+        Polyline mPolyline = map.addPolyline(mPolylineOptions);
+        return mPolyline;
     }
+
+    //Gestione del tipo della mappa
 
     public void setType(String type){
         //satellite, hybrid, terrain
@@ -242,23 +255,32 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
-        map.clear();
-        setPolyline();
-        for(int i=0; i<flowList.size(); i++){
-            flowList.get(i).getFlowId();
-            flowList.get(i).getFlowName();
-            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
-            mapChartFlow.getMaxItems();
-            String markerType = mapChartFlow.getMarkerType();
-            String markerProperty = mapChartFlow.getMarkerProperty(markerType);
-            String color = mapChartFlow.getMarkerColour();
-            for(int j =0; j< mapChartFlow.getRecordSize(); j++) {
-                String id = mapChartFlow.getRecordMarkerId(j);
-                float lat = mapChartFlow.getRecordLatitude(j);
-                float lng = mapChartFlow.getRecordLongitude(j);
-                String recordId = mapChartFlow.getRecordId(j);
-                addMapMarker(id, lat, lng, markerType, markerProperty, color);
-            }
-        }
+        //switch (signal) {
+            //case "configGraph":
+                map.clear();
+                for (int i = 0; i < flowList.size(); i++) {
+
+                    flowList.get(i).getFlowId();
+                    flowList.get(i).getFlowName();
+
+                    MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
+
+                    //setPolyline(mapChartFlow.getTraceCoords(),mapChartFlow.getTraceStrokeColour());
+
+                    mapChartFlow.getMaxItems();
+                    String markerType = mapChartFlow.getMarkerType();
+                    String markerProperty = mapChartFlow.getMarkerProperty(markerType);
+                    String color = mapChartFlow.getMarkerColour();
+                    for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
+                        String id = mapChartFlow.getRecordMarkerId(j);
+                        float lat = mapChartFlow.getRecordLatitude(j);
+                        float lng = mapChartFlow.getRecordLongitude(j);
+                        String recordId = mapChartFlow.getRecordId(j);
+                        addMapMarker(id, lat, lng, markerType, markerProperty, color);
+                    }
+                }
+                //break;
+           // default:
+      //  }
     }
 }

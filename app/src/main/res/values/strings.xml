@@ -7,11 +7,10 @@
     <string name="action_settings">Settings</string>
     <string name="action_credits">Credits</string>
 
-    <string name="action_previewX">View Finder X</string>
-    <string name="action_previewY">View Finder Y</string>
-    <string name="action_previewXY">View Finder Completo</string>
+    <string name="action_previewX">X View Finder</string>
+    <string name="action_previewY">Y View Finder</string>
+    <string name="action_previewXY">Complete View Finder</string>
 
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_line_chart">LineChartActivity</string>
     <string name="title_activity_map_chart">MapChartActivity</string>
     <string name="title_activity_bar_chart">BarChartActivity</string>
