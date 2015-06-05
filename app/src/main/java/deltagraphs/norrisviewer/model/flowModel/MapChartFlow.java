@@ -79,6 +79,8 @@ public class MapChartFlow extends FlowModel {
             maxItems = data.getInt("maxItemsSaved");
             if(data.has("marker"))
                 markerProperties = new Marker(data.getJSONObject("marker"));
+            if(data.has("trace"))
+                trace = new TraceModel(data.getJSONObject("trace"));
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -120,10 +122,10 @@ public class MapChartFlow extends FlowModel {
     }
 
     class TraceModel{
-        private String type;
-        private String strokeColour="default";  // colour of the polyline
-        private String fillColour="default";  // colour of the area subtended by the polyline
-        private ArrayList<LatLng> coords = new ArrayList<LatLng>();;
+        String type;
+        String strokeColour="default";  // colour of the polyline
+        String fillColour="default";  // colour of the area subtended by the polyline
+        ArrayList<LatLng> coords = new ArrayList<LatLng>();;
 
         public TraceModel(JSONObject data) {
             try {
