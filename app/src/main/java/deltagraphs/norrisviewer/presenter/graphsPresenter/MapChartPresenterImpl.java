@@ -62,6 +62,16 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         }
     }
 
+    public void stopConnection(){
+        stopSocket();
+    }
 
+    public void startConnection(){
+        startNewConnections();
+    }
+
+    public void destroyConnection(){
+        destroySocket();
+    }
 }
 

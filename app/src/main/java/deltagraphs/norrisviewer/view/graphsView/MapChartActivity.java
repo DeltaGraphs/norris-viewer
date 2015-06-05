@@ -1,6 +1,7 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -46,7 +47,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
 
-       //TOAST
         Context context = getApplicationContext();
         CharSequence text = "Loading may take a few moments...";
         int duration = Toast.LENGTH_SHORT;
@@ -56,8 +56,27 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
+        mapChartPresenter.startConnection();
         super.onResume();
+    }
+
+    @Override
+    public void onStop(){
+        mapChartPresenter.stopConnection();
+        super.onStop();
+    }
+
+    @Override
+    public void onRestart(){
+        //mapChartPresenter.startConnection();
+        super.onRestart();
+    }
+
+    @Override
+    public void onDestroy(){
+        mapChartPresenter.destroyConnection();
+        super.onDestroy();
     }
 
     private void setUpMapIfNeeded() {

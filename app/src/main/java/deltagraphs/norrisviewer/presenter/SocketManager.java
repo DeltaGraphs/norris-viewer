@@ -80,6 +80,10 @@ public class SocketManager{
         mSocket.disconnect();
     }
 
+    public void destroyConnection(){
+        mSocket.close();
+    }
+
     //close the connection with the socket
     public void closeSocket(){
         mSocket.close();

@@ -50,7 +50,6 @@
         </activity>
         <activity
             android:name=".view.graphsView.MapChartActivity"
-            android:launchMode="singleTask"
             android:label="@string/title_activity_map_chart">
         </activity>
 
