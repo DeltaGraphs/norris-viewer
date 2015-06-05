@@ -161,9 +161,14 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color){
 
-        PolylineOptions mPolylineOptions = new PolylineOptions()
-                .width(8)
-                .color(Color.parseColor(color));
+        PolylineOptions mPolylineOptions = new PolylineOptions();
+
+        mPolylineOptions.width(8);
+
+        if(color == "default")
+            mPolylineOptions.color(Color.RED);
+        else
+            mPolylineOptions.color(Color.parseColor(color));
 
         for(int i=0; i < polyline.size(); i++){
             mPolylineOptions.add(polyline.get(i));
@@ -245,8 +250,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
                     MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
                     String polyLineColour = mapChartFlow.getTraceStrokeColour();
-                    if(polyLineColour == "default")
-                        polyLineColour = "RED";
                     setPolyline(mapChartFlow.getTraceCoords(),polyLineColour);
 
                     mapChartFlow.getMaxItems();
