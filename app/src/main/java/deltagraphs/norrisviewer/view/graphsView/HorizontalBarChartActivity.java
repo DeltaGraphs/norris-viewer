@@ -40,6 +40,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     private BarChartPresenter barChartPresenter;
     private String sourceTitle;
     private String sourceURL;
+    private String orientation;
 
     private String[] mMonths = {"Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"};
 
@@ -118,7 +119,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         yr.setDrawGridLines(false);
 //        yr.setInverted(true);
 
-        setData(12, 50);
+        //setData(12, 50);
         hBarChart.animateY(2500);
 
         // setting data
@@ -186,7 +187,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         yr.setDrawGridLines(false);
 //        yr.setInverted(true);
 
-        setData(12, 50);
+        //setData(12, 50);
         vBarChart.animateY(2500);
 
         // setting data
@@ -242,7 +243,9 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setBarOrientation(String orientation) {
-        if(orientation=="v")
+        Log.d("","orientation");
+        this.orientation=orientation;
+        if(orientation.equals("V"))
             initializeBarChart();
         else
             initializeHorizontalBarChart();
@@ -284,13 +287,23 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             set1.setBarSpacePercent(35f);
 
             dataSets.add(set1);
-
+            if(headers==null){
+                headers=new ArrayList<String>();
+                headers.add("bla");
+                headers.add("cia");
+                headers.add("ride");
+                headers.add("caca");
+                headers.add("lol");
+                headers.add("lololol");
+            }
             data = new BarData(headers, dataSets);
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
         }
-        hBarChart.setData(data);
-//        vBarChart.setData(data);
+        if(orientation.equals("V"))
+            vBarChart.setData(data);
+        else
+            hBarChart.setData(data);
     }
 
     @Override
