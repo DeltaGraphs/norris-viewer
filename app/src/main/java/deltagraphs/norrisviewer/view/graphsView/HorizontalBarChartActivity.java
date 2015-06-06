@@ -123,11 +123,11 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         hBarChart.animateY(2500);
 
         // setting data
-        mSeekBarY.setProgress(50);
-        mSeekBarX.setProgress(12);
+        //mSeekBarY.setProgress(50);
+        //mSeekBarX.setProgress(12);
 
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
+        //mSeekBarY.setOnSeekBarChangeListener(this);
+        //mSeekBarX.setOnSeekBarChangeListener(this);
 
         Legend l = hBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
@@ -141,8 +141,8 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+        //mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        //mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
         vBarChart = (BarChart) findViewById(R.id.chart1);
         vBarChart.setOnChartValueSelectedListener(this);
@@ -191,11 +191,11 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         vBarChart.animateY(2500);
 
         // setting data
-        mSeekBarY.setProgress(50);
-        mSeekBarX.setProgress(12);
+        //mSeekBarY.setProgress(50);
+        //mSeekBarX.setProgress(12);
 
-        mSeekBarY.setOnSeekBarChangeListener(this);
-        mSeekBarX.setOnSeekBarChangeListener(this);
+        //mSeekBarY.setOnSeekBarChangeListener(this);
+        //mSeekBarX.setOnSeekBarChangeListener(this);
 
         Legend l = vBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);

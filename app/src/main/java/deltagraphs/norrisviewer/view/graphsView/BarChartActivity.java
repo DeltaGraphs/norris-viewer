@@ -88,8 +88,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
 
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
+        //mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
+        //mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
         mChart = (BarChart) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
