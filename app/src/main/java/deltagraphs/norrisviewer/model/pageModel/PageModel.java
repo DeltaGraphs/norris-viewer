@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public interface PageModel {
+    public String getName();
     public void setPageModel(JSONObject data, String signal);
     public ArrayList<Page> getPageList();
     public int getPageListSize();

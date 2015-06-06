@@ -59,13 +59,11 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     private SocketManager mainSocket;
     public MainView mainView;
     private PageModel pageModel = new PageModelImpl(this);
-    FragmentManager fragmentManager;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
         mainView = view;
     }
-
 
     public void setUpSocket(String url){
         mainSocket.setSocketUrl(url);
@@ -84,13 +82,13 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
         // Set up the input
         final EditText input = new EditText(context);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT);
         //input.setText("http://norris-nrti-dev.herokuapp.com/page1/map1");
         input.setText(mainSocket.getSocketUrl());
         builder.setView(input);
 
-// Set up the buttons
+        // Set up the buttons
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -110,246 +108,8 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        mainView.setPages(pageModel);
-        //setUpViews();
         Log.d("", "update");
-        fragmentManager = mainView.getSupportManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
-                .commit();
-    }
-
-
-
-    //QUESTO GESTISCE IL FRAGMENT DOVE ANDRANNO INSERITI I GRAFICI
-
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment implements AdapterView.OnItemClickListener {
-
-        private ListView listView;
-        private ChartAdapter adapter;
-        private PageModel pageModel;
-        private List<ChartDescription> graphsList = new ArrayList<ChartDescription>();
-
-
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-
-
-        public static PlaceholderFragment newInstance(int sectionNumber, PageModel p) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            fragment.pageModel = p;
-            return fragment;
-        }
-
-        public PlaceholderFragment() {}
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            listView = (ListView) rootView.findViewById(android.R.id.list);
-            graphsList = generateDescriptions();
-            adapter = new ChartAdapter(getActivity(), 0, graphsList);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(this);
-            return rootView;
-        }
-
-        @Override
-        public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-            Intent intent;
-            ChartType graphType = graphsList.get(position).getChartType();
-            switch (graphType) {
-                case LINE_CHART:
-                    intent = new Intent(getActivity(), LineChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
-                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
-                    startActivity(intent);
-                    break;
-
-                case COLUMN_CHART:
-                    intent = new Intent(getActivity(), HorizontalBarChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
-                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
-                    startActivity(intent);
-                    break;
-
-                case MAP_CHART:
-                    intent = new Intent(getActivity(), MapChartActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
-                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
-                    startActivity(intent);
-                    break;
-                case TABLE:
-                    intent = new Intent(getActivity(), TableActivity.class);
-                    intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
-                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
-                    startActivity(intent);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-
-        // this is generated after socket connection with the graphs' list
-
-        private List<ChartDescription> generateDescriptions() {
-            List<ChartDescription> list = new ArrayList<ChartDescription>();
-
-            //number of page needed
-            for(int j=0; j<pageModel.getPageListSize(); j++){
-                int size = pageModel.getItemListSize(j);
-                ArrayList<PageItem> itemList = pageModel.getItemList(j);
-                for(int i=0; i<size; i++) {
-                    String itemName = itemList.get(i).getName();
-                    String itemType = pageModel.getPage(j).getName() +" - "+ itemList.get(i).getType();
-                    String itemUrl = itemList.get(i).getUrl();
-                    String chartType= itemList.get(i).getType();
-                    switch (chartType){
-                        case "MapChart":{
-                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.MAP_CHART));
-                            break;
-                        }
-                        case "LineChart":{
-                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.LINE_CHART));
-                            break;
-                        }
-                        case "BarChart":{
-                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
-                            break;
-                        }
-                        case "Table":{
-                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.TABLE));
-                            break;
-                        }
-                    }
-
-                }
-            }
-            /*
-
-            list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
-            list.add(new ChartDescription("linebalby", "asd", "asd", ChartType.LINE_CHART));
-            list.add(new ChartDescription("MappaDemmedda", "ciao", "Colpa di ross", ChartType.MAP_CHART));
-            list.add(new ChartDescription("tabbbbella", "tabble", "url", ChartType.TABLE));
-
-*/
-            return list;
-        }
-
-    }
-
-
-
-    public static class ChartAdapter extends ArrayAdapter<ChartDescription> {
-
-        public ChartAdapter(Context context, int resource, List<ChartDescription> objects) {
-            super(context, resource, objects);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder holder;
-
-            if (convertView == null) {
-                convertView = View.inflate(getContext(), R.layout.list_item_sample, null);
-
-                holder = new ViewHolder();
-                holder.name = (TextView) convertView.findViewById(R.id.name);
-                holder.type = (TextView) convertView.findViewById(R.id.type);
-                holder.chartLayout = (FrameLayout) convertView.findViewById(R.id.chart_layout);
-
-                convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
-
-            ChartDescription item = getItem(position);
-
-            String graphUrl = item.getUrl();
-
-            holder.chartLayout.setVisibility(View.VISIBLE);
-            holder.chartLayout.removeAllViews();
-            AbstractChartView chart;
-            switch (item.chartType) {
-                case COLUMN_CHART:
-                    chart = new ColumnChartView(getContext());
-                    holder.chartLayout.addView(chart);
-                    break;
-                case LINE_CHART:
-                    chart = new PreviewLineChartView(getContext());
-                    holder.chartLayout.addView(chart);
-                    break;
-                case MAP_CHART:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for map Chart
-                    holder.chartLayout.addView(chart);
-                    break;
-                case TABLE:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for table
-                    holder.chartLayout.addView(chart);
-                    break;
-                default:
-                    chart = null;
-                    holder.chartLayout.setVisibility(View.GONE);
-                    break;
-            }
-
-            if (null != chart) {
-                chart.setInteractive(false);// Disable touch handling for chart on the ListView.
-            }
-            holder.name.setText(item.name);
-            holder.type.setText(item.type);
-
-            return convertView;
-        }
-
-        private class ViewHolder {
-
-            TextView name;
-            TextView type;
-            FrameLayout chartLayout;
-        }
-
-    }
-
-    public enum ChartType {
-        LINE_CHART, COLUMN_CHART, MAP_CHART, TABLE
-    }
-
-    public static class ChartDescription {
-        private String name;
-        private String type;
-        private String url;
-        private ChartType chartType;
-
-        public String getUrl(){return url;}
-        public String getName() {return name;}
-        public String getType() {return type;}
-        public ChartType getChartType() {return chartType;}
-
-        public ChartDescription(String text1, String text2, String url, ChartType chartType) {
-            this.name = text1;
-            this.type = text2;
-            this.url = url;
-            this.chartType = chartType;
-        }
+        mainView.updatePagesList(pageModel);
     }
 
 }

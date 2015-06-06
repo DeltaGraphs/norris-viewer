@@ -35,6 +35,8 @@ public class PageModelImpl extends Observable implements PageModel{
 
     public PageModelImpl(Observer presenter){ addObserver(presenter);}
 
+
+
     public void setPageModel(JSONObject data, String signal){
         JSONParser(data,signal);
         setChanged();

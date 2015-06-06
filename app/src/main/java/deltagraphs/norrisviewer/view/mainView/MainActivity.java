@@ -19,23 +19,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import deltagraphs.norrisviewer.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.pageModel.PageItem;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
-import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
-import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
+import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
-import deltagraphs.norrisviewer.view.mainView.MainView;
 import lecho.lib.hellocharts.view.AbstractChartView;
 import lecho.lib.hellocharts.view.ColumnChartView;
-import lecho.lib.hellocharts.view.LineChartView;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 /*
@@ -58,10 +55,8 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 public class MainActivity extends ActionBarActivity implements MainView {
 
-    public static String[] pagesList = {};
-    private String title;
     private MainPresenter presenter;
-
+    private FragmentManager fragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -143,7 +138,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.setTitle((CharSequence)title);
     }
 
     public void showDialog(){
@@ -171,25 +166,15 @@ public class MainActivity extends ActionBarActivity implements MainView {
         return getSupportFragmentManager();
     }
 
-   // public void setMainView(){
-   //
-   // }
-
     @Override
-    public void setPages(PageModel pages) {
-        pagesList = new String[pages.getPageListSize()];
-        for(int i=0; i<pages.getPageList().size(); i++){
-            pagesList[i] = pages.getPage(i).getName();
-        }
+    public void updatePagesList(PageModel pageModel) {
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
+                .commit();
     }
 
 
-
-
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment implements AdapterView.OnItemClickListener {
 
         private ListView listView;
@@ -236,31 +221,32 @@ public class MainActivity extends ActionBarActivity implements MainView {
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;
-            String graphType = graphsList.get(position).getType();
+            ChartType graphType = graphsList.get(position).getChartType();
             switch (graphType) {
-                case "lineChart":
+                case LINE_CHART:
                     intent = new Intent(getActivity(), LineChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
 
-                case "BarChart":
-                    intent = new Intent(getActivity(), BarChartActivity.class);
+                case COLUMN_CHART:
+                    intent = new Intent(getActivity(), HorizontalBarChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
 
-                case "MapChart":
+                case MAP_CHART:
                     intent = new Intent(getActivity(), MapChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
-                    //intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     startActivity(intent);
                     break;
-                case "Table":
+                case TABLE:
                     intent = new Intent(getActivity(), TableActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
+                    intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
                     break;
                 default:
@@ -273,32 +259,41 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
         private List<ChartDescription> generateDescriptions() {
             List<ChartDescription> list = new ArrayList<ChartDescription>();
-/*
+
             //number of page needed
-            int PAGE = 1;
+            for(int j=0; j<pageModel.getPageListSize(); j++){
+                int size = pageModel.getItemListSize(j);
+                ArrayList<PageItem> itemList = pageModel.getItemList(j);
+                for(int i=0; i<size; i++) {
+                    String itemName = itemList.get(i).getName();
+                    String itemType = pageModel.getPage(j).getName() +" - "+ itemList.get(i).getType();
+                    String itemUrl = itemList.get(i).getUrl();
+                    String chartType= itemList.get(i).getType();
+                    switch (chartType){
+                        case "MapChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.MAP_CHART));
+                            break;
+                        }
+                        case "LineChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.LINE_CHART));
+                            break;
+                        }
+                        case "BarChart":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
+                            break;
+                        }
+                        case "Table":{
+                            list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.TABLE));
+                            break;
+                        }
+                    }
 
-            int size = pageModel.getItemListSize(PAGE);
-            ArrayList<PageItem> itemList = pageModel.getItemList(PAGE);
-            for(int i=0; i<size; i++) {
-                String itemName = itemList.get(i).getName();
-                String itemType = itemList.get(i).getType();
-                String itemUrl = itemList.get(i).getUrl();
-                list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
+                }
             }
-            */
-
-            list.add(new ChartDescription("BalbyChartBar", "bablgbn", "asdasd", ChartType.COLUMN_CHART));
-            list.add(new ChartDescription("linebalby", "", "", ChartType.LINE_CHART));
-            list.add(new ChartDescription("MappaDemmedda", "ciao", "Colpa di ross", ChartType.MAP_CHART));
-            list.add(new ChartDescription("tabbbbella", "tabble", "url", ChartType.TABLE));
-
-
             return list;
         }
 
     }
-
-
 
     public static class ChartAdapter extends ArrayAdapter<ChartDescription> {
 
@@ -325,30 +320,24 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
             ChartDescription item = getItem(position);
 
-            String graphUrl = item.getUrl();
-
             holder.chartLayout.setVisibility(View.VISIBLE);
             holder.chartLayout.removeAllViews();
             AbstractChartView chart;
             switch (item.chartType) {
-                case LINE_CHART:
-                    chart = new LineChartView(getContext());
-                    holder.chartLayout.addView(chart);
-                    break;
                 case COLUMN_CHART:
                     chart = new ColumnChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
-                case PREVIEW_LINE_CHART:
+                case LINE_CHART:
                     chart = new PreviewLineChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
                 case MAP_CHART:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for map Chart
                     holder.chartLayout.addView(chart);
                     break;
                 case TABLE:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for table
                     holder.chartLayout.addView(chart);
                     break;
                 default:
@@ -376,7 +365,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     public enum ChartType {
-        LINE_CHART, COLUMN_CHART, PREVIEW_LINE_CHART, MAP_CHART, TABLE, OTHER
+        LINE_CHART, COLUMN_CHART, MAP_CHART, TABLE
     }
 
     public static class ChartDescription {
@@ -388,13 +377,14 @@ public class MainActivity extends ActionBarActivity implements MainView {
         public String getUrl(){return url;}
         public String getName() {return name;}
         public String getType() {return type;}
+        public ChartType getChartType() {return chartType;}
 
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.name = text1;
             this.type = text2;
+            this.url = url;
             this.chartType = chartType;
         }
     }
-
 
 }
