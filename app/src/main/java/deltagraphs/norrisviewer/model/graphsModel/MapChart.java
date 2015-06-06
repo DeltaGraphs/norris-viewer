@@ -17,7 +17,6 @@ package deltagraphs.norrisviewer.model.graphsModel;
  */
 
 import java.util.ArrayList;
-
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface MapChart {

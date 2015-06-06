@@ -1,7 +1,5 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
-
-
 /*
  * Name : MapChartFlow.java
  * Module : deltagraphs.norrisviewer.model.flowModel
@@ -21,15 +19,12 @@ package deltagraphs.norrisviewer.model.flowModel;
  */
 
 import android.util.Log;
-
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
+
 
 public class MapChartFlow extends FlowModel {
 

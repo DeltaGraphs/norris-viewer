@@ -7,13 +7,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Observable;
 import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
-import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 
 /*
  * Name : MapChartImpl.java
