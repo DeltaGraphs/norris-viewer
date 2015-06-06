@@ -33,7 +33,7 @@ public class BarChartImpl extends Graph implements BarChart{
 
     private AxisModel axisX;
     private AxisModel axisY;
-    private ArrayList<String> headers;
+    private ArrayList<String> headers=new ArrayList<String>();
     private String barOrientation = "V";
     private String background;
     private Boolean sortable;

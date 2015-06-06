@@ -290,7 +290,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             set1.setBarSpacePercent(35f);
 
             dataSets.add(set1);
-            if (headers == null) {
+           /* if (headers == null) {
                 headers = new ArrayList<String>();
                 headers.add("bla");
                 headers.add("cia");
@@ -298,7 +298,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
                 headers.add("caca");
                 headers.add("lol");
                 headers.add("lololol");
-            }
+            }*/
             data = new BarData(headers, dataSets);
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
