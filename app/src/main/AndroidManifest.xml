@@ -40,11 +40,6 @@
             android:label="@string/title_activity_line_chart" >
         </activity>
         <activity
-            android:name=".view.graphsView.BarChartActivity"
-            android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_bar_chart" >
-        </activity>
-        <activity
             android:name=".view.graphsView.TableActivity"
             android:label="@string/title_activity_table" >
         </activity>

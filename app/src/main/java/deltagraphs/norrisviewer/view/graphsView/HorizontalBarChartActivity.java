@@ -1,6 +1,7 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,10 @@ import com.github.mikephil.charting.utils.Highlight;
 import com.github.mikephil.charting.utils.ValueFormatter;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
@@ -41,8 +46,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     private String sourceTitle;
     private String sourceURL;
     private String orientation;
-
-    private String[] mMonths = {"Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"};
+    Legend l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,6 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     private void initializeHorizontalBarChart(){
         Log.d("", "Matteo ha perso");
         setContentView(R.layout.activity_horizontal_bar_chart);
-
-        tvX = (TextView) findViewById(R.id.tvXMax);
-        tvY = (TextView) findViewById(R.id.tvYMax);
-
-        mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
         hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
         hBarChart.setOnChartValueSelectedListener(this);
@@ -121,28 +119,11 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
         //setData(12, 50);
         hBarChart.animateX(1000);
-
-        // setting data
-        //mSeekBarY.setProgress(50);
-        //mSeekBarX.setProgress(12);
-
-        //mSeekBarY.setOnSeekBarChangeListener(this);
-        //mSeekBarX.setOnSeekBarChangeListener(this);
-
-        Legend l = hBarChart.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setFormSize(8f);
-        l.setXEntrySpace(4f);
     }
 
     private void initializeBarChart(){
         Log.d("", "John spaccia log");
         setContentView(R.layout.activity_bar_chart);
-        tvX = (TextView) findViewById(R.id.tvXMax);
-        tvY = (TextView) findViewById(R.id.tvYMax);
-
-        //mSeekBarX = (SeekBar) findViewById(R.id.seekBar1);
-        //mSeekBarY = (SeekBar) findViewById(R.id.seekBar2);
 
         vBarChart = (BarChart) findViewById(R.id.chart1);
         vBarChart.setOnChartValueSelectedListener(this);
@@ -190,17 +171,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         //setData(12, 50);
         vBarChart.animateY(1000);
 
-        // setting data
-        //mSeekBarY.setProgress(50);
-        //mSeekBarX.setProgress(12);
 
-        //mSeekBarY.setOnSeekBarChangeListener(this);
-        //mSeekBarX.setOnSeekBarChangeListener(this);
-
-        Legend l = vBarChart.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setFormSize(8f);
-        l.setXEntrySpace(4f);
     }
 
 
@@ -268,41 +239,40 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
-        Log.d("", "Mery e gli unicorni");
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         BarData data = new BarData();
+        List<Integer> lColors = new ArrayList<Integer>();
+        List<String> lLabels = new ArrayList<String>();
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
-            flowList.get(i).getFlowName();
+            //aggiunge una label alla legenda
+            String name = flowList.get(i).getFlowName();
+            Log.d("",name);
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
-            barChartFlow.getFlowColour();
+            String color = barChartFlow.getFlowColour();
+
             ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
             for (int j = 0; j < barChartFlow.getRecordSize(); j++) {
                 barChartFlow.getRecordId(j);
                 float y = barChartFlow.getRecordValue(j);
                 String id = barChartFlow.getRecordId(j);
-                Log.d("", id);
-                Log.d("", String.valueOf(y));
                 yVals1.add(new BarEntry(y, j));
             }
 
-            BarDataSet set1 = new BarDataSet(yVals1, "Dati");
+            BarDataSet set1 = new BarDataSet(yVals1, name);
             set1.setBarSpacePercent(35f);
 
             dataSets.add(set1);
-           /* if (headers == null) {
-                headers = new ArrayList<String>();
-                headers.add("bla");
-                headers.add("cia");
-                headers.add("ride");
-                headers.add("caca");
-                headers.add("lol");
-                headers.add("lololol");
-            }*/
+
             data = new BarData(headers, dataSets);
+
+            //l.setColors(colors);
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
         }
+
+        setLegend(lLabels, lColors);
+
         if (orientation.equals("V")){
             vBarChart.setData(data);
             vBarChart.animateY(0);
@@ -311,6 +281,16 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             hBarChart.animateX(0);
         }
     }
+
+    public Legend setLegend(List<String> labels, List<Integer> colors){
+        l = vBarChart.getLegend();
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        l.setFormSize(8f);
+        l.setXEntrySpace(4f);
+        l.setLabels(labels);
+        l.getLegendLabels();
+        return l;
+    };
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
@@ -335,32 +315,5 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
-    }
-
-    private void setData(int count, float range) {
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add(mMonths[i % 12]);
-        }
-
-        ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
-        for (int i = 0; i < count; i++) {
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult);
-            yVals1.add(new BarEntry(val, i));
-        }
-
-        BarDataSet set1 = new BarDataSet(yVals1, "DataSet");
-        set1.setBarSpacePercent(35f);
-
-        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
-        dataSets.add(set1);
-
-        BarData data = new BarData(xVals, dataSets);
-        data.setValueTextSize(10f);
-
-        hBarChart.setData(data);
     }
 }

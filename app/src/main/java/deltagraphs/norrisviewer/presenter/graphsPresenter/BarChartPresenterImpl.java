@@ -1,15 +1,10 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
-import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
-import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
-import lecho.lib.hellocharts.model.Axis;
 
 /*
  * Name : BarChartPresenterImpl.java
