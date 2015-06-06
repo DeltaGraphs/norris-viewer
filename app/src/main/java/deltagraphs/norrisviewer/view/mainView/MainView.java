@@ -24,7 +24,6 @@ import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 
 public interface MainView{
-    PageNavigationFragment getFragment(int id);
     DrawerLayout findDrawer(int id);
     FragmentManager getSupportManager();
     //void setMainView();

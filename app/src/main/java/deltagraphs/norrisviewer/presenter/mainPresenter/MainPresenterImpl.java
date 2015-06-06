@@ -32,11 +32,9 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
     import deltagraphs.norrisviewer.view.graphsView.*;
     import deltagraphs.norrisviewer.view.mainView.MainActivity;
     import deltagraphs.norrisviewer.view.mainView.MainView;
-    import deltagraphs.norrisviewer.view.mainView.PageNavigationFragment;
 
     import lecho.lib.hellocharts.view.AbstractChartView;
     import lecho.lib.hellocharts.view.ColumnChartView;
-    import lecho.lib.hellocharts.view.LineChartView;
     import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 
@@ -56,42 +54,18 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  *
  */
 
-public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.NavigationDrawerCallbacks, Observer {
+public class MainPresenterImpl implements MainPresenter, Observer {
 
     private SocketManager mainSocket;
     public MainView mainView;
-    private PageNavigationFragment mPageNavigationFragment;
     private PageModel pageModel = new PageModelImpl(this);
     FragmentManager fragmentManager;
 
     public MainPresenterImpl(MainView view){
         mainSocket = new SocketManager();
         mainView = view;
-        mPageNavigationFragment = new PageNavigationFragment();
-        //X DEMO
-        setUpViews();
-       // FragmentManager fragmentManager = mainView.getSupportManager();
-      //  fragmentManager.beginTransaction()
-        //        .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
-          //      .commit();
     }
 
-    private void setUpViews(){
-        //mainView.setMainView();
-        //mPageNavigationFragment = mainView.getFragment(R.id.navigation_drawer);
-
-       // mPageNavigationFragment.setUp(
-       //         R.id.navigation_drawer,
-       //         mainView.findDrawer(R.id.drawer_layout));
-    }
-
-/*
-    public void onSectionAttached(int number) {
-        if((number-1)<pagesList.length) {
-            mTitle = pagesList[number-1];
-        }
-    }
-*/
 
     public void setUpSocket(String url){
         mainSocket.setSocketUrl(url);
@@ -135,19 +109,9 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
     }
 
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = mainView.getSupportManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1, pageModel))
-                .commit();
-    }
-
-    @Override
     public void update(Observable observable, Object data) {
         mainView.setPages(pageModel);
         //setUpViews();
-        onNavigationDrawerItemSelected(0);
         Log.d("", "update");
         fragmentManager = mainView.getSupportManager();
         fragmentManager.beginTransaction()
@@ -206,14 +170,7 @@ public class MainPresenterImpl implements MainPresenter,PageNavigationFragment.N
             listView.setOnItemClickListener(this);
             return rootView;
         }
-/*
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
-        }
-*/
+
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;

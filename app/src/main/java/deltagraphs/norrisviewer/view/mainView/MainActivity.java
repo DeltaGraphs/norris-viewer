@@ -56,7 +56,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
  *
  */
 
-public class MainActivity extends ActionBarActivity implements MainView,PageNavigationFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements MainView {
 
     public static String[] pagesList = {};
     private String title;
@@ -162,9 +162,6 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
 
     }
 
-    public PageNavigationFragment getFragment(int id){
-        return (PageNavigationFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-    }
 
     public DrawerLayout findDrawer(int id){
         return (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -186,10 +183,6 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
         }
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-
-    }
 
 
 
@@ -239,14 +232,7 @@ public class MainActivity extends ActionBarActivity implements MainView,PageNavi
             listView.setOnItemClickListener(this);
             return rootView;
         }
-        /*
-                @Override
-                public void onAttach(Activity activity) {
-                    super.onAttach(activity);
-                    ((MainActivity) activity).onSectionAttached(
-                            getArguments().getInt(ARG_SECTION_NUMBER));
-                }
-        */
+
         @Override
         public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
             Intent intent;
