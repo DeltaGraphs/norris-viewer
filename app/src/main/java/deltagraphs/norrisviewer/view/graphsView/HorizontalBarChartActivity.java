@@ -120,7 +120,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 //        yr.setInverted(true);
 
         //setData(12, 50);
-        hBarChart.animateY(2500);
+        hBarChart.animateX(1000);
 
         // setting data
         //mSeekBarY.setProgress(50);
@@ -136,7 +136,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
     private void initializeBarChart(){
-        Log.d("","John spaccia log");
+        Log.d("", "John spaccia log");
         setContentView(R.layout.activity_bar_chart);
         tvX = (TextView) findViewById(R.id.tvXMax);
         tvY = (TextView) findViewById(R.id.tvYMax);
@@ -188,7 +188,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 //        yr.setInverted(true);
 
         //setData(12, 50);
-        vBarChart.animateY(2500);
+        vBarChart.animateY(1000);
 
         // setting data
         //mSeekBarY.setProgress(50);
@@ -268,10 +268,10 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
-        Log.d("","Mery e gli unicorni");
+        Log.d("", "Mery e gli unicorni");
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
-        BarData data=new BarData();
-        for(int i=0; i<flowList.size(); i++) {
+        BarData data = new BarData();
+        for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
@@ -280,6 +280,9 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             for (int j = 0; j < barChartFlow.getRecordSize(); j++) {
                 barChartFlow.getRecordId(j);
                 float y = barChartFlow.getRecordValue(j);
+                String id = barChartFlow.getRecordId(j);
+                Log.d("", id);
+                Log.d("", String.valueOf(y));
                 yVals1.add(new BarEntry(y, j));
             }
 
@@ -287,8 +290,8 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             set1.setBarSpacePercent(35f);
 
             dataSets.add(set1);
-            if(headers==null){
-                headers=new ArrayList<String>();
+            if (headers == null) {
+                headers = new ArrayList<String>();
                 headers.add("bla");
                 headers.add("cia");
                 headers.add("ride");
@@ -300,10 +303,13 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
         }
-        if(orientation.equals("V"))
+        if (orientation.equals("V")){
             vBarChart.setData(data);
-        else
+            vBarChart.animateY(0);
+        }else{
             hBarChart.setData(data);
+            hBarChart.animateX(0);
+        }
     }
 
     @Override
