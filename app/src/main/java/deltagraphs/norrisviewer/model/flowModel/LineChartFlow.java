@@ -56,8 +56,8 @@ public class LineChartFlow extends FlowModel{
                 this.flowName = data.getString("name");
             else
                 this.flowName="";
-            if(data.has("color"))
-                this.flowColour = data.getString("color");
+            if(data.has("flowColor"))
+                this.flowColour = data.getString("flowColor");
             else
                 this.flowColour = "random";
             if(data.has("marker"))
@@ -114,7 +114,7 @@ public class LineChartFlow extends FlowModel{
         try {
             Log.d("flow", "updateFlow");
             flowName = data.getString("name");
-            flowColour = data.getString("color");
+            flowColour = data.getString("flowColor");
             marker = data.getString("marker");
             interpolation = data.getString("interpolation");
             subAreaColour = data.getString("area");

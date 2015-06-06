@@ -40,7 +40,7 @@ public class BarChartFlow extends FlowModel{
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            flowColour = data.getString("color");
+            flowColour = data.getString("flowColor");
         }catch(JSONException e){}
     }
 
