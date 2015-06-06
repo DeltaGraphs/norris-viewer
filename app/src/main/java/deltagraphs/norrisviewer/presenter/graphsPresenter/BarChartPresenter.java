@@ -17,4 +17,9 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface BarChartPresenter {
+    void stopConnection();
+
+    void startConnection();
+
+    void destroyConnection();
 }

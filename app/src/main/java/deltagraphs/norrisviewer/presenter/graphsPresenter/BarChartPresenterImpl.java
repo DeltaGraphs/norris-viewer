@@ -94,4 +94,15 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 
     }
 
+    public void stopConnection(){
+        stopSocket();
+    }
+
+    public void startConnection(){
+        startSocket((HorizontalBarChartActivity) graphView, barChartInstance);
+    }
+
+    public void destroyConnection(){
+        destroySocket();
+    }
 }

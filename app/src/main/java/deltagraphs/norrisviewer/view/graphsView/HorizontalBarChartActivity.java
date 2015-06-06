@@ -70,6 +70,30 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
 
+    @Override
+    public void onStop(){
+        barChartPresenter.destroyConnection();
+        super.onStop();
+    }
+
+    @Override
+    public void onPause(){
+        barChartPresenter.destroyConnection();
+        super.onPause();
+    }
+
+    @Override
+    public void onRestart(){
+        //mapChartPresenter.startConnection();
+        super.onRestart();
+    }
+
+    @Override
+    public void onDestroy(){
+        barChartPresenter.destroyConnection();
+        super.onDestroy();
+    }
+
     private void initializeHorizontalBarChart(){
         Log.d("", "Matteo ha perso");
         setContentView(R.layout.activity_horizontal_bar_chart);

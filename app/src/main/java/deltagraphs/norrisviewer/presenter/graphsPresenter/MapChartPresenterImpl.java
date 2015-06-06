@@ -39,7 +39,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         //this.setUpViews();
     }
 
-    private void startNewConnections(){
+    public void startConnection(){
         startSocket((MapChartActivity) graphView, mapChartInstance);
     }
 
@@ -66,10 +66,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
 
     public void stopConnection(){
         stopSocket();
-    }
-
-    public void startConnection(){
-        startNewConnections();
     }
 
     public void destroyConnection(){

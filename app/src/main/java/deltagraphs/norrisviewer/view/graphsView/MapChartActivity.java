@@ -57,14 +57,20 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void onResume() {
-        //mapChartPresenter.startConnection();
+        mapChartPresenter.startConnection();
         super.onResume();
     }
 
     @Override
     public void onStop(){
-        //mapChartPresenter.stopConnection();
+        mapChartPresenter.destroyConnection();
         super.onStop();
+    }
+
+    @Override
+    public void onPause(){
+        mapChartPresenter.destroyConnection();
+        super.onPause();
     }
 
     @Override
