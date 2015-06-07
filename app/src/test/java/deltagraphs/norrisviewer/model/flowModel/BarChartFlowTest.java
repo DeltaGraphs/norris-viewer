@@ -1,13 +1,8 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
-import android.util.Log;
-
 import junit.framework.TestCase;
 
 import org.json.*;
-
-
-import deltagraphs.norrisviewer.model.graphsModel.BarChart;
 
 /*
  * Name : { Nome del file }.java

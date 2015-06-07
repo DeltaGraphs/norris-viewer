@@ -105,6 +105,7 @@ public class BarChartImpl extends Graph implements BarChart {
                 addFlow(flow);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -143,6 +144,7 @@ public class BarChartImpl extends Graph implements BarChart {
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

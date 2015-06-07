@@ -307,7 +307,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         return l;
     }
 
-    ;
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {

@@ -16,12 +16,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-import android.util.Log;
-
 import java.util.Observable;
-import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 
@@ -33,7 +29,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     public MapChartPresenterImpl(MapChartView view, String url) {
         super(url);
         graphView = view;
-        mapChartInstance = (MapChart) new MapChartImpl(this);
+        mapChartInstance = new MapChartImpl(this);
         startSocket((MapChartActivity) view, mapChartInstance);
         //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();

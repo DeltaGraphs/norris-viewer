@@ -4,8 +4,6 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /*
  * Name : { Nome del file }.java
  * Module : com.example.deltagraphs.norrisviewer.presenter

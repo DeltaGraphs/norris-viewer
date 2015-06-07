@@ -81,6 +81,7 @@ public class BarChartFlow extends FlowModel {
         try {
             recordList = data.getJSONArray("records");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
         addRecords(recordList);
     }
@@ -91,6 +92,7 @@ public class BarChartFlow extends FlowModel {
             flowName = data.getString("name");
             flowColour = data.getString("color");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -109,6 +111,7 @@ public class BarChartFlow extends FlowModel {
             float value = (float) jsonValues.getDouble(1);
             records.add(new BarChartRecord(id, index, value));
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -121,6 +124,7 @@ public class BarChartFlow extends FlowModel {
                 addRecord(record);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -133,6 +137,7 @@ public class BarChartFlow extends FlowModel {
             records.get(recordIndex).index = jsonValues.getString(0);
             records.get(recordIndex).value = jsonValues.getInt(1);
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -155,6 +160,7 @@ public class BarChartFlow extends FlowModel {
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -2,15 +2,11 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartView;
-import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 
 /*
  * Name : LineChartPresenterImpl.java

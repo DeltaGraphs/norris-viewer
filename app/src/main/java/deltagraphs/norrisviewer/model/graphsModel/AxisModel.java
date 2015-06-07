@@ -29,29 +29,48 @@ public class AxisModel {
     private int ticks;
     private int scale;
 
-    AxisModel(JSONObject params){
-       try {
-           if (params.has("name"))
-               name = params.getString("name");
-           if(params.has("color"))
-               appearance = params.getString("color");
-           if(params.has("maxIndex"))
-               maxIndex = (float) params.getDouble("maxIndex");
-           if(params.has("minIndex"))
-               minIndex = (float) params.getDouble("minIndex");
-           if(params.has("ticks"))
-               ticks = params.getInt("ticks");
-           if(params.has("scale"))
-               scale = params.getInt("scale");
-       }catch(JSONException e){}
+    AxisModel(JSONObject params) {
+        try {
+            if (params.has("name"))
+                name = params.getString("name");
+            if (params.has("color"))
+                appearance = params.getString("color");
+            if (params.has("maxIndex"))
+                maxIndex = (float) params.getDouble("maxIndex");
+            if (params.has("minIndex"))
+                minIndex = (float) params.getDouble("minIndex");
+            if (params.has("ticks"))
+                ticks = params.getInt("ticks");
+            if (params.has("scale"))
+                scale = params.getInt("scale");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
-    public String getName() { return name; }
-    public String getAppearance() { return appearance; }
-    public float getMaxIndex() { return maxIndex; }
-    public float getMinIndex() { return minIndex; }
-    public int getScale() { return scale; }
-    public int getTicks() { return ticks; }
+    public String getName() {
+        return name;
+    }
+
+    public String getAppearance() {
+        return appearance;
+    }
+
+    public float getMaxIndex() {
+        return maxIndex;
+    }
+
+    public float getMinIndex() {
+        return minIndex;
+    }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public int getTicks() {
+        return ticks;
+    }
 
 }
 

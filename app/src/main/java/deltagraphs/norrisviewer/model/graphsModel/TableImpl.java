@@ -61,6 +61,7 @@ public class TableImpl extends Graph implements Table {
                 rowOddTextColour = data.getJSONObject("oddEven").getString("textColor");
                 rowOddBGColour = data.getJSONObject("oddEven").getString("backgroundColor");
             } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -155,6 +156,7 @@ public class TableImpl extends Graph implements Table {
                 addFlow(flow);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -248,8 +250,8 @@ public class TableImpl extends Graph implements Table {
                     tableColumns.get(i).headerBGColour = jsonColumns.getString(i);
                 }
             }
-
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

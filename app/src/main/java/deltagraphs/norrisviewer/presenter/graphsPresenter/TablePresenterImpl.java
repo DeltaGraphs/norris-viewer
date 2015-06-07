@@ -16,10 +16,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-import android.util.Log;
-
 import java.util.Observable;
-import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
@@ -32,7 +29,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     public TablePresenterImpl(TableView view, String url) {
         super(url);
         graphView = view;
-        tableInstance = (Table) new TableImpl(this);
+        tableInstance = new TableImpl(this);
         startSocket((TableActivity) view, tableInstance);
 //        this.setUpViews();
     }

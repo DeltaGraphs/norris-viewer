@@ -7,8 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.*;
 
-import static org.mockito.Mockito.*;
-
 /*
  * Name : { Nome del file }.java
  * Module : deltagraphs.norrisviewer.model.flowModel

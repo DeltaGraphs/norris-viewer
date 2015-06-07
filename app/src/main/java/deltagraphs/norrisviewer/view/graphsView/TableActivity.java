@@ -7,9 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.GridView;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import deltagraphs.norrisviewer.R;

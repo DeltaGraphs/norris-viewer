@@ -4,38 +4,17 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.widget.FrameLayout;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import deltagraphs.norrisviewer.R;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.pageModel.*;
 import deltagraphs.norrisviewer.presenter.SocketManager;
-import deltagraphs.norrisviewer.view.graphsView.*;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 import deltagraphs.norrisviewer.view.mainView.MainView;
-
-import lecho.lib.hellocharts.view.AbstractChartView;
-import lecho.lib.hellocharts.view.ColumnChartView;
-import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 
 /*

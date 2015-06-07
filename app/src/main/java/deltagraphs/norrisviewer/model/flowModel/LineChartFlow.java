@@ -7,9 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import lecho.lib.hellocharts.model.PointValue;
 
 /*
  * Name : LineChartFlow.java
@@ -145,6 +142,7 @@ public class LineChartFlow extends FlowModel {
             subAreaColour = data.getString("area");
             maxItems = data.getInt("maxItems");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -219,9 +217,4 @@ public class LineChartFlow extends FlowModel {
         }
     }
 
-    public String toString() {
-        String s = "";
-
-        return s;
-    }
 }

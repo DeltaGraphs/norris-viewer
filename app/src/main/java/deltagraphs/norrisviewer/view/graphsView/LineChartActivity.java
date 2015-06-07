@@ -1,11 +1,7 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.Color;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,13 +11,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.*;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
-import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 import lecho.lib.hellocharts.gesture.ZoomType;

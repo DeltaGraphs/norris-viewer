@@ -72,7 +72,6 @@ public class MapChartImpl extends Graph implements MapChart {
             mapHeight = (float) data.getDouble("mapHeight");
             latitude = (float) data.getDouble("latitude");
             longitude = (float) data.getDouble("longitude");
-            ;
             legendOnPoint = data.getBoolean("legendOnPoint");
             mapType = data.getString("mapType");
             //changes to flow params
@@ -101,12 +100,12 @@ public class MapChartImpl extends Graph implements MapChart {
                 latitude = (float) data.getDouble("latitude");
             if (data.has("longitude"))
                 longitude = (float) data.getDouble("longitude");
-            ;
             if (data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
             if (data.has("mapType"))
                 mapType = data.getString("mapType");
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

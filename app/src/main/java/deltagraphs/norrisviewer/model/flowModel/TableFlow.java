@@ -59,6 +59,7 @@ public class TableFlow extends FlowModel {
             flowName = data.getString("name");
             maxItems = data.getInt("maxItemsPage");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -77,6 +78,7 @@ public class TableFlow extends FlowModel {
                     values.add(new Value(value, bg, text));
                 }
             } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
 
@@ -100,6 +102,7 @@ public class TableFlow extends FlowModel {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -109,6 +112,7 @@ public class TableFlow extends FlowModel {
             flowName = data.getString("name");
             maxItems = data.getInt("maxItemsPage");
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -126,6 +130,7 @@ public class TableFlow extends FlowModel {
             JSONArray appearance = data.getJSONArray("appearance");
             records.add(new TableRecord(id, jsonValues, appearance));
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -138,6 +143,7 @@ public class TableFlow extends FlowModel {
                 addRecord(record);
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -155,6 +161,7 @@ public class TableFlow extends FlowModel {
                 records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
             }
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -177,6 +184,7 @@ public class TableFlow extends FlowModel {
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);
         } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

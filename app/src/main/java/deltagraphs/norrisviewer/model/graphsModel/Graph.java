@@ -20,8 +20,6 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
 import android.util.Log;
 
-import java.util.Observable;
-
 import deltagraphs.norrisviewer.model.flowModel.*;
 
 import org.json.JSONArray;
@@ -137,7 +135,6 @@ public abstract class Graph extends Observable {
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            return;
         }
     }
 

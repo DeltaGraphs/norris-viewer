@@ -80,8 +80,6 @@ public class MapChartFlow extends FlowModel {
         return markerProperties.type;
     }
 
-    ;
-
     public String getMarkerColour() {
         return markerProperties.colour;
     }
@@ -163,7 +161,6 @@ public class MapChartFlow extends FlowModel {
         String strokeColour = "default";  // colour of the polyline
         String fillColour = "default";  // colour of the area subtended by the polyline
         ArrayList<LatLng> coords = new ArrayList<LatLng>();
-        ;
 
         public TraceModel(JSONObject data) {
             try {

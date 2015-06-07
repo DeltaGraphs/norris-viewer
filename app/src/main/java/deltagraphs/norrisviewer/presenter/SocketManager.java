@@ -1,7 +1,6 @@
 package deltagraphs.norrisviewer.presenter;
 
 import java.net.URISyntaxException;
-import java.util.Observer;
 
 import android.app.Activity;
 import android.util.Log;
@@ -10,13 +9,10 @@ import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
-import deltagraphs.norrisviewer.model.graphsModel.Graph;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
-import deltagraphs.norrisviewer.model.pageModel.PageModelImpl;
 import deltagraphs.norrisviewer.view.graphsView.*;
 import deltagraphs.norrisviewer.view.mainView.MainView;
 
@@ -61,6 +57,7 @@ public class SocketManager {
         try {
             mSocket = IO.socket(url);
         } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
 

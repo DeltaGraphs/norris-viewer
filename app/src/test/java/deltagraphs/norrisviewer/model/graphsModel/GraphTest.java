@@ -4,14 +4,11 @@ import android.util.Log;
 
 import junit.framework.TestCase;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Observable;
 import java.util.Observer;
-
-import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 
 /*

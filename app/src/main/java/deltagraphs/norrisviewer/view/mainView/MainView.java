@@ -17,10 +17,6 @@ package deltagraphs.norrisviewer.view.mainView;
  */
 
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
-
-import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 
 public interface MainView {
