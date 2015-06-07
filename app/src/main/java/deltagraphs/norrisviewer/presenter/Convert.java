@@ -15,6 +15,7 @@ package deltagraphs.norrisviewer.presenter;/*
  * ===============================================================
  *
  */
+
 public class Convert {
 
     public static class Hsl {
@@ -28,7 +29,9 @@ public class Convert {
     }
 
     public static Hsl rgbToHsl(double r, double g, double b) {
-        r /= 255d; g /= 255d; b /= 255d;
+        r /= 255d;
+        g /= 255d;
+        b /= 255d;
 
         double max = Math.max(Math.max(r, g), b), min = Math.min(Math.min(r, g), b);
         double h, s, l = (max + min) / 2;

@@ -25,7 +25,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 
-public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter{
+public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter {
 
     private MapChartView graphView;
     private MapChart mapChartInstance;
@@ -39,12 +39,12 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         //this.setUpViews();
     }
 
-    public void startConnection(){
+    public void startConnection() {
         startSocket((MapChartActivity) graphView, mapChartInstance);
     }
 
     @Override
-    protected void setGraphParameters(){
+    protected void setGraphParameters() {
         graphView.cameraPosition(mapChartInstance.getLatitude(),
                 mapChartInstance.getLongitude()
         );
@@ -56,7 +56,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     public void update(Observable observable, Object data) {
         if (observable instanceof MapChartImpl) {
             String signal = (String) data;
-            if((signal == "configGraph") || (signal=="updateGraphProp"))
+            if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
             graphView.setData(mapChartInstance.getFlowList(), signal);
 
@@ -64,11 +64,11 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         }
     }
 
-    public void stopConnection(){
+    public void stopConnection() {
         stopSocket();
     }
 
-    public void destroyConnection(){
+    public void destroyConnection() {
         destroySocket();
     }
 }

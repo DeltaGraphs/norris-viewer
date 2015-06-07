@@ -22,18 +22,26 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface TableView {
     public void setAppearance(String appearance);
+
     public void setAddRowOn(String addRowOn);
+
     public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
+
     public void setSortable(Boolean Sortable);
 
     public void setSortByCol(String sortingColumn);
+
     public void setSortOrder(String sortOrder);
+
     public void setBorderWidth(int borderWidth);
+
     public void setBorderColour(String borderColour);
 
     //column parameters
     public void setHeader(int index, String value, String textColour, String bgColour);
+
     public void setRowEven(int index, String textColour, String bgColour);
+
     public void setRowOdd(int index, String textColour, String bgColour);
 
 

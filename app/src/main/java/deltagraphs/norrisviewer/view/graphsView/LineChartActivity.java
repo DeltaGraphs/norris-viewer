@@ -72,7 +72,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("","onCreate");
+        Log.d("", "onCreate");
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
         chart.setOnValueTouchListener(new ValueTouchListener());
@@ -102,7 +102,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         return true;
     }
 
-    public void setInitialState(){
+    public void setInitialState() {
         hasAxes = true;
         hasAxesNames = true;
         hasLabels = false;
@@ -153,10 +153,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
         if (hasAxes) {
 
-            float step = (maxIndex-minIndex)/ticks;
+            float step = (maxIndex - minIndex) / ticks;
 
-            if(axisXorY == 'x') {
-                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+            if (axisXorY == 'x') {
+                axisX = Axis.generateAxisFromRange(minIndex, maxIndex, step);
                 axisX.setHasLines(true);
                 if (hasAxesNames) {
                     axisX.setName(name);
@@ -164,8 +164,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
                 data.setAxisXBottom(axisX);
             }
-            if(axisXorY == 'y') {
-                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);
+            if (axisXorY == 'y') {
+                axisY = Axis.generateAxisFromRange(minIndex, maxIndex, step);
                 axisY.setHasLines(true);
                 if (hasAxesNames) {
                     axisY.setName(name);
@@ -245,8 +245,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     }
 
 
-    private void setLineColor(Line line, String color){
-        if(color != null && color != "random")
+    private void setLineColor(Line line, String color) {
+        if (color != null && color != "random")
             line.setColor(Color.parseColor(color));
         else
             line.setColor(ChartUtils.DEFAULT_COLOR);

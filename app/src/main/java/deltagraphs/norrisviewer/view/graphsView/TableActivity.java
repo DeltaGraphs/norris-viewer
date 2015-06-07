@@ -118,17 +118,16 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
 
-
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
-        for(int i=0; i<flowList.size(); i++) {
+        for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
             TableFlow tableFlow = (TableFlow) flowList.get(i);
             tableFlow.getMaxItems();
-            for(int j=0; j< tableFlow.getRecordSize(); j++){
+            for (int j = 0; j < tableFlow.getRecordSize(); j++) {
                 tableFlow.getRecordId(j);
-                for(int indexCol = 0; indexCol<numOfColumns; indexCol++ ){
+                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                     tableFlow.getCellBackgroundColour(j, indexCol);
                     tableFlow.getCellData(j, indexCol);
                     tableFlow.getCellTextColour(j, indexCol);
@@ -160,14 +159,14 @@ public class TableActivity extends ActionBarActivity implements TableView {
         private final String[] data;
 
         private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {
-            data = new String[] {
+            data = new String[]{
                     name,
                     company,
                     version,
                     api,
                     storage,
                     inches,
-                    ram };
+                    ram};
         }
     }
 
@@ -196,7 +195,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         private final float density;
 
         public FamilyNexusAdapter(Context context) {
-            familys = new NexusTypes[] {
+            familys = new NexusTypes[]{
                     new NexusTypes("Mobiles"),
                     new NexusTypes("Tablets"),
                     new NexusTypes("Others"),
@@ -368,10 +367,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
             return 5;
         }
     }
-
-
-
-
 
 
 }

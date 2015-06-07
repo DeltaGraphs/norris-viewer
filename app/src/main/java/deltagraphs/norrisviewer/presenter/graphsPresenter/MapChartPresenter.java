@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
 public interface MapChartPresenter {
     void stopConnection();
+
     void destroyConnection();
+
     void startConnection();
 }

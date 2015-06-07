@@ -30,7 +30,7 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 
-public class HorizontalBarChartActivity extends ActionBarActivity implements BarChartView,SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
+public class BarChartActivity extends ActionBarActivity implements BarChartView, SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
 
     protected HorizontalBarChart hBarChart;
     protected BarChart vBarChart;
@@ -59,36 +59,35 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
 
 
-
         // hBarChart.setDrawLegend(false);
     }
 
 
     @Override
-    public void onStop(){
+    public void onStop() {
         barChartPresenter.destroyConnection();
         super.onStop();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         barChartPresenter.destroyConnection();
         super.onPause();
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         //barChartPresenter.startConnection();
         super.onRestart();
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         barChartPresenter.destroyConnection();
         super.onDestroy();
     }
 
-    private void initializeHorizontalBarChart(){
+    private void initializeHorizontalBarChart() {
         setContentView(R.layout.activity_horizontal_bar_chart);
 
         hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
@@ -138,7 +137,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         hBarChart.animateX(1000);
     }
 
-    private void initializeBarChart(){
+    private void initializeBarChart() {
         Log.d("", "John spaccia log");
         setContentView(R.layout.activity_bar_chart);
 
@@ -231,9 +230,9 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void setBarOrientation(String orientation) {
-        Log.d("","orientation");
-        this.orientation=orientation;
-        if(orientation.equals("V"))
+        Log.d("", "orientation");
+        this.orientation = orientation;
+        if (orientation.equals("V"))
             initializeBarChart();
         else
             initializeHorizontalBarChart();
@@ -264,7 +263,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
             flowList.get(i).getFlowId();
             //aggiunge una label alla legenda
             String name = flowList.get(i).getFlowName();
-            Log.d("",name);
+            Log.d("", name);
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
             String color = barChartFlow.getFlowColour();
 
@@ -289,16 +288,16 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
         setLegend(lLabels, lColors);
 
-        if (orientation.equals("V")){
+        if (orientation.equals("V")) {
             vBarChart.setData(data);
             vBarChart.animateY(0);
-        }else{
+        } else {
             hBarChart.setData(data);
             hBarChart.animateX(0);
         }
     }
 
-    public Legend setLegend(List<String> labels, List<Integer> colors){
+    public Legend setLegend(List<String> labels, List<Integer> colors) {
         l = vBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setFormSize(8f);
@@ -306,7 +305,9 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
         l.setLabels(labels);
         l.getLegendLabels();
         return l;
-    };
+    }
+
+    ;
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {

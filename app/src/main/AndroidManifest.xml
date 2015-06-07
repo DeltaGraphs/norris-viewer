@@ -56,7 +56,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".view.graphsView.HorizontalBarChartActivity"
+            android:name=".view.graphsView.BarChartActivity"
             android:label="@string/title_activity_horizontal_bar_chart" >
         </activity>
     </application>

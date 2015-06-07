@@ -20,29 +20,48 @@ package deltagraphs.norrisviewer.model.pageModel;
 
 import java.util.ArrayList;
 
-public class Page{
+public class Page {
     private String id;
     private String name;
     private String description;
     private ArrayList<PageItem> pageItemList = new ArrayList<PageItem>();
 
     // constructor of Page
-    Page(String id, String name, String description){
+    Page(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public void addItem(String id, String name, String type, String URL){
+    public void addItem(String id, String name, String type, String URL) {
         pageItemList.add(new PageItem(id, name, type, URL));
     }
 
-    public void setName(String name){ this.name = name; }
-    public void setDescription(String description){ this.description = description; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public ArrayList<PageItem> getPageItemList(){ return pageItemList; }
-    public String getId(){ return id;}
-    public String getName(){ return name;}
-    public String getDescription(){ return description; }
-    public int getItemListSize(){ return pageItemList.size();}
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ArrayList<PageItem> getPageItemList() {
+        return pageItemList;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getItemListSize() {
+        return pageItemList.size();
+    }
 }

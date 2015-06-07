@@ -27,7 +27,7 @@ import deltagraphs.norrisviewer.model.pageModel.PageItem;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenter;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
-import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
+import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
@@ -59,7 +59,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     private FragmentManager fragmentManager;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Bundle extras = getIntent().getExtras();
@@ -103,66 +103,66 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         super.onRestart();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         super.onPause();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         super.onStop();
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
     }
 
     public void setTitle(String title) {
-        this.setTitle((CharSequence)title);
+        this.setTitle((CharSequence) title);
     }
 
-    public void showDialog(){
+    public void showDialog() {
         presenter.showDialog(this);
     }
 
-    public void showGraphs(){
+    public void showGraphs() {
 
     }
 
-    public void onGraphSelected(){
+    public void onGraphSelected() {
 
     }
 
-    public void onSettingsSelected(){
+    public void onSettingsSelected() {
 
     }
 
 
-    public DrawerLayout findDrawer(int id){
+    public DrawerLayout findDrawer(int id) {
         return (DrawerLayout) findViewById(R.id.drawer_layout);
     }
 
-    public FragmentManager getSupportManager(){
+    public FragmentManager getSupportManager() {
         return getSupportFragmentManager();
     }
 
@@ -204,7 +204,8 @@ public class MainActivity extends ActionBarActivity implements MainView {
             return fragment;
         }
 
-        public PlaceholderFragment() {}
+        public PlaceholderFragment() {
+        }
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -231,7 +232,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                     break;
 
                 case COLUMN_CHART:
-                    intent = new Intent(getActivity(), HorizontalBarChartActivity.class);
+                    intent = new Intent(getActivity(), BarChartActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);
@@ -261,28 +262,28 @@ public class MainActivity extends ActionBarActivity implements MainView {
             List<ChartDescription> list = new ArrayList<ChartDescription>();
 
             //number of page needed
-            for(int j=0; j<pageModel.getPageListSize(); j++){
+            for (int j = 0; j < pageModel.getPageListSize(); j++) {
                 int size = pageModel.getItemListSize(j);
                 ArrayList<PageItem> itemList = pageModel.getItemList(j);
-                for(int i=0; i<size; i++) {
+                for (int i = 0; i < size; i++) {
                     String itemName = itemList.get(i).getName();
-                    String itemType = pageModel.getPage(j).getName() +" - "+ itemList.get(i).getType();
+                    String itemType = pageModel.getPage(j).getName() + " - " + itemList.get(i).getType();
                     String itemUrl = itemList.get(i).getUrl();
-                    String chartType= itemList.get(i).getType();
-                    switch (chartType){
-                        case "MapChart":{
+                    String chartType = itemList.get(i).getType();
+                    switch (chartType) {
+                        case "MapChart": {
                             list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.MAP_CHART));
                             break;
                         }
-                        case "LineChart":{
+                        case "LineChart": {
                             list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.LINE_CHART));
                             break;
                         }
-                        case "BarChart":{
+                        case "BarChart": {
                             list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.COLUMN_CHART));
                             break;
                         }
-                        case "Table":{
+                        case "Table": {
                             list.add(new ChartDescription(itemName, itemType, itemUrl, ChartType.TABLE));
                             break;
                         }
@@ -374,10 +375,21 @@ public class MainActivity extends ActionBarActivity implements MainView {
         private String url;
         private ChartType chartType;
 
-        public String getUrl(){return url;}
-        public String getName() {return name;}
-        public String getType() {return type;}
-        public ChartType getChartType() {return chartType;}
+        public String getUrl() {
+            return url;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public ChartType getChartType() {
+            return chartType;
+        }
 
         public ChartDescription(String text1, String text2, String url, ChartType chartType) {
             this.name = text1;

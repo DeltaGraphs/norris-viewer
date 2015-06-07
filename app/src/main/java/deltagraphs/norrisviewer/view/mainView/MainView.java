@@ -23,7 +23,8 @@ import android.support.v4.widget.DrawerLayout;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 
-public interface MainView{
+public interface MainView {
     public void updatePagesList(PageModel pageModel);
+
     public void setTitle(String title);
 }

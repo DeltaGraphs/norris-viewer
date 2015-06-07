@@ -28,7 +28,7 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
  *
  */
 
- public class MapChartImpl extends Graph implements MapChart {
+public class MapChartImpl extends Graph implements MapChart {
 
     private float mapWidth;
     private float mapHeight;
@@ -37,14 +37,33 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
     private Boolean legendOnPoint;
     private String mapType;
 
-    public float getLatitude() { return latitude; }
-    public float getLongitude() { return longitude; }
-    public float getMapWidth() { return mapWidth; }
-    public float getMapHeight() { return mapHeight; }
-    public Boolean getLegendOnPoint(){ return legendOnPoint; }
-    public String getMapType() { return mapType; }
+    public float getLatitude() {
+        return latitude;
+    }
 
-    public MapChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public float getLongitude() {
+        return longitude;
+    }
+
+    public float getMapWidth() {
+        return mapWidth;
+    }
+
+    public float getMapHeight() {
+        return mapHeight;
+    }
+
+    public Boolean getLegendOnPoint() {
+        return legendOnPoint;
+    }
+
+    public String getMapType() {
+        return mapType;
+    }
+
+    public MapChartImpl(Observer chartPresenter) {
+        addObserver(chartPresenter);
+    }
 
     public void setParameters(JSONObject data) {
         try {
@@ -52,18 +71,19 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
             mapWidth = (float) data.getDouble("mapWidth");
             mapHeight = (float) data.getDouble("mapHeight");
             latitude = (float) data.getDouble("latitude");
-            longitude = (float) data.getDouble("longitude");;
+            longitude = (float) data.getDouble("longitude");
+            ;
             legendOnPoint = data.getBoolean("legendOnPoint");
             mapType = data.getString("mapType");
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
-            for(int i=0; i< flowLenght; i++){
+            for (int i = 0; i < flowLenght; i++) {
                 Log.d("getJSONObject", jsonFlows.getJSONObject(i).toString());
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 addFlow(flow);
             }
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -73,23 +93,25 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
         try {
             if (data.has("title"))
                 title = data.getString("title");
-            if(data.has("mapWidth"))
+            if (data.has("mapWidth"))
                 mapWidth = (float) data.getDouble("mapWidth");
-            if(data.has("mapHeight"))
+            if (data.has("mapHeight"))
                 mapHeight = (float) data.getDouble("mapHeight");
-            if(data.has("latitude"))
+            if (data.has("latitude"))
                 latitude = (float) data.getDouble("latitude");
-            if(data.has("longitude"))
-                longitude = (float) data.getDouble("longitude");;
-            if(data.has("legendOnPoint"))
+            if (data.has("longitude"))
+                longitude = (float) data.getDouble("longitude");
+            ;
+            if (data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
-            if(data.has("mapType"))
+            if (data.has("mapType"))
                 mapType = data.getString("mapType");
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
 
-     @Override
-     public void addFlow(JSONObject flow){
-         flowList.add(new MapChartFlow(flow));
-     }
+    @Override
+    public void addFlow(JSONObject flow) {
+        flowList.add(new MapChartFlow(flow));
+    }
 }

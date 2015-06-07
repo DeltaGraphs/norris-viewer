@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.Observable;
 import java.util.ArrayList;
 import java.util.Observer;
@@ -27,32 +28,33 @@ import java.util.Observer;
  *
  */
 
-public class PageModelImpl extends Observable implements PageModel{
+public class PageModelImpl extends Observable implements PageModel {
 
 
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
 
-    public PageModelImpl(Observer presenter){ addObserver(presenter); }
+    public PageModelImpl(Observer presenter) {
+        addObserver(presenter);
+    }
 
 
-
-    public void setPageModel(JSONObject data, String signal){
-        JSONParser(data,signal);
+    public void setPageModel(JSONObject data, String signal) {
+        JSONParser(data, signal);
         setChanged();
         notifyObservers();
     }
 
     //this method inserts a page
-    public void addPage(String id, String name, String description){
+    public void addPage(String id, String name, String description) {
         pageList.add(new Page(id, name, description));
     }
 
-    private void JSONParser(JSONObject data, String signal){
-        try{
-           //choise of procedure based on arriving signals
+    private void JSONParser(JSONObject data, String signal) {
+        try {
+            //choise of procedure based on arriving signals
 
-            switch(signal) {
+            switch (signal) {
                 case "configPageList": {
 
                     /* this is the case of the first initialization.
@@ -149,7 +151,7 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
 
-                case("updateGraph"):{
+                case ("updateGraph"): {
                     Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a Graph,
                     // identified by an id, is updated.
@@ -157,13 +159,13 @@ public class PageModelImpl extends Observable implements PageModel{
                     //first of all it searches a page in the list, with an index equal to the JSON's one
 
                     int pageIndex = -1;
-                    for(int i=0; i < pageList.size(); i++){
-                        if(pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
+                    for (int i = 0; i < pageList.size(); i++) {
+                        if (pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
                     }
 
                     //then it searches a graph in the list of the found page, with an index equal to the JSON's one
 
-                    if(pageIndex != -1) {
+                    if (pageIndex != -1) {
                         int graphIndex = -1;
                         for (int j = 0; j < pageList.size(); j++) {
                             if (pageList.get(pageIndex).getPageItemList().get(j).getId().equals(data.getString("ID")))
@@ -182,17 +184,34 @@ public class PageModelImpl extends Observable implements PageModel{
                     break;
                 }
             }
-        }catch(JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public String getName(){ return name; }
-    public ArrayList<Page> getPageList(){ return pageList; }
-    public int getPageListSize(){ return pageList.size(); }
-    public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }
-    public ArrayList<PageItem> getItemList(int page){ return pageList.get(page).getPageItemList(); }
-    public Page getPage(int index){ return this.getPageList().get(index); }
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<Page> getPageList() {
+        return pageList;
+    }
+
+    public int getPageListSize() {
+        return pageList.size();
+    }
+
+    public int getItemListSize(int page) {
+        return pageList.get(page).getItemListSize();
+    }
+
+    public ArrayList<PageItem> getItemList(int page) {
+        return pageList.get(page).getPageItemList();
+    }
+
+    public Page getPage(int index) {
+        return this.getPageList().get(index);
+    }
 
     @Override
     public void removeObservers() {

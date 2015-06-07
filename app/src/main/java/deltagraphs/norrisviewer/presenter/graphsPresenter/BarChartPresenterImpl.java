@@ -3,8 +3,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
+import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
-import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
 
 /*
  * Name : BarChartPresenterImpl.java
@@ -22,18 +22,18 @@ import deltagraphs.norrisviewer.view.graphsView.HorizontalBarChartActivity;
  *
  */
 
-public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter{
+public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter {
 
-        private BarChartView graphView;
-        private BarChart barChartInstance;
+    private BarChartView graphView;
+    private BarChart barChartInstance;
 
 
-    public BarChartPresenterImpl(BarChartView view,String url){
+    public BarChartPresenterImpl(BarChartView view, String url) {
         super(url);
-        graphView=view;
+        graphView = view;
         barChartInstance = (BarChart) new BarChartImpl(this);
-        startSocket((HorizontalBarChartActivity) view, barChartInstance);
-    //lineChartInstance = new LineChartImpl(jsonData);
+        startSocket((BarChartActivity) view, barChartInstance);
+        //lineChartInstance = new LineChartImpl(jsonData);
         //this.setUpViews();
     }
 
@@ -51,13 +51,13 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         }*/
 
     @Override
-    public void update(Observable observable,Object data) {
+    public void update(Observable observable, Object data) {
         if (observable instanceof BarChartImpl) {
-        // in quanto potremmo avere piu modelli dati
-        // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
-        // prima di effettuare il cast
+            // in quanto potremmo avere piu modelli dati
+            // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
+            // prima di effettuare il cast
             String signal = (String) data;
-            if((signal == "configGraph") || (signal=="updateGraphProp"))
+            if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
             graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());
             firstConnection = false;
@@ -90,19 +90,19 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());
     }
 
-    public void viewPointLegend(){
+    public void viewPointLegend() {
 
     }
 
-    public void stopConnection(){
+    public void stopConnection() {
         stopSocket();
     }
 
-    public void startConnection(){
-        startSocket((HorizontalBarChartActivity) graphView, barChartInstance);
+    public void startConnection() {
+        startSocket((BarChartActivity) graphView, barChartInstance);
     }
 
-    public void destroyConnection(){
+    public void destroyConnection() {
         destroySocket();
     }
 }

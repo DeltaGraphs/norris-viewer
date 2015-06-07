@@ -27,15 +27,26 @@ public abstract class FlowModel {
     protected String flowName;
 
     public abstract void createFlow(JSONObject data);
+
     public abstract void updateFlow(JSONObject data);
+
     public abstract void deleteRecordList();
+
     public abstract void addRecord(JSONObject data);
+
     public abstract void addRecords(JSONArray data);
+
     public abstract void updateRecord(JSONObject data);
+
     public abstract void deleteRecord(JSONObject data);
-    
-    public String getFlowName() { return flowName; }
-    public String getFlowId() { return flowId; }
+
+    public String getFlowName() {
+        return flowName;
+    }
+
+    public String getFlowId() {
+        return flowId;
+    }
 
 }
 

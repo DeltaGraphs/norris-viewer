@@ -25,12 +25,20 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface BarChart {
     public AxisModel getAxisX();
+
     public AxisModel getAxisY();
+
     public ArrayList<String> getHeaders();
+
     public String getBackground();
+
     public String getBarOrientation();
+
     public Boolean getSortable();
+
     public Boolean getGrid();
+
     public Boolean getLegendOnPoint();
+
     public ArrayList<FlowModel> getFlowList();
 }

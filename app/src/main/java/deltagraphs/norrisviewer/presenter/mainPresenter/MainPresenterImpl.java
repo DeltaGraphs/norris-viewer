@@ -1,41 +1,41 @@
 package deltagraphs.norrisviewer.presenter.mainPresenter;
 
 
-    import android.app.AlertDialog;
-    import android.content.Context;
-    import android.content.DialogInterface;
-    import android.content.Intent;
-    import android.os.Bundle;
-    import android.text.InputType;
-    import android.util.Log;
-    import android.view.LayoutInflater;
-    import android.view.View;
-    import android.view.ViewGroup;
-    import android.widget.AdapterView;
-    import android.widget.ArrayAdapter;
-    import android.widget.EditText;
-    import android.support.v4.app.Fragment;
-    import android.support.v4.app.FragmentManager;
-    import android.widget.FrameLayout;
-    import android.widget.ListView;
-    import android.widget.TextView;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+import android.widget.TextView;
 
-    import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.R;
 
-    import java.util.ArrayList;
-    import java.util.List;
-    import java.util.Observable;
-    import java.util.Observer;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-    import deltagraphs.norrisviewer.model.pageModel.*;
-    import deltagraphs.norrisviewer.presenter.SocketManager;
-    import deltagraphs.norrisviewer.view.graphsView.*;
-    import deltagraphs.norrisviewer.view.mainView.MainActivity;
-    import deltagraphs.norrisviewer.view.mainView.MainView;
+import deltagraphs.norrisviewer.model.pageModel.*;
+import deltagraphs.norrisviewer.presenter.SocketManager;
+import deltagraphs.norrisviewer.view.graphsView.*;
+import deltagraphs.norrisviewer.view.mainView.MainActivity;
+import deltagraphs.norrisviewer.view.mainView.MainView;
 
-    import lecho.lib.hellocharts.view.AbstractChartView;
-    import lecho.lib.hellocharts.view.ColumnChartView;
-    import lecho.lib.hellocharts.view.PreviewLineChartView;
+import lecho.lib.hellocharts.view.AbstractChartView;
+import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 
 /*
@@ -60,12 +60,12 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     public MainView mainView;
     private PageModel pageModel = new PageModelImpl(this);
 
-    public MainPresenterImpl(MainView view){
+    public MainPresenterImpl(MainView view) {
         mainSocket = new SocketManager();
         mainView = view;
     }
 
-    public void setUpSocket(String url){
+    public void setUpSocket(String url) {
         mainSocket.setSocketUrl(url);
         mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
         mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
@@ -76,11 +76,11 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         Log.d("", mainSocket.getSocketUrl());
     }
 
-    public void reinitializePageList(){
+    public void reinitializePageList() {
         pageModel = new PageModelImpl(this);
     }
 
-    public void showDialog(final Context context){
+    public void showDialog(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
 
@@ -96,7 +96,7 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {
+                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {
                     if ((!mainSocket.isNull()) && (mainSocket.isConnected())) {
                         pageModel.removeObservers();
                         mainSocket.stopConnection();

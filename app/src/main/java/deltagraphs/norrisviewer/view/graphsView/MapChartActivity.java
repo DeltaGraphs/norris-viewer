@@ -64,25 +64,25 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
     @Override
-    public void onStop(){
+    public void onStop() {
         mapChartPresenter.destroyConnection();
         super.onStop();
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         mapChartPresenter.destroyConnection();
         super.onPause();
     }
 
     @Override
-    public void onRestart(){
+    public void onRestart() {
         //mapChartPresenter.startConnection();
         super.onRestart();
     }
 
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         mapChartPresenter.destroyConnection();
         super.onDestroy();
     }
@@ -100,7 +100,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public void onMapReady(GoogleMap mMap) {
     }
 
-    public Marker addMapMarker(String id, float lat, float lng, String type, String property, String color){
+    public Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
         MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
         Marker m = map.addMarker(mMarkerOptions);
@@ -108,50 +108,50 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return m;
     }
 
-    public void removeMarker(String id){
-        for(int i=0; i < markers.size(); i++) {
+    public void removeMarker(String id) {
+        for (int i = 0; i < markers.size(); i++) {
             //se gli Id sono uguali lo elimina dalla lista
-            if(markers.get(i).getId() == id) {
+            if (markers.get(i).getId() == id) {
                 markers.get(i).remove();
                 markers.remove(i);
             }
         }
     }
 
-    public Marker updateMarkerPosition(String id, float lat, float lng, String type, String property, String color){
+    public Marker updateMarkerPosition(String id, float lat, float lng, String type, String property, String color) {
         removeMarker(id);
         Marker m = addMapMarker(id, lat, lng, type, property, color);
         return m;
     }
 
-    public void cameraPosition(float lat, float lng){
+    public void cameraPosition(float lat, float lng) {
         center = new LatLng(lat, lng);
         map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
 
-    public float getHueFromString(String c){
+    public float getHueFromString(String c) {
         String color = c;
 
         int r = Integer.parseInt(color.substring(1, 3), 16); // Grab the hex representation of red (chars 1-2) and convert to decimal (base 10).
         int g = Integer.parseInt(color.substring(3, 5), 16);
         int b = Integer.parseInt(color.substring(5, 7), 16);
 
-        float hue = (float)Convert.rgbToHsl(r, g, b).h * 360;
+        float hue = (float) Convert.rgbToHsl(r, g, b).h * 360;
         return hue;
     }
 
 
-    public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color){
+    public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color) {
 
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
         m.title(id);
-        if(hasLegend){
+        if (hasLegend) {
         }
         switch (type) {
             // shape marker
             case "shape":
-                switch(property) {
+                switch (property) {
                     //normal marker
                     case "normal":
                         float hue = getHueFromString(color);
@@ -163,7 +163,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 break;
 
             case "icon":
-                switch (property){
+                switch (property) {
                     case "bus":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));
                         break;
@@ -196,18 +196,18 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     //Gestione della traccia
 
-    public Polyline setPolyline(ArrayList<LatLng> polyline, String color){
+    public Polyline setPolyline(ArrayList<LatLng> polyline, String color) {
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
 
         mPolylineOptions.width(8);
 
-        if(color == "default")
+        if (color == "default")
             mPolylineOptions.color(Color.RED);
         else
             mPolylineOptions.color(Color.parseColor(color));
 
-        for(int i=0; i < polyline.size(); i++){
+        for (int i = 0; i < polyline.size(); i++) {
             mPolylineOptions.add(polyline.get(i));
         }
         Polyline mPolyline = map.addPolyline(mPolylineOptions);
@@ -216,7 +216,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     //Gestione del tipo della mappa
 
-    public void setType(String type){
+    public void setType(String type) {
         //satellite, hybrid, terrain
         switch (type) {
             case "roadMap":
@@ -233,9 +233,9 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
 
-    public void setZoom(float width, float height){
-        if(center!= null) {
-            double[] ref = getBoundingBox(center.latitude, center.longitude, (int)width, (int)height);
+    public void setZoom(float width, float height) {
+        if (center != null) {
+            double[] ref = getBoundingBox(center.latitude, center.longitude, (int) width, (int) height);
             LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng(ref[2], ref[3]));
             map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 0));
             map.animateCamera(CameraUpdateFactory.zoomIn());
@@ -278,32 +278,32 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         //switch (signal) {
-            //case "configGraph":
-                map.clear();
-                for (int i = 0; i < flowList.size(); i++) {
+        //case "configGraph":
+        map.clear();
+        for (int i = 0; i < flowList.size(); i++) {
 
-                    flowList.get(i).getFlowId();
-                    String idLine = flowList.get(i).getFlowName();
+            flowList.get(i).getFlowId();
+            String idLine = flowList.get(i).getFlowName();
 
-                    MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
-                    String polyLineColour = mapChartFlow.getTraceStrokeColour();
-                    setPolyline(mapChartFlow.getTraceCoords(),polyLineColour);
+            MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
+            String polyLineColour = mapChartFlow.getTraceStrokeColour();
+            setPolyline(mapChartFlow.getTraceCoords(), polyLineColour);
 
-                    mapChartFlow.getMaxItems();
-                    String markerType = mapChartFlow.getMarkerType();
-                    String markerProperty = mapChartFlow.getMarkerProperty(markerType);
-                    String color = mapChartFlow.getMarkerColour();
-                    for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
-                        String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
-                        float lat = mapChartFlow.getRecordLatitude(j);
-                        float lng = mapChartFlow.getRecordLongitude(j);
-                        String recordId = mapChartFlow.getRecordId(j);
-                        addMapMarker(id, lat, lng, markerType, markerProperty, color);
-                    }
-                }
-                //break;
-           // default:
-      //  }
+            mapChartFlow.getMaxItems();
+            String markerType = mapChartFlow.getMarkerType();
+            String markerProperty = mapChartFlow.getMarkerProperty(markerType);
+            String color = mapChartFlow.getMarkerColour();
+            for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
+                String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
+                float lat = mapChartFlow.getRecordLatitude(j);
+                float lng = mapChartFlow.getRecordLongitude(j);
+                String recordId = mapChartFlow.getRecordId(j);
+                addMapMarker(id, lat, lng, markerType, markerProperty, color);
+            }
+        }
+        //break;
+        // default:
+        //  }
     }
 
     @Override

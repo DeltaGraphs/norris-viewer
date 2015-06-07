@@ -21,19 +21,36 @@ package deltagraphs.norrisviewer.model.flowModel;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class TableFlow extends FlowModel {
     private int maxItems;
     private ArrayList<TableRecord> records = new ArrayList<TableRecord>();
 
-    public int getMaxItems(){ return maxItems; } //per page
-    public int getRecordSize(){return records.size(); }
-    public String getRecordId(int index){ return records.get(index).recordId; }
+    public int getMaxItems() {
+        return maxItems;
+    } //per page
 
-    public String getCellTextColour(int index, int columnIndex){ return records.get(index).values.get(columnIndex).textColour; }
-    public String getCellBackgroundColour(int index, int columnIndex){ return records.get(index).values.get(columnIndex).background; }
-    public String getCellData(int index, int columnIndex){ return records.get(index).values.get(columnIndex).data; }
+    public int getRecordSize() {
+        return records.size();
+    }
+
+    public String getRecordId(int index) {
+        return records.get(index).recordId;
+    }
+
+    public String getCellTextColour(int index, int columnIndex) {
+        return records.get(index).values.get(columnIndex).textColour;
+    }
+
+    public String getCellBackgroundColour(int index, int columnIndex) {
+        return records.get(index).values.get(columnIndex).background;
+    }
+
+    public String getCellData(int index, int columnIndex) {
+        return records.get(index).values.get(columnIndex).data;
+    }
 
 
     public TableFlow(JSONObject data) {
@@ -41,32 +58,34 @@ public class TableFlow extends FlowModel {
             flowId = data.getString("ID");
             flowName = data.getString("name");
             maxItems = data.getInt("maxItemsPage");
-        }catch(JSONException e){}
+        } catch (JSONException e) {
+        }
     }
 
-    class TableRecord{
+    class TableRecord {
         private String recordId;
         private ArrayList<Value> values = new ArrayList<Value>();
 
-        public TableRecord(String id, JSONArray valueList, JSONArray appearance){
+        public TableRecord(String id, JSONArray valueList, JSONArray appearance) {
             recordId = id;
-            try{
+            try {
                 int listLength = valueList.length();
-                for(int i = 0; i< listLength; i++) {
+                for (int i = 0; i < listLength; i++) {
                     String value = valueList.getString(i);
                     String bg = appearance.getJSONObject(i).getString("bg");
                     String text = appearance.getJSONObject(i).getString("text");
                     values.add(new Value(value, bg, text));
                 }
-            }catch(JSONException e){}
+            } catch (JSONException e) {
+            }
         }
 
-        class Value{
+        class Value {
             private String data;
             private String background;
             private String textColour;
 
-            Value(String data, String bg, String tC){
+            Value(String data, String bg, String tC) {
                 this.data = data;
                 background = bg;
                 textColour = tC;
@@ -80,7 +99,8 @@ public class TableFlow extends FlowModel {
         try {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     @Override
@@ -88,7 +108,8 @@ public class TableFlow extends FlowModel {
         try {
             flowName = data.getString("name");
             maxItems = data.getInt("maxItemsPage");
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     @Override
@@ -104,18 +125,20 @@ public class TableFlow extends FlowModel {
             JSONArray jsonValues = data.getJSONArray("values");
             JSONArray appearance = data.getJSONArray("appearance");
             records.add(new TableRecord(id, jsonValues, appearance));
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords){
+    public void addRecords(JSONArray jsonRecords) {
         try {
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);
                 addRecord(record);
             }
-        }catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     @Override
@@ -126,19 +149,20 @@ public class TableFlow extends FlowModel {
             JSONArray valueList = data.getJSONArray("values");
             JSONArray appearance = data.getJSONArray("appearance");
             int listLength = valueList.length();
-            for(int i = 0; i< listLength; i++) {
+            for (int i = 0; i < listLength; i++) {
                 records.get(recordIndex).values.get(i).data = valueList.getString(i);
                 records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
                 records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
             }
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
 
     // it searches the record index in the list of records
-    protected int searchRecordIndex(String id){
+    protected int searchRecordIndex(String id) {
         int index = 0;
-        while (index < records.size()){
+        while (index < records.size()) {
             if (records.get(index).recordId.equals(id))
                 return index;
             index++;
@@ -152,6 +176,7 @@ public class TableFlow extends FlowModel {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 }

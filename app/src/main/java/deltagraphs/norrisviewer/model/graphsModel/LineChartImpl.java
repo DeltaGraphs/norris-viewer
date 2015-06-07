@@ -5,6 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Observer;
+
 import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
 
 
@@ -26,7 +27,7 @@ import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
  *
  */
 
-public class LineChartImpl extends Graph  implements LineChart{
+public class LineChartImpl extends Graph implements LineChart {
 
     private AxisModel axisX;
     private AxisModel axisY;
@@ -36,15 +37,37 @@ public class LineChartImpl extends Graph  implements LineChart{
     private Boolean verticalGrid;
     private Boolean legendOnPoint;
 
-    public AxisModel getAxisX() { return axisX; }
-    public AxisModel getAxisY() { return axisY; }
-    public String getBackground() { return background; }
-    public Boolean getViewFinder() { return viewFinder; }
-    public Boolean getHorizontalGrid() { return horizontalGrid; }
-    public Boolean getVerticalGrid() { return verticalGrid; }
-    public Boolean getLegendOnPoint(){ return legendOnPoint; }
+    public AxisModel getAxisX() {
+        return axisX;
+    }
 
-    public LineChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public AxisModel getAxisY() {
+        return axisY;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public Boolean getViewFinder() {
+        return viewFinder;
+    }
+
+    public Boolean getHorizontalGrid() {
+        return horizontalGrid;
+    }
+
+    public Boolean getVerticalGrid() {
+        return verticalGrid;
+    }
+
+    public Boolean getLegendOnPoint() {
+        return legendOnPoint;
+    }
+
+    public LineChartImpl(Observer chartPresenter) {
+        addObserver(chartPresenter);
+    }
 
     public void setParameters(JSONObject data) {
         try {
@@ -64,11 +87,11 @@ public class LineChartImpl extends Graph  implements LineChart{
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
-            for(int i=0; i< flowLenght; i++){
+            for (int i = 0; i < flowLenght; i++) {
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 addFlow(flow);
             }
-        }catch (JSONException e){
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -78,26 +101,26 @@ public class LineChartImpl extends Graph  implements LineChart{
         try {
             if (data.has("title"))
                 title = data.getString("title");
-            if(data.has("backgroundColor"))
+            if (data.has("backgroundColor"))
                 background = data.getString("backgroundColor");
-            if(data.has("viewFinder"))
+            if (data.has("viewFinder"))
                 viewFinder = data.getBoolean("viewFinder");
-            if(data.has("horizontalGrid"))
+            if (data.has("horizontalGrid"))
                 horizontalGrid = data.getBoolean("horizontalGrid");
-            if(data.has("verticalGrid"))
+            if (data.has("verticalGrid"))
                 verticalGrid = data.getBoolean("verticalGrid");
-            if(data.has("legendOnPoint"))
+            if (data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
             //changes to axises
-            if(data.has("xAxis")) {
+            if (data.has("xAxis")) {
                 JSONObject xAxis = data.getJSONObject("xAxis");
                 axisX = new AxisModel(xAxis);
             }
-            if(data.has("yAxis")) {
+            if (data.has("yAxis")) {
                 JSONObject yAxis = data.getJSONObject("yAxis");
                 axisY = new AxisModel(yAxis);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

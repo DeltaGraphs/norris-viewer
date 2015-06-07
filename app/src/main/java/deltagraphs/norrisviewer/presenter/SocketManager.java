@@ -40,63 +40,65 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 
 //This class provides an instrument for manage Socket connection and the URL I/O
 
-public class SocketManager{
+public class SocketManager {
 
     private Socket mSocket;
-    private String url="";
+    private String url = "";
 
 
     //Constructor
-    public SocketManager(){}
+    public SocketManager() {
+    }
 
     //Constructor
-    public SocketManager(String url){
+    public SocketManager(String url) {
         setSocketUrl(url);
     }
 
     //setter method
-    public void setSocketUrl(String url){
+    public void setSocketUrl(String url) {
         this.url = url;
         try {
             mSocket = IO.socket(url);
-        } catch (URISyntaxException e) {}
+        } catch (URISyntaxException e) {
+        }
     }
 
     //getter method
-    public String getSocketUrl(){
+    public String getSocketUrl() {
         return url;
     }
 
     //start the connection with socket
-    public void startConnection(){
+    public void startConnection() {
         mSocket.connect();
 
     }
 
-    public Boolean isNull(){
-        return (mSocket==null);
+    public Boolean isNull() {
+        return (mSocket == null);
     }
 
-    public Boolean isConnected(){
+    public Boolean isConnected() {
         return mSocket.connected();
     }
 
     //stop the connection with the socket
-    public void stopConnection(){
+    public void stopConnection() {
         mSocket.disconnect();
     }
 
-    public void destroyConnection(){
+    public void destroyConnection() {
         mSocket.close();
     }
 
     //close the connection with the socket
-    public void closeSocket(){
+    public void closeSocket() {
         mSocket.close();
     }
 
-    public void startListening(final String signal, final Activity activity, final Object model){
-        Log.d("","onSocket");
+    public void startListening(final String signal, final Activity activity, final Object model) {
+        Log.d("", "onSocket");
         mSocket.on(signal, new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -105,28 +107,22 @@ public class SocketManager{
                     public void run() {
                         JSONObject obj = (JSONObject) args[0];
                         //try {
-                            if(activity instanceof MainView) {
-                                ((PageModel) model).setPageModel(obj, signal);
-                            }
-                            else
-                                if(activity instanceof BarChartView)
-                                    ((Graph)model).setGraph(obj, signal);
-                                    else
-                                    if(activity instanceof LineChartView)
-                                        ((Graph)model).setGraph(obj, signal);
-                                        else
-                                        if(activity instanceof MapChartView) {
-                                            ((Graph) model).setGraph(obj, signal);
-                                        }
-                                        else
-                                            if(activity instanceof TableView)
-                                                ((Graph)model).setGraph(obj, signal);
+                        if (activity instanceof MainView) {
+                            ((PageModel) model).setPageModel(obj, signal);
+                        } else if (activity instanceof BarChartView)
+                            ((Graph) model).setGraph(obj, signal);
+                        else if (activity instanceof LineChartView)
+                            ((Graph) model).setGraph(obj, signal);
+                        else if (activity instanceof MapChartView) {
+                            ((Graph) model).setGraph(obj, signal);
+                        } else if (activity instanceof TableView)
+                            ((Graph) model).setGraph(obj, signal);
 
-                                            else {
-                                                Log.d("","qualcosa non va");
-                                            }
-                            //float x = (float) obj.getDouble("item");
-                            //dataModel.setMyData((float) obj.getDouble("item"));
+                        else {
+                            Log.d("", "qualcosa non va");
+                        }
+                        //float x = (float) obj.getDouble("item");
+                        //dataModel.setMyData((float) obj.getDouble("item"));
                         //} catch (JSONException e) {
                         //    return;
                         //}

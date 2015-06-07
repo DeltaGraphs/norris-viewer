@@ -24,22 +24,36 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface Table {
     public String getAddRowOn();
+
     public int getMaxItems();
+
     public Boolean getSortable();
-    public String sortByCol() ;
+
+    public String sortByCol();
+
     public String getSortOrder();
+
     public ArrayList<FlowModel> getFlowList();
+
     public int getBorderWidth();
+
     public String getBorderColour();
+
     public int getNumberOfColumns();
 
     //column parameters
     public String getHeaderValue(int index);
+
     public String getHeaderTextColour(int index);
+
     public String getHeaderBGColour(int index);
+
     public String getRowEvenTC(int index);
+
     public String getRowEvenBGColour(int index);
+
     public String getRowOddTC(int index);
+
     public String getRowOddBGColour(int index);
 
 }

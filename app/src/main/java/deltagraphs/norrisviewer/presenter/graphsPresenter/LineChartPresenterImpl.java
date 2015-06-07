@@ -28,7 +28,7 @@ import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
  *
  */
 
-public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter{
+public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter {
 
     private LineChartView graphView;
     private LineChart lineChartInstance;
@@ -53,7 +53,9 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         previewLineChartView.setScrollEnabled(false);
     }*/
 
-    private void startNewConnections(){ startSocket((LineChartActivity) graphView, lineChartInstance);}
+    private void startNewConnections() {
+        startSocket((LineChartActivity) graphView, lineChartInstance);
+    }
 
     @Override
     public void update(Observable observable, Object data) {
@@ -62,11 +64,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
             // verifichiamo su quale modello  avvenuto un cambiamento dei dati
             // prima di effettuare il cast
             String signal = (String) data;
-            if((signal == "configGraph") || (signal=="updateGraphProp"))
+            if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
-            Log.d("LineChartPresenterImpl","Chiamato il setData");
+            Log.d("LineChartPresenterImpl", "Chiamato il setData");
         }
     }
 
@@ -95,11 +97,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     }
 
 
-    public void viewPointLegend(){
+    public void viewPointLegend() {
 
     }
 
-    public void destroy(){
+    public void destroy() {
         stopSocket();
     }
 

@@ -29,7 +29,7 @@ import lecho.lib.hellocharts.model.PointValue;
  *
  */
 
-public class LineChartFlow extends FlowModel{
+public class LineChartFlow extends FlowModel {
 
     private String flowColour;
     private String marker;
@@ -38,45 +38,70 @@ public class LineChartFlow extends FlowModel{
     private int maxItems;
     private ArrayList<LineChartRecord> records = new ArrayList<LineChartRecord>();
 
-    public String getFlowColour(){ return flowColour; }
-    public String getMarker(){ return marker; }
-    public String getInterpolation() { return interpolation; }
-    public String getSubAreaColour(){ return subAreaColour; }
-    public int getMaxItems() { return maxItems; }
+    public String getFlowColour() {
+        return flowColour;
+    }
 
-    public int getRecordSize(){return records.size(); }
-    public String getRecordId(int index){ return records.get(index).recordId; }
-    public float getRecordValueX(int index){ return records.get(index).xValue; }
-    public float getRecordValueY(int index){ return records.get(index).yValue; }
+    public String getMarker() {
+        return marker;
+    }
+
+    public String getInterpolation() {
+        return interpolation;
+    }
+
+    public String getSubAreaColour() {
+        return subAreaColour;
+    }
+
+    public int getMaxItems() {
+        return maxItems;
+    }
+
+    public int getRecordSize() {
+        return records.size();
+    }
+
+    public String getRecordId(int index) {
+        return records.get(index).recordId;
+    }
+
+    public float getRecordValueX(int index) {
+        return records.get(index).xValue;
+    }
+
+    public float getRecordValueY(int index) {
+        return records.get(index).yValue;
+    }
 
     public LineChartFlow(JSONObject data) {
         try {
             this.flowId = data.getString("ID");
-            if(data.has("name"))
+            if (data.has("name"))
                 this.flowName = data.getString("name");
             else
-                this.flowName="";
-            if(data.has("flowColor"))
+                this.flowName = "";
+            if (data.has("flowColor"))
                 this.flowColour = data.getString("flowColor");
             else
                 this.flowColour = "random";
-            if(data.has("marker"))
+            if (data.has("marker"))
                 this.marker = data.getString("marker");
             else
                 this.marker = "none";
-            if(data.has("interpolation"))
+            if (data.has("interpolation"))
                 this.interpolation = data.getString("interpolation");
             else
                 this.interpolation = "standard";
-            if(data.has("area"))
+            if (data.has("area"))
                 this.subAreaColour = data.getString("area");
             else
                 this.subAreaColour = "none";
-            if(data.has("maxItems"))
+            if (data.has("maxItems"))
                 this.maxItems = data.getInt("maxItems");
             else
                 this.maxItems = 0;
-            if(data.has("records")){
+            if (data.has("records")) {
                 JSONArray recordList = data.getJSONArray("records");
                 addRecords(recordList);
             }
@@ -85,12 +110,12 @@ public class LineChartFlow extends FlowModel{
         }
     }
 
-    class LineChartRecord{
+    class LineChartRecord {
         private String recordId;
         private float xValue; // x value
         private float yValue; // y value
 
-        public LineChartRecord(String id, float xValue, float yValue){
+        public LineChartRecord(String id, float xValue, float yValue) {
             this.recordId = id;
             this.xValue = xValue;
             this.yValue = yValue;
@@ -119,7 +144,8 @@ public class LineChartFlow extends FlowModel{
             interpolation = data.getString("interpolation");
             subAreaColour = data.getString("area");
             maxItems = data.getInt("maxItems");
-        } catch (JSONException e) {}
+        } catch (JSONException e) {
+        }
     }
 
     @Override
@@ -142,7 +168,7 @@ public class LineChartFlow extends FlowModel{
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords){
+    public void addRecords(JSONArray jsonRecords) {
         try {
             Log.d("flow", "addRecords");
             int recordLength = jsonRecords.length();
@@ -150,7 +176,7 @@ public class LineChartFlow extends FlowModel{
                 JSONObject record = jsonRecords.getJSONObject(i);
                 addRecord(record);
             }
-        }catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
@@ -171,9 +197,9 @@ public class LineChartFlow extends FlowModel{
 
 
     // it searches the record index in the list of records
-    protected int searchRecordIndex(String id){
+    protected int searchRecordIndex(String id) {
         int index = 0;
-        while (index < records.size()){
+        while (index < records.size()) {
             if (records.get(index).recordId.equals(id))
                 return index;
             index++;
@@ -193,7 +219,7 @@ public class LineChartFlow extends FlowModel{
         }
     }
 
-    public String toString(){
+    public String toString() {
         String s = "";
 
         return s;

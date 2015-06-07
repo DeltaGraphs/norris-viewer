@@ -34,26 +34,27 @@ public abstract class GraphPresenter implements Observer {
         this.graphSocket = new SocketManager(url);
     }
 
-    public void startSocket( Activity graphActivity, Object graphModel){
-            graphSocket.startConnection();
-            graphSocket.startListening("configGraph", graphActivity, graphModel);
-            graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
-            graphSocket.startListening("insertFlow", graphActivity, graphModel);
-            graphSocket.startListening("deleteFlow", graphActivity, graphModel);
-            graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
-            graphSocket.startListening("updateFlowData", graphActivity, graphModel);
+    public void startSocket(Activity graphActivity, Object graphModel) {
+        graphSocket.startConnection();
+        graphSocket.startListening("configGraph", graphActivity, graphModel);
+        graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
+        graphSocket.startListening("insertFlow", graphActivity, graphModel);
+        graphSocket.startListening("deleteFlow", graphActivity, graphModel);
+        graphSocket.startListening("updateFlowProp", graphActivity, graphModel);
+        graphSocket.startListening("updateFlowData", graphActivity, graphModel);
     }
 
-    public void stopSocket(){
+    public void stopSocket() {
         graphSocket.stopConnection();
     }
 
-    public void destroySocket(){
+    public void destroySocket() {
         graphSocket.destroyConnection();
     }
 
     protected abstract void setGraphParameters();
 
     @Override
-    public void update(Observable observable,Object data){}
+    public void update(Observable observable, Object data) {
+    }
 }

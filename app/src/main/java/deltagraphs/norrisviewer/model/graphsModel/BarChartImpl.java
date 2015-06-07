@@ -27,60 +27,85 @@ import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
  *
  */
 
-public class BarChartImpl extends Graph implements BarChart{
+public class BarChartImpl extends Graph implements BarChart {
 
     private AxisModel axisX;
     private AxisModel axisY;
-    private ArrayList<String> headers=new ArrayList<String>();
+    private ArrayList<String> headers = new ArrayList<String>();
     private String barOrientation = "V";
     private String background;
     private Boolean sortable;
     private Boolean grid;
     private Boolean legendOnPoint;
 
-    public AxisModel getAxisX() { return axisX; }
-    public AxisModel getAxisY() { return axisY; }
-    public ArrayList<String> getHeaders() { return headers; }
-    public String getBackground() { return background; }
-    public String getBarOrientation() { return barOrientation; }
-    public Boolean getSortable() { return sortable; }
-    public Boolean getGrid() { return grid; }
-    public Boolean getLegendOnPoint(){ return legendOnPoint; }
+    public AxisModel getAxisX() {
+        return axisX;
+    }
 
-    public BarChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
+    public AxisModel getAxisY() {
+        return axisY;
+    }
 
+    public ArrayList<String> getHeaders() {
+        return headers;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public String getBarOrientation() {
+        return barOrientation;
+    }
+
+    public Boolean getSortable() {
+        return sortable;
+    }
+
+    public Boolean getGrid() {
+        return grid;
+    }
+
+    public Boolean getLegendOnPoint() {
+        return legendOnPoint;
+    }
+
+    public BarChartImpl(Observer chartPresenter) {
+        addObserver(chartPresenter);
+    }
 
 
     @Override
     public void setParameters(JSONObject data) {
-       try {
-           title = data.getString("title");
-           background = data.getString("backgroundColor");
-           barOrientation = data.getString("barOrientation");
-           sortable = data.getBoolean("sortable");
-           grid = data.getBoolean("grid");
-           legendOnPoint = data.getBoolean("legendOnPoint");
-           JSONArray jsonHeaders = data.getJSONArray("headers");
-           int length = jsonHeaders.length();
-           if (length > 0) {
-               for (int i = 0; i < length; i++) {
-                   headers.add(jsonHeaders.getString(i));
-               }
-           }
-           //changes to axises
-           JSONObject xAxis = data.getJSONObject("xAxis");
-           axisX = new AxisModel(xAxis);
-           JSONObject yAxis = data.getJSONObject("yAxis");
-           axisY = new AxisModel(yAxis);
+        try {
+            title = data.getString("title");
+            background = data.getString("backgroundColor");
+            barOrientation = data.getString("barOrientation");
+            sortable = data.getBoolean("sortable");
+            grid = data.getBoolean("grid");
+            legendOnPoint = data.getBoolean("legendOnPoint");
+            JSONArray jsonHeaders = data.getJSONArray("headers");
+            int length = jsonHeaders.length();
+            if (length > 0) {
+                for (int i = 0; i < length; i++) {
+                    headers.add(jsonHeaders.getString(i));
+                }
+            }
+            //changes to axises
+            JSONObject xAxis = data.getJSONObject("xAxis");
+            axisX = new AxisModel(xAxis);
+            JSONObject yAxis = data.getJSONObject("yAxis");
+            axisY = new AxisModel(yAxis);
 
-           //changes to flow params
-           JSONArray jsonFlows = data.getJSONArray("flows");
-           int flowLenght = jsonFlows.length();
-           for(int i=0; i< flowLenght; i++){
-               JSONObject flow = jsonFlows.getJSONObject(i);
-               addFlow(flow);
-           }
-       }catch (JSONException e){}
+            //changes to flow params
+            JSONArray jsonFlows = data.getJSONArray("flows");
+            int flowLenght = jsonFlows.length();
+            for (int i = 0; i < flowLenght; i++) {
+                JSONObject flow = jsonFlows.getJSONObject(i);
+                addFlow(flow);
+            }
+        } catch (JSONException e) {
+        }
     }
 
     @Override
@@ -88,36 +113,37 @@ public class BarChartImpl extends Graph implements BarChart{
         try {
             if (data.has("title"))
                 title = data.getString("title");
-            if(data.has("backgroundColor"))
+            if (data.has("backgroundColor"))
                 background = data.getString("backgroundColor");
-            if(data.has("barOrientation"))
+            if (data.has("barOrientation"))
                 barOrientation = data.getString("barOrientation");
-            if(data.has("sortable"))
+            if (data.has("sortable"))
                 sortable = data.getBoolean("sortable");
-            if(data.has("grid"))
+            if (data.has("grid"))
                 grid = data.getBoolean("grid");
-            if(data.has("legendOnPoint"))
+            if (data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
-            if(data.has("headers")){
+            if (data.has("headers")) {
                 JSONArray jsonHeaders = data.getJSONArray("headers");
                 int length = jsonHeaders.length();
                 if (length > 0) {
                     for (int i = 0; i < length; i++) {
-                       headers.add(jsonHeaders.getString(i));
+                        headers.add(jsonHeaders.getString(i));
                     }
                 }
             }
             //changes to axises
-            if(data.has("xAxis")) {
+            if (data.has("xAxis")) {
                 JSONObject xAxis = data.getJSONObject("xAxis");
                 axisX = new AxisModel(xAxis);
             }
-            if(data.has("yAxis")) {
+            if (data.has("yAxis")) {
                 JSONObject yAxis = data.getJSONObject("yAxis");
                 axisY = new AxisModel(yAxis);
             }
 
-        }catch(Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     @Override

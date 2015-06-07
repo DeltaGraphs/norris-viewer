@@ -24,7 +24,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.*;
 
-public class TablePresenterImpl extends GraphPresenter implements TablePresenter{
+public class TablePresenterImpl extends GraphPresenter implements TablePresenter {
 
     private TableView graphView;
     private Table tableInstance;
@@ -38,12 +38,11 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     }
 
 
-
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof TableImpl) {
             String signal = (String) data;
-            if((signal == "configGraph") || (signal=="updateGraphProp"))
+            if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
             graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns(), signal);
 
@@ -53,22 +52,22 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 
     @Override
     protected void setGraphParameters() {
-            graphView.setAddRowOn(tableInstance.getAddRowOn());
-            graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
-            graphView.setSortable(tableInstance.getSortable());
-            graphView.setSortByCol(tableInstance.sortByCol());
-            graphView.setSortOrder(tableInstance.getSortOrder());
-            graphView.setBorderWidth(tableInstance.getBorderWidth());
-            graphView.setBorderColour(tableInstance.getBorderColour());
+        graphView.setAddRowOn(tableInstance.getAddRowOn());
+        graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
+        graphView.setSortable(tableInstance.getSortable());
+        graphView.setSortByCol(tableInstance.sortByCol());
+        graphView.setSortOrder(tableInstance.getSortOrder());
+        graphView.setBorderWidth(tableInstance.getBorderWidth());
+        graphView.setBorderColour(tableInstance.getBorderColour());
 
-            //column parameters
-            for(int index=0; index<tableInstance.getNumberOfColumns(); index++) {
-                graphView.setHeader(index,
-                        tableInstance.getHeaderValue(index),
-                        tableInstance.getHeaderTextColour(index),
-                        tableInstance.getHeaderBGColour(index));
-                graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));
-                graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));
-            }
+        //column parameters
+        for (int index = 0; index < tableInstance.getNumberOfColumns(); index++) {
+            graphView.setHeader(index,
+                    tableInstance.getHeaderValue(index),
+                    tableInstance.getHeaderTextColour(index),
+                    tableInstance.getHeaderBGColour(index));
+            graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));
+            graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));
+        }
     }
 }
