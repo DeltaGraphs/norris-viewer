@@ -31,13 +31,18 @@ public class AxisModel {
 
     AxisModel(JSONObject params){
        try {
-           name = params.getString("name");
-           appearance = params.getString("color");
-           maxIndex = (float) params.getDouble("maxIndex");
-           minIndex = (float) params.getDouble("minIndex");
-           ticks = params.getInt("ticks");
-           scale = params.getInt("scale");
-
+           if (params.has("name"))
+               name = params.getString("name");
+           if(params.has("color"))
+               appearance = params.getString("color");
+           if(params.has("maxIndex"))
+               maxIndex = (float) params.getDouble("maxIndex");
+           if(params.has("minIndex"))
+               minIndex = (float) params.getDouble("minIndex");
+           if(params.has("ticks"))
+               ticks = params.getInt("ticks");
+           if(params.has("scale"))
+               scale = params.getInt("scale");
        }catch(JSONException e){}
     }
 

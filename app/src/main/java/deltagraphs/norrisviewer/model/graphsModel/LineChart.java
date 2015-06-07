@@ -10,6 +10,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ *
  * 0.0.1 2015-05-17 Enrico Savoca Creazione file
  *
  * ===============================================================
@@ -17,6 +19,7 @@ package deltagraphs.norrisviewer.model.graphsModel;
  */
 
 import java.util.ArrayList;
+
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface LineChart {
@@ -28,6 +31,4 @@ public interface LineChart {
     public Boolean getVerticalGrid();
     public Boolean getLegendOnPoint();
     public ArrayList<FlowModel> getFlowList();
-    //public LineChart getInstance();
-
 }

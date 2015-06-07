@@ -78,7 +78,7 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
     @Override
     public void onRestart(){
-        //mapChartPresenter.startConnection();
+        //barChartPresenter.startConnection();
         super.onRestart();
     }
 

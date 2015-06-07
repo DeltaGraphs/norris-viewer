@@ -71,7 +71,6 @@ public class TableImpl extends Graph implements Table {
     public String getSortOrder() { return sortOrder; }
     public int getBorderWidth() { return borderWidth; }
     public String getBorderColour() { return borderColour; }
-    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
     public int getNumberOfColumns(){ return tableColumns.size(); }
 
     //column parameters

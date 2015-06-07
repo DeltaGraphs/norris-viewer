@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
-import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 /*
  * Name : BarChartImpl.java
@@ -47,7 +46,6 @@ public class BarChartImpl extends Graph implements BarChart{
     public Boolean getSortable() { return sortable; }
     public Boolean getGrid() { return grid; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
-    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
     public BarChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 

@@ -6,10 +6,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.Observer;
 
-import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 /*
@@ -45,7 +43,6 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
     public float getMapHeight() { return mapHeight; }
     public Boolean getLegendOnPoint(){ return legendOnPoint; }
     public String getMapType() { return mapType; }
-    public ArrayList<FlowModel> getFlowList(){ return super.getFlowList(); }
 
     public MapChartImpl(Observer chartPresenter){addObserver(chartPresenter);}
 

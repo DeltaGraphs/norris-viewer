@@ -185,9 +185,6 @@ public class PageModelImpl extends Observable implements PageModel{
         }catch(JSONException e){
             e.printStackTrace();
         }
-
-
-
     }
 
     public String getName(){ return name; }

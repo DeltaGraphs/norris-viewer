@@ -31,27 +31,18 @@ import org.json.JSONObject;
 import java.util.*;
 
 public abstract class Graph extends Observable {
-    protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
 
     protected String title;
+    protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
 
     public String getTitle() { return title; }
     public ArrayList<FlowModel> getFlowList(){ return flowList; }
 
     public void setGraph(JSONObject obj, String signal){
         JSONParser(obj, signal);
-        //addObserver(chartPresenter);
         setChanged();
         notifyObservers(signal);
-        /*
-        LineChartFlow x= (LineChartFlow)flowList.get(0);
-        for(int i=0; i<x.getRecordSize(); i++){
-            Log.d("", String.valueOf(x.getRecordValueX(i)));
-            Log.d("", String.valueOf(x.getRecordValueY(i)));
-            Log.d("", "fine flusso 1 connessione");
-        }
-        Log.d("", "fine flusso 1 connessione");
-        */
+
     }
 
     public abstract void setParameters(JSONObject data);
