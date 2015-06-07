@@ -71,6 +71,11 @@ public class SocketManager{
         mSocket.connect();
 
     }
+
+    public Boolean isNull(){
+        return (mSocket==null);
+    }
+
     public Boolean isConnected(){
         return mSocket.connected();
     }

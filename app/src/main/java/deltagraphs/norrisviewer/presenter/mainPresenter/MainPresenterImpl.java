@@ -76,6 +76,10 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         Log.d("", mainSocket.getSocketUrl());
     }
 
+    public void reinitializePageList(){
+        pageModel = new PageModelImpl(this);
+    }
+
     public void showDialog(final Context context){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
@@ -92,10 +96,10 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if((mainSocket!=null)&&(mainSocket.isConnected())){
+                if((!mainSocket.isNull())&&(mainSocket.isConnected())){
                     mainSocket.stopConnection();
                     mainSocket= new SocketManager();
-                    pageModel.reinitialize();
+                    reinitializePageList();
                 }
                 setUpSocket(input.getText().toString());
 

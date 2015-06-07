@@ -197,8 +197,4 @@ public class PageModelImpl extends Observable implements PageModel{
     public ArrayList<PageItem> getItemList(int page){ return pageList.get(page).getPageItemList(); }
     public Page getPage(int index){ return this.getPageList().get(index); }
 
-    @Override
-    public void reinitialize() {
-        pageList=new ArrayList<Page>();
-    }
 }

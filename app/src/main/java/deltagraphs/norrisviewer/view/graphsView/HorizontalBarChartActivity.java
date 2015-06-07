@@ -271,7 +271,6 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
             ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
             for (int j = 0; j < barChartFlow.getRecordSize(); j++) {
-                barChartFlow.getRecordId(j);
                 float y = barChartFlow.getRecordValue(j);
                 String id = barChartFlow.getRecordId(j);
                 yVals1.add(new BarEntry(y, j));

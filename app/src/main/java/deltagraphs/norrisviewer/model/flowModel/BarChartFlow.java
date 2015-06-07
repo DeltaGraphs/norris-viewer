@@ -41,7 +41,10 @@ public class BarChartFlow extends FlowModel{
             flowId = data.getString("ID");
             flowName = data.getString("name");
             flowColour = data.getString("flowColor");
-        }catch(JSONException e){}
+        }catch(JSONException e)
+            {
+                e.printStackTrace();
+            }
     }
 
     class BarChartRecord{
@@ -116,7 +119,7 @@ public class BarChartFlow extends FlowModel{
 
 
     // it searches the record index in the list of records
-    protected int searchRecordIndex(String id){
+    private int searchRecordIndex(String id){
         int index = 0;
         while (index < records.size()){
             if (records.get(index).recordId.equals(id))
