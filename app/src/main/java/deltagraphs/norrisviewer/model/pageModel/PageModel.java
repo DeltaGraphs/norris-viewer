@@ -28,4 +28,5 @@ public interface PageModel {
     public int getItemListSize(int page);
     public ArrayList<PageItem> getItemList(int page);
     public Page getPage(int index);
+    public void removeObservers();
 }

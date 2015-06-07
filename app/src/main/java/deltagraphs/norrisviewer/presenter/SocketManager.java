@@ -45,6 +45,7 @@ public class SocketManager{
     private Socket mSocket;
     private String url="http://norris-nrti-dev.herokuapp.com/norris";
 
+
     //Constructor
     public SocketManager(){}
 

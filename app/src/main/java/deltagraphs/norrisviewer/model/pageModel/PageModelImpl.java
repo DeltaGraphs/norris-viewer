@@ -33,7 +33,7 @@ public class PageModelImpl extends Observable implements PageModel{
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
 
-    public PageModelImpl(Observer presenter){ addObserver(presenter);}
+    public PageModelImpl(Observer presenter){ addObserver(presenter); }
 
 
 
@@ -196,5 +196,10 @@ public class PageModelImpl extends Observable implements PageModel{
     public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }
     public ArrayList<PageItem> getItemList(int page){ return pageList.get(page).getPageItemList(); }
     public Page getPage(int index){ return this.getPageList().get(index); }
+
+    @Override
+    public void removeObservers() {
+        deleteObservers();
+    }
 
 }
