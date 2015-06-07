@@ -118,11 +118,6 @@ public class SocketManager {
                         else {
                             Log.d("", "qualcosa non va");
                         }
-                        //float x = (float) obj.getDouble("item");
-                        //dataModel.setMyData((float) obj.getDouble("item"));
-                        //} catch (JSONException e) {
-                        //    return;
-                        //}
                     }
                 });
             }

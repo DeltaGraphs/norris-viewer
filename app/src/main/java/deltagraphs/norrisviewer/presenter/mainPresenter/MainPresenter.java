@@ -10,6 +10,8 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 0.1.0 2015-05-14 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
  * 0.0.1 2015-05-14 Enrico Savoca Creazione file
  *
  * ===============================================================

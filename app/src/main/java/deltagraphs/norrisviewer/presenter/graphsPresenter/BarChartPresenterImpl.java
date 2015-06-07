@@ -15,7 +15,9 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
+ *
+ * 0.1.0 2015-05-15 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
  * 0.0.1 2015-05-15 Davide Trivellato Creazione file
  *
  * ===============================================================
@@ -64,8 +66,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         }
     }
 
-    @Override
-    protected void setGraphParameters() {
+    private void setGraphParameters() {
         graphView.setBarOrientation(barChartInstance.getBarOrientation());
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),

@@ -27,6 +27,8 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 0.1.0 2015-05-13 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
  * 0.0.1 2015-05-13 Davide Trivellato Creazione file
  *
  * ===============================================================

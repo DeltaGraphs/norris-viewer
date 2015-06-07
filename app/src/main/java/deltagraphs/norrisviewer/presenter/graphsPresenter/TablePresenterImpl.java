@@ -9,7 +9,9 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
+ *
+ * 0.1.0 2015-05-15 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ *
  * 0.0.1 2015-05-15 Davide Trivellato Creazione file
  *
  * ===============================================================
@@ -47,8 +49,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         }
     }
 
-    @Override
-    protected void setGraphParameters() {
+    private void setGraphParameters() {
         graphView.setAddRowOn(tableInstance.getAddRowOn());
         graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
         graphView.setSortable(tableInstance.getSortable());
