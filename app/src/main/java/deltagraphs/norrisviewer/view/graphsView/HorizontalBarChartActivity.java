@@ -280,12 +280,12 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
 
             dataSets.add(set1);
 
-            data = new BarData(headers, dataSets);
 
             //l.setColors(colors);
             // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
         }
+        data = new BarData(headers, dataSets);
 
         setLegend(lLabels, lColors);
 

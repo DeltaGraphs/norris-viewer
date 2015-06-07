@@ -43,7 +43,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager{
 
     private Socket mSocket;
-    private String url="http://norris-nrti-dev.herokuapp.com/norris";
+    private String url="";
 
 
     //Constructor
