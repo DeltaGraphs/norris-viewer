@@ -89,7 +89,6 @@ public class HorizontalBarChartActivity extends ActionBarActivity implements Bar
     }
 
     private void initializeHorizontalBarChart(){
-        Log.d("", "Matteo ha perso");
         setContentView(R.layout.activity_horizontal_bar_chart);
 
         hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
