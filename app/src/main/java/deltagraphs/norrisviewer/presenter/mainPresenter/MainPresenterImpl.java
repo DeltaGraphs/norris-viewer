@@ -92,6 +92,11 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                if((mainSocket!=null)&&(mainSocket.isConnected())){
+                    mainSocket.stopConnection();
+                    mainSocket= new SocketManager();
+                    pageModel.reinitialize();
+                }
                 setUpSocket(input.getText().toString());
 
             }

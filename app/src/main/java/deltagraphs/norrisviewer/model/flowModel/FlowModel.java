@@ -33,9 +33,7 @@ public abstract class FlowModel {
     public abstract void addRecords(JSONArray data);
     public abstract void updateRecord(JSONObject data);
     public abstract void deleteRecord(JSONObject data);
-
-    public void setFlowName(String name){ flowName = name;  }
-
+    
     public String getFlowName() { return flowName; }
     public String getFlowId() { return flowId; }
 
