@@ -190,7 +190,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     //Gestione della traccia
 
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color) {
-        map.clear();
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
 
@@ -271,6 +270,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
+        boolean isMapCleared = false;
         for (int i = 0; i < flowList.size(); i++) {
 
             flowList.get(i).getFlowId();
@@ -278,6 +278,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
             MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
             if(mapChartFlow.isTraceUpdated() == true) {
+                if(isMapCleared == false) {
+                    map.clear();
+                    isMapCleared = true;
+                }
                 String polyLineColour = mapChartFlow.getTraceStrokeColour();
                 setPolyline(mapChartFlow.getTraceCoords(), polyLineColour);
             }
