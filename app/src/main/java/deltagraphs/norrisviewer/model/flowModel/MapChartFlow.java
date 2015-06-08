@@ -60,6 +60,14 @@ public class MapChartFlow extends FlowModel {
         return records.get(index).longitude;
     }
 
+    public Boolean isTraceUpdated() {
+        if (trace.traceUpdated == true) {
+            trace.traceUpdated = false;
+            return true;
+        }
+        return false;
+    }
+
     public String getTraceType() {
         return trace.type;
     }
@@ -160,9 +168,11 @@ public class MapChartFlow extends FlowModel {
         String type;
         String strokeColour = "default";  // colour of the polyline
         String fillColour = "default";  // colour of the area subtended by the polyline
+        Boolean traceUpdated = false;
         ArrayList<LatLng> coords = new ArrayList<LatLng>();
 
         public TraceModel(JSONObject data) {
+            traceUpdated = true;
             try {
                 type = data.getString("type");
                 if (data.has("strokeColor"))
@@ -202,6 +212,8 @@ public class MapChartFlow extends FlowModel {
             markerProperties.icon = data.getJSONObject("marker").getString("icon");
             markerProperties.text = data.getJSONObject("marker").getString("text");
             markerProperties.colour = data.getJSONObject("marker").getString("color");
+            if (data.has("trace"))
+                trace.traceUpdated = true;
             trace.type = data.getJSONObject("trace").getString("type");
             trace.strokeColour = data.getJSONObject("trace").getString("strokeColor");
             trace.fillColour = data.getJSONObject("trace").getString("fillColor");

@@ -252,6 +252,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             line.setColor(Color.parseColor(color));
         else
             line.setColor(ChartUtils.DEFAULT_COLOR);
+
     }
 
     private class ValueTouchListener implements LineChartOnValueSelectListener {
