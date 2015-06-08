@@ -217,7 +217,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
     }
 
     @Override
-    public void setAxis(char axisXorY, String name, String appearance, Float maxIndex, Float minIndex, int ticks, int scale) {
+    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
         // CONTROLLARE CHE maxIndex
     }
 
