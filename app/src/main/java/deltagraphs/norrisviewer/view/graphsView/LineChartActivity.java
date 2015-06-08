@@ -59,6 +59,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private boolean hasLabelForSelected = false;
     private boolean hasViewFinder = false;
     private int dataType = DEFAULT_DATA;
+    private Viewport viewport;
 
     private Axis axisX;
     private Axis axisY;
@@ -84,10 +85,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
-
+        viewport = new Viewport();
         previewChart.setViewportChangeListener(new ViewportListener());
         previewChart.setPreviewColor(Color.parseColor("#80CBC4"));
-        previewX(true);
     }
 
     @Override
@@ -151,21 +151,19 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             float step = (maxIndex - minIndex) / ticks;
 
             if (axisXorY == 'x') {
-                axisX = Axis.generateAxisFromRange(minIndex, maxIndex, step);
-                axisX.setHasLines(true);
+                axisX = new Axis().setHasLines(true);
+                axisX.generateAxisFromRange(minIndex, maxIndex, step);
+                //axisX.setHasSeparationLine(true);
                 if (hasAxesNames) {
                     axisX.setName(name);
                 }
-
-                data.setAxisXBottom(axisX);
             }
             if (axisXorY == 'y') {
-                axisY = Axis.generateAxisFromRange(minIndex, maxIndex, step);
-                axisY.setHasLines(true);
+                axisY = new Axis().setHasLines(true);
+                axisY.generateAxisFromRange(minIndex, maxIndex, step);
                 if (hasAxesNames) {
                     axisY.setName(name);
                 }
-                data.setAxisYLeft(axisY);
             }
             // TODO: Insert the possibility to change the scale.
         } else {
@@ -221,8 +219,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
                 values.add(new PointValue(x, y));
-                Log.d("", String.valueOf(x));
-                Log.d("", String.valueOf(y));
             }
 
             Line line = new Line(values);
@@ -237,13 +233,23 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             lines.add(line);
             previewLines.add(previewLine);
         }
+
+        //viewport = previewChart.getCurrentViewport();
+
+        //float dx = viewport.width();
+        //float dy = viewport.height();
+
         data.setLines(lines);
+        data.setAxisXBottom(axisX);
+        data.setAxisYLeft(axisY);
+
         previewData.setLines(previewLines);
 
         chart.setLineChartData(data);
+
         previewChart.setLineChartData(previewData);
-        //previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
-        Log.d("LineActivity", "line chart data settato");
+        //previewChart.setCurrentViewport(viewport);
+        //previewChart.getCurrentViewport().inset(dx,dy);
     }
 
 
@@ -303,6 +309,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         Viewport tempViewport = new Viewport(chart.getMaximumViewport());
         float dy = tempViewport.height() / 4;
         tempViewport.inset(0, dy);
+        viewport = tempViewport;
         previewChart.setCurrentViewportWithAnimation(tempViewport);
         previewChart.setZoomType(ZoomType.VERTICAL);
     }
@@ -311,6 +318,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         Viewport tempViewport = new Viewport(chart.getMaximumViewport());
         float dx = tempViewport.width() / 4;
         tempViewport.inset(dx, 0);
+        viewport = tempViewport;
         if (animate) {
             previewChart.setCurrentViewportWithAnimation(tempViewport);
         } else {
@@ -326,6 +334,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         float dx = tempViewport.width() / 4;
         float dy = tempViewport.height() / 4;
         tempViewport.inset(dx, dy);
+        viewport = tempViewport;
         previewChart.setCurrentViewportWithAnimation(tempViewport);
     }
 
