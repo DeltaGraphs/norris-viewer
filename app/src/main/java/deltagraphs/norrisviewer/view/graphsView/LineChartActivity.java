@@ -38,7 +38,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private static final int NEGATIVE_STACKED_DATA = 4;
 
     private List<Line> lines;
-    // Map< flowIndex, lineIndex>
+    private List<Line> previewLines;
     private List<String> indexesList = new ArrayList<String>();
 
     private LineChartPresenter lineChartPresenter;
@@ -80,6 +80,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         setTitle(sourceTitle);
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         data = new LineChartData();
+        previewData = new LineChartData();
 
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
@@ -199,6 +200,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         String color = "";
         lines = new ArrayList<Line>();
+        previewLines = new ArrayList<Line>();
         for (int i = 0; i < flowList.size(); i++) {
 
             String flowId = flowList.get(i).getFlowId();
@@ -226,15 +228,21 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             Line line = new Line(values);
             setLineColor(line, color);
 
+            Line previewLine = new Line(values);
+            setLineColor(previewLine, "random");
+
+            previewLine.setHasLabels(hasLabels);
             line.setHasLabels(hasLabels);
+
             lines.add(line);
+            previewLines.add(previewLine);
         }
         data.setLines(lines);
-        previewData = new LineChartData(data);
-        //previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
+        previewData.setLines(previewLines);
 
         chart.setLineChartData(data);
         previewChart.setLineChartData(previewData);
+        //previewData.getLines().get(0).setColor(ChartUtils.DEFAULT_DARKEN_COLOR);
         Log.d("LineActivity", "line chart data settato");
     }
 

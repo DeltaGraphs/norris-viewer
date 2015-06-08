@@ -71,7 +71,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     }
 
     private void setGraphParameters() {
-/*        graphView.setAxis('x',
+        graphView.setAxis('x',
                 lineChartInstance.getAxisX().getName(),
                 lineChartInstance.getAxisX().getAppearance(),
                 lineChartInstance.getAxisX().getMaxIndex(),
@@ -86,10 +86,10 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
                 lineChartInstance.getAxisY().getMinIndex(),
                 lineChartInstance.getAxisY().getTicks(),
                 lineChartInstance.getAxisY().getScale()
-        ); */
+        );
         graphView.setViewFinder(lineChartInstance.getViewFinder());
         graphView.setBackground(lineChartInstance.getBackground());
-//        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
+        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
         graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
     }
 
