@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -100,6 +101,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
         MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
+        removeMarker(id);
         Marker m = map.addMarker(mMarkerOptions);
         markers.add(m);
         return m;
@@ -108,17 +110,11 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public void removeMarker(String id) {
         for (int i = 0; i < markers.size(); i++) {
             //se gli Id sono uguali lo elimina dalla lista
-            if (markers.get(i).getId() == id) {
+            if (markers.get(i).getTitle().equals(id)) {
                 markers.get(i).remove();
                 markers.remove(i);
             }
         }
-    }
-
-    public Marker updateMarkerPosition(String id, float lat, float lng, String type, String property, String color) {
-        removeMarker(id);
-        Marker m = addMapMarker(id, lat, lng, type, property, color);
-        return m;
     }
 
     public void cameraPosition(float lat, float lng) {
@@ -274,18 +270,16 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
-        //switch (signal) {
-        //case "configGraph":
-        map.clear();
         for (int i = 0; i < flowList.size(); i++) {
 
             flowList.get(i).getFlowId();
             String idLine = flowList.get(i).getFlowName();
 
             MapChartFlow mapChartFlow = (MapChartFlow) flowList.get(i);
-            String polyLineColour = mapChartFlow.getTraceStrokeColour();
-            setPolyline(mapChartFlow.getTraceCoords(), polyLineColour);
-
+            if(mapChartFlow.isTraceUpdated() == true) {
+                String polyLineColour = mapChartFlow.getTraceStrokeColour();
+                setPolyline(mapChartFlow.getTraceCoords(), polyLineColour);
+            }
             mapChartFlow.getMaxItems();
             String markerType = mapChartFlow.getMarkerType();
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
@@ -298,9 +292,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 addMapMarker(id, lat, lng, markerType, markerProperty, color);
             }
         }
-        //break;
-        // default:
-        //  }
     }
 
     @Override
