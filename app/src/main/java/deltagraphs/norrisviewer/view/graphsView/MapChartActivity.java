@@ -43,7 +43,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+        //mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
 
@@ -57,7 +57,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void onResume() {
-        mapChartPresenter.startConnection();
+        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         super.onResume();
     }
 
@@ -190,6 +190,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     //Gestione della traccia
 
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color) {
+        map.clear();
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
 
