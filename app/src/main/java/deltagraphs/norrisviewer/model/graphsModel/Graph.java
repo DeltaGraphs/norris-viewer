@@ -33,6 +33,7 @@ public abstract class Graph extends Observable {
 
     protected String title;
     protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
+    private boolean configured = false;
 
     public String getTitle() {
         return title;
@@ -89,14 +90,17 @@ public abstract class Graph extends Observable {
         try {
             switch (signal) {
                 case "configGraph": {
-                    JSONObject properties = obj.getJSONObject("properties");
-                    setParameters(properties);
-                    JSONArray data = obj.getJSONArray("data");
-                    for (int i = 0; i < data.length(); i++) {
-                        int flowIndex = searchFlowIndex(data.getJSONObject(i).getString("ID"));
-                        if (flowIndex != -1) {
-                            flowList.get(flowIndex).createFlow(data.getJSONObject(i));
+                    if (configured != true) {
+                        JSONObject properties = obj.getJSONObject("properties");
+                        setParameters(properties);
+                        JSONArray data = obj.getJSONArray("data");
+                        for (int i = 0; i < data.length(); i++) {
+                            int flowIndex = searchFlowIndex(data.getJSONObject(i).getString("ID"));
+                            if (flowIndex != -1) {
+                                flowList.get(flowIndex).createFlow(data.getJSONObject(i));
+                            }
                         }
+                        configured = true;
                     }
                     break;
                 }

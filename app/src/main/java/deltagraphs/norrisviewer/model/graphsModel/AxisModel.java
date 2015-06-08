@@ -24,8 +24,8 @@ import org.json.JSONObject;
 public class AxisModel {
     private String name;
     private String appearance;
-    private float maxIndex;
-    private float minIndex;
+    private Float maxIndex;
+    private Float minIndex;
     private int ticks;
     private int scale;
 
@@ -35,9 +35,17 @@ public class AxisModel {
                 name = params.getString("name");
             if (params.has("color"))
                 appearance = params.getString("color");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        try{
             if (params.has("maxIndex"))
                 maxIndex = (float) params.getDouble("maxIndex");
-            if (params.has("minIndex"))
+        } catch (JSONException e) {
+            e.printStackTrace();
+            maxIndex = null;
+        }
+        try{if (params.has("minIndex"))
                 minIndex = (float) params.getDouble("minIndex");
             if (params.has("ticks"))
                 ticks = params.getInt("ticks");
@@ -56,11 +64,11 @@ public class AxisModel {
         return appearance;
     }
 
-    public float getMaxIndex() {
+    public Float getMaxIndex() {
         return maxIndex;
     }
 
-    public float getMinIndex() {
+    public Float getMinIndex() {
         return minIndex;
     }
 
