@@ -56,10 +56,14 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-
 
         // hBarChart.setDrawLegend(false);
+    }
+
+    @Override
+    public void onResume() {
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        super.onResume();
     }
 
 
@@ -77,7 +81,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
     @Override
     public void onRestart() {
-        //barChartPresenter.startConnection();
         super.onRestart();
     }
 
@@ -230,7 +233,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
 
     @Override
     public void setBarOrientation(String orientation) {
-        Log.d("", "orientation");
+
         this.orientation = orientation;
         if (orientation.equals("V"))
             initializeBarChart();
@@ -263,7 +266,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
             flowList.get(i).getFlowId();
             //aggiunge una label alla legenda
             String name = flowList.get(i).getFlowName();
-            Log.d("", name);
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
             String color = barChartFlow.getFlowColour();
 
