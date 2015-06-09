@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.model.flowModel;
  *
  */
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -76,6 +78,7 @@ public class TableFlow extends FlowModel {
                     String value = valueList.getString(i);
                     String bg = appearance.getJSONObject(i).getString("bg");
                     String text = appearance.getJSONObject(i).getString("text");
+                    Log.d("", value);
                     if (onTop)
                         values.push(new Value(value, bg, text));
                     else
@@ -130,7 +133,7 @@ public class TableFlow extends FlowModel {
         String id = null;
         try {
             id = data.getString("norrisRecordID");
-            JSONArray jsonValues = data.getJSONArray("values");
+            JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
             records.add(new TableRecord(id, jsonValues, appearance, false));
         } catch (JSONException e) {
@@ -142,7 +145,7 @@ public class TableFlow extends FlowModel {
         String id = null;
         try {
             id = data.getString("norrisRecordID");
-            JSONArray jsonValues = data.getJSONArray("values");
+            JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
             records.add(new TableRecord(id, jsonValues, appearance, true));
         } catch (JSONException e) {

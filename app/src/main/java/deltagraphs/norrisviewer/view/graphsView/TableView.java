@@ -44,6 +44,7 @@ public interface TableView {
 
     public void setRowOdd(int index, String textColour, String bgColour);
 
+    public void setHeaders(String[] headers);
 
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal);
 }

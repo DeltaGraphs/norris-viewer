@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +39,7 @@ public class TableImpl extends Graph implements Table {
     private int borderWidth = 1;
     private String borderColour;
 
-    private ArrayList<Column> tableColumns;
+    private ArrayList<Column> tableColumns=new ArrayList<Column>();
 
     class Column {
         private String headerValue;
@@ -58,8 +60,8 @@ public class TableImpl extends Graph implements Table {
                 headerBGColour = data.getJSONObject("headers").getString("backgroundColor");
                 rowEvenTextColour = data.getJSONObject("rowEven").getString("textColor");
                 rowEvenBGColour = data.getJSONObject("rowEven").getString("backgroundColor");
-                rowOddTextColour = data.getJSONObject("oddEven").getString("textColor");
-                rowOddBGColour = data.getJSONObject("oddEven").getString("backgroundColor");
+                rowOddTextColour = data.getJSONObject("rowOdd").getString("textColor");
+                rowOddBGColour = data.getJSONObject("rowOdd").getString("backgroundColor");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -146,6 +148,7 @@ public class TableImpl extends Graph implements Table {
             int jsonColumnsSize = jsonColumns.length();
             for (int i = 0; i < jsonColumnsSize; i++) {
                 tableColumns.add(new Column(jsonColumns.getString(i), data.getJSONObject("appearance")));
+                Log.d("", jsonColumns.getString(i));
             }
 
             //changes to flow params

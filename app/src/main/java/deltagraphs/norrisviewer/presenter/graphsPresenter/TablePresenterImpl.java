@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -40,6 +42,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof TableImpl) {
+            Log.d("", "updateTable");
             String signal = (String) data;
             if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
@@ -58,8 +61,10 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         graphView.setBorderWidth(tableInstance.getBorderWidth());
         graphView.setBorderColour(tableInstance.getBorderColour());
 
+        String[] headers = new String[tableInstance.getNumberOfColumns()];
         //column parameters
         for (int index = 0; index < tableInstance.getNumberOfColumns(); index++) {
+            headers[index]=tableInstance.getHeaderValue(index);
             graphView.setHeader(index,
                     tableInstance.getHeaderValue(index),
                     tableInstance.getHeaderTextColour(index),
@@ -67,5 +72,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             graphView.setRowEven(index, tableInstance.getRowEvenTC(index), tableInstance.getRowEvenBGColour(index));
             graphView.setRowOdd(index, tableInstance.getRowOddTC(index), tableInstance.getRowOddBGColour(index));
         }
+        graphView.setHeaders(headers);
     }
 }

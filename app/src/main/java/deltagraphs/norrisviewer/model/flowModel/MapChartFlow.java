@@ -97,9 +97,6 @@ public class MapChartFlow extends FlowModel {
             case ("shape"): {
                 return markerProperties.shape;
             }
-            case ("icon"): {
-                return markerProperties.icon;
-            }
             case ("text"): {
                 return markerProperties.text;
             }
@@ -142,7 +139,6 @@ public class MapChartFlow extends FlowModel {
     class Marker {
         String type = "default";
         String shape = null;
-        String icon = null;
         String text = null;
         String colour = null;
 
@@ -152,8 +148,6 @@ public class MapChartFlow extends FlowModel {
                     type = data.getString("type");
                 if (data.has("shape"))
                     shape = data.getString("shape");
-                if (data.has("icon"))
-                    icon = data.getString("icon");
                 if (data.has("text"))
                     text = data.getString("text");
                 if (data.has("colour"))
@@ -209,7 +203,6 @@ public class MapChartFlow extends FlowModel {
             maxItems = data.getInt("maxItemsPage");
             markerProperties.type = data.getJSONObject("marker").getString("type");
             markerProperties.shape = data.getJSONObject("marker").getString("shape");
-            markerProperties.icon = data.getJSONObject("marker").getString("icon");
             markerProperties.text = data.getJSONObject("marker").getString("text");
             markerProperties.colour = data.getJSONObject("marker").getString("color");
             if (data.has("trace"))
