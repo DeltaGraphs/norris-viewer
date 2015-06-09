@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,6 +35,7 @@ public class AxisModel {
         try {
             if (params.has("name"))
                 name = params.getString("name");
+            Log.d("", name);
             if (params.has("color"))
                 appearance = params.getString("color");
             if (params.has("maxIndex"))

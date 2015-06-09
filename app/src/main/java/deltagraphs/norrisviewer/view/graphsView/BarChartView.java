@@ -31,7 +31,7 @@ public interface BarChartView {
 
     public void setBarOrientation(String orientation);
 
-    public void setSortable(Boolean choise);
+   // public void setSortable(Boolean choise);
 
     public void setGrid(Boolean grid);
 

@@ -86,7 +86,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         );
         graphView.setHeaders(barChartInstance.getHeaders());
         graphView.setBackground(barChartInstance.getBackground());
-        graphView.setSortable(barChartInstance.getSortable());
+        //graphView.setSortable(barChartInstance.getSortable());
         graphView.setGrid(barChartInstance.getGrid());
         graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());
     }

@@ -241,10 +241,10 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
             initializeHorizontalBarChart();
     }
 
-    @Override
-    public void setSortable(Boolean choise) {
+   // @Override
+   // public void setSortable(Boolean choise) {
 
-    }
+   // }
 
     @Override
     public void setGrid(Boolean grid) {

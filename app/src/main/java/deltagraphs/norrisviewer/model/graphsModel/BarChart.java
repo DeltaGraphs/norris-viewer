@@ -34,7 +34,7 @@ public interface BarChart {
 
     public String getBarOrientation();
 
-    public Boolean getSortable();
+    //public Boolean getSortable();
 
     public Boolean getGrid();
 

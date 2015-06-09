@@ -58,9 +58,9 @@ public class BarChartImpl extends Graph implements BarChart {
         return barOrientation;
     }
 
-    public Boolean getSortable() {
-        return sortable;
-    }
+    //public Boolean getSortable() {
+        //return sortable;
+   // }
 
     public Boolean getGrid() {
         return grid;
@@ -81,7 +81,7 @@ public class BarChartImpl extends Graph implements BarChart {
             title = data.getString("title");
             background = data.getString("backgroundColor");
             barOrientation = data.getString("barOrientation");
-            sortable = data.getBoolean("sortable");
+            //sortable = data.getBoolean("sortable");
             grid = data.getBoolean("grid");
             legendOnPoint = data.getBoolean("legendOnPoint");
             JSONArray jsonHeaders = data.getJSONArray("headers");

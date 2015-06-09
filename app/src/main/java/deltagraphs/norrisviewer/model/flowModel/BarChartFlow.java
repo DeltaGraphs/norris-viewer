@@ -73,7 +73,6 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
-
     @Override
     public void createFlow(JSONObject data) {
         records = new ArrayList<BarChartRecord>();
