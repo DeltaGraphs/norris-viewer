@@ -33,6 +33,7 @@ public class PageModelImpl extends Observable implements PageModel {
 
     private String name;
     private ArrayList<Page> pageList = new ArrayList<Page>();
+    private boolean configured = false;
 
     public PageModelImpl(Observer presenter) {
         addObserver(presenter);
@@ -56,33 +57,35 @@ public class PageModelImpl extends Observable implements PageModel {
 
             switch (signal) {
                 case "configPageList": {
-
+                    if (configured != true) {
                     /* this is the case of the first initialization.
                        It uses JSON to create firstly PageModel's attributes, then the Pages List.
                        After this, it creates and populates each page */
 
-                    name = data.getString("name");
-                    Log.d("", "qualcosa arriva");
-                    JSONArray pagesArray = data.getJSONArray("data");
-                    for (int i = 0; i < pagesArray.length(); i++) {
-                        JSONObject page = pagesArray.getJSONObject(i);
-                        JSONObject properties = page.getJSONObject("properties");
-                        String pageId = properties.getString("ID");
-                        String pageName = properties.getString("name");
-                        String pageDescription = properties.getString("description");
+                        name = data.getString("name");
+                        Log.d("", "qualcosa arriva");
+                        JSONArray pagesArray = data.getJSONArray("data");
+                        for (int i = 0; i < pagesArray.length(); i++) {
+                            JSONObject page = pagesArray.getJSONObject(i);
+                            JSONObject properties = page.getJSONObject("properties");
+                            String pageId = properties.getString("ID");
+                            String pageName = properties.getString("name");
+                            String pageDescription = properties.getString("description");
 
-                        addPage(pageId, pageName, pageDescription);
+                            addPage(pageId, pageName, pageDescription);
 
-                        JSONArray itemsArray = page.getJSONArray("data");
-                        for (int j = 0; j < itemsArray.length(); j++) {
-                            JSONObject item = itemsArray.getJSONObject(j);
-                            String itemId = item.getString("ID");
-                            String itemName = item.getString("title");
-                            String itemType = item.getString("type");
-                            String itemURL = item.getString("socketURL");
+                            JSONArray itemsArray = page.getJSONArray("data");
+                            for (int j = 0; j < itemsArray.length(); j++) {
+                                JSONObject item = itemsArray.getJSONObject(j);
+                                String itemId = item.getString("ID");
+                                String itemName = item.getString("title");
+                                String itemType = item.getString("type");
+                                String itemURL = item.getString("socketURL");
 
-                            pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);
+                                pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);
+                            }
                         }
+                        configured = true;
                     }
                     break;
                 }

@@ -82,7 +82,7 @@ public class BarChartFlow extends FlowModel {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        addRecords(recordList);
+        addRecords(recordList, false);
     }
 
     @Override
@@ -115,7 +115,7 @@ public class BarChartFlow extends FlowModel {
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords) {
+    public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {

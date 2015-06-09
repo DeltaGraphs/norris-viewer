@@ -196,7 +196,7 @@ public class MapChartFlow extends FlowModel {
         records = new ArrayList<MapChartRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");
-            addRecords(recordList);
+            addRecords(recordList, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -247,7 +247,7 @@ public class MapChartFlow extends FlowModel {
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords) {
+    public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {

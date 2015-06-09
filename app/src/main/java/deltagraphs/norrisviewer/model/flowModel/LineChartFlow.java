@@ -100,7 +100,7 @@ public class LineChartFlow extends FlowModel {
                 this.maxItems = 0;
             if (data.has("records")) {
                 JSONArray recordList = data.getJSONArray("records");
-                addRecords(recordList);
+                addRecords(recordList, false);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -124,7 +124,7 @@ public class LineChartFlow extends FlowModel {
         Log.d("flow", "createFlow");
         try {
             JSONArray recordList = data.getJSONArray("records");
-            addRecords(recordList);
+            addRecords(recordList, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -166,7 +166,7 @@ public class LineChartFlow extends FlowModel {
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords) {
+    public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
             Log.d("flow", "addRecords");
             int recordLength = jsonRecords.length();

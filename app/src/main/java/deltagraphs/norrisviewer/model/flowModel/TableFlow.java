@@ -23,6 +23,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
     private int maxItems;
@@ -65,9 +66,9 @@ public class TableFlow extends FlowModel {
 
     class TableRecord {
         private String recordId;
-        private ArrayList<Value> values = new ArrayList<Value>();
+        private LinkedList<Value> values = new LinkedList<Value>();
 
-        public TableRecord(String id, JSONArray valueList, JSONArray appearance) {
+        public TableRecord(String id, JSONArray valueList, JSONArray appearance, boolean onTop) {
             recordId = id;
             try {
                 int listLength = valueList.length();
@@ -75,7 +76,10 @@ public class TableFlow extends FlowModel {
                     String value = valueList.getString(i);
                     String bg = appearance.getJSONObject(i).getString("bg");
                     String text = appearance.getJSONObject(i).getString("text");
-                    values.add(new Value(value, bg, text));
+                    if (onTop)
+                        values.push(new Value(value, bg, text));
+                    else
+                        values.add(new Value(value, bg, text));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -100,7 +104,7 @@ public class TableFlow extends FlowModel {
         records = new ArrayList<TableRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");
-            addRecords(recordList);
+            addRecords(recordList, false);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -128,19 +132,38 @@ public class TableFlow extends FlowModel {
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("values");
             JSONArray appearance = data.getJSONArray("appearance");
-            records.add(new TableRecord(id, jsonValues, appearance));
+            records.add(new TableRecord(id, jsonValues, appearance, false));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void pushRecord(JSONObject data) {
+        String id = null;
+        try {
+            id = data.getString("norrisRecordID");
+            JSONArray jsonValues = data.getJSONArray("values");
+            JSONArray appearance = data.getJSONArray("appearance");
+            records.add(new TableRecord(id, jsonValues, appearance, true));
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void addRecords(JSONArray jsonRecords) {
+    public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
             int recordLength = jsonRecords.length();
-            for (int i = 0; i < recordLength; i++) {
-                JSONObject record = jsonRecords.getJSONObject(i);
-                addRecord(record);
+            if (insertOnTop) {
+                for (int i = 0; i < recordLength; i++) {
+                    JSONObject record = jsonRecords.getJSONObject(i);
+                    pushRecord(record);
+                }
+            } else {
+                for (int i = 0; i < recordLength; i++) {
+                    JSONObject record = jsonRecords.getJSONObject(i);
+                    addRecord(record);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

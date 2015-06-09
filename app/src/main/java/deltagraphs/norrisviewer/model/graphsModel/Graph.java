@@ -149,9 +149,12 @@ public abstract class Graph extends Observable {
                 case "insertRecords": {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
-                    if (flowIndex != -1)
-                        flowList.get(flowIndex).addRecords(data.getJSONArray("records"));
-                    else flowList.add(new LineChartFlow(data));
+                    if (flowIndex != -1) {
+                        boolean insertOnTop = false; // only for the table
+                        if ((this instanceof TableImpl) && (((TableImpl) this).getAddRowOn() == "top"))
+                            insertOnTop=true;
+                        flowList.get(flowIndex).addRecords(data.getJSONArray("records"), insertOnTop);
+                    }
                     break;
                 }
                 case "deleteRecord": {

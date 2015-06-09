@@ -34,7 +34,7 @@ public abstract class FlowModel {
 
     public abstract void addRecord(JSONObject data);
 
-    public abstract void addRecords(JSONArray data);
+    public abstract void addRecords(JSONArray data, boolean insertOnTop);
 
     public abstract void updateRecord(JSONObject data);
 
