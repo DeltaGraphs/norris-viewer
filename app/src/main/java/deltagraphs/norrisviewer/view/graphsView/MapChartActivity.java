@@ -1,7 +1,10 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -139,6 +142,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
         m.title(id);
+
         if (hasLegend) {
         }
         switch (type) {
@@ -152,11 +156,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                     case "circle":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.red_circle_marker));
                         break;
-                }
-                break;
-
-            case "icon":
-                switch (property) {
                     case "bus":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));
                         break;
@@ -175,16 +174,34 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                     case "woman":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker));
                         break;
-
                 }
                 break;
+
             case "text":
+                Bitmap.Config conf = Bitmap.Config.ARGB_8888;
+                Bitmap bmp = Bitmap.createBitmap(300, 70, conf);
+                Canvas canvas = new Canvas(bmp);
+                Paint paint = new Paint();
+                color = toHexColor(color);
+                paint.setColor(Color.parseColor(color));
+                paint.setTextSize(36);
+                canvas.drawText(property, 0, 50, paint); // paint defines the text color, stroke width, size
+                m.icon(BitmapDescriptorFactory.fromBitmap(bmp));
+                break;
 
             default:
                 m.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 break;
         }
         return m;
+    }
+
+    public String toHexColor(String c){
+        String color = "#";
+        color += c.charAt(1) + c.charAt(1);
+        color += c.charAt(2) + c.charAt(2);
+        color += c.charAt(3) + c.charAt(3);
+        return color;
     }
 
     //Gestione della traccia
