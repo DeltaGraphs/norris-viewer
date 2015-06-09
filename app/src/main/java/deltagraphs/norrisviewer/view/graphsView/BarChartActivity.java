@@ -288,19 +288,19 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         }
         data = new BarData(headers, dataSets);
 
-        setLegend(lLabels, lColors);
-
         if (orientation.equals("V")) {
+            setVLegend(lLabels, lColors);
             vBarChart.setData(data);
             vBarChart.animateY(0);
         } else {
+            setHLegend(lLabels, lColors);
             hBarChart.setData(data);
             hBarChart.animateX(0);
         }
     }
 
-    public Legend setLegend(List<String> labels, List<Integer> colors) {
-        l = vBarChart.getLegend();
+    public Legend setHLegend(List<String> labels, List<Integer> colors) {
+        l = hBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setFormSize(8f);
         l.setXEntrySpace(4f);
@@ -309,6 +309,15 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         return l;
     }
 
+    public Legend setVLegend(List<String> labels, List<Integer> colors) {
+        l = vBarChart.getLegend();
+        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
+        l.setFormSize(8f);
+        l.setXEntrySpace(4f);
+        l.setLabels(labels);
+        l.getLegendLabels();
+        return l;
+    }
 
     @Override
     public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
