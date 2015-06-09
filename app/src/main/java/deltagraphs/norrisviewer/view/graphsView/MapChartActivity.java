@@ -182,9 +182,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 Bitmap bmp = Bitmap.createBitmap(300, 70, conf);
                 Canvas canvas = new Canvas(bmp);
                 Paint paint = new Paint();
-                color = toHexColor(color);
                 paint.setColor(Color.parseColor(color));
-                paint.setTextSize(36);
+                paint.setTextSize(46);
                 canvas.drawText(property, 0, 50, paint); // paint defines the text color, stroke width, size
                 m.icon(BitmapDescriptorFactory.fromBitmap(bmp));
                 break;
@@ -194,14 +193,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 break;
         }
         return m;
-    }
-
-    public String toHexColor(String c){
-        String color = "#";
-        color += c.charAt(1) + c.charAt(1);
-        color += c.charAt(2) + c.charAt(2);
-        color += c.charAt(3) + c.charAt(3);
-        return color;
     }
 
     //Gestione della traccia
@@ -306,6 +297,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
             String markerType = mapChartFlow.getMarkerType();
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
             String color = mapChartFlow.getMarkerColour();
+            Log.d("",color);
             for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
                 String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
                 float lat = mapChartFlow.getRecordLatitude(j);
