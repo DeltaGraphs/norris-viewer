@@ -30,6 +30,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private String sourceURL;
     private String sourceTitle;
     private TablePresenter tablePresenter;
+    String headers[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +45,9 @@ public class TableActivity extends ActionBarActivity implements TableView {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
+        baseTableAdapter = new FamilyNexusAdapter(this);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
         Log.d("","arrivato qui");
-        baseTableAdapter = new FamilyNexusAdapter(this);
         Log.d("","anche qui");
         //tableFixHeaders.setAdapter(baseTableAdapter);
 
@@ -132,7 +133,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
     @Override
     public void setHeaders(String[] headers) {
-        ((FamilyNexusAdapter)baseTableAdapter).headers = headers;
+        this.headers = headers;
         Log.d("", "stampaHeaders");
     }
 
@@ -140,7 +141,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
 
-
+        baseTableAdapter = new FamilyNexusAdapter(this);
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
             flowList.get(i).getFlowName();
@@ -159,11 +160,16 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 ((FamilyNexusAdapter)baseTableAdapter).families[0].list.add(new Nexus(values));
             }
         }
-        setContentView(R.layout.table);
-        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
+Log.d("", "a");
 
+
+        setContentView(R.layout.table);
+        Log.d("", "b");
+        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
+        Log.d("", "c");
         tableFixHeaders.setAdapter(baseTableAdapter);
-        tableFixHeaders.animate();
+        Log.d("", "d");
+        //tableFixHeaders.animate();
     }
 
 
@@ -202,18 +208,12 @@ public class TableActivity extends ActionBarActivity implements TableView {
         }
     }
 
+
+
     public class FamilyNexusAdapter extends BaseTableAdapter {
 
         NexusTypes families[];
-        String headers[] = {
-                "Name",
-                "Company",
-                "Version",
-                "API",
-                "Storage",
-                "Size",
-                "RAM",
-        };
+
 
         private final int[] widths = {
                 80
@@ -320,15 +320,15 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         @Override
         public int getHeight(int row) {
-            final int height;
+            /*final int height;
             if (row == -1) {
                 height = 35;
             } else if (isFamily(row)) {
                 height = 25;
             } else {
                 height = 45;
-            }
-            return Math.round(height * density);
+            }*/
+            return Math.round(35 * density);
         }
 
         @Override
