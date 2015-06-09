@@ -5,8 +5,13 @@ import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -203,7 +208,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
             String flowId = flowList.get(i).getFlowId();
 
-            //flowList.get(i).getFlowName();
+            String flowName = flowList.get(i).getFlowName();
 
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
 
@@ -218,7 +223,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                 //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
-                values.add(new PointValue(x, y));
+                PointValue pointValue = new PointValue(x, y);
+                pointValue.setLabel(flowName);
+                values.add(pointValue);
             }
 
             Line line = new Line(values);
@@ -265,7 +272,31 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
         @Override
         public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-            Toast.makeText(getApplicationContext(), "VALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY(), Toast.LENGTH_SHORT).show();
+            char[] cLabel = value.getLabelAsChars();
+            String label = new String(cLabel);
+
+            LayoutInflater inflater = getLayoutInflater();
+            View layout = inflater.inflate(R.layout.custom_toast,
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
+
+            TextView title = (TextView) layout.findViewById(R.id.label);
+            title.setText(label);
+
+            TextView values = (TextView) layout.findViewById(R.id. coord_values);
+            values.setText("\nVALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY());
+
+            Toast toast = new Toast(getApplicationContext());
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.setView(layout);
+            toast.show();
+
+
+
+
+            //Toast toast = new Toast(getApplicationContext());
+            //toast.setGravity(Gravity.TOP| Gravity.LEFT, 0, 0);
+            //toast.makeText(getApplicationContext(),"FLOW:\n" + label + "\nVALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
