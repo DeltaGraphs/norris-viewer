@@ -150,7 +150,7 @@ public class MapChartFlow extends FlowModel {
                     shape = data.getString("shape");
                 if (data.has("text"))
                     text = data.getString("text");
-                if (data.has("colour"))
+                if (data.has("color"))
                     colour = data.getString("color");
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -45,8 +45,9 @@ public class TableActivity extends ActionBarActivity implements TableView {
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         tablePresenter = new TablePresenterImpl(this, sourceURL);
+        Log.d("","arrivato qui");
         baseTableAdapter = new FamilyNexusAdapter(this);
-
+        Log.d("","anche qui");
         //tableFixHeaders.setAdapter(baseTableAdapter);
 
     }
@@ -132,7 +133,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setHeaders(String[] headers) {
         ((FamilyNexusAdapter)baseTableAdapter).headers = headers;
-
+        Log.d("", "stampaHeaders");
     }
 
 
@@ -215,13 +216,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         };
 
         private final int[] widths = {
-                120,
-                100,
-                140,
-                60,
-                70,
-                60,
-                60,
+                80
         };
         private final float density;
 
@@ -233,18 +228,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
             };
 
             density = context.getResources().getDisplayMetrics().density;
-
-            families[0].list.add(new Nexus("Nexus One", "HTC", "Gingerbread", "10", "512 MB", "3.7\"", "512 MB"));
-            families[0].list.add(new Nexus("Nexus S", "Samsung", "Gingerbread", "10", "16 GB", "4\"", "512 MB"));
-            families[0].list.add(new Nexus("Galaxy Nexus (16 GB)", "Samsung", "Ice cream Sandwich", "15", "16 GB", "4.65\"", "1 GB"));
-            families[0].list.add(new Nexus("Galaxy Nexus (32 GB)", "Samsung", "Ice cream Sandwich", "15", "32 GB", "4.65\"", "1 GB"));
-            families[0].list.add(new Nexus("Nexus 4 (8 GB)", "LG", "Jelly Bean", "17", "8 GB", "4.7\"", "2 GB"));
-            families[0].list.add(new Nexus("Nexus 4 (16 GB)", "LG", "Jelly Bean", "17", "16 GB", "4.7\"", "2 GB"));
-            families[1].list.add(new Nexus("Nexus 7 (16 GB)", "Asus", "Jelly Bean", "16", "16 GB", "7\"", "1 GB"));
-            families[1].list.add(new Nexus("Nexus 7 (32 GB)", "Asus", "Jelly Bean", "16", "32 GB", "7\"", "1 GB"));
-            families[1].list.add(new Nexus("Nexus 10 (16 GB)", "Samsung", "Jelly Bean", "17", "16 GB", "10\"", "2 GB"));
-            families[1].list.add(new Nexus("Nexus 10 (32 GB)", "Samsung", "Jelly Bean", "17", "32 GB", "10\"", "2 GB"));
-            families[2].list.add(new Nexus("Nexus Q", "--", "Honeycomb", "13", "--", "--", "--"));
         }
 
         @Override
@@ -254,7 +237,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         @Override
         public int getColumnCount() {
-            return 6;
+            return headers.length-1;
         }
 
         @Override
@@ -332,7 +315,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         @Override
         public int getWidth(int column) {
-            return Math.round(widths[column + 1] * density);
+            return Math.round(80 * density);
         }
 
         @Override
