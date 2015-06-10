@@ -177,7 +177,7 @@ public class TableImpl extends Graph implements Table {
 
             if (data.has("addRowOn")) {
                 addRowOn = data.getString("addRowOn");
-                Log.d("", "top");
+                Log.d("", addRowOn);
             }
             if ((data.has("sort")) && (data.getJSONObject("sort").has("ordering")))
                 sortOrder = data.getJSONObject("sort").getString("ordering");

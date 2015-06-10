@@ -150,9 +150,10 @@ public abstract class Graph extends Observable {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
                     if (flowIndex != -1) {
+                        Log.d("", "insert");
                         boolean insertOnTop = false; // only for the table
-                        if ((this instanceof TableImpl) && (((TableImpl) this).getAddRowOn() == "top"))
-                            insertOnTop=true;
+                        if ((this instanceof Table)&&((TableImpl) this).getAddRowOn().equals("top")){
+                            insertOnTop=true; Log.d("", "insertToop");}
                         flowList.get(flowIndex).addRecords(data.getJSONArray("records"), insertOnTop);
                     }
                     break;

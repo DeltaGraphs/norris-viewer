@@ -29,7 +29,7 @@ import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
     private int maxItems;
-    private ArrayList<TableRecord> records = new ArrayList<TableRecord>();
+    private LinkedList<TableRecord> records = new LinkedList<TableRecord>();
 
     public int getMaxItems() {
         return maxItems;
@@ -70,7 +70,7 @@ public class TableFlow extends FlowModel {
         private String recordId;
         private LinkedList<Value> values = new LinkedList<Value>();
 
-        public TableRecord(String id, JSONArray valueList, JSONArray appearance, boolean onTop) {
+        public TableRecord(String id, JSONArray valueList, JSONArray appearance) {
             recordId = id;
             try {
                 int listLength = valueList.length();
@@ -79,10 +79,7 @@ public class TableFlow extends FlowModel {
                     String bg = appearance.getJSONObject(i).getString("bg");
                     String text = appearance.getJSONObject(i).getString("text");
                     Log.d("", value);
-                    if (onTop)
-                        values.addFirst(new Value(value, bg, text));
-                    else
-                        values.add(new Value(value, bg, text));
+                    values.add(new Value(value, bg, text));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -104,7 +101,7 @@ public class TableFlow extends FlowModel {
 
     @Override
     public void createFlow(JSONObject data) {
-        records = new ArrayList<TableRecord>();
+        records = new LinkedList<TableRecord>();
         try {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList, false);
@@ -135,19 +132,19 @@ public class TableFlow extends FlowModel {
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
-            records.add(new TableRecord(id, jsonValues, appearance, false));
+            records.add(new TableRecord(id, jsonValues, appearance));
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void pushRecord(JSONObject data) {
+    public void addFirstRecord(JSONObject data) {
         String id = null;
         try {
             id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
-            records.add(new TableRecord(id, jsonValues, appearance, true));
+            records.addFirst(new TableRecord(id, jsonValues, appearance));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -160,7 +157,8 @@ public class TableFlow extends FlowModel {
             if (insertOnTop) {
                 for (int i = 0; i < recordLength; i++) {
                     JSONObject record = jsonRecords.getJSONObject(i);
-                    pushRecord(record);
+                    addFirstRecord(record);
+                    Log.d("", "addOnTop");
                 }
             } else {
                 for (int i = 0; i < recordLength; i++) {

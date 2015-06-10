@@ -121,7 +121,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                     tableFlow.getCellBackgroundColour(j, indexCol);
                     values[indexCol] = tableFlow.getCellData(j, indexCol);
-                    Log.d("", values[indexCol]);
                     tableFlow.getCellTextColour(j, indexCol);
 
                 }
@@ -129,13 +128,9 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 rows++;
             }
         }
-
-
-        Log.d("", "c");
         tableFixHeaders.setAdapter(baseTableAdapter);
         firstTime = false;
         baseTableAdapter.notifyDataSetChanged();
-        Log.d("", "d");
         tableFixHeaders.animate();
     }
 
