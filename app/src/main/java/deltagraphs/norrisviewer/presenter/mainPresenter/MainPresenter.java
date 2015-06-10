@@ -21,5 +21,8 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
 import android.content.Context;
 
 public interface MainPresenter {
-    public void showDialog(Context context);
+    void showDialog(Context context);
+    void stopConnection();
+    void destroyConnection();
+    void startConnection();
 }

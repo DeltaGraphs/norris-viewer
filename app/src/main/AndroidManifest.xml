@@ -41,10 +41,12 @@
         </activity>
         <activity
             android:name=".view.graphsView.TableActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_table" >
         </activity>
         <activity
             android:name=".view.graphsView.MapChartActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_map_chart">
         </activity>
 
@@ -57,6 +59,7 @@
 
         <activity
             android:name=".view.graphsView.BarChartActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_horizontal_bar_chart" >
         </activity>
     </application>

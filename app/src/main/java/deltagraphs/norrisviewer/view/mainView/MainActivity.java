@@ -63,7 +63,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Bundle extras = getIntent().getExtras();
         presenter = new MainPresenterImpl(this);
         showDialog();
     }
@@ -125,11 +124,13 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onStop() {
+            presenter.stopConnection();
         super.onStop();
     }
 
     @Override
     public void onDestroy() {
+        presenter.destroyConnection();
         super.onDestroy();
     }
 

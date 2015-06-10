@@ -31,7 +31,7 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 
-public class BarChartActivity extends ActionBarActivity implements BarChartView, SeekBar.OnSeekBarChangeListener, OnChartValueSelectedListener {
+public class BarChartActivity extends ActionBarActivity implements BarChartView {
 
     protected HorizontalBarChart hBarChart;
     protected BarChart vBarChart;
@@ -95,7 +95,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         setContentView(R.layout.activity_horizontal_bar_chart);
 
         hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
-        hBarChart.setOnChartValueSelectedListener(this);
         // hBarChart.setHighlightEnabled(false);
 
         hBarChart.setDrawBarShadow(false);
@@ -146,7 +145,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         setContentView(R.layout.activity_bar_chart);
 
         vBarChart = (BarChart) findViewById(R.id.chart1);
-        vBarChart.setOnChartValueSelectedListener(this);
         // vBarChart.setHighlightEnabled(false);
 
         vBarChart.setDrawBarShadow(false);
@@ -315,28 +313,4 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView,
         return l;
     }
 
-    @Override
-    public void onValueSelected(Entry e, int dataSetIndex, Highlight h) {
-        Log.i("Activity", "Selected: " + e.toString() + ", dataSet: " + dataSetIndex);
-    }
-
-    @Override
-    public void onNothingSelected() {
-
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
 }

@@ -99,6 +99,21 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     }
 
     @Override
+    public void stopConnection() {
+        mainSocket.stopConnection();
+    }
+
+    @Override
+    public void destroyConnection() {
+        mainSocket.destroyConnection();
+    }
+
+    @Override
+    public void startConnection() {
+        mainSocket.startConnection();
+    }
+
+    @Override
     public void update(Observable observable, Object data) {
         Log.d("", "update");
         mainView.updatePagesList(pageModel);
