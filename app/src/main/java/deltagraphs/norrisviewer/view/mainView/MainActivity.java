@@ -146,27 +146,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
         presenter.showDialog(this);
     }
 
-    public void showGraphs() {
-
-    }
-
-    public void onGraphSelected() {
-
-    }
-
-    public void onSettingsSelected() {
-
-    }
-
-
-    public DrawerLayout findDrawer(int id) {
-        return (DrawerLayout) findViewById(R.id.drawer_layout);
-    }
-
-    public FragmentManager getSupportManager() {
-        return getSupportFragmentManager();
-    }
-
     @Override
     public void updatePagesList(PageModel pageModel) {
         fragmentManager = getSupportFragmentManager();
@@ -194,7 +173,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-
 
         public static PlaceholderFragment newInstance(int sectionNumber, PageModel p) {
             PlaceholderFragment fragment = new PlaceholderFragment();

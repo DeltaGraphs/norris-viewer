@@ -297,7 +297,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
             String markerType = mapChartFlow.getMarkerType();
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
             String color = mapChartFlow.getMarkerColour();
-            Log.d("",color);
+
             for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
                 String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
                 float lat = mapChartFlow.getRecordLatitude(j);

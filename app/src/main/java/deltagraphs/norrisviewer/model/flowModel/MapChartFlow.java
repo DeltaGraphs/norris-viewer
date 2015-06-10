@@ -140,7 +140,7 @@ public class MapChartFlow extends FlowModel {
         String type = "default";
         String shape = null;
         String text = null;
-        String colour = null;
+        String colour = "";
 
         public Marker(JSONObject data) {
             try {
@@ -150,7 +150,7 @@ public class MapChartFlow extends FlowModel {
                     shape = data.getString("shape");
                 if (data.has("text"))
                     text = data.getString("text");
-                if (data.has("color"))
+                if (data.has("color")&&(!(data.isNull("color"))))
                     colour = data.getString("color");
             } catch (JSONException e) {
                 e.printStackTrace();
