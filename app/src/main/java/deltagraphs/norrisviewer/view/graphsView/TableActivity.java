@@ -49,8 +49,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
         setContentView(R.layout.table);
         tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
-        Log.d("","arrivato qui");
-        Log.d("","anche qui");
+        Log.d("", "arrivato qui");
+        Log.d("", "anche qui");
         //tableFixHeaders.setAdapter(baseTableAdapter);
 
     }
@@ -77,13 +77,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return super.onOptionsItemSelected(item);
     }
 
-
-    @Override
-    public void setAppearance(String appearance) {
-
-    }
-
-
     @Override
     public void setMaxItemsDisplayedPerPage(int maxItemsPerPage) {
 
@@ -105,41 +98,17 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
     @Override
-    public void setBorderWidth(int borderWidth) {
-
-    }
-
-    @Override
-    public void setBorderColour(String borderColour) {
-
-    }
-
-    @Override
-    public void setHeader(int index, String value, String textColour, String bgColour) {
-
-    }
-
-    @Override
-    public void setRowEven(int index, String textColour, String bgColour) {
-
-    }
-
-    @Override
-    public void setRowOdd(int index, String textColour, String bgColour) {
-
-    }
-
-    @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
         Log.d("", "stampaHeaders");
     }
 
-    int rows=0;
-boolean firstTime=true;
+    int rows = 0;
+    boolean firstTime = true;
+
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
-        rows=0;
+        rows = 0;
         baseTableAdapter = new FamilyNexusAdapter(this);
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
@@ -148,7 +117,7 @@ boolean firstTime=true;
             tableFlow.getMaxItems();
             for (int j = 0; j < tableFlow.getRecordSize(); j++) {
                 tableFlow.getRecordId(j);
-                String[] values= new String[numOfColumns];
+                String[] values = new String[numOfColumns];
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                     tableFlow.getCellBackgroundColour(j, indexCol);
                     values[indexCol] = tableFlow.getCellData(j, indexCol);
@@ -156,17 +125,16 @@ boolean firstTime=true;
                     tableFlow.getCellTextColour(j, indexCol);
 
                 }
-                ((FamilyNexusAdapter)baseTableAdapter).families[0].list.add(new Nexus(values));
+                ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
                 rows++;
             }
         }
 
 
-
-            Log.d("", "c");
-            tableFixHeaders.setAdapter(baseTableAdapter);
-            firstTime = false;
-         baseTableAdapter.notifyDataSetChanged();
+        Log.d("", "c");
+        tableFixHeaders.setAdapter(baseTableAdapter);
+        firstTime = false;
+        baseTableAdapter.notifyDataSetChanged();
         Log.d("", "d");
         tableFixHeaders.animate();
     }
@@ -193,7 +161,9 @@ boolean firstTime=true;
     private class Nexus {
         private final String[] data;
 
-        private Nexus(String[] values){ data = values; }
+        private Nexus(String[] values) {
+            data = values;
+        }
 
         /*private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {
             data = new String[]{
@@ -208,11 +178,11 @@ boolean firstTime=true;
     }
 
 
-
     public class FamilyNexusAdapter extends BaseTableAdapter {
 
         NexusTypes families[];
-
+        String rowEvenColour;
+        String rowOddColour;
 
         private final int[] widths = {
                 80
@@ -234,7 +204,7 @@ boolean firstTime=true;
 
         @Override
         public int getColumnCount() {
-            return headers.length-1;
+            return headers.length - 1;
         }
 
         @Override
@@ -274,7 +244,7 @@ boolean firstTime=true;
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);
             }
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column+1]);
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);
             return convertView;
         }
 

@@ -80,7 +80,7 @@ public class TableFlow extends FlowModel {
                     String text = appearance.getJSONObject(i).getString("text");
                     Log.d("", value);
                     if (onTop)
-                        values.push(new Value(value, bg, text));
+                        values.addFirst(new Value(value, bg, text));
                     else
                         values.add(new Value(value, bg, text));
                 }

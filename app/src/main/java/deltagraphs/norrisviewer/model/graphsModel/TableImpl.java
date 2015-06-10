@@ -175,9 +175,10 @@ public class TableImpl extends Graph implements Table {
             if (data.has("maxItemsPage"))
                 maxItems = data.getInt("maxItemsPage");
 
-            if (data.has("addRowOn"))
+            if (data.has("addRowOn")) {
                 addRowOn = data.getString("addRowOn");
-
+                Log.d("", "top");
+            }
             if ((data.has("sort")) && (data.getJSONObject("sort").has("ordering")))
                 sortOrder = data.getJSONObject("sort").getString("ordering");
 

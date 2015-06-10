@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface TableView {
-    public void setAppearance(String appearance);
 
     public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
 
@@ -31,16 +30,7 @@ public interface TableView {
 
     public void setSortOrder(String sortOrder);
 
-    public void setBorderWidth(int borderWidth);
-
-    public void setBorderColour(String borderColour);
-
     //column parameters
-    public void setHeader(int index, String value, String textColour, String bgColour);
-
-    public void setRowEven(int index, String textColour, String bgColour);
-
-    public void setRowOdd(int index, String textColour, String bgColour);
 
     public void setHeaders(String[] headers);
 
