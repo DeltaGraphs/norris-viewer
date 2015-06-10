@@ -241,10 +241,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             previewLines.add(previewLine);
         }
 
-        //viewport = previewChart.getCurrentViewport();
+        viewport = chart.getCurrentViewport();
 
-        //float dx = viewport.width();
-        //float dy = viewport.height();
+        float dx = viewport.width();
+        float dy = viewport.height();
 
         data.setLines(lines);
         data.setAxisXBottom(axisX);
@@ -255,7 +255,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setLineChartData(data);
 
         previewChart.setLineChartData(previewData);
-        //previewChart.setCurrentViewport(viewport);
+        previewChart.setCurrentViewport(viewport);
         //previewChart.getCurrentViewport().inset(dx,dy);
     }
 
@@ -283,7 +283,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             title.setText(label);
 
             TextView values = (TextView) layout.findViewById(R.id. coord_values);
-            values.setText("\nVALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY());
+            values.setText("x = " + value.getX() + "\ny = " + value.getY());
 
             Toast toast = new Toast(getApplicationContext());
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -319,22 +319,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         super.onDestroy();
         lineChartPresenter.destroy();
     }
-
-
-
-/*
-    public class FireMissilesDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Legend");
-
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
-    }
-    */
 
     private void previewY() {
         Viewport tempViewport = new Viewport(chart.getMaximumViewport());
