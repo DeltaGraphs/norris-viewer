@@ -53,7 +53,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     }
 
     private void setGraphParameters() {
-        graphView.setAddRowOn(tableInstance.getAddRowOn());
         graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
         graphView.setSortable(tableInstance.getSortable());
         graphView.setSortByCol(tableInstance.sortByCol());

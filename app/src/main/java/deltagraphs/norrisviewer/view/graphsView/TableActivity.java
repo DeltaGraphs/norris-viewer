@@ -46,6 +46,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         baseTableAdapter = new FamilyNexusAdapter(this);
+        setContentView(R.layout.table);
+        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
         Log.d("","arrivato qui");
         Log.d("","anche qui");
@@ -81,10 +83,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
     }
 
-    @Override
-    public void setAddRowOn(String addRowOn) {
-
-    }
 
     @Override
     public void setMaxItemsDisplayedPerPage(int maxItemsPerPage) {
@@ -137,10 +135,11 @@ public class TableActivity extends ActionBarActivity implements TableView {
         Log.d("", "stampaHeaders");
     }
 
-
+    int rows=0;
+boolean firstTime=true;
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
-
+        rows=0;
         baseTableAdapter = new FamilyNexusAdapter(this);
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
@@ -158,18 +157,18 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
                 }
                 ((FamilyNexusAdapter)baseTableAdapter).families[0].list.add(new Nexus(values));
+                rows++;
             }
         }
-Log.d("", "a");
 
 
-        setContentView(R.layout.table);
-        Log.d("", "b");
-        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
-        Log.d("", "c");
-        tableFixHeaders.setAdapter(baseTableAdapter);
+
+            Log.d("", "c");
+            tableFixHeaders.setAdapter(baseTableAdapter);
+            firstTime = false;
+         baseTableAdapter.notifyDataSetChanged();
         Log.d("", "d");
-        //tableFixHeaders.animate();
+        tableFixHeaders.animate();
     }
 
 
@@ -196,7 +195,7 @@ Log.d("", "a");
 
         private Nexus(String[] values){ data = values; }
 
-        private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {
+        /*private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {
             data = new String[]{
                     name,
                     company,
@@ -205,7 +204,7 @@ Log.d("", "a");
                     storage,
                     inches,
                     ram};
-        }
+        }*/
     }
 
 
@@ -222,9 +221,7 @@ Log.d("", "a");
 
         public FamilyNexusAdapter(Context context) {
             families = new NexusTypes[]{
-                    new NexusTypes(""),
-                    new NexusTypes("Tablets"),
-                    new NexusTypes("Others"),
+                    new NexusTypes("")
             };
 
             density = context.getResources().getDisplayMetrics().density;
@@ -232,7 +229,7 @@ Log.d("", "a");
 
         @Override
         public int getRowCount() {
-            return 14;
+            return rows;
         }
 
         @Override
@@ -305,7 +302,7 @@ Log.d("", "a");
             }
             final String string;
             if (column == -1) {
-                string = getFamily(row).name;
+                string = getFamily(0).name;
             } else {
                 string = "";
             }
