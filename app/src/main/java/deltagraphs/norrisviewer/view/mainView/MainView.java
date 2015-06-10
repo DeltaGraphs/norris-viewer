@@ -20,7 +20,6 @@ package deltagraphs.norrisviewer.view.mainView;
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 
 public interface MainView {
-    public void updatePagesList(PageModel pageModel);
-
-    public void setTitle(String title);
+    void updatePagesList(PageModel pageModel);
+    void setTitle(String title);
 }

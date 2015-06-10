@@ -78,7 +78,6 @@ public class MapChartImpl extends Graph implements MapChart {
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
             for (int i = 0; i < flowLenght; i++) {
-                Log.d("getJSONObject", jsonFlows.getJSONObject(i).toString());
                 JSONObject flow = jsonFlows.getJSONObject(i);
                 addFlow(flow);
             }

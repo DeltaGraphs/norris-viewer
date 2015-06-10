@@ -47,6 +47,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         );
         graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());
         graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());
+        graphView.setMapType(mapChartInstance.getMapType());
     }
 
     @Override

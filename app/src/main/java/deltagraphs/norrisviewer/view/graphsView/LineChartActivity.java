@@ -36,15 +36,10 @@ import lecho.lib.hellocharts.view.LineChartView;
 
 public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {
 
-    private static final int DEFAULT_DATA = 0;
-    private static final int SUBCOLUMNS_DATA = 1;
-    private static final int STACKED_DATA = 2;
-    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
-    private static final int NEGATIVE_STACKED_DATA = 4;
+
 
     private List<Line> lines;
     private List<Line> previewLines;
-    private List<String> indexesList = new ArrayList<String>();
 
     private LineChartPresenter lineChartPresenter;
 
@@ -63,7 +58,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private boolean hasLabels = false;
     private boolean hasLabelForSelected = false;
     private boolean hasViewFinder = false;
-    private int dataType = DEFAULT_DATA;
     private Viewport viewport;
 
     private Axis axisX;
@@ -107,7 +101,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         hasAxesNames = true;
         hasLabels = false;
         hasLabelForSelected = false;
-        dataType = DEFAULT_DATA;
         chart.setValueSelectionEnabled(hasLabelForSelected);
     }
 

@@ -97,12 +97,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
-    @Override
-    public void onMapReady(GoogleMap mMap) {
-    }
-
-    public Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
-        MarkerOptions mMarkerOptions = newMarker(id, lat, lng, type, property, color);
+    private Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
+        MarkerOptions mMarkerOptions = newMarkerOpt(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
         removeMarker(id);
         Marker m = map.addMarker(mMarkerOptions);
@@ -110,7 +106,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return m;
     }
 
-    public void removeMarker(String id) {
+    private void removeMarker(String id) {
         for (int i = 0; i < markers.size(); i++) {
             //se gli Id sono uguali lo elimina dalla lista
             if (markers.get(i).getTitle().equals(id)) {
@@ -125,7 +121,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
 
-    public float getHueFromString(String c) {
+    private float getHueFromString(String c) {
         String color = c;
 
         int r = Integer.parseInt(color.substring(1, 3), 16); // Grab the hex representation of red (chars 1-2) and convert to decimal (base 10).
@@ -137,7 +133,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
 
-    public MarkerOptions newMarker(String id, float lat, float lng, String type, String property, String color) {
+    public MarkerOptions newMarkerOpt(String id, float lat, float lng, String type, String property, String color) {
 
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
@@ -215,25 +211,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return mPolyline;
     }
 
-    //Gestione del tipo della mappa
-
-    public void setType(String type) {
-        //satellite, hybrid, terrain
-        switch (type) {
-            case "roadMap":
-                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-            case "satellite":
-                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-            case "hybrid":
-                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            case "terrain":
-                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-            default:
-                map.setMapType(GoogleMap.MAP_TYPE_NONE);
-        }
-    }
-
-
     public void setZoom(float width, float height) {
         if (center != null) {
             double[] ref = getBoundingBox(center.latitude, center.longitude, (int) width, (int) height);
@@ -269,6 +246,24 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     @Override
     public void setMapType(String type) {
+        //satellite, hybrid, terrain
+        switch (type) {
+            case "roadmap":
+                map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                break;
+            case "satellite":
+                map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                break;
+            case "hybrid":
+                map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                break;
+            case "terrain":
+                map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                break;
+            default:
+                map.setMapType(GoogleMap.MAP_TYPE_NONE);
+                break;
+        }
     }
 
     @Override
@@ -336,4 +331,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
 }
