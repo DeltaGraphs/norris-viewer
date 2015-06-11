@@ -25,4 +25,6 @@ public interface MainPresenter {
     void stopConnection();
     void destroyConnection();
     void startConnection();
+    boolean isConnected();
+    boolean isSocketNull();
 }

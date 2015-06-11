@@ -114,6 +114,16 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     }
 
     @Override
+    public boolean isConnected() {
+        return mainSocket.isConnected();
+    }
+
+    @Override
+    public boolean isSocketNull() {
+        return mainSocket.isNull();
+    }
+
+    @Override
     public void update(Observable observable, Object data) {
         Log.d("", "update");
         mainView.updatePagesList(pageModel);
