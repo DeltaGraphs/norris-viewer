@@ -10,15 +10,25 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.4.2 2015-05-14 Enrico Savoca Update method addRecords(JSONArray data, boolean insertOnTop)
  *
- * 0.0.1 2015-05-13 Enrico Savoca Creazione file
+ * 0.4.1 2015-05-14 Enrico Savoca fix some bugs of  initial configuration, added attribute "configured"
+ *
+ * 0.4.0 2015-05-14 Enrico Savoca Add method updateRecords(JSONObject data), used by JSONParser
+ *
+ * 0.3.0 2015-05-14 Enrico Savoca Apply other several changes to JSONParser(JSONObject obj, String signal)
+ *
+ * 0.2.0 2015-05-14 Enrico Savoca Apply several changes to JSONParser(JSONObject obj, String signal)
+ *
+ * 0.1.1 2015-05-15 Enrico Savoca Change the method addFlow to abstract
+ *
+ * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-13 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
-
-import android.util.Log;
 
 import deltagraphs.norrisviewer.model.flowModel.*;
 
@@ -71,7 +81,7 @@ public abstract class Graph extends Observable {
         int index = searchFlowIndex(flowID);
         if (index != -1) {
             flowList.remove(index);
-        }//else eccezione
+        }
     }
 
     // it searches the flow index in the list of flows
@@ -113,7 +123,6 @@ public abstract class Graph extends Observable {
                         JSONObject jsonFlowParam = obj.getJSONObject("properties");
                         addFlow(jsonFlowParam);
                     }
-                    Log.d("insert", "insertFlow");
                     int flowIndex = searchFlowIndex(obj.getJSONObject("properties").getString("ID"));
                     if (flowIndex != -1) {
                         flowList.get(flowIndex).createFlow(obj);
@@ -121,7 +130,6 @@ public abstract class Graph extends Observable {
                     break;
                 }
                 case "deleteFlow": {
-                    Log.d("delete", "deleteFlow");
                     String id = obj.getString("ID");
                     deleteFlow(id);
                     break;
@@ -132,7 +140,6 @@ public abstract class Graph extends Observable {
                     break;
                 }
                 case "updateFlowData": {
-                    Log.d("graph", "dentro updateFlowData");
                     updateRecords(obj);
                     break;
                 }
@@ -150,10 +157,9 @@ public abstract class Graph extends Observable {
                     String id = data.getString("ID");
                     int flowIndex = searchFlowIndex(id);
                     if (flowIndex != -1) {
-                        Log.d("", "insert");
                         boolean insertOnTop = false; // only for the table
-                        if ((this instanceof Table)&&((TableImpl) this).getAddRowOn().equals("top")){
-                            insertOnTop=true; Log.d("", "insertToop");}
+                        if ((this instanceof Table) && ((TableImpl) this).getAddRowOn().equals("top"))
+                            insertOnTop = true;
                         flowList.get(flowIndex).addRecords(data.getJSONArray("records"), insertOnTop);
                     }
                     break;

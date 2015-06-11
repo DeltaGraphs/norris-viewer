@@ -10,9 +10,9 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.1.0 2015-05-17 Enrico Savoca Coding of all methods
  *
- * 0.0.1 2015-05-17 Enrico Savoca Creazione file
+ * 0.0.1 2015-05-17 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -26,8 +26,6 @@ public interface Table {
     public String getAddRowOn();
 
     public int getMaxItems();
-
-    public Boolean getSortable();
 
     public String sortByCol();
 

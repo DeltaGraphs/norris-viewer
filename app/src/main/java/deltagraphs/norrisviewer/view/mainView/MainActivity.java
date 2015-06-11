@@ -198,7 +198,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
                     break;
                 case TABLE:
                     intent = new Intent(getActivity(), TableActivity.class);
-                    Log.d("", "premuto");
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);

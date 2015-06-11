@@ -1,7 +1,5 @@
 package deltagraphs.norrisviewer.model.pageModel;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,9 +18,17 @@ import java.util.Observer;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.2.3 2015-05-12 Enrico Savoca Add variable "configured" and some related methods to avoid configuration problems
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creazione file
+ * 0.2.2 2015-05-12 Enrico Savoca Changes to constructor
+ *
+ * 0.2.1 2015-05-12 Enrico Savoca Fix some reading errors in JSONParser(JSONObject data, String signal)
+ *
+ * 0.2.0 2015-05-12 Enrico Savoca Several changes to JSONParser(JSONObject data, String signal)
+ *
+ * 0.1.0 2015-05-12 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-12 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -63,7 +69,6 @@ public class PageModelImpl extends Observable implements PageModel {
                        After this, it creates and populates each page */
 
                         name = data.getString("name");
-                        Log.d("", "qualcosa arriva");
                         JSONArray pagesArray = data.getJSONArray("data");
                         for (int i = 0; i < pagesArray.length(); i++) {
                             JSONObject page = pagesArray.getJSONObject(i);
@@ -90,7 +95,6 @@ public class PageModelImpl extends Observable implements PageModel {
                     break;
                 }
                 case ("insertPage"): {
-                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a new Page,
                     // with every parameters, is added to the pages list of PageModel.
 
@@ -131,7 +135,6 @@ public class PageModelImpl extends Observable implements PageModel {
                     break;
                 }
                 case ("insertGraph"): {
-                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a new Graph,
                     // with every parameters, is added to the item list of the declared Page.
 
@@ -154,7 +157,6 @@ public class PageModelImpl extends Observable implements PageModel {
                 }
 
                 case ("updateGraph"): {
-                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a Graph,
                     // identified by an id, is updated.
 

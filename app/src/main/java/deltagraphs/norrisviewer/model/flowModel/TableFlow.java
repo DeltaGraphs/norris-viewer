@@ -10,21 +10,27 @@ package deltagraphs.norrisviewer.model.flowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica degli attributi e dei parametri
+ * 0.3.2 2015-05-14 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
- * 0.0.1 2015-05-14 Enrico Creazione file
+ * 0.3.1 2015-05-14 Enrico Savoca Fix some JSON-reading bugs
+ *
+ * 0.3.0 2015-05-14 Enrico Savoca Add classes TableRecord and Value
+ *
+ * 0.2.0 2015-05-14 Enrico Savoca Reorganize the whole class
+ *
+ * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attibutes
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
 
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
@@ -157,7 +163,6 @@ public class TableFlow extends FlowModel {
                 for (int i = 0; i < recordLength; i++) {
                     JSONObject record = jsonRecords.getJSONObject(i);
                     addFirstRecord(record);
-                    Log.d("", "addOnTop");
                 }
             } else {
                 for (int i = 0; i < recordLength; i++) {

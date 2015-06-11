@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.EditText;
 
 import java.util.Observable;
@@ -54,7 +53,6 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
         mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
         mainSocket.startConnection();
-        Log.d("", mainSocket.getSocketUrl());
     }
 
     public void reinitializePageList() {
@@ -125,7 +123,6 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        Log.d("", "update");
         mainView.updatePagesList(pageModel);
     }
 

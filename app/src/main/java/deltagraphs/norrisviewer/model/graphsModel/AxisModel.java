@@ -14,10 +14,14 @@ import org.json.JSONObject;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
- * 0.1.0 2015-05-15 Enrico Savoca Codifica di tutti gli attributi e i metodi
  *
- * 0.0.1 2015-05-15 Enrico Savoca Creazione file
+ * 0.1.2 2015-05-15 Enrico Savoca Fix method AxisModel(JSONObject params)
+ *
+ * 0.1.1 2015-05-15 Enrico Savoca Change the type of minIndex from int to float
+ *
+ * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attibutes
+ *
+ * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -35,7 +39,6 @@ public class AxisModel {
         try {
             if (params.has("name"))
                 name = params.getString("name");
-            Log.d("", name);
             if (params.has("color"))
                 appearance = params.getString("color");
             if (params.has("maxIndex"))

@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -37,17 +36,17 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.5.0 2015-05-14 Davide Trivellato coding of method setData(ArrayList<FlowModel> flowList, String signal)
+ * 0.5.0 2015-05-14 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal)
  *
- * 0.4.0 2015-05-14 Davide Trivellato coding of method setPolyline(ArrayList<LatLng> polyline, String color)
+ * 0.4.0 2015-05-14 Davide Trivellato Coding of method setPolyline(ArrayList<LatLng> polyline, String color)
  *
- * 0.3.0 2015-05-14 Davide Trivellato set zoom and camera position
+ * 0.3.0 2015-05-14 Davide Trivellato Set zoom and camera position
  *
- * 0.2.1 2015-05-14 Davide Trivellato fixed markers colors
+ * 0.2.1 2015-05-14 Davide Trivellato Fixed markers colors
  *
- * 0.2.0 2015-05-14 Davide Trivellato set customization for markers
+ * 0.2.0 2015-05-14 Davide Trivellato Set customization for markers
  *
- * 0.1.0 2015-05-14 Davide Trivellato coding of methods and attributes
+ * 0.1.0 2015-05-14 Davide Trivellato Coding of methods and attributes
  *
  * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
  *
@@ -139,7 +138,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
     private void removeMarker(String id) {
         for (int i = 0; i < markers.size(); i++) {
-            //se gli Id sono uguali lo elimina dalla lista
+            //if in ID already exists, it's removed from the list
             if (markers.get(i).getTitle().equals(id)) {
                 markers.get(i).remove();
                 markers.remove(i);

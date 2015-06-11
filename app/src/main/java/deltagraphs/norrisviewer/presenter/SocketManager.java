@@ -3,7 +3,6 @@ package deltagraphs.norrisviewer.presenter;
 import java.net.URISyntaxException;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -91,7 +90,6 @@ public class SocketManager {
     }
 
     public void startListening(final String signal, final Activity activity, final Object model) {
-        Log.d("", "onSocket");
         mSocket.on(signal, new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -110,10 +108,6 @@ public class SocketManager {
                             ((Graph) model).setGraph(obj, signal);
                         } else if (activity instanceof TableView)
                             ((Graph) model).setGraph(obj, signal);
-
-                        else {
-                            Log.d("", "qualcosa non va");
-                        }
                     }
                 });
             }

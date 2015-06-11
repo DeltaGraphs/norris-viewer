@@ -1,7 +1,5 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,9 +16,15 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica degli attributi e dei parametri
+ * 0.2.1 2015-05-14 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
- * 0.0.1 2015-05-14 Enrico Savoca Creazione file
+ * 0.2.0 2015-05-14 Enrico Savoca Remove useless methods
+ *
+ * 0.1.1 2015-05-14 Enrico Savoca Increment method LineChartFlow(JSONObject data) to manage null JSON Objects
+ *
+ * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attibutes
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -121,7 +125,6 @@ public class LineChartFlow extends FlowModel {
 
     @Override
     public void createFlow(JSONObject data) {
-        Log.d("flow", "createFlow");
         try {
             JSONArray recordList = data.getJSONArray("records");
             addRecords(recordList, false);
@@ -134,7 +137,6 @@ public class LineChartFlow extends FlowModel {
     @Override
     public void updateFlow(JSONObject data) {
         try {
-            Log.d("flow", "updateFlow");
             flowName = data.getString("name");
             flowColour = data.getString("flowColor");
             marker = data.getString("marker");
@@ -154,7 +156,6 @@ public class LineChartFlow extends FlowModel {
     @Override
     public void addRecord(JSONObject data) {
         try {
-            Log.d("flow", "addRecord");
             String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             float xValue = (float) jsonValues.getDouble(0);
@@ -168,7 +169,6 @@ public class LineChartFlow extends FlowModel {
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
-            Log.d("flow", "addRecords");
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);
@@ -182,7 +182,6 @@ public class LineChartFlow extends FlowModel {
     @Override
     public void updateRecord(JSONObject data) {
         try {
-            Log.d("flow", "updateRecord");
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             JSONArray jsonValues = data.getJSONArray("value");
@@ -208,7 +207,6 @@ public class LineChartFlow extends FlowModel {
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-            Log.d("flow", "deleteRecord");
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             records.remove(recordIndex);

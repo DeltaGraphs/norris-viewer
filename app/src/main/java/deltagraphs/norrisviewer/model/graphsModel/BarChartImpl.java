@@ -19,9 +19,13 @@ import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-15 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.1.2 2015-05-19 Enrico Savoca Several changes to Constructor
  *
- * 0.0.1 2015-05-15 Enrico Savoca Creazione file
+ * 0.1.1 2015-05-18 Enrico Savoca Remove method sortable and all sortable related mehods
+ *
+ * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -34,7 +38,6 @@ public class BarChartImpl extends Graph implements BarChart {
     private ArrayList<String> headers = new ArrayList<String>();
     private String barOrientation = "V";
     private String background;
-    private Boolean sortable;
     private Boolean grid;
     private Boolean legendOnPoint;
 
@@ -58,10 +61,6 @@ public class BarChartImpl extends Graph implements BarChart {
         return barOrientation;
     }
 
-    //public Boolean getSortable() {
-        //return sortable;
-   // }
-
     public Boolean getGrid() {
         return grid;
     }
@@ -81,7 +80,6 @@ public class BarChartImpl extends Graph implements BarChart {
             title = data.getString("title");
             background = data.getString("backgroundColor");
             barOrientation = data.getString("barOrientation");
-            //sortable = data.getBoolean("sortable");
             grid = data.getBoolean("grid");
             legendOnPoint = data.getBoolean("legendOnPoint");
             JSONArray jsonHeaders = data.getJSONArray("headers");
@@ -118,8 +116,6 @@ public class BarChartImpl extends Graph implements BarChart {
                 background = data.getString("backgroundColor");
             if (data.has("barOrientation"))
                 barOrientation = data.getString("barOrientation");
-            if (data.has("sortable"))
-                sortable = data.getBoolean("sortable");
             if (data.has("grid"))
                 grid = data.getBoolean("grid");
             if (data.has("legendOnPoint"))

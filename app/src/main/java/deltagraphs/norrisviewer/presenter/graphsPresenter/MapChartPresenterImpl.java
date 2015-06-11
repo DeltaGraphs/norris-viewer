@@ -33,8 +33,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         graphView = view;
         mapChartInstance = new MapChartImpl(this);
         startSocket((MapChartActivity) view, mapChartInstance);
-        //lineChartInstance = new LineChartImpl(jsonData);
-        //this.setUpViews();
     }
 
     public void startConnection() {
@@ -57,8 +55,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
             if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
             graphView.setData(mapChartInstance.getFlowList(), signal);
-
-            firstConnection = false;
         }
     }
 

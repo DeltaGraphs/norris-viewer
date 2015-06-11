@@ -3,12 +3,9 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.SeekBar;
-import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -18,9 +15,6 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.Highlight;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +62,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // NASCONDE LA BARRA IN ALTO
+        // the following method hides the status bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -158,7 +152,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     }
 
     private void initializeBarChart() {
-        Log.d("", "John spaccia log");
         setContentView(R.layout.activity_bar_chart);
 
         vBarChart = (BarChart) findViewById(R.id.chart1);

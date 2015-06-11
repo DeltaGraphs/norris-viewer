@@ -10,15 +10,17 @@ package deltagraphs.norrisviewer.model.flowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica degli attributi e dei parametri
+ * 0.2.1 2015-05-14 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
- * 0.0.1 2015-05-14 Enrico Creazione file
+ * 0.2.0 2015-05-14 Enrico Savoca Add classes TraceModel and Marker
+ *
+ * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attibutes
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
-
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -232,7 +234,6 @@ public class MapChartFlow extends FlowModel {
             String markerId = data.getString("markerID");
             float latitude = (float) data.getJSONArray("value").getDouble(0);
             float longitude = (float) data.getJSONArray("value").getDouble(1);
-            Log.d("addRecordJSONObjectdata", recordId + " " + markerId + " " + latitude + " " + longitude);
             records.add(new MapChartRecord(recordId, markerId, latitude, longitude));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -245,7 +246,6 @@ public class MapChartFlow extends FlowModel {
             int recordLength = jsonRecords.length();
             for (int i = 0; i < recordLength; i++) {
                 JSONObject record = jsonRecords.getJSONObject(i);
-                Log.d("addRecords" + i, record.toString());
                 addRecord(record);
             }
         } catch (JSONException e) {

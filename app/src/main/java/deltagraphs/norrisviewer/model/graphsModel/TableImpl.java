@@ -9,10 +9,14 @@ package deltagraphs.norrisviewer.model.graphsModel;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
- * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
  *
- * 0.0.1 2015-05-17 Enrico Savoca Creazione file
+ * 0.1.2 2015-05-19 Enrico Savoca Several changes to Constructor
+ *
+ * 0.1.1 2015-05-15 Enrico Savoca Add some default value for sortOrder, sortColumn and borderWidth
+ *
+ * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -76,9 +80,7 @@ public class TableImpl extends Graph implements Table {
         return maxItems;
     }
 
-    public Boolean getSortable() {
-        return sortable;
-    }
+    public Boolean getSortable() { return sortable; }
 
     public String sortByCol() {
         return sortColumn;

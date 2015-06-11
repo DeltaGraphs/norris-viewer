@@ -1,7 +1,5 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import android.util.Log;
-
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -36,20 +34,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         graphView = view;
         lineChartInstance = new LineChartImpl(this);
         startSocket((LineChartActivity) view, lineChartInstance);
-
-        //this.setUpViews();
     }
-
-         /*  @Override
-    public void setUpViews() {
- previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
-        previewLineChartView.setLineChartData(dataModel.getData());
-        previewLineChartView.setLineChartData(previewData);
-        // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
-        // zoom/scroll is unnecessary.
-        previewLineChartView.setZoomEnabled(false);
-        previewLineChartView.setScrollEnabled(false);
-    }*/
 
     private void startNewConnections() {
         startSocket((LineChartActivity) graphView, lineChartInstance);
@@ -58,15 +43,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
-            // in quanto potremmo avere piu modelli dati
-            // verifichiamo su quale modello  avvenuto un cambiamento dei dati
-            // prima di effettuare il cast
             String signal = (String) data;
             if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
-            Log.d("LineChartPresenterImpl", "Chiamato il setData");
         }
     }
 

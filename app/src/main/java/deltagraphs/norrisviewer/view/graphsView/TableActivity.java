@@ -1,9 +1,8 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,22 +10,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import deltagraphs.norrisviewer.R;
-import deltagraphs.norrisviewer.model.flowModel.FlowModel;
-import deltagraphs.norrisviewer.model.flowModel.TableFlow;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
-import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
-
 import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import deltagraphs.norrisviewer.R;
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.TableFlow;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
 public class TableActivity extends ActionBarActivity implements TableView {
 
@@ -39,12 +35,10 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private TablePresenter tablePresenter;
     String headers[];
     int rows = 0;
-    boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_table);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -58,9 +52,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         setContentView(R.layout.table);
         tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
-        Log.d("", "arrivato qui");
-        Log.d("", "anche qui");
-
     }
 
     @Override
@@ -134,12 +125,9 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
-        Log.d("", "stampaHeaders");
     }
 
     private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
-        Log.d("", String.valueOf(rows));
-        Log.d("", String.valueOf(numOfColumns));
         ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < flowList.size(); i++) {
             TableFlow tableFlow = (TableFlow) flowList.get(i);
@@ -147,7 +135,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 tableFlow.getRecordId(j);
                 ArrayList<String> row = new ArrayList<String>();
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
-                    Log.d("", tableFlow.getCellData(j, indexCol));
                     row.add(tableFlow.getCellData(j, indexCol));
                 }
                 table.add(row);
@@ -165,12 +152,10 @@ public class TableActivity extends ActionBarActivity implements TableView {
             String[] values = new String[numOfColumns];
             for (int i = 0; i < numOfColumns; i++) {
                 values[i] = table.get(j).get(i);
-                Log.d("", values[i]);
             }
             ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
 
         }
-        Log.d("", String.valueOf(((FamilyNexusAdapter) baseTableAdapter).families[0].list.size()));
         rows = table.size();
     }
 
@@ -190,12 +175,9 @@ public class TableActivity extends ActionBarActivity implements TableView {
                     rows++;
                 }
             }
-            Log.d("", "non ordina qui");
         } else {
             sort(flowList, numOfColumns);
-            Log.d("", "ordinare");
         }
-        Log.d("", String.valueOf(rows));
         tableFixHeaders.setAdapter(baseTableAdapter);
         baseTableAdapter.notifyDataSetChanged();
         tableFixHeaders.animate();

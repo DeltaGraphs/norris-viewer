@@ -32,7 +32,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -96,7 +95,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        Log.d("", "onCreate");
         setContentView(R.layout.line_chart);
         chart = (LineChartView) findViewById(R.id.chart);
         chart.setOnValueTouchListener(new ValueTouchListener());
