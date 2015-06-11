@@ -1,8 +1,8 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 /*
- * Name : TableChartView.java
- * Module : com.example.deltagraphs.norrisviewer.view.graphsView
+ * Name : TableView.java
+ * Module : norrisviewer::view::graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :
@@ -10,7 +10,9 @@ package deltagraphs.norrisviewer.view.graphsView;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.0.1 2015-05-16 Davide Trivellato Creazione file
+ * 0.1.0 2015-05-14 Enrico Savoca coding of methods
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca creation of the file
  *
  * ===============================================================
  *

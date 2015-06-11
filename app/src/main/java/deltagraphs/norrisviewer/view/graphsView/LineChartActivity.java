@@ -10,19 +10,17 @@ package deltagraphs.norrisviewer.view.graphsView;
  * Version   Date       Programmer              Description
  * ==========================================================================================
  *
- * 0.3.3 2015-05-28 Davide Trivellato Impostato stile grafico della legenda
+ * 0.3.2 2015-05-28 Davide Trivellato Update legend style
  *
- * 0.3.2 2015-05-25 Davide Trivellato Pulizia del codice
+ * 0.3.1 2015-05-22 Davide Trivellato Fix ViewFinder
  *
- * 0.3.1 2015-05-22 Davide Trivellato Fix al ViewFinder
+ * 0.3.0 2015-05-21 Davide Trivellato Coding of menu, axis and flow colours
  *
- * 0.3.0 2015-05-21 Davide Trivellato Codifica di menù, assi e colori dei flussi
+ * 0.2.0 2015-05-20 Davide Trivellato Implementation of ViewFinder and legend
  *
- * 0.2.0 2015-05-20 Davide Trivellato Implementazione del ViewFinder e legenda
+ * 0.1.0 2015-05-19 Davide Trivellato Coding of methods and attributes
  *
- * 0.1.0 2015-05-19 Davide Trivellato Codifica di tutti gli attributi e i metodi principali
- *
- * 0.0.1 2015-05-18 Davide Trivellato Creazione file
+ * 0.0.1 2015-05-18 Davide Trivellato Creation of the file
  *
  * =========================================================================================
  *

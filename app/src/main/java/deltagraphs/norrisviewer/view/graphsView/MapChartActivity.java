@@ -28,7 +28,7 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
 /*
  * Name : MapChartActivity.java
- * Module : norrisviewer.view.graphsView
+ * Module : norrisviewer::view::graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :

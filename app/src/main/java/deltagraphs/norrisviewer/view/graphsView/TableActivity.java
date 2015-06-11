@@ -24,6 +24,37 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
+/*
+ * Name : TableActivity.java
+ * Module : norrisviewer::view::graphsView
+ * Location : norrisviewer\view\graphsView
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.5.1 2015-05-14 Enrico Savoca Fixes to table settings
+ *
+ * 0.5.0 2015-05-14 Enrico Savoca Several changes to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ *
+ * 0.4.0 2015-05-14 Enrico Savoca Several changes to sort(ArrayList<FlowModel> flowList, int numOfColumns)
+ *
+ * 0.3.0 2015-05-14 Enrico Savoca Add sort(ArrayList<FlowModel> flowList, int numOfColumns)
+ *
+ * 0.2.0 2015-05-14 Enrico Savoca Update setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ *
+ * 0.1.1 2015-05-14 Enrico Savoca Update setData(ArrayList<FlowModel> flowList) to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ *
+ * 0.1.0 2015-05-14 Enrico Savoca Coding of methods and attributes
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
+ *
+ * ===============================================================
+ *
+ */
+
+
 public class TableActivity extends ActionBarActivity implements TableView {
 
     private TableFixHeaders tableFixHeaders;

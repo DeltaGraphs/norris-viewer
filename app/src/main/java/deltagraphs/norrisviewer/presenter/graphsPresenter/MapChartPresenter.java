@@ -10,7 +10,7 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-20 Davide Trivellato Coding of all methods and attributes
+ * 0.1.0 2015-05-20 Davide Trivellato Coding of all methods
  *
  * 0.0.1 2015-05-20 Davide Trivellato Creation of the file
  *

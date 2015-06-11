@@ -2,7 +2,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 
 /*
  * Name : MapChartView.java
- * Module : deltagraphs.norrisviewer.view.graphsView
+ * Module : norrisviewer::view::graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :
@@ -10,9 +10,9 @@ package deltagraphs.norrisviewer.view.graphsView;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.1.0 2015-05-19 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.1.0 2015-05-14 Enrico Savoca coding of methods
  *
- * 0.0.1 2015-05-19 Enrico Savoca Creazione file
+ * 0.0.1 2015-05-14 Enrico Savoca creation of the file
  *
  * ===============================================================
  *

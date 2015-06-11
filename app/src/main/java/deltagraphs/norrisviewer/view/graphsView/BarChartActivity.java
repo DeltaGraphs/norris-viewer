@@ -27,7 +27,7 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 
 /*
  * Name : BarChartActivity.java
- * Module : norrisviewer.view.graphsView
+ * Module : norrisviewer::view::graphsView
  * Location : norrisviewer\view\graphsView
  *
  * History :
@@ -35,15 +35,15 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.4.0 2015-05-14 Davide Trivellato create the legend panel
+ * 0.4.0 2015-05-14 Davide Trivellato Create the legend panel
  *
- * 0.3.0 2015-05-14 Davide Trivellato managing bar orientation
+ * 0.3.0 2015-05-14 Davide Trivellato Managing bar orientation
  *
- * 0.2.0 2015-05-14 Davide Trivellato coding of method setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers)
+ * 0.2.0 2015-05-14 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers)
  *
- * 0.1.0 2015-05-14 Davide Trivellato coding of methods and attributes
+ * 0.1.0 2015-05-14 Davide Trivellato Coding of methods and attributes
  *
- * 0.0.1 2015-05-14 Davide Trivellato creation of the file
+ * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

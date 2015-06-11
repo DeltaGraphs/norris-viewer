@@ -10,7 +10,9 @@ package deltagraphs.norrisviewer.view.mainView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.0.1 2015-05-13 Davide Trivellato Creazione file
+ * 0.1.0 2015-05-14 Davide Trivellato Coding of methods
+ *
+ * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

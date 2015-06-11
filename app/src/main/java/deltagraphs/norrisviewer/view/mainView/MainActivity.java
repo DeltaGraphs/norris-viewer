@@ -47,9 +47,15 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-13 Davide Trivellato Codifica di tutti gli attributi e i metodi
+ * 0.3.1 2015-05-14 Davide Trivellato update method updatePagesList(PageModel pageModel)
  *
- * 0.0.1 2015-05-13 Davide Trivellato Creazione file
+ * 0.3.0 2015-05-14 Davide Trivellato Add settings
+ *
+ * 0.2.0 2015-05-14 Davide Trivellato Add fragment
+ *
+ * 0.1.0 2015-05-14 Davide Trivellato Coding of methods
+ *
+ * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *
