@@ -23,19 +23,8 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface BarChartView {
-    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale);
+    void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale);
 
-    public void setHeaders(ArrayList<String> headers);
-
-    public void setBackground(String bg);
-
-    public void setBarOrientation(String orientation);
-
-   // public void setSortable(Boolean choise);
-
-    public void setGrid(Boolean grid);
-
-    public void setLegendOnPoint(Boolean legend);
-
-    public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers);
+    void setBarOrientation(String orientation);
+    void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers);
 }

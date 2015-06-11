@@ -27,6 +27,34 @@ import deltagraphs.norrisviewer.presenter.Convert;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 
+/*
+ * Name : MapChartActivity.java
+ * Module : norrisviewer.view.graphsView
+ * Location : norrisviewer\view\graphsView
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.5.0 2015-05-14 Davide Trivellato coding of method setData(ArrayList<FlowModel> flowList, String signal)
+ *
+ * 0.4.0 2015-05-14 Davide Trivellato coding of method setPolyline(ArrayList<LatLng> polyline, String color)
+ *
+ * 0.3.0 2015-05-14 Davide Trivellato set zoom and camera position
+ *
+ * 0.2.1 2015-05-14 Davide Trivellato fixed markers colors
+ *
+ * 0.2.0 2015-05-14 Davide Trivellato set customization for markers
+ *
+ * 0.1.0 2015-05-14 Davide Trivellato coding of methods and attributes
+ *
+ * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
+ *
+ * ===============================================================
+ *
+ */
+
 public class MapChartActivity extends ActionBarActivity implements OnMapReadyCallback, MapChartView {
 
     private GoogleMap map; // Might be null if Google Play services APK is not available.

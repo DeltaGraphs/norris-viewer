@@ -31,6 +31,30 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 
+/*
+ * Name : BarChartActivity.java
+ * Module : norrisviewer.view.graphsView
+ * Location : norrisviewer\view\graphsView
+ *
+ * History :
+
+ * Version Date Programmer Description
+ * ===============================================================
+ *
+ * 0.4.0 2015-05-14 Davide Trivellato create the legend panel
+ *
+ * 0.3.0 2015-05-14 Davide Trivellato managing bar orientation
+ *
+ * 0.2.0 2015-05-14 Davide Trivellato coding of method setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers)
+ *
+ * 0.1.0 2015-05-14 Davide Trivellato coding of methods and attributes
+ *
+ * 0.0.1 2015-05-14 Davide Trivellato creation of the file
+ *
+ * ===============================================================
+ *
+ */
+
 public class BarChartActivity extends ActionBarActivity implements BarChartView {
 
     protected HorizontalBarChart hBarChart;
@@ -44,7 +68,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-// NASCONDE LA BARRA IN ALTO!!!
+        // NASCONDE LA BARRA IN ALTO
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -107,11 +131,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
         // scaling can now only be done on x- and y-axis separately
         hBarChart.setPinchZoom(false);
-
-        // draw shadows for each bar that show the maximum value
-        // hBarChart.setDrawBarShadow(true);
-
-        // hBarChart.setDrawXLabels(false);
 
         hBarChart.setDrawGridBackground(false);
 
@@ -219,16 +238,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     }
 
     @Override
-    public void setHeaders(ArrayList<String> headers) {
-
-    }
-
-    @Override
-    public void setBackground(String bg) {
-
-    }
-
-    @Override
     public void setBarOrientation(String orientation) {
 
         this.orientation = orientation;
@@ -236,16 +245,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             initializeBarChart();
         else
             initializeHorizontalBarChart();
-    }
-
-    @Override
-    public void setGrid(Boolean grid) {
-
-    }
-
-    @Override
-    public void setLegendOnPoint(Boolean legend) {
-
     }
 
     @Override
@@ -273,9 +272,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             set1.setColor(Color.parseColor(color));
             dataSets.add(set1);
 
-
-            //l.setColors(colors);
-            // data.setValueFormatter(new MyValueFormatter());
             data.setValueTextSize(10f);
         }
         data = new BarData(headers, dataSets);
