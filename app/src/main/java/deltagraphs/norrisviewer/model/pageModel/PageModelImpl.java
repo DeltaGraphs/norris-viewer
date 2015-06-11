@@ -114,7 +114,6 @@ public class PageModelImpl extends Observable implements PageModel {
                     break;
                 }
                 case ("updatePage"): {
-                    Log.d("", "qualcosa arriva");
                     // on the arrival of this signal, a page,
                     // identified by an id, is updated.
 

@@ -112,22 +112,29 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onRestart() {
+        if(!presenter.isSocketNull())
+            if(!presenter.isConnected())
+                presenter.startConnection();
         super.onRestart();
     }
 
     @Override
     public void onPause() {
+        /*
         if(!presenter.isSocketNull())
             if(presenter.isConnected())
             presenter.stopConnection();
+            */
         super.onPause();
     }
 
     @Override
     public void onResume() {
+        /*
         if(!presenter.isSocketNull())
             if(!presenter.isConnected())
                 presenter.startConnection();
+                */
         super.onResume();
     }
 
@@ -149,9 +156,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onBackPressed() {
-        if(!presenter.isSocketNull())
-            if(presenter.isConnected())
-                presenter.destroyConnection();
+
         super.onBackPressed();
     }
 
