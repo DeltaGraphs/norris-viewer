@@ -78,7 +78,6 @@ public class TableFlow extends FlowModel {
                     String value = valueList.getString(i);
                     String bg = appearance.getJSONObject(i).getString("bg");
                     String text = appearance.getJSONObject(i).getString("text");
-                    Log.d("", value);
                     values.add(new Value(value, bg, text));
                 }
             } catch (JSONException e) {

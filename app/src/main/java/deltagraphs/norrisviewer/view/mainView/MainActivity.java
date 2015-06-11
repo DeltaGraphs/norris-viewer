@@ -104,7 +104,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
         return super.onOptionsItemSelected(item);
     }
-
+/*
     @Override
     public void onStart() {
         if(!presenter.isSocketNull())
@@ -123,23 +123,23 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onPause() {
-        /*
-        if(!presenter.isSocketNull())
-            if(presenter.isConnected())
-            presenter.stopConnection();
-            */
+
+       // if(!presenter.isSocketNull())
+        //    if(presenter.isConnected())
+       //     presenter.stopConnection();
+
         super.onPause();
     }
 
     @Override
     public void onResume() {
-        /*
-        if(!presenter.isSocketNull())
-            if(!presenter.isConnected())
-                presenter.startConnection();
-                */
         super.onResume();
     }
+
+        //if(!presenter.isSocketNull())
+         //   if(!presenter.isConnected())
+         //       presenter.startConnection();
+
 
     @Override
     public void onStop() {
@@ -156,7 +156,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                 presenter.destroyConnection();
         super.onDestroy();
     }
-
+*/
     @Override
     public void onBackPressed() {
 

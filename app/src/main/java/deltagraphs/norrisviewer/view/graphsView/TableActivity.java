@@ -46,9 +46,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
         //setContentView(R.layout.activity_table);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        //TableLayout tableView = new TableLayout(this);
-        //GridLayout grid = new GridLayout(this);
+               WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
@@ -60,7 +59,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tablePresenter = new TablePresenterImpl(this, sourceURL);
         Log.d("", "arrivato qui");
         Log.d("", "anche qui");
-        //tableFixHeaders.setAdapter(baseTableAdapter);
 
     }
 
@@ -90,7 +88,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setSortByCol(String sortingColumn) {
         int col = 0;
-        for (col = 0; !headers[col].equals(sortingColumn) && col < headers.length; col++) ;
+        for (col = 0; (!(headers[col].equals(sortingColumn)) && (col < headers.length)); col++) ;
         //while(!(headers[col].equals(sortingColumn)))
         if (col >= headers.length)
             col = -1;
@@ -107,36 +105,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         this.headers = headers;
         Log.d("", "stampaHeaders");
     }
-
-   /* private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
-        Log.d("", String.valueOf(rows));
-        Log.d("", String.valueOf(numOfColumns));
-        String[][] values = new String[rows][numOfColumns];
-
-        for (int i = 0; i < flowList.size(); i++) {
-            TableFlow tableFlow = (TableFlow) flowList.get(i);
-            for (int j = 0; j < tableFlow.getRecordSize(); j++) {
-                tableFlow.getRecordId(j);
-                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
-                    Log.d("", tableFlow.getCellData(j, indexCol));
-                    values[j][indexCol] =tableFlow.getCellData(j, indexCol);
-                }
-            }
-        }
-
-        Arrays.sort(values, new Comparator<String[]>() {
-            @Override
-            public int compare(final String[] entry1, final String[] entry2) {
-                final String elem1 = entry1[sortingColumn];
-                final String elem2 = entry2[sortingColumn];
-                return elem1.compareTo(elem2);
-            }
-        });
-        for (int j = 0; j < numOfColumns; j++) {
-            ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values[j]));
-        }
-    }*/
-
 
     private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
         Log.d("", String.valueOf(rows));
@@ -163,25 +131,26 @@ public class TableActivity extends ActionBarActivity implements TableView {
         });
 
         for (int j = 0; j < table.size(); j++) {
-            String[] values=new String[numOfColumns];
-            for(int i=0; i<numOfColumns; i++){
+            String[] values = new String[numOfColumns];
+            for (int i = 0; i < numOfColumns; i++) {
                 values[i] = table.get(j).get(i);
+                Log.d("", values[i]);
             }
             ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
+
         }
+        Log.d("", String.valueOf(((FamilyNexusAdapter) baseTableAdapter).families[0].list.size()));
+        rows = table.size();
     }
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
-        baseTableAdapter = new FamilyNexusAdapter(this);
         rows = 0;
+        baseTableAdapter = new FamilyNexusAdapter(this);
         if (sortingColumn == -1) {
             for (int i = 0; i < flowList.size(); i++) {
-                flowList.get(i).getFlowId();
-                flowList.get(i).getFlowName();
                 TableFlow tableFlow = (TableFlow) flowList.get(i);
                 for (int j = 0; j < tableFlow.getRecordSize(); j++) {
-                    tableFlow.getRecordId(j);
                     String[] values = new String[numOfColumns];
                     for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                         values[indexCol] = tableFlow.getCellData(j, indexCol);
@@ -195,8 +164,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
             sort(flowList, numOfColumns);
             Log.d("", "ordinare");
         }
+        Log.d("", String.valueOf(rows));
         tableFixHeaders.setAdapter(baseTableAdapter);
-        firstTime = false;
         baseTableAdapter.notifyDataSetChanged();
         tableFixHeaders.animate();
     }
@@ -243,8 +212,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
     public class FamilyNexusAdapter extends BaseTableAdapter {
 
         NexusTypes families[];
-        String rowEvenColour;
-        String rowOddColour;
 
         private final int[] widths = {
                 80
@@ -367,7 +334,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 itemViewType = 0;
             } else if (row == -1) {
                 itemViewType = 1;
-            } else if (isFamily(0)) {
+            } else if (isFamily(row)) {
                 itemViewType = 4;
             } else if (column == -1) {
                 itemViewType = 2;

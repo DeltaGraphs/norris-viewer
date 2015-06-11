@@ -22,10 +22,6 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface TableView {
 
-   // public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
-
-    //public void setSortable(Boolean Sortable);
-
     public void setSortByCol(String sortingColumn);
 
     public void setSortOrder(String sortOrder);
