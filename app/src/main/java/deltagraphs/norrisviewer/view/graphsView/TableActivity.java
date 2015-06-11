@@ -15,6 +15,7 @@ import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
+import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
@@ -60,6 +61,36 @@ public class TableActivity extends ActionBarActivity implements TableView {
         Log.d("", "arrivato qui");
         Log.d("", "anche qui");
 
+    }
+
+    @Override
+    public void onResume() {
+        tablePresenter = new TablePresenterImpl(this, sourceURL);
+        super.onResume();
+    }
+
+    @Override
+    public void onStop() {
+        tablePresenter.destroyConnection();
+        super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        tablePresenter.destroyConnection();
+        super.onPause();
+    }
+
+    @Override
+    public void onRestart() {
+        //mapChartPresenter.startConnection();
+        super.onRestart();
+    }
+
+    @Override
+    public void onDestroy() {
+        tablePresenter.destroyConnection();
+        super.onDestroy();
     }
 
     @Override

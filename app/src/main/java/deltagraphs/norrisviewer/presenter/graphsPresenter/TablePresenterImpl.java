@@ -65,4 +65,12 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         graphView.setHeaders(headers);
         graphView.setSortByCol(tableInstance.sortByCol());
     }
+
+    public void stopConnection() {
+        stopSocket();
+    }
+
+    public void destroyConnection() {
+        destroySocket();
+    }
 }
