@@ -104,63 +104,11 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public void onStart() {
-        if(!presenter.isSocketNull())
-            if(!presenter.isConnected())
-                presenter.startConnection();
-        super.onStart();
-    }
-
-    @Override
-    public void onRestart() {
-        if(!presenter.isSocketNull())
-            if(!presenter.isConnected())
-                presenter.startConnection();
-        super.onRestart();
-    }
-
-    @Override
-    public void onPause() {
-
-       // if(!presenter.isSocketNull())
-        //    if(presenter.isConnected())
-       //     presenter.stopConnection();
-
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-        //if(!presenter.isSocketNull())
-         //   if(!presenter.isConnected())
-         //       presenter.startConnection();
 
 
-    @Override
-    public void onStop() {
-        if(!presenter.isSocketNull())
-            if(presenter.isConnected())
-                presenter.stopConnection();
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroy() {
-        if(!presenter.isSocketNull())
-            if(presenter.isConnected())
-                presenter.destroyConnection();
-        super.onDestroy();
-    }
-*/
     @Override
     public void onBackPressed() {
-
-        super.onBackPressed();
+        Toast.makeText(getApplicationContext(),"Press HOME button to exit the application",Toast.LENGTH_SHORT).show();
     }
 
     public void setTitle(String title) {

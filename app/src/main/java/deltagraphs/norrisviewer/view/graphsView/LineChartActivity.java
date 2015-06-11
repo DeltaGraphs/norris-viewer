@@ -253,7 +253,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             previewLines.add(previewLine);
         }
 
-        viewport = previewChart.getCurrentViewport();
+        //viewport = chart.getCurrentViewport();
 
         //float dx = viewport.width();
         //float dy = viewport.height();
@@ -268,7 +268,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
         previewChart.setLineChartData(previewData);
 
-        previewChart.setCurrentViewport(viewport);
+        //previewChart.setCurrentViewport(viewport);
         //previewChart.getCurrentViewport().inset(dx,dy);
     }
 
@@ -312,13 +312,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
 
     }
-
-    /*@Override
-    public void onBackPressed() {
-        // Otherwise defer to system default behavior.
-        super.onBackPressed();
-        this.onDestroy();
-    }*/
 
     public void onDestroy() {
         // Otherwise defer to system default behavior.
@@ -364,7 +357,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         @Override
         public void onViewportChanged(Viewport newViewport) {
             // don't use animation, it is unnecessary when using preview chart.
-            chart.setCurrentViewport(viewport);
+            chart.setCurrentViewport(newViewport);
         }
 
     }
