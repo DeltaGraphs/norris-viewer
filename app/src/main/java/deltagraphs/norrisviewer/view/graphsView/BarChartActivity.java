@@ -35,13 +35,11 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
     protected HorizontalBarChart hBarChart;
     protected BarChart vBarChart;
-    private SeekBar mSeekBarX, mSeekBarY;
-    private TextView tvX, tvY;
     private BarChartPresenter barChartPresenter;
     private String sourceTitle;
     private String sourceURL;
     private String orientation;
-    Legend l;
+    private Legend l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -283,28 +281,21 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         data = new BarData(headers, dataSets);
 
         if (orientation.equals("V")) {
-            setVLegend(lLabels, lColors);
+            setLegend(lLabels);
             vBarChart.setData(data);
             vBarChart.animateY(0);
         } else {
-            setHLegend(lLabels, lColors);
+            setLegend(lLabels);
             hBarChart.setData(data);
             hBarChart.animateX(0);
         }
     }
 
-    public Legend setHLegend(List<String> labels, List<Integer> colors) {
-        l = hBarChart.getLegend();
-        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
-        l.setFormSize(8f);
-        l.setXEntrySpace(4f);
-        l.setLabels(labels);
-        l.getLegendLabels();
-        return l;
-    }
-
-    public Legend setVLegend(List<String> labels, List<Integer> colors) {
-        l = vBarChart.getLegend();
+    private Legend setLegend(List<String> labels) {
+        if(orientation.equals("V"))
+            l = vBarChart.getLegend();
+        else
+            l = hBarChart.getLegend();
         l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);
         l.setFormSize(8f);
         l.setXEntrySpace(4f);

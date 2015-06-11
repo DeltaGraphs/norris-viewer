@@ -56,7 +56,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private boolean hasAxes = true;
     private boolean hasAxesNames = true;
     private boolean hasLabels = false;
-    private boolean hasLabelForSelected = false;
     private boolean hasViewFinder = false;
     private Viewport viewport;
 
@@ -94,14 +93,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_line_chart, menu);
         return true;
-    }
-
-    public void setInitialState() {
-        hasAxes = true;
-        hasAxesNames = true;
-        hasLabels = false;
-        hasLabelForSelected = false;
-        chart.setValueSelectionEnabled(hasLabelForSelected);
     }
 
 
@@ -234,10 +225,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             previewLines.add(previewLine);
         }
 
-        viewport = chart.getCurrentViewport();
+        viewport = previewChart.getCurrentViewport();
 
-        float dx = viewport.width();
-        float dy = viewport.height();
+        //float dx = viewport.width();
+        //float dy = viewport.height();
 
         data.setLines(lines);
         data.setAxisXBottom(axisX);
@@ -248,6 +239,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setLineChartData(data);
 
         previewChart.setLineChartData(previewData);
+
         previewChart.setCurrentViewport(viewport);
         //previewChart.getCurrentViewport().inset(dx,dy);
     }
@@ -283,13 +275,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             toast.setDuration(Toast.LENGTH_SHORT);
             toast.setView(layout);
             toast.show();
-
-
-
-
-            //Toast toast = new Toast(getApplicationContext());
-            //toast.setGravity(Gravity.TOP| Gravity.LEFT, 0, 0);
-            //toast.makeText(getApplicationContext(),"FLOW:\n" + label + "\nVALUE:\n" + "x = " + value.getX() + "\ny = " + value.getY(), Toast.LENGTH_SHORT).show();
         }
 
         @Override
@@ -351,7 +336,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         @Override
         public void onViewportChanged(Viewport newViewport) {
             // don't use animation, it is unnecessary when using preview chart.
-            chart.setCurrentViewport(newViewport);
+            chart.setCurrentViewport(viewport);
         }
 
     }
