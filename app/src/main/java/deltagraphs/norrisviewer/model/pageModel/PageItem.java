@@ -10,11 +10,11 @@ package deltagraphs.norrisviewer.model.pageModel;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.1.1 2015-05-13 Enrico Savoca Update constructor
+ * 0.1.1 2015-05-20 Enrico Savoca Update constructor
  *
- * 0.1.0 2015-05-12 Enrico Savoca Coding of all methods and attributes
+ * 0.1.0 2015-05-19 Enrico Savoca Coding of all methods and attributes
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-19 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

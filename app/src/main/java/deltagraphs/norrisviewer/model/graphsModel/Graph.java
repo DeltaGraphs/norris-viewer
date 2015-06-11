@@ -10,21 +10,19 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.4.2 2015-05-14 Enrico Savoca Update method addRecords(JSONArray data, boolean insertOnTop)
+ * 0.3.2 2015-06-12 Enrico Savoca Update method addRecords(JSONArray data, boolean insertOnTop)
  *
- * 0.4.1 2015-05-14 Enrico Savoca fix some bugs of  initial configuration, added attribute "configured"
+ * 0.3.1 2015-06-11 Enrico Savoca fix some bugs of  initial configuration, added attribute "configured"
  *
- * 0.4.0 2015-05-14 Enrico Savoca Add method updateRecords(JSONObject data), used by JSONParser
+ * 0.3.0 2015-05-29 Enrico Savoca Apply other several changes to JSONParser(JSONObject obj, String signal)
  *
- * 0.3.0 2015-05-14 Enrico Savoca Apply other several changes to JSONParser(JSONObject obj, String signal)
+ * 0.2.0 2015-05-25 Enrico Savoca Apply several changes to JSONParser(JSONObject obj, String signal)
  *
- * 0.2.0 2015-05-14 Enrico Savoca Apply several changes to JSONParser(JSONObject obj, String signal)
+ * 0.1.1 2015-05-23 Enrico Savoca Change the method addFlow to abstract
  *
- * 0.1.1 2015-05-15 Enrico Savoca Change the method addFlow to abstract
+ * 0.1.0 2015-05-22 Enrico Savoca Coding of all methods and attributes
  *
- * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attributes
- *
- * 0.0.1 2015-05-13 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-22 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

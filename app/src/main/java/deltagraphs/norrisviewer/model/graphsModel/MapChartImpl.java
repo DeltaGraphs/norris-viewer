@@ -18,11 +18,9 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.1 2015-05-19 Enrico Savoca Several changes to Constructor
+ * 0.1.0 2015-06-03 Enrico Savoca Coding of all methods and attributes
  *
- * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
- *
- * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
+ * 0.0.1 2015-06-01 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

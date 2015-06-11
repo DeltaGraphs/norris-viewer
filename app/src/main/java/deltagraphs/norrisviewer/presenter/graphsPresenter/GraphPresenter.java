@@ -10,13 +10,13 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.2.0 2015-05-15 Enrico Savoca Update startSocket(Activity graphActivity) to  startSocket(Activity graphActivity, Object graphModel)
+ * 0.2.0 2015-05-24 Enrico Savoca Update startSocket(Activity graphActivity) to  startSocket(Activity graphActivity, Object graphModel)
  *
- * 0.1.1 2015-05-15 Enrico Savoca Fix method startSocket(Activity graphActivity)
+ * 0.1.1 2015-05-23 Enrico Savoca Fix method startSocket(Activity graphActivity)
  *
- * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
+ * 0.1.0 2015-05-23 Enrico Savoca Coding of all methods and attributes
  *
- * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-23 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

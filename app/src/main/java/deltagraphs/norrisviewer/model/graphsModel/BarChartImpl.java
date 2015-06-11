@@ -19,13 +19,11 @@ import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.2 2015-05-19 Enrico Savoca Several changes to Constructor
+ * 0.1.1 2015-05-26 Enrico Savoca Several changes to Constructor
  *
- * 0.1.1 2015-05-18 Enrico Savoca Remove method sortable and all sortable related mehods
+ * 0.1.0 2015-05-25 Enrico Savoca Coding of all methods and attributes
  *
- * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
- *
- * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-23 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

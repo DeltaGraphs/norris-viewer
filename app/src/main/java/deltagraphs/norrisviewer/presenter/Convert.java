@@ -1,20 +1,4 @@
-package deltagraphs.norrisviewer.presenter;/*
- * Name : {Nome del file}.java
- * Module : deltagraphs.norrisviewer.presenter
- * Location : norrisviewer { Percorso in cui \'e presente il file }
- *
- * History :
-
- * Version      Date        Programmer         Description
- * ===============================================================
- * 
- * 0.1.0 2015-05-05 Davide Trivellato Codifica di tutti gli attributi e metodi
- *
- * 0.0.1 2015-05-05 Davide Trivellato Creazione file
- *
- * ===============================================================
- *
- */
+package deltagraphs.norrisviewer.presenter;
 
 public class Convert {
 

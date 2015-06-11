@@ -25,11 +25,11 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.1 2015-05-20 Davide Trivellato update method startListening(final String signal) to startListening(final String signal, final Object model)
+ * 0.1.1 2015-05-21 Davide Trivellato update method startListening(final String signal) to startListening(final String signal, final Object model)
  *
- * 0.1.0 2015-05-20 Davide Trivellato Coding of all methods and attributes
+ * 0.1.0 2015-05-19 Davide Trivellato Coding of all methods and attributes
  *
- * 0.0.1 2015-05-20 Davide Trivellato Creation of the file
+ * 0.0.1 2015-05-19 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

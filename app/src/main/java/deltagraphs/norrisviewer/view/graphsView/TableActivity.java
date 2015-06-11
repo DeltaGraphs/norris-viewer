@@ -34,21 +34,21 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.5.1 2015-05-14 Enrico Savoca Fixes to table settings
+ * 0.5.1 2015-06-15 Davide Trivellato Fixes to table settings
  *
- * 0.5.0 2015-05-14 Enrico Savoca Several changes to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ * 0.5.0 2015-06-15 Davide Trivellato Several changes to setData(ArrayList<FlowModel> flowList, int numOfColumns)
  *
- * 0.4.0 2015-05-14 Enrico Savoca Several changes to sort(ArrayList<FlowModel> flowList, int numOfColumns)
+ * 0.4.0 2015-06-14 Davide Trivellato Several changes to sort(ArrayList<FlowModel> flowList, int numOfColumns)
  *
- * 0.3.0 2015-05-14 Enrico Savoca Add sort(ArrayList<FlowModel> flowList, int numOfColumns)
+ * 0.3.0 2015-06-13 Davide Trivellato Add sort(ArrayList<FlowModel> flowList, int numOfColumns)
  *
- * 0.2.0 2015-05-14 Enrico Savoca Update setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ * 0.2.0 2015-06-12 Davide Trivellato Update setData(ArrayList<FlowModel> flowList, int numOfColumns)
  *
- * 0.1.1 2015-05-14 Enrico Savoca Update setData(ArrayList<FlowModel> flowList) to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+ * 0.1.1 2015-06-11 Davide Trivellato Update setData(ArrayList<FlowModel> flowList) to setData(ArrayList<FlowModel> flowList, int numOfColumns)
  *
- * 0.1.0 2015-05-14 Enrico Savoca Coding of methods and attributes
+ * 0.1.0 2015-06-11 Davide Trivellato Coding of methods and attributes
  *
- * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
+ * 0.0.1 2015-06-09 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

@@ -16,11 +16,11 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.1 2015-05-20 Davide Trivellato Fix and update method update(Observable observable, Object data)
+ * 0.1.1 2015-05-31 Davide Trivellato Fix and update method update(Observable observable, Object data)
  *
- * 0.1.0 2015-05-20 Davide Trivellato Coding of all methods and attributes
+ * 0.1.0 2015-05-30 Davide Trivellato Coding of all methods and attributes
  *
- * 0.0.1 2015-05-20 Davide Trivellato Creation of the file
+ * 0.0.1 2015-05-28 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

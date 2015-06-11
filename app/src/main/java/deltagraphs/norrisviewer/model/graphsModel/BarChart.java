@@ -15,11 +15,9 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.1 2015-05-18 Enrico Savoca Remove method getSortable(), not used
+ * 0.1.0 2015-05-22 Enrico Savoca Coding of all methods
  *
- * 0.1.0 2015-05-17 Enrico Savoca Coding of all methods
- *
- * 0.0.1 2015-05-17 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-22 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

@@ -16,13 +16,13 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.2 2015-05-14 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
+ * 0.1.2 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
- * 0.1.1 2015-05-14 Enrico Savoca Add a default value for the attribute "flowColour"
+ * 0.1.1 2015-05-27 Enrico Savoca Add a default value for the attribute "flowColour"
  *
- * 0.1.0 2015-05-14 Enrico Savoca Coding of all methods and attibutes
+ * 0.1.0 2015-05-25 Enrico Savoca Coding of all methods and attibutes
  *
- * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-25 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

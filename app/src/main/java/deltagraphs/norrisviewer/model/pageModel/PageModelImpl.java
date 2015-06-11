@@ -18,17 +18,17 @@ import java.util.Observer;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.2.3 2015-05-12 Enrico Savoca Add variable "configured" and some related methods to avoid configuration problems
+ * 0.2.3 2015-05-23 Enrico Savoca Add variable "configured" and some related methods to avoid configuration problems
  *
- * 0.2.2 2015-05-12 Enrico Savoca Changes to constructor
+ * 0.2.2 2015-05-22 Enrico Savoca Changes to constructor
  *
- * 0.2.1 2015-05-12 Enrico Savoca Fix some reading errors in JSONParser(JSONObject data, String signal)
+ * 0.2.1 2015-05-21 Enrico Savoca Fix some reading errors in JSONParser(JSONObject data, String signal)
  *
- * 0.2.0 2015-05-12 Enrico Savoca Several changes to JSONParser(JSONObject data, String signal)
+ * 0.2.0 2015-05-21 Enrico Savoca Several changes to JSONParser(JSONObject data, String signal)
  *
- * 0.1.0 2015-05-12 Enrico Savoca Coding of all methods and attributes
+ * 0.1.0 2015-05-19 Enrico Savoca Coding of all methods and attributes
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-19 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *

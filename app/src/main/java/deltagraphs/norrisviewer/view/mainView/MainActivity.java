@@ -47,15 +47,17 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.3.1 2015-05-14 Davide Trivellato update method updatePagesList(PageModel pageModel)
+ * 0.3.1 2015-05-23 Davide Trivellato update method updatePagesList(PageModel pageModel)
  *
- * 0.3.0 2015-05-14 Davide Trivellato Add settings
+ * 0.3.0 2015-05-22 Davide Trivellato Add settings
  *
- * 0.2.0 2015-05-14 Davide Trivellato Add fragment
+ * 0.2.1 2015-05-21 Davide Trivellato Fix fragmentManager
  *
- * 0.1.0 2015-05-14 Davide Trivellato Coding of methods
+ * 0.2.0 2015-05-20 Davide Trivellato Add fragmentManager
  *
- * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
+ * 0.1.0 2015-05-19 Davide Trivellato Coding of methods
+ *
+ * 0.0.1 2015-05-19 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

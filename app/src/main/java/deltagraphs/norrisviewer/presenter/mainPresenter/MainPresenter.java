@@ -10,7 +10,7 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.1 2015-05-20 Enrico Savoca Added methods isConnected() and boolean isSocketNull()
+ * 0.1.1 2015-05-21 Enrico Savoca Added methods isConnected() and boolean isSocketNull()
  *
  * 0.1.0 2015-05-20 Enrico Savoca Coding of all methods
  *

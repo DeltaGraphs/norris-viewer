@@ -15,13 +15,13 @@ import org.json.JSONObject;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.2 2015-05-15 Enrico Savoca Fix method AxisModel(JSONObject params)
+ * 0.1.2 2015-05-23 Davide Trivellato Fix method AxisModel(JSONObject params)
  *
- * 0.1.1 2015-05-15 Enrico Savoca Change the type of minIndex from int to float
+ * 0.1.1 2015-05-23 Davide Trivellato Change the type of minIndex from int to float
  *
- * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attibutes
+ * 0.1.0 2015-05-22 Davide Trivellato Coding of all methods and attibutes
  *
- * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
+ * 0.0.1 2015-05-22 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

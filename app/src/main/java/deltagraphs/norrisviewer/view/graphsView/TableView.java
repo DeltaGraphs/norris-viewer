@@ -10,9 +10,9 @@ package deltagraphs.norrisviewer.view.graphsView;
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.1.0 2015-05-14 Enrico Savoca coding of methods
+ * 0.1.0 2015-06-09 Enrico Savoca coding of methods
  *
- * 0.0.1 2015-05-14 Enrico Savoca creation of the file
+ * 0.0.1 2015-06-09 Enrico Savoca creation of the file
  *
  * ===============================================================
  *

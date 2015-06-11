@@ -26,17 +26,17 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.3.2 2015-05-20 Davide Trivellato Added methods isConnected() and boolean isSocketNull()
+ * 0.3.2 2015-05-21 Davide Trivellato Added methods isConnected() and boolean isSocketNull()
  *
- * 0.3.1 2015-05-20 Davide Trivellato Fixes to connection methods
+ * 0.3.1 2015-05-21 Davide Trivellato Fixes to connection methods
  *
  * 0.3.0 2015-05-20 Davide Trivellato Major changes to the whole class
  *
- * 0.2.0 2015-05-20 Davide Trivellato Add dialog to insert URl
+ * 0.2.0 2015-05-19 Davide Trivellato Add dialog to insert URl
  *
- * 0.1.0 2015-05-20 Davide Trivellato Coding of all methods and attributes
+ * 0.1.0 2015-05-19 Davide Trivellato Coding of all methods and attributes
  *
- * 0.0.1 2015-05-20 Davide Trivellato Creation of the file
+ * 0.0.1 2015-05-19 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

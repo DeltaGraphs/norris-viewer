@@ -35,15 +35,15 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.4.0 2015-05-14 Davide Trivellato Create the legend panel
+ * 0.4.0 2015-05-28 Davide Trivellato Create the legend panel
  *
- * 0.3.0 2015-05-14 Davide Trivellato Managing bar orientation
+ * 0.3.0 2015-05-27 Davide Trivellato Managing bar orientation
  *
- * 0.2.0 2015-05-14 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers)
+ * 0.2.0 2015-05-26 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers)
  *
- * 0.1.0 2015-05-14 Davide Trivellato Coding of methods and attributes
+ * 0.1.0 2015-05-25 Davide Trivellato Coding of methods and attributes
  *
- * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
+ * 0.0.1 2015-05-23 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

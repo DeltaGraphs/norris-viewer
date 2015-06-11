@@ -36,19 +36,19 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.5.0 2015-05-14 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal)
+ * 0.5.0 2015-06-09 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal)
  *
- * 0.4.0 2015-05-14 Davide Trivellato Coding of method setPolyline(ArrayList<LatLng> polyline, String color)
+ * 0.4.0 2015-06-07 Davide Trivellato Coding of method setPolyline(ArrayList<LatLng> polyline, String color)
  *
- * 0.3.0 2015-05-14 Davide Trivellato Set zoom and camera position
+ * 0.3.0 2015-06-06 Davide Trivellato Set zoom and camera position
  *
- * 0.2.1 2015-05-14 Davide Trivellato Fixed markers colors
+ * 0.2.1 2015-06-06 Davide Trivellato Fixed markers colors
  *
- * 0.2.0 2015-05-14 Davide Trivellato Set customization for markers
+ * 0.2.0 2015-06-05 Davide Trivellato Set customization for markers
  *
- * 0.1.0 2015-05-14 Davide Trivellato Coding of methods and attributes
+ * 0.1.0 2015-06-04 Davide Trivellato Coding of methods and attributes
  *
- * 0.0.1 2015-05-14 Davide Trivellato Creation of the file
+ * 0.0.1 2015-06-04 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *

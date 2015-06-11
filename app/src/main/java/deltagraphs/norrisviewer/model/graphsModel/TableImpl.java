@@ -10,13 +10,11 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.2 2015-05-19 Enrico Savoca Several changes to Constructor
+ * 0.1.1 2015-06-12 Enrico Savoca Add some default value for sortOrder, sortColumn and borderWidth
  *
- * 0.1.1 2015-05-15 Enrico Savoca Add some default value for sortOrder, sortColumn and borderWidth
+ * 0.1.0 2015-06-09 Enrico Savoca Coding of all methods and attributes
  *
- * 0.1.0 2015-05-15 Enrico Savoca Coding of all methods and attributes
- *
- * 0.0.1 2015-05-15 Enrico Savoca Creation of the file
+ * 0.0.1 2015-06-07 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
