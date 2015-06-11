@@ -16,9 +16,11 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica degli attributi e dei parametri
+ * 0.1.1 2015-05-14 Enrico Savoca add a default value for the attribute "flowColour"
  *
- * 0.0.1 2015-05-14 Enrico Savoca Creazione file
+ * 0.1.0 2015-05-14 Enrico Savoca coding of methods and parameters
+ *
+ * 0.0.1 2015-05-14 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
