@@ -34,12 +34,12 @@ public class TableImpl extends Graph implements Table {
     private String addRowOn;  // top or bottom
     private int maxItems; //displayed per page
     private Boolean sortable;
-    private String sortOrder; //ascendent or descendent
-    private String sortColumn; // sorted by column "sortColumn"
+    private String sortOrder = null; //ascendent or descendent
+    private String sortColumn = null; // sorted by column "sortColumn"
     private int borderWidth = 1;
     private String borderColour;
 
-    private ArrayList<Column> tableColumns=new ArrayList<Column>();
+    private ArrayList<Column> tableColumns = new ArrayList<Column>();
 
     class Column {
         private String headerValue;
@@ -139,8 +139,10 @@ public class TableImpl extends Graph implements Table {
             sortable = data.getBoolean("sortable");
             maxItems = data.getInt("maxItemsPage");
             addRowOn = data.getString("addRowOn");
-            sortOrder = data.getJSONObject("sort").getString("ordering");
-            sortColumn = data.getJSONObject("sort").getString("column");
+            if (data.has("sort") && (!(data.isNull("sort")))) {
+                sortOrder = data.getJSONObject("sort").getString("ordering");
+                sortColumn = data.getJSONObject("sort").getString("column");
+            }
             borderColour = data.getJSONObject("appearance").getJSONObject("border").getString("color");
             borderWidth = data.getJSONObject("appearance").getJSONObject("border").getInt("width");
 
@@ -183,8 +185,9 @@ public class TableImpl extends Graph implements Table {
                 sortOrder = data.getJSONObject("sort").getString("ordering");
 
             if ((data.has("sort")) && (data.getJSONObject("sort").has("column")))
-                sortColumn = data.getJSONObject("sort").getString("column");
-
+                if (!(data.isNull("sort")))
+                    sortColumn = data.getJSONObject("sort").getString("column");
+                else sortColumn = null;
             if ((data.has("appearance")) && (data.getJSONObject("appearance").has("border")) &&
                     (data.getJSONObject("appearance").getJSONObject("border").has("color")))
                 borderColour = data.getJSONObject("appearance").getJSONObject("border").getString("color");

@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import deltagraphs.norrisviewer.R;
@@ -21,6 +22,9 @@ import com.inqbarna.tablefixheaders.TableFixHeaders;
 import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class TableActivity extends ActionBarActivity implements TableView {
@@ -29,15 +33,20 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private BaseTableAdapter baseTableAdapter;
     private String sourceURL;
     private String sourceTitle;
+    private String order = null;
+    private int sortingColumn = -1;
     private TablePresenter tablePresenter;
     String headers[];
+    int rows = 0;
+    boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_table);
 
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //TableLayout tableView = new TableLayout(this);
         //GridLayout grid = new GridLayout(this);
         Bundle extras = getIntent().getExtras();
@@ -77,24 +86,20 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void setMaxItemsDisplayedPerPage(int maxItemsPerPage) {
-
-    }
-
-    @Override
-    public void setSortable(Boolean Sortable) {
-
-    }
 
     @Override
     public void setSortByCol(String sortingColumn) {
-
+        int col = 0;
+        for (col = 0; !headers[col].equals(sortingColumn) && col < headers.length; col++) ;
+        //while(!(headers[col].equals(sortingColumn)))
+        if (col >= headers.length)
+            col = -1;
+        this.sortingColumn = col;
     }
 
     @Override
     public void setSortOrder(String sortOrder) {
-
+        order = sortOrder;
     }
 
     @Override
@@ -103,30 +108,92 @@ public class TableActivity extends ActionBarActivity implements TableView {
         Log.d("", "stampaHeaders");
     }
 
-    int rows = 0;
-    boolean firstTime = true;
+   /* private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
+        Log.d("", String.valueOf(rows));
+        Log.d("", String.valueOf(numOfColumns));
+        String[][] values = new String[rows][numOfColumns];
 
-    @Override
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal) {
-        rows = 0;
-        baseTableAdapter = new FamilyNexusAdapter(this);
         for (int i = 0; i < flowList.size(); i++) {
-            flowList.get(i).getFlowId();
-            flowList.get(i).getFlowName();
             TableFlow tableFlow = (TableFlow) flowList.get(i);
-            tableFlow.getMaxItems();
             for (int j = 0; j < tableFlow.getRecordSize(); j++) {
                 tableFlow.getRecordId(j);
-                String[] values = new String[numOfColumns];
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
-                    tableFlow.getCellBackgroundColour(j, indexCol);
-                    values[indexCol] = tableFlow.getCellData(j, indexCol);
-                    tableFlow.getCellTextColour(j, indexCol);
-
+                    Log.d("", tableFlow.getCellData(j, indexCol));
+                    values[j][indexCol] =tableFlow.getCellData(j, indexCol);
                 }
-                ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
-                rows++;
             }
+        }
+
+        Arrays.sort(values, new Comparator<String[]>() {
+            @Override
+            public int compare(final String[] entry1, final String[] entry2) {
+                final String elem1 = entry1[sortingColumn];
+                final String elem2 = entry2[sortingColumn];
+                return elem1.compareTo(elem2);
+            }
+        });
+        for (int j = 0; j < numOfColumns; j++) {
+            ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values[j]));
+        }
+    }*/
+
+
+    private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
+        Log.d("", String.valueOf(rows));
+        Log.d("", String.valueOf(numOfColumns));
+        ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+        for (int i = 0; i < flowList.size(); i++) {
+            TableFlow tableFlow = (TableFlow) flowList.get(i);
+            for (int j = 0; j < tableFlow.getRecordSize(); j++) {
+                tableFlow.getRecordId(j);
+                ArrayList<String> row = new ArrayList<String>();
+                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
+                    Log.d("", tableFlow.getCellData(j, indexCol));
+                    row.add(tableFlow.getCellData(j, indexCol));
+                }
+                table.add(row);
+            }
+        }
+
+        Collections.sort(table, new Comparator<ArrayList<String>>() {
+            @Override
+            public int compare(ArrayList<String> a, ArrayList<String> b) {
+                return a.get(sortingColumn).compareTo(b.get(sortingColumn));
+            }
+        });
+
+        for (int j = 0; j < table.size(); j++) {
+            String[] values=new String[numOfColumns];
+            for(int i=0; i<numOfColumns; i++){
+                values[i] = table.get(j).get(i);
+            }
+            ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
+        }
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
+        baseTableAdapter = new FamilyNexusAdapter(this);
+        rows = 0;
+        if (sortingColumn == -1) {
+            for (int i = 0; i < flowList.size(); i++) {
+                flowList.get(i).getFlowId();
+                flowList.get(i).getFlowName();
+                TableFlow tableFlow = (TableFlow) flowList.get(i);
+                for (int j = 0; j < tableFlow.getRecordSize(); j++) {
+                    tableFlow.getRecordId(j);
+                    String[] values = new String[numOfColumns];
+                    for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
+                        values[indexCol] = tableFlow.getCellData(j, indexCol);
+                    }
+                    ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
+                    rows++;
+                }
+            }
+            Log.d("", "non ordina qui");
+        } else {
+            sort(flowList, numOfColumns);
+            Log.d("", "ordinare");
         }
         tableFixHeaders.setAdapter(baseTableAdapter);
         firstTime = false;
@@ -300,7 +367,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 itemViewType = 0;
             } else if (row == -1) {
                 itemViewType = 1;
-            } else if (isFamily(row)) {
+            } else if (isFamily(0)) {
                 itemViewType = 4;
             } else if (column == -1) {
                 itemViewType = 2;

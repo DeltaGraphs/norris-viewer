@@ -44,7 +44,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+// NASCONDE LA BARRA IN ALTO!!!
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -292,7 +292,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     }
 
     private Legend setLegend(List<String> labels) {
-        if(orientation.equals("V"))
+        if (orientation.equals("V"))
             l = vBarChart.getLegend();
         else
             l = hBarChart.getLegend();

@@ -22,9 +22,9 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface TableView {
 
-    public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
+   // public void setMaxItemsDisplayedPerPage(int maxItemsPerPage);
 
-    public void setSortable(Boolean Sortable);
+    //public void setSortable(Boolean Sortable);
 
     public void setSortByCol(String sortingColumn);
 
@@ -34,5 +34,5 @@ public interface TableView {
 
     public void setHeaders(String[] headers);
 
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns, String signal);
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns);
 }

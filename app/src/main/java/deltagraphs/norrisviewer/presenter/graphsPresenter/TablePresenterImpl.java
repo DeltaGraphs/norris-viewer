@@ -46,16 +46,16 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             String signal = (String) data;
             if ((signal == "configGraph") || (signal == "updateGraphProp"))
                 setGraphParameters();
-            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns(), signal);
+            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());
 
             firstConnection = false;
         }
     }
 
     private void setGraphParameters() {
-        graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
-        graphView.setSortable(tableInstance.getSortable());
-        graphView.setSortByCol(tableInstance.sortByCol());
+       // graphView.setMaxItemsDisplayedPerPage(tableInstance.getMaxItems());
+        //graphView.setSortable(tableInstance.getSortable());
+
         graphView.setSortOrder(tableInstance.getSortOrder());
         String[] headers = new String[tableInstance.getNumberOfColumns()];
         //column parameters
@@ -63,5 +63,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             headers[index]=tableInstance.getHeaderValue(index);
         }
         graphView.setHeaders(headers);
+        graphView.setSortByCol(tableInstance.sortByCol());
     }
 }
