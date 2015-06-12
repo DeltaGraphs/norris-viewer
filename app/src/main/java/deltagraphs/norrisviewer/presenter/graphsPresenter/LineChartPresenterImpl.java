@@ -38,10 +38,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         startSocket((LineChartActivity) view, lineChartInstance);
     }
 
-    private void startNewConnections() {
-        startSocket((LineChartActivity) graphView, lineChartInstance);
-    }
-
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
@@ -74,11 +70,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         graphView.setBackground(lineChartInstance.getBackground());
         graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
         graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
-    }
-
-
-    public void viewPointLegend() {
-
     }
 
     public void destroy() {
