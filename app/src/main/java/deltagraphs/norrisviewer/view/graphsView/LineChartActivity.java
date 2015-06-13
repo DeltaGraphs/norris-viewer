@@ -292,7 +292,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             title.setText(label);
 
             TextView values = (TextView) layout.findViewById(R.id. coord_values);
-            values.setText("x = " + value.getX() + "\ny = " + value.getY());
+            values.setText("\nx = " + value.getX() + "\ny = " + value.getY());
 
             Toast toast = new Toast(getApplicationContext());
             toast.setGravity(Gravity.CENTER, 0, 0);
