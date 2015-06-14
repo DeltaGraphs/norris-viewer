@@ -39,6 +39,10 @@ public class Page {
         pageItemList.add(new PageItem(id, name, type, URL));
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
