@@ -60,7 +60,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     private MapChartPresenter mapChartPresenter;
     private String sourceURL;
     private String sourceTitle;
-    LatLng center;
+    private LatLng center;
     private boolean hasLegend = true;
     private List<Marker> markers;
 
@@ -163,7 +163,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
 
-    public MarkerOptions newMarkerOpt(String id, float lat, float lng, String type, String property, String color) {
+    private MarkerOptions newMarkerOpt(String id, float lat, float lng, String type, String property, String color) {
 
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));

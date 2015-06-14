@@ -83,7 +83,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     private boolean hasAxesNames = true;
     private boolean hasLabels = false;
     private boolean hasViewFinder = false;
-    private Viewport viewport;
 
     private Axis axisX;
     private Axis axisY;
@@ -110,7 +109,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
-        viewport = new Viewport();
         previewChart.setViewportChangeListener(new ViewportListener());
         previewChart.setPreviewColor(Color.parseColor("#80CBC4"));
     }
@@ -188,26 +186,10 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
     }
 
-
-    @Override
-    public void setViewFinder(Boolean withViewFinder) {
-
-    }
-
-    @Override
-    public void setBackground(String bg) {
-
-    }
-
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
         axisX.setHasSeparationLine(vertical);
         axisY.setHasSeparationLine(horizontal);
-    }
-
-    @Override
-    public void setLegendOnPoint(Boolean legend) {
-
     }
 
     @Override
@@ -249,11 +231,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             previewLines.add(previewLine);
         }
 
-        //viewport = chart.getCurrentViewport();
-
-        //float dx = viewport.width();
-        //float dy = viewport.height();
-
         data.setLines(lines);
         data.setAxisXBottom(axisX);
         data.setAxisYLeft(axisY);
@@ -263,9 +240,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         chart.setLineChartData(data);
 
         previewChart.setLineChartData(previewData);
-
-        //previewChart.setCurrentViewport(viewport);
-        //previewChart.getCurrentViewport().inset(dx,dy);
     }
 
 
@@ -319,7 +293,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         Viewport tempViewport = new Viewport(chart.getMaximumViewport());
         float dy = tempViewport.height() / 4;
         tempViewport.inset(0, dy);
-        viewport = tempViewport;
         previewChart.setCurrentViewportWithAnimation(tempViewport);
         previewChart.setZoomType(ZoomType.VERTICAL);
     }
@@ -328,7 +301,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         Viewport tempViewport = new Viewport(chart.getMaximumViewport());
         float dx = tempViewport.width() / 4;
         tempViewport.inset(dx, 0);
-        viewport = tempViewport;
         if (animate) {
             previewChart.setCurrentViewportWithAnimation(tempViewport);
         } else {
@@ -344,7 +316,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         float dx = tempViewport.width() / 4;
         float dy = tempViewport.height() / 4;
         tempViewport.inset(dx, dy);
-        viewport = tempViewport;
         previewChart.setCurrentViewportWithAnimation(tempViewport);
     }
 
