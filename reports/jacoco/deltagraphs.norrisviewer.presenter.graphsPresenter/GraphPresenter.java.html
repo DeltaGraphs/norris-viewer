@@ -9,45 +9,53 @@
 
  * Version Date Programmer Description
  * ===============================================================
- * 
- * 0.1.0 2015-05-17 Enrico Savoca Codifica di tutti gli attributi e i metodi
  *
- * 0.0.1 2015-05-17 Enrico Savoca Creazione file
+ * 0.2.0 2015-05-24 Enrico Savoca Update startSocket(Activity graphActivity) to  startSocket(Activity graphActivity, Object graphModel)
+ *
+ * 0.1.1 2015-05-23 Enrico Savoca Fix method startSocket(Activity graphActivity)
+ *
+ * 0.1.0 2015-05-23 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-23 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
 
 import android.app.Activity;
-import android.util.Log;
+
+import java.util.Observable;
+import java.util.Observer;
 
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
-public abstract class GraphPresenter {
+public abstract class GraphPresenter implements Observer {
     private SocketManager graphSocket;
-<span class="nc" id="L28">    protected Boolean firstConnection = true;</span>
 
-<span class="nc" id="L30">    public GraphPresenter(String url) {</span>
-<span class="nc" id="L31">        this.graphSocket = new SocketManager(url);</span>
-<span class="nc" id="L32">    }</span>
+<span class="nc" id="L35">    public GraphPresenter(String url) {</span>
+<span class="nc" id="L36">        this.graphSocket = new SocketManager(url);</span>
+<span class="nc" id="L37">    }</span>
 
-    public void startSocket( Activity graphActivity, Object graphModel){
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if(firstConnection) {</span>
-<span class="nc" id="L36">            graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-        }
-        else {
-<span class="nc" id="L39">            graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L40">            graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel,(MapChartPresenterImpl) this );</span>
-<span class="nc" id="L41">            graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L42">            graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-<span class="nc" id="L43">            graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel, (MapChartPresenterImpl) this);</span>
-        }
-<span class="nc" id="L45">        graphSocket.startConnection();</span>
-<span class="nc" id="L46">    }</span>
+    public void startSocket(Activity graphActivity, Object graphModel) {
+<span class="nc" id="L40">        graphSocket.startConnection();</span>
+<span class="nc" id="L41">        graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L42">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L43">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L44">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L45">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L46">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+<span class="nc" id="L47">    }</span>
 
-<span class="nc" id="L48">    public void stopSocket(){}</span>
+    public void stopSocket() {
+<span class="nc" id="L50">        graphSocket.stopConnection();</span>
+<span class="nc" id="L51">    }</span>
 
-   protected abstract void setGraphParameters();
+    public void destroySocket() {
+<span class="nc" id="L54">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L55">    }</span>
 
+    @Override
+    public void update(Observable observable, Object data) {
+<span class="nc" id="L59">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

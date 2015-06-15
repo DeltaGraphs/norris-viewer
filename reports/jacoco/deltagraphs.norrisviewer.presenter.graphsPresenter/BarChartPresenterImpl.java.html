@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BarChartPresenterImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">BarChartPresenterImpl.java</span></div><h1>BarChartPresenterImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
-import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
-import lecho.lib.hellocharts.model.Axis;
 
 /*
  * Name : BarChartPresenterImpl.java
@@ -19,62 +15,48 @@ import lecho.lib.hellocharts.model.Axis;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
- * 0.0.1 2015-05-15 Davide Trivellato Creazione file
+ *
+ * 0.3.1 2015-05-26 Davide Trivellato Fix and update method update(Observable observable, Object data)
+ *
+ * 0.3.0 2015-05-25 Davide Trivellato Other changes to update(Observable observable, Object data) and added setGraphParameters()
+ *
+ * 0.2.0 2015-05-25 Davide Trivellato Several changes to update(Observable observable, Object data)
+ *
+ * 0.1.0 2015-05-24 Davide Trivellato Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-23 Davide Trivellato Creation of the file
  *
  * ===============================================================
  *
  */
 
-public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter, Observer{
+public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter {
 
-        private BarChartView graphView;
-        private BarChart barChartInstance;
-
-
-    public BarChartPresenterImpl(BarChartView view,String url){
-<span class="nc" id="L36">        super(url);</span>
-<span class="nc" id="L37">        graphView=view;</span>
-<span class="nc" id="L38">        barChartInstance = (BarChart) new BarChartImpl();</span>
-<span class="nc" id="L39">        startSocket((BarChartActivity) view, barChartInstance);</span>
-    //lineChartInstance = new LineChartImpl(jsonData);
-        //this.setUpViews();
-<span class="nc" id="L42">    }</span>
+    private BarChartView graphView;
+    private BarChart barChartInstance;
 
 
-    /*
-    @Override
-    public void setUpViews(){
-        previewLineChartView=(lecho.lib.hellocharts.view.PreviewLineChartView)findViewById(R.id.chart);
-        previewLineChartView.setLineChartData(dataModel.getData());
-        previewLineChartView.setLineChartData(previewData);
-        // Disable zoom/scroll for previewed chart, visible chart ranges depends on preview chart viewport so
-        // zoom/scroll is unnecessary.
-        previewLineChartView.setZoomEnabled(false);
-        previewLineChartView.setScrollEnabled(false);
-        }*/
-
-
-<span class="nc" id="L58">    private void startNewConnections(){ startSocket((MapChartActivity) graphView, barChartInstance);}</span>
+    public BarChartPresenterImpl(BarChartView view, String url) {
+<span class="nc" id="L40">        super(url);</span>
+<span class="nc" id="L41">        graphView = view;</span>
+<span class="nc" id="L42">        barChartInstance = new BarChartImpl(this);</span>
+<span class="nc" id="L43">        startSocket((BarChartActivity) view, barChartInstance);</span>
+<span class="nc" id="L44">    }</span>
 
     @Override
-    public void update(Observable observable,Object data) {
-<span class="nc bnc" id="L62" title="All 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
-        // in quanto potremmo avere piu modelli dati
-        // verifichiamo su quale modello e' avvenuto un cambiamento dei dati
-        // prima di effettuare il cast
-<span class="nc" id="L66">            String signal = (String) data;</span>
-<span class="nc bnc" id="L67" title="All 4 branches missed.">            if((signal == &quot;configGraph&quot;) || (signal==&quot;updateGraphProp&quot;))</span>
-<span class="nc" id="L68">                setGraphParameters();</span>
-<span class="nc" id="L69">            graphView.setData(barChartInstance.getFlowList(), signal);</span>
-<span class="nc" id="L70">            firstConnection = false;</span>
-<span class="nc" id="L71">            startNewConnections();</span>
+    public void update(Observable observable, Object data) {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
+<span class="nc" id="L49">            String signal = (String) data;</span>
+<span class="nc bnc" id="L50" title="All 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="nc" id="L51">                setGraphParameters();</span>
+<span class="nc" id="L52">            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());</span>
         }
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L54">    }</span>
 
-    @Override
-    protected void setGraphParameters() {
-<span class="nc" id="L77">        graphView.setAxis('x',</span>
+    private void setGraphParameters() {
+<span class="nc" id="L57">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
+        /*
+        graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
                 barChartInstance.getAxisX().getAppearance(),
                 barChartInstance.getAxisX().getMaxIndex(),
@@ -82,7 +64,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisX().getTicks(),
                 barChartInstance.getAxisX().getScale()
         );
-<span class="nc" id="L85">        graphView.setAxis('y',</span>
+        graphView.setAxis('y',
                 barChartInstance.getAxisY().getName(),
                 barChartInstance.getAxisY().getAppearance(),
                 barChartInstance.getAxisY().getMaxIndex(),
@@ -90,17 +72,23 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisY().getTicks(),
                 barChartInstance.getAxisY().getScale()
         );
-<span class="nc" id="L93">        graphView.setHeaders(barChartInstance.getHeaders());</span>
-<span class="nc" id="L94">        graphView.setBackground(barChartInstance.getBackground());</span>
-<span class="nc" id="L95">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
-<span class="nc" id="L96">        graphView.setSortable(barChartInstance.getSortable());</span>
-<span class="nc" id="L97">        graphView.setGrid(barChartInstance.getGrid());</span>
-<span class="nc" id="L98">        graphView.setLegendOnPoint(barChartInstance.getLegendOnPoint());</span>
-<span class="nc" id="L99">    }</span>
+        */
+<span class="nc" id="L76">    }</span>
 
-    public void viewPointLegend(){
+    public void viewPointLegend() {
 
-<span class="nc" id="L103">    }</span>
+<span class="nc" id="L80">    }</span>
 
+    public void stopConnection() {
+<span class="nc" id="L83">        stopSocket();</span>
+<span class="nc" id="L84">    }</span>
+
+    public void startConnection() {
+<span class="nc" id="L87">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
+<span class="nc" id="L88">    }</span>
+
+    public void destroyConnection() {
+<span class="nc" id="L91">        destroySocket();</span>
+<span class="nc" id="L92">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

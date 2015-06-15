@@ -3,8 +3,10 @@
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.Observable;
 import java.util.ArrayList;
+import java.util.Observer;
 
 /*
  * Name : PageModelImpl.java
@@ -16,178 +18,209 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.2.3 2015-05-23 Enrico Savoca Add variable &quot;configured&quot; and some related methods to avoid configuration problems
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creazione file
+ * 0.2.2 2015-05-22 Enrico Savoca Changes to constructor
+ *
+ * 0.2.1 2015-05-21 Enrico Savoca Fix some reading errors in JSONParser(JSONObject data, String signal)
+ *
+ * 0.2.0 2015-05-21 Enrico Savoca Several changes to JSONParser(JSONObject data, String signal)
+ *
+ * 0.1.0 2015-05-19 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-19 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
 
-public class PageModelImpl extends Observable implements PageModel{
+public class PageModelImpl extends Observable implements PageModel {
 
 
     private String name;
-<span class="fc" id="L31">    private ArrayList&lt;Page&gt; pageList = new ArrayList&lt;Page&gt;();</span>
+<span class="nc" id="L41">    private ArrayList&lt;Page&gt; pageList = new ArrayList&lt;Page&gt;();</span>
+<span class="nc" id="L42">    private boolean configured = false;</span>
 
-<span class="fc" id="L33">    public PageModelImpl(){}</span>
+<span class="nc" id="L44">    public PageModelImpl(Observer presenter) {</span>
+<span class="nc" id="L45">        addObserver(presenter);</span>
+<span class="nc" id="L46">    }</span>
 
-    public void setPageModel(JSONObject data, String signal){
-<span class="nc" id="L36">        JSONParser(data,signal);</span>
-<span class="nc" id="L37">        setChanged();</span>
-<span class="nc" id="L38">        notifyObservers();</span>
-<span class="nc" id="L39">    }</span>
+
+    public void setPageModel(JSONObject data, String signal) {
+<span class="nc" id="L50">        JSONParser(data, signal);</span>
+<span class="nc" id="L51">        setChanged();</span>
+<span class="nc" id="L52">        notifyObservers();</span>
+<span class="nc" id="L53">    }</span>
 
     //this method inserts a page
-    public void addPage(String id, String name, String description){
-<span class="fc" id="L43">        pageList.add(new Page(id, name, description));</span>
-<span class="fc" id="L44">    }</span>
+    public void addPage(String id, String name, String description) {
+<span class="nc" id="L57">        pageList.add(new Page(id, name, description));</span>
+<span class="nc" id="L58">    }</span>
 
-    private void JSONParser(JSONObject data, String signal){
-        try{
-           //choise of procedure based on arriving signals
+    private void JSONParser(JSONObject data, String signal) {
+        try {
+            //choise of procedure based on arriving signals
 
-<span class="nc bnc" id="L50" title="All 22 branches missed.">            switch(signal) {</span>
+<span class="nc bnc" id="L64" title="All 22 branches missed.">            switch (signal) {</span>
                 case &quot;configPageList&quot;: {
-
+<span class="nc bnc" id="L66" title="All 2 branches missed.">                    if (configured != true) {</span>
                     /* this is the case of the first initialization.
                        It uses JSON to create firstly PageModel's attributes, then the Pages List.
                        After this, it creates and populates each page */
 
-<span class="nc" id="L57">                    name = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L58">                    JSONArray pagesArray = data.getJSONArray(&quot;data&quot;);</span>
-<span class="nc" id="L59">                    int pageArrayDim = pagesArray.length();</span>
-<span class="nc bnc" id="L60" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageArrayDim; i++) {</span>
-<span class="nc" id="L61">                        JSONObject page = pagesArray.getJSONObject(i);</span>
-<span class="nc" id="L62">                        String pageId = page.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L63">                        String pageName = page.getString(&quot;name&quot;);</span>
-<span class="nc" id="L64">                        String pageDescription = page.getString(&quot;description&quot;);</span>
+<span class="nc" id="L71">                        name = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L72">                        JSONArray pagesArray = data.getJSONArray(&quot;data&quot;);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">                        for (int i = 0; i &lt; pagesArray.length(); i++) {</span>
+<span class="nc" id="L74">                            JSONObject page = pagesArray.getJSONObject(i);</span>
+<span class="nc" id="L75">                            JSONObject properties = page.getJSONObject(&quot;properties&quot;);</span>
+<span class="nc" id="L76">                            String pageId = properties.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L77">                            String pageName = properties.getString(&quot;name&quot;);</span>
+<span class="nc" id="L78">                            String pageDescription = properties.getString(&quot;description&quot;);</span>
 
-<span class="nc" id="L66">                        addPage(pageId, pageName, pageDescription);</span>
+<span class="nc" id="L80">                            addPage(pageId, pageName, pageDescription);</span>
 
-<span class="nc" id="L68">                        JSONArray itemsArray = page.getJSONArray(&quot;graphs&quot;);</span>
-<span class="nc" id="L69">                        int itemArrayDim = itemsArray.length();</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">                        for (int j = 0; j &lt; itemArrayDim; j++) {</span>
-<span class="nc" id="L71">                            JSONObject item = itemsArray.getJSONObject(j);</span>
-<span class="nc" id="L72">                            String itemId = item.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L73">                            String itemName = item.getString(&quot;title&quot;);</span>
-<span class="nc" id="L74">                            String itemType = item.getString(&quot;type&quot;);</span>
-<span class="nc" id="L75">                            String itemURL = item.getString(&quot;URLSocket&quot;);</span>
+<span class="nc" id="L82">                            JSONArray itemsArray = page.getJSONArray(&quot;data&quot;);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">                            for (int j = 0; j &lt; itemsArray.length(); j++) {</span>
+<span class="nc" id="L84">                                JSONObject item = itemsArray.getJSONObject(j);</span>
+<span class="nc" id="L85">                                String itemId = item.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L86">                                String itemName = item.getString(&quot;title&quot;);</span>
+<span class="nc" id="L87">                                String itemType = item.getString(&quot;type&quot;);</span>
+<span class="nc" id="L88">                                String itemURL = item.getString(&quot;socketURL&quot;);</span>
 
-<span class="nc" id="L77">                            pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);</span>
+<span class="nc" id="L90">                                pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);</span>
+                            }
                         }
-                    }
-<span class="nc" id="L80">                    break;</span>
+<span class="nc" id="L93">                        configured = true;</span>
+<span class="nc" id="L94">                    }</span>
+                    break;
                 }
                 case (&quot;insertPage&quot;): {
-
                     // on the arrival of this signal, a new Page,
                     // with every parameters, is added to the pages list of PageModel.
 
-<span class="nc" id="L87">                    String pageId = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L88">                    String pageName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L89">                    String pageDescription = data.getString(&quot;description&quot;);</span>
+<span class="nc" id="L101">                    String pageId = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L102">                    String pageName = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L103">                    String pageDescription = data.getString(&quot;description&quot;);</span>
 
-<span class="nc" id="L91">                    addPage(pageId, pageName, pageDescription);</span>
+<span class="nc" id="L105">                    addPage(pageId, pageName, pageDescription);</span>
 
-<span class="nc" id="L93">                    JSONArray itemsArray = data.getJSONArray(&quot;graphs&quot;);</span>
-<span class="nc" id="L94">                    int itemArrayDim = itemsArray.length();</span>
-<span class="nc bnc" id="L95" title="All 2 branches missed.">                    for (int j = 0; j &lt; itemArrayDim; j++) {</span>
-<span class="nc" id="L96">                        JSONObject item = itemsArray.getJSONObject(j);</span>
-<span class="nc" id="L97">                        String itemId = item.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L98">                        String itemName = item.getString(&quot;title&quot;);</span>
-<span class="nc" id="L99">                        String itemType = item.getString(&quot;type&quot;);</span>
-<span class="nc" id="L100">                        String itemURL = item.getString(&quot;URLSocket&quot;);</span>
+<span class="nc" id="L107">                    JSONArray itemsArray = data.getJSONArray(&quot;graphs&quot;);</span>
+<span class="nc" id="L108">                    int itemArrayDim = itemsArray.length();</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">                    for (int j = 0; j &lt; itemArrayDim; j++) {</span>
+<span class="nc" id="L110">                        JSONObject item = itemsArray.getJSONObject(j);</span>
+<span class="nc" id="L111">                        String itemId = item.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L112">                        String itemName = item.getString(&quot;title&quot;);</span>
+<span class="nc" id="L113">                        String itemType = item.getString(&quot;type&quot;);</span>
+<span class="nc" id="L114">                        String itemURL = item.getString(&quot;socketURL&quot;);</span>
 
-<span class="nc" id="L102">                        pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);</span>
+<span class="nc" id="L116">                        pageList.get(pageList.size() - 1).addItem(itemId, itemName, itemType, itemURL);</span>
                     }
-<span class="nc" id="L104">                    break;</span>
+<span class="nc" id="L118">                    break;</span>
                 }
                 case (&quot;updatePage&quot;): {
-
                     // on the arrival of this signal, a page,
                     // identified by an id, is updated.
 
                     //first of all it searches a page in the list, with an index equal to the JSON's one
 
-<span class="nc" id="L113">                    int pageIndex = -1;</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageList.size(); i++) {</span>
-<span class="nc bnc" id="L115" title="All 2 branches missed.">                        if (pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
+<span class="nc" id="L126">                    int pageIndex = -1;</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageList.size(); i++) {</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                        if (pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
                     }
-<span class="nc bnc" id="L117" title="All 2 branches missed.">                    if (pageIndex != -1) {</span>
-<span class="nc" id="L118">                        pageList.get(pageIndex).setName(data.getString(&quot;name&quot;));</span>
-<span class="nc" id="L119">                        pageList.get(pageIndex).setDescription(data.getString(&quot;description&quot;));</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                    if (pageIndex != -1) {</span>
+<span class="nc" id="L131">                        pageList.get(pageIndex).setName(data.getString(&quot;name&quot;));</span>
+<span class="nc" id="L132">                        pageList.get(pageIndex).setDescription(data.getString(&quot;description&quot;));</span>
                     }//else non trovato, eccezione??
 
                     break;
                 }
                 case (&quot;insertGraph&quot;): {
-
                     // on the arrival of this signal, a new Graph,
                     // with every parameters, is added to the item list of the declared Page.
 
                     //first of all it searches a page in the list, with an index equal to the JSON's one
 
-<span class="nc" id="L131">                    int pageIndex = -1;</span>
-<span class="nc bnc" id="L132" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageList.size(); i++) {</span>
-<span class="nc bnc" id="L133" title="All 2 branches missed.">                        if (pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
+<span class="nc" id="L143">                    int pageIndex = -1;</span>
+<span class="nc bnc" id="L144" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageList.size(); i++) {</span>
+<span class="nc bnc" id="L145" title="All 2 branches missed.">                        if (pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
                     }
-<span class="nc bnc" id="L135" title="All 2 branches missed.">                    if (pageIndex != -1) {</span>
-<span class="nc" id="L136">                        String itemId = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L137">                        String itemName = data.getString(&quot;title&quot;);</span>
-<span class="nc" id="L138">                        String itemType = data.getString(&quot;type&quot;);</span>
-<span class="nc" id="L139">                        String itemURL = data.getString(&quot;URLSocket&quot;);</span>
+<span class="nc bnc" id="L147" title="All 2 branches missed.">                    if (pageIndex != -1) {</span>
+<span class="nc" id="L148">                        String itemId = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L149">                        String itemName = data.getString(&quot;title&quot;);</span>
+<span class="nc" id="L150">                        String itemType = data.getString(&quot;type&quot;);</span>
+<span class="nc" id="L151">                        String itemURL = data.getString(&quot;socketURL&quot;);</span>
 
                         //then it insert a graph in the list of the found page, with an index equal to the JSON's one
-<span class="nc" id="L142">                        pageList.get(pageIndex).addItem(itemId, itemName, itemType, itemURL);</span>
-<span class="nc" id="L143">                    }</span>
+<span class="nc" id="L154">                        pageList.get(pageIndex).addItem(itemId, itemName, itemType, itemURL);</span>
+<span class="nc" id="L155">                    }</span>
                     break;
                 }
 
-                case(&quot;updateGraph&quot;):{
-
+                case (&quot;updateGraph&quot;): {
                     // on the arrival of this signal, a Graph,
                     // identified by an id, is updated.
 
                     //first of all it searches a page in the list, with an index equal to the JSON's one
 
-<span class="nc" id="L154">                    int pageIndex = -1;</span>
-<span class="nc bnc" id="L155" title="All 2 branches missed.">                    for(int i=0; i &lt; pageList.size(); i++){</span>
-<span class="nc bnc" id="L156" title="All 2 branches missed.">                        if(pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
+<span class="nc" id="L165">                    int pageIndex = -1;</span>
+<span class="nc bnc" id="L166" title="All 2 branches missed.">                    for (int i = 0; i &lt; pageList.size(); i++) {</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">                        if (pageList.get(i).getId().equals(data.getString(&quot;ID&quot;))) pageIndex = i;</span>
                     }
 
                     //then it searches a graph in the list of the found page, with an index equal to the JSON's one
 
-<span class="nc bnc" id="L161" title="All 2 branches missed.">                    if(pageIndex != -1) {</span>
-<span class="nc" id="L162">                        int graphIndex = -1;</span>
-<span class="nc bnc" id="L163" title="All 2 branches missed.">                        for (int j = 0; j &lt; pageList.size(); j++) {</span>
-<span class="nc bnc" id="L164" title="All 2 branches missed.">                            if (pageList.get(pageIndex).getPageItemList().get(j).getId().equals(data.getString(&quot;ID&quot;)))</span>
-<span class="nc" id="L165">                                graphIndex = j;</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">                    if (pageIndex != -1) {</span>
+<span class="nc" id="L173">                        int graphIndex = -1;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">                        for (int j = 0; j &lt; pageList.size(); j++) {</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">                            if (pageList.get(pageIndex).getPageItemList().get(j).getId().equals(data.getString(&quot;ID&quot;)))</span>
+<span class="nc" id="L176">                                graphIndex = j;</span>
                         }
 
                         // found indexes are used to update the item
 
-<span class="nc bnc" id="L170" title="All 2 branches missed.">                        if (graphIndex != -1) {</span>
-<span class="nc" id="L171">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString(&quot;ID&quot;));</span>
-<span class="nc" id="L172">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString(&quot;title&quot;));</span>
-<span class="nc" id="L173">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString(&quot;type&quot;));</span>
-<span class="nc" id="L174">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString(&quot;URLSocket&quot;));</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">                        if (graphIndex != -1) {</span>
+<span class="nc" id="L182">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString(&quot;ID&quot;));</span>
+<span class="nc" id="L183">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString(&quot;title&quot;));</span>
+<span class="nc" id="L184">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString(&quot;type&quot;));</span>
+<span class="nc" id="L185">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString(&quot;socketURL&quot;));</span>
                         }//else exception
-<span class="nc" id="L176">                    }</span>
+<span class="nc" id="L187">                    }</span>
                     break;
                 }
             }
-<span class="nc" id="L180">        }catch(JSONException e){}</span>
+<span class="nc" id="L191">        } catch (JSONException e) {</span>
+<span class="nc" id="L192">            e.printStackTrace();</span>
+<span class="nc" id="L193">        }</span>
+<span class="nc" id="L194">    }</span>
 
+    public String getName() {
+<span class="nc" id="L197">        return name;</span>
+    }
 
+    public ArrayList&lt;Page&gt; getPageList() {
+<span class="nc" id="L201">        return pageList;</span>
+    }
 
-<span class="nc" id="L184">    }</span>
+    public int getPageListSize() {
+<span class="nc" id="L205">        return pageList.size();</span>
+    }
 
-<span class="nc" id="L186">    public String getName(){ return name; }</span>
-<span class="fc" id="L187">    public ArrayList&lt;Page&gt; getPageList(){ return pageList; }</span>
-<span class="fc" id="L188">    public int getPageListSize(){ return pageList.size(); }</span>
-<span class="nc" id="L189">    public int getItemListSize(int page){ return pageList.get(page).getItemListSize(); }</span>
-<span class="nc" id="L190">    public ArrayList&lt;PageItem&gt; getItemList(int page){ return pageList.get(page).getPageItemList(); }</span>
-<span class="nc" id="L191">    public Page getPage(int index){ return this.getPageList().get(index); }</span>
+    public int getItemListSize(int page) {
+<span class="nc" id="L209">        return pageList.get(page).getItemListSize();</span>
+    }
+
+    public ArrayList&lt;PageItem&gt; getItemList(int page) {
+<span class="nc" id="L213">        return pageList.get(page).getPageItemList();</span>
+    }
+
+    public Page getPage(int index) {
+<span class="nc" id="L217">        return this.getPageList().get(index);</span>
+    }
+
+    @Override
+    public void removeObservers() {
+<span class="nc" id="L222">        deleteObservers();</span>
+<span class="nc" id="L223">    }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

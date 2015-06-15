@@ -9,10 +9,12 @@
 
  * Version Date Programmer Description
  * ===============================================================
- * 
- * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creazione file
+ * 0.1.1 2015-05-20 Enrico Savoca Add methods getItemListSize() and getPageItemList()
+ *
+ * 0.1.0 2015-05-19 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-19 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -20,30 +22,53 @@
 
 import java.util.ArrayList;
 
-public class Page{
+public class Page {
     private String id;
     private String name;
     private String description;
-<span class="fc" id="L27">    private ArrayList&lt;PageItem&gt; pageItemList = new ArrayList&lt;PageItem&gt;();</span>
+<span class="nc" id="L29">    private ArrayList&lt;PageItem&gt; pageItemList = new ArrayList&lt;PageItem&gt;();</span>
 
     // constructor of Page
-<span class="fc" id="L30">    Page(String id, String name, String description){</span>
-<span class="fc" id="L31">        this.id = id;</span>
-<span class="fc" id="L32">        this.name = name;</span>
-<span class="fc" id="L33">        this.description = description;</span>
-<span class="fc" id="L34">    }</span>
+<span class="nc" id="L32">    Page(String id, String name, String description) {</span>
+<span class="nc" id="L33">        this.id = id;</span>
+<span class="nc" id="L34">        this.name = name;</span>
+<span class="nc" id="L35">        this.description = description;</span>
+<span class="nc" id="L36">    }</span>
 
-    public void addItem(String id, String name, String type, String URL){
-<span class="nc" id="L37">        pageItemList.add(new PageItem(id, name, type, URL));</span>
-<span class="nc" id="L38">    }</span>
+    public void addItem(String id, String name, String type, String URL) {
+<span class="nc" id="L39">        pageItemList.add(new PageItem(id, name, type, URL));</span>
+<span class="nc" id="L40">    }</span>
 
-<span class="nc" id="L40">    public void setName(String name){ this.name = name; }</span>
-<span class="nc" id="L41">    public void setDescription(String description){ this.description = description; }</span>
+    public void setId(String id) {
+<span class="nc" id="L43">        this.id = id;</span>
+<span class="nc" id="L44">    }</span>
 
-<span class="nc" id="L43">    public ArrayList&lt;PageItem&gt; getPageItemList(){ return pageItemList; }</span>
-<span class="nc" id="L44">    public String getId(){ return id;}</span>
-<span class="nc" id="L45">    public String getName(){ return name;}</span>
-<span class="nc" id="L46">    public String getDescription(){ return description; }</span>
-<span class="nc" id="L47">    public int getItemListSize(){ return pageItemList.size();}</span>
+    public void setName(String name) {
+<span class="nc" id="L47">        this.name = name;</span>
+<span class="nc" id="L48">    }</span>
+
+    public void setDescription(String description) {
+<span class="nc" id="L51">        this.description = description;</span>
+<span class="nc" id="L52">    }</span>
+
+    public ArrayList&lt;PageItem&gt; getPageItemList() {
+<span class="nc" id="L55">        return pageItemList;</span>
+    }
+
+    public String getId() {
+<span class="nc" id="L59">        return id;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L63">        return name;</span>
+    }
+
+    public String getDescription() {
+<span class="nc" id="L67">        return description;</span>
+    }
+
+    public int getItemListSize() {
+<span class="nc" id="L71">        return pageItemList.size();</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -11,75 +11,71 @@ import android.widget.TextView;
 /**
  * This class implements the main functionalities of the TableAdapter in
  * Mutuactivos.
- * 
- * 
+ *
  * @author Brais Gab�n
  */
 public abstract class SampleTableAdapter extends BaseTableAdapter {
-	private final Context context;
-	private final LayoutInflater inflater;
+    private final Context context;
+    private final LayoutInflater inflater;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param context
-	 *            The current context.
-	 */
-<span class="nc" id="L28">	public SampleTableAdapter(Context context) {</span>
-<span class="nc" id="L29">		this.context = context;</span>
-<span class="nc" id="L30">		inflater = LayoutInflater.from(context);</span>
-<span class="nc" id="L31">	}</span>
+    /**
+     * Constructor
+     *
+     * @param context The current context.
+     */
+<span class="nc" id="L26">    public SampleTableAdapter(Context context) {</span>
+<span class="nc" id="L27">        this.context = context;</span>
+<span class="nc" id="L28">        inflater = LayoutInflater.from(context);</span>
+<span class="nc" id="L29">    }</span>
 
-	/**
-	 * Returns the context associated with this array adapter. The context is
-	 * used to create views from the resource passed to the constructor.
-	 * 
-	 * @return The Context associated with this adapter.
-	 */
-	public Context getContext() {
-<span class="nc" id="L40">		return context;</span>
-	}
+    /**
+     * Returns the context associated with this array adapter. The context is
+     * used to create views from the resource passed to the constructor.
+     *
+     * @return The Context associated with this adapter.
+     */
+    public Context getContext() {
+<span class="nc" id="L38">        return context;</span>
+    }
 
-	/**
-	 * Quick access to the LayoutInflater instance that this Adapter retreived
-	 * from its Context.
-	 * 
-	 * @return The shared LayoutInflater.
-	 */
-	public LayoutInflater getInflater() {
-<span class="nc" id="L50">		return inflater;</span>
-	}
+    /**
+     * Quick access to the LayoutInflater instance that this Adapter retreived
+     * from its Context.
+     *
+     * @return The shared LayoutInflater.
+     */
+    public LayoutInflater getInflater() {
+<span class="nc" id="L48">        return inflater;</span>
+    }
 
-	@Override
-	public View getView(int row, int column, View converView, ViewGroup parent) {
-<span class="nc bnc" id="L55" title="All 2 branches missed.">		if (converView == null) {</span>
-<span class="nc" id="L56">			converView = inflater.inflate(getLayoutResource(row, column), parent, false);</span>
-		}
-<span class="nc" id="L58">		setText(converView, getCellString(row, column));</span>
-<span class="nc" id="L59">		return converView;</span>
-	}
+    @Override
+    public View getView(int row, int column, View converView, ViewGroup parent) {
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (converView == null) {</span>
+<span class="nc" id="L54">            converView = inflater.inflate(getLayoutResource(row, column), parent, false);</span>
+        }
+<span class="nc" id="L56">        setText(converView, getCellString(row, column));</span>
+<span class="nc" id="L57">        return converView;</span>
+    }
 
-	/**
-	 * Sets the text to the view.
-	 * 
-	 * @param view
-	 * @param text
-	 */
-	private void setText(View view, String text) {
-<span class="nc" id="L69">		((TextView) view.findViewById(android.R.id.text1)).setText(text);</span>
-<span class="nc" id="L70">	}</span>
+    /**
+     * Sets the text to the view.
+     *
+     * @param view
+     * @param text
+     */
+    private void setText(View view, String text) {
+<span class="nc" id="L67">        ((TextView) view.findViewById(android.R.id.text1)).setText(text);</span>
+<span class="nc" id="L68">    }</span>
 
-	/**
-	 * @param row
-	 *            the title of the row of this header. If the column is -1
-	 *            returns the title of the row header.
-	 * @param column
-	 *            the title of the column of this header. If the column is -1
-	 *            returns the title of the column header.
-	 * @return the string for the cell [row, column]
-	 */
-	public abstract String getCellString(int row, int column);
+    /**
+     * @param row    the title of the row of this header. If the column is -1
+     *               returns the title of the row header.
+     * @param column the title of the column of this header. If the column is -1
+     *               returns the title of the column header.
+     * @return the string for the cell [row, column]
+     */
+    public abstract String getCellString(int row, int column);
 
-	public abstract int getLayoutResource(int row, int column);
+    public abstract int getLayoutResource(int row, int column);
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

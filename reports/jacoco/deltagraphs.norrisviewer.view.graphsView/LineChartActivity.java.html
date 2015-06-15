@@ -1,24 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>LineChartActivity.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.view.graphsView</a> &gt; <span class="el_source">LineChartActivity.java</span></div><h1>LineChartActivity.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.view.graphsView;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.support.v4.app.DialogFragment;
+/*
+ * Name : LineChartActivity.java
+ * Module : norrisviewer::view::graphsView
+ * Location : norrisviewer\view\graphsView
+ *
+ * History :
+
+ * Version   Date       Programmer              Description
+ * ==========================================================================================
+ *
+ * 0.3.2 2015-06-15 Davide Trivellato Update legend style
+ *
+ * 0.3.1 2015-06-03 Davide Trivellato Fix ViewFinder
+ *
+ * 0.3.0 2015-06-02 Davide Trivellato Coding of menu, axis and flow colours
+ *
+ * 0.2.0 2015-06-02 Davide Trivellato Implementation of ViewFinder and legend
+ *
+ * 0.1.0 2015-06-01 Davide Trivellato Coding of methods and attributes
+ *
+ * 0.0.1 2015-05-31 Davide Trivellato Creation of the file
+ *
+ * =========================================================================================
+ *
+ */
+
+import android.content.Context;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.*;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.*;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
-import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -32,17 +60,12 @@ import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
 
-<span class="nc" id="L35">public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {</span>
+<span class="nc" id="L63">public class LineChartActivity extends ActionBarActivity implements deltagraphs.norrisviewer.view.graphsView.LineChartView {</span>
 
-    private static final int DEFAULT_DATA = 0;
-    private static final int SUBCOLUMNS_DATA = 1;
-    private static final int STACKED_DATA = 2;
-    private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
-    private static final int NEGATIVE_STACKED_DATA = 4;
+
 
     private List&lt;Line&gt; lines;
-    // Map&lt; flowIndex, lineIndex&gt;
-    private List&lt;String&gt; indexesList;
+    private List&lt;Line&gt; previewLines;
 
     private LineChartPresenter lineChartPresenter;
 
@@ -51,193 +74,259 @@ import lecho.lib.hellocharts.view.LineChartView;
     private LineChartView chart;
     private PreviewLineChartView previewChart;
     private LineChartData data;
+    private LineChartData previewData;
 
     private String sourceTitle;
     private String sourceURL;
 
-<span class="nc" id="L58">    private boolean hasAxes = true;</span>
-<span class="nc" id="L59">    private boolean hasAxesNames = true;</span>
-<span class="nc" id="L60">    private boolean hasLabels = false;</span>
-<span class="nc" id="L61">    private boolean hasLabelForSelected = false;</span>
-<span class="nc" id="L62">    private boolean hasViewFinder = false;</span>
-<span class="nc" id="L63">    private int dataType = DEFAULT_DATA;</span>
+<span class="nc" id="L82">    private boolean hasAxes = true;</span>
+<span class="nc" id="L83">    private boolean hasAxesNames = true;</span>
+<span class="nc" id="L84">    private boolean hasLabels = false;</span>
+<span class="nc" id="L85">    private boolean hasViewFinder = false;</span>
 
     private Axis axisX;
     private Axis axisY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L70">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L71">        setContentView(R.layout.line_chart);</span>
-<span class="nc" id="L72">        chart = (LineChartView) findViewById(R.id.chart);</span>
-<span class="nc" id="L73">        chart.setOnValueTouchListener(new ValueTouchListener());</span>
-<span class="nc" id="L74">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
+<span class="nc" id="L92">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L93">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+<span class="nc" id="L95">        setContentView(R.layout.line_chart);</span>
+<span class="nc" id="L96">        chart = (LineChartView) findViewById(R.id.chart);</span>
+<span class="nc" id="L97">        chart.setOnValueTouchListener(new ValueTouchListener());</span>
+<span class="nc" id="L98">        previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);</span>
 
-<span class="nc" id="L76">        Bundle extras = getIntent().getExtras();</span>
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        if (extras != null) {</span>
-<span class="nc" id="L78">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L79">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L100">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L102">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L103">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-<span class="nc" id="L81">        setTitle(sourceTitle);</span>
-<span class="nc" id="L82">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L83">        lines = new ArrayList&lt;Line&gt;();</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L105">        setTitle(sourceTitle);</span>
+<span class="nc" id="L106">        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L107">        data = new LineChartData();</span>
+<span class="nc" id="L108">        previewData = new LineChartData();</span>
+
+<span class="nc" id="L110">        chart.setZoomEnabled(false);</span>
+<span class="nc" id="L111">        chart.setScrollEnabled(false);</span>
+<span class="nc" id="L112">        previewChart.setViewportChangeListener(new ViewportListener());</span>
+<span class="nc" id="L113">        previewChart.setPreviewColor(Color.parseColor(&quot;#80CBC4&quot;));</span>
+<span class="nc" id="L114">    }</span>
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L89">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
-<span class="nc" id="L90">        return true;</span>
+<span class="nc" id="L119">        getMenuInflater().inflate(R.menu.menu_line_chart, menu);</span>
+<span class="nc" id="L120">        return true;</span>
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L98">        int id = item.getItemId();</span>
+<span class="nc" id="L129">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L102">            return true;</span>
+<span class="nc bnc" id="L132" title="All 2 branches missed.">        if (id == R.id.action_previewX) {</span>
+<span class="nc" id="L133">            previewX(true);</span>
+<span class="nc" id="L134">            return true;</span>
         }
 
-<span class="nc" id="L105">        return super.onOptionsItemSelected(item);</span>
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        if (id == R.id.action_previewY) {</span>
+<span class="nc" id="L138">            previewY();</span>
+<span class="nc" id="L139">            return true;</span>
+        }
+
+<span class="nc bnc" id="L142" title="All 2 branches missed.">        if (id == R.id.action_previewXY) {</span>
+<span class="nc" id="L143">            previewXY();</span>
+<span class="nc" id="L144">            return true;</span>
+        }
+
+<span class="nc bnc" id="L147" title="All 2 branches missed.">        if (id == R.id.action_credits) {</span>
+<span class="nc" id="L148">            Context context = getApplicationContext();</span>
+<span class="nc" id="L149">            CharSequence text = &quot;Credits to DeltaGraphs 2015&quot;;</span>
+<span class="nc" id="L150">            int duration = Toast.LENGTH_SHORT;</span>
+
+<span class="nc" id="L152">            Toast toast = Toast.makeText(context, text, duration);</span>
+<span class="nc" id="L153">            toast.show();</span>
+
+<span class="nc" id="L155">            return true;</span>
+        }
+
+<span class="nc" id="L158">        return super.onOptionsItemSelected(item);</span>
     }
-
-    public void setInitialState(){
-<span class="nc" id="L109">        hasAxes = true;</span>
-<span class="nc" id="L110">        hasAxesNames = true;</span>
-<span class="nc" id="L111">        hasLabels = false;</span>
-<span class="nc" id="L112">        hasLabelForSelected = false;</span>
-<span class="nc" id="L113">        dataType = DEFAULT_DATA;</span>
-<span class="nc" id="L114">        chart.setValueSelectionEnabled(hasLabelForSelected);</span>
-<span class="nc" id="L115">    }</span>
-
 
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
-<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (hasAxes) {</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (hasAxes) {</span>
 
-<span class="nc" id="L122">            float step = (maxIndex-minIndex)/ticks;</span>
+<span class="nc" id="L165">            float step = (maxIndex - minIndex) / ticks;</span>
 
-<span class="nc bnc" id="L124" title="All 2 branches missed.">            if(axisXorY == 'x') {</span>
-<span class="nc" id="L125">                axisX = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
-<span class="nc" id="L126">                axisX.setHasLines(true);</span>
-<span class="nc bnc" id="L127" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L128">                    axisX.setName(name);</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (axisXorY == 'x') {</span>
+<span class="nc" id="L168">                axisX = new Axis().setHasLines(true);</span>
+<span class="nc" id="L169">                axisX.generateAxisFromRange(minIndex, maxIndex, step);</span>
+                //axisX.setHasSeparationLine(true);
+<span class="nc bnc" id="L171" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L172">                    axisX.setName(name);</span>
                 }
-
-<span class="nc" id="L131">                data.setAxisXBottom(axisX);</span>
             }
-<span class="nc bnc" id="L133" title="All 2 branches missed.">            if(axisXorY == 'y') {</span>
-<span class="nc" id="L134">                axisY = Axis.generateAxisFromRange(minIndex,maxIndex,step);</span>
-<span class="nc" id="L135">                axisY.setHasLines(true);</span>
-<span class="nc bnc" id="L136" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L137">                    axisY.setName(name);</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">            if (axisXorY == 'y') {</span>
+<span class="nc" id="L176">                axisY = new Axis().setHasLines(true);</span>
+<span class="nc" id="L177">                axisY.generateAxisFromRange(minIndex, maxIndex, step);</span>
+<span class="nc bnc" id="L178" title="All 2 branches missed.">                if (hasAxesNames) {</span>
+<span class="nc" id="L179">                    axisY.setName(name);</span>
                 }
-<span class="nc" id="L139">                data.setAxisYLeft(axisY);</span>
             }
             // TODO: Insert the possibility to change the scale.
-<span class="nc" id="L142">        } else {</span>
-<span class="nc" id="L143">            data.setAxisXBottom(null);</span>
-<span class="nc" id="L144">            data.setAxisYLeft(null);</span>
+<span class="nc" id="L183">        } else {</span>
+<span class="nc" id="L184">            data.setAxisXBottom(null);</span>
+<span class="nc" id="L185">            data.setAxisYLeft(null);</span>
         }
-<span class="nc" id="L146">    }</span>
-
-
-    @Override
-    public void setViewFinder(Boolean withViewFinder) {
-
-<span class="nc" id="L152">    }</span>
-
-    @Override
-    public void setBackground(String bg) {
-
-<span class="nc" id="L157">    }</span>
+<span class="nc" id="L187">    }</span>
 
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
-<span class="nc" id="L161">        axisX.setHasSeparationLine(vertical);</span>
-<span class="nc" id="L162">        axisY.setHasSeparationLine(horizontal);</span>
-<span class="nc" id="L163">    }</span>
-
-    @Override
-    public void setLegendOnPoint(Boolean legend) {
-
-<span class="nc" id="L168">    }</span>
+<span class="nc" id="L191">        axisX.setHasSeparationLine(vertical);</span>
+<span class="nc" id="L192">        axisY.setHasSeparationLine(horizontal);</span>
+<span class="nc" id="L193">    }</span>
 
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, String signal) {
-<span class="nc" id="L172">        String color = &quot;&quot;;</span>
-<span class="nc bnc" id="L173" title="All 2 branches missed.">        for(int i=0; i&lt;flowList.size(); i++) {</span>
+<span class="nc" id="L197">        String color = &quot;&quot;;</span>
+<span class="nc" id="L198">        lines = new ArrayList&lt;Line&gt;();</span>
+<span class="nc" id="L199">        previewLines = new ArrayList&lt;Line&gt;();</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
 
-<span class="nc" id="L175">            indexesList.add(flowList.get(i).getFlowId());</span>
+<span class="nc" id="L202">            String flowId = flowList.get(i).getFlowId();</span>
 
-<span class="nc" id="L177">            flowList.get(i).getFlowName();</span>
-<span class="nc" id="L178">            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);</span>
-<span class="nc" id="L179">            color = lineChartFlow.getFlowColour();</span>
-<span class="nc" id="L180">            lineChartFlow.maxItems();</span>
-<span class="nc" id="L181">            lineChartFlow.getMarker();</span>
-<span class="nc" id="L182">            lineChartFlow.getInterpolation();</span>
-<span class="nc" id="L183">            List&lt;PointValue&gt; values = new ArrayList&lt;PointValue&gt;();</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">            for(int j =0; j&lt; lineChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L204">            String flowName = flowList.get(i).getFlowName();</span>
+
+<span class="nc" id="L206">            LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);</span>
+
+<span class="nc" id="L208">            color = lineChartFlow.getFlowColour();</span>
+
+<span class="nc" id="L210">            List&lt;PointValue&gt; values = new ArrayList&lt;PointValue&gt;();</span>
+
+<span class="nc bnc" id="L212" title="All 2 branches missed.">            for (int j = 0; j &lt; lineChartFlow.getRecordSize(); j++) {</span>
                 //lineChartFlow.getRecordId(j);
-<span class="nc" id="L186">                float x = lineChartFlow.getRecordValueX(j);</span>
-<span class="nc" id="L187">                float y = lineChartFlow.getRecordValueY(j);</span>
-<span class="nc" id="L188">                values.add(new PointValue(x, y));</span>
+<span class="nc" id="L214">                float x = lineChartFlow.getRecordValueX(j);</span>
+<span class="nc" id="L215">                float y = lineChartFlow.getRecordValueY(j);</span>
+<span class="nc" id="L216">                PointValue pointValue = new PointValue(x, y);</span>
+<span class="nc" id="L217">                pointValue.setLabel(flowName);</span>
+<span class="nc" id="L218">                values.add(pointValue);</span>
             }
-<span class="nc" id="L190">            Line line = new Line(values);</span>
-<span class="nc bnc" id="L191" title="All 22 branches missed.">            switch (color){</span>
-                case &quot;green&quot;:
-<span class="nc" id="L193">                    line.setColor(ChartUtils.COLOR_GREEN);</span>
-<span class="nc" id="L194">                    break;</span>
-                case &quot;blue&quot;:
-<span class="nc" id="L196">                    line.setColor(ChartUtils.COLOR_BLUE);</span>
-<span class="nc" id="L197">                    break;</span>
-                case &quot;orange&quot;:
-<span class="nc" id="L199">                    line.setColor(ChartUtils.COLOR_ORANGE);</span>
-<span class="nc" id="L200">                    break;</span>
-                case &quot;red&quot;:
-<span class="nc" id="L202">                    line.setColor(ChartUtils.COLOR_RED);</span>
-<span class="nc" id="L203">                    break;</span>
-                case &quot;violet&quot;:
-<span class="nc" id="L205">                    line.setColor(ChartUtils.COLOR_VIOLET);</span>
-<span class="nc" id="L206">                    break;</span>
-                default:
-<span class="nc" id="L208">                    line.setColor(ChartUtils.DEFAULT_COLOR);</span>
-                    break;
-            }
-<span class="nc" id="L211">            line.setHasLabels(hasLabels);</span>
-<span class="nc" id="L212">            lines.add(line);</span>
-        }
-<span class="nc" id="L214">    }</span>
 
-<span class="nc" id="L216">    private class ValueTouchListener implements LineChartOnValueSelectListener {</span>
+<span class="nc" id="L221">            Line line = new Line(values);</span>
+<span class="nc" id="L222">            setLineColor(line, color);</span>
+
+<span class="nc" id="L224">            Line previewLine = new Line(values);</span>
+<span class="nc" id="L225">            setLineColor(previewLine, &quot;random&quot;);</span>
+
+<span class="nc" id="L227">            previewLine.setHasLabels(hasLabels);</span>
+<span class="nc" id="L228">            line.setHasLabels(hasLabels);</span>
+
+<span class="nc" id="L230">            lines.add(line);</span>
+<span class="nc" id="L231">            previewLines.add(previewLine);</span>
+        }
+
+<span class="nc" id="L234">        data.setLines(lines);</span>
+<span class="nc" id="L235">        data.setAxisXBottom(axisX);</span>
+<span class="nc" id="L236">        data.setAxisYLeft(axisY);</span>
+
+<span class="nc" id="L238">        previewData.setLines(previewLines);</span>
+
+<span class="nc" id="L240">        chart.setLineChartData(data);</span>
+
+<span class="nc" id="L242">        previewChart.setLineChartData(previewData);</span>
+<span class="nc" id="L243">    }</span>
+
+
+    private void setLineColor(Line line, String color) {
+<span class="nc bnc" id="L247" title="All 4 branches missed.">        if (color != null &amp;&amp; color != &quot;random&quot;)</span>
+<span class="nc" id="L248">            line.setColor(Color.parseColor(color));</span>
+        else
+<span class="nc" id="L250">            line.setColor(ChartUtils.DEFAULT_COLOR);</span>
+
+<span class="nc" id="L252">    }</span>
+
+<span class="nc" id="L254">    private class ValueTouchListener implements LineChartOnValueSelectListener {</span>
 
         @Override
         public void onValueSelected(int lineIndex, int pointIndex, PointValue value) {
-            //Toast.makeText(getActivity(), &quot;Value: &quot; + value, Toast.LENGTH_SHORT).show();
-<span class="nc" id="L221">        }</span>
+<span class="nc" id="L258">            char[] cLabel = value.getLabelAsChars();</span>
+<span class="nc" id="L259">            String label = new String(cLabel);</span>
+
+<span class="nc" id="L261">            LayoutInflater inflater = getLayoutInflater();</span>
+<span class="nc" id="L262">            View layout = inflater.inflate(R.layout.custom_toast,</span>
+                    (ViewGroup) findViewById(R.id.toast_layout_root));
+
+<span class="nc" id="L265">            TextView title = (TextView) layout.findViewById(R.id.label);</span>
+<span class="nc" id="L266">            title.setText(label);</span>
+
+<span class="nc" id="L268">            TextView values = (TextView) layout.findViewById(R.id. coord_values);</span>
+<span class="nc" id="L269">            values.setText(&quot;\nx = &quot; + value.getX() + &quot;\ny = &quot; + value.getY());</span>
+
+<span class="nc" id="L271">            Toast toast = new Toast(getApplicationContext());</span>
+<span class="nc" id="L272">            toast.setGravity(Gravity.CENTER, 0, 0);</span>
+<span class="nc" id="L273">            toast.setDuration(Toast.LENGTH_SHORT);</span>
+<span class="nc" id="L274">            toast.setView(layout);</span>
+<span class="nc" id="L275">            toast.show();</span>
+<span class="nc" id="L276">        }</span>
 
         @Override
         public void onValueDeselected() {
             // TODO Auto-generated method stub
 
-<span class="nc" id="L227">        }</span>
+<span class="nc" id="L282">        }</span>
 
     }
 
-<span class="nc" id="L231">    public class FireMissilesDialogFragment extends DialogFragment {</span>
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-<span class="nc" id="L235">            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());</span>
-<span class="nc" id="L236">            builder.setTitle(&quot;Legend&quot;);</span>
+    public void onDestroy() {
+        // Otherwise defer to system default behavior.
+<span class="nc" id="L288">        super.onDestroy();</span>
+<span class="nc" id="L289">        lineChartPresenter.destroy();</span>
+<span class="nc" id="L290">    }</span>
 
-            // Create the AlertDialog object and return it
-<span class="nc" id="L239">            return builder.create();</span>
+    private void previewY() {
+<span class="nc" id="L293">        Viewport tempViewport = new Viewport(chart.getMaximumViewport());</span>
+<span class="nc" id="L294">        float dy = tempViewport.height() / 4;</span>
+<span class="nc" id="L295">        tempViewport.inset(0, dy);</span>
+<span class="nc" id="L296">        previewChart.setCurrentViewportWithAnimation(tempViewport);</span>
+<span class="nc" id="L297">        previewChart.setZoomType(ZoomType.VERTICAL);</span>
+<span class="nc" id="L298">    }</span>
+
+    private void previewX(boolean animate) {
+<span class="nc" id="L301">        Viewport tempViewport = new Viewport(chart.getMaximumViewport());</span>
+<span class="nc" id="L302">        float dx = tempViewport.width() / 4;</span>
+<span class="nc" id="L303">        tempViewport.inset(dx, 0);</span>
+<span class="nc bnc" id="L304" title="All 2 branches missed.">        if (animate) {</span>
+<span class="nc" id="L305">            previewChart.setCurrentViewportWithAnimation(tempViewport);</span>
+        } else {
+<span class="nc" id="L307">            previewChart.setCurrentViewport(tempViewport);</span>
         }
+<span class="nc" id="L309">        previewChart.setZoomType(ZoomType.HORIZONTAL);</span>
+<span class="nc" id="L310">    }</span>
+
+    private void previewXY() {
+        // Better to not modify viewport of any chart directly so create a copy.
+<span class="nc" id="L314">        Viewport tempViewport = new Viewport(chart.getMaximumViewport());</span>
+        // Make temp viewport smaller.
+<span class="nc" id="L316">        float dx = tempViewport.width() / 4;</span>
+<span class="nc" id="L317">        float dy = tempViewport.height() / 4;</span>
+<span class="nc" id="L318">        tempViewport.inset(dx, dy);</span>
+<span class="nc" id="L319">        previewChart.setCurrentViewportWithAnimation(tempViewport);</span>
+<span class="nc" id="L320">    }</span>
+
+<span class="nc" id="L322">    private class ViewportListener implements ViewportChangeListener {</span>
+
+        @Override
+        public void onViewportChanged(Viewport newViewport) {
+            // don't use animation, it is unnecessary when using preview chart.
+<span class="nc" id="L327">            chart.setCurrentViewport(newViewport);</span>
+<span class="nc" id="L328">        }</span>
+
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

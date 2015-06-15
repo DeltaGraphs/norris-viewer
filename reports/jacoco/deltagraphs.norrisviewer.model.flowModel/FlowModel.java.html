@@ -10,9 +10,11 @@
  * Version Date Programmer Description
  * ===============================================================
  *
- * 0.1.0 2015-05-14 Enrico Savoca Codifica degli attributi e dei parametri
+ * 0.1.1 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
- * 0.0.1 2015-05-13 Enrico Savoca Creazione file
+ * 0.1.0 2015-05-22 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-22 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
@@ -21,23 +23,32 @@
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-<span class="nc" id="L24">public abstract class FlowModel {</span>
+<span class="nc" id="L26">public abstract class FlowModel {</span>
 
     protected String flowId;
     protected String flowName;
 
     public abstract void createFlow(JSONObject data);
+
     public abstract void updateFlow(JSONObject data);
+
     public abstract void deleteRecordList();
+
     public abstract void addRecord(JSONObject data);
-    public abstract void addRecords(JSONArray data);
+
+    public abstract void addRecords(JSONArray data, boolean insertOnTop);
+
     public abstract void updateRecord(JSONObject data);
+
     public abstract void deleteRecord(JSONObject data);
 
-<span class="nc" id="L37">    public void setFlowName(String name){ flowName = name;  }</span>
+    public String getFlowName() {
+<span class="nc" id="L46">        return flowName;</span>
+    }
 
-<span class="nc" id="L39">    public String getFlowName() { return flowName; }</span>
-<span class="nc" id="L40">    public String getFlowId() { return flowId; }</span>
+    public String getFlowId() {
+<span class="nc" id="L50">        return flowId;</span>
+    }
 
 }
 

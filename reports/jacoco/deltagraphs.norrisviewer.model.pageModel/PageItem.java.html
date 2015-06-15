@@ -10,36 +10,60 @@
  * Version Date Programmer Description
  * ===============================================================
  * 
- * 0.1.0 2015-05-12 Enrico Savoca Codifica di tutti gli attributi e i metodi
+ * 0.1.1 2015-05-20 Enrico Savoca Update constructor
  *
- * 0.0.1 2015-05-12 Enrico Savoca Creazione file
+ * 0.1.0 2015-05-19 Enrico Savoca Coding of all methods and attributes
+ *
+ * 0.0.1 2015-05-19 Enrico Savoca Creation of the file
  *
  * ===============================================================
  *
  */
 
-public class PageItem{
+public class PageItem {
     private String itemId;
     private String itemName;
     private String itemType;
     private String itemURL;
 
     // constructor of PageItem
-<span class="nc" id="L28">    PageItem(String iI, String iN, String iT, String URL ){</span>
-<span class="nc" id="L29">        itemId = iI;</span>
-<span class="nc" id="L30">        itemName = iN;</span>
-<span class="nc" id="L31">        itemType = iT;</span>
-<span class="nc" id="L32">        itemURL = URL;</span>
-<span class="nc" id="L33">    }</span>
+<span class="nc" id="L30">    PageItem(String iI, String iN, String iT, String URL) {</span>
+<span class="nc" id="L31">        itemId = iI;</span>
+<span class="nc" id="L32">        itemName = iN;</span>
+<span class="nc" id="L33">        itemType = iT;</span>
+<span class="nc" id="L34">        itemURL = URL;</span>
+<span class="nc" id="L35">    }</span>
 
-<span class="nc" id="L35">    public void setId(String id){ this.itemId = id; }</span>
-<span class="nc" id="L36">    public void setName(String name){ this.itemName = name; }</span>
-<span class="nc" id="L37">    public void setType(String type){ this.itemType = type; }</span>
-<span class="nc" id="L38">    public void setUrl(String url){ this.itemURL = url; }</span>
+    public void setId(String id) {
+<span class="nc" id="L38">        this.itemId = id;</span>
+<span class="nc" id="L39">    }</span>
 
-<span class="nc" id="L40">    public String getId(){ return itemId; }</span>
-<span class="nc" id="L41">    public String getName(){ return itemName; }</span>
-<span class="nc" id="L42">    public String getType(){ return itemType; }</span>
-<span class="nc" id="L43">    public String getUrl(){ return itemURL; }</span>
+    public void setName(String name) {
+<span class="nc" id="L42">        this.itemName = name;</span>
+<span class="nc" id="L43">    }</span>
+
+    public void setType(String type) {
+<span class="nc" id="L46">        this.itemType = type;</span>
+<span class="nc" id="L47">    }</span>
+
+    public void setUrl(String url) {
+<span class="nc" id="L50">        this.itemURL = url;</span>
+<span class="nc" id="L51">    }</span>
+
+    public String getId() {
+<span class="nc" id="L54">        return itemId;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L58">        return itemName;</span>
+    }
+
+    public String getType() {
+<span class="nc" id="L62">        return itemType;</span>
+    }
+
+    public String getUrl() {
+<span class="nc" id="L66">        return itemURL;</span>
+    }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

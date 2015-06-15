@@ -23,25 +23,6 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     </issue>
 
     <issue
-        id="ValidFragment"
-        severity="Fatal"
-        message="This fragment inner class should be static (deltagraphs.norrisviewer.view.graphsView.LineChartActivity.FireMissilesDialogFragment)"
-        category="Correctness"
-        priority="6"
-        summary="Fragment not instantiatable"
-        explanation="From the Fragment documentation:
-*Every* fragment must have an empty constructor, so it can be instantiated when restoring its activity&apos;s state. It is strongly recommended that subclasses do not have other constructors with parameters, since these constructors will not be called when the fragment is re-instantiated; instead, arguments can be supplied by the caller with `setArguments(Bundle)` and later retrieved by the Fragment with `getArguments()`."
-        url="http://developer.android.com/reference/android/app/Fragment.html#Fragment()"
-        urls="http://developer.android.com/reference/android/app/Fragment.html#Fragment()"
-        errorLine1="    public class FireMissilesDialogFragment extends DialogFragment {"
-        errorLine2="                 ~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/view/graphsView/LineChartActivity.java"
-            line="231"
-            column="18"/>
-    </issue>
-
-    <issue
         id="GradleDependency"
         severity="Warning"
         message="Old buildToolsVersion 21.1.1; recommended version is 21.1.2 or later"
@@ -88,7 +69,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/build.gradle"
-            line="67"
+            line="69"
             column="5"/>
     </issue>
 
@@ -105,14 +86,14 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/build.gradle"
-            line="69"
+            line="71"
             column="5"/>
     </issue>
 
     <issue
         id="Overdraw"
         severity="Warning"
-        message="Possible overdraw: Root element paints background `#E0F2F1` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        message="Possible overdraw: Root element paints background `#c526a69a` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
         category="Performance"
         priority="3"
         summary="Overdraw: Painting regions more than once"
@@ -124,11 +105,11 @@ If you want your custom background on multiple pages, then you should consider m
 
 Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
 "
-        errorLine1="    android:background=&quot;#E0F2F1&quot; tools:context=&quot;.NavigationDrawerFragment&quot; />"
-        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        errorLine1="    android:background=&quot;#c526a69a&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/fragment_navigation_drawer.xml"
-            line="5"
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/custom_toast.xml"
+            line="7"
             column="5"/>
     </issue>
 
@@ -147,6 +128,52 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.dimen.navigation_drawer_width` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;navigation_drawer_width&quot;>240dp&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/dimens.xml"
+            line="8"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.drawer_shadow` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-hdpi/drawer_shadow.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-mdpi/drawer_shadow.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-xhdpi/drawer_shadow.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-xxhdpi/drawer_shadow.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.menu.global` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/global.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.drawable.green_square` appears to be unused"
         category="Performance"
         priority="3"
@@ -154,6 +181,24 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         explanation="Unused resources make applications larger and slow down builds.">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/green_square.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.ic_drawer` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-hdpi/ic_drawer.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-mdpi/ic_drawer.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-xhdpi/ic_drawer.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable-xxhdpi/ic_drawer.png"/>
     </issue>
 
     <issue
@@ -183,6 +228,50 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.menu.menu_bar_chart` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/menu_bar_chart.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.navigation_drawer_open` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;navigation_drawer_open&quot;>Open navigation drawer&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="4"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.navigation_drawer_close` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;navigation_drawer_close&quot;>Close navigation drawer&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="5"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.string.action_example` appears to be unused"
         category="Performance"
         priority="3"
@@ -199,6 +288,22 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.string.title_activity_bar_chart` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;title_activity_bar_chart&quot;>BarChartActivity&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="16"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.string.title_activity_maps` appears to be unused"
         category="Performance"
         priority="3"
@@ -208,7 +313,7 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
-            line="18"
+            line="21"
             column="13"/>
     </issue>
 
@@ -224,7 +329,23 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         errorLine2="            ~~~~~~~~~">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
-            line="19"
+            line="22"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.title_activity_main` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;title_activity_main&quot;>MainActivity&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="23"
             column="13"/>
     </issue>
 
@@ -241,7 +362,7 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         quickfix="studio,adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_main.xml"
-            line="25"
+            line="21"
             column="5"/>
     </issue>
 
@@ -258,98 +379,6 @@ Low density is not really used much anymore, so this check ignores the ldpi dens
         urls="http://developer.android.com/guide/practices/screens_support.html">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        severity="Warning"
-        message="[I18N] Hardcoded string &quot;500&quot;, should use `@string` resource"
-        category="Internationalization"
-        priority="5"
-        summary="Hardcoded text"
-        explanation="Hardcoding text attributes directly in layout files is bad for several reasons:
-
-* When creating configuration variations (for example for landscape or portrait)you have to repeat the actual text (and keep it up to date when making changes)
-
-* The application cannot be translated to other languages by just adding new translations for existing string resources.
-
-In Android Studio and Eclipse there are quickfixes to automatically extract this hardcoded string into a resource lookup."
-        errorLine1="        android:text=&quot;500&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~"
-        quickfix="adt">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="42"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        severity="Warning"
-        message="[I18N] Hardcoded string &quot;500&quot;, should use `@string` resource"
-        category="Internationalization"
-        priority="5"
-        summary="Hardcoded text"
-        explanation="Hardcoding text attributes directly in layout files is bad for several reasons:
-
-* When creating configuration variations (for example for landscape or portrait)you have to repeat the actual text (and keep it up to date when making changes)
-
-* The application cannot be translated to other languages by just adding new translations for existing string resources.
-
-In Android Studio and Eclipse there are quickfixes to automatically extract this hardcoded string into a resource lookup."
-        errorLine1="        android:text=&quot;500&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~"
-        quickfix="adt">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="54"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        severity="Warning"
-        message="[I18N] Hardcoded string &quot;500&quot;, should use `@string` resource"
-        category="Internationalization"
-        priority="5"
-        summary="Hardcoded text"
-        explanation="Hardcoding text attributes directly in layout files is bad for several reasons:
-
-* When creating configuration variations (for example for landscape or portrait)you have to repeat the actual text (and keep it up to date when making changes)
-
-* The application cannot be translated to other languages by just adding new translations for existing string resources.
-
-In Android Studio and Eclipse there are quickfixes to automatically extract this hardcoded string into a resource lookup."
-        errorLine1="        android:text=&quot;500&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~"
-        quickfix="adt">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="43"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="HardcodedText"
-        severity="Warning"
-        message="[I18N] Hardcoded string &quot;500&quot;, should use `@string` resource"
-        category="Internationalization"
-        priority="5"
-        summary="Hardcoded text"
-        explanation="Hardcoding text attributes directly in layout files is bad for several reasons:
-
-* When creating configuration variations (for example for landscape or portrait)you have to repeat the actual text (and keep it up to date when making changes)
-
-* The application cannot be translated to other languages by just adding new translations for existing string resources.
-
-In Android Studio and Eclipse there are quickfixes to automatically extract this hardcoded string into a resource lookup."
-        errorLine1="        android:text=&quot;500&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~"
-        quickfix="adt">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="55"
-            column="9"/>
     </issue>
 
     <issue
@@ -427,402 +456,6 @@ In Android Studio and Eclipse there are quickfixes to automatically extract this
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_header_first.xml"
             line="14"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentStart=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentLeft=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="17"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_toStartOf=&quot;@+id/tvYMax&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_toLeftOf=&quot;@+id/tvYMax&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="19"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;5dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;5dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="20"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_toStartOf=&quot;@+id/tvXMax&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_toLeftOf=&quot;@+id/tvXMax&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="31"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;5dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;5dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="32"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentEnd=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentRight=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="41"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;10dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;10dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="44"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Use &quot;`end`&quot; instead of &quot;`right`&quot; to ensure correct behavior in right-to-left locales"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:gravity=&quot;right&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="45"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentEnd=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentRight=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="53"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;10dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;10dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="56"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Use &quot;`end`&quot; instead of &quot;`right`&quot; to ensure correct behavior in right-to-left locales"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:gravity=&quot;right&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
-            line="57"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentStart=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentLeft=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="18"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_toStartOf=&quot;@+id/tvYMax&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_toLeftOf=&quot;@+id/tvYMax&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="20"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;5dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;5dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="21"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_toStartOf=&quot;@+id/tvXMax&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_toLeftOf=&quot;@+id/tvXMax&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="32"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;5dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;5dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="33"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentEnd=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentRight=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="42"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;10dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;10dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="45"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Use &quot;`end`&quot; instead of &quot;`right`&quot; to ensure correct behavior in right-to-left locales"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:gravity=&quot;right&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="46"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_alignParentEnd=&quot;true&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_alignParentRight=&quot;true&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="54"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Consider adding `android:layout_marginEnd=&quot;10dp&quot;` to better support right-to-left layouts"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:layout_marginRight=&quot;10dp&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="57"
-            column="9"/>
-    </issue>
-
-    <issue
-        id="RtlHardcoded"
-        severity="Warning"
-        message="Use &quot;`end`&quot; instead of &quot;`right`&quot; to ensure correct behavior in right-to-left locales"
-        category="Bi-directional Text"
-        priority="5"
-        summary="Using left/right instead of start/end attributes"
-        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
-For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
-(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
-        errorLine1="        android:gravity=&quot;right&quot;"
-        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
-            line="58"
             column="9"/>
     </issue>
 
@@ -986,19 +619,6 @@ For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStar
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/list_item_sample.xml"
             line="31"
             column="9"/>
-    </issue>
-
-    <issue
-        id="RtlEnabled"
-        severity="Warning"
-        message="The project references RTL attributes, but does not explicitly enable or disable RTL support with `android:supportsRtl` in the manifest"
-        category="Bi-directional Text"
-        priority="3"
-        summary="Using RTL attributes without enabling RTL support"
-        explanation="To enable right-to-left support, when running on API 17 and higher, you must set the `android:supportsRtl` attribute in the manifest `&lt;application>` element.
-If you have started adding RTL attributes, but have not yet finished the migration, you can set the attribute to false to satisfy this lint check.">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/AndroidManifest.xml"/>
     </issue>
 
 </issues>
