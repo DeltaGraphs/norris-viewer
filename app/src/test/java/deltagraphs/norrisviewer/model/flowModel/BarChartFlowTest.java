@@ -23,7 +23,7 @@ import org.junit.Test;
  * ===============================================================
  *
  */public class BarChartFlowTest extends TestCase {
-
+/*
     JSONObject data;
     BarChartFlow flow;
 
@@ -33,7 +33,7 @@ import org.junit.Test;
         data = new JSONObject("{records: [{norrisRecordID : \"flusso1201505081\", value: [1, 25]}]");
         flow = new BarChartFlow(data);
     }
-   /* data = new JSONObject().put("records",
+    data = new JSONObject().put("records",
                                         new JSONArray().
     put(0, new JSONObject().
     put("markerID", 837).
@@ -44,7 +44,7 @@ import org.junit.Test;
     )
             )
             );
-    */
+
 
     @Test
     public void testGetRecordSize() throws Exception {
@@ -86,4 +86,5 @@ import org.junit.Test;
     public void testDeleteRecord() throws Exception {
 
     }
+    */
 }

@@ -23,8 +23,10 @@ import org.junit.*;
  *
  * ===============================================================
  *
- */public class MapChartFlowTest extends TestCase {
+ */
 
+public class MapChartFlowTest extends TestCase {
+/*
     @Rule private  MapChartFlow flow;
     @Rule JSONArray array;
     @Rule JSONObject obj;
@@ -100,4 +102,5 @@ import org.junit.*;
     public void testDeleteRecord() throws Exception {
 
     }
+    */
 }
