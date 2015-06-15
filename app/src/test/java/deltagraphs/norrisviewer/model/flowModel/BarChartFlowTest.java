@@ -57,9 +57,9 @@ import org.junit.Test;
 
         //String dataString= "{\"ID\" : \"flusso1\", \"records\" : [{ \"norrisRecordID\" : \"flusso1201505081\", \"value\": [1, 25]}, {\"norrisRecordID\" : \"flusso1201505082\",\"value\": [2, 15]}]}";
         //System.out.println(dataString);
-        flow = new BarChartFlow(data);
-        flow.createFlow(data);
-        assertEquals(1, flow.getRecordSize());
+        //flow = new BarChartFlow(data);
+        //flow.createFlow(data);
+        //assertEquals(1, flow.getRecordSize());
 
     }
 
