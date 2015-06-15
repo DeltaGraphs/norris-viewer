@@ -64,8 +64,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private String order = null;
     private int sortingColumn = -1;
     private TablePresenter tablePresenter;
-    String headers[];
-    int rows = 0;
+    private String headers[];
+    private int rows = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

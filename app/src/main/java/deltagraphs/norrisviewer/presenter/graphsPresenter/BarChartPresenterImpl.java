@@ -55,6 +55,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 
     private void setGraphParameters() {
         graphView.setBarOrientation(barChartInstance.getBarOrientation());
+        /*
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
                 barChartInstance.getAxisX().getAppearance(),
@@ -71,6 +72,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisY().getTicks(),
                 barChartInstance.getAxisY().getScale()
         );
+        */
     }
 
     public void viewPointLegend() {

@@ -24,4 +24,5 @@ public interface BarChartPresenter {
     void startConnection();
 
     void destroyConnection();
+
 }
