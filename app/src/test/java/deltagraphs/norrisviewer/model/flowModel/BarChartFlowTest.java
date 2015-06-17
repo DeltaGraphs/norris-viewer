@@ -74,11 +74,11 @@ import org.junit.Test;
     public void testAddRecord() throws Exception {
 
     }
-
+*/
     public void testAddRecords() throws Exception {
-
+        assertTrue("",true);
     }
-
+/*
     public void testUpdateRecord() throws Exception {
 
     }

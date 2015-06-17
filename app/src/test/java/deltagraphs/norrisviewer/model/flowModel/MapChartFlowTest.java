@@ -78,11 +78,11 @@ public class MapChartFlowTest extends TestCase {
     public void testUpdateFlow() throws Exception {
 
     }
-
+*/
     public void testDeleteRecordList() throws Exception {
-
+        assertTrue("", true);
     }
-
+/*
     public void testAddRecord() throws Exception {
 
     }
