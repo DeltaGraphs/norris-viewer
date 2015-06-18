@@ -66,55 +66,62 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //retrieve extra information passed on changing the activity
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-
-        // hBarChart.setDrawLegend(false);
     }
 
+    //menage the resuming action from another activity
     @Override
     public void onResume() {
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
         super.onResume();
     }
 
-
+    //menage the onStop event
     @Override
     public void onStop() {
         barChartPresenter.destroyConnection();
         super.onStop();
     }
 
+    //menage the onPause event
     @Override
     public void onPause() {
         barChartPresenter.destroyConnection();
         super.onPause();
     }
 
+    //menage the onRestart event
     @Override
     public void onRestart() {
         super.onRestart();
     }
 
+    //menage the onDestroy event
     @Override
     public void onDestroy() {
         barChartPresenter.destroyConnection();
         super.onDestroy();
     }
 
+    /*
+    Initialize a vertical bar chart with its configuration
+    */
     private void initializeHorizontalBarChart() {
+        //load the layout relative to the horizontal bar chart
         setContentView(R.layout.activity_horizontal_bar_chart);
 
         hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);
-        // hBarChart.setHighlightEnabled(false);
 
+        //hide the bar shadow
         hBarChart.setDrawBarShadow(false);
 
+        //set values above bars
         hBarChart.setDrawValueAboveBar(true);
 
         hBarChart.setDescription("");
@@ -126,39 +133,44 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         // scaling can now only be done on x- and y-axis separately
         hBarChart.setPinchZoom(false);
 
+        //it doesn't display the grid on background
         hBarChart.setDrawGridBackground(false);
 
-        // hBarChart.setDrawYLabels(false);
-
+        //create and configure an x axis
         XAxis xl = hBarChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setDrawAxisLine(true);
         xl.setDrawGridLines(true);
         xl.setGridLineWidth(0.3f);
 
+        //create and configure a left y axis
         YAxis yl = hBarChart.getAxisLeft();
         yl.setDrawAxisLine(true);
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
-//        yl.setInverted(true);
 
+        //create and configure a right y axis
         YAxis yr = hBarChart.getAxisRight();
         yr.setDrawAxisLine(true);
         yr.setDrawGridLines(false);
-//        yr.setInverted(true);
 
-        //setData(12, 50);
+        //set X animation
         hBarChart.animateX(1000);
     }
 
+    /*
+    Initialize a vertical bar chart with its configuration
+     */
     private void initializeBarChart() {
+        //load the layout relative to the vertical bar chart
         setContentView(R.layout.activity_bar_chart);
 
         vBarChart = (BarChart) findViewById(R.id.chart1);
-        // vBarChart.setHighlightEnabled(false);
 
+        //hide the bar shadow
         vBarChart.setDrawBarShadow(false);
 
+        //set values above bars
         vBarChart.setDrawValueAboveBar(true);
 
         vBarChart.setDescription("");
@@ -170,33 +182,28 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         // scaling can now only be done on x- and y-axis separately
         vBarChart.setPinchZoom(false);
 
-        // draw shadows for each bar that show the maximum value
-        // vBarChart.setDrawBarShadow(true);
-
-        // vBarChart.setDrawXLabels(false);
-
+        //it doesn't display the grid on background
         vBarChart.setDrawGridBackground(false);
 
-        // vBarChart.setDrawYLabels(false);
-
+        //create and configure a left x axis
         XAxis xl = vBarChart.getXAxis();
         xl.setPosition(XAxis.XAxisPosition.BOTTOM);
         xl.setDrawAxisLine(true);
         xl.setDrawGridLines(true);
         xl.setGridLineWidth(0.3f);
 
+        //create and configure a bottom y axis
         YAxis yl = vBarChart.getAxisLeft();
         yl.setDrawAxisLine(true);
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
-//        yl.setInverted(true);
 
+        //create and configure a right x axis
         YAxis yr = vBarChart.getAxisRight();
         yr.setDrawAxisLine(true);
         yr.setDrawGridLines(false);
-//        yr.setInverted(true);
 
-        //setData(12, 50);
+        //set Y animation
         vBarChart.animateY(1000);
 
 
@@ -225,6 +232,10 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    This method call the initialize method depending on the orientation setted.
+     */
+
     @Override
     public void setBarOrientation(String orientation) {
 
@@ -235,11 +246,17 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             initializeHorizontalBarChart();
     }
 
+    /*
+    The following method is called on an update and retrieves data from the model to configure the bar chart.
+     */
+
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         BarData data = new BarData();
+        //create a list to contain every flow color
         List<Integer> lColors = new ArrayList<Integer>();
+        //create a list to contain every label
         List<String> lLabels = new ArrayList<String>();
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
@@ -249,6 +266,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             String color = barChartFlow.getFlowColour();
 
             ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
+
+            //sets the Y-value for every X-value
             for (int j = 0; j < barChartFlow.getRecordSize(); j++) {
                 float y = barChartFlow.getRecordValue(j);
                 String id = barChartFlow.getRecordId(j);
@@ -274,6 +293,10 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             hBarChart.animateX(0);
         }
     }
+
+    /*
+    *   This method configures the labels displayed on the legend for every flow and return a Legend.
+    */
 
     private Legend setLegend(List<String> labels) {
         if (orientation.equals("V"))

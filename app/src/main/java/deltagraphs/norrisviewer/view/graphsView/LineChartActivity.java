@@ -179,7 +179,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
                     axisY.setName(name);
                 }
             }
-            // TODO: Insert the possibility to change the scale.
         } else {
             data.setAxisXBottom(null);
             data.setAxisYLeft(null);
