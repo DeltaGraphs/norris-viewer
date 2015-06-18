@@ -66,148 +66,155 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
 <span class="nc" id="L66">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        //retrieve extra information passed on changing the activity
 <span class="nc" id="L70">        Bundle extras = getIntent().getExtras();</span>
 <span class="nc bnc" id="L71" title="All 2 branches missed.">        if (extras != null) {</span>
 <span class="nc" id="L72">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
 <span class="nc" id="L73">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
 <span class="nc" id="L75">        setTitle(sourceTitle);</span>
+<span class="nc" id="L76">    }</span>
 
-        // hBarChart.setDrawLegend(false);
-<span class="nc" id="L78">    }</span>
-
+    //menage the resuming action from another activity
     @Override
     public void onResume() {
-<span class="nc" id="L82">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L83">        super.onResume();</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L81">        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L82">        super.onResume();</span>
+<span class="nc" id="L83">    }</span>
 
-
+    //menage the onStop event
     @Override
     public void onStop() {
-<span class="nc" id="L89">        barChartPresenter.destroyConnection();</span>
-<span class="nc" id="L90">        super.onStop();</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L88">        barChartPresenter.destroyConnection();</span>
+<span class="nc" id="L89">        super.onStop();</span>
+<span class="nc" id="L90">    }</span>
 
+    //menage the onPause event
     @Override
     public void onPause() {
 <span class="nc" id="L95">        barChartPresenter.destroyConnection();</span>
 <span class="nc" id="L96">        super.onPause();</span>
 <span class="nc" id="L97">    }</span>
 
+    //menage the onRestart event
     @Override
     public void onRestart() {
-<span class="nc" id="L101">        super.onRestart();</span>
-<span class="nc" id="L102">    }</span>
+<span class="nc" id="L102">        super.onRestart();</span>
+<span class="nc" id="L103">    }</span>
 
+    //menage the onDestroy event
     @Override
     public void onDestroy() {
-<span class="nc" id="L106">        barChartPresenter.destroyConnection();</span>
-<span class="nc" id="L107">        super.onDestroy();</span>
-<span class="nc" id="L108">    }</span>
+<span class="nc" id="L108">        barChartPresenter.destroyConnection();</span>
+<span class="nc" id="L109">        super.onDestroy();</span>
+<span class="nc" id="L110">    }</span>
 
+    /*
+    Initialize a vertical bar chart with its configuration
+    */
     private void initializeHorizontalBarChart() {
-<span class="nc" id="L111">        setContentView(R.layout.activity_horizontal_bar_chart);</span>
+        //load the layout relative to the horizontal bar chart
+<span class="nc" id="L117">        setContentView(R.layout.activity_horizontal_bar_chart);</span>
 
-<span class="nc" id="L113">        hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);</span>
-        // hBarChart.setHighlightEnabled(false);
+<span class="nc" id="L119">        hBarChart = (HorizontalBarChart) findViewById(R.id.chart1);</span>
 
-<span class="nc" id="L116">        hBarChart.setDrawBarShadow(false);</span>
+        //hide the bar shadow
+<span class="nc" id="L122">        hBarChart.setDrawBarShadow(false);</span>
 
-<span class="nc" id="L118">        hBarChart.setDrawValueAboveBar(true);</span>
+        //set values above bars
+<span class="nc" id="L125">        hBarChart.setDrawValueAboveBar(true);</span>
 
-<span class="nc" id="L120">        hBarChart.setDescription(&quot;&quot;);</span>
+<span class="nc" id="L127">        hBarChart.setDescription(&quot;&quot;);</span>
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-<span class="nc" id="L124">        hBarChart.setMaxVisibleValueCount(60);</span>
+<span class="nc" id="L131">        hBarChart.setMaxVisibleValueCount(60);</span>
 
         // scaling can now only be done on x- and y-axis separately
-<span class="nc" id="L127">        hBarChart.setPinchZoom(false);</span>
+<span class="nc" id="L134">        hBarChart.setPinchZoom(false);</span>
 
-<span class="nc" id="L129">        hBarChart.setDrawGridBackground(false);</span>
+        //it doesn't display the grid on background
+<span class="nc" id="L137">        hBarChart.setDrawGridBackground(false);</span>
 
-        // hBarChart.setDrawYLabels(false);
+        //create and configure an x axis
+<span class="nc" id="L140">        XAxis xl = hBarChart.getXAxis();</span>
+<span class="nc" id="L141">        xl.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
+<span class="nc" id="L142">        xl.setDrawAxisLine(true);</span>
+<span class="nc" id="L143">        xl.setDrawGridLines(true);</span>
+<span class="nc" id="L144">        xl.setGridLineWidth(0.3f);</span>
 
-<span class="nc" id="L133">        XAxis xl = hBarChart.getXAxis();</span>
-<span class="nc" id="L134">        xl.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
-<span class="nc" id="L135">        xl.setDrawAxisLine(true);</span>
-<span class="nc" id="L136">        xl.setDrawGridLines(true);</span>
-<span class="nc" id="L137">        xl.setGridLineWidth(0.3f);</span>
+        //create and configure a left y axis
+<span class="nc" id="L147">        YAxis yl = hBarChart.getAxisLeft();</span>
+<span class="nc" id="L148">        yl.setDrawAxisLine(true);</span>
+<span class="nc" id="L149">        yl.setDrawGridLines(true);</span>
+<span class="nc" id="L150">        yl.setGridLineWidth(0.3f);</span>
 
-<span class="nc" id="L139">        YAxis yl = hBarChart.getAxisLeft();</span>
-<span class="nc" id="L140">        yl.setDrawAxisLine(true);</span>
-<span class="nc" id="L141">        yl.setDrawGridLines(true);</span>
-<span class="nc" id="L142">        yl.setGridLineWidth(0.3f);</span>
-//        yl.setInverted(true);
+        //create and configure a right y axis
+<span class="nc" id="L153">        YAxis yr = hBarChart.getAxisRight();</span>
+<span class="nc" id="L154">        yr.setDrawAxisLine(true);</span>
+<span class="nc" id="L155">        yr.setDrawGridLines(false);</span>
 
-<span class="nc" id="L145">        YAxis yr = hBarChart.getAxisRight();</span>
-<span class="nc" id="L146">        yr.setDrawAxisLine(true);</span>
-<span class="nc" id="L147">        yr.setDrawGridLines(false);</span>
-//        yr.setInverted(true);
+        //set X animation
+<span class="nc" id="L158">        hBarChart.animateX(1000);</span>
+<span class="nc" id="L159">    }</span>
 
-        //setData(12, 50);
-<span class="nc" id="L151">        hBarChart.animateX(1000);</span>
-<span class="nc" id="L152">    }</span>
-
+    /*
+    Initialize a vertical bar chart with its configuration
+     */
     private void initializeBarChart() {
-<span class="nc" id="L155">        setContentView(R.layout.activity_bar_chart);</span>
+        //load the layout relative to the vertical bar chart
+<span class="nc" id="L166">        setContentView(R.layout.activity_bar_chart);</span>
 
-<span class="nc" id="L157">        vBarChart = (BarChart) findViewById(R.id.chart1);</span>
-        // vBarChart.setHighlightEnabled(false);
+<span class="nc" id="L168">        vBarChart = (BarChart) findViewById(R.id.chart1);</span>
 
-<span class="nc" id="L160">        vBarChart.setDrawBarShadow(false);</span>
+        //hide the bar shadow
+<span class="nc" id="L171">        vBarChart.setDrawBarShadow(false);</span>
 
-<span class="nc" id="L162">        vBarChart.setDrawValueAboveBar(true);</span>
+        //set values above bars
+<span class="nc" id="L174">        vBarChart.setDrawValueAboveBar(true);</span>
 
-<span class="nc" id="L164">        vBarChart.setDescription(&quot;&quot;);</span>
+<span class="nc" id="L176">        vBarChart.setDescription(&quot;&quot;);</span>
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-<span class="nc" id="L168">        vBarChart.setMaxVisibleValueCount(60);</span>
+<span class="nc" id="L180">        vBarChart.setMaxVisibleValueCount(60);</span>
 
         // scaling can now only be done on x- and y-axis separately
-<span class="nc" id="L171">        vBarChart.setPinchZoom(false);</span>
+<span class="nc" id="L183">        vBarChart.setPinchZoom(false);</span>
 
-        // draw shadows for each bar that show the maximum value
-        // vBarChart.setDrawBarShadow(true);
+        //it doesn't display the grid on background
+<span class="nc" id="L186">        vBarChart.setDrawGridBackground(false);</span>
 
-        // vBarChart.setDrawXLabels(false);
+        //create and configure a left x axis
+<span class="nc" id="L189">        XAxis xl = vBarChart.getXAxis();</span>
+<span class="nc" id="L190">        xl.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
+<span class="nc" id="L191">        xl.setDrawAxisLine(true);</span>
+<span class="nc" id="L192">        xl.setDrawGridLines(true);</span>
+<span class="nc" id="L193">        xl.setGridLineWidth(0.3f);</span>
 
-<span class="nc" id="L178">        vBarChart.setDrawGridBackground(false);</span>
+        //create and configure a bottom y axis
+<span class="nc" id="L196">        YAxis yl = vBarChart.getAxisLeft();</span>
+<span class="nc" id="L197">        yl.setDrawAxisLine(true);</span>
+<span class="nc" id="L198">        yl.setDrawGridLines(true);</span>
+<span class="nc" id="L199">        yl.setGridLineWidth(0.3f);</span>
 
-        // vBarChart.setDrawYLabels(false);
+        //create and configure a right x axis
+<span class="nc" id="L202">        YAxis yr = vBarChart.getAxisRight();</span>
+<span class="nc" id="L203">        yr.setDrawAxisLine(true);</span>
+<span class="nc" id="L204">        yr.setDrawGridLines(false);</span>
 
-<span class="nc" id="L182">        XAxis xl = vBarChart.getXAxis();</span>
-<span class="nc" id="L183">        xl.setPosition(XAxis.XAxisPosition.BOTTOM);</span>
-<span class="nc" id="L184">        xl.setDrawAxisLine(true);</span>
-<span class="nc" id="L185">        xl.setDrawGridLines(true);</span>
-<span class="nc" id="L186">        xl.setGridLineWidth(0.3f);</span>
-
-<span class="nc" id="L188">        YAxis yl = vBarChart.getAxisLeft();</span>
-<span class="nc" id="L189">        yl.setDrawAxisLine(true);</span>
-<span class="nc" id="L190">        yl.setDrawGridLines(true);</span>
-<span class="nc" id="L191">        yl.setGridLineWidth(0.3f);</span>
-//        yl.setInverted(true);
-
-<span class="nc" id="L194">        YAxis yr = vBarChart.getAxisRight();</span>
-<span class="nc" id="L195">        yr.setDrawAxisLine(true);</span>
-<span class="nc" id="L196">        yr.setDrawGridLines(false);</span>
-//        yr.setInverted(true);
-
-        //setData(12, 50);
-<span class="nc" id="L200">        vBarChart.animateY(1000);</span>
+        //set Y animation
+<span class="nc" id="L207">        vBarChart.animateY(1000);</span>
 
 
-<span class="nc" id="L203">    }</span>
+<span class="nc" id="L210">    }</span>
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L209">        getMenuInflater().inflate(R.menu.menu_horizontal_bar_chart, menu);</span>
-<span class="nc" id="L210">        return true;</span>
+<span class="nc" id="L216">        getMenuInflater().inflate(R.menu.menu_horizontal_bar_chart, menu);</span>
+<span class="nc" id="L217">        return true;</span>
     }
 
     @Override
@@ -215,77 +222,93 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L218">        int id = item.getItemId();</span>
+<span class="nc" id="L225">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L221" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L222">            return true;</span>
+<span class="nc bnc" id="L228" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L229">            return true;</span>
         }
 
-<span class="nc" id="L225">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L232">        return super.onOptionsItemSelected(item);</span>
     }
+
+    /*
+    This method call the initialize method depending on the orientation setted.
+     */
 
     @Override
     public void setBarOrientation(String orientation) {
 
-<span class="nc" id="L231">        this.orientation = orientation;</span>
-<span class="nc bnc" id="L232" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;))</span>
-<span class="nc" id="L233">            initializeBarChart();</span>
+<span class="nc" id="L242">        this.orientation = orientation;</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;))</span>
+<span class="nc" id="L244">            initializeBarChart();</span>
         else
-<span class="nc" id="L235">            initializeHorizontalBarChart();</span>
-<span class="nc" id="L236">    }</span>
+<span class="nc" id="L246">            initializeHorizontalBarChart();</span>
+<span class="nc" id="L247">    }</span>
+
+    /*
+    The following method is called on an update and retrieves data from the model to configure the bar chart.
+     */
 
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, String signal, ArrayList&lt;String&gt; headers) {
-<span class="nc" id="L240">        ArrayList&lt;BarDataSet&gt; dataSets = new ArrayList&lt;BarDataSet&gt;();</span>
-<span class="nc" id="L241">        BarData data = new BarData();</span>
-<span class="nc" id="L242">        List&lt;Integer&gt; lColors = new ArrayList&lt;Integer&gt;();</span>
-<span class="nc" id="L243">        List&lt;String&gt; lLabels = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L244" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
-<span class="nc" id="L245">            flowList.get(i).getFlowId();</span>
+<span class="nc" id="L255">        ArrayList&lt;BarDataSet&gt; dataSets = new ArrayList&lt;BarDataSet&gt;();</span>
+<span class="nc" id="L256">        BarData data = new BarData();</span>
+        //create a list to contain every flow color
+<span class="nc" id="L258">        List&lt;Integer&gt; lColors = new ArrayList&lt;Integer&gt;();</span>
+        //create a list to contain every label
+<span class="nc" id="L260">        List&lt;String&gt; lLabels = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L261" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
+<span class="nc" id="L262">            flowList.get(i).getFlowId();</span>
             //aggiunge una label alla legenda
-<span class="nc" id="L247">            String name = flowList.get(i).getFlowName();</span>
-<span class="nc" id="L248">            BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);</span>
-<span class="nc" id="L249">            String color = barChartFlow.getFlowColour();</span>
+<span class="nc" id="L264">            String name = flowList.get(i).getFlowName();</span>
+<span class="nc" id="L265">            BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);</span>
+<span class="nc" id="L266">            String color = barChartFlow.getFlowColour();</span>
 
-<span class="nc" id="L251">            ArrayList&lt;BarEntry&gt; yVals1 = new ArrayList&lt;BarEntry&gt;();</span>
-<span class="nc bnc" id="L252" title="All 2 branches missed.">            for (int j = 0; j &lt; barChartFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L253">                float y = barChartFlow.getRecordValue(j);</span>
-<span class="nc" id="L254">                String id = barChartFlow.getRecordId(j);</span>
-<span class="nc" id="L255">                yVals1.add(new BarEntry(y, j));</span>
+<span class="nc" id="L268">            ArrayList&lt;BarEntry&gt; yVals1 = new ArrayList&lt;BarEntry&gt;();</span>
+
+            //sets the Y-value for every X-value
+<span class="nc bnc" id="L271" title="All 2 branches missed.">            for (int j = 0; j &lt; barChartFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L272">                float y = barChartFlow.getRecordValue(j);</span>
+<span class="nc" id="L273">                String id = barChartFlow.getRecordId(j);</span>
+<span class="nc" id="L274">                yVals1.add(new BarEntry(y, j));</span>
             }
 
-<span class="nc" id="L258">            BarDataSet set1 = new BarDataSet(yVals1, name);</span>
-<span class="nc" id="L259">            set1.setBarSpacePercent(35f);</span>
-<span class="nc" id="L260">            set1.setColor(Color.parseColor(color));</span>
-<span class="nc" id="L261">            dataSets.add(set1);</span>
+<span class="nc" id="L277">            BarDataSet set1 = new BarDataSet(yVals1, name);</span>
+<span class="nc" id="L278">            set1.setBarSpacePercent(35f);</span>
+<span class="nc" id="L279">            set1.setColor(Color.parseColor(color));</span>
+<span class="nc" id="L280">            dataSets.add(set1);</span>
 
-<span class="nc" id="L263">            data.setValueTextSize(10f);</span>
+<span class="nc" id="L282">            data.setValueTextSize(10f);</span>
         }
-<span class="nc" id="L265">        data = new BarData(headers, dataSets);</span>
+<span class="nc" id="L284">        data = new BarData(headers, dataSets);</span>
 
-<span class="nc bnc" id="L267" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;)) {</span>
-<span class="nc" id="L268">            setLegend(lLabels);</span>
-<span class="nc" id="L269">            vBarChart.setData(data);</span>
-<span class="nc" id="L270">            vBarChart.animateY(0);</span>
+<span class="nc bnc" id="L286" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;)) {</span>
+<span class="nc" id="L287">            setLegend(lLabels);</span>
+<span class="nc" id="L288">            vBarChart.setData(data);</span>
+<span class="nc" id="L289">            vBarChart.animateY(0);</span>
         } else {
-<span class="nc" id="L272">            setLegend(lLabels);</span>
-<span class="nc" id="L273">            hBarChart.setData(data);</span>
-<span class="nc" id="L274">            hBarChart.animateX(0);</span>
+<span class="nc" id="L291">            setLegend(lLabels);</span>
+<span class="nc" id="L292">            hBarChart.setData(data);</span>
+<span class="nc" id="L293">            hBarChart.animateX(0);</span>
         }
-<span class="nc" id="L276">    }</span>
+<span class="nc" id="L295">    }</span>
+
+    /*
+    *   This method configures the labels displayed on the legend for every flow and return a Legend.
+    */
 
     private Legend setLegend(List&lt;String&gt; labels) {
-<span class="nc bnc" id="L279" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;))</span>
-<span class="nc" id="L280">            l = vBarChart.getLegend();</span>
+<span class="nc bnc" id="L302" title="All 2 branches missed.">        if (orientation.equals(&quot;V&quot;))</span>
+<span class="nc" id="L303">            l = vBarChart.getLegend();</span>
         else
-<span class="nc" id="L282">            l = hBarChart.getLegend();</span>
-<span class="nc" id="L283">        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);</span>
-<span class="nc" id="L284">        l.setFormSize(8f);</span>
-<span class="nc" id="L285">        l.setXEntrySpace(4f);</span>
-<span class="nc" id="L286">        l.setLabels(labels);</span>
-<span class="nc" id="L287">        l.getLegendLabels();</span>
-<span class="nc" id="L288">        return l;</span>
+<span class="nc" id="L305">            l = hBarChart.getLegend();</span>
+<span class="nc" id="L306">        l.setPosition(Legend.LegendPosition.BELOW_CHART_LEFT);</span>
+<span class="nc" id="L307">        l.setFormSize(8f);</span>
+<span class="nc" id="L308">        l.setXEntrySpace(4f);</span>
+<span class="nc" id="L309">        l.setLabels(labels);</span>
+<span class="nc" id="L310">        l.getLegendLabels();</span>
+<span class="nc" id="L311">        return l;</span>
     }
 
 }
