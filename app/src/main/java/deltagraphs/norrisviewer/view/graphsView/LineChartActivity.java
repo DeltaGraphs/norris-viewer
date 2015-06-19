@@ -69,7 +69,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
     private LineChartPresenter lineChartPresenter;
 
-    //line chart con view finder
+    //line chart with view finder
 
     private LineChartView chart;
     private PreviewLineChartView previewChart;
@@ -93,10 +93,12 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.line_chart);
+        //set the view layout for the graph
         chart = (LineChartView) findViewById(R.id.chart);
-        chart.setOnValueTouchListener(new ValueTouchListener());
+        //set the view layout for the view finder
         previewChart = (PreviewLineChartView) findViewById(R.id.chart_preview);
-
+        //set a listener for the graph
+        chart.setOnValueTouchListener(new ValueTouchListener());
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
@@ -107,9 +109,13 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         data = new LineChartData();
         previewData = new LineChartData();
 
+        //disable the zoom and the scrolling
         chart.setZoomEnabled(false);
         chart.setScrollEnabled(false);
+
+        //set a listener for the view finder
         previewChart.setViewportChangeListener(new ViewportListener());
+        //set the line color for the view finder
         previewChart.setPreviewColor(Color.parseColor("#80CBC4"));
     }
 
@@ -129,21 +135,24 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        //enable the X preview for the view finder
         if (id == R.id.action_previewX) {
             previewX(true);
             return true;
         }
-
+        //enable the Y preview for the view finder
         if (id == R.id.action_previewY) {
             previewY();
             return true;
         }
 
+        //enable the XY preview for the view finder
         if (id == R.id.action_previewXY) {
             previewXY();
             return true;
         }
 
+        //shows Deltagraphs informations in a toast box
         if (id == R.id.action_credits) {
             Context context = getApplicationContext();
             CharSequence text = "Credits to DeltaGraphs 2015";
@@ -158,6 +167,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+    This method configures a single axis for the line chart
+     */
     @Override
     public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
         if (hasAxes) {
@@ -167,7 +179,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             if (axisXorY == 'x') {
                 axisX = new Axis().setHasLines(true);
                 axisX.generateAxisFromRange(minIndex, maxIndex, step);
-                //axisX.setHasSeparationLine(true);
                 if (hasAxesNames) {
                     axisX.setName(name);
                 }
@@ -185,12 +196,18 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
     }
 
+    /*
+    This method sets a grid if the option is enabled by the two variables
+     */
     @Override
     public void setGrid(Boolean horizontal, Boolean vertical) {
         axisX.setHasSeparationLine(vertical);
         axisY.setHasSeparationLine(horizontal);
     }
 
+    /*
+    It's the main method. It update the view by getting data from the model and set the values on the graph
+     */
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         String color = "";
@@ -231,17 +248,20 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }
 
         data.setLines(lines);
+        //set axes for the data
         data.setAxisXBottom(axisX);
         data.setAxisYLeft(axisY);
 
         previewData.setLines(previewLines);
-
+        //set data for the chart
         chart.setLineChartData(data);
-
+        //set data for the view finder
         previewChart.setLineChartData(previewData);
     }
 
-
+    /*
+    Set the color for a particular line
+     */
     private void setLineColor(Line line, String color) {
         if (color != null && color != "random")
             line.setColor(Color.parseColor(color));
