@@ -25,27 +25,36 @@ import org.json.JSONObject;
 
 public abstract class FlowModel {
 
-    protected String flowId;
-    protected String flowName;
+    protected String flowId;    /*The id of the flow */
+    protected String flowName;  /*The id of the flow */
 
+    // The following method create a new flow, initializing the record list
     public abstract void createFlow(JSONObject data);
 
+    // The following method updates all the flow attributes.
     public abstract void updateFlow(JSONObject data);
 
+    // Used to delete the whole flow list. Params of the flow will remain.
     public abstract void deleteRecordList();
 
+    // The following method insert a record in the flow.
     public abstract void addRecord(JSONObject data);
 
+    // Used to insert some records in the flow.
     public abstract void addRecords(JSONArray data, boolean insertOnTop);
 
+    // Used to update a record of the flow.
     public abstract void updateRecord(JSONObject data);
 
+    // Used to delete a record in the flow.
     public abstract void deleteRecord(JSONObject data);
 
+    //it returns the value of flowName
     public String getFlowName() {
         return flowName;
     }
 
+    //it returns the value of flowId
     public String getFlowId() {
         return flowId;
     }

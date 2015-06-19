@@ -2,8 +2,10 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 import junit.framework.TestCase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
 import org.junit.Test;
 
 /*
@@ -22,17 +24,17 @@ import org.junit.Test;
  *
  * ===============================================================
  *
- */public class BarChartFlowTest extends TestCase {
-/*
+ */public class BarChartFlowTest {
+
     JSONObject data;
     BarChartFlow flow;
-
+/*
     @org.junit.Before
     public void setUp() throws Exception {
         super.setUp();
         data = new JSONObject("{records: [{norrisRecordID : \"flusso1201505081\", value: [1, 25]}]");
         flow = new BarChartFlow(data);
-    }
+
     data = new JSONObject().put("records",
                                         new JSONArray().
     put(0, new JSONObject().
@@ -45,21 +47,21 @@ import org.junit.Test;
             )
             );
 
-
+/*
     @Test
     public void testGetRecordSize() throws Exception {
 
     }
-
+*//*
     @Test
     public void testCreateFlow() throws Exception {
-        //try {
 
-        //String dataString= "{\"ID\" : \"flusso1\", \"records\" : [{ \"norrisRecordID\" : \"flusso1201505081\", \"value\": [1, 25]}, {\"norrisRecordID\" : \"flusso1201505082\",\"value\": [2, 15]}]}";
-        //System.out.println(dataString);
-        //flow = new BarChartFlow(data);
-        //flow.createFlow(data);
-        //assertEquals(1, flow.getRecordSize());
+            String dataString = "{ [{ \"norrisRecordID\" : \"flusso1201505081\", \"value\": [1, 25]}, {\"norrisRecordID\" : \"flusso1201505082\",\"value\": [2, 15]}]}";
+            data = new JSONObject().put("records", dataString);
+        System.out.println(dataString);
+            flow = new BarChartFlow(data);
+            flow.createFlow(data);
+            Assert.assertEquals(1, flow.getRecordSize());
 
     }
 
@@ -75,8 +77,9 @@ import org.junit.Test;
 
     }
 */
+    @Test
     public void testAddRecords() throws Exception {
-        assertTrue("",true);
+        Assert.assertTrue("", true);
     }
 /*
     public void testUpdateRecord() throws Exception {

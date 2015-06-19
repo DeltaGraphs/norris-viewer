@@ -35,33 +35,42 @@ import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
     private int maxItems;
-    private LinkedList<TableRecord> records = new LinkedList<TableRecord>();
+    private LinkedList<TableRecord> records = new LinkedList<TableRecord>(); /* a list that contains all the records of the flow */
 
+    //it returns the maximum number of items of a flow in the chart
     public int getMaxItems() {
         return maxItems;
     } //per page
 
+    //it returns the record list length
     public int getRecordSize() {
         return records.size();
     }
 
+    //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
         return records.get(index).recordId;
     }
 
+    //it returns the text colour of the record at the position 'index' in the list
     public String getCellTextColour(int index, int columnIndex) {
         return records.get(index).values.get(columnIndex).textColour;
     }
 
+    //it returns the background of the cell of the record at the position 'index' in the list
     public String getCellBackgroundColour(int index, int columnIndex) {
         return records.get(index).values.get(columnIndex).background;
     }
 
+    //it returns the value of the record at the position 'index' in the list
     public String getCellData(int index, int columnIndex) {
         return records.get(index).values.get(columnIndex).data;
     }
 
-
+    // Constructor of the flow.
+    // It is called when a new flow is added to the flow list of a chart.
+    // Flow parameters are initialized with jsonobject data content.
+    // Jsonobject data must contain a value for each parameter.
     public TableFlow(JSONObject data) {
         try {
             flowId = data.getString("ID");
@@ -72,10 +81,14 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // This inner class contains all the attributes that are related to a single record
     class TableRecord {
         private String recordId;
         private LinkedList<Value> values = new LinkedList<Value>();
 
+        // Record constructor.
+        // It's used when a new record is added to a record list.
+        // The new record is initialized with the passed parameters.
         public TableRecord(String id, JSONArray valueList, JSONArray appearance) {
             recordId = id;
             try {
@@ -91,11 +104,15 @@ public class TableFlow extends FlowModel {
             }
         }
 
+        // This inner class contains all the attributes of a value
         class Value {
             private String data;
             private String background;
             private String textColour;
 
+            // Marker constructor.
+            // It's used when a new Value is added to the record list
+            // The new marker type is initialized with the passed parameters.
             Value(String data, String bg, String tC) {
                 this.data = data;
                 background = bg;
@@ -104,6 +121,9 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // The following method create a new flow.
+    // The record list is created and is initialized with the jsonobject data.
+    // The Jsonobject data must contain a record list.
     @Override
     public void createFlow(JSONObject data) {
         records = new LinkedList<TableRecord>();
@@ -115,6 +135,8 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // The following method updates all the flow attributes.
+    // The Jsonobject data must contain a value for each of them.
     @Override
     public void updateFlow(JSONObject data) {
         try {
@@ -125,16 +147,18 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
         records = null;
     }
 
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
     @Override
     public void addRecord(JSONObject data) {
-        String id = null;
         try {
-            id = data.getString("norrisRecordID");
+            String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
             records.add(new TableRecord(id, jsonValues, appearance));
@@ -143,10 +167,12 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
+    // Differently from the method 'addRecord(JSONObject data)', the new record will be added on Top.
     public void addFirstRecord(JSONObject data) {
-        String id = null;
         try {
-            id = data.getString("norrisRecordID");
+            String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             JSONArray appearance = data.getJSONArray("appearance");
             records.addFirst(new TableRecord(id, jsonValues, appearance));
@@ -155,6 +181,10 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // Used to insert some records in the flow.
+    // The JsonObject data must contain the a JsonArray with the records that must be inserted.
+    // This method will use the method 'addRecord(record)' for each record adding.
+    // If the boolean variable 'insertOnTop' is set on 'true', the new records will be added on the top of the list.
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
@@ -175,6 +205,10 @@ public class TableFlow extends FlowModel {
         }
     }
 
+    // Used to update a record of the flow.
+    // The JsonObject data must contain the ID of the record that will be updated.
+    // The method will search for the record Index in the flowList, using its ID.
+    // After that, all the parameters of the record will be updated.
     @Override
     public void updateRecord(JSONObject data) {
         try {
@@ -194,7 +228,8 @@ public class TableFlow extends FlowModel {
     }
 
 
-    // it searches the record index in the list of records
+    // It searches the record index in the list of records.
+    // A record's id must be provided.
     protected int searchRecordIndex(String id) {
         int index = 0;
         while (index < records.size()) {
@@ -205,6 +240,9 @@ public class TableFlow extends FlowModel {
         return -1;
     }
 
+    // Used to delete a record from the flow.
+    // The JsonObject data must contain the ID of the record that will be deleted.
+    // The method will search for the record Index in the flowList, using its ID.
     @Override
     public void deleteRecord(JSONObject data) {
         try {

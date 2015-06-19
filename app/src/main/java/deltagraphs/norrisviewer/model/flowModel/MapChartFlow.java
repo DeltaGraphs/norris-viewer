@@ -36,32 +36,40 @@ public class MapChartFlow extends FlowModel {
     private Marker markerProperties;
     private int maxItems;
     private TraceModel trace;
-    private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>();
+    private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>(); /* a list that contains all the records of the flow */
 
+    //it returns the maximum number of items of a flow in the chart
     public int getMaxItems() {
         return maxItems;
     }
 
+    //it returns the record list length
     public int getRecordSize() {
         return records.size();
     }
 
+    //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
         return records.get(index).recordId;
     }
 
+    //it returns the marker id of the record at the position 'index' in the list
     public String getRecordMarkerId(int index) {
         return records.get(index).markerId;
     }
 
+    //it returns the latitude value of the record at the position 'index' in the list
     public float getRecordLatitude(int index) {
         return records.get(index).latitude;
     }
 
+    //it returns the longitude value of the record at the position 'index' in the list
     public float getRecordLongitude(int index) {
         return records.get(index).longitude;
     }
 
+    // it returns true if the trace model has been updated after being drawed in the map chart (view)
+    // When used, the value of 'traceUpdated' always becomes false at the end.
     public Boolean isTraceUpdated() {
         if (trace.traceUpdated == true) {
             trace.traceUpdated = false;
@@ -70,30 +78,38 @@ public class MapChartFlow extends FlowModel {
         return false;
     }
 
+    //it returns the type of trace: area or polyline
     public String getTraceType() {
         return trace.type;
     }
 
+    //it returns the colour of the trace
     public String getTraceStrokeColour() {
         return trace.strokeColour;
     } // colour of the polyline
 
+    //it returns the colour of the area within the trace
     public String getTraceFillColour() {
         return trace.fillColour;
     } // colour of the area subtended by the polyline
 
+    //it returns the coordinates of a trace
     public ArrayList<LatLng> getTraceCoords() {
         return trace.coords;
     }
 
+    //it returns the marker type value
     public String getMarkerType() {
         return markerProperties.type;
     }
 
+    //it returns the marker colour
     public String getMarkerColour() {
         return markerProperties.colour;
     }
 
+    //it returns marker type.
+    // Actually, it can assume three values: shape, text, default.
     public String getMarkerProperty(String type) {
         switch (type) {
             case ("shape"): {
@@ -108,7 +124,10 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
-
+    // Constructor of the flow.
+    // It is called when a new flow is added to the flow list of a chart.
+    // Flow parameters are initialized with jsonobject data content.
+    // Jsonobject data must contain a value for each parameter.
     public MapChartFlow(JSONObject data) {
         try {
             flowId = data.getString("ID");
@@ -123,13 +142,16 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
-
+    // This inner class contains all the attributes that are related to a single record
     class MapChartRecord {
         private String recordId;
         private String markerId;
         private float latitude;
         private float longitude;
 
+        // Record constructor.
+        // It's used when a new record is added to a record list.
+        // The new record is initialized with the passed parameters.
         public MapChartRecord(String rId, String mId, float lat, float longit) {
             recordId = rId;
             markerId = mId;
@@ -138,12 +160,16 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // This inner class contains all the attributes of a marker
     class Marker {
         String type = "default";
         String shape = null;
         String text = null;
         String colour = "";
 
+        // Marker constructor.
+        // It's used when a new type of marker is created.
+        // The new marker type is initialized with the passed parameters.
         public Marker(JSONObject data) {
             try {
                 if (data.has("type"))
@@ -160,13 +186,17 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // This inner class contains all the attributes of a trace
     class TraceModel {
         String type;
-        String strokeColour = "default";  // colour of the polyline
-        String fillColour = "default";  // colour of the area subtended by the polyline
+        String strokeColour = "default";  /* colour of the polyline */
+        String fillColour = "default";  /* colour of the area subtended by the polyline */
         Boolean traceUpdated = false;
         ArrayList<LatLng> coords = new ArrayList<LatLng>();
 
+        // Trace constructor.
+        // It's used when a new trace is created.
+        // The new trace is initialized with the passed parameters.
         public TraceModel(JSONObject data) {
             traceUpdated = true;
             try {
@@ -186,6 +216,9 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // The following method create a new flow.
+    // The record list is created and is initialized with the jsonobject data.
+    // The Jsonobject data must contain a record list.
     @Override
     public void createFlow(JSONObject data) {
 
@@ -198,6 +231,8 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // The following method updates all the flow attributes.
+    // The Jsonobject data must contain a value for each of them.
     @Override
     public void updateFlow(JSONObject data) {
         try {
@@ -222,11 +257,14 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
         records = null;
     }
 
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
     @Override
     public void addRecord(JSONObject data) {
         try {
@@ -240,6 +278,10 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // Used to insert some records in the flow.
+    // The JsonObject data must contain the a JsonArray with the records that must be inserted.
+    // This method will use the method 'addRecord(record)' for each record adding.
+    // The boolean variable 'insertOnTop' is not currently used, but it allows future extensions.
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
@@ -253,6 +295,10 @@ public class MapChartFlow extends FlowModel {
         }
     }
 
+    // Used to update a record of the flow.
+    // The JsonObject data must contain the ID of the record that will be updated.
+    // The method will search for the record Index in the flowList, using its ID.
+    // After that, all the parameters of the record will be updated.
     @Override
     public void updateRecord(JSONObject data) {
         try {
@@ -267,7 +313,8 @@ public class MapChartFlow extends FlowModel {
     }
 
 
-    // it searches the record index in the list of records
+    // It searches the record index in the list of records.
+    // A record's id must be provided.
     protected int searchRecordIndex(String id) {
         int index = 0;
         while (index < records.size()) {
@@ -278,6 +325,9 @@ public class MapChartFlow extends FlowModel {
         return -1;
     }
 
+    // Used to delete a record from the flow.
+    // The JsonObject data must contain the ID of the record that will be deleted.
+    // The method will search for the record Index in the flowList, using its ID.
     @Override
     public void deleteRecord(JSONObject data) {
         try {

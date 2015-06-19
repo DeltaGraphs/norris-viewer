@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.view.graphsView;
  *
  */
 
+import android.util.JsonReader;
+
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;

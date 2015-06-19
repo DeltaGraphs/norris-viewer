@@ -30,29 +30,38 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel {
 
-    private String flowColour = "random"; //default
-    private ArrayList<BarChartRecord> records = new ArrayList<BarChartRecord>();
+    private String flowColour = "random"; /* 'random' is the default colour */
+    private ArrayList<BarChartRecord> records = new ArrayList<BarChartRecord>(); /* a list that contains all the records of the flow */
 
+    //it returns the colour of the flow
     public String getFlowColour() {
         return flowColour;
     }
 
+    //it returns the record length
     public int getRecordSize() {
         return records.size();
     }
 
+    //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
         return records.get(index).recordId;
     }
 
+    //it returns the bar index of the record at the position 'index' in the list
     public String getRecordIndex(int index) {
         return records.get(index).index;
     }
 
+    //it returns the value of the record at the position 'index' in the list
     public float getRecordValue(int index) {
         return records.get(index).value;
     }
 
+    // Constructor of the flow.
+    // It is called when a new flow is added to the flow list of a chart.
+    // Flow parameters are initialized with jsonobject data content.
+    // Jsonobject data must contain a value for each parameter.
     public BarChartFlow(JSONObject data) {
         records = new ArrayList<BarChartRecord>();
         try {
@@ -65,11 +74,15 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
+    // This inner class contains all the attributes that are related to a single record
     class BarChartRecord {
         private String recordId;
-        private String index; // ID of bar
-        private float value; // value for that bar
+        private String index; /* ID of bar */
+        private float value; /* value for that bar */
 
+        // Record constructor.
+        // It's used when a new record is added to a record list.
+        // The new record is initialized with the passed parameters.
         public BarChartRecord(String id, String index, float value) {
             this.recordId = id;
             this.index = index;
@@ -77,6 +90,9 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
+    // The following method create a new flow.
+    // The record list is created and is initialized with the jsonobject data.
+    // The Jsonobject data must contain a record list.
     @Override
     public void createFlow(JSONObject data) {
         records = new ArrayList<BarChartRecord>();
@@ -89,6 +105,8 @@ public class BarChartFlow extends FlowModel {
         addRecords(recordList, false);
     }
 
+    // The following method updates all the flow attributes.
+    // The Jsonobject data must contain a value for each of them.
     @Override
     public void updateFlow(JSONObject data) {
         try {
@@ -99,16 +117,18 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
+    // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
         records = null;
     }
 
+    // The following method inserts a record in the flow.
+    // The record is build with the JsonObject's informations.
     @Override
     public void addRecord(JSONObject data) {
-        String id = null;
         try {
-            id = data.getString("norrisRecordID");
+            String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             String index = jsonValues.getString(0);
             float value = (float) jsonValues.getDouble(1);
@@ -118,6 +138,10 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
+    // Used to insert some records in the flow.
+    // The JsonObject data must contain the a JsonArray with the records that must be inserted.
+    // This method will use the method 'addRecord(record)' for each record adding.
+    // The boolean variable 'insertOnTop' is not currently used, but it allows future extensions.
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
@@ -131,6 +155,10 @@ public class BarChartFlow extends FlowModel {
         }
     }
 
+    // Used to update a record of the flow.
+    // The JsonObject data must contain the ID of the record that will be updated.
+    // The method will search for the record Index in the flowList, using its ID.
+    // After that, all the parameters of the record will be updated.
     @Override
     public void updateRecord(JSONObject data) {
         try {
@@ -145,7 +173,8 @@ public class BarChartFlow extends FlowModel {
     }
 
 
-    // it searches the record index in the list of records
+    // It searches the record index in the list of records.
+    // A record's id must be provided.
     private int searchRecordIndex(String id) {
         int index = 0;
         while (index < records.size()) {
@@ -156,6 +185,10 @@ public class BarChartFlow extends FlowModel {
         return -1;
     }
 
+
+    // Used to delete a record in the flow.
+    // The JsonObject data must contain the ID of the record that will be deleted.
+    // The method will search for the record Index in the flowList, using its ID.
     @Override
     public void deleteRecord(JSONObject data) {
         try {
