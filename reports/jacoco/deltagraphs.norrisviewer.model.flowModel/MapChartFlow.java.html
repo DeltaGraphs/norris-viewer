@@ -36,258 +36,308 @@ public class MapChartFlow extends FlowModel {
     private Marker markerProperties;
     private int maxItems;
     private TraceModel trace;
-<span class="nc" id="L39">    private ArrayList&lt;MapChartRecord&gt; records = new ArrayList&lt;MapChartRecord&gt;();</span>
+<span class="nc" id="L39">    private ArrayList&lt;MapChartRecord&gt; records = new ArrayList&lt;MapChartRecord&gt;(); /* a list that contains all the records of the flow */</span>
 
+    //it returns the maximum number of items of a flow in the chart
     public int getMaxItems() {
-<span class="nc" id="L42">        return maxItems;</span>
+<span class="nc" id="L43">        return maxItems;</span>
     }
 
+    //it returns the record list length
     public int getRecordSize() {
-<span class="nc" id="L46">        return records.size();</span>
+<span class="nc" id="L48">        return records.size();</span>
     }
 
+    //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
-<span class="nc" id="L50">        return records.get(index).recordId;</span>
+<span class="nc" id="L53">        return records.get(index).recordId;</span>
     }
 
+    //it returns the marker id of the record at the position 'index' in the list
     public String getRecordMarkerId(int index) {
-<span class="nc" id="L54">        return records.get(index).markerId;</span>
+<span class="nc" id="L58">        return records.get(index).markerId;</span>
     }
 
+    //it returns the latitude value of the record at the position 'index' in the list
     public float getRecordLatitude(int index) {
-<span class="nc" id="L58">        return records.get(index).latitude;</span>
+<span class="nc" id="L63">        return records.get(index).latitude;</span>
     }
 
+    //it returns the longitude value of the record at the position 'index' in the list
     public float getRecordLongitude(int index) {
-<span class="nc" id="L62">        return records.get(index).longitude;</span>
+<span class="nc" id="L68">        return records.get(index).longitude;</span>
     }
 
+    // it returns true if the trace model has been updated after being drawed in the map chart (view)
+    // When used, the value of 'traceUpdated' always becomes false at the end.
     public Boolean isTraceUpdated() {
-<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (trace.traceUpdated == true) {</span>
-<span class="nc" id="L67">            trace.traceUpdated = false;</span>
-<span class="nc" id="L68">            return true;</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">        if (trace.traceUpdated == true) {</span>
+<span class="nc" id="L75">            trace.traceUpdated = false;</span>
+<span class="nc" id="L76">            return true;</span>
         }
-<span class="nc" id="L70">        return false;</span>
+<span class="nc" id="L78">        return false;</span>
     }
 
+    //it returns the type of trace: area or polyline
     public String getTraceType() {
-<span class="nc" id="L74">        return trace.type;</span>
+<span class="nc" id="L83">        return trace.type;</span>
     }
 
+    //it returns the colour of the trace
     public String getTraceStrokeColour() {
-<span class="nc" id="L78">        return trace.strokeColour;</span>
+<span class="nc" id="L88">        return trace.strokeColour;</span>
     } // colour of the polyline
 
+    //it returns the colour of the area within the trace
     public String getTraceFillColour() {
-<span class="nc" id="L82">        return trace.fillColour;</span>
+<span class="nc" id="L93">        return trace.fillColour;</span>
     } // colour of the area subtended by the polyline
 
+    //it returns the coordinates of a trace
     public ArrayList&lt;LatLng&gt; getTraceCoords() {
-<span class="nc" id="L86">        return trace.coords;</span>
+<span class="nc" id="L98">        return trace.coords;</span>
     }
 
+    //it returns the marker type value
     public String getMarkerType() {
-<span class="nc" id="L90">        return markerProperties.type;</span>
+<span class="nc" id="L103">        return markerProperties.type;</span>
     }
 
+    //it returns the marker colour
     public String getMarkerColour() {
-<span class="nc" id="L94">        return markerProperties.colour;</span>
+<span class="nc" id="L108">        return markerProperties.colour;</span>
     }
 
+    //it returns marker type.
+    // Actually, it can assume three values: shape, text, default.
     public String getMarkerProperty(String type) {
-<span class="nc bnc" id="L98" title="All 10 branches missed.">        switch (type) {</span>
+<span class="nc bnc" id="L114" title="All 10 branches missed.">        switch (type) {</span>
             case (&quot;shape&quot;): {
-<span class="nc" id="L100">                return markerProperties.shape;</span>
+<span class="nc" id="L116">                return markerProperties.shape;</span>
             }
             case (&quot;text&quot;): {
-<span class="nc" id="L103">                return markerProperties.text;</span>
+<span class="nc" id="L119">                return markerProperties.text;</span>
             }
             default: {
-<span class="nc" id="L106">                return &quot;default&quot;;</span>
+<span class="nc" id="L122">                return &quot;default&quot;;</span>
             }
         }
     }
 
-
-<span class="nc" id="L112">    public MapChartFlow(JSONObject data) {</span>
+    // Constructor of the flow.
+    // It is called when a new flow is added to the flow list of a chart.
+    // Flow parameters are initialized with jsonobject data content.
+    // Jsonobject data must contain a value for each parameter.
+<span class="nc" id="L131">    public MapChartFlow(JSONObject data) {</span>
         try {
-<span class="nc" id="L114">            flowId = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L115">            flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L116">            maxItems = data.getInt(&quot;maxItemsSaved&quot;);</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">            if (data.has(&quot;marker&quot;))</span>
-<span class="nc" id="L118">                markerProperties = new Marker(data.getJSONObject(&quot;marker&quot;));</span>
-<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (data.has(&quot;trace&quot;))</span>
-<span class="nc" id="L120">                trace = new TraceModel(data.getJSONObject(&quot;trace&quot;));</span>
-<span class="nc" id="L121">        } catch (JSONException e) {</span>
-<span class="nc" id="L122">            e.printStackTrace();</span>
-<span class="nc" id="L123">        }</span>
-<span class="nc" id="L124">    }</span>
+<span class="nc" id="L133">            flowId = data.getString(&quot;ID&quot;);</span>
+<span class="nc" id="L134">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L135">            maxItems = data.getInt(&quot;maxItemsSaved&quot;);</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">            if (data.has(&quot;marker&quot;))</span>
+<span class="nc" id="L137">                markerProperties = new Marker(data.getJSONObject(&quot;marker&quot;));</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            if (data.has(&quot;trace&quot;))</span>
+<span class="nc" id="L139">                trace = new TraceModel(data.getJSONObject(&quot;trace&quot;));</span>
+<span class="nc" id="L140">        } catch (JSONException e) {</span>
+<span class="nc" id="L141">            e.printStackTrace();</span>
+<span class="nc" id="L142">        }</span>
+<span class="nc" id="L143">    }</span>
 
-
+    // This inner class contains all the attributes that are related to a single record
     class MapChartRecord {
         private String recordId;
         private String markerId;
         private float latitude;
         private float longitude;
 
-<span class="nc" id="L133">        public MapChartRecord(String rId, String mId, float lat, float longit) {</span>
-<span class="nc" id="L134">            recordId = rId;</span>
-<span class="nc" id="L135">            markerId = mId;</span>
-<span class="nc" id="L136">            latitude = lat;</span>
-<span class="nc" id="L137">            longitude = longit;</span>
-<span class="nc" id="L138">        }</span>
-    }
-
-    class Marker {
-<span class="nc" id="L142">        String type = &quot;default&quot;;</span>
-<span class="nc" id="L143">        String shape = null;</span>
-<span class="nc" id="L144">        String text = null;</span>
-<span class="nc" id="L145">        String colour = &quot;&quot;;</span>
-
-<span class="nc" id="L147">        public Marker(JSONObject data) {</span>
-            try {
-<span class="nc bnc" id="L149" title="All 2 branches missed.">                if (data.has(&quot;type&quot;))</span>
-<span class="nc" id="L150">                    type = data.getString(&quot;type&quot;);</span>
-<span class="nc bnc" id="L151" title="All 2 branches missed.">                if (data.has(&quot;shape&quot;))</span>
-<span class="nc" id="L152">                    shape = data.getString(&quot;shape&quot;);</span>
-<span class="nc bnc" id="L153" title="All 2 branches missed.">                if (data.has(&quot;text&quot;))</span>
-<span class="nc" id="L154">                    text = data.getString(&quot;text&quot;);</span>
-<span class="nc bnc" id="L155" title="All 4 branches missed.">                if (data.has(&quot;color&quot;)&amp;&amp;(!(data.isNull(&quot;color&quot;))))</span>
-<span class="nc" id="L156">                    colour = data.getString(&quot;color&quot;);</span>
-<span class="nc" id="L157">            } catch (JSONException e) {</span>
-<span class="nc" id="L158">                e.printStackTrace();</span>
-<span class="nc" id="L159">            }</span>
+        // Record constructor.
+        // It's used when a new record is added to a record list.
+        // The new record is initialized with the passed parameters.
+<span class="nc" id="L155">        public MapChartRecord(String rId, String mId, float lat, float longit) {</span>
+<span class="nc" id="L156">            recordId = rId;</span>
+<span class="nc" id="L157">            markerId = mId;</span>
+<span class="nc" id="L158">            latitude = lat;</span>
+<span class="nc" id="L159">            longitude = longit;</span>
 <span class="nc" id="L160">        }</span>
     }
 
-    class TraceModel {
-        String type;
-<span class="nc" id="L165">        String strokeColour = &quot;default&quot;;  // colour of the polyline</span>
-<span class="nc" id="L166">        String fillColour = &quot;default&quot;;  // colour of the area subtended by the polyline</span>
-<span class="nc" id="L167">        Boolean traceUpdated = false;</span>
-<span class="nc" id="L168">        ArrayList&lt;LatLng&gt; coords = new ArrayList&lt;LatLng&gt;();</span>
+    // This inner class contains all the attributes of a marker
+    class Marker {
+<span class="nc" id="L165">        String type = &quot;default&quot;;</span>
+<span class="nc" id="L166">        String shape = null;</span>
+<span class="nc" id="L167">        String text = null;</span>
+<span class="nc" id="L168">        String colour = &quot;&quot;;</span>
 
-<span class="nc" id="L170">        public TraceModel(JSONObject data) {</span>
-<span class="nc" id="L171">            traceUpdated = true;</span>
+        // Marker constructor.
+        // It's used when a new type of marker is created.
+        // The new marker type is initialized with the passed parameters.
+<span class="nc" id="L173">        public Marker(JSONObject data) {</span>
             try {
-<span class="nc" id="L173">                type = data.getString(&quot;type&quot;);</span>
-<span class="nc bnc" id="L174" title="All 2 branches missed.">                if (data.has(&quot;strokeColor&quot;))</span>
-<span class="nc" id="L175">                    strokeColour = data.getString(&quot;strokeColor&quot;);</span>
-<span class="nc bnc" id="L176" title="All 2 branches missed.">                if (data.has(&quot;fillColor&quot;))</span>
-<span class="nc" id="L177">                    fillColour = data.getString(&quot;fillColor&quot;);</span>
-<span class="nc" id="L178">                JSONArray line = data.getJSONArray(&quot;coordinates&quot;);</span>
-<span class="nc bnc" id="L179" title="All 2 branches missed.">                for (int i = 0; i &lt; line.length(); i++) {</span>
-<span class="nc" id="L180">                    JSONArray coordinates = line.getJSONArray(i);</span>
-<span class="nc" id="L181">                    coords.add(new LatLng((float) coordinates.getDouble(0), (float) coordinates.getDouble(1)));</span>
-                }
+<span class="nc bnc" id="L175" title="All 2 branches missed.">                if (data.has(&quot;type&quot;))</span>
+<span class="nc" id="L176">                    type = data.getString(&quot;type&quot;);</span>
+<span class="nc bnc" id="L177" title="All 2 branches missed.">                if (data.has(&quot;shape&quot;))</span>
+<span class="nc" id="L178">                    shape = data.getString(&quot;shape&quot;);</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">                if (data.has(&quot;text&quot;))</span>
+<span class="nc" id="L180">                    text = data.getString(&quot;text&quot;);</span>
+<span class="nc bnc" id="L181" title="All 4 branches missed.">                if (data.has(&quot;color&quot;)&amp;&amp;(!(data.isNull(&quot;color&quot;))))</span>
+<span class="nc" id="L182">                    colour = data.getString(&quot;color&quot;);</span>
 <span class="nc" id="L183">            } catch (JSONException e) {</span>
 <span class="nc" id="L184">                e.printStackTrace();</span>
 <span class="nc" id="L185">            }</span>
 <span class="nc" id="L186">        }</span>
     }
 
+    // This inner class contains all the attributes of a trace
+    class TraceModel {
+        String type;
+<span class="nc" id="L192">        String strokeColour = &quot;default&quot;;  /* colour of the polyline */</span>
+<span class="nc" id="L193">        String fillColour = &quot;default&quot;;  /* colour of the area subtended by the polyline */</span>
+<span class="nc" id="L194">        Boolean traceUpdated = false;</span>
+<span class="nc" id="L195">        ArrayList&lt;LatLng&gt; coords = new ArrayList&lt;LatLng&gt;();</span>
+
+        // Trace constructor.
+        // It's used when a new trace is created.
+        // The new trace is initialized with the passed parameters.
+<span class="nc" id="L200">        public TraceModel(JSONObject data) {</span>
+<span class="nc" id="L201">            traceUpdated = true;</span>
+            try {
+<span class="nc" id="L203">                type = data.getString(&quot;type&quot;);</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">                if (data.has(&quot;strokeColor&quot;))</span>
+<span class="nc" id="L205">                    strokeColour = data.getString(&quot;strokeColor&quot;);</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                if (data.has(&quot;fillColor&quot;))</span>
+<span class="nc" id="L207">                    fillColour = data.getString(&quot;fillColor&quot;);</span>
+<span class="nc" id="L208">                JSONArray line = data.getJSONArray(&quot;coordinates&quot;);</span>
+<span class="nc bnc" id="L209" title="All 2 branches missed.">                for (int i = 0; i &lt; line.length(); i++) {</span>
+<span class="nc" id="L210">                    JSONArray coordinates = line.getJSONArray(i);</span>
+<span class="nc" id="L211">                    coords.add(new LatLng((float) coordinates.getDouble(0), (float) coordinates.getDouble(1)));</span>
+                }
+<span class="nc" id="L213">            } catch (JSONException e) {</span>
+<span class="nc" id="L214">                e.printStackTrace();</span>
+<span class="nc" id="L215">            }</span>
+<span class="nc" id="L216">        }</span>
+    }
+
+    // The following method create a new flow.
+    // The record list is created and is initialized with the jsonobject data.
+    // The Jsonobject data must contain a record list.
     @Override
     public void createFlow(JSONObject data) {
 
-<span class="nc" id="L192">        records = new ArrayList&lt;MapChartRecord&gt;();</span>
+<span class="nc" id="L225">        records = new ArrayList&lt;MapChartRecord&gt;();</span>
         try {
-<span class="nc" id="L194">            JSONArray recordList = data.getJSONArray(&quot;records&quot;);</span>
-<span class="nc" id="L195">            addRecords(recordList, false);</span>
-<span class="nc" id="L196">        } catch (JSONException e) {</span>
-<span class="nc" id="L197">            e.printStackTrace();</span>
-<span class="nc" id="L198">        }</span>
-<span class="nc" id="L199">    }</span>
+<span class="nc" id="L227">            JSONArray recordList = data.getJSONArray(&quot;records&quot;);</span>
+<span class="nc" id="L228">            addRecords(recordList, false);</span>
+<span class="nc" id="L229">        } catch (JSONException e) {</span>
+<span class="nc" id="L230">            e.printStackTrace();</span>
+<span class="nc" id="L231">        }</span>
+<span class="nc" id="L232">    }</span>
 
+    // The following method updates all the flow attributes.
+    // The Jsonobject data must contain a value for each of them.
     @Override
     public void updateFlow(JSONObject data) {
         try {
-<span class="nc" id="L204">            flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L205">            maxItems = data.getInt(&quot;maxItemsPage&quot;);</span>
-<span class="nc" id="L206">            markerProperties.type = data.getJSONObject(&quot;marker&quot;).getString(&quot;type&quot;);</span>
-<span class="nc" id="L207">            markerProperties.shape = data.getJSONObject(&quot;marker&quot;).getString(&quot;shape&quot;);</span>
-<span class="nc" id="L208">            markerProperties.text = data.getJSONObject(&quot;marker&quot;).getString(&quot;text&quot;);</span>
-<span class="nc" id="L209">            markerProperties.colour = data.getJSONObject(&quot;marker&quot;).getString(&quot;color&quot;);</span>
-<span class="nc bnc" id="L210" title="All 2 branches missed.">            if (data.has(&quot;trace&quot;))</span>
-<span class="nc" id="L211">                trace.traceUpdated = true;</span>
-<span class="nc" id="L212">            trace.type = data.getJSONObject(&quot;trace&quot;).getString(&quot;type&quot;);</span>
-<span class="nc" id="L213">            trace.strokeColour = data.getJSONObject(&quot;trace&quot;).getString(&quot;strokeColor&quot;);</span>
-<span class="nc" id="L214">            trace.fillColour = data.getJSONObject(&quot;trace&quot;).getString(&quot;fillColor&quot;);</span>
-<span class="nc" id="L215">            JSONArray jsonCoordinates = data.getJSONArray(&quot;coordinates&quot;);</span>
-<span class="nc bnc" id="L216" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonCoordinates.length(); i++) {</span>
-<span class="nc" id="L217">                trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),</span>
+<span class="nc" id="L239">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="nc" id="L240">            maxItems = data.getInt(&quot;maxItemsPage&quot;);</span>
+<span class="nc" id="L241">            markerProperties.type = data.getJSONObject(&quot;marker&quot;).getString(&quot;type&quot;);</span>
+<span class="nc" id="L242">            markerProperties.shape = data.getJSONObject(&quot;marker&quot;).getString(&quot;shape&quot;);</span>
+<span class="nc" id="L243">            markerProperties.text = data.getJSONObject(&quot;marker&quot;).getString(&quot;text&quot;);</span>
+<span class="nc" id="L244">            markerProperties.colour = data.getJSONObject(&quot;marker&quot;).getString(&quot;color&quot;);</span>
+<span class="nc bnc" id="L245" title="All 2 branches missed.">            if (data.has(&quot;trace&quot;))</span>
+<span class="nc" id="L246">                trace.traceUpdated = true;</span>
+<span class="nc" id="L247">            trace.type = data.getJSONObject(&quot;trace&quot;).getString(&quot;type&quot;);</span>
+<span class="nc" id="L248">            trace.strokeColour = data.getJSONObject(&quot;trace&quot;).getString(&quot;strokeColor&quot;);</span>
+<span class="nc" id="L249">            trace.fillColour = data.getJSONObject(&quot;trace&quot;).getString(&quot;fillColor&quot;);</span>
+<span class="nc" id="L250">            JSONArray jsonCoordinates = data.getJSONArray(&quot;coordinates&quot;);</span>
+<span class="nc bnc" id="L251" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonCoordinates.length(); i++) {</span>
+<span class="nc" id="L252">                trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),</span>
                         (float) jsonCoordinates.getJSONArray(i).getDouble(1)));
             }
-<span class="nc" id="L220">        } catch (JSONException e) {</span>
-<span class="nc" id="L221">            e.printStackTrace();</span>
-<span class="nc" id="L222">        }</span>
-<span class="nc" id="L223">    }</span>
+<span class="nc" id="L255">        } catch (JSONException e) {</span>
+<span class="nc" id="L256">            e.printStackTrace();</span>
+<span class="nc" id="L257">        }</span>
+<span class="nc" id="L258">    }</span>
 
+    // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
-<span class="nc" id="L227">        records = null;</span>
-<span class="nc" id="L228">    }</span>
+<span class="nc" id="L263">        records = null;</span>
+<span class="nc" id="L264">    }</span>
 
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
     @Override
     public void addRecord(JSONObject data) {
         try {
-<span class="nc" id="L233">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L234">            String markerId = data.getString(&quot;markerID&quot;);</span>
-<span class="nc" id="L235">            float latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
-<span class="nc" id="L236">            float longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
-<span class="nc" id="L237">            records.add(new MapChartRecord(recordId, markerId, latitude, longitude));</span>
-<span class="nc" id="L238">        } catch (JSONException e) {</span>
-<span class="nc" id="L239">            e.printStackTrace();</span>
-<span class="nc" id="L240">        }</span>
-<span class="nc" id="L241">    }</span>
+<span class="nc" id="L271">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L272">            String markerId = data.getString(&quot;markerID&quot;);</span>
+<span class="nc" id="L273">            float latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
+<span class="nc" id="L274">            float longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
+<span class="nc" id="L275">            records.add(new MapChartRecord(recordId, markerId, latitude, longitude));</span>
+<span class="nc" id="L276">        } catch (JSONException e) {</span>
+<span class="nc" id="L277">            e.printStackTrace();</span>
+<span class="nc" id="L278">        }</span>
+<span class="nc" id="L279">    }</span>
 
+    // Used to insert some records in the flow.
+    // The JsonObject data must contain the a JsonArray with the records that must be inserted.
+    // This method will use the method 'addRecord(record)' for each record adding.
+    // The boolean variable 'insertOnTop' is not currently used, but it allows future extensions.
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
-<span class="nc" id="L246">            int recordLength = jsonRecords.length();</span>
-<span class="nc bnc" id="L247" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
-<span class="nc" id="L248">                JSONObject record = jsonRecords.getJSONObject(i);</span>
-<span class="nc" id="L249">                addRecord(record);</span>
+<span class="nc" id="L288">            int recordLength = jsonRecords.length();</span>
+<span class="nc bnc" id="L289" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="nc" id="L290">                JSONObject record = jsonRecords.getJSONObject(i);</span>
+<span class="nc" id="L291">                addRecord(record);</span>
             }
-<span class="nc" id="L251">        } catch (JSONException e) {</span>
-<span class="nc" id="L252">            e.printStackTrace();</span>
-<span class="nc" id="L253">        }</span>
-<span class="nc" id="L254">    }</span>
+<span class="nc" id="L293">        } catch (JSONException e) {</span>
+<span class="nc" id="L294">            e.printStackTrace();</span>
+<span class="nc" id="L295">        }</span>
+<span class="nc" id="L296">    }</span>
 
+    // Used to update a record of the flow.
+    // The JsonObject data must contain the ID of the record that will be updated.
+    // The method will search for the record Index in the flowList, using its ID.
+    // After that, all the parameters of the record will be updated.
     @Override
     public void updateRecord(JSONObject data) {
         try {
-<span class="nc" id="L259">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L260">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L261">            records.get(recordIndex).markerId = data.getString(&quot;markerID&quot;);</span>
-<span class="nc" id="L262">            records.get(recordIndex).latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
-<span class="nc" id="L263">            records.get(recordIndex).longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
-<span class="nc" id="L264">        } catch (JSONException e) {</span>
-<span class="nc" id="L265">            e.printStackTrace();</span>
-<span class="nc" id="L266">        }</span>
-<span class="nc" id="L267">    }</span>
+<span class="nc" id="L305">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L306">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L307">            records.get(recordIndex).markerId = data.getString(&quot;markerID&quot;);</span>
+<span class="nc" id="L308">            records.get(recordIndex).latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
+<span class="nc" id="L309">            records.get(recordIndex).longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
+<span class="nc" id="L310">        } catch (JSONException e) {</span>
+<span class="nc" id="L311">            e.printStackTrace();</span>
+<span class="nc" id="L312">        }</span>
+<span class="nc" id="L313">    }</span>
 
 
-    // it searches the record index in the list of records
+    // It searches the record index in the list of records.
+    // A record's id must be provided.
     protected int searchRecordIndex(String id) {
-<span class="nc" id="L272">        int index = 0;</span>
-<span class="nc bnc" id="L273" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="nc bnc" id="L274" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L275">                return index;</span>
-<span class="nc" id="L276">            index++;</span>
+<span class="nc" id="L319">        int index = 0;</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
+<span class="nc bnc" id="L321" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L322">                return index;</span>
+<span class="nc" id="L323">            index++;</span>
         }
-<span class="nc" id="L278">        return -1;</span>
+<span class="nc" id="L325">        return -1;</span>
     }
 
+    // Used to delete a record from the flow.
+    // The JsonObject data must contain the ID of the record that will be deleted.
+    // The method will search for the record Index in the flowList, using its ID.
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L284">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L285">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L286">            records.remove(recordIndex);</span>
-<span class="nc" id="L287">        } catch (JSONException e) {</span>
-<span class="nc" id="L288">            e.printStackTrace();</span>
-<span class="nc" id="L289">        }</span>
-<span class="nc" id="L290">    }</span>
+<span class="nc" id="L334">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L335">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L336">            records.remove(recordIndex);</span>
+<span class="nc" id="L337">        } catch (JSONException e) {</span>
+<span class="nc" id="L338">            e.printStackTrace();</span>
+<span class="nc" id="L339">        }</span>
+<span class="nc" id="L340">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
