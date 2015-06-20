@@ -30,49 +30,51 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel {
 
-<span class="nc" id="L33">    private String flowColour = &quot;random&quot;; /* 'random' is the default colour */</span>
-<span class="nc" id="L34">    private ArrayList&lt;BarChartRecord&gt; records = new ArrayList&lt;BarChartRecord&gt;(); /* a list that contains all the records of the flow */</span>
+<span class="fc" id="L33">    private String flowColour = &quot;random&quot;; /* 'random' is the default colour */</span>
+<span class="fc" id="L34">    private ArrayList&lt;BarChartRecord&gt; records = new ArrayList&lt;BarChartRecord&gt;(); /* a list that contains all the records of the flow */</span>
 
     //it returns the colour of the flow
     public String getFlowColour() {
-<span class="nc" id="L38">        return flowColour;</span>
+<span class="fc" id="L38">        return flowColour;</span>
     }
 
     //it returns the record length
     public int getRecordSize() {
-<span class="nc" id="L43">        return records.size();</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(records==null)</span>
+<span class="fc" id="L44">            return 0;</span>
+<span class="fc" id="L45">        return records.size();</span>
     }
 
     //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
-<span class="nc" id="L48">        return records.get(index).recordId;</span>
+<span class="fc" id="L50">        return records.get(index).recordId;</span>
     }
 
     //it returns the bar index of the record at the position 'index' in the list
     public String getRecordIndex(int index) {
-<span class="nc" id="L53">        return records.get(index).index;</span>
+<span class="fc" id="L55">        return records.get(index).index;</span>
     }
 
     //it returns the value of the record at the position 'index' in the list
     public float getRecordValue(int index) {
-<span class="nc" id="L58">        return records.get(index).value;</span>
+<span class="fc" id="L60">        return records.get(index).value;</span>
     }
 
     // Constructor of the flow.
     // It is called when a new flow is added to the flow list of a chart.
     // Flow parameters are initialized with jsonobject data content.
     // Jsonobject data must contain a value for each parameter.
-<span class="nc" id="L65">    public BarChartFlow(JSONObject data) {</span>
-<span class="nc" id="L66">        records = new ArrayList&lt;BarChartRecord&gt;();</span>
+<span class="fc" id="L67">    public BarChartFlow(JSONObject data) {</span>
+<span class="fc" id="L68">        records = new ArrayList&lt;BarChartRecord&gt;();</span>
         try {
-<span class="nc" id="L68">            flowId = data.getString(&quot;ID&quot;);</span>
-<span class="nc" id="L69">            flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc bnc" id="L70" title="All 2 branches missed.">            if (data.has(&quot;flowColor&quot;))</span>
-<span class="nc" id="L71">                flowColour = data.getString(&quot;flowColor&quot;);</span>
-<span class="nc" id="L72">        } catch (JSONException e) {</span>
-<span class="nc" id="L73">            e.printStackTrace();</span>
-<span class="nc" id="L74">        }</span>
-<span class="nc" id="L75">    }</span>
+<span class="fc" id="L70">            flowId = data.getString(&quot;ID&quot;);</span>
+<span class="fc" id="L71">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if (data.has(&quot;flowColor&quot;))</span>
+<span class="nc" id="L73">                flowColour = data.getString(&quot;flowColor&quot;);</span>
+<span class="nc" id="L74">        } catch (JSONException e) {</span>
+<span class="nc" id="L75">            e.printStackTrace();</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc" id="L77">    }</span>
 
     // This inner class contains all the attributes that are related to a single record
     class BarChartRecord {
@@ -83,11 +85,11 @@ public class BarChartFlow extends FlowModel {
         // Record constructor.
         // It's used when a new record is added to a record list.
         // The new record is initialized with the passed parameters.
-<span class="nc" id="L86">        public BarChartRecord(String id, String index, float value) {</span>
-<span class="nc" id="L87">            this.recordId = id;</span>
-<span class="nc" id="L88">            this.index = index;</span>
-<span class="nc" id="L89">            this.value = value;</span>
-<span class="nc" id="L90">        }</span>
+<span class="fc" id="L88">        public BarChartRecord(String id, String index, float value) {</span>
+<span class="fc" id="L89">            this.recordId = id;</span>
+<span class="fc" id="L90">            this.index = index;</span>
+<span class="fc" id="L91">            this.value = value;</span>
+<span class="fc" id="L92">        }</span>
     }
 
     // The following method create a new flow.
@@ -95,48 +97,51 @@ public class BarChartFlow extends FlowModel {
     // The Jsonobject data must contain a record list.
     @Override
     public void createFlow(JSONObject data) {
-<span class="nc" id="L98">        records = new ArrayList&lt;BarChartRecord&gt;();</span>
-<span class="nc" id="L99">        JSONArray recordList = null;</span>
+<span class="fc" id="L100">        records = new ArrayList&lt;BarChartRecord&gt;();</span>
+<span class="fc" id="L101">        JSONArray recordList = null;</span>
         try {
-<span class="nc" id="L101">            recordList = data.getJSONArray(&quot;records&quot;);</span>
-<span class="nc" id="L102">        } catch (JSONException e) {</span>
-<span class="nc" id="L103">            e.printStackTrace();</span>
-<span class="nc" id="L104">        }</span>
-<span class="nc" id="L105">        addRecords(recordList, false);</span>
-<span class="nc" id="L106">    }</span>
+<span class="fc" id="L103">            recordList = data.getJSONArray(&quot;records&quot;);</span>
+<span class="nc" id="L104">        } catch (JSONException e) {</span>
+<span class="nc" id="L105">            e.printStackTrace();</span>
+<span class="fc" id="L106">        }</span>
+<span class="fc" id="L107">        addRecords(recordList, false);</span>
+<span class="fc" id="L108">    }</span>
 
     // The following method updates all the flow attributes.
     // The Jsonobject data must contain a value for each of them.
     @Override
     public void updateFlow(JSONObject data) {
         try {
-<span class="nc" id="L113">            flowName = data.getString(&quot;name&quot;);</span>
-<span class="nc" id="L114">            flowColour = data.getString(&quot;color&quot;);</span>
-<span class="nc" id="L115">        } catch (JSONException e) {</span>
-<span class="nc" id="L116">            e.printStackTrace();</span>
-<span class="nc" id="L117">        }</span>
-<span class="nc" id="L118">    }</span>
+<span class="fc" id="L115">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="fc" id="L116">            flowColour = data.getString(&quot;color&quot;);</span>
+<span class="nc" id="L117">        } catch (JSONException e) {</span>
+<span class="nc" id="L118">            e.printStackTrace();</span>
+<span class="fc" id="L119">        }</span>
+<span class="fc" id="L120">    }</span>
 
     // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
-<span class="nc" id="L123">        records = null;</span>
-<span class="nc" id="L124">    }</span>
+<span class="fc" id="L125">        records = null;</span>
+<span class="fc" id="L126">    }</span>
 
     // The following method inserts a record in the flow.
     // The record is build with the JsonObject's informations.
     @Override
     public void addRecord(JSONObject data) {
         try {
-<span class="nc" id="L131">            String id = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L132">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L133">            String index = jsonValues.getString(0);</span>
-<span class="nc" id="L134">            float value = (float) jsonValues.getDouble(1);</span>
-<span class="nc" id="L135">            records.add(new BarChartRecord(id, index, value));</span>
-<span class="nc" id="L136">        } catch (JSONException e) {</span>
-<span class="nc" id="L137">            e.printStackTrace();</span>
-<span class="nc" id="L138">        }</span>
-<span class="nc" id="L139">    }</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            if (records == null) {</span>
+<span class="fc" id="L134">                records = new ArrayList&lt;BarChartRecord&gt;();</span>
+            }
+<span class="fc" id="L136">            String id = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L137">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="fc" id="L138">            String index = jsonValues.getString(0);</span>
+<span class="fc" id="L139">            float value = (float) jsonValues.getDouble(1);</span>
+<span class="fc" id="L140">            records.add(new BarChartRecord(id, index, value));</span>
+<span class="nc" id="L141">        } catch (JSONException e) {</span>
+<span class="nc" id="L142">            e.printStackTrace();</span>
+<span class="fc" id="L143">        }</span>
+<span class="fc" id="L144">    }</span>
 
     // Used to insert some records in the flow.
     // The JsonObject data must contain the a JsonArray with the records that must be inserted.
@@ -145,15 +150,15 @@ public class BarChartFlow extends FlowModel {
     @Override
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
-<span class="nc" id="L148">            int recordLength = jsonRecords.length();</span>
-<span class="nc bnc" id="L149" title="All 2 branches missed.">            for (int i = 0; i &lt; recordLength; i++) {</span>
-<span class="nc" id="L150">                JSONObject record = jsonRecords.getJSONObject(i);</span>
-<span class="nc" id="L151">                addRecord(record);</span>
+<span class="fc" id="L153">            int recordLength = jsonRecords.length();</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">            for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="fc" id="L155">                JSONObject record = jsonRecords.getJSONObject(i);</span>
+<span class="fc" id="L156">                addRecord(record);</span>
             }
-<span class="nc" id="L153">        } catch (JSONException e) {</span>
-<span class="nc" id="L154">            e.printStackTrace();</span>
-<span class="nc" id="L155">        }</span>
-<span class="nc" id="L156">    }</span>
+<span class="nc" id="L158">        } catch (JSONException e) {</span>
+<span class="nc" id="L159">            e.printStackTrace();</span>
+<span class="fc" id="L160">        }</span>
+<span class="fc" id="L161">    }</span>
 
     // Used to update a record of the flow.
     // The JsonObject data must contain the ID of the record that will be updated.
@@ -162,27 +167,27 @@ public class BarChartFlow extends FlowModel {
     @Override
     public void updateRecord(JSONObject data) {
         try {
-<span class="nc" id="L165">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L166">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L167">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L168">            records.get(recordIndex).index = jsonValues.getString(0);</span>
-<span class="nc" id="L169">            records.get(recordIndex).value = jsonValues.getInt(1);</span>
-<span class="nc" id="L170">        } catch (JSONException e) {</span>
-<span class="nc" id="L171">            e.printStackTrace();</span>
-<span class="nc" id="L172">        }</span>
-<span class="nc" id="L173">    }</span>
+<span class="fc" id="L170">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L171">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="fc" id="L172">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="fc" id="L173">            records.get(recordIndex).index = jsonValues.getString(0);</span>
+<span class="fc" id="L174">            records.get(recordIndex).value = jsonValues.getInt(1);</span>
+<span class="nc" id="L175">        } catch (JSONException e) {</span>
+<span class="nc" id="L176">            e.printStackTrace();</span>
+<span class="fc" id="L177">        }</span>
+<span class="fc" id="L178">    }</span>
 
 
     // It searches the record index in the list of records.
     // A record's id must be provided.
     private int searchRecordIndex(String id) {
-<span class="nc" id="L179">        int index = 0;</span>
-<span class="nc bnc" id="L180" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="nc bnc" id="L181" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L182">                return index;</span>
-<span class="nc" id="L183">            index++;</span>
+<span class="fc" id="L184">        int index = 0;</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        while (index &lt; records.size()) {</span>
+<span class="pc bpc" id="L186" title="1 of 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="fc" id="L187">                return index;</span>
+<span class="nc" id="L188">            index++;</span>
         }
-<span class="nc" id="L185">        return -1;</span>
+<span class="nc" id="L190">        return -1;</span>
     }
 
 
@@ -192,12 +197,12 @@ public class BarChartFlow extends FlowModel {
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L195">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L196">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L197">            records.remove(recordIndex);</span>
-<span class="nc" id="L198">        } catch (JSONException e) {</span>
-<span class="nc" id="L199">            e.printStackTrace();</span>
-<span class="nc" id="L200">        }</span>
-<span class="nc" id="L201">    }</span>
+<span class="fc" id="L200">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L201">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="fc" id="L202">            records.remove(recordIndex);</span>
+<span class="nc" id="L203">        } catch (JSONException e) {</span>
+<span class="nc" id="L204">            e.printStackTrace();</span>
+<span class="fc" id="L205">        }</span>
+<span class="fc" id="L206">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

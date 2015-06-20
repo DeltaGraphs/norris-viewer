@@ -18,7 +18,7 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Fri Jun 19 16:33:34 UTC 2015.<br/>
+Check performed at Sat Jun 20 10:15:05 UTC 2015.<br/>
 0 errors and 37 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
@@ -124,10 +124,10 @@ To fix this issue, set the <code>targetSdkVersion</code> to the highest availabl
 <span class="lineno">  63</span>     }
 <span class="lineno">  64</span>     <span class="errorspan">compile 'com.android.support:appcompat-v7:22.0.0'</span>
 <span class="lineno">  65</span>     compile 'com.github.lecho:hellocharts-library:1.5.4@aar'
-<span class="lineno">  66</span>     compile ('com.github.nkzawa:socket.io-client:0.3.0'){
+<span class="lineno">  66</span>     compile('com.github.nkzawa:socket.io-client:0.3.0') {
 </pre>
 <span class="location"><a href="../../build.gradle">../../build.gradle</a>:69</span>: <span class="message">A newer version of com.google.android.gms:play-services than 7.0.0 is available: 7.5.0</span><br /><pre class="errorlines">
-<span class="lineno">  66</span>     compile ('com.github.nkzawa:socket.io-client:0.3.0'){
+<span class="lineno">  66</span>     compile('com.github.nkzawa:socket.io-client:0.3.0') {
 <span class="lineno">  67</span>         exclude group: 'org.json', module: 'json'
 <span class="lineno">  68</span>     }
 <span class="lineno">  69</span>     <span class="errorspan">compile 'com.google.android.gms:play-services:7.0.0'</span>
@@ -156,8 +156,8 @@ This detector looks for usages of libraries where the version you are using is n
 <span class="lineno">  69</span>     compile 'com.google.android.gms:play-services:7.0.0'
 <span class="lineno">  70</span>     compile 'com.github.PhilJay:MPAndroidChart:v2.1.0'
 <span class="lineno">  71</span>     <span class="errorspan">compile 'com.google.maps.android:android-maps-utils:0.3.+'</span>
-<span class="lineno">  72</span> }
-<span class="lineno">  73</span> 
+<span class="lineno">  72</span>     compile files('libs/org.json.jar')
+<span class="lineno">  73</span> }
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />

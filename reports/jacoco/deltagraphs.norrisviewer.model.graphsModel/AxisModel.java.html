@@ -35,47 +35,56 @@ public class AxisModel {
     private int ticks;
     private int scale;
 
-<span class="nc" id="L38">    AxisModel(JSONObject params) {</span>
+    // Axis constructor.
+    // It's used when a new axis must be built.
+    // The Jsonobject 'params' must be contain the attributes, in order to initialize the class.
+<span class="nc" id="L41">    AxisModel(JSONObject params) {</span>
         try {
-<span class="nc bnc" id="L40" title="All 2 branches missed.">            if (params.has(&quot;name&quot;))</span>
-<span class="nc" id="L41">                name = params.getString(&quot;name&quot;);</span>
-<span class="nc bnc" id="L42" title="All 2 branches missed.">            if (params.has(&quot;color&quot;))</span>
-<span class="nc" id="L43">                appearance = params.getString(&quot;color&quot;);</span>
-<span class="nc bnc" id="L44" title="All 2 branches missed.">            if (params.has(&quot;maxIndex&quot;))</span>
-<span class="nc" id="L45">                maxIndex = (float) params.getDouble(&quot;maxIndex&quot;);</span>
-<span class="nc bnc" id="L46" title="All 2 branches missed.">            if (params.has(&quot;minIndex&quot;))</span>
-<span class="nc" id="L47">                minIndex = (float) params.getDouble(&quot;minIndex&quot;);</span>
-<span class="nc bnc" id="L48" title="All 2 branches missed.">            if (params.has(&quot;ticks&quot;))</span>
-<span class="nc" id="L49">                ticks = params.getInt(&quot;ticks&quot;);</span>
-<span class="nc bnc" id="L50" title="All 2 branches missed.">            if (params.has(&quot;scale&quot;))</span>
-<span class="nc" id="L51">                scale = params.getInt(&quot;scale&quot;);</span>
-<span class="nc" id="L52">        } catch (JSONException e) {</span>
-<span class="nc" id="L53">            e.printStackTrace();</span>
-<span class="nc" id="L54">        }</span>
-<span class="nc" id="L55">    }</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if (params.has(&quot;name&quot;))</span>
+<span class="nc" id="L44">                name = params.getString(&quot;name&quot;);</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            if (params.has(&quot;color&quot;))</span>
+<span class="nc" id="L46">                appearance = params.getString(&quot;color&quot;);</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if (params.has(&quot;maxIndex&quot;))</span>
+<span class="nc" id="L48">                maxIndex = (float) params.getDouble(&quot;maxIndex&quot;);</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (params.has(&quot;minIndex&quot;))</span>
+<span class="nc" id="L50">                minIndex = (float) params.getDouble(&quot;minIndex&quot;);</span>
+<span class="nc bnc" id="L51" title="All 2 branches missed.">            if (params.has(&quot;ticks&quot;))</span>
+<span class="nc" id="L52">                ticks = params.getInt(&quot;ticks&quot;);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">            if (params.has(&quot;scale&quot;))</span>
+<span class="nc" id="L54">                scale = params.getInt(&quot;scale&quot;);</span>
+<span class="nc" id="L55">        } catch (JSONException e) {</span>
+<span class="nc" id="L56">            e.printStackTrace();</span>
+<span class="nc" id="L57">        }</span>
+<span class="nc" id="L58">    }</span>
 
+    //it returns the name of an axis.
     public String getName() {
-<span class="nc" id="L58">        return name;</span>
+<span class="nc" id="L62">        return name;</span>
     }
 
+    //it returns the colour of an axis.
     public String getAppearance() {
-<span class="nc" id="L62">        return appearance;</span>
+<span class="nc" id="L67">        return appearance;</span>
     }
 
+    //it returns the maximum index on an axis.
     public Float getMaxIndex() {
-<span class="nc" id="L66">        return maxIndex;</span>
+<span class="nc" id="L72">        return maxIndex;</span>
     }
 
+    //it returns the minimum index on an axis.
     public Float getMinIndex() {
-<span class="nc" id="L70">        return minIndex;</span>
+<span class="nc" id="L77">        return minIndex;</span>
     }
 
+    //it returns the scale of an axis.
     public int getScale() {
-<span class="nc" id="L74">        return scale;</span>
+<span class="nc" id="L82">        return scale;</span>
     }
 
+    //it returns the number of ticks on an axis.
     public int getTicks() {
-<span class="nc" id="L78">        return ticks;</span>
+<span class="nc" id="L87">        return ticks;</span>
     }
 
 }
