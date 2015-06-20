@@ -29,6 +29,5 @@ public interface LineChart {
     public Boolean getViewFinder();
     public Boolean getHorizontalGrid();
     public Boolean getVerticalGrid();
-    public Boolean getLegendOnPoint();
     public ArrayList<FlowModel> getFlowList();
 }

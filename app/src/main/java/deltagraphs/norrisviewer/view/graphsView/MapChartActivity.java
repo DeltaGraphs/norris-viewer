@@ -318,7 +318,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                 String polyLineColour = mapChartFlow.getTraceStrokeColour();
                 setPolyline(mapChartFlow.getTraceCoords(), polyLineColour);
             }
-            mapChartFlow.getMaxItems();
             String markerType = mapChartFlow.getMarkerType();
             String markerProperty = mapChartFlow.getMarkerProperty(markerType);
             String color = mapChartFlow.getMarkerColour();

@@ -171,7 +171,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     This method configures a single axis for the line chart
      */
     @Override
-    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+    public void setAxis(char axisXorY, String name, float maxIndex, float minIndex, int ticks) {
         if (hasAxes) {
 
             float step = (maxIndex - minIndex) / ticks;

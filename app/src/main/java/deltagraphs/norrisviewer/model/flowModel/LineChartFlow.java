@@ -33,36 +33,10 @@ import java.util.ArrayList;
 public class LineChartFlow extends FlowModel {
 
     private String flowColour;
-    private String marker;
-    private String interpolation;
-    private String subAreaColour;
-    private int maxItems;
     private ArrayList<LineChartRecord> records = new ArrayList<LineChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow
-    public String getFlowColour() {
-        return flowColour;
-    }
-
-    //it returns the type of markers of the flow
-    public String getMarker() {
-        return marker;
-    }
-
-    //it returns the type of interpolation of the points in the flow
-    public String getInterpolation() {
-        return interpolation;
-    }
-
-    //it returns the colour of the area below a line
-    public String getSubAreaColour() {
-        return subAreaColour;
-    }
-
-    //it returns the maximum number of items of a flow in the chart
-    public int getMaxItems() {
-        return maxItems;
-    }
+    public String getFlowColour() { return flowColour; }
 
     //it returns the record list length
     public int getRecordSize() {
@@ -99,22 +73,6 @@ public class LineChartFlow extends FlowModel {
                 this.flowColour = data.getString("flowColor");
             else
                 this.flowColour = "random";
-            if (data.has("marker"))
-                this.marker = data.getString("marker");
-            else
-                this.marker = "none";
-            if (data.has("interpolation"))
-                this.interpolation = data.getString("interpolation");
-            else
-                this.interpolation = "standard";
-            if (data.has("area"))
-                this.subAreaColour = data.getString("area");
-            else
-                this.subAreaColour = "none";
-            if (data.has("maxItems"))
-                this.maxItems = data.getInt("maxItems");
-            else
-                this.maxItems = 0;
             if (data.has("records")) {
                 JSONArray recordList = data.getJSONArray("records");
                 addRecords(recordList, false);
@@ -161,10 +119,6 @@ public class LineChartFlow extends FlowModel {
         try {
             flowName = data.getString("name");
             flowColour = data.getString("flowColor");
-            marker = data.getString("marker");
-            interpolation = data.getString("interpolation");
-            subAreaColour = data.getString("area");
-            maxItems = data.getInt("maxItems");
         } catch (JSONException e) {
             e.printStackTrace();
         }

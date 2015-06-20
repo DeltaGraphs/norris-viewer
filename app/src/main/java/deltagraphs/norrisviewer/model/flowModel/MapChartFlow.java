@@ -34,14 +34,8 @@ import java.util.ArrayList;
 public class MapChartFlow extends FlowModel {
 
     private Marker markerProperties;
-    private int maxItems;
     private TraceModel trace;
     private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>(); /* a list that contains all the records of the flow */
-
-    //it returns the maximum number of items of a flow in the chart
-    public int getMaxItems() {
-        return maxItems;
-    }
 
     //it returns the record list length
     public int getRecordSize() {
@@ -132,7 +126,6 @@ public class MapChartFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            maxItems = data.getInt("maxItemsSaved");
             if (data.has("marker"))
                 markerProperties = new Marker(data.getJSONObject("marker"));
             if (data.has("trace"))
@@ -237,7 +230,6 @@ public class MapChartFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            maxItems = data.getInt("maxItemsPage");
             markerProperties.type = data.getJSONObject("marker").getString("type");
             markerProperties.shape = data.getJSONObject("marker").getString("shape");
             markerProperties.text = data.getJSONObject("marker").getString("text");

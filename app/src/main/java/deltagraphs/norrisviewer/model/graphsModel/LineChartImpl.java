@@ -37,7 +37,6 @@ public class LineChartImpl extends Graph implements LineChart {
     private Boolean viewFinder;
     private Boolean horizontalGrid;
     private Boolean verticalGrid;
-    private Boolean legendOnPoint;
 
     public AxisModel getAxisX() {
         return axisX;
@@ -59,13 +58,7 @@ public class LineChartImpl extends Graph implements LineChart {
         return horizontalGrid;
     }
 
-    public Boolean getVerticalGrid() {
-        return verticalGrid;
-    }
-
-    public Boolean getLegendOnPoint() {
-        return legendOnPoint;
-    }
+    public Boolean getVerticalGrid() { return verticalGrid; }
 
     public LineChartImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
@@ -75,7 +68,6 @@ public class LineChartImpl extends Graph implements LineChart {
         try {
             title = data.getString("title");
             background = data.getString("backgroundColor");
-            legendOnPoint = data.getBoolean("legendOnPoint");
             viewFinder = data.getBoolean("viewFinder");
             horizontalGrid = data.getBoolean("horizontalGrid");
             verticalGrid = data.getBoolean("verticalGrid");
@@ -111,8 +103,6 @@ public class LineChartImpl extends Graph implements LineChart {
                 horizontalGrid = data.getBoolean("horizontalGrid");
             if (data.has("verticalGrid"))
                 verticalGrid = data.getBoolean("verticalGrid");
-            if (data.has("legendOnPoint"))
-                legendOnPoint = data.getBoolean("legendOnPoint");
             //changes to axises
             if (data.has("xAxis")) {
                 JSONObject xAxis = data.getJSONObject("xAxis");

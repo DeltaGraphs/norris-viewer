@@ -34,9 +34,5 @@ public interface BarChart {
 
     public String getBarOrientation();
 
-    public Boolean getGrid();
-
-    public Boolean getLegendOnPoint();
-
     public ArrayList<FlowModel> getFlowList();
 }

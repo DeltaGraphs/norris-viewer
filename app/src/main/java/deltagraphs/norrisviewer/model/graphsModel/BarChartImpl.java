@@ -36,8 +36,6 @@ public class BarChartImpl extends Graph implements BarChart {
     private ArrayList<String> headers = new ArrayList<String>();
     private String barOrientation = "V";
     private String background;
-    private Boolean grid;
-    private Boolean legendOnPoint;
 
     public AxisModel getAxisX() {
         return axisX;
@@ -59,14 +57,6 @@ public class BarChartImpl extends Graph implements BarChart {
         return barOrientation;
     }
 
-    public Boolean getGrid() {
-        return grid;
-    }
-
-    public Boolean getLegendOnPoint() {
-        return legendOnPoint;
-    }
-
     public BarChartImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
@@ -78,8 +68,6 @@ public class BarChartImpl extends Graph implements BarChart {
             title = data.getString("title");
             background = data.getString("backgroundColor");
             barOrientation = data.getString("barOrientation");
-            grid = data.getBoolean("grid");
-            legendOnPoint = data.getBoolean("legendOnPoint");
             JSONArray jsonHeaders = data.getJSONArray("headers");
             int length = jsonHeaders.length();
             if (length > 0) {
@@ -114,10 +102,6 @@ public class BarChartImpl extends Graph implements BarChart {
                 background = data.getString("backgroundColor");
             if (data.has("barOrientation"))
                 barOrientation = data.getString("barOrientation");
-            if (data.has("grid"))
-                grid = data.getBoolean("grid");
-            if (data.has("legendOnPoint"))
-                legendOnPoint = data.getBoolean("legendOnPoint");
             if (data.has("headers")) {
                 JSONArray jsonHeaders = data.getJSONArray("headers");
                 int length = jsonHeaders.length();
