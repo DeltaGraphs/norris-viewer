@@ -40,6 +40,8 @@ public class BarChartFlow extends FlowModel {
 
     //it returns the record length
     public int getRecordSize() {
+        if(records==null)
+            return 0;
         return records.size();
     }
 
@@ -128,6 +130,9 @@ public class BarChartFlow extends FlowModel {
     @Override
     public void addRecord(JSONObject data) {
         try {
+            if (records == null) {
+                records = new ArrayList<BarChartRecord>();
+            }
             String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
             String index = jsonValues.getString(0);

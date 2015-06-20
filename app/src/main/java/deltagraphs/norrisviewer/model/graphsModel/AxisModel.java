@@ -35,6 +35,9 @@ public class AxisModel {
     private int ticks;
     private int scale;
 
+    // Axis constructor.
+    // It's used when a new axis must be built.
+    // The Jsonobject 'params' must be contain the attributes, in order to initialize the class.
     AxisModel(JSONObject params) {
         try {
             if (params.has("name"))
@@ -54,26 +57,32 @@ public class AxisModel {
         }
     }
 
+    //it returns the name of an axis.
     public String getName() {
         return name;
     }
 
+    //it returns the colour of an axis.
     public String getAppearance() {
         return appearance;
     }
 
+    //it returns the maximum index on an axis.
     public Float getMaxIndex() {
         return maxIndex;
     }
 
+    //it returns the minimum index on an axis.
     public Float getMinIndex() {
         return minIndex;
     }
 
+    //it returns the scale of an axis.
     public int getScale() {
         return scale;
     }
 
+    //it returns the number of ticks on an axis.
     public int getTicks() {
         return ticks;
     }

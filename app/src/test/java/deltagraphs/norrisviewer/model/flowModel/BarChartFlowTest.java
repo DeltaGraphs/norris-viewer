@@ -1,11 +1,12 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
-import junit.framework.TestCase;
 
+import junit.framework.TestCase;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 /*
@@ -28,66 +29,73 @@ import org.junit.Test;
 
     JSONObject data;
     BarChartFlow flow;
-/*
-    @org.junit.Before
-    public void setUp() throws Exception {
-        super.setUp();
-        data = new JSONObject("{records: [{norrisRecordID : \"flusso1201505081\", value: [1, 25]}]");
-        flow = new BarChartFlow(data);
 
-    data = new JSONObject().put("records",
-                                        new JSONArray().
-    put(0, new JSONObject().
-    put("markerID", 837).
-    put("norrisRecordID", "flow114331692096017").
-    put("value", new JSONArray().
-    put(0, 45.399394989014).
-    put(1, 11.877456665039)
-    )
-            )
-            );
-
-/*
-    @Test
-    public void testGetRecordSize() throws Exception {
-
-    }
-*//*
-    @Test
+    @Before
     public void testCreateFlow() throws Exception {
-
-            String dataString = "{ [{ \"norrisRecordID\" : \"flusso1201505081\", \"value\": [1, 25]}, {\"norrisRecordID\" : \"flusso1201505082\",\"value\": [2, 15]}]}";
-            data = new JSONObject().put("records", dataString);
-        System.out.println(dataString);
-            flow = new BarChartFlow(data);
-            flow.createFlow(data);
-            Assert.assertEquals(1, flow.getRecordSize());
+        String dataString = "{ ID: \"ciao\", name: \"hoho\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
+        data = new JSONObject(dataString);
+        flow = new BarChartFlow(data);
+        flow.createFlow(data);
+        Assert.assertEquals(2, flow.getRecordSize());
 
     }
 
+    @Test
     public void testUpdateFlow() throws Exception {
+        String dataString = "{ ID: \"roba\", name: \"hoho\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
+        data = new JSONObject(dataString);
+        flow = new BarChartFlow(data);
+        String a = "{ name: \"ciao\", color: \"blue\"}";
+        JSONObject data2 = new JSONObject(a);
+        flow.createFlow(data);
+        flow.updateFlow(data2);
+        Assert.assertEquals(flow.getFlowName(), "ciao");
+        Assert.assertEquals(flow.getFlowColour(), "blue");
 
     }
 
+    @Test
     public void testDeleteRecordList() throws Exception {
-
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
+        flow.deleteRecordList();
+        Assert.assertTrue("", flow.getRecordSize()==0);
     }
 
+    @Test
     public void testAddRecord() throws Exception {
-
+        if(flow.getRecordSize()!=0)
+            flow.deleteRecordList();
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
+        Assert.assertEquals(1, flow.getRecordSize());
     }
-*/
+
     @Test
     public void testAddRecords() throws Exception {
-        Assert.assertTrue("", true);
+        if(flow.getRecordSize()!=0)
+            flow.deleteRecordList();
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505080\", value: [\"2\", 20]}"));
+        Assert.assertEquals(2, flow.getRecordSize());
     }
-/*
+
+    @Test
     public void testUpdateRecord() throws Exception {
-
+        if(flow.getRecordSize()!=0)
+            flow.deleteRecordList();
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
+        flow.updateRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"2\", 20]}"));
+        Assert.assertEquals(flow.getRecordId(0), "flusso1201505081");
+        Assert.assertEquals(flow.getRecordIndex(0), "2");
+        Assert.assertEquals(flow.getRecordValue(0), 20.0, 0);
     }
 
+    @Test
     public void testDeleteRecord() throws Exception {
-
+        if(flow.getRecordSize()!=0)
+            flow.deleteRecordList();
+        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
+        flow.deleteRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\"}"));
+        Assert.assertEquals(0, flow.getRecordSize());
     }
-    */
+
 }
