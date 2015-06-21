@@ -103,6 +103,7 @@ public class BarChartImpl extends Graph implements BarChart {
             if (data.has("barOrientation"))
                 barOrientation = data.getString("barOrientation");
             if (data.has("headers")) {
+                headers=new ArrayList<String>();
                 JSONArray jsonHeaders = data.getJSONArray("headers");
                 int length = jsonHeaders.length();
                 if (length > 0) {
