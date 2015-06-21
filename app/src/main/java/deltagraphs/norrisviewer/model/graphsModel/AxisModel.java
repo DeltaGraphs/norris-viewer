@@ -41,9 +41,15 @@ public class AxisModel {
             if (params.has("name"))
                 name = params.getString("name");
             if (params.has("maxIndex"))
-                maxIndex = (float) params.getDouble("maxIndex");
+                if (params.isNull("maxIndex"))
+                    maxIndex = 0;
+                else
+                    maxIndex = (float) params.getDouble("maxIndex");
             if (params.has("minIndex"))
-                minIndex = (float) params.getDouble("minIndex");
+                if (params.isNull("minIndex"))
+                    minIndex = 0;
+                else
+                    minIndex = (float) params.getDouble("minIndex");
             if (params.has("ticks"))
                 ticks = params.getInt("ticks");
         } catch (JSONException e) {
@@ -52,7 +58,9 @@ public class AxisModel {
     }
 
     //it returns the name of an axis.
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     //it returns the maximum index on an axis.
     public Float getMaxIndex() {
@@ -60,7 +68,9 @@ public class AxisModel {
     }
 
     //it returns the minimum index on an axis.
-    public Float getMinIndex() { return minIndex; }
+    public Float getMinIndex() {
+        return minIndex;
+    }
 
     //it returns the number of ticks on an axis.
     public int getTicks() {
