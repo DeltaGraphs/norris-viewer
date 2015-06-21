@@ -38,7 +38,7 @@ public class MapChartFlowTest extends TestCase {
         Assert.assertEquals(2, flow.getRecordSize());
 
     }
-
+/*
     @Test
     public void testUpdateFlow() throws Exception {
         String dataString = "{data:[{ID:\"flow1\",records:[{norrisRecordID:\"flow1_1434809721998_4\",markerID:835,value:[45.420070648193,11.878535270691]},{norrisRecordID:\"flow1_1434809721998_7\",markerID:880, value:[45.414321899414,11.875240325928]}]}]}";
@@ -57,7 +57,7 @@ public class MapChartFlowTest extends TestCase {
         Assert.assertEquals(flow.getTraceStrokeColour(), "#000");
         Assert.assertEquals(flow.getTraceType(), "none");
     }
-/*
+
     @Test
     public void testDeleteRecordList() throws Exception {
         flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
