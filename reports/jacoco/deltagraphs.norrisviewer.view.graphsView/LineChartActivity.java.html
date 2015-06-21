@@ -171,7 +171,7 @@ import lecho.lib.hellocharts.view.LineChartView;
     This method configures a single axis for the line chart
      */
     @Override
-    public void setAxis(char axisXorY, String name, String appearance, float maxIndex, float minIndex, int ticks, int scale) {
+    public void setAxis(char axisXorY, String name, float maxIndex, float minIndex, int ticks) {
 <span class="nc bnc" id="L175" title="All 2 branches missed.">        if (hasAxes) {</span>
 
 <span class="nc" id="L177">            float step = (maxIndex - minIndex) / ticks;</span>

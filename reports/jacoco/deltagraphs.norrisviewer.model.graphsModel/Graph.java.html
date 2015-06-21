@@ -37,18 +37,18 @@ import org.json.JSONObject;
 
 import java.util.*;
 
-<span class="nc" id="L40">public abstract class Graph extends Observable {</span>
+<span class="fc" id="L40">public abstract class Graph extends Observable {</span>
 
     protected String title;
-<span class="nc" id="L43">    protected ArrayList&lt;FlowModel&gt; flowList = new ArrayList&lt;FlowModel&gt;();</span>
-<span class="nc" id="L44">    private boolean configured = false;</span>
+<span class="fc" id="L43">    protected ArrayList&lt;FlowModel&gt; flowList = new ArrayList&lt;FlowModel&gt;();</span>
+<span class="fc" id="L44">    private boolean configured = false;</span>
 
     public String getTitle() {
 <span class="nc" id="L47">        return title;</span>
     }
 
     public ArrayList&lt;FlowModel&gt; getFlowList() {
-<span class="nc" id="L51">        return flowList;</span>
+<span class="fc" id="L51">        return flowList;</span>
     }
 
     public void setGraph(JSONObject obj, String signal) {

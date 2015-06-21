@@ -37,100 +37,90 @@ public class LineChartImpl extends Graph implements LineChart {
     private Boolean viewFinder;
     private Boolean horizontalGrid;
     private Boolean verticalGrid;
-    private Boolean legendOnPoint;
 
     public AxisModel getAxisX() {
-<span class="nc" id="L43">        return axisX;</span>
+<span class="fc" id="L42">        return axisX;</span>
     }
 
     public AxisModel getAxisY() {
-<span class="nc" id="L47">        return axisY;</span>
+<span class="fc" id="L46">        return axisY;</span>
     }
 
     public String getBackground() {
-<span class="nc" id="L51">        return background;</span>
+<span class="fc" id="L50">        return background;</span>
     }
 
     public Boolean getViewFinder() {
-<span class="nc" id="L55">        return viewFinder;</span>
+<span class="fc" id="L54">        return viewFinder;</span>
     }
 
     public Boolean getHorizontalGrid() {
-<span class="nc" id="L59">        return horizontalGrid;</span>
+<span class="fc" id="L58">        return horizontalGrid;</span>
     }
 
-    public Boolean getVerticalGrid() {
-<span class="nc" id="L63">        return verticalGrid;</span>
-    }
+<span class="fc" id="L61">    public Boolean getVerticalGrid() { return verticalGrid; }</span>
 
-    public Boolean getLegendOnPoint() {
-<span class="nc" id="L67">        return legendOnPoint;</span>
-    }
-
-<span class="nc" id="L70">    public LineChartImpl(Observer chartPresenter) {</span>
-<span class="nc" id="L71">        addObserver(chartPresenter);</span>
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L63">    public LineChartImpl(Observer chartPresenter) {</span>
+<span class="fc" id="L64">        addObserver(chartPresenter);</span>
+<span class="fc" id="L65">    }</span>
 
     public void setParameters(JSONObject data) {
         try {
-<span class="nc" id="L76">            title = data.getString(&quot;title&quot;);</span>
-<span class="nc" id="L77">            background = data.getString(&quot;backgroundColor&quot;);</span>
-<span class="nc" id="L78">            legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
-<span class="nc" id="L79">            viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
-<span class="nc" id="L80">            horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
-<span class="nc" id="L81">            verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
+<span class="fc" id="L69">            title = data.getString(&quot;title&quot;);</span>
+<span class="fc" id="L70">            background = data.getString(&quot;backgroundColor&quot;);</span>
+<span class="fc" id="L71">            viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
+<span class="fc" id="L72">            horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
+<span class="fc" id="L73">            verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
 
             //changes to axises
-<span class="nc" id="L84">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="nc" id="L85">            axisX = new AxisModel(xAxis);</span>
-<span class="nc" id="L86">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="nc" id="L87">            axisY = new AxisModel(yAxis);</span>
+<span class="fc" id="L76">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L77">            axisX = new AxisModel(xAxis);</span>
+<span class="fc" id="L78">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L79">            axisY = new AxisModel(yAxis);</span>
 
             //changes to flow params
-<span class="nc" id="L90">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="nc" id="L91">            int flowLenght = jsonFlows.length();</span>
-<span class="nc bnc" id="L92" title="All 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="nc" id="L93">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="nc" id="L94">                addFlow(flow);</span>
+<span class="fc" id="L82">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="fc" id="L83">            int flowLenght = jsonFlows.length();</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="nc" id="L85">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="nc" id="L86">                addFlow(flow);</span>
             }
-<span class="nc" id="L96">        } catch (JSONException e) {</span>
-<span class="nc" id="L97">            e.printStackTrace();</span>
-<span class="nc" id="L98">        }</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L88">        } catch (JSONException e) {</span>
+<span class="nc" id="L89">            e.printStackTrace();</span>
+<span class="fc" id="L90">        }</span>
+<span class="fc" id="L91">    }</span>
 
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="nc" id="L105">                title = data.getString(&quot;title&quot;);</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">            if (data.has(&quot;backgroundColor&quot;))</span>
-<span class="nc" id="L107">                background = data.getString(&quot;backgroundColor&quot;);</span>
-<span class="nc bnc" id="L108" title="All 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
-<span class="nc" id="L109">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
-<span class="nc" id="L111">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
-<span class="nc bnc" id="L112" title="All 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
-<span class="nc" id="L113">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">            if (data.has(&quot;legendOnPoint&quot;))</span>
-<span class="nc" id="L115">                legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
+<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="nc" id="L97">                title = data.getString(&quot;title&quot;);</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (data.has(&quot;backgroundColor&quot;))</span>
+<span class="nc" id="L99">                background = data.getString(&quot;backgroundColor&quot;);</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
+<span class="nc" id="L101">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
+<span class="nc" id="L103">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
+<span class="nc" id="L105">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
             //changes to axises
-<span class="nc bnc" id="L117" title="All 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
-<span class="nc" id="L118">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="nc" id="L119">                axisX = new AxisModel(xAxis);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
+<span class="nc" id="L108">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="nc" id="L109">                axisX = new AxisModel(xAxis);</span>
             }
-<span class="nc bnc" id="L121" title="All 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
-<span class="nc" id="L122">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="nc" id="L123">                axisY = new AxisModel(yAxis);</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
+<span class="nc" id="L112">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="nc" id="L113">                axisY = new AxisModel(yAxis);</span>
             }
-<span class="nc" id="L125">        } catch (Exception e) {</span>
-<span class="nc" id="L126">            e.printStackTrace();</span>
-<span class="nc" id="L127">        }</span>
-<span class="nc" id="L128">    }</span>
+<span class="nc" id="L115">        } catch (Exception e) {</span>
+<span class="nc" id="L116">            e.printStackTrace();</span>
+<span class="nc" id="L117">        }</span>
+<span class="nc" id="L118">    }</span>
 
     @Override
     public void addFlow(JSONObject flow) {
-<span class="nc" id="L132">        flowList.add(new LineChartFlow(flow));</span>
-<span class="nc" id="L133">    }</span>
+<span class="nc" id="L122">        flowList.add(new LineChartFlow(flow));</span>
+<span class="nc" id="L123">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

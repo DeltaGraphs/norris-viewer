@@ -52,29 +52,25 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     private void setGraphParameters() {
 <span class="nc" id="L53">        graphView.setAxis('x',</span>
                 lineChartInstance.getAxisX().getName(),
-                lineChartInstance.getAxisX().getAppearance(),
                 lineChartInstance.getAxisX().getMaxIndex(),
                 lineChartInstance.getAxisX().getMinIndex(),
-                lineChartInstance.getAxisX().getTicks(),
-                lineChartInstance.getAxisX().getScale()
+                lineChartInstance.getAxisX().getTicks()
         );
-<span class="nc" id="L61">        graphView.setAxis('y',</span>
+<span class="nc" id="L59">        graphView.setAxis('y',</span>
                 lineChartInstance.getAxisY().getName(),
-                lineChartInstance.getAxisY().getAppearance(),
                 lineChartInstance.getAxisY().getMaxIndex(),
                 lineChartInstance.getAxisY().getMinIndex(),
-                lineChartInstance.getAxisY().getTicks(),
-                lineChartInstance.getAxisY().getScale()
+                lineChartInstance.getAxisY().getTicks()
         );
         //graphView.setViewFinder(lineChartInstance.getViewFinder());
         //graphView.setBackground(lineChartInstance.getBackground());
-<span class="nc" id="L71">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
+<span class="nc" id="L67">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
         //graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
-<span class="nc" id="L73">    }</span>
+<span class="nc" id="L69">    }</span>
 
     public void destroy() {
-<span class="nc" id="L76">        stopSocket();</span>
-<span class="nc" id="L77">    }</span>
+<span class="nc" id="L72">        stopSocket();</span>
+<span class="nc" id="L73">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
