@@ -50,9 +50,14 @@ public class MapChartFlowTest extends TestCase {
         flow.updateFlow(data2);
         Assert.assertEquals(flow.getFlowName(), "ciao");
         Assert.assertEquals(flow.getMarkerColour(), "blue");
-
+        Assert.assertEquals(flow.getMarkerType(), "shape");
+        Assert.assertEquals(flow.getMarkerProperty("shape"), "circle");
+        Assert.assertEquals(flow.getRecordId(0), "flow1_1434809721998_4");
+        Assert.assertEquals(flow.getTraceFillColour(), "#000");
+        Assert.assertEquals(flow.getTraceStrokeColour(), "#000");
+        Assert.assertEquals(flow.getTraceType(), "none");
     }
-
+/*
     @Test
     public void testDeleteRecordList() throws Exception {
         flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
@@ -98,4 +103,5 @@ public class MapChartFlowTest extends TestCase {
         flow.deleteRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\"}"));
         Assert.assertEquals(0, flow.getRecordSize());
     }
+    */
 }
