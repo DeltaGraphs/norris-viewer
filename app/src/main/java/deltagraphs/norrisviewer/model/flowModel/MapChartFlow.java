@@ -37,8 +37,10 @@ public class MapChartFlow extends FlowModel {
     private TraceModel trace;
     private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>(); /* a list that contains all the records of the flow */
 
-    //it returns the record list length
+    //it returns the record length
     public int getRecordSize() {
+        if(records==null)
+            return 0;
         return records.size();
     }
 

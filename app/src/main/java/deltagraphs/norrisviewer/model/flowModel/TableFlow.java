@@ -42,8 +42,10 @@ public class TableFlow extends FlowModel {
         return maxItems;
     } //per page
 
-    //it returns the record list length
+    //it returns the record length
     public int getRecordSize() {
+        if(records==null)
+            return 0;
         return records.size();
     }
 

@@ -44,7 +44,7 @@ public class MapChartFlowTest extends TestCase {
         String dataString = "{data:[{ID:\"flow1\",records:[{norrisRecordID:\"flow1_1434809721998_4\",markerID:835,value:[45.420070648193,11.878535270691]},{norrisRecordID:\"flow1_1434809721998_7\",markerID:880, value:[45.414321899414,11.875240325928]}]}]}";
         data = new JSONObject(dataString);
         flow = new MapChartFlow(data.getJSONArray("data").getJSONObject(0));
-        String a = "{ name: \"ciao\", color: \"blue\"}";
+        String a = "{\"ID\":\"flusso1\",\"name\":\"\",\"marker\":{\"type\":'shape',\"shape\":'circle',\"icon\":null,\"text\":null,\"color\":\"#000\"}\"trace\":{\"type\":\"none\"\"coordinates\":[[123.241,-2.3],[123.241,-2.3],[...]]\"stokeColor\":\"#000\"\"fillColor\":\"#000\"}\"maxItems\"=50}";
         JSONObject data2 = new JSONObject(a);
         flow.createFlow(data.getJSONArray("data").getJSONObject(0));
         flow.updateFlow(data2);

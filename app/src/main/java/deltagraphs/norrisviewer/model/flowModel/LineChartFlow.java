@@ -38,8 +38,10 @@ public class LineChartFlow extends FlowModel {
     //it returns the colour of the flow
     public String getFlowColour() { return flowColour; }
 
-    //it returns the record list length
+    //it returns the record length
     public int getRecordSize() {
+        if(records==null)
+            return 0;
         return records.size();
     }
 
