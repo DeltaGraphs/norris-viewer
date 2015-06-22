@@ -1,8 +1,19 @@
 package deltagraphs.norrisviewer.presenter;
 
+import android.app.Activity;
+
+import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import deltagraphs.norrisviewer.model.graphsModel.BarChart;
+import deltagraphs.norrisviewer.model.graphsModel.BarChartImpl;
+import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 
 /*
  * Name : { Nome del file }.java
@@ -22,24 +33,30 @@ import org.junit.Test;
 
 public class SocketManagerTest extends TestCase {
 
-    @Test
-    public void testSetSocketUrl() throws Exception {
+    SocketManager socketManager;
 
+    @Before
+    public void setUp() throws Exception{
+        super.setUp();
+        socketManager = new SocketManager("http://norris-nrti-dev.herokuapp.com/norris");
     }
 
     @Test
-    public void testGetSocketUrl() throws Exception {
-
+    public void testSetSocketUrl() throws Exception {
+        socketManager.setSocketUrl("asd");
+        Assert.assertEquals(socketManager.getSocketUrl(), "asd");
     }
 
     @Test
     public void testStartConnection() throws Exception {
-
+        socketManager.startConnection();
+        Assert.assertEquals((boolean)socketManager.isConnected(), true);
     }
 
     @Test
     public void testStopConnection() throws Exception {
-
+        socketManager.stopConnection();
+        Assert.assertEquals((boolean) socketManager.isConnected(), false);
     }
 
     @Test
@@ -49,6 +66,11 @@ public class SocketManagerTest extends TestCase {
 
     @Test
     public void testStartListening() throws Exception {
+        socketManager.startListening("insertFlow",new BarChartActivity(), new BarChartImpl(new Observer() {
+            @Override
+            public void update(Observable observable, Object data) {
 
+            }
+        }));
     }
 }

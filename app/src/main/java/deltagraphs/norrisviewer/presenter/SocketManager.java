@@ -45,6 +45,11 @@ public class SocketManager {
 
     //Constructor
     public SocketManager() {
+        try {
+            mSocket = IO.socket("");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
     }
 
     //Constructor

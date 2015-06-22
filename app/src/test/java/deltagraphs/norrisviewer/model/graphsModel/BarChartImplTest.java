@@ -99,4 +99,16 @@ public class BarChartImplTest extends TestCase {
         barChart.addFlow(data);
         Assert.assertEquals(barChart.getFlowList().size(), 1);
     }
+
+    @Test
+    public void testUpdateFlow() throws Exception {
+        String dataString = "{ ID: \"ciao\", name: \"gigi\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
+        data = new JSONObject(dataString);
+        barChart.addFlow(data);
+        dataString = "{ ID: \"ciao\", name: \"hoho\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
+        data = new JSONObject(dataString);
+        barChart.updateFlow(data);
+        Assert.assertEquals(barChart.getFlowList().get(0).getFlowId(), "ciao");
+        Assert.assertEquals(barChart.getFlowList().get(0).getFlowName(), "hoho");
+    }
 }
