@@ -43,6 +43,8 @@ public abstract class Graph extends Observable {
     protected ArrayList<FlowModel> flowList = new ArrayList<FlowModel>();
     private boolean configured = false;
 
+    public boolean isConfigured(){ return configured; }
+
     public String getTitle() {
         return title;
     }
@@ -98,14 +100,16 @@ public abstract class Graph extends Observable {
         try {
             switch (signal) {
                 case "configGraph": {
-                    if (configured != true) {
+                    if (!configured) {
                         JSONObject properties = obj.getJSONObject("properties");
                         setParameters(properties);
-                        JSONArray data = obj.getJSONArray("data");
-                        for (int i = 0; i < data.length(); i++) {
-                            int flowIndex = searchFlowIndex(data.getJSONObject(i).getString("ID"));
-                            if (flowIndex != -1) {
-                                flowList.get(flowIndex).createFlow(data.getJSONObject(i));
+                        if(obj.has("data")) {
+                            JSONArray data = obj.getJSONArray("data");
+                            for (int i = 0; i < data.length(); i++) {
+                                int flowIndex = searchFlowIndex(data.getJSONObject(i).getString("ID"));
+                                if (flowIndex != -1) {
+                                    flowList.get(flowIndex).createFlow(data.getJSONObject(i));
+                                }
                             }
                         }
                         configured = true;

@@ -42,11 +42,11 @@ public class MainPresenterImplTest extends TestCase {
     public void testSetUpSocket() throws Exception {
         mainPresenter.setUpSocket("http://norris-nrti-dev.herokuapp.com/norris");
     }
-
+/*
     @Test
     public void testShowDialog() throws Exception {
         AlertDialog d = mainPresenter.showDialog(new MainActivity());
         Assert.assertEquals(d.isShowing(), true);
     }
-
+*/
 }

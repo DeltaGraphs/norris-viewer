@@ -54,6 +54,7 @@ public class MapChartImplTest extends TestCase {
                 "\"markerID\":845,\"value\":[45.395496368408,11.872955322266]},{\"norrisRecordID\":\"flow1_1434961647052_4\",\"markerID\":835,\"value\":[45.397514343262,11.87842464447]},{\"norrisRecordID\":\"flow1_1434961647052_3\",\"markerID\":867,\"value\":[45.368686676025,11.830775260925]}]}]}";
         data = new JSONObject(dataString);
         mapChart.setParameters(data);
+        Assert.assertEquals(mapChart.getTitle(), "APS");
         Assert.assertEquals(mapChart.getMapHeight(), 2000, 0);
         Assert.assertEquals(mapChart.getMapWidth(), 2000, 0);
         Assert.assertEquals(mapChart.getMapType(), "terrain");

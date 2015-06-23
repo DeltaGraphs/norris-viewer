@@ -4,11 +4,17 @@ import android.util.Log;
 
 import junit.framework.TestCase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 
 /*
@@ -27,75 +33,129 @@ import java.util.Observer;
  *
  * ===============================================================
  *
- */public class GraphTest extends TestCase {
-/*
-    public JSONObject json;
-    public String command = ("{\"properties\":{\"ID\":\"map1\",\"title\":\"APS\",\"type\":\"MapChart\",\"height\":600,\"width\":1000,\"enableLegend\":true,\"legend\":{\"position\":\"NE\",\"fontColor\":\"#000000\",\"backgroundColor\":\"#FFFFFF\"},\"latitude\":45.42533493042,\"longitude\":45.42533493042,\"mapType\":\"roadmap\",\"mapWidth\":2000,\"mapHeight\":2000,\"legendOnPoint\":true,\"flows\":[{\"ID\":\"flow1\",\"name\":\"linea 22\",\"filters\":null,\"longitudeKey\":\"2\",\"latitudeKey\":\"1\",\"objectKey\":\"0\",\"longitudeFormat\":\"coordinates\",\"latitudeFormat\":\"coordinates\",\"marker\":{\"type\":\"shape\",\"shape\":\"circle\",\"icon\":\"null\",\"text\":\"null\",\"color\":\"#000\"},\"trace\":{\"type\":\"none\",\"coordinates\":[]},\"trailLength\":3,\"maxItemsSaved\":500}]},\"data\":[{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow114331513389434\",\"markerID\":814,\"value\":[45.420356750488,11.879591941833]},{\"norrisRecordID\":\"flow114331513389410\",\"markerID\":875,\"value\":[45.425243377686,11.900855064392]},{\"norrisRecordID\":\"flow114331513389432\",\"markerID\":867,\"value\":[45.368156433105,11.830556869507]},{\"norrisRecordID\":\"flow114331513389437\",\"markerID\":837,\"value\":[45.424633026123,11.885098457336]},{\"norrisRecordID\":\"flow114331513389436\",\"markerID\":880,\"value\":[45.427024841309,11.909913063049]},{\"norrisRecordID\":\"flow114331513389431\",\"markerID\":805,\"value\":[45.416053771973,11.876558303833]},{\"norrisRecordID\":\"flow114331513389435\",\"markerID\":845,\"value\":[45.397495269775,11.874231338501]},{\"norrisRecordID\":\"flow114331513389433\",\"markerID\":835,\"value\":[45.397827148438,11.87478351593]}]}]}");
-    //MapChartImpl mapChartMock= new MapChartImpl();
+ */
+class MockFlow extends FlowModel{
 
-    public GraphTest() {
+
+    MockFlow(JSONObject x){
         try {
-
-            json = new JSONObject(command);
+            flowId = x.getString("ID");
+            if(x.has("name"))
+                flowName = x.getString("name");
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    /*class Mock extends Graph{
-        @Override
-        public void setParameters(JSONObject data) {}
-        @Override
-        public void updateParameters(JSONObject data) {}
+    @Override
+    public void createFlow(JSONObject data) {
 
-        @Override
-        public void addFlow(JSONObject flow) {
-            flowList.add(new MapChartFlow(flow));
+    }
+
+    @Override
+    public void updateFlow(JSONObject data) {
+        try {
+            flowName = data.getString("name");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
-    class MockObserver implements Observer {
+    @Override
+    public void deleteRecordList() {
 
-        @Override
-        public void update(Observable observable, Object data) {
+    }
 
+    @Override
+    public void addRecord(JSONObject data) {
+
+    }
+
+    @Override
+    public void addRecords(JSONArray data, boolean insertOnTop) {
+
+    }
+
+    @Override
+    public void updateRecord(JSONObject data) {
+
+    }
+
+    @Override
+    public void deleteRecord(JSONObject data) {
+
+    }
+}
+class Mock extends Graph{
+    @Override
+    public void setParameters(JSONObject data) {
+    try {
+            JSONArray jsonFlows = data.getJSONArray("flows");
+            JSONObject flow = jsonFlows.getJSONObject(0);
+            addFlow(flow);
+        } catch (JSONException e) {
+                e.printStackTrace();
         }
     }
+    @Override
+    public void updateParameters(JSONObject data) {}
 
+    @Override
+    public void addFlow(JSONObject flow) {
+        flowList.add(new MockFlow(flow));
+    }
+}
 
-    public void testGetFlowList() throws Exception {
+class MockObserver implements Observer {
+
+    @Override
+    public void update(Observable observable, Object data) {
 
     }
+}
 
-    @org.junit.After
+
+
+
+public class GraphTest extends TestCase {
+    Mock mockGraph = new Mock();
+    JSONObject jsonFlow;
+
+    @Test
     public void testSetGraph() throws Exception {
-        /*mapChartMock = new MapChartImpl();
-        MockObserver obs = new MockObserver();
-        mapChartMock.setGraph(json, "configGraph", obs);
-        Log.d(mapChartMock.getTitle(),"");
-        assertEquals("APS", mapChartMock.getTitle());
-        assertEquals("MapChart", mapChartMock.getMapType());
-        assertEquals(45.42533493042, mapChartMock.getLatitude());
-        assertEquals(45.42533493042, mapChartMock.getLongitude());
-        assertEquals(true, mapChartMock.getLegendOnPoint().booleanValue());
-        assertEquals(2000, mapChartMock.getMapWidth());
-        assertEquals(2000, mapChartMock.getMapHeight());
+        jsonFlow = new JSONObject("{properties:{flows:[{ID: \"ciao\"}]} }");
+        assertEquals(mockGraph.isConfigured(), false);
+        mockGraph.setGraph(jsonFlow, "configGraph");
+        assertEquals(mockGraph.getFlowList().size(), 1);
+        assertEquals(mockGraph.isConfigured(), true);
     }
-*/
+
+    @Test
     public void testAddFlow() throws Exception {
-        assertTrue("", true);
+        jsonFlow = new JSONObject("{ID: \"ciao\"}");
+        mockGraph.addFlow(jsonFlow);
+        Assert.assertEquals(mockGraph.getFlowList().size(), 1);
     }
-/*
+
+    @Test
     public void testUpdateFlow() throws Exception {
-
+        jsonFlow = new JSONObject("{ID: \"ciao\"}");
+        mockGraph.addFlow(jsonFlow);
+        jsonFlow = new JSONObject("{ID: \"ciao\", name:\"nuovoNome\"}");
+        mockGraph.updateFlow(jsonFlow);
+        Assert.assertEquals(mockGraph.flowList.get(0).getFlowName(), "nuovoNome");
     }
 
-    public void testSetRecords() throws Exception {
 
-    }
-
+    @Test
     public void testDeleteFlow() throws Exception {
-
+        jsonFlow = new JSONObject("{ID: \"ciao\"}");
+        mockGraph.addFlow(jsonFlow);
+        jsonFlow = new JSONObject("{ID: \"ola\"}");
+        mockGraph.addFlow(jsonFlow);
+        mockGraph.deleteFlow("ola");
+        assertEquals(mockGraph.flowList.size(), 1);
+        assertEquals(mockGraph.flowList.get(0).getFlowId(), "ciao");
     }
-    */
+
 }
