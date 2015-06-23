@@ -37,11 +37,11 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 
 
     public BarChartPresenterImpl(BarChartView view, String url) {
-<span class="nc" id="L40">        super(url);</span>
-<span class="nc" id="L41">        graphView = view;</span>
-<span class="nc" id="L42">        barChartInstance = new BarChartImpl(this);</span>
-<span class="nc" id="L43">        startSocket((BarChartActivity) view, barChartInstance);</span>
-<span class="nc" id="L44">    }</span>
+<span class="fc" id="L40">        super(url);</span>
+<span class="fc" id="L41">        graphView = view;</span>
+<span class="fc" id="L42">        barChartInstance = new BarChartImpl(this);</span>
+<span class="fc" id="L43">        startSocket((BarChartActivity) view, barChartInstance);</span>
+<span class="fc" id="L44">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {
@@ -80,12 +80,12 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 <span class="nc" id="L80">    }</span>
 
     public void stopConnection() {
-<span class="nc" id="L83">        stopSocket();</span>
-<span class="nc" id="L84">    }</span>
+<span class="fc" id="L83">        stopSocket();</span>
+<span class="fc" id="L84">    }</span>
 
     public void startConnection() {
-<span class="nc" id="L87">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
-<span class="nc" id="L88">    }</span>
+<span class="fc" id="L87">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
+<span class="fc" id="L88">    }</span>
 
     public void destroyConnection() {
 <span class="nc" id="L91">        destroySocket();</span>

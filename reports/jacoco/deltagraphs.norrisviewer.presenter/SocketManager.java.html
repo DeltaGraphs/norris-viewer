@@ -40,80 +40,85 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager {
 
     private Socket mSocket;
-<span class="nc" id="L43">    private String url = &quot;&quot;;</span>
+<span class="fc" id="L43">    private String url = &quot;&quot;;</span>
 
 
     //Constructor
-<span class="nc" id="L47">    public SocketManager() {</span>
-<span class="nc" id="L48">    }</span>
+<span class="fc" id="L47">    public SocketManager() {</span>
+        try {
+<span class="fc" id="L49">            mSocket = IO.socket(&quot;&quot;);</span>
+<span class="nc" id="L50">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L51">            e.printStackTrace();</span>
+<span class="fc" id="L52">        }</span>
+<span class="fc" id="L53">    }</span>
 
     //Constructor
-<span class="nc" id="L51">    public SocketManager(String url) {</span>
-<span class="nc" id="L52">        setSocketUrl(url);</span>
-<span class="nc" id="L53">    }</span>
+<span class="fc" id="L56">    public SocketManager(String url) {</span>
+<span class="fc" id="L57">        setSocketUrl(url);</span>
+<span class="fc" id="L58">    }</span>
 
     //setter method
     public void setSocketUrl(String url) {
-<span class="nc" id="L57">        this.url = url;</span>
+<span class="fc" id="L62">        this.url = url;</span>
         try {
-<span class="nc" id="L59">            mSocket = IO.socket(url);</span>
-<span class="nc" id="L60">        } catch (URISyntaxException e) {</span>
-<span class="nc" id="L61">            e.printStackTrace();</span>
-<span class="nc" id="L62">        }</span>
-<span class="nc" id="L63">    }</span>
+<span class="fc" id="L64">            mSocket = IO.socket(url);</span>
+<span class="fc" id="L65">        } catch (URISyntaxException e) {</span>
+<span class="fc" id="L66">            e.printStackTrace();</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">    }</span>
 
     //getter method
     public String getSocketUrl() {
-<span class="nc" id="L67">        return url;</span>
+<span class="fc" id="L72">        return url;</span>
     }
 
     //start the connection with socket
     public void startConnection() {
-<span class="nc" id="L72">        mSocket.connect();</span>
+<span class="fc" id="L77">        mSocket.connect();</span>
 
-<span class="nc" id="L74">    }</span>
+<span class="fc" id="L79">    }</span>
 
     public Boolean isNull() {
-<span class="nc bnc" id="L77" title="All 2 branches missed.">        return (mSocket == null);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        return (mSocket == null);</span>
     }
 
     public Boolean isConnected() {
-<span class="nc" id="L81">        return mSocket.connected();</span>
+<span class="fc" id="L86">        return mSocket.connected();</span>
     }
 
     //stop the connection with the socket
     public void stopConnection() {
-<span class="nc" id="L86">        mSocket.disconnect();</span>
-<span class="nc" id="L87">    }</span>
+<span class="fc" id="L91">        mSocket.disconnect();</span>
+<span class="fc" id="L92">    }</span>
 
     //close the connection with the socket
     public void destroyConnection() {
-<span class="nc" id="L91">        mSocket.close();</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L96">        mSocket.close();</span>
+<span class="nc" id="L97">    }</span>
 
     public void startListening(final String signal, final Activity activity, final Object model) {
-<span class="nc" id="L95">        mSocket.on(signal, new Emitter.Listener() {</span>
+<span class="fc" id="L100">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="nc" id="L98">                activity.runOnUiThread(new Runnable() {</span>
+<span class="nc" id="L103">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
-<span class="nc" id="L101">                        JSONObject obj = (JSONObject) args[0];</span>
+<span class="nc" id="L106">                        JSONObject obj = (JSONObject) args[0];</span>
                         //try {
-<span class="nc bnc" id="L103" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
-<span class="nc" id="L104">                            ((PageModel) model).setPageModel(obj, signal);</span>
-<span class="nc bnc" id="L105" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView)</span>
-<span class="nc" id="L106">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L107" title="All 2 branches missed.">                        else if (activity instanceof LineChartView)</span>
-<span class="nc" id="L108">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L109" title="All 2 branches missed.">                        else if (activity instanceof MapChartView) {</span>
-<span class="nc" id="L110">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L111" title="All 2 branches missed.">                        } else if (activity instanceof TableView)</span>
-<span class="nc" id="L112">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc" id="L113">                    }</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
+<span class="nc" id="L109">                            ((PageModel) model).setPageModel(obj, signal);</span>
+<span class="nc bnc" id="L110" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView)</span>
+<span class="nc" id="L111">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L112" title="All 2 branches missed.">                        else if (activity instanceof LineChartView)</span>
+<span class="nc" id="L113">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                        else if (activity instanceof MapChartView) {</span>
+<span class="nc" id="L115">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">                        } else if (activity instanceof TableView)</span>
+<span class="nc" id="L117">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc" id="L118">                    }</span>
                 });
-<span class="nc" id="L115">            }</span>
+<span class="nc" id="L120">            }</span>
         });
-<span class="nc" id="L117">    }</span>
+<span class="fc" id="L122">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

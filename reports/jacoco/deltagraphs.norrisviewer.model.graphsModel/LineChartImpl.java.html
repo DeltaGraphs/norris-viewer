@@ -93,34 +93,34 @@ public class LineChartImpl extends Graph implements LineChart {
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="nc bnc" id="L96" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="nc" id="L97">                title = data.getString(&quot;title&quot;);</span>
-<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (data.has(&quot;backgroundColor&quot;))</span>
-<span class="nc" id="L99">                background = data.getString(&quot;backgroundColor&quot;);</span>
-<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
-<span class="nc" id="L101">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
-<span class="nc" id="L103">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
-<span class="nc" id="L105">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
+<span class="pc bpc" id="L96" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="fc" id="L97">                title = data.getString(&quot;title&quot;);</span>
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">            if (data.has(&quot;backgroundColor&quot;))</span>
+<span class="fc" id="L99">                background = data.getString(&quot;backgroundColor&quot;);</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
+<span class="fc" id="L101">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
+<span class="fc" id="L103">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
+<span class="fc" id="L105">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
             //changes to axises
-<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
-<span class="nc" id="L108">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="nc" id="L109">                axisX = new AxisModel(xAxis);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
+<span class="fc" id="L108">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L109">                axisX = new AxisModel(xAxis);</span>
             }
-<span class="nc bnc" id="L111" title="All 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
-<span class="nc" id="L112">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="nc" id="L113">                axisY = new AxisModel(yAxis);</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
+<span class="fc" id="L112">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L113">                axisY = new AxisModel(yAxis);</span>
             }
 <span class="nc" id="L115">        } catch (Exception e) {</span>
 <span class="nc" id="L116">            e.printStackTrace();</span>
-<span class="nc" id="L117">        }</span>
-<span class="nc" id="L118">    }</span>
+<span class="fc" id="L117">        }</span>
+<span class="fc" id="L118">    }</span>
 
     @Override
     public void addFlow(JSONObject flow) {
-<span class="nc" id="L122">        flowList.add(new LineChartFlow(flow));</span>
-<span class="nc" id="L123">    }</span>
+<span class="fc" id="L122">        flowList.add(new LineChartFlow(flow));</span>
+<span class="fc" id="L123">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -46,28 +46,28 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     private SocketManager mainSocket;
     public MainView mainView;
-<span class="nc" id="L49">    private PageModel pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L49">    private PageModel pageModel = new PageModelImpl(this);</span>
 
-<span class="nc" id="L51">    public MainPresenterImpl(MainView view) {</span>
-<span class="nc" id="L52">        mainSocket = new SocketManager();</span>
-<span class="nc" id="L53">        mainView = view;</span>
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L51">    public MainPresenterImpl(MainView view) {</span>
+<span class="fc" id="L52">        mainSocket = new SocketManager();</span>
+<span class="fc" id="L53">        mainView = view;</span>
+<span class="fc" id="L54">    }</span>
 
     public void setUpSocket(String url) {
-<span class="nc" id="L57">        mainSocket.setSocketUrl(url);</span>
-<span class="nc" id="L58">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="nc" id="L59">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="nc" id="L60">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="nc" id="L61">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="nc" id="L62">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="nc" id="L63">        mainSocket.startConnection();</span>
-<span class="nc" id="L64">    }</span>
+<span class="fc" id="L57">        mainSocket.setSocketUrl(url);</span>
+<span class="fc" id="L58">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L59">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L60">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L61">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L62">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L63">        mainSocket.startConnection();</span>
+<span class="fc" id="L64">    }</span>
 
     public void reinitializePageList() {
 <span class="nc" id="L67">        pageModel = new PageModelImpl(this);</span>
 <span class="nc" id="L68">    }</span>
 
-    public void showDialog(final Context context) {
+    public AlertDialog showDialog(final Context context) {
 <span class="nc" id="L71">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
 <span class="nc" id="L72">        builder.setTitle(&quot;Insert source URL&quot;);</span>
 
@@ -101,38 +101,39 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 <span class="nc" id="L101">            }</span>
         });
 
-<span class="nc" id="L104">        builder.show();</span>
-<span class="nc" id="L105">    }</span>
+<span class="nc" id="L104">        AlertDialog dialog = builder.show();</span>
+<span class="nc" id="L105">        return dialog;</span>
+    }
 
     @Override
     public void stopConnection() {
-<span class="nc" id="L109">        mainSocket.stopConnection();</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L110">        mainSocket.stopConnection();</span>
+<span class="nc" id="L111">    }</span>
 
     @Override
     public void destroyConnection() {
-<span class="nc" id="L114">        mainSocket.destroyConnection();</span>
-<span class="nc" id="L115">    }</span>
+<span class="nc" id="L115">        mainSocket.destroyConnection();</span>
+<span class="nc" id="L116">    }</span>
 
     @Override
     public void startConnection() {
-<span class="nc" id="L119">        mainSocket.startConnection();</span>
-<span class="nc" id="L120">    }</span>
+<span class="nc" id="L120">        mainSocket.startConnection();</span>
+<span class="nc" id="L121">    }</span>
 
     @Override
     public boolean isConnected() {
-<span class="nc" id="L124">        return mainSocket.isConnected();</span>
+<span class="nc" id="L125">        return mainSocket.isConnected();</span>
     }
 
     @Override
     public boolean isSocketNull() {
-<span class="nc" id="L129">        return mainSocket.isNull();</span>
+<span class="nc" id="L130">        return mainSocket.isNull();</span>
     }
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc" id="L134">        mainView.updatePagesList(pageModel);</span>
-<span class="nc" id="L135">    }</span>
+<span class="nc" id="L135">        mainView.updatePagesList(pageModel);</span>
+<span class="nc" id="L136">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
