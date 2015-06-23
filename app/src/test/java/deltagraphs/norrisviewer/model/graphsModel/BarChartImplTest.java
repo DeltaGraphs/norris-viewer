@@ -105,7 +105,7 @@ public class BarChartImplTest extends TestCase {
         String dataString = "{ ID: \"ciao\", name: \"gigi\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
         data = new JSONObject(dataString);
         barChart.addFlow(data);
-        dataString = "{ ID: \"ciao\", name: \"hoho\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
+        dataString = "{ ID: \"ciao\", name: \"hoho\", color: \" grigio\", records: [{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}, {norrisRecordID : \"flusso1201505082\", value: [\"2\", 15]}]}";
         data = new JSONObject(dataString);
         barChart.updateFlow(data);
         Assert.assertEquals(barChart.getFlowList().get(0).getFlowId(), "ciao");

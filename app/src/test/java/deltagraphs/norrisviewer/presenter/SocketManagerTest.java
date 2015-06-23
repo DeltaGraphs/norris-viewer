@@ -49,6 +49,7 @@ public class SocketManagerTest extends TestCase {
 
     @Test
     public void testStartConnection() throws Exception {
+        socketManager = new SocketManager("http://norris-nrti-dev.herokuapp.com/norris");
         socketManager.startConnection();
         Assert.assertEquals((boolean)socketManager.isConnected(), true);
     }

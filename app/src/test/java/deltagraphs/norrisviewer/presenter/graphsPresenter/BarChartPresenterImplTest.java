@@ -26,7 +26,7 @@ import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 
-public class BarChartPresenteImplTest extends TestCase {
+public class BarChartPresenterImplTest extends TestCase {
 
     BarChartPresenterImpl barChartPresenter;
 
