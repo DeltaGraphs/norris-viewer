@@ -20,10 +20,11 @@ package deltagraphs.norrisviewer.presenter.mainPresenter;
  *
  */
 
+import android.app.AlertDialog;
 import android.content.Context;
 
 public interface MainPresenter {
-    void showDialog(Context context);
+    AlertDialog showDialog(Context context);
     void stopConnection();
     void destroyConnection();
     void startConnection();

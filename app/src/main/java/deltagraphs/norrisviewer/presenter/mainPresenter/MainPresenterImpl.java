@@ -67,7 +67,7 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         pageModel = new PageModelImpl(this);
     }
 
-    public void showDialog(final Context context) {
+    public AlertDialog showDialog(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
 
@@ -101,7 +101,8 @@ public class MainPresenterImpl implements MainPresenter, Observer {
             }
         });
 
-        builder.show();
+        AlertDialog dialog = builder.show();
+        return dialog;
     }
 
     @Override

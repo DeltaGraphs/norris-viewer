@@ -50,6 +50,10 @@ public abstract class GraphPresenter implements Observer {
         graphSocket.stopConnection();
     }
 
+    public SocketManager getGraphSocket(){
+        return graphSocket;
+    }
+
     public void destroySocket() {
         graphSocket.destroyConnection();
     }
