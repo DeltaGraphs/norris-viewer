@@ -39,7 +39,7 @@ public class MapChartFlow extends FlowModel {
 
     //it returns the record length
     public int getRecordSize() {
-        if(records==null)
+        if (records == null)
             return 0;
         return records.size();
     }
@@ -80,14 +80,7 @@ public class MapChartFlow extends FlowModel {
     }
 
     //it returns the colour of the trace
-    public String getTraceStrokeColour() {
-        return trace.strokeColour;
-    } // colour of the polyline
-
-    //it returns the colour of the area within the trace
-    public String getTraceFillColour() {
-        return trace.fillColour;
-    } // colour of the area subtended by the polyline
+    public String getTraceStrokeColour() { return trace.strokeColour; } // colour of the polyline
 
     //it returns the coordinates of a trace
     public ArrayList<LatLng> getTraceCoords() {
@@ -173,7 +166,7 @@ public class MapChartFlow extends FlowModel {
                     shape = data.getString("shape");
                 if (data.has("text"))
                     text = data.getString("text");
-                if (data.has("color")&&(!(data.isNull("color"))))
+                if (data.has("color") && (!(data.isNull("color"))))
                     colour = data.getString("color");
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -185,7 +178,6 @@ public class MapChartFlow extends FlowModel {
     class TraceModel {
         String type;
         String strokeColour = "default";  /* colour of the polyline */
-        String fillColour = "default";  /* colour of the area subtended by the polyline */
         Boolean traceUpdated = false;
         ArrayList<LatLng> coords = new ArrayList<LatLng>();
 
@@ -198,8 +190,6 @@ public class MapChartFlow extends FlowModel {
                 type = data.getString("type");
                 if (data.has("strokeColor"))
                     strokeColour = data.getString("strokeColor");
-                if (data.has("fillColor"))
-                    fillColour = data.getString("fillColor");
                 JSONArray line = data.getJSONArray("coordinates");
                 for (int i = 0; i < line.length(); i++) {
                     JSONArray coordinates = line.getJSONArray(i);
@@ -232,19 +222,33 @@ public class MapChartFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            markerProperties.type = data.getJSONObject("marker").getString("type");
-            markerProperties.shape = data.getJSONObject("marker").getString("shape");
-            markerProperties.text = data.getJSONObject("marker").getString("text");
-            markerProperties.colour = data.getJSONObject("marker").getString("color");
-            if (data.has("trace"))
-                trace.traceUpdated = true;
-            trace.type = data.getJSONObject("trace").getString("type");
-            trace.strokeColour = data.getJSONObject("trace").getString("strokeColor");
-            trace.fillColour = data.getJSONObject("trace").getString("fillColor");
-            JSONArray jsonCoordinates = data.getJSONArray("coordinates");
-            for (int i = 0; i < jsonCoordinates.length(); i++) {
-                trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),
-                        (float) jsonCoordinates.getJSONArray(i).getDouble(1)));
+            if (data.has("marker")) {
+                if (markerProperties == null)
+                    markerProperties = new Marker(data.getJSONObject("marker"));
+                else {
+                    markerProperties.type = data.getJSONObject("marker").getString("type");
+                    if(data.getJSONObject("marker").has("shape"))
+                        markerProperties.shape = data.getJSONObject("marker").getString("shape");
+                    if(data.getJSONObject("marker").has("text"))
+                        markerProperties.text = data.getJSONObject("marker").getString("text");
+                    if(data.getJSONObject("marker").has("color"))
+                        markerProperties.colour = data.getJSONObject("marker").getString("color");
+                }
+            }
+            if (data.has("trace")) {
+                if (trace == null)
+                    trace = new TraceModel(data.getJSONObject("trace"));
+                else {
+                    trace.traceUpdated = true;
+                    trace.type = data.getJSONObject("trace").getString("type");
+                    trace.strokeColour = data.getJSONObject("trace").getString("strokeColor");
+                    JSONArray jsonCoordinates = data.getJSONObject("trace").getJSONArray("coordinates");
+                    trace.coords = new ArrayList<LatLng>();
+                    for (int i = 0; i < jsonCoordinates.length(); i++) {
+                        trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),
+                                (float) jsonCoordinates.getJSONArray(i).getDouble(1)));
+                    }
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -40,7 +40,7 @@ public class BarChartFlow extends FlowModel {
 
     //it returns the record length
     public int getRecordSize() {
-        if(records==null)
+        if (records == null)
             return 0;
         return records.size();
     }
