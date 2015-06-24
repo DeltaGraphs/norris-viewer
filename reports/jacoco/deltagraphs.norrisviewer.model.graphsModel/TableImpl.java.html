@@ -34,234 +34,105 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 public class TableImpl extends Graph implements Table {
 
     private String addRowOn;  // top or bottom
-    private Boolean sortable;
-<span class="nc" id="L38">    private String sortOrder = null; //ascendent or descendent</span>
-<span class="nc" id="L39">    private String sortColumn = null; // sorted by column &quot;sortColumn&quot;</span>
-<span class="nc" id="L40">    private int borderWidth = 1;</span>
-    private String borderColour;
+<span class="nc" id="L37">    private String sortOrder = null; //ascendent or descendent</span>
+<span class="nc" id="L38">    private String sortColumn = null; // sorted by column &quot;sortColumn&quot;</span>
 
-<span class="nc" id="L43">    private ArrayList&lt;Column&gt; tableColumns = new ArrayList&lt;Column&gt;();</span>
+<span class="nc" id="L40">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
 
     class Column {
         private String headerValue;
-       /*
-        //text and background colour of header row
-        private String headerTextColour;
-        private String headerBGColour;
-        //text and background colour of even row
-        private String rowEvenTextColour;
-        private String rowEvenBGColour;
-        //text and background colour of odd row
-        private String rowOddTextColour;
-        private String rowOddBGColour;
-    */
-<span class="nc" id="L58">        Column(String value, JSONObject data) {</span>
-            //try {
-<span class="nc" id="L60">                headerValue = value;</span>
-                /*headerTextColour = data.getJSONObject(&quot;headers&quot;).getString(&quot;textColor&quot;);
-                headerBGColour = data.getJSONObject(&quot;headers&quot;).getString(&quot;backgroundColor&quot;);
-                rowEvenTextColour = data.getJSONObject(&quot;rowEven&quot;).getString(&quot;textColor&quot;);
-                rowEvenBGColour = data.getJSONObject(&quot;rowEven&quot;).getString(&quot;backgroundColor&quot;);
-                rowOddTextColour = data.getJSONObject(&quot;rowOdd&quot;).getString(&quot;textColor&quot;);
-                rowOddBGColour = data.getJSONObject(&quot;rowOdd&quot;).getString(&quot;backgroundColor&quot;);
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } */
-<span class="nc" id="L71">        }</span>
+<span class="nc" id="L45">        Column(String value) {</span>
+<span class="nc" id="L46">            headerValue = value;</span>
+
+<span class="nc" id="L48">        }</span>
     }
 
     public String getAddRowOn() {
-<span class="nc" id="L75">        return addRowOn;</span>
+<span class="nc" id="L52">        return addRowOn;</span>
     }
-
-
-<span class="nc" id="L79">    public Boolean getSortable() { return sortable; }</span>
 
     public String sortByCol() {
-<span class="nc" id="L82">        return sortColumn;</span>
+<span class="nc" id="L56">        return sortColumn;</span>
     }
 
-    public String getSortOrder() {
-<span class="nc" id="L86">        return sortOrder;</span>
-    }
-
-    public int getBorderWidth() {
-<span class="nc" id="L90">        return borderWidth;</span>
-    }
-
-    public String getBorderColour() {
-<span class="nc" id="L94">        return borderColour;</span>
-    }
+<span class="nc" id="L59">    public String getSortOrder() { return sortOrder; }</span>
 
     public int getNumberOfColumns() {
-<span class="nc" id="L98">        return tableColumns.size();</span>
+<span class="nc" id="L62">        return headers.size();</span>
     }
 
     //column parameters
     public String getHeaderValue(int index) {
-<span class="nc" id="L103">        return tableColumns.get(index).headerValue;</span>
+<span class="nc" id="L67">        return headers.get(index);</span>
     }
 
-    /*
-    public String getHeaderTextColour(int index) {
-        return tableColumns.get(index).headerTextColour;
-    }
-
-    public String getHeaderBGColour(int index) {
-        return tableColumns.get(index).headerBGColour;
-    }
-
-    public String getRowEvenTC(int index) {
-        return tableColumns.get(index).rowEvenTextColour;
-    }
-
-    public String getRowEvenBGColour(int index) {
-        return tableColumns.get(index).rowEvenBGColour;
-    }
-
-    public String getRowOddTC(int index) {
-        return tableColumns.get(index).rowOddTextColour;
-    }
-
-    public String getRowOddBGColour(int index) {
-        return tableColumns.get(index).rowOddBGColour;
-    }
-
-*/
-<span class="nc" id="L132">    public TableImpl(Observer chartPresenter) {</span>
-<span class="nc" id="L133">        addObserver(chartPresenter);</span>
-<span class="nc" id="L134">    }</span>
+<span class="nc" id="L70">    public TableImpl(Observer chartPresenter) {</span>
+<span class="nc" id="L71">        addObserver(chartPresenter);</span>
+<span class="nc" id="L72">    }</span>
 
     public void setParameters(JSONObject data) {
         try {
-<span class="nc" id="L138">            title = data.getString(&quot;title&quot;);</span>
-<span class="nc" id="L139">            sortable = data.getBoolean(&quot;sortable&quot;);</span>
-<span class="nc" id="L140">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
-<span class="nc bnc" id="L141" title="All 4 branches missed.">            if (data.has(&quot;sort&quot;) &amp;&amp; (!(data.isNull(&quot;sort&quot;)))) {</span>
-<span class="nc" id="L142">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
-<span class="nc" id="L143">                sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
+<span class="nc" id="L76">            title = data.getString(&quot;title&quot;);</span>
+<span class="nc" id="L77">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="nc bnc" id="L78" title="All 4 branches missed.">            if (data.has(&quot;sort&quot;) &amp;&amp; (!(data.isNull(&quot;sort&quot;)))) {</span>
+<span class="nc" id="L79">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
+<span class="nc" id="L80">                sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
             }
-<span class="nc" id="L145">            borderColour = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).getString(&quot;color&quot;);</span>
-<span class="nc" id="L146">            borderWidth = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).getInt(&quot;width&quot;);</span>
 
-<span class="nc" id="L148">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="nc" id="L149">            int jsonColumnsSize = jsonColumns.length();</span>
-<span class="nc bnc" id="L150" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="nc" id="L151">                tableColumns.add(new Column(jsonColumns.getString(i), data.getJSONObject(&quot;appearance&quot;)));</span>
-<span class="nc" id="L152">                Log.d(&quot;&quot;, jsonColumns.getString(i));</span>
+<span class="nc" id="L83">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="nc" id="L84">            int jsonColumnsSize = jsonColumns.length();</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="nc" id="L86">                headers.add(jsonColumns.getString(i));</span>
             }
 
             //changes to flow params
-<span class="nc" id="L156">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="nc" id="L157">            int flowLenght = jsonFlows.length();</span>
-<span class="nc bnc" id="L158" title="All 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="nc" id="L159">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="nc" id="L160">                addFlow(flow);</span>
+<span class="nc" id="L90">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="nc" id="L91">            int flowLenght = jsonFlows.length();</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="nc" id="L93">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="nc" id="L94">                addFlow(flow);</span>
             }
-<span class="nc" id="L162">        } catch (JSONException e) {</span>
-<span class="nc" id="L163">            e.printStackTrace();</span>
-<span class="nc" id="L164">        }</span>
-<span class="nc" id="L165">    }</span>
+<span class="nc" id="L96">        } catch (JSONException e) {</span>
+<span class="nc" id="L97">            e.printStackTrace();</span>
+<span class="nc" id="L98">        }</span>
+<span class="nc" id="L99">    }</span>
 
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="nc bnc" id="L170" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="nc" id="L171">                title = data.getString(&quot;title&quot;);</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="nc" id="L105">                title = data.getString(&quot;title&quot;);</span>
 
-<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (data.has(&quot;sortable&quot;))</span>
-<span class="nc" id="L174">                sortable = data.getBoolean(&quot;sortable&quot;);</span>
-
-<span class="nc bnc" id="L176" title="All 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
-<span class="nc" id="L177">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
-<span class="nc" id="L178">                Log.d(&quot;&quot;, addRowOn);</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
+<span class="nc" id="L108">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="nc" id="L109">                Log.d(&quot;&quot;, addRowOn);</span>
             }
-<span class="nc bnc" id="L180" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;ordering&quot;)))</span>
-<span class="nc" id="L181">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
+<span class="nc bnc" id="L111" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;ordering&quot;)))</span>
+<span class="nc" id="L112">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
 
-<span class="nc bnc" id="L183" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;column&quot;)))</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">                if (!(data.isNull(&quot;sort&quot;)))</span>
-<span class="nc" id="L185">                    sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
-<span class="nc" id="L186">                else sortColumn = null;</span>
-<span class="nc bnc" id="L187" title="All 6 branches missed.">            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;border&quot;)) &amp;&amp;</span>
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).has(&quot;color&quot;)))
-<span class="nc" id="L189">                borderColour = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).getString(&quot;color&quot;);</span>
+<span class="nc bnc" id="L114" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;column&quot;)))</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">                if (!(data.isNull(&quot;sort&quot;)))</span>
+<span class="nc" id="L116">                    sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
+<span class="nc" id="L117">                else sortColumn = null;</span>
 
-<span class="nc bnc" id="L191" title="All 6 branches missed.">            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;border&quot;)) &amp;&amp;</span>
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).has(&quot;width&quot;)))
-<span class="nc" id="L193">                borderWidth = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;border&quot;).getInt(&quot;width&quot;);</span>
-
-<span class="nc bnc" id="L195" title="All 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
-<span class="nc" id="L196">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="nc" id="L197">                int jsonColumnsSize = jsonColumns.length();</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="nc" id="L199">                    tableColumns.get(i).headerValue = jsonColumns.getString(i);</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
+<span class="nc" id="L120">                headers = new ArrayList&lt;String&gt;();</span>
+<span class="nc" id="L121">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="nc" id="L122">                int jsonColumnsSize = jsonColumns.length();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="nc" id="L124">                    headers.add(jsonColumns.getString(i));</span>
                 }
             }
 
-            /*
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;rowEven&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowEven&quot;).has(&quot;textColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;textColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowEvenTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;rowEven&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowEven&quot;).has(&quot;backgroundColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;backgroundColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowEvenBGColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;rowOdd&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowOdd&quot;).has(&quot;textColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;textColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowOddTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;rowEven&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowOdd&quot;).has(&quot;backgroundColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;backgroundColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowOddBGColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;headers&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;headers&quot;).has(&quot;textColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;headers&quot;).getJSONArray(&quot;textColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).headerTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has(&quot;appearance&quot;)) &amp;&amp; (data.getJSONObject(&quot;appearance&quot;).has(&quot;headers&quot;)) &amp;&amp;
-                    (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;headers&quot;).has(&quot;backgroundColor&quot;))) {
-                JSONArray jsonColumns = data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;headers&quot;).getJSONArray(&quot;backgroundColor&quot;);
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i &lt; jsonColumnsSize; i++) {
-                    tableColumns.get(i).headerBGColour = jsonColumns.getString(i);
-                }
-            }*/
-<span class="nc" id="L257">        } catch (Exception e) {</span>
-<span class="nc" id="L258">            e.printStackTrace();</span>
-<span class="nc" id="L259">        }</span>
-<span class="nc" id="L260">    }</span>
+<span class="nc" id="L128">        } catch (Exception e) {</span>
+<span class="nc" id="L129">            e.printStackTrace();</span>
+<span class="nc" id="L130">        }</span>
+<span class="nc" id="L131">    }</span>
 
     @Override
     public void addFlow(JSONObject flow) {
-<span class="nc" id="L264">        flowList.add(new TableFlow(flow));</span>
-<span class="nc" id="L265">    }</span>
+<span class="nc" id="L135">        flowList.add(new TableFlow(flow));</span>
+<span class="nc" id="L136">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

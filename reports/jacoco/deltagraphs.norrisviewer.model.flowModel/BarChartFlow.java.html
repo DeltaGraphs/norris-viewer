@@ -169,7 +169,7 @@ public class BarChartFlow extends FlowModel {
         try {
 <span class="fc" id="L170">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
 <span class="fc" id="L171">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="pc bpc" id="L172" title="1 of 2 branches missed.">            if(recordIndex!=-1){</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">            if(recordIndex!=-1){</span>
 <span class="fc" id="L173">                JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
 <span class="fc" id="L174">                records.get(recordIndex).index = jsonValues.getString(0);</span>
 <span class="fc" id="L175">                records.get(recordIndex).value = jsonValues.getInt(1);</span>
@@ -184,12 +184,12 @@ public class BarChartFlow extends FlowModel {
     // A record's id must be provided.
     private int searchRecordIndex(String id) {
 <span class="fc" id="L186">        int index = 0;</span>
-<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="pc bpc" id="L188" title="1 of 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="fc bfc" id="L187" title="All 2 branches covered.">        while (index &lt; records.size()) {</span>
+<span class="fc bfc" id="L188" title="All 2 branches covered.">            if (records.get(index).recordId.equals(id))</span>
 <span class="fc" id="L189">                return index;</span>
-<span class="nc" id="L190">            index++;</span>
+<span class="fc" id="L190">            index++;</span>
         }
-<span class="nc" id="L192">        return -1;</span>
+<span class="fc" id="L192">        return -1;</span>
     }
 
 

@@ -302,7 +302,7 @@ public class MapChartFlow extends FlowModel {
         try {
 <span class="fc" id="L303">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
 <span class="fc" id="L304">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="pc bpc" id="L305" title="1 of 2 branches missed.">            if(recordIndex!=-1){</span>
+<span class="fc bfc" id="L305" title="All 2 branches covered.">            if(recordIndex!=-1){</span>
 <span class="fc" id="L306">                records.get(recordIndex).markerId = data.getString(&quot;markerID&quot;);</span>
 <span class="fc" id="L307">                records.get(recordIndex).latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
 <span class="fc" id="L308">                records.get(recordIndex).longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
@@ -317,12 +317,12 @@ public class MapChartFlow extends FlowModel {
     // A record's id must be provided.
     protected int searchRecordIndex(String id) {
 <span class="fc" id="L319">        int index = 0;</span>
-<span class="pc bpc" id="L320" title="1 of 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="pc bpc" id="L321" title="1 of 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="fc bfc" id="L320" title="All 2 branches covered.">        while (index &lt; records.size()) {</span>
+<span class="fc bfc" id="L321" title="All 2 branches covered.">            if (records.get(index).recordId.equals(id))</span>
 <span class="fc" id="L322">                return index;</span>
-<span class="nc" id="L323">            index++;</span>
+<span class="fc" id="L323">            index++;</span>
         }
-<span class="nc" id="L325">        return -1;</span>
+<span class="fc" id="L325">        return -1;</span>
     }
 
     // Used to delete a record from the flow.
