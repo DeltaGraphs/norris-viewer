@@ -73,8 +73,7 @@ import org.junit.Test;
     public void testAddRecords() throws Exception {
         if(flow.getRecordSize()!=0)
             flow.deleteRecordList();
-        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]}"));
-        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505080\", value: [\"2\", 20]}"));
+        flow.addRecords(new JSONArray("[{ norrisRecordID : \"flusso1201505081\", value: [\"1\", 25]},{norrisRecordID : \"flusso1201505080\", value: [\"2\", 20]}]"), false);
         Assert.assertEquals(2, flow.getRecordSize());
     }
 

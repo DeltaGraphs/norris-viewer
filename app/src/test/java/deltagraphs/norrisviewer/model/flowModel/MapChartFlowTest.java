@@ -2,6 +2,7 @@ package deltagraphs.norrisviewer.model.flowModel;
 
 import junit.framework.TestCase;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Before;
@@ -93,8 +94,7 @@ import org.junit.Test;
     public void testAddRecords() throws Exception {
         if (flow.getRecordSize() != 0)
             flow.deleteRecordList();
-        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505081\", markerID:\"mak\", value: [1, 25]}"));
-        flow.addRecord(new JSONObject("{ norrisRecordID : \"flusso1201505080\", markerID:\"mak1\", value: [2, 20]}"));
+        flow.addRecords(new JSONArray("[{ norrisRecordID : \"flusso1201505081\", markerID:\"mak\", value: [1, 25]},{ norrisRecordID : \"flusso1201505080\", markerID:\"mak1\", value: [2, 20]}]"), false);
         Assert.assertEquals(2, flow.getRecordSize());
     }
 

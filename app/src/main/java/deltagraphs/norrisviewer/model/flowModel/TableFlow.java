@@ -194,7 +194,7 @@ public class TableFlow extends FlowModel {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
             if(recordIndex!=-1){
-                JSONArray valueList = data.getJSONArray("values");
+                JSONArray valueList = data.getJSONArray("value");
                 int listLength = valueList.length();
                 for (int i = 0; i < listLength; i++) {
                     records.get(recordIndex).values.get(i).data = valueList.getString(i);
