@@ -108,6 +108,8 @@ import org.junit.Test;
         Assert.assertEquals(flow.getRecordLatitude(0), 2, 0);
         Assert.assertEquals(flow.getRecordLongitude(0), 20.0, 0);
         Assert.assertEquals(flow.getRecordMarkerId(0), "");
+        flow.updateRecord(new JSONObject("{ norrisRecordID : \"ad\", markerID:\"\", value: [2, 20]}"));
+
     }
 
     @Test

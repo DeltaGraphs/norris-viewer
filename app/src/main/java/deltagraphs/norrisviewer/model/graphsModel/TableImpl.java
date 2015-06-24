@@ -34,40 +34,17 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 public class TableImpl extends Graph implements Table {
 
     private String addRowOn;  // top or bottom
-    private Boolean sortable;
     private String sortOrder = null; //ascendent or descendent
     private String sortColumn = null; // sorted by column "sortColumn"
-    private int borderWidth = 1;
-    private String borderColour;
 
-    private ArrayList<Column> tableColumns = new ArrayList<Column>();
+    private ArrayList<String> headers = new ArrayList<String>();
 
     class Column {
         private String headerValue;
-       /*
-        //text and background colour of header row
-        private String headerTextColour;
-        private String headerBGColour;
-        //text and background colour of even row
-        private String rowEvenTextColour;
-        private String rowEvenBGColour;
-        //text and background colour of odd row
-        private String rowOddTextColour;
-        private String rowOddBGColour;
-    */
-        Column(String value, JSONObject data) {
-            //try {
-                headerValue = value;
-                /*headerTextColour = data.getJSONObject("headers").getString("textColor");
-                headerBGColour = data.getJSONObject("headers").getString("backgroundColor");
-                rowEvenTextColour = data.getJSONObject("rowEven").getString("textColor");
-                rowEvenBGColour = data.getJSONObject("rowEven").getString("backgroundColor");
-                rowOddTextColour = data.getJSONObject("rowOdd").getString("textColor");
-                rowOddBGColour = data.getJSONObject("rowOdd").getString("backgroundColor");
 
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } */
+        Column(String value) {
+            headerValue = value;
+
         }
     }
 
@@ -75,60 +52,21 @@ public class TableImpl extends Graph implements Table {
         return addRowOn;
     }
 
-
-    public Boolean getSortable() { return sortable; }
-
     public String sortByCol() {
         return sortColumn;
     }
 
-    public String getSortOrder() {
-        return sortOrder;
-    }
-
-    public int getBorderWidth() {
-        return borderWidth;
-    }
-
-    public String getBorderColour() {
-        return borderColour;
-    }
+    public String getSortOrder() { return sortOrder; }
 
     public int getNumberOfColumns() {
-        return tableColumns.size();
+        return headers.size();
     }
 
     //column parameters
     public String getHeaderValue(int index) {
-        return tableColumns.get(index).headerValue;
+        return headers.get(index);
     }
 
-    /*
-    public String getHeaderTextColour(int index) {
-        return tableColumns.get(index).headerTextColour;
-    }
-
-    public String getHeaderBGColour(int index) {
-        return tableColumns.get(index).headerBGColour;
-    }
-
-    public String getRowEvenTC(int index) {
-        return tableColumns.get(index).rowEvenTextColour;
-    }
-
-    public String getRowEvenBGColour(int index) {
-        return tableColumns.get(index).rowEvenBGColour;
-    }
-
-    public String getRowOddTC(int index) {
-        return tableColumns.get(index).rowOddTextColour;
-    }
-
-    public String getRowOddBGColour(int index) {
-        return tableColumns.get(index).rowOddBGColour;
-    }
-
-*/
     public TableImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
@@ -136,20 +74,16 @@ public class TableImpl extends Graph implements Table {
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
-            sortable = data.getBoolean("sortable");
             addRowOn = data.getString("addRowOn");
             if (data.has("sort") && (!(data.isNull("sort")))) {
                 sortOrder = data.getJSONObject("sort").getString("ordering");
                 sortColumn = data.getJSONObject("sort").getString("column");
             }
-            borderColour = data.getJSONObject("appearance").getJSONObject("border").getString("color");
-            borderWidth = data.getJSONObject("appearance").getJSONObject("border").getInt("width");
 
             JSONArray jsonColumns = data.getJSONArray("headers");
             int jsonColumnsSize = jsonColumns.length();
             for (int i = 0; i < jsonColumnsSize; i++) {
-                tableColumns.add(new Column(jsonColumns.getString(i), data.getJSONObject("appearance")));
-                Log.d("", jsonColumns.getString(i));
+                headers.add(jsonColumns.getString(i));
             }
 
             //changes to flow params
@@ -170,9 +104,6 @@ public class TableImpl extends Graph implements Table {
             if (data.has("title"))
                 title = data.getString("title");
 
-            if (data.has("sortable"))
-                sortable = data.getBoolean("sortable");
-
             if (data.has("addRowOn")) {
                 addRowOn = data.getString("addRowOn");
                 Log.d("", addRowOn);
@@ -184,76 +115,16 @@ public class TableImpl extends Graph implements Table {
                 if (!(data.isNull("sort")))
                     sortColumn = data.getJSONObject("sort").getString("column");
                 else sortColumn = null;
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("border")) &&
-                    (data.getJSONObject("appearance").getJSONObject("border").has("color")))
-                borderColour = data.getJSONObject("appearance").getJSONObject("border").getString("color");
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("border")) &&
-                    (data.getJSONObject("appearance").getJSONObject("border").has("width")))
-                borderWidth = data.getJSONObject("appearance").getJSONObject("border").getInt("width");
 
             if (data.has("headers")) {
+                headers = new ArrayList<String>();
                 JSONArray jsonColumns = data.getJSONArray("headers");
                 int jsonColumnsSize = jsonColumns.length();
                 for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).headerValue = jsonColumns.getString(i);
+                    headers.add(jsonColumns.getString(i));
                 }
             }
 
-            /*
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("rowEven")) &&
-                    (data.getJSONObject("appearance").getJSONObject("rowEven").has("textColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("rowEven").getJSONArray("textColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowEvenTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("rowEven")) &&
-                    (data.getJSONObject("appearance").getJSONObject("rowEven").has("backgroundColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("rowEven").getJSONArray("backgroundColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowEvenBGColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("rowOdd")) &&
-                    (data.getJSONObject("appearance").getJSONObject("rowOdd").has("textColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("rowOdd").getJSONArray("textColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowOddTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("rowEven")) &&
-                    (data.getJSONObject("appearance").getJSONObject("rowOdd").has("backgroundColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("rowOdd").getJSONArray("backgroundColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).rowOddBGColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("headers")) &&
-                    (data.getJSONObject("appearance").getJSONObject("headers").has("textColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("headers").getJSONArray("textColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).headerTextColour = jsonColumns.getString(i);
-                }
-            }
-
-            if ((data.has("appearance")) && (data.getJSONObject("appearance").has("headers")) &&
-                    (data.getJSONObject("appearance").getJSONObject("headers").has("backgroundColor"))) {
-                JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("headers").getJSONArray("backgroundColor");
-                int jsonColumnsSize = jsonColumns.length();
-                for (int i = 0; i < jsonColumnsSize; i++) {
-                    tableColumns.get(i).headerBGColour = jsonColumns.getString(i);
-                }
-            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

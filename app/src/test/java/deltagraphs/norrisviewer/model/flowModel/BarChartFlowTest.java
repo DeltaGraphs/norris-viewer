@@ -87,6 +87,8 @@ import org.junit.Test;
         Assert.assertEquals(flow.getRecordId(0), "flusso1201505081");
         Assert.assertEquals(flow.getRecordIndex(0), "2");
         Assert.assertEquals(flow.getRecordValue(0), 20.0, 0);
+        flow.updateRecord(new JSONObject("{ norrisRecordID : \"a\", value: [\"2\", 20]}"));
+
     }
 
     @Test

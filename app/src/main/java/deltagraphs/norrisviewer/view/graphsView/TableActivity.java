@@ -79,7 +79,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        baseTableAdapter = new FamilyNexusAdapter(this);
+        baseTableAdapter = new RecordListAdapter(this);
         setContentView(R.layout.table);
         tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
@@ -184,7 +184,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
             for (int i = 0; i < numOfColumns; i++) {
                 values[i] = table.get(j).get(i);
             }
-            ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
+            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));
 
         }
         rows = table.size();
@@ -193,7 +193,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
         rows = 0;
-        baseTableAdapter = new FamilyNexusAdapter(this);
+        baseTableAdapter = new RecordListAdapter(this);
         if (sortingColumn == -1) {
             for (int i = 0; i < flowList.size(); i++) {
                 TableFlow tableFlow = (TableFlow) flowList.get(i);
@@ -202,7 +202,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
                     for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                         values[indexCol] = tableFlow.getCellData(j, indexCol);
                     }
-                    ((FamilyNexusAdapter) baseTableAdapter).families[0].list.add(new Nexus(values));
+                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));
                     rows++;
                 }
             }
@@ -215,56 +215,46 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
 
-    private class NexusTypes {
+    private class RecordList {
         private final String name;
-        private final List<Nexus> list;
+        private final List<Record> list;
 
-        NexusTypes(String name) {
+        RecordList(String name) {
             this.name = name;
-            list = new ArrayList<Nexus>();
+            list = new ArrayList<Record>();
         }
 
         public int size() {
             return list.size();
         }
 
-        public Nexus get(int i) {
+        public Record get(int i) {
             return list.get(i);
         }
     }
 
-    private class Nexus {
+    private class Record {
         private final String[] data;
 
-        private Nexus(String[] values) {
+        private Record(String[] values) {
             data = values;
         }
 
-        /*private Nexus(String name, String company, String version, String api, String storage, String inches, String ram) {
-            data = new String[]{
-                    name,
-                    company,
-                    version,
-                    api,
-                    storage,
-                    inches,
-                    ram};
-        }*/
     }
 
 
-    public class FamilyNexusAdapter extends BaseTableAdapter {
+    public class RecordListAdapter extends BaseTableAdapter {
 
-        NexusTypes families[];
+        RecordList families[];
 
         private final int[] widths = {
                 80
         };
         private final float density;
 
-        public FamilyNexusAdapter(Context context) {
-            families = new NexusTypes[]{
-                    new NexusTypes("")
+        public RecordListAdapter(Context context) {
+            families = new RecordList[]{
+                    new RecordList("")
             };
 
             density = context.getResources().getDisplayMetrics().density;
@@ -397,7 +387,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
             return row == 0;
         }
 
-        private NexusTypes getFamily(int row) {
+        private RecordList getFamily(int row) {
             int family = 0;
             while (row >= 0) {
                 row -= families[family].size() + 1;
@@ -406,7 +396,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
             return families[family - 1];
         }
 
-        private Nexus getDevice(int row) {
+        private Record getDevice(int row) {
             int family = 0;
             while (row >= 0) {
                 row -= families[family].size() + 1;

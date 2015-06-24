@@ -34,13 +34,7 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
-    //private int maxItems;
     private LinkedList<TableRecord> records = new LinkedList<TableRecord>(); /* a list that contains all the records of the flow */
-
-    //it returns the maximum number of items of a flow in the chart
-   // public int getMaxItems() {
-    //    return maxItems;
-    //} //per page
 
     //it returns the record length
     public int getRecordSize() {
@@ -52,16 +46,6 @@ public class TableFlow extends FlowModel {
     //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
         return records.get(index).recordId;
-    }
-
-    //it returns the text colour of the record at the position 'index' in the list
-    public String getCellTextColour(int index, int columnIndex) {
-        return records.get(index).values.get(columnIndex).textColour;
-    }
-
-    //it returns the background of the cell of the record at the position 'index' in the list
-    public String getCellBackgroundColour(int index, int columnIndex) {
-        return records.get(index).values.get(columnIndex).background;
     }
 
     //it returns the value of the record at the position 'index' in the list
@@ -91,15 +75,13 @@ public class TableFlow extends FlowModel {
         // Record constructor.
         // It's used when a new record is added to a record list.
         // The new record is initialized with the passed parameters.
-        public TableRecord(String id, JSONArray valueList, JSONArray appearance) {
+        public TableRecord(String id, JSONArray valueList) {
             recordId = id;
             try {
                 int listLength = valueList.length();
                 for (int i = 0; i < listLength; i++) {
                     String value = valueList.getString(i);
-                    String bg = appearance.getJSONObject(i).getString("bg");
-                    String text = appearance.getJSONObject(i).getString("text");
-                    values.add(new Value(value, bg, text));
+                    values.add(new Value(value));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -109,16 +91,13 @@ public class TableFlow extends FlowModel {
         // This inner class contains all the attributes of a value
         class Value {
             private String data;
-            private String background;
-            private String textColour;
 
-            // Marker constructor.
+            // Value constructor.
             // It's used when a new Value is added to the record list
-            // The new marker type is initialized with the passed parameters.
-            Value(String data, String bg, String tC) {
+            // The new Value is initialized with the passed parameters.
+            // Here can be added properties of a single cell
+            Value(String data) {
                 this.data = data;
-                background = bg;
-                textColour = tC;
             }
         }
     }
@@ -162,8 +141,7 @@ public class TableFlow extends FlowModel {
         try {
             String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
-            JSONArray appearance = data.getJSONArray("appearance");
-            records.add(new TableRecord(id, jsonValues, appearance));
+            records.add(new TableRecord(id, jsonValues));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -176,8 +154,7 @@ public class TableFlow extends FlowModel {
         try {
             String id = data.getString("norrisRecordID");
             JSONArray jsonValues = data.getJSONArray("value");
-            JSONArray appearance = data.getJSONArray("appearance");
-            records.addFirst(new TableRecord(id, jsonValues, appearance));
+            records.addFirst(new TableRecord(id, jsonValues));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -218,12 +195,9 @@ public class TableFlow extends FlowModel {
             int recordIndex = searchRecordIndex(recordId);
             if(recordIndex!=-1){
                 JSONArray valueList = data.getJSONArray("values");
-                JSONArray appearance = data.getJSONArray("appearance");
                 int listLength = valueList.length();
                 for (int i = 0; i < listLength; i++) {
                     records.get(recordIndex).values.get(i).data = valueList.getString(i);
-                    records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
-                    records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
                 }
             }
         } catch (JSONException e) {

@@ -74,7 +74,7 @@ import org.junit.Assert;
         String dataString = "{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}, {\"norrisRecordID\":\"flow1_143\",\"value\":[3,23]}]}";
         data = new JSONObject(dataString);
         flow.updateRecord(data.getJSONArray("records").getJSONObject(0));
-        Assert.assertEquals(flow.getRecordId(0),"flow1_1435142614086_1");
+        Assert.assertEquals(flow.getRecordId(0), "flow1_1435142614086_1");
         Assert.assertEquals(flow.getRecordValueX(0), 2, 0);
         Assert.assertEquals(flow.getRecordValueY(0), 20, 0);
         flow.updateRecord(data.getJSONArray("records").getJSONObject(1));
@@ -84,7 +84,7 @@ import org.junit.Assert;
     public void testDeleteRecord() throws Exception {
         String dataString = "{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}";
         data = new JSONObject(dataString);
-        flow.addRecord(data);
         flow.deleteRecord(data);
+        Assert.assertEquals(flow.getRecordSize(), 0);
     }
 }
