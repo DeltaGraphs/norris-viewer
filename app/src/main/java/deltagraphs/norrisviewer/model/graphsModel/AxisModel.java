@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 public class AxisModel {
     private String name;
-    private float maxIndex;
-    private float minIndex;
+   // private float maxIndex;
+   // private float minIndex;
     private int ticks;
 
     // Axis constructor.
@@ -40,7 +40,7 @@ public class AxisModel {
         try {
             if (params.has("name"))
                 name = params.getString("name");
-            if (params.has("maxIndex"))
+            /*if (params.has("maxIndex"))
                 if (params.isNull("maxIndex"))
                     maxIndex = 0;
                 else
@@ -50,6 +50,7 @@ public class AxisModel {
                     minIndex = 0;
                 else
                     minIndex = (float) params.getDouble("minIndex");
+            */
             if (params.has("ticks"))
                 ticks = params.getInt("ticks");
         } catch (JSONException e) {
@@ -62,7 +63,7 @@ public class AxisModel {
         return name;
     }
 
-    //it returns the maximum index on an axis.
+    /*it returns the maximum index on an axis.
     public Float getMaxIndex() {
         return maxIndex;
     }
@@ -71,7 +72,7 @@ public class AxisModel {
     public Float getMinIndex() {
         return minIndex;
     }
-
+*/
     //it returns the number of ticks on an axis.
     public int getTicks() {
         return ticks;

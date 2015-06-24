@@ -38,7 +38,9 @@ import java.util.Observer;
     public void testSetPageModel() throws Exception {
         x = new PageModelImpl(y);
         JSONObject json = new JSONObject("{\"name\":\"norris\",\"data\":[{\"properties\":{\"ID\":\"page1\",\"name\":\"Pagina 1\",\"description\":\"Questa è una bella pagina\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page1\"},\"data\":[{\"ID\":\"map1\",\"title\":\"APS\",\"type\":\"MapChart\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page1/map1\"},{\"ID\":\"line1\",\"title\":\"LINEE\",\"type\":\"LineChart\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page1/line1\"},{\"ID\":\"bar1\",\"title\":\"BARRE\",\"type\":\"BarChart\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page1/bar1\"},{\"ID\":\"table1\",\"title\":\"Tabella\",\"type\":\"Table\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page1/table1\"}]},{\"properties\":{\"ID\":\"page2\",\"name\":\"Pagina 2\",\"description\":\"Questa è una bella pagina 2\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page2\"},\"data\":[{\"ID\":\"bar1\",\"title\":\"Empty Bar Chart\",\"type\":\"BarChart\",\"socketURL\":\"http://norris-nrti-dev.herokuapp.com/page2/bar1\"}]}]}");
+        assertEquals(x.isConfigured(), false);
         x.setPageModel(json, "configPageList");
+        assertEquals(x.isConfigured(), true);
         assertEquals(x.getName(), "norris");
         assertEquals(x.getPageListSize(), 2);
         assertEquals(x.getPage(0).getId(), "page1");

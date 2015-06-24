@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface LineChartView {
-    void setAxis(char axisXorY, String name, float maxIndex, float minIndex, int ticks);
+    void setAxis(char axisXorY, String name, int ticks);
 
     void setGrid(Boolean horizontal, Boolean vertical);
 

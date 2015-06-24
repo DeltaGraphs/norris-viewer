@@ -41,7 +41,7 @@ public interface Table {
 
     //column parameters
     public String getHeaderValue(int index);
-
+/*
     public String getHeaderTextColour(int index);
 
     public String getHeaderBGColour(int index);
@@ -53,5 +53,5 @@ public interface Table {
     public String getRowOddTC(int index);
 
     public String getRowOddBGColour(int index);
-
+*/
 }

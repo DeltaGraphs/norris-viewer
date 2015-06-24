@@ -45,6 +45,7 @@ public class TableImpl extends Graph implements Table {
 
     class Column {
         private String headerValue;
+       /*
         //text and background colour of header row
         private String headerTextColour;
         private String headerBGColour;
@@ -54,19 +55,20 @@ public class TableImpl extends Graph implements Table {
         //text and background colour of odd row
         private String rowOddTextColour;
         private String rowOddBGColour;
-
+    */
         Column(String value, JSONObject data) {
-            try {
+            //try {
                 headerValue = value;
-                headerTextColour = data.getJSONObject("headers").getString("textColor");
+                /*headerTextColour = data.getJSONObject("headers").getString("textColor");
                 headerBGColour = data.getJSONObject("headers").getString("backgroundColor");
                 rowEvenTextColour = data.getJSONObject("rowEven").getString("textColor");
                 rowEvenBGColour = data.getJSONObject("rowEven").getString("backgroundColor");
                 rowOddTextColour = data.getJSONObject("rowOdd").getString("textColor");
                 rowOddBGColour = data.getJSONObject("rowOdd").getString("backgroundColor");
+
             } catch (JSONException e) {
                 e.printStackTrace();
-            }
+            } */
         }
     }
 
@@ -105,6 +107,7 @@ public class TableImpl extends Graph implements Table {
         return tableColumns.get(index).headerValue;
     }
 
+    /*
     public String getHeaderTextColour(int index) {
         return tableColumns.get(index).headerTextColour;
     }
@@ -129,6 +132,7 @@ public class TableImpl extends Graph implements Table {
         return tableColumns.get(index).rowOddBGColour;
     }
 
+*/
     public TableImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
@@ -204,6 +208,7 @@ public class TableImpl extends Graph implements Table {
                 }
             }
 
+            /*
             if ((data.has("appearance")) && (data.getJSONObject("appearance").has("rowEven")) &&
                     (data.getJSONObject("appearance").getJSONObject("rowEven").has("textColor"))) {
                 JSONArray jsonColumns = data.getJSONObject("appearance").getJSONObject("rowEven").getJSONArray("textColor");
@@ -256,7 +261,7 @@ public class TableImpl extends Graph implements Table {
                 for (int i = 0; i < jsonColumnsSize; i++) {
                     tableColumns.get(i).headerBGColour = jsonColumns.getString(i);
                 }
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

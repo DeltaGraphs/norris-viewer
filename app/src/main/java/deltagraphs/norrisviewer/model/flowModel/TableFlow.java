@@ -34,13 +34,13 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 
 public class TableFlow extends FlowModel {
-    private int maxItems;
+    //private int maxItems;
     private LinkedList<TableRecord> records = new LinkedList<TableRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the maximum number of items of a flow in the chart
-    public int getMaxItems() {
-        return maxItems;
-    } //per page
+   // public int getMaxItems() {
+    //    return maxItems;
+    //} //per page
 
     //it returns the record length
     public int getRecordSize() {
@@ -77,7 +77,7 @@ public class TableFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            maxItems = data.getInt("maxItemsPage");
+            //maxItems = data.getInt("maxItemsPage");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -143,7 +143,7 @@ public class TableFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            maxItems = data.getInt("maxItemsPage");
+            //maxItems = data.getInt("maxItemsPage");
         } catch (JSONException e) {
             e.printStackTrace();
         }

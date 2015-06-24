@@ -52,14 +52,14 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     private void setGraphParameters() {
         graphView.setAxis('x',
                 lineChartInstance.getAxisX().getName(),
-                lineChartInstance.getAxisX().getMaxIndex(),
-                lineChartInstance.getAxisX().getMinIndex(),
+                //lineChartInstance.getAxisX().getMaxIndex(),
+                //lineChartInstance.getAxisX().getMinIndex(),
                 lineChartInstance.getAxisX().getTicks()
         );
         graphView.setAxis('y',
                 lineChartInstance.getAxisY().getName(),
-                lineChartInstance.getAxisY().getMaxIndex(),
-                lineChartInstance.getAxisY().getMinIndex(),
+                //lineChartInstance.getAxisY().getMaxIndex(),
+                //lineChartInstance.getAxisY().getMinIndex(),
                 lineChartInstance.getAxisY().getTicks()
         );
         //graphView.setViewFinder(lineChartInstance.getViewFinder());

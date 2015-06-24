@@ -58,19 +58,11 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         /*
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
-                barChartInstance.getAxisX().getAppearance(),
-                barChartInstance.getAxisX().getMaxIndex(),
-                barChartInstance.getAxisX().getMinIndex(),
-                barChartInstance.getAxisX().getTicks(),
-                barChartInstance.getAxisX().getScale()
+                barChartInstance.getAxisX().getTicks()
         );
         graphView.setAxis('y',
                 barChartInstance.getAxisY().getName(),
-                barChartInstance.getAxisY().getAppearance(),
-                barChartInstance.getAxisY().getMaxIndex(),
-                barChartInstance.getAxisY().getMinIndex(),
-                barChartInstance.getAxisY().getTicks(),
-                barChartInstance.getAxisY().getScale()
+                barChartInstance.getAxisY().getTicks()
         );
         */
     }
