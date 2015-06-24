@@ -44,7 +44,7 @@ public class PageModelImpl extends Observable implements PageModel {
 <span class="fc" id="L44">    public PageModelImpl(Observer presenter) {</span>
 <span class="fc" id="L45">        addObserver(presenter);</span>
 <span class="fc" id="L46">    }</span>
-<span class="nc" id="L47">    public boolean isConfigured(){return configured; }</span>
+<span class="fc" id="L47">    public boolean isConfigured(){return configured; }</span>
 
     public void setPageModel(JSONObject data, String signal) {
 <span class="fc" id="L50">        JSONParser(data, signal);</span>

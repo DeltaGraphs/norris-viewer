@@ -171,29 +171,29 @@ import lecho.lib.hellocharts.view.LineChartView;
     This method configures a single axis for the line chart
      */
     @Override
-    public void setAxis(char axisXorY, String name, float maxIndex, float minIndex, int ticks) {
-<span class="nc bnc" id="L175" title="All 2 branches missed.">        if (hasAxes) {</span>
+    public void setAxis(char axisXorY, String name, int ticks) {
+       /* if (hasAxes) {
 
-<span class="nc" id="L177">            float step = (maxIndex - minIndex) / ticks;</span>
+            float step = (maxIndex - minIndex) / ticks;
 
-<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (axisXorY == 'x') {</span>
-<span class="nc" id="L180">                axisX = new Axis().setHasLines(true);</span>
-<span class="nc" id="L181">                axisX.generateAxisFromRange(minIndex, maxIndex, step);</span>
-<span class="nc bnc" id="L182" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L183">                    axisX.setName(name);</span>
+            if (axisXorY == 'x') {
+                axisX = new Axis().setHasLines(true);
+                axisX.generateAxisFromRange(minIndex, maxIndex, step);
+                if (hasAxesNames) {
+                    axisX.setName(name);
                 }
             }
-<span class="nc bnc" id="L186" title="All 2 branches missed.">            if (axisXorY == 'y') {</span>
-<span class="nc" id="L187">                axisY = new Axis().setHasLines(true);</span>
-<span class="nc" id="L188">                axisY.generateAxisFromRange(minIndex, maxIndex, step);</span>
-<span class="nc bnc" id="L189" title="All 2 branches missed.">                if (hasAxesNames) {</span>
-<span class="nc" id="L190">                    axisY.setName(name);</span>
+            if (axisXorY == 'y') {
+                axisY = new Axis().setHasLines(true);
+                axisY.generateAxisFromRange(minIndex, maxIndex, step);
+                if (hasAxesNames) {
+                    axisY.setName(name);
                 }
             }
-<span class="nc" id="L193">        } else {</span>
-<span class="nc" id="L194">            data.setAxisXBottom(null);</span>
-<span class="nc" id="L195">            data.setAxisYLeft(null);</span>
-        }
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }*/
 <span class="nc" id="L197">    }</span>
 
     /*

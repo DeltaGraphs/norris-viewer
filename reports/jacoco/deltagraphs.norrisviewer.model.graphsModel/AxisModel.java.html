@@ -29,8 +29,8 @@ import org.json.JSONObject;
 
 public class AxisModel {
     private String name;
-    private float maxIndex;
-    private float minIndex;
+   // private float maxIndex;
+   // private float minIndex;
     private int ticks;
 
     // Axis constructor.
@@ -40,41 +40,42 @@ public class AxisModel {
         try {
 <span class="pc bpc" id="L41" title="1 of 2 branches missed.">            if (params.has(&quot;name&quot;))</span>
 <span class="fc" id="L42">                name = params.getString(&quot;name&quot;);</span>
-<span class="pc bpc" id="L43" title="1 of 2 branches missed.">            if (params.has(&quot;maxIndex&quot;))</span>
-<span class="fc bfc" id="L44" title="All 2 branches covered.">                if (params.isNull(&quot;maxIndex&quot;))</span>
-<span class="fc" id="L45">                    maxIndex = 0;</span>
+            /*if (params.has(&quot;maxIndex&quot;))
+                if (params.isNull(&quot;maxIndex&quot;))
+                    maxIndex = 0;
                 else
-<span class="fc" id="L47">                    maxIndex = (float) params.getDouble(&quot;maxIndex&quot;);</span>
-<span class="pc bpc" id="L48" title="1 of 2 branches missed.">            if (params.has(&quot;minIndex&quot;))</span>
-<span class="fc bfc" id="L49" title="All 2 branches covered.">                if (params.isNull(&quot;minIndex&quot;))</span>
-<span class="fc" id="L50">                    minIndex = 0;</span>
+                    maxIndex = (float) params.getDouble(&quot;maxIndex&quot;);
+            if (params.has(&quot;minIndex&quot;))
+                if (params.isNull(&quot;minIndex&quot;))
+                    minIndex = 0;
                 else
-<span class="fc" id="L52">                    minIndex = (float) params.getDouble(&quot;minIndex&quot;);</span>
-<span class="pc bpc" id="L53" title="1 of 2 branches missed.">            if (params.has(&quot;ticks&quot;))</span>
-<span class="fc" id="L54">                ticks = params.getInt(&quot;ticks&quot;);</span>
-<span class="nc" id="L55">        } catch (JSONException e) {</span>
-<span class="nc" id="L56">            e.printStackTrace();</span>
-<span class="fc" id="L57">        }</span>
-<span class="fc" id="L58">    }</span>
+                    minIndex = (float) params.getDouble(&quot;minIndex&quot;);
+            */
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">            if (params.has(&quot;ticks&quot;))</span>
+<span class="fc" id="L55">                ticks = params.getInt(&quot;ticks&quot;);</span>
+<span class="nc" id="L56">        } catch (JSONException e) {</span>
+<span class="nc" id="L57">            e.printStackTrace();</span>
+<span class="fc" id="L58">        }</span>
+<span class="fc" id="L59">    }</span>
 
     //it returns the name of an axis.
     public String getName() {
-<span class="fc" id="L62">        return name;</span>
+<span class="fc" id="L63">        return name;</span>
     }
 
-    //it returns the maximum index on an axis.
+    /*it returns the maximum index on an axis.
     public Float getMaxIndex() {
-<span class="fc" id="L67">        return maxIndex;</span>
+        return maxIndex;
     }
 
     //it returns the minimum index on an axis.
     public Float getMinIndex() {
-<span class="fc" id="L72">        return minIndex;</span>
+        return minIndex;
     }
-
+*/
     //it returns the number of ticks on an axis.
     public int getTicks() {
-<span class="fc" id="L77">        return ticks;</span>
+<span class="fc" id="L78">        return ticks;</span>
     }
 
 }
