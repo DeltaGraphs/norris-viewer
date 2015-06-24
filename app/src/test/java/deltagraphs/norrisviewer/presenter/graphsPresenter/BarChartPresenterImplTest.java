@@ -22,13 +22,33 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
+import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 
 public class BarChartPresenterImplTest extends TestCase {
 
     BarChartPresenterImpl barChartPresenter;
+
+    class Mock extends BarChartPresenterImpl{
+        Boolean connected = false;
+
+
+
+        @Override
+        public void startConnection(){
+            connected = true;
+        }
+
+        @Override
+        public void stopConnection(){
+            connected = false;
+        }
+
+    }
+
 
     @Before
     public void setUp() throws Exception {
