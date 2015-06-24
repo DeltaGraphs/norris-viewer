@@ -19,6 +19,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;/*
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -31,11 +33,14 @@ import deltagraphs.norrisviewer.model.graphsModel.AxisModel;
 import deltagraphs.norrisviewer.model.graphsModel.LineChart;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 
-class AxisModelMock{
+
+
+class AxisModelMock extends AxisModel{
     private String name;
     private int ticks;
 
-    AxisModelMock(){
+    AxisModelMock(JSONObject json){
+        super(json);
         name = "";
         ticks = 0;
     }
@@ -53,12 +58,14 @@ class LineChartMock implements LineChart {
 
     @Override
     public AxisModel getAxisX() {
-        return new AxisModelMock();
+        JSONObject json=new JSONObject();
+        return new AxisModelMock(json);
     }
 
     @Override
     public AxisModel getAxisY() {
-        return new AxisModelMock();
+        JSONObject json=new JSONObject();
+        return new AxisModelMock(json);
     }
 
     @Override

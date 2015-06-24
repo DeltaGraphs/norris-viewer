@@ -39,15 +39,6 @@ public class TableImpl extends Graph implements Table {
 
     private ArrayList<String> headers = new ArrayList<String>();
 
-    class Column {
-        private String headerValue;
-
-        Column(String value) {
-            headerValue = value;
-
-        }
-    }
-
     public String getAddRowOn() {
         return addRowOn;
     }

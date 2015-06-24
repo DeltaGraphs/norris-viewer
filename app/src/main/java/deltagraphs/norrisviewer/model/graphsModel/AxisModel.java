@@ -29,28 +29,15 @@ import org.json.JSONObject;
 
 public class AxisModel {
     private String name;
-   // private float maxIndex;
-   // private float minIndex;
     private int ticks;
 
     // Axis constructor.
     // It's used when a new axis must be built.
     // The Jsonobject 'params' must be contain the attributes, in order to initialize the class.
-    AxisModel(JSONObject params) {
+    public AxisModel(JSONObject params) {
         try {
             if (params.has("name"))
                 name = params.getString("name");
-            /*if (params.has("maxIndex"))
-                if (params.isNull("maxIndex"))
-                    maxIndex = 0;
-                else
-                    maxIndex = (float) params.getDouble("maxIndex");
-            if (params.has("minIndex"))
-                if (params.isNull("minIndex"))
-                    minIndex = 0;
-                else
-                    minIndex = (float) params.getDouble("minIndex");
-            */
             if (params.has("ticks"))
                 ticks = params.getInt("ticks");
         } catch (JSONException e) {
