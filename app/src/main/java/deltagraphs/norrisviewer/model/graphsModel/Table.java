@@ -25,8 +25,6 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 public interface Table {
     public String getAddRowOn();
 
-    public int getMaxItems();
-
     public String sortByCol();
 
     public String getSortOrder();

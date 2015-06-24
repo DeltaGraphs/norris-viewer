@@ -34,7 +34,6 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 public class TableImpl extends Graph implements Table {
 
     private String addRowOn;  // top or bottom
-    private int maxItems; //displayed per page
     private Boolean sortable;
     private String sortOrder = null; //ascendent or descendent
     private String sortColumn = null; // sorted by column "sortColumn"
@@ -76,9 +75,6 @@ public class TableImpl extends Graph implements Table {
         return addRowOn;
     }
 
-    public int getMaxItems() {
-        return maxItems;
-    }
 
     public Boolean getSortable() { return sortable; }
 
@@ -141,7 +137,6 @@ public class TableImpl extends Graph implements Table {
         try {
             title = data.getString("title");
             sortable = data.getBoolean("sortable");
-            maxItems = data.getInt("maxItemsPage");
             addRowOn = data.getString("addRowOn");
             if (data.has("sort") && (!(data.isNull("sort")))) {
                 sortOrder = data.getJSONObject("sort").getString("ordering");
@@ -177,9 +172,6 @@ public class TableImpl extends Graph implements Table {
 
             if (data.has("sortable"))
                 sortable = data.getBoolean("sortable");
-
-            if (data.has("maxItemsPage"))
-                maxItems = data.getInt("maxItemsPage");
 
             if (data.has("addRowOn")) {
                 addRowOn = data.getString("addRowOn");
