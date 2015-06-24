@@ -216,30 +216,32 @@ public class TableFlow extends FlowModel {
         try {
 <span class="nc" id="L217">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
 <span class="nc" id="L218">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L219">            JSONArray valueList = data.getJSONArray(&quot;values&quot;);</span>
-<span class="nc" id="L220">            JSONArray appearance = data.getJSONArray(&quot;appearance&quot;);</span>
-<span class="nc" id="L221">            int listLength = valueList.length();</span>
-<span class="nc bnc" id="L222" title="All 2 branches missed.">            for (int i = 0; i &lt; listLength; i++) {</span>
-<span class="nc" id="L223">                records.get(recordIndex).values.get(i).data = valueList.getString(i);</span>
-<span class="nc" id="L224">                records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString(&quot;bg&quot;);</span>
-<span class="nc" id="L225">                records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString(&quot;text&quot;);</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            if(recordIndex!=-1){</span>
+<span class="nc" id="L220">                JSONArray valueList = data.getJSONArray(&quot;values&quot;);</span>
+<span class="nc" id="L221">                JSONArray appearance = data.getJSONArray(&quot;appearance&quot;);</span>
+<span class="nc" id="L222">                int listLength = valueList.length();</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">                for (int i = 0; i &lt; listLength; i++) {</span>
+<span class="nc" id="L224">                    records.get(recordIndex).values.get(i).data = valueList.getString(i);</span>
+<span class="nc" id="L225">                    records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString(&quot;bg&quot;);</span>
+<span class="nc" id="L226">                    records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString(&quot;text&quot;);</span>
+                }
             }
-<span class="nc" id="L227">        } catch (JSONException e) {</span>
-<span class="nc" id="L228">            e.printStackTrace();</span>
-<span class="nc" id="L229">        }</span>
-<span class="nc" id="L230">    }</span>
+<span class="nc" id="L229">        } catch (JSONException e) {</span>
+<span class="nc" id="L230">            e.printStackTrace();</span>
+<span class="nc" id="L231">        }</span>
+<span class="nc" id="L232">    }</span>
 
 
     // It searches the record index in the list of records.
     // A record's id must be provided.
     protected int searchRecordIndex(String id) {
-<span class="nc" id="L236">        int index = 0;</span>
-<span class="nc bnc" id="L237" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="nc bnc" id="L238" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L239">                return index;</span>
-<span class="nc" id="L240">            index++;</span>
+<span class="nc" id="L238">        int index = 0;</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="nc" id="L241">                return index;</span>
+<span class="nc" id="L242">            index++;</span>
         }
-<span class="nc" id="L242">        return -1;</span>
+<span class="nc" id="L244">        return -1;</span>
     }
 
     // Used to delete a record from the flow.
@@ -248,12 +250,12 @@ public class TableFlow extends FlowModel {
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L251">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L252">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L253">            records.remove(recordIndex);</span>
-<span class="nc" id="L254">        } catch (JSONException e) {</span>
-<span class="nc" id="L255">            e.printStackTrace();</span>
-<span class="nc" id="L256">        }</span>
-<span class="nc" id="L257">    }</span>
+<span class="nc" id="L253">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="nc" id="L254">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="nc" id="L255">            records.remove(recordIndex);</span>
+<span class="nc" id="L256">        } catch (JSONException e) {</span>
+<span class="nc" id="L257">            e.printStackTrace();</span>
+<span class="nc" id="L258">        }</span>
+<span class="nc" id="L259">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

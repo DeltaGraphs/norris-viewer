@@ -104,7 +104,7 @@ public class PageModelImpl extends Observable implements PageModel {
 
 <span class="nc" id="L105">                    addPage(pageId, pageName, pageDescription);</span>
 
-<span class="nc" id="L107">                    JSONArray itemsArray = data.getJSONArray(&quot;graphs&quot;);</span>
+<span class="nc" id="L107">                    JSONArray itemsArray = data.getJSONArray(&quot;data&quot;);</span>
 <span class="nc" id="L108">                    int itemArrayDim = itemsArray.length();</span>
 <span class="nc bnc" id="L109" title="All 2 branches missed.">                    for (int j = 0; j &lt; itemArrayDim; j++) {</span>
 <span class="nc" id="L110">                        JSONObject item = itemsArray.getJSONObject(j);</span>

@@ -40,7 +40,7 @@ public class BarChartFlow extends FlowModel {
 
     //it returns the record length
     public int getRecordSize() {
-<span class="fc bfc" id="L43" title="All 2 branches covered.">        if(records==null)</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">        if (records == null)</span>
 <span class="fc" id="L44">            return 0;</span>
 <span class="fc" id="L45">        return records.size();</span>
     }
@@ -169,25 +169,27 @@ public class BarChartFlow extends FlowModel {
         try {
 <span class="fc" id="L170">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
 <span class="fc" id="L171">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="fc" id="L172">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="fc" id="L173">            records.get(recordIndex).index = jsonValues.getString(0);</span>
-<span class="fc" id="L174">            records.get(recordIndex).value = jsonValues.getInt(1);</span>
-<span class="nc" id="L175">        } catch (JSONException e) {</span>
-<span class="nc" id="L176">            e.printStackTrace();</span>
-<span class="fc" id="L177">        }</span>
-<span class="fc" id="L178">    }</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">            if(recordIndex!=-1){</span>
+<span class="fc" id="L173">                JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="fc" id="L174">                records.get(recordIndex).index = jsonValues.getString(0);</span>
+<span class="fc" id="L175">                records.get(recordIndex).value = jsonValues.getInt(1);</span>
+            }
+<span class="nc" id="L177">        } catch (JSONException e) {</span>
+<span class="nc" id="L178">            e.printStackTrace();</span>
+<span class="fc" id="L179">        }</span>
+<span class="fc" id="L180">    }</span>
 
 
     // It searches the record index in the list of records.
     // A record's id must be provided.
     private int searchRecordIndex(String id) {
-<span class="fc" id="L184">        int index = 0;</span>
-<span class="pc bpc" id="L185" title="1 of 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="pc bpc" id="L186" title="1 of 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="fc" id="L187">                return index;</span>
-<span class="nc" id="L188">            index++;</span>
+<span class="fc" id="L186">        int index = 0;</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        while (index &lt; records.size()) {</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
+<span class="fc" id="L189">                return index;</span>
+<span class="nc" id="L190">            index++;</span>
         }
-<span class="nc" id="L190">        return -1;</span>
+<span class="nc" id="L192">        return -1;</span>
     }
 
 
@@ -197,12 +199,12 @@ public class BarChartFlow extends FlowModel {
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="fc" id="L200">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="fc" id="L201">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="fc" id="L202">            records.remove(recordIndex);</span>
-<span class="nc" id="L203">        } catch (JSONException e) {</span>
-<span class="nc" id="L204">            e.printStackTrace();</span>
-<span class="fc" id="L205">        }</span>
-<span class="fc" id="L206">    }</span>
+<span class="fc" id="L202">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L203">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="fc" id="L204">            records.remove(recordIndex);</span>
+<span class="nc" id="L205">        } catch (JSONException e) {</span>
+<span class="nc" id="L206">            e.printStackTrace();</span>
+<span class="fc" id="L207">        }</span>
+<span class="fc" id="L208">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
