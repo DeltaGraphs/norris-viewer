@@ -93,9 +93,10 @@ class BarChartMock extends BarChartImpl {
     }
 }
 
-class mockBarChartActivity implements BarChartView{
+class mockBarChartActivity extends BarChartActivity{
 
     String orientation;
+    boolean data = false;
 
     @Override
     public void setBarOrientation(String orientation) {
@@ -108,8 +109,11 @@ class mockBarChartActivity implements BarChartView{
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
-
+        data = true;
     }
+
+    public boolean getData(){ return data; }
+
 }
 
 
@@ -123,7 +127,7 @@ public class BarChartPresenterImplTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        barChartPresenter = new BarChartPresenterImpl(new BarChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
+        barChartPresenter = new BarChartPresenterImpl(new mockBarChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
         barChartPresenter.graphSocket = new Mock();
     }
 
@@ -153,6 +157,7 @@ public class BarChartPresenterImplTest extends TestCase {
         barChartPresenter.barChartInstance = new BarChartMock(barChartPresenter);
         String signal = "configGraph";
         barChartPresenter.update((Observable) barChartPresenter.barChartInstance, signal);
-        Assert.assertEquals(((mockBarChartActivity) barChartPresenter.graphView).getBarOrientation(),"horizontal");
+        Assert.assertEquals(((mockBarChartActivity) barChartPresenter.graphView).getBarOrientation(), "V");
+        Assert.assertTrue(((mockBarChartActivity) barChartPresenter.graphView).getData());
     }
 }
