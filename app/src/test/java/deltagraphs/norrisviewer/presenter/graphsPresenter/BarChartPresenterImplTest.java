@@ -22,32 +22,68 @@ import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
+import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 
+class Mock extends SocketManager{
+    Boolean connected;
+
+    Mock(){
+        connected=new Boolean(false);
+    }
+
+    Mock(String url){
+        super(url);
+        connected=new Boolean(false);
+    }
+
+    public Boolean isNull() {
+        return (connected == null);
+    }
+
+    public Boolean isConnected() {
+        return connected;
+    }
+
+    @Override
+    public void startConnection(){
+        connected = true;
+    }
+
+    @Override
+    public void stopConnection(){
+        connected = false;
+    }
+
+}
+
+class viewMock implements BarChartView{
+
+    String orientation;
+
+    @Override
+    public void setBarOrientation(String orientation) {
+        this.orientation= orientation;
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
+
+    }
+}
+
+
 public class BarChartPresenterImplTest extends TestCase {
 
     BarChartPresenterImpl barChartPresenter;
 
-    class Mock extends BarChartPresenterImpl{
-        Boolean connected = false;
 
-
-
-        @Override
-        public void startConnection(){
-            connected = true;
-        }
-
-        @Override
-        public void stopConnection(){
-            connected = false;
-        }
-
-    }
 
 
     @Before
