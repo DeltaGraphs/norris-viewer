@@ -38,19 +38,19 @@ public class TableFlow extends FlowModel {
 
     //it returns the record length
     public int getRecordSize() {
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if(records==null)</span>
-<span class="nc" id="L42">            return 0;</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        if(records==null)</span>
+<span class="fc" id="L42">            return 0;</span>
 <span class="fc" id="L43">        return records.size();</span>
     }
 
     //it returns the id of the record at the position 'index' in the list
     public String getRecordId(int index) {
-<span class="nc" id="L48">        return records.get(index).recordId;</span>
+<span class="fc" id="L48">        return records.get(index).recordId;</span>
     }
 
     //it returns the value of the record at the position 'index' in the list
     public String getCellData(int index, int columnIndex) {
-<span class="nc" id="L53">        return records.get(index).values.get(columnIndex).data;</span>
+<span class="fc" id="L53">        return records.get(index).values.get(columnIndex).data;</span>
     }
 
     // Constructor of the flow.
@@ -79,13 +79,13 @@ public class TableFlow extends FlowModel {
 <span class="fc" id="L79">            recordId = id;</span>
             try {
 <span class="fc" id="L81">                int listLength = valueList.length();</span>
-<span class="pc bnc" id="L82" title="All 2 branches missed.">                for (int i = 0; i &lt; listLength; i++) {</span>
-<span class="nc" id="L83">                    String value = valueList.getString(i);</span>
-<span class="nc" id="L84">                    values.add(new Value(value));</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">                for (int i = 0; i &lt; listLength; i++) {</span>
+<span class="fc" id="L83">                    String value = valueList.getString(i);</span>
+<span class="fc" id="L84">                    values.add(new Value(value));</span>
                 }
-<span class="fc" id="L86">            } catch (JSONException e) {</span>
-<span class="fc" id="L87">                e.printStackTrace();</span>
-<span class="nc" id="L88">            }</span>
+<span class="nc" id="L86">            } catch (JSONException e) {</span>
+<span class="nc" id="L87">                e.printStackTrace();</span>
+<span class="fc" id="L88">            }</span>
 <span class="fc" id="L89">        }</span>
 
         // This inner class contains all the attributes of a value
@@ -96,9 +96,9 @@ public class TableFlow extends FlowModel {
             // It's used when a new Value is added to the record list
             // The new Value is initialized with the passed parameters.
             // Here can be added properties of a single cell
-<span class="nc" id="L99">            Value(String data) {</span>
-<span class="nc" id="L100">                this.data = data;</span>
-<span class="nc" id="L101">            }</span>
+<span class="fc" id="L99">            Value(String data) {</span>
+<span class="fc" id="L100">                this.data = data;</span>
+<span class="fc" id="L101">            }</span>
         }
     }
 
@@ -121,18 +121,18 @@ public class TableFlow extends FlowModel {
     @Override
     public void updateFlow(JSONObject data) {
         try {
-<span class="nc" id="L124">            flowName = data.getString(&quot;name&quot;);</span>
+<span class="fc" id="L124">            flowName = data.getString(&quot;name&quot;);</span>
             //maxItems = data.getInt(&quot;maxItemsPage&quot;);
 <span class="nc" id="L126">        } catch (JSONException e) {</span>
 <span class="nc" id="L127">            e.printStackTrace();</span>
-<span class="nc" id="L128">        }</span>
-<span class="nc" id="L129">    }</span>
+<span class="fc" id="L128">        }</span>
+<span class="fc" id="L129">    }</span>
 
     // Used to delete the whole flow list. Params of the flow will remain.
     @Override
     public void deleteRecordList() {
-<span class="nc" id="L134">        records = null;</span>
-<span class="nc" id="L135">    }</span>
+<span class="fc" id="L134">        records = null;</span>
+<span class="fc" id="L135">    }</span>
 
     // The following method insert a record in the flow.
     // The record is build with the JsonObject's informations.
@@ -152,13 +152,13 @@ public class TableFlow extends FlowModel {
     // Differently from the method 'addRecord(JSONObject data)', the new record will be added on Top.
     public void addFirstRecord(JSONObject data) {
         try {
-<span class="nc" id="L155">            String id = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L156">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
-<span class="nc" id="L157">            records.addFirst(new TableRecord(id, jsonValues));</span>
+<span class="fc" id="L155">            String id = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L156">            JSONArray jsonValues = data.getJSONArray(&quot;value&quot;);</span>
+<span class="fc" id="L157">            records.addFirst(new TableRecord(id, jsonValues));</span>
 <span class="nc" id="L158">        } catch (JSONException e) {</span>
 <span class="nc" id="L159">            e.printStackTrace();</span>
-<span class="nc" id="L160">        }</span>
-<span class="nc" id="L161">    }</span>
+<span class="fc" id="L160">        }</span>
+<span class="fc" id="L161">    }</span>
 
     // Used to insert some records in the flow.
     // The JsonObject data must contain the a JsonArray with the records that must be inserted.
@@ -168,10 +168,10 @@ public class TableFlow extends FlowModel {
     public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
         try {
 <span class="fc" id="L170">            int recordLength = jsonRecords.length();</span>
-<span class="pc bpc" id="L171" title="1 of 2 branches missed.">            if (insertOnTop) {</span>
-<span class="nc bnc" id="L172" title="All 2 branches missed.">                for (int i = 0; i &lt; recordLength; i++) {</span>
-<span class="nc" id="L173">                    JSONObject record = jsonRecords.getJSONObject(i);</span>
-<span class="nc" id="L174">                    addFirstRecord(record);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">            if (insertOnTop) {</span>
+<span class="fc bfc" id="L172" title="All 2 branches covered.">                for (int i = 0; i &lt; recordLength; i++) {</span>
+<span class="fc" id="L173">                    JSONObject record = jsonRecords.getJSONObject(i);</span>
+<span class="fc" id="L174">                    addFirstRecord(record);</span>
                 }
             } else {
 <span class="fc bfc" id="L177" title="All 2 branches covered.">                for (int i = 0; i &lt; recordLength; i++) {</span>
@@ -191,31 +191,31 @@ public class TableFlow extends FlowModel {
     @Override
     public void updateRecord(JSONObject data) {
         try {
-<span class="nc" id="L194">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L195">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc bnc" id="L196" title="All 2 branches missed.">            if(recordIndex!=-1){</span>
-<span class="nc" id="L197">                JSONArray valueList = data.getJSONArray(&quot;values&quot;);</span>
-<span class="nc" id="L198">                int listLength = valueList.length();</span>
-<span class="nc bnc" id="L199" title="All 2 branches missed.">                for (int i = 0; i &lt; listLength; i++) {</span>
-<span class="nc" id="L200">                    records.get(recordIndex).values.get(i).data = valueList.getString(i);</span>
+<span class="fc" id="L194">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L195">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="fc bfc" id="L196" title="All 2 branches covered.">            if(recordIndex!=-1){</span>
+<span class="fc" id="L197">                JSONArray valueList = data.getJSONArray(&quot;value&quot;);</span>
+<span class="fc" id="L198">                int listLength = valueList.length();</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">                for (int i = 0; i &lt; listLength; i++) {</span>
+<span class="fc" id="L200">                    records.get(recordIndex).values.get(i).data = valueList.getString(i);</span>
                 }
             }
 <span class="nc" id="L203">        } catch (JSONException e) {</span>
 <span class="nc" id="L204">            e.printStackTrace();</span>
-<span class="nc" id="L205">        }</span>
-<span class="nc" id="L206">    }</span>
+<span class="fc" id="L205">        }</span>
+<span class="fc" id="L206">    }</span>
 
 
     // It searches the record index in the list of records.
     // A record's id must be provided.
     protected int searchRecordIndex(String id) {
-<span class="nc" id="L212">        int index = 0;</span>
-<span class="nc bnc" id="L213" title="All 2 branches missed.">        while (index &lt; records.size()) {</span>
-<span class="nc bnc" id="L214" title="All 2 branches missed.">            if (records.get(index).recordId.equals(id))</span>
-<span class="nc" id="L215">                return index;</span>
-<span class="nc" id="L216">            index++;</span>
+<span class="fc" id="L212">        int index = 0;</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        while (index &lt; records.size()) {</span>
+<span class="fc bfc" id="L214" title="All 2 branches covered.">            if (records.get(index).recordId.equals(id))</span>
+<span class="fc" id="L215">                return index;</span>
+<span class="fc" id="L216">            index++;</span>
         }
-<span class="nc" id="L218">        return -1;</span>
+<span class="fc" id="L218">        return -1;</span>
     }
 
     // Used to delete a record from the flow.
@@ -224,12 +224,12 @@ public class TableFlow extends FlowModel {
     @Override
     public void deleteRecord(JSONObject data) {
         try {
-<span class="nc" id="L227">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
-<span class="nc" id="L228">            int recordIndex = searchRecordIndex(recordId);</span>
-<span class="nc" id="L229">            records.remove(recordIndex);</span>
+<span class="fc" id="L227">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
+<span class="fc" id="L228">            int recordIndex = searchRecordIndex(recordId);</span>
+<span class="fc" id="L229">            records.remove(recordIndex);</span>
 <span class="nc" id="L230">        } catch (JSONException e) {</span>
 <span class="nc" id="L231">            e.printStackTrace();</span>
-<span class="nc" id="L232">        }</span>
-<span class="nc" id="L233">    }</span>
+<span class="fc" id="L232">        }</span>
+<span class="fc" id="L233">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

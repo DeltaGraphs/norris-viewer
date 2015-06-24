@@ -30,7 +30,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
 public abstract class GraphPresenter implements Observer {
-    private SocketManager graphSocket;
+    protected SocketManager graphSocket;
 
 <span class="fc" id="L35">    public GraphPresenter(String url) {</span>
 <span class="fc" id="L36">        this.graphSocket = new SocketManager(url);</span>
@@ -55,8 +55,8 @@ public abstract class GraphPresenter implements Observer {
     }
 
     public void destroySocket() {
-<span class="nc" id="L58">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L59">    }</span>
+<span class="fc" id="L58">        graphSocket.destroyConnection();</span>
+<span class="fc" id="L59">    }</span>
 
     @Override
     public void update(Observable observable, Object data) {

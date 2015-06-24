@@ -29,38 +29,25 @@ import org.json.JSONObject;
 
 public class AxisModel {
     private String name;
-   // private float maxIndex;
-   // private float minIndex;
     private int ticks;
 
     // Axis constructor.
     // It's used when a new axis must be built.
     // The Jsonobject 'params' must be contain the attributes, in order to initialize the class.
-<span class="fc" id="L39">    AxisModel(JSONObject params) {</span>
+<span class="fc" id="L37">    public AxisModel(JSONObject params) {</span>
         try {
-<span class="pc bpc" id="L41" title="1 of 2 branches missed.">            if (params.has(&quot;name&quot;))</span>
-<span class="fc" id="L42">                name = params.getString(&quot;name&quot;);</span>
-            /*if (params.has(&quot;maxIndex&quot;))
-                if (params.isNull(&quot;maxIndex&quot;))
-                    maxIndex = 0;
-                else
-                    maxIndex = (float) params.getDouble(&quot;maxIndex&quot;);
-            if (params.has(&quot;minIndex&quot;))
-                if (params.isNull(&quot;minIndex&quot;))
-                    minIndex = 0;
-                else
-                    minIndex = (float) params.getDouble(&quot;minIndex&quot;);
-            */
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">            if (params.has(&quot;ticks&quot;))</span>
-<span class="fc" id="L55">                ticks = params.getInt(&quot;ticks&quot;);</span>
-<span class="nc" id="L56">        } catch (JSONException e) {</span>
-<span class="nc" id="L57">            e.printStackTrace();</span>
-<span class="fc" id="L58">        }</span>
-<span class="fc" id="L59">    }</span>
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            if (params.has(&quot;name&quot;))</span>
+<span class="fc" id="L40">                name = params.getString(&quot;name&quot;);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            if (params.has(&quot;ticks&quot;))</span>
+<span class="fc" id="L42">                ticks = params.getInt(&quot;ticks&quot;);</span>
+<span class="nc" id="L43">        } catch (JSONException e) {</span>
+<span class="nc" id="L44">            e.printStackTrace();</span>
+<span class="fc" id="L45">        }</span>
+<span class="fc" id="L46">    }</span>
 
     //it returns the name of an axis.
     public String getName() {
-<span class="fc" id="L63">        return name;</span>
+<span class="fc" id="L50">        return name;</span>
     }
 
     /*it returns the maximum index on an axis.
@@ -75,7 +62,7 @@ public class AxisModel {
 */
     //it returns the number of ticks on an axis.
     public int getTicks() {
-<span class="fc" id="L78">        return ticks;</span>
+<span class="fc" id="L65">        return ticks;</span>
     }
 
 }

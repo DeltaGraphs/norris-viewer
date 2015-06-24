@@ -62,14 +62,14 @@ public class SocketManager {
 <span class="fc" id="L62">        this.url = url;</span>
         try {
 <span class="fc" id="L64">            mSocket = IO.socket(url);</span>
-<span class="fc" id="L65">        } catch (URISyntaxException e) {</span>
-<span class="fc" id="L66">            e.printStackTrace();</span>
+<span class="nc" id="L65">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L66">            e.printStackTrace();</span>
 <span class="fc" id="L67">        }</span>
 <span class="fc" id="L68">    }</span>
 
     //getter method
     public String getSocketUrl() {
-<span class="fc" id="L72">        return url;</span>
+<span class="nc" id="L72">        return url;</span>
     }
 
     //start the connection with socket

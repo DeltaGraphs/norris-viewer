@@ -32,8 +32,8 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 
 public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter {
 
-    private BarChartView graphView;
-    private BarChart barChartInstance;
+    protected BarChartView graphView;
+    protected BarChart barChartInstance;
 
 
     public BarChartPresenterImpl(BarChartView view, String url) {
@@ -45,16 +45,16 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc bnc" id="L48" title="All 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
-<span class="nc" id="L49">            String signal = (String) data;</span>
-<span class="nc bnc" id="L50" title="All 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="nc" id="L51">                setGraphParameters();</span>
-<span class="nc" id="L52">            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());</span>
+<span class="pc bpc" id="L48" title="1 of 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
+<span class="fc" id="L49">            String signal = (String) data;</span>
+<span class="pc bpc" id="L50" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L51">                setGraphParameters();</span>
+<span class="fc" id="L52">            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());</span>
         }
-<span class="nc" id="L54">    }</span>
+<span class="fc" id="L54">    }</span>
 
     private void setGraphParameters() {
-<span class="nc" id="L57">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
+<span class="fc" id="L57">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
         /*
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
@@ -65,22 +65,18 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisY().getTicks()
         );
         */
-<span class="nc" id="L68">    }</span>
-
-    public void viewPointLegend() {
-
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L68">    }</span>
 
     public void stopConnection() {
-<span class="fc" id="L75">        stopSocket();</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L71">        stopSocket();</span>
+<span class="fc" id="L72">    }</span>
 
     public void startConnection() {
-<span class="fc" id="L79">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L75">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
+<span class="fc" id="L76">    }</span>
 
     public void destroyConnection() {
-<span class="nc" id="L83">        destroySocket();</span>
-<span class="nc" id="L84">    }</span>
+<span class="fc" id="L79">        destroySocket();</span>
+<span class="fc" id="L80">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
