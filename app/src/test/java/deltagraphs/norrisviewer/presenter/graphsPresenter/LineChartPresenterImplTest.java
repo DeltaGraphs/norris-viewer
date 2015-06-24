@@ -31,8 +31,21 @@ import deltagraphs.norrisviewer.model.graphsModel.AxisModel;
 import deltagraphs.norrisviewer.model.graphsModel.LineChart;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 
-class AxisModelMock extends AxisModel{
+class AxisModelMock{
+    private String name;
+    private int ticks;
 
+    AxisModelMock(){
+        name = "";
+        ticks = 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+    public int getTicks() {
+        return ticks;
+    }
 }
 
 
