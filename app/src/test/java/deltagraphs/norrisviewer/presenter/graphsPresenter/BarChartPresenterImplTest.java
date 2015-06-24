@@ -43,10 +43,12 @@ class Mock extends SocketManager{
         connected=new Boolean(false);
     }
 
+    @Override
     public Boolean isNull() {
         return (connected == null);
     }
 
+    @Override
     public Boolean isConnected() {
         return connected;
     }
@@ -61,6 +63,10 @@ class Mock extends SocketManager{
         connected = false;
     }
 
+    @Override
+    public void destroyConnection(){
+        connected = true;
+    }
 }
 
 class viewMock implements BarChartView{
@@ -90,12 +96,13 @@ public class BarChartPresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         barChartPresenter = new BarChartPresenterImpl(new BarChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
+        barChartPresenter.graphSocket = new Mock();
     }
 
     @Test
     public void testStartConnection() throws Exception{
         barChartPresenter.startConnection();
-//        Assert.assertEquals((boolean)barChartPresenter.getGraphSocket().isConnected(),true);
+        Assert.assertEquals((boolean)barChartPresenter.getGraphSocket().isConnected(),true);
     }
 
     @Test
@@ -103,5 +110,13 @@ public class BarChartPresenterImplTest extends TestCase {
         barChartPresenter.startConnection();
         barChartPresenter.stopConnection();
         Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isConnected(), false);
+    }
+
+    @Test
+    public void testDestroyConnection() throws Exception{
+        barChartPresenter.startConnection();
+        barChartPresenter.stopConnection();
+        barChartPresenter.destroyConnection();
+        Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isNull(), false);
     }
 }

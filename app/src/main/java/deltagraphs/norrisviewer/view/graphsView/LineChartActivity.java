@@ -307,7 +307,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onDestroy() {
         // Otherwise defer to system default behavior.
         super.onDestroy();
-        lineChartPresenter.destroy();
+        lineChartPresenter.destroyConnection();
     }
 
     private void previewY() {

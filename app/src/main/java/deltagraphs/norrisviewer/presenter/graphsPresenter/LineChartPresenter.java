@@ -19,5 +19,5 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface LineChartPresenter {
-    void destroy();
+    void destroyConnection();
 }

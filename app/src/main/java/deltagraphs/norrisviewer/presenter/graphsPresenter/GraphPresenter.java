@@ -30,7 +30,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 
 public abstract class GraphPresenter implements Observer {
-    private SocketManager graphSocket;
+    protected SocketManager graphSocket;
 
     public GraphPresenter(String url) {
         this.graphSocket = new SocketManager(url);

@@ -28,8 +28,8 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
 public class LineChartPresenterImpl extends GraphPresenter implements LineChartPresenter {
 
-    private LineChartView graphView;
-    private LineChart lineChartInstance;
+    protected LineChartView graphView;
+    protected LineChart lineChartInstance;
 
     public LineChartPresenterImpl(LineChartView view, String url) {
         super(url);
@@ -68,8 +68,12 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         //graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
     }
 
-    public void destroy() {
-        stopSocket();
+    public void destroyConnection() {
+        destroySocket();
     }
+
+    public void startConnection(){startSocket((LineChartActivity) graphView, lineChartInstance);}
+
+    public void stopConnection(){stopSocket();}
 
 }
