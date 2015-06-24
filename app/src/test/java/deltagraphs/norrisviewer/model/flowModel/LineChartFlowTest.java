@@ -27,14 +27,16 @@ import org.junit.Assert;
 
     public void setUp() throws Exception {
         super.setUp();
-        String dataString = "{\"data\":[{\"ID\":\"flow1\",\"name\":\"name\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[1,25]}]},{\"ID\":\"flow2\",\"records\":[{\"norrisRecordID\":\"flow2_1435142614086_1\",\"value\":[1,15]}]}]}";
+        String dataString = "{\"data\":[{\"ID\":\"flow1\",\"name\":\"name\", \"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[1,10]}]}]}";
         data = new JSONObject(dataString);
         flow = new LineChartFlow(data.getJSONArray("data").getJSONObject(0));
     }
 
     public void testCreateFlow() throws Exception {
+        String dataString = "{\"data\":[{\"ID\":\"flow1\",\"name\":\"name\", \"records\":[{\"norrisRecordID\":\"flow1_14314086_1\",\"value\":[1,10]}]}]}";
+        data = new JSONObject(dataString);
         flow.createFlow(data.getJSONArray("data").getJSONObject(0));
-        Assert.assertEquals(1, flow.getRecordSize());
+        Assert.assertEquals(2, flow.getRecordSize());
     }
 
     public void testUpdateFlow() throws Exception {
@@ -43,9 +45,7 @@ import org.junit.Assert;
         flow.updateFlow(data);
         Assert.assertEquals(1, flow.getRecordSize());
         Assert.assertEquals(flow.getFlowColour(),"giallo");
-        Assert.assertEquals(flow.getRecordId(0),"");
-        Assert.assertEquals(flow.getRecordValueX(0), 2, 0);
-        Assert.assertEquals(flow.getRecordValueY(0), 20, 0);
+
         Assert.assertEquals(flow.getRecordSize(), 1);
         Assert.assertEquals(flow.getFlowId(), "flow1");
         Assert.assertEquals(flow.getFlowName(), "ora");
@@ -57,7 +57,7 @@ import org.junit.Assert;
     }
 
     public void testAddRecord() throws Exception {
-        String dataString = "{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}]}";
+        String dataString = "{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}";
         data = new JSONObject(dataString);
         flow.addRecord(data);
         Assert.assertEquals(2, flow.getRecordSize());
@@ -71,13 +71,18 @@ import org.junit.Assert;
     }
 
     public void testUpdateRecord() throws Exception {
-        String dataString = "{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}, {\"norrisRecordID\":\"flow1_1435142614086_2\",\"value\":[3,23]}]}";
+        String dataString = "{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}, {\"norrisRecordID\":\"flow1_143\",\"value\":[3,23]}]}";
         data = new JSONObject(dataString);
-        flow.updateRecord(data);
+        flow.updateRecord(data.getJSONArray("records").getJSONObject(0));
+        Assert.assertEquals(flow.getRecordId(0),"flow1_1435142614086_1");
+        Assert.assertEquals(flow.getRecordValueX(0), 2, 0);
+        Assert.assertEquals(flow.getRecordValueY(0), 20, 0);
+        flow.updateRecord(data.getJSONArray("records").getJSONObject(1));
+
     }
 
     public void testDeleteRecord() throws Exception {
-        String dataString = "{\"ID\":\"flow1\",\"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}]}";
+        String dataString = "{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}";
         data = new JSONObject(dataString);
         flow.addRecord(data);
         flow.deleteRecord(data);

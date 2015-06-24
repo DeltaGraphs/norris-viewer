@@ -216,13 +216,15 @@ public class TableFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            JSONArray valueList = data.getJSONArray("values");
-            JSONArray appearance = data.getJSONArray("appearance");
-            int listLength = valueList.length();
-            for (int i = 0; i < listLength; i++) {
-                records.get(recordIndex).values.get(i).data = valueList.getString(i);
-                records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
-                records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
+            if(recordIndex!=-1){
+                JSONArray valueList = data.getJSONArray("values");
+                JSONArray appearance = data.getJSONArray("appearance");
+                int listLength = valueList.length();
+                for (int i = 0; i < listLength; i++) {
+                    records.get(recordIndex).values.get(i).data = valueList.getString(i);
+                    records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
+                    records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

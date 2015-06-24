@@ -302,9 +302,11 @@ public class MapChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            records.get(recordIndex).markerId = data.getString("markerID");
-            records.get(recordIndex).latitude = (float) data.getJSONArray("value").getDouble(0);
-            records.get(recordIndex).longitude = (float) data.getJSONArray("value").getDouble(1);
+            if(recordIndex!=-1){
+                records.get(recordIndex).markerId = data.getString("markerID");
+                records.get(recordIndex).latitude = (float) data.getJSONArray("value").getDouble(0);
+                records.get(recordIndex).longitude = (float) data.getJSONArray("value").getDouble(1);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

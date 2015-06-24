@@ -169,9 +169,11 @@ public class BarChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            JSONArray jsonValues = data.getJSONArray("value");
-            records.get(recordIndex).index = jsonValues.getString(0);
-            records.get(recordIndex).value = jsonValues.getInt(1);
+            if(recordIndex!=-1){
+                JSONArray jsonValues = data.getJSONArray("value");
+                records.get(recordIndex).index = jsonValues.getString(0);
+                records.get(recordIndex).value = jsonValues.getInt(1);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
