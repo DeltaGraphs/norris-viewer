@@ -55,12 +55,8 @@ public class BarChartImplTest extends TestCase {
         data = new JSONObject(dataString);
         barChart.setParameters(data);
         Assert.assertEquals(barChart.getAxisX().getName(), "tempo");
-        Assert.assertEquals(barChart.getAxisX().getMaxIndex(), 7.0, 0);
-        Assert.assertEquals(barChart.getAxisX().getMinIndex(), 0.0, 0);
         Assert.assertEquals(barChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(barChart.getAxisY().getName(), "pressione");
-        Assert.assertEquals(barChart.getAxisY().getMaxIndex(), 0, 0);
-        Assert.assertEquals(barChart.getAxisY().getMinIndex(), 0, 0);
         Assert.assertEquals(barChart.getAxisY().getTicks(), 10);
         Assert.assertEquals(barChart.getBackground(), "#FFFFFF");
         Assert.assertEquals(barChart.getBarOrientation(), "V");
@@ -79,12 +75,8 @@ public class BarChartImplTest extends TestCase {
         data = new JSONObject(dataString);
         barChart.updateParameters(data);
         Assert.assertEquals(barChart.getAxisX().getName(), "temp");
-        Assert.assertEquals(barChart.getAxisX().getMaxIndex(), 5.0, 0);
-        Assert.assertEquals(barChart.getAxisX().getMinIndex(), 1.0, 0);
         Assert.assertEquals(barChart.getAxisX().getTicks(), 9);
         Assert.assertEquals(barChart.getAxisY().getName(), "pression");
-        Assert.assertEquals(barChart.getAxisY().getMaxIndex(), 0, 0);
-        Assert.assertEquals(barChart.getAxisY().getMinIndex(), 0, 0);
         Assert.assertEquals(barChart.getAxisY().getTicks(), 9);
         Assert.assertEquals(barChart.getBackground(), "#FFFFFE");
         Assert.assertEquals(barChart.getBarOrientation(), "H");

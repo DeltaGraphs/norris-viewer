@@ -56,12 +56,8 @@ public class LineChartImplTest extends TestCase {
         Assert.assertEquals(lineChart.getHorizontalGrid(), true);
         Assert.assertEquals(lineChart.getBackground(), "#FFFFFF");
         Assert.assertEquals(lineChart.getAxisX().getName(), "tempo");
-        Assert.assertEquals(lineChart.getAxisX().getMaxIndex(), 0.0, 0);
-        Assert.assertEquals(lineChart.getAxisX().getMinIndex(), 0.0, 0);
         Assert.assertEquals(lineChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(lineChart.getAxisY().getName(), "temperatura");
-        Assert.assertEquals(lineChart.getAxisY().getMaxIndex(), 0, 0);
-        Assert.assertEquals(lineChart.getAxisY().getMinIndex(), 0, 0);
         Assert.assertEquals(lineChart.getAxisY().getTicks(), 10);
 
     }
@@ -83,12 +79,8 @@ public class LineChartImplTest extends TestCase {
         Assert.assertEquals(lineChart.getHorizontalGrid(), false);
         Assert.assertEquals(lineChart.getBackground(), "#FFCCFF");
         Assert.assertEquals(lineChart.getAxisX().getName(), "tempo");
-        Assert.assertEquals(lineChart.getAxisX().getMaxIndex(), 7.0, 0);
-        Assert.assertEquals(lineChart.getAxisX().getMinIndex(), 2.0, 0);
         Assert.assertEquals(lineChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(lineChart.getAxisY().getName(), "temperatura");
-        Assert.assertEquals(lineChart.getAxisY().getMaxIndex(), 5, 0);
-        Assert.assertEquals(lineChart.getAxisY().getMinIndex(), 3, 0);
         Assert.assertEquals(lineChart.getAxisY().getTicks(), 20);
     }
 
