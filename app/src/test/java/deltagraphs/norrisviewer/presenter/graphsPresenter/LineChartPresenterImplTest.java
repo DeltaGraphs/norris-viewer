@@ -31,6 +31,7 @@ import java.util.Observer;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.graphsModel.AxisModel;
 import deltagraphs.norrisviewer.model.graphsModel.LineChart;
+import deltagraphs.norrisviewer.model.graphsModel.LineChartImpl;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 
 
@@ -54,7 +55,11 @@ class AxisModelMock extends AxisModel{
 }
 
 
-class LineChartMock implements LineChart {
+class LineChartMock extends LineChartImpl {
+
+    public LineChartMock(Observer chartPresenter) {
+        super(chartPresenter);
+    }
 
     @Override
     public AxisModel getAxisX() {
@@ -93,6 +98,29 @@ class LineChartMock implements LineChart {
         return null;
     }
 }
+
+class mockActivity extends LineChartActivity{
+    boolean axis = false;
+    boolean grid = false;
+    boolean data = false;
+
+    boolean getAxis(){ return axis; }
+    boolean getGrid(){ return grid; }
+    boolean getData(){ return data; }
+
+    public void setAxis(char axisXorY, String name, int ticks){
+        axis = true;
+    }
+
+    public void setGrid(Boolean horizontal, Boolean vertical){
+        grid = true;
+    }
+
+    public void setData(ArrayList<FlowModel> flowList, String signal) {
+        data = true;
+    }
+}
+
 public class LineChartPresenterImplTest extends TestCase {
 
     public LineChartPresenterImpl lineChartPresenter;
@@ -103,7 +131,7 @@ public class LineChartPresenterImplTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        lineChartPresenter = new LineChartPresenterImpl(new LineChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
+        lineChartPresenter = new LineChartPresenterImpl(new mockActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
         lineChartPresenter.graphSocket = new Mock();
     }
 
@@ -130,7 +158,11 @@ public class LineChartPresenterImplTest extends TestCase {
 
     @Test
     public void testSetGraphParameters() throws Exception{
-        lineChartPresenter.lineChartInstance = new LineChartMock();
-
+        lineChartPresenter.lineChartInstance = new LineChartMock(lineChartPresenter);
+        String signal = "configGraph";
+        lineChartPresenter.update((Observable)lineChartPresenter.lineChartInstance, signal);
+        Assert.assertTrue(((mockActivity) lineChartPresenter.graphView).getAxis());
+        Assert.assertTrue(((mockActivity)lineChartPresenter.graphView).getData());
+        Assert.assertTrue(((mockActivity)lineChartPresenter.graphView).getGrid());
     }
 }

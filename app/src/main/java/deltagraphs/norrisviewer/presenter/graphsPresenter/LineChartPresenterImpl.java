@@ -60,7 +60,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         );
         //graphView.setViewFinder(lineChartInstance.getViewFinder());
         graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
-        //graphView.setLegendOnPoint(lineChartInstance.getLegendOnPoint());
     }
 
     public void destroyConnection() {

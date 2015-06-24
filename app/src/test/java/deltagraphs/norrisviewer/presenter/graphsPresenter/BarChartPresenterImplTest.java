@@ -65,7 +65,7 @@ class Mock extends SocketManager{
 
     @Override
     public void destroyConnection(){
-        connected = true;
+        connected = false;
     }
 }
 
