@@ -131,5 +131,6 @@ public class LineChartPresenterImplTest extends TestCase {
     @Test
     public void testSetGraphParameters() throws Exception{
         lineChartPresenter.lineChartInstance = new LineChartMock();
+
     }
 }
