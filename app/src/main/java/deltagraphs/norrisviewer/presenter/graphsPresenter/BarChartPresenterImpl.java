@@ -32,8 +32,8 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 
 public class BarChartPresenterImpl extends GraphPresenter implements BarChartPresenter {
 
-    private BarChartView graphView;
-    private BarChart barChartInstance;
+    protected BarChartView graphView;
+    protected BarChart barChartInstance;
 
 
     public BarChartPresenterImpl(BarChartView view, String url) {
@@ -65,10 +65,6 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisY().getTicks()
         );
         */
-    }
-
-    public void viewPointLegend() {
-
     }
 
     public void stopConnection() {

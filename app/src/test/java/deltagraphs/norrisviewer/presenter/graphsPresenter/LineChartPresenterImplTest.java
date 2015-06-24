@@ -99,7 +99,7 @@ class LineChartMock extends LineChartImpl {
     }
 }
 
-class mockActivity extends LineChartActivity{
+class mockLineChartActivity extends LineChartActivity{
     boolean axis = false;
     boolean grid = false;
     boolean data = false;
@@ -131,7 +131,7 @@ public class LineChartPresenterImplTest extends TestCase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        lineChartPresenter = new LineChartPresenterImpl(new mockActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
+        lineChartPresenter = new LineChartPresenterImpl(new mockLineChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
         lineChartPresenter.graphSocket = new Mock();
     }
 
@@ -161,8 +161,8 @@ public class LineChartPresenterImplTest extends TestCase {
         lineChartPresenter.lineChartInstance = new LineChartMock(lineChartPresenter);
         String signal = "configGraph";
         lineChartPresenter.update((Observable)lineChartPresenter.lineChartInstance, signal);
-        Assert.assertTrue(((mockActivity) lineChartPresenter.graphView).getAxis());
-        Assert.assertTrue(((mockActivity)lineChartPresenter.graphView).getData());
-        Assert.assertTrue(((mockActivity)lineChartPresenter.graphView).getGrid());
+        Assert.assertTrue(((mockLineChartActivity) lineChartPresenter.graphView).getAxis());
+        Assert.assertTrue(((mockLineChartActivity)lineChartPresenter.graphView).getData());
+        Assert.assertTrue(((mockLineChartActivity)lineChartPresenter.graphView).getGrid());
     }
 }

@@ -19,12 +19,17 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;/*
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.graphsModel.AxisModel;
+import deltagraphs.norrisviewer.model.graphsModel.BarChartImpl;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
@@ -69,13 +74,36 @@ class Mock extends SocketManager{
     }
 }
 
-class viewMock implements BarChartView{
+class BarChartMock extends BarChartImpl {
+
+    public BarChartMock(Observer chartPresenter) {
+        super(chartPresenter);
+    }
+
+    @Override
+    public AxisModel getAxisX() {
+        JSONObject json=new JSONObject();
+        return new AxisModelMock(json);
+    }
+
+    @Override
+    public AxisModel getAxisY() {
+        JSONObject json=new JSONObject();
+        return new AxisModelMock(json);
+    }
+}
+
+class mockBarChartActivity implements BarChartView{
 
     String orientation;
 
     @Override
     public void setBarOrientation(String orientation) {
         this.orientation= orientation;
+    }
+
+    public String getBarOrientation(){
+        return orientation;
     }
 
     @Override
@@ -118,5 +146,13 @@ public class BarChartPresenterImplTest extends TestCase {
         barChartPresenter.stopConnection();
         barChartPresenter.destroyConnection();
         Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isNull(), false);
+    }
+
+    @Test
+    public void testSetGraphParameters() throws Exception{
+        barChartPresenter.barChartInstance = new BarChartMock(barChartPresenter);
+        String signal = "configGraph";
+        barChartPresenter.update((Observable) barChartPresenter.barChartInstance, signal);
+        Assert.assertEquals(((mockBarChartActivity) barChartPresenter.graphView).getBarOrientation(),"horizontal");
     }
 }
