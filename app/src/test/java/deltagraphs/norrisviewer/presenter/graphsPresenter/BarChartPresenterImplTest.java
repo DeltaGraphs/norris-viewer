@@ -147,9 +147,8 @@ public class BarChartPresenterImplTest extends TestCase {
     @Test
     public void testDestroyConnection() throws Exception{
         barChartPresenter.startConnection();
-        barChartPresenter.stopConnection();
         barChartPresenter.destroyConnection();
-        Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isNull(), false);
+        Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isConnected(), false);
     }
 
     @Test

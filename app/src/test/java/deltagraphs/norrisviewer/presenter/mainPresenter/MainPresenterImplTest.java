@@ -32,6 +32,10 @@ public class MainPresenterImplTest extends TestCase {
 
     MainPresenterImpl mainPresenter;
 
+    class MockMainActivity extends MainActivity{
+
+    }
+
     @Before
     public void setUp() throws Exception {
         super.setUp();

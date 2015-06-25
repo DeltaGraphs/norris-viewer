@@ -27,8 +27,8 @@ import deltagraphs.norrisviewer.view.graphsView.*;
 
 public class MapChartPresenterImpl extends GraphPresenter implements MapChartPresenter {
 
-    private MapChartView graphView;
-    private MapChart mapChartInstance;
+    protected MapChartView graphView;
+    protected MapChart mapChartInstance;
 
     public MapChartPresenterImpl(MapChartView view, String url) {
         super(url);

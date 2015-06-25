@@ -20,6 +20,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
 public interface TablePresenter {
 
+    void stopConnection();
     void destroyConnection();
+    void startConnection();
 
 }

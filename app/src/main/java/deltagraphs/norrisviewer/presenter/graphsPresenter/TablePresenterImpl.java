@@ -25,8 +25,8 @@ import deltagraphs.norrisviewer.view.graphsView.*;
 
 public class TablePresenterImpl extends GraphPresenter implements TablePresenter {
 
-    private TableView graphView;
-    private Table tableInstance;
+    protected TableView graphView;
+    protected Table tableInstance;
 
     public TablePresenterImpl(TableView view, String url) {
         super(url);
@@ -64,5 +64,9 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 
     public void destroyConnection() {
         destroySocket();
+    }
+
+    public void startConnection() {
+        startSocket((TableActivity) graphView, tableInstance);
     }
 }
