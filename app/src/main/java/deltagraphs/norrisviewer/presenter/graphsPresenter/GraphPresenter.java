@@ -57,8 +57,9 @@ public abstract class GraphPresenter implements Observer {
     public void destroySocket() {
         graphSocket.destroyConnection();
     }
-
+/*
     @Override
     public void update(Observable observable, Object data) {
     }
+    */
 }

@@ -25,6 +25,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import java.util.Observable;
+
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
 import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
@@ -68,19 +70,31 @@ class SocketMock extends SocketManager {
     }
 }
 
+class MockMainActivity extends MainActivity{
+
+    boolean update = false;
+
+    @Override
+    public void updatePagesList(PageModel pageModel){
+        update = true;
+    }
+
+    public boolean getUpdate(){
+        return update;
+    }
+}
+
 public class MainPresenterImplTest extends TestCase {
 
     MainPresenterImpl mainPresenter;
 
-    class MockMainActivity extends MainActivity{
-
-    }
 
     @Before
     public void setUp() throws Exception {
         super.setUp();
         mainPresenter = new MainPresenterImpl(new MainActivity());
         mainPresenter.mainSocket = new SocketMock();
+        mainPresenter.mainView = new MockMainActivity();
     }
 
     @Test
@@ -110,7 +124,19 @@ public class MainPresenterImplTest extends TestCase {
 
     @Test
     public void testReinitializePageList() throws Exception{
+        mainPresenter.reinitializePageList();
 
+    }
+
+    @Test
+    public void testIsSocketNull() throws Exception{
+        Assert.assertFalse(mainPresenter.isSocketNull());
+    }
+
+    @Test
+    public void testUpdate() throws Exception{
+        mainPresenter.update((Observable) mainPresenter.pageModel, new Object());
+        Assert.assertTrue(((MockMainActivity)mainPresenter.mainView).getUpdate());
     }
 
 /*

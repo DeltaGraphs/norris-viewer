@@ -45,7 +45,7 @@ import java.util.Observer;
         assertEquals(x.getPageListSize(), 2);
         assertEquals(x.getPage(0).getId(), "page1");
         assertEquals(x.getPage(0).getName(), "Pagina 1");
-        assertEquals(x.getPage(1).getDescription(),"Questa � una bella pagina 2");
+        assertEquals(x.getPage(1).getDescription(),"Questa è una bella pagina 2");
         assertEquals(x.getItemListSize(0), 4);
         assertEquals(x.getItemList(0).get(0).getId(), "map1");
         assertEquals(x.getItemList(0).get(0).getName(), "APS");
