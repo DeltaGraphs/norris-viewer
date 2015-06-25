@@ -86,7 +86,9 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
 
     // exclude auto-generated classes and tests
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
-                      'android/**/*.*', '**/Convert.*']
+                      'android/**/*.*', '**/Convert.*', '**/SampleTableAdapter.*', '**/MatrixTableAdapter.*', '**/Hsl.*', '**/TableFixHeaders.*',
+                      '**/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/ChartType.*', '**/RecordListAdapter.*',
+                      '**/RecordList.*', '**/Record.*']
     def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
