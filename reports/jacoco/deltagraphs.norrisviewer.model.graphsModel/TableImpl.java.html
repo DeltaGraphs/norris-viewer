@@ -34,96 +34,98 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 public class TableImpl extends Graph implements Table {
 
     private String addRowOn;  // top or bottom
-<span class="nc" id="L37">    private String sortOrder = null; //ascendent or descendent</span>
-<span class="nc" id="L38">    private String sortColumn = null; // sorted by column &quot;sortColumn&quot;</span>
+<span class="fc" id="L37">    private String sortOrder = null; //ascendent or descendent</span>
+<span class="fc" id="L38">    private String sortColumn = null; // sorted by column &quot;sortColumn&quot;</span>
 
-<span class="nc" id="L40">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L40">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
 
     public String getAddRowOn() {
-<span class="nc" id="L43">        return addRowOn;</span>
+<span class="fc" id="L43">        return addRowOn;</span>
     }
 
     public String sortByCol() {
-<span class="nc" id="L47">        return sortColumn;</span>
+<span class="fc" id="L47">        return sortColumn;</span>
     }
 
-<span class="nc" id="L50">    public String getSortOrder() { return sortOrder; }</span>
+    public String getSortOrder() {
+<span class="fc" id="L51">        return sortOrder;</span>
+    }
 
     public int getNumberOfColumns() {
-<span class="nc" id="L53">        return headers.size();</span>
+<span class="fc" id="L55">        return headers.size();</span>
     }
 
     //column parameters
     public String getHeaderValue(int index) {
-<span class="nc" id="L58">        return headers.get(index);</span>
+<span class="fc" id="L60">        return headers.get(index);</span>
     }
 
-<span class="nc" id="L61">    public TableImpl(Observer chartPresenter) {</span>
-<span class="nc" id="L62">        addObserver(chartPresenter);</span>
-<span class="nc" id="L63">    }</span>
+<span class="fc" id="L63">    public TableImpl(Observer chartPresenter) {</span>
+<span class="fc" id="L64">        addObserver(chartPresenter);</span>
+<span class="fc" id="L65">    }</span>
 
     public void setParameters(JSONObject data) {
         try {
-<span class="nc" id="L67">            title = data.getString(&quot;title&quot;);</span>
-<span class="nc" id="L68">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
-<span class="nc bnc" id="L69" title="All 4 branches missed.">            if (data.has(&quot;sort&quot;) &amp;&amp; (!(data.isNull(&quot;sort&quot;)))) {</span>
-<span class="nc" id="L70">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
-<span class="nc" id="L71">                sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
+<span class="fc" id="L69">            title = data.getString(&quot;title&quot;);</span>
+<span class="fc" id="L70">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="pc bpc" id="L71" title="2 of 4 branches missed.">            if (data.has(&quot;sort&quot;) &amp;&amp; (!(data.isNull(&quot;sort&quot;)))) {</span>
+<span class="fc" id="L72">                sortOrder = data.getJSONObject(&quot;sort&quot;).getJSONArray(&quot;ordering&quot;).getString(0);</span>
+<span class="fc" id="L73">                sortColumn = data.getJSONObject(&quot;sort&quot;).getJSONArray(&quot;column&quot;).getString(0);</span>
             }
 
-<span class="nc" id="L74">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="nc" id="L75">            int jsonColumnsSize = jsonColumns.length();</span>
-<span class="nc bnc" id="L76" title="All 2 branches missed.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="nc" id="L77">                headers.add(jsonColumns.getString(i));</span>
+<span class="fc" id="L76">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L77">            int jsonColumnsSize = jsonColumns.length();</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="fc" id="L79">                headers.add(jsonColumns.getString(i));</span>
             }
 
             //changes to flow params
-<span class="nc" id="L81">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="nc" id="L82">            int flowLenght = jsonFlows.length();</span>
-<span class="nc bnc" id="L83" title="All 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="nc" id="L84">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="nc" id="L85">                addFlow(flow);</span>
+<span class="fc" id="L83">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="fc" id="L84">            int flowLenght = jsonFlows.length();</span>
+<span class="fc bfc" id="L85" title="All 2 branches covered.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="fc" id="L86">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="fc" id="L87">                addFlow(flow);</span>
             }
-<span class="nc" id="L87">        } catch (JSONException e) {</span>
-<span class="nc" id="L88">            e.printStackTrace();</span>
-<span class="nc" id="L89">        }</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L89">        } catch (JSONException e) {</span>
+<span class="nc" id="L90">            e.printStackTrace();</span>
+<span class="fc" id="L91">        }</span>
+<span class="fc" id="L92">    }</span>
 
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="nc bnc" id="L95" title="All 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="nc" id="L96">                title = data.getString(&quot;title&quot;);</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="fc" id="L98">                title = data.getString(&quot;title&quot;);</span>
 
-<span class="nc bnc" id="L98" title="All 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
-<span class="nc" id="L99">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
-<span class="nc" id="L100">                Log.d(&quot;&quot;, addRowOn);</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
+<span class="fc" id="L101">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="fc" id="L102">                Log.d(&quot;&quot;, addRowOn);</span>
             }
-<span class="nc bnc" id="L102" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;ordering&quot;)))</span>
-<span class="nc" id="L103">                sortOrder = data.getJSONObject(&quot;sort&quot;).getString(&quot;ordering&quot;);</span>
+<span class="pc bpc" id="L104" title="2 of 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;ordering&quot;)))</span>
+<span class="fc" id="L105">                sortOrder = data.getJSONObject(&quot;sort&quot;).getJSONArray(&quot;ordering&quot;).getString(0);</span>
 
-<span class="nc bnc" id="L105" title="All 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;column&quot;)))</span>
-<span class="nc bnc" id="L106" title="All 2 branches missed.">                if (!(data.isNull(&quot;sort&quot;)))</span>
-<span class="nc" id="L107">                    sortColumn = data.getJSONObject(&quot;sort&quot;).getString(&quot;column&quot;);</span>
-<span class="nc" id="L108">                else sortColumn = null;</span>
+<span class="pc bpc" id="L107" title="2 of 4 branches missed.">            if ((data.has(&quot;sort&quot;)) &amp;&amp; (data.getJSONObject(&quot;sort&quot;).has(&quot;column&quot;)))</span>
+<span class="pc bpc" id="L108" title="1 of 2 branches missed.">                if (!(data.isNull(&quot;sort&quot;)))</span>
+<span class="fc" id="L109">                    sortColumn = data.getJSONObject(&quot;sort&quot;).getJSONArray(&quot;column&quot;).getString(0);</span>
+<span class="nc" id="L110">                else sortColumn = null;</span>
 
-<span class="nc bnc" id="L110" title="All 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
-<span class="nc" id="L111">                headers = new ArrayList&lt;String&gt;();</span>
-<span class="nc" id="L112">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="nc" id="L113">                int jsonColumnsSize = jsonColumns.length();</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="nc" id="L115">                    headers.add(jsonColumns.getString(i));</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
+<span class="fc" id="L113">                headers = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L114">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L115">                int jsonColumnsSize = jsonColumns.length();</span>
+<span class="fc bfc" id="L116" title="All 2 branches covered.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="fc" id="L117">                    headers.add(jsonColumns.getString(i));</span>
                 }
             }
 
-<span class="nc" id="L119">        } catch (Exception e) {</span>
-<span class="nc" id="L120">            e.printStackTrace();</span>
-<span class="nc" id="L121">        }</span>
-<span class="nc" id="L122">    }</span>
+<span class="nc" id="L121">        } catch (Exception e) {</span>
+<span class="nc" id="L122">            e.printStackTrace();</span>
+<span class="fc" id="L123">        }</span>
+<span class="fc" id="L124">    }</span>
 
     @Override
     public void addFlow(JSONObject flow) {
-<span class="nc" id="L126">        flowList.add(new TableFlow(flow));</span>
-<span class="nc" id="L127">    }</span>
+<span class="fc" id="L128">        flowList.add(new TableFlow(flow));</span>
+<span class="fc" id="L129">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
