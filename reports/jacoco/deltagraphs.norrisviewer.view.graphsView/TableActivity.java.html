@@ -219,26 +219,26 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
         private final String name;
         private final List&lt;Record&gt; list;
 
-<span class="nc" id="L222">        RecordList(String name) {</span>
-<span class="nc" id="L223">            this.name = name;</span>
-<span class="nc" id="L224">            list = new ArrayList&lt;Record&gt;();</span>
-<span class="nc" id="L225">        }</span>
+        RecordList(String name) {
+            this.name = name;
+            list = new ArrayList&lt;Record&gt;();
+        }
 
         public int size() {
-<span class="nc" id="L228">            return list.size();</span>
+            return list.size();
         }
 
         public Record get(int i) {
-<span class="nc" id="L232">            return list.get(i);</span>
+            return list.get(i);
         }
     }
 
     private class Record {
         private final String[] data;
 
-<span class="nc" id="L239">        private Record(String[] values) {</span>
-<span class="nc" id="L240">            data = values;</span>
-<span class="nc" id="L241">        }</span>
+        private Record(String[] values) {
+            data = values;
+        }
 
     }
 
@@ -247,105 +247,105 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
         RecordList families[];
 
-<span class="nc" id="L250">        private final int[] widths = {</span>
+        private final int[] widths = {
                 80
         };
         private final float density;
 
-<span class="nc" id="L255">        public RecordListAdapter(Context context) {</span>
-<span class="nc" id="L256">            families = new RecordList[]{</span>
+        public RecordListAdapter(Context context) {
+            families = new RecordList[]{
                     new RecordList(&quot;&quot;)
             };
 
-<span class="nc" id="L260">            density = context.getResources().getDisplayMetrics().density;</span>
-<span class="nc" id="L261">        }</span>
+            density = context.getResources().getDisplayMetrics().density;
+        }
 
         @Override
         public int getRowCount() {
-<span class="nc" id="L265">            return rows;</span>
+            return rows;
         }
 
         @Override
         public int getColumnCount() {
-<span class="nc" id="L270">            return headers.length - 1;</span>
+            return headers.length - 1;
         }
 
         @Override
         public View getView(int row, int column, View convertView, ViewGroup parent) {
             final View view;
-<span class="nc bnc" id="L276" title="All 6 branches missed.">            switch (getItemViewType(row, column)) {</span>
+            switch (getItemViewType(row, column)) {
                 case 0:
-<span class="nc" id="L278">                    view = getFirstHeader(row, column, convertView, parent);</span>
-<span class="nc" id="L279">                    break;</span>
+                    view = getFirstHeader(row, column, convertView, parent);
+                    break;
                 case 1:
-<span class="nc" id="L281">                    view = getHeader(row, column, convertView, parent);</span>
-<span class="nc" id="L282">                    break;</span>
+                    view = getHeader(row, column, convertView, parent);
+                    break;
                 case 2:
-<span class="nc" id="L284">                    view = getFirstBody(row, column, convertView, parent);</span>
-<span class="nc" id="L285">                    break;</span>
+                    view = getFirstBody(row, column, convertView, parent);
+                    break;
                 case 3:
-<span class="nc" id="L287">                    view = getBody(row, column, convertView, parent);</span>
-<span class="nc" id="L288">                    break;</span>
+                    view = getBody(row, column, convertView, parent);
+                    break;
                 case 4:
-<span class="nc" id="L290">                    view = getFamilyView(row, column, convertView, parent);</span>
-<span class="nc" id="L291">                    break;</span>
+                    view = getFamilyView(row, column, convertView, parent);
+                    break;
                 default:
-<span class="nc" id="L293">                    throw new RuntimeException(&quot;wtf?&quot;);</span>
+                    throw new RuntimeException(&quot;wtf?&quot;);
             }
-<span class="nc" id="L295">            return view;</span>
+            return view;
         }
 
         private View getFirstHeader(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L299" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L300">                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);</span>
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);
             }
-<span class="nc" id="L302">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);</span>
-<span class="nc" id="L303">            return convertView;</span>
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);
+            return convertView;
         }
 
         private View getHeader(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L307" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L308">                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);</span>
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);
             }
-<span class="nc" id="L310">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);</span>
-<span class="nc" id="L311">            return convertView;</span>
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);
+            return convertView;
         }
 
         private View getFirstBody(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L315" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L316">                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);</span>
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);
             }
-<span class="nc bnc" id="L318" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
-<span class="nc" id="L319">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
-<span class="nc" id="L320">            return convertView;</span>
+            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);
+            return convertView;
         }
 
         private View getBody(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L324" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L325">                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);</span>
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);
             }
-<span class="nc bnc" id="L327" title="All 2 branches missed.">            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);</span>
-<span class="nc" id="L328">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);</span>
-<span class="nc" id="L329">            return convertView;</span>
+            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);
+            return convertView;
         }
 
         private View getFamilyView(int row, int column, View convertView, ViewGroup parent) {
-<span class="nc bnc" id="L333" title="All 2 branches missed.">            if (convertView == null) {</span>
-<span class="nc" id="L334">                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);</span>
+            if (convertView == null) {
+                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);
             }
             final String string;
-<span class="nc bnc" id="L337" title="All 2 branches missed.">            if (column == -1) {</span>
-<span class="nc" id="L338">                string = getFamily(0).name;</span>
+            if (column == -1) {
+                string = getFamily(0).name;
             } else {
-<span class="nc" id="L340">                string = &quot;&quot;;</span>
+                string = &quot;&quot;;
             }
-<span class="nc" id="L342">            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);</span>
-<span class="nc" id="L343">            return convertView;</span>
+            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);
+            return convertView;
         }
 
         @Override
         public int getWidth(int column) {
-<span class="nc" id="L348">            return Math.round(80 * density);</span>
+            return Math.round(80 * density);
         }
 
         @Override
@@ -358,57 +358,57 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
             } else {
                 height = 45;
             }*/
-<span class="nc" id="L361">            return Math.round(35 * density);</span>
+            return Math.round(35 * density);
         }
 
         @Override
         public int getItemViewType(int row, int column) {
             final int itemViewType;
-<span class="nc bnc" id="L367" title="All 4 branches missed.">            if (row == -1 &amp;&amp; column == -1) {</span>
-<span class="nc" id="L368">                itemViewType = 0;</span>
-<span class="nc bnc" id="L369" title="All 2 branches missed.">            } else if (row == -1) {</span>
-<span class="nc" id="L370">                itemViewType = 1;</span>
-<span class="nc bnc" id="L371" title="All 2 branches missed.">            } else if (isFamily(row)) {</span>
-<span class="nc" id="L372">                itemViewType = 4;</span>
-<span class="nc bnc" id="L373" title="All 2 branches missed.">            } else if (column == -1) {</span>
-<span class="nc" id="L374">                itemViewType = 2;</span>
+            if (row == -1 &amp;&amp; column == -1) {
+                itemViewType = 0;
+            } else if (row == -1) {
+                itemViewType = 1;
+            } else if (isFamily(row)) {
+                itemViewType = 4;
+            } else if (column == -1) {
+                itemViewType = 2;
             } else {
-<span class="nc" id="L376">                itemViewType = 3;</span>
+                itemViewType = 3;
             }
-<span class="nc" id="L378">            return itemViewType;</span>
+            return itemViewType;
         }
 
         private boolean isFamily(int row) {
-<span class="nc" id="L382">            int family = 0;</span>
-<span class="nc bnc" id="L383" title="All 2 branches missed.">            while (row &gt; 0) {</span>
-<span class="nc" id="L384">                row -= families[family].size() + 1;</span>
-<span class="nc" id="L385">                family++;</span>
+            int family = 0;
+            while (row &gt; 0) {
+                row -= families[family].size() + 1;
+                family++;
             }
-<span class="nc bnc" id="L387" title="All 2 branches missed.">            return row == 0;</span>
+            return row == 0;
         }
 
         private RecordList getFamily(int row) {
-<span class="nc" id="L391">            int family = 0;</span>
-<span class="nc bnc" id="L392" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
-<span class="nc" id="L393">                row -= families[family].size() + 1;</span>
-<span class="nc" id="L394">                family++;</span>
+            int family = 0;
+            while (row &gt;= 0) {
+                row -= families[family].size() + 1;
+                family++;
             }
-<span class="nc" id="L396">            return families[family - 1];</span>
+            return families[family - 1];
         }
 
         private Record getDevice(int row) {
-<span class="nc" id="L400">            int family = 0;</span>
-<span class="nc bnc" id="L401" title="All 2 branches missed.">            while (row &gt;= 0) {</span>
-<span class="nc" id="L402">                row -= families[family].size() + 1;</span>
-<span class="nc" id="L403">                family++;</span>
+            int family = 0;
+            while (row &gt;= 0) {
+                row -= families[family].size() + 1;
+                family++;
             }
-<span class="nc" id="L405">            family--;</span>
-<span class="nc" id="L406">            return families[family].get(row + families[family].size());</span>
+            family--;
+            return families[family].get(row + families[family].size());
         }
 
         @Override
         public int getViewTypeCount() {
-<span class="nc" id="L411">            return 5;</span>
+            return 5;
         }
     }
 
