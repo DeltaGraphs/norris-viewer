@@ -51,6 +51,39 @@ import java.util.Observer;
         assertEquals(x.getItemList(0).get(0).getName(), "APS");
         assertEquals(x.getItemList(0).get(0).getType(), "MapChart");
         assertEquals(x.getItemList(0).get(0).getUrl(), "http://norris-nrti-dev.herokuapp.com/page1/map1");
+
+        String dataString = "{\"ID\":\"page3\",\"name\":\"PaginaUno\",\"description\":\"lapagina3\",\"SocketURL\":\"http://localhost/page1\",\"data\":[{\"ID\":\"grafico1\",\"title\":\"GraficoUno\",\"type\":\"LineChart\",\"socketURL\":\"http://localhost/page1/grafico1\"}]}";
+        json = new JSONObject(dataString);
+        x.setPageModel(json, "insertPage");
+        assertEquals(x.getPageListSize(), 3);
+        assertEquals(x.getPage(2).getId(), "page3");
+        assertEquals(x.getPage(2).getName(), "PaginaUno");
+        assertEquals(x.getPage(2).getDescription(),"lapagina3");
+        assertEquals(x.getItemListSize(2), 1);
+
+        dataString = "{\"ID\":\"page1\",\"name\":\"PaginaCiao\",\"description\":\"questalapaginauno\",\"socketURL\":\"http://localhost/page1\"}";
+        json = new JSONObject(dataString);
+        x.setPageModel(json, "updatePage");
+        assertEquals(x.getPage(0).getName(), "PaginaCiao");
+        assertEquals(x.getPage(0).getDescription(),"questalapaginauno");
+
+        dataString = "{\"ID\":\"page1\", \"data\":{\"ID\":\"graficoX\",\"title\":\"GraficoX\",\"type\":\"LineChart\",\"socketURL\":\"http://localhost/page1/grafico1\"}}";
+        json = new JSONObject(dataString);
+        x.setPageModel(json, "insertGraph");
+        assertEquals(x.getItemListSize(0), 5);
+        assertEquals(x.getItemList(0).get(4).getId(), "graficoX");
+        assertEquals(x.getItemList(0).get(4).getName(), "GraficoX");
+        assertEquals(x.getItemList(0).get(4).getType(), "LineChart");
+        assertEquals(x.getItemList(0).get(4).getUrl(), "http://localhost/page1/grafico1");
+
+        dataString = "{\"ID\":\"page1\",\"data\":{\"ID\":\"map1\",\"title\":\"Grafico11\",\"type\":\"LineChart\",\"socketURL\":\"http://localhost/page1/grafico1\"}}";
+        json = new JSONObject(dataString);
+        x.setPageModel(json, "updateGraph");
+        assertEquals(x.getItemListSize(0), 5);
+        assertEquals(x.getItemList(0).get(0).getName(), "Grafico11");
+        assertEquals(x.getItemList(0).get(0).getType(), "LineChart");
+        assertEquals(x.getItemList(0).get(0).getUrl(), "http://localhost/page1/grafico1");
+
     }
 
     @Test

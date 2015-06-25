@@ -145,6 +145,7 @@ public class PageModelImpl extends Observable implements PageModel {
                         if (pageList.get(i).getId().equals(data.getString("ID"))) pageIndex = i;
                     }
                     if (pageIndex != -1) {
+                        data= data.getJSONObject("data");
                         String itemId = data.getString("ID");
                         String itemName = data.getString("title");
                         String itemType = data.getString("type");
@@ -169,6 +170,7 @@ public class PageModelImpl extends Observable implements PageModel {
 
                     //then it searches a graph in the list of the found page, with an index equal to the JSON's one
 
+                    data = data.getJSONObject("data");
                     if (pageIndex != -1) {
                         int graphIndex = -1;
                         for (int j = 0; j < pageList.size(); j++) {
