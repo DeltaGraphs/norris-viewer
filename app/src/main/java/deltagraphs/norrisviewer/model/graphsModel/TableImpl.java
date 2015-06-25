@@ -47,7 +47,9 @@ public class TableImpl extends Graph implements Table {
         return sortColumn;
     }
 
-    public String getSortOrder() { return sortOrder; }
+    public String getSortOrder() {
+        return sortOrder;
+    }
 
     public int getNumberOfColumns() {
         return headers.size();
@@ -67,8 +69,8 @@ public class TableImpl extends Graph implements Table {
             title = data.getString("title");
             addRowOn = data.getString("addRowOn");
             if (data.has("sort") && (!(data.isNull("sort")))) {
-                sortOrder = data.getJSONObject("sort").getString("ordering");
-                sortColumn = data.getJSONObject("sort").getString("column");
+                sortOrder = data.getJSONObject("sort").getJSONArray("ordering").getString(0);
+                sortColumn = data.getJSONObject("sort").getJSONArray("column").getString(0);
             }
 
             JSONArray jsonColumns = data.getJSONArray("headers");
@@ -100,11 +102,11 @@ public class TableImpl extends Graph implements Table {
                 Log.d("", addRowOn);
             }
             if ((data.has("sort")) && (data.getJSONObject("sort").has("ordering")))
-                sortOrder = data.getJSONObject("sort").getString("ordering");
+                sortOrder = data.getJSONObject("sort").getJSONArray("ordering").getString(0);
 
             if ((data.has("sort")) && (data.getJSONObject("sort").has("column")))
                 if (!(data.isNull("sort")))
-                    sortColumn = data.getJSONObject("sort").getString("column");
+                    sortColumn = data.getJSONObject("sort").getJSONArray("column").getString(0);
                 else sortColumn = null;
 
             if (data.has("headers")) {

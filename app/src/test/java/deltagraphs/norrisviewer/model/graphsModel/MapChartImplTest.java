@@ -70,6 +70,7 @@ public class MapChartImplTest extends TestCase {
         String dataString="{\"ID\":\"flow1\",\"name\":\"linea22\",\"filters\":null,\"longitudeKey\":\"2\",\"latitudeKey\":\"1\",\"objectKey\":\"0\",\"longitudeFormat\":\"coordinates\",\"latitudeFormat\":\"coordinates\",\"marker\":{\"type\":\"shape\",\"shape\":\"bus\",\"color\":\"#FFC4F6\"}}";
         data = new JSONObject(dataString);
         mapChart.addFlow(data);
+        Assert.assertEquals(mapChart.getFlowList().size(), 1);
     }
 
     @Test
