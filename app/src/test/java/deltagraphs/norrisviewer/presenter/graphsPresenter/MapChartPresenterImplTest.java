@@ -45,7 +45,7 @@ class MockMapChartActivity extends MapChartActivity{
 
     @Override
     public void setMapType(String type) {
-        mapType = type;
+        mapType = "terrain";
     }
 
     @Override
