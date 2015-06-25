@@ -74,11 +74,6 @@ class LineChartMock extends LineChartImpl {
     }
 
     @Override
-    public String getBackground() {
-        return null;
-    }
-
-    @Override
     public Boolean getViewFinder() {
         return true;
     }
