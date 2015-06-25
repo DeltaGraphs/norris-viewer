@@ -25,45 +25,49 @@ import deltagraphs.norrisviewer.view.graphsView.*;
 
 public class TablePresenterImpl extends GraphPresenter implements TablePresenter {
 
-    private TableView graphView;
-    private Table tableInstance;
+    protected TableView graphView;
+    protected Table tableInstance;
 
     public TablePresenterImpl(TableView view, String url) {
-<span class="nc" id="L32">        super(url);</span>
-<span class="nc" id="L33">        graphView = view;</span>
-<span class="nc" id="L34">        tableInstance = new TableImpl(this);</span>
-<span class="nc" id="L35">        startSocket((TableActivity) view, tableInstance);</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L32">        super(url);</span>
+<span class="fc" id="L33">        graphView = view;</span>
+<span class="fc" id="L34">        tableInstance = new TableImpl(this);</span>
+<span class="fc" id="L35">        startSocket((TableActivity) view, tableInstance);</span>
+<span class="fc" id="L36">    }</span>
 
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc bnc" id="L41" title="All 2 branches missed.">        if (observable instanceof TableImpl) {</span>
-<span class="nc" id="L42">            String signal = (String) data;</span>
-<span class="nc bnc" id="L43" title="All 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="nc" id="L44">                setGraphParameters();</span>
-<span class="nc" id="L45">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        if (observable instanceof TableImpl) {</span>
+<span class="fc" id="L42">            String signal = (String) data;</span>
+<span class="pc bpc" id="L43" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L44">                setGraphParameters();</span>
+<span class="fc" id="L45">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
         }
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L47">    }</span>
 
     private void setGraphParameters() {
 
-<span class="nc" id="L51">        graphView.setSortOrder(tableInstance.getSortOrder());</span>
-<span class="nc" id="L52">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
+<span class="fc" id="L51">        graphView.setSortOrder(tableInstance.getSortOrder());</span>
+<span class="fc" id="L52">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
         //column parameters
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
 <span class="nc" id="L55">            headers[index]=tableInstance.getHeaderValue(index);</span>
         }
-<span class="nc" id="L57">        graphView.setHeaders(headers);</span>
-<span class="nc" id="L58">        graphView.setSortByCol(tableInstance.sortByCol());</span>
-<span class="nc" id="L59">    }</span>
+<span class="fc" id="L57">        graphView.setHeaders(headers);</span>
+<span class="fc" id="L58">        graphView.setSortByCol(tableInstance.sortByCol());</span>
+<span class="fc" id="L59">    }</span>
 
     public void stopConnection() {
-<span class="nc" id="L62">        stopSocket();</span>
-<span class="nc" id="L63">    }</span>
+<span class="fc" id="L62">        stopSocket();</span>
+<span class="fc" id="L63">    }</span>
 
     public void destroyConnection() {
-<span class="nc" id="L66">        destroySocket();</span>
-<span class="nc" id="L67">    }</span>
+<span class="fc" id="L66">        destroySocket();</span>
+<span class="fc" id="L67">    }</span>
+
+    public void startConnection() {
+<span class="fc" id="L70">        startSocket((TableActivity) graphView, tableInstance);</span>
+<span class="fc" id="L71">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
