@@ -65,7 +65,7 @@ class MockMapChartActivity extends MapChartActivity{
 
     @Override
     public void setLegendOnPoint(Boolean legend){
-        legendOnPoint = legend;
+        legendOnPoint = true;
     }
 
     public boolean getData(){ return data; }
