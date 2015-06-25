@@ -84,7 +84,7 @@ public class MapChartPresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         mapChartPresenter = new MapChartPresenterImpl(new MockMapChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
-        mapChartPresenter.graphSocket = new Mock();
+        mapChartPresenter.graphSocket = new SocketMock();
     }
 
     @Test

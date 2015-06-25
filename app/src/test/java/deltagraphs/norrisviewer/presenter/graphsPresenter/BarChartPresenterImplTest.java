@@ -36,14 +36,14 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 
-class Mock extends SocketManager{
+class SocketMock extends SocketManager{
     Boolean connected;
 
-    Mock(){
+    SocketMock(){
         connected=new Boolean(false);
     }
 
-    Mock(String url){
+    SocketMock(String url){
         super(url);
         connected=new Boolean(false);
     }
@@ -128,7 +128,7 @@ public class BarChartPresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         barChartPresenter = new BarChartPresenterImpl(new mockBarChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
-        barChartPresenter.graphSocket = new Mock();
+        barChartPresenter.graphSocket = new SocketMock();
     }
 
     @Test

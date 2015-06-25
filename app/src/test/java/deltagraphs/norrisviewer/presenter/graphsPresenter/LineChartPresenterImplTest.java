@@ -132,7 +132,7 @@ public class LineChartPresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         lineChartPresenter = new LineChartPresenterImpl(new mockLineChartActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
-        lineChartPresenter.graphSocket = new Mock();
+        lineChartPresenter.graphSocket = new SocketMock();
     }
 
     @Test

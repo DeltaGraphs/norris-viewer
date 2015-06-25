@@ -44,9 +44,9 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 
 public class MainPresenterImpl implements MainPresenter, Observer {
 
-    private SocketManager mainSocket;
+    protected SocketManager mainSocket;
     public MainView mainView;
-    private PageModel pageModel = new PageModelImpl(this);
+    protected PageModel pageModel = new PageModelImpl(this);
 
     public MainPresenterImpl(MainView view) {
         mainSocket = new SocketManager();

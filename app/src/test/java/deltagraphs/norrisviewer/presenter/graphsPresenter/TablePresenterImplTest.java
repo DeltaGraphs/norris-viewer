@@ -79,7 +79,7 @@ public class TablePresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         tablePresenter = new TablePresenterImpl(new MockTableActivity(),"http://norris-nrti-dev.herokuapp.com/norris/bar1");
-        tablePresenter.graphSocket = new Mock();
+        tablePresenter.graphSocket = new SocketMock();
     }
 
     @Test

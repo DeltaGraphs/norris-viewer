@@ -23,10 +23,50 @@ import junit.framework.TestCase;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import deltagraphs.norrisviewer.model.pageModel.PageModel;
+import deltagraphs.norrisviewer.presenter.SocketManager;
 import deltagraphs.norrisviewer.view.mainView.MainActivity;
 import deltagraphs.norrisviewer.view.mainView.MainView;
+
+class SocketMock extends SocketManager {
+    Boolean connected;
+
+    SocketMock(){
+        connected=new Boolean(false);
+    }
+
+    SocketMock(String url){
+        super(url);
+        connected=new Boolean(false);
+    }
+
+    @Override
+    public Boolean isNull() {
+        return (connected == null);
+    }
+
+    @Override
+    public Boolean isConnected() {
+        return connected;
+    }
+
+    @Override
+    public void startConnection(){
+        connected = true;
+    }
+
+    @Override
+    public void stopConnection(){
+        connected = false;
+    }
+
+    @Override
+    public void destroyConnection(){
+        connected = false;
+    }
+}
 
 public class MainPresenterImplTest extends TestCase {
 
@@ -40,12 +80,39 @@ public class MainPresenterImplTest extends TestCase {
     public void setUp() throws Exception {
         super.setUp();
         mainPresenter = new MainPresenterImpl(new MainActivity());
+        mainPresenter.mainSocket = new SocketMock();
     }
 
     @Test
     public void testSetUpSocket() throws Exception {
         mainPresenter.setUpSocket("http://norris-nrti-dev.herokuapp.com/norris");
     }
+
+    @Test
+    public void testStartConnection() throws Exception {
+        mainPresenter.startConnection();
+        Assert.assertTrue(mainPresenter.isConnected());
+    }
+
+    @Test
+    public void testStopConnection() throws Exception {
+        mainPresenter.startConnection();
+        mainPresenter.stopConnection();
+        Assert.assertFalse(mainPresenter.isConnected());
+    }
+
+    @Test
+    public void testDestroyConnection() throws Exception {
+        mainPresenter.startConnection();
+        mainPresenter.destroyConnection();
+        Assert.assertFalse(mainPresenter.isConnected());
+    }
+
+    @Test
+    public void testReinitializePageList() throws Exception{
+
+    }
+
 /*
     @Test
     public void testShowDialog() throws Exception {
