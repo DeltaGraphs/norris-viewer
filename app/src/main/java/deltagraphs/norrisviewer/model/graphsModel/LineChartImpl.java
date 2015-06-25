@@ -33,41 +33,44 @@ public class LineChartImpl extends Graph implements LineChart {
 
     private AxisModel axisX;
     private AxisModel axisY;
-    private String background;
     private Boolean viewFinder;
     private Boolean horizontalGrid;
     private Boolean verticalGrid;
 
+    //it returns the properties of the x axis
     public AxisModel getAxisX() {
         return axisX;
     }
 
+    //it returns the properties of the y axis
     public AxisModel getAxisY() {
         return axisY;
     }
 
-    public String getBackground() {
-        return background;
-    }
-
+    //it returns true if the viewFinder is set
     public Boolean getViewFinder() {
         return viewFinder;
     }
 
+    //it returns true if the horizontal grid must exists on the graph
     public Boolean getHorizontalGrid() {
         return horizontalGrid;
     }
 
+    //it returns true if the vertical grid must exists on the graph
     public Boolean getVerticalGrid() { return verticalGrid; }
 
+    // constructor of LineChartImpl. It requires an observer. It will receives update from LineChartImpl
     public LineChartImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to set the attributes of the chart
+    // It's used to set all the parameters of the chart and to create its flows.
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
-            background = data.getString("backgroundColor");
             viewFinder = data.getBoolean("viewFinder");
             horizontalGrid = data.getBoolean("horizontalGrid");
             verticalGrid = data.getBoolean("verticalGrid");
@@ -90,13 +93,15 @@ public class LineChartImpl extends Graph implements LineChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to update the attributes of the chart
+    // It's only used to update all the parameters of the chart. If an attribute isn't contained in
+    // the json object, it won't be updated.
     @Override
     public void updateParameters(JSONObject data) {
         try {
             if (data.has("title"))
                 title = data.getString("title");
-            if (data.has("backgroundColor"))
-                background = data.getString("backgroundColor");
             if (data.has("viewFinder"))
                 viewFinder = data.getBoolean("viewFinder");
             if (data.has("horizontalGrid"))
@@ -117,6 +122,8 @@ public class LineChartImpl extends Graph implements LineChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
         flowList.add(new LineChartFlow(flow));

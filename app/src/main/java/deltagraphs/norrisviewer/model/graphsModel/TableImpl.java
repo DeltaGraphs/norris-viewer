@@ -39,31 +39,40 @@ public class TableImpl extends Graph implements Table {
 
     private ArrayList<String> headers = new ArrayList<String>();
 
+    //it returns the position where new records will be inserted in table flows
     public String getAddRowOn() {
         return addRowOn;
     }
 
+    //if not null, it returns the name of a header of the table. In this case
+    //the table will be ordered by values contained in its column.
     public String sortByCol() {
         return sortColumn;
     }
 
+    //if sortbyCol isn't null, it will return the type of ordering: ascendent or descendent.
     public String getSortOrder() {
         return sortOrder;
     }
 
+    //it returns the number of columns of the table
     public int getNumberOfColumns() {
         return headers.size();
     }
 
-    //column parameters
+    //it returns the value of a header for a given index. The index represents the number of the column
     public String getHeaderValue(int index) {
         return headers.get(index);
     }
 
+    // constructor of TableImpl. It requires an observer. It will receives update from TableImpl
     public TableImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to set the attributes of the chart
+    // It's used to set all the parameters of the chart and to create its flows.
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
@@ -91,6 +100,10 @@ public class TableImpl extends Graph implements Table {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to update the attributes of the chart
+    // It's only used to update all the parameters of the chart. If an attribute isn't contained in
+    // the json object, it won't be updated.
     @Override
     public void updateParameters(JSONObject data) {
         try {
@@ -123,6 +136,8 @@ public class TableImpl extends Graph implements Table {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
         flowList.add(new TableFlow(flow));

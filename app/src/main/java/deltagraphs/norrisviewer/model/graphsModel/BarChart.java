@@ -23,16 +23,20 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
  *
  */
 
+
 public interface BarChart {
+    //it returns the properties of the x axis
     public AxisModel getAxisX();
 
+    //it returns the properties of the y axis
     public AxisModel getAxisY();
 
+    //it returns the list of values of the headers of the bar chart
     public ArrayList<String> getHeaders();
 
-    public String getBackground();
-
+    //it returns the orientation of bars in the chart
     public String getBarOrientation();
 
+    //it returns the flow list of the chart
     public ArrayList<FlowModel> getFlowList();
 }

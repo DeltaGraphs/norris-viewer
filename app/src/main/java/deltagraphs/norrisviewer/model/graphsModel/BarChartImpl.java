@@ -35,38 +35,40 @@ public class BarChartImpl extends Graph implements BarChart {
     private AxisModel axisY;
     private ArrayList<String> headers = new ArrayList<String>();
     private String barOrientation = "V";
-    private String background;
 
+    //it returns the properties of the x axis
     public AxisModel getAxisX() {
         return axisX;
     }
 
+    //it returns the properties of the y axis
     public AxisModel getAxisY() {
         return axisY;
     }
 
+    //it returns the list of values of the headers of the bar chart
     public ArrayList<String> getHeaders() {
         return headers;
     }
 
-    public String getBackground() {
-        return background;
-    }
-
+    //it returns the orientation of bars in the chart
     public String getBarOrientation() {
         return barOrientation;
     }
 
+    // constructor of BarChartImpl. It requires an observer. It will receives update from BarChartImpl
     public BarChartImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
 
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to set the attributes of the chart
+    // It's used to set all the parameters of the chart and to create its flows.
     @Override
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
-            background = data.getString("backgroundColor");
             barOrientation = data.getString("barOrientation");
             JSONArray jsonHeaders = data.getJSONArray("headers");
             int length = jsonHeaders.length();
@@ -93,13 +95,15 @@ public class BarChartImpl extends Graph implements BarChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to update the attributes of the chart
+    // It's only used to update all the parameters of the chart. If an attribute isn't contained in
+    // the json object, it won't be updated.
     @Override
     public void updateParameters(JSONObject data) {
         try {
             if (data.has("title"))
                 title = data.getString("title");
-            if (data.has("backgroundColor"))
-                background = data.getString("backgroundColor");
             if (data.has("barOrientation"))
                 barOrientation = data.getString("barOrientation");
             if (data.has("headers")) {
@@ -127,6 +131,8 @@ public class BarChartImpl extends Graph implements BarChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
         flowList.add(new BarChartFlow(flow));

@@ -35,9 +35,13 @@ public class Page {
         this.description = description;
     }
 
+    // this method is used to add to a page a page item
     public void addItem(String id, String name, String type, String URL) {
         pageItemList.add(new PageItem(id, name, type, URL));
     }
+
+    // the following methods are used to set specific attributes
+    // of a page like id, name and description
 
     public void setId(String id) {
         this.id = id;
@@ -50,6 +54,9 @@ public class Page {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    // the following methods return information about a single page.
+    // Returned informations are id, name, description, item list and its size.
 
     public ArrayList<PageItem> getPageItemList() {
         return pageItemList;

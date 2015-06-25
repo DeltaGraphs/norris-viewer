@@ -23,16 +23,22 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface Table {
+    //it returns the position where new records will be inserted in table flows
     public String getAddRowOn();
 
+    //if not null, it returns the name of a header of the table. In this case
+    //the table will be ordered by values contained in its column.
     public String sortByCol();
 
+    //if sortbyCol isn't null, it will return the type of ordering: ascendent or descendent.
     public String getSortOrder();
 
-    public ArrayList<FlowModel> getFlowList();
-
+    //it returns the number of columns of the table
     public int getNumberOfColumns();
 
-    //column parameters
+    //it returns the value of a header for a given index. The index represents the number of the column
     public String getHeaderValue(int index);
+
+    //it returns the flow list of the chart
+    public ArrayList<FlowModel> getFlowList();
 }

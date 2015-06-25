@@ -55,7 +55,6 @@ public class LineChartImplTest extends TestCase {
         Assert.assertEquals(lineChart.getViewFinder(), true);
         Assert.assertEquals(lineChart.getVerticalGrid(), true);
         Assert.assertEquals(lineChart.getHorizontalGrid(), true);
-        Assert.assertEquals(lineChart.getBackground(), "#FFFFFF");
         Assert.assertEquals(lineChart.getAxisX().getName(), "tempo");
         Assert.assertEquals(lineChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(lineChart.getAxisY().getName(), "temperatura");
@@ -78,7 +77,6 @@ public class LineChartImplTest extends TestCase {
         Assert.assertEquals(lineChart.getViewFinder(), false);
         Assert.assertEquals(lineChart.getVerticalGrid(), true);
         Assert.assertEquals(lineChart.getHorizontalGrid(), false);
-        Assert.assertEquals(lineChart.getBackground(), "#FFCCFF");
         Assert.assertEquals(lineChart.getAxisX().getName(), "tempo");
         Assert.assertEquals(lineChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(lineChart.getAxisY().getName(), "temperatura");

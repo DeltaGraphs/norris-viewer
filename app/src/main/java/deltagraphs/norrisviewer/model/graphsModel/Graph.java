@@ -45,14 +45,18 @@ public abstract class Graph extends Observable {
 
     public boolean isConfigured(){ return configured; }
 
+    //it returns the title of the chart
     public String getTitle() {
         return title;
     }
 
+    //it returns the flow list of the chart
     public ArrayList<FlowModel> getFlowList() {
         return flowList;
     }
 
+    // this method is used when a new json object arrives from the socket
+    // Used to initialize, set and update parameters and flows of a chart.
     public void setGraph(JSONObject obj, String signal) {
         JSONParser(obj, signal);
         setChanged();
@@ -60,13 +64,20 @@ public abstract class Graph extends Observable {
 
     }
 
+    // this method, defined by the concrete classes that extend graph, is used to set their parameters
+    // using a json Object
     public abstract void setParameters(JSONObject data);
 
+    // this method, defined by the concrete classes that extend graph, is used to update their parameters
+    // using a json Object
     public abstract void updateParameters(JSONObject data);
 
+    // this method, defined by the concrete classes that extend graph, is used to add a flow to them
+    // using a json Object
     public abstract void addFlow(JSONObject flow);
 
-
+    // this method is used to update a flow of a graph, using a json Object.
+    // it will search the flow that must be updated using its ID.
     public void updateFlow(JSONObject data) {
         try {
             String flowId = data.getString("ID");
@@ -77,6 +88,8 @@ public abstract class Graph extends Observable {
         }
     }
 
+    // this method is used to delete a flow of a graph.
+    // it will search the flow that must be deleted using its ID.
     public void deleteFlow(String flowID) {
         int index = searchFlowIndex(flowID);
         if (index != -1) {
@@ -85,6 +98,7 @@ public abstract class Graph extends Observable {
     }
 
     // it searches the flow index in the list of flows
+    // it uses a value of ID for a flow, to get an index in the data structure that contains flows.
     private int searchFlowIndex(String flowId) {
         int index = 0;
         while (index < flowList.size()) {
@@ -96,6 +110,10 @@ public abstract class Graph extends Observable {
         return -1;
     }
 
+    //this method is called by "setGraph". Its aim is to receive a json object
+    // and a signal and do different choices considering their content.
+    // Choices will depend on the signal content. For each case a different action could be done on the graph:
+    // initializing of properties, updating of properties and flows can be added, updated or removed
     private void JSONParser(JSONObject obj, String signal) {
         try {
             switch (signal) {
@@ -151,6 +169,9 @@ public abstract class Graph extends Observable {
         }
     }
 
+    //This method is called by "jsonParser". It is used to update records of a flow.
+    // the ID of a flow is provided. When a flow with that ID exists in the graph. It will be updated.
+    // records in that flow can be inserted, deleted or updated.
     private void updateRecords(JSONObject data) {
         try {
             String action = data.getString("action");

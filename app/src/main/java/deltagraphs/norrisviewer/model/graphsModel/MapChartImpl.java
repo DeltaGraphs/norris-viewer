@@ -35,34 +35,44 @@ public class MapChartImpl extends Graph implements MapChart {
     private Boolean legendOnPoint;
     private String mapType;
 
+    //it returns the latitude of the center of the mapChart
     public float getLatitude() {
         return latitude;
     }
 
+    //it returns the longitude of the center of the mapChart
     public float getLongitude() {
         return longitude;
     }
 
+    //it returns the width of the center of the mapChart
     public float getMapWidth() {
         return mapWidth;
     }
 
+    //it returns the height of the center of the mapChart
     public float getMapHeight() {
         return mapHeight;
     }
 
+    //it returns true if the legend on point exists
     public Boolean getLegendOnPoint() {
         return legendOnPoint;
     }
 
+    //it returns the type of map.
     public String getMapType() {
         return mapType;
     }
 
+    // constructor of MapChartImpl. It requires an observer. It will receives update from MapChartImpl
     public MapChartImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to set the attributes of the chart
+    // It's used to set all the parameters of the chart and to create its flows.
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
@@ -84,6 +94,10 @@ public class MapChartImpl extends Graph implements MapChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to update the attributes of the chart
+    // It's only used to update all the parameters of the chart. If an attribute isn't contained in
+    // the json object, it won't be updated.
     @Override
     public void updateParameters(JSONObject data) {
         try {
@@ -106,6 +120,8 @@ public class MapChartImpl extends Graph implements MapChart {
         }
     }
 
+    // The following method is called when a new update arrives from the socket.
+    // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
         flowList.add(new MapChartFlow(flow));

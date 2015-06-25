@@ -59,7 +59,6 @@ public class BarChartImplTest extends TestCase {
         Assert.assertEquals(barChart.getAxisX().getTicks(), 10);
         Assert.assertEquals(barChart.getAxisY().getName(), "pressione");
         Assert.assertEquals(barChart.getAxisY().getTicks(), 10);
-        Assert.assertEquals(barChart.getBackground(), "#FFFFFF");
         Assert.assertEquals(barChart.getBarOrientation(), "V");
         Assert.assertEquals(barChart.getHeaders().size(), 5);
         Assert.assertEquals(barChart.getFlowList().size(), 2);
@@ -79,7 +78,6 @@ public class BarChartImplTest extends TestCase {
         Assert.assertEquals(barChart.getAxisX().getTicks(), 9);
         Assert.assertEquals(barChart.getAxisY().getName(), "pression");
         Assert.assertEquals(barChart.getAxisY().getTicks(), 9);
-        Assert.assertEquals(barChart.getBackground(), "#FFFFFE");
         Assert.assertEquals(barChart.getBarOrientation(), "H");
         Assert.assertEquals(barChart.getHeaders().size(), 6);
         Assert.assertEquals(barChart.getFlowList().size(), 2);

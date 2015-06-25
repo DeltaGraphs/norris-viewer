@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class LineChartFlow extends FlowModel {
 
-    private String flowColour;
+    private String flowColour; /* the colour of the points of the flow in the chart */
     private ArrayList<LineChartRecord> records = new ArrayList<LineChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow

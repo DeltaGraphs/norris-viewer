@@ -34,6 +34,9 @@ public class PageItem {
         itemURL = URL;
     }
 
+    // the following methods are used to set specific attributes
+    // of a page like id, name, type and url.
+
     public void setId(String id) {
         this.itemId = id;
     }
@@ -49,6 +52,9 @@ public class PageItem {
     public void setUrl(String url) {
         this.itemURL = url;
     }
+
+    // the following methods return information about a single page.
+    // Returned informations are id, name, type and url.
 
     public String getId() {
         return itemId;

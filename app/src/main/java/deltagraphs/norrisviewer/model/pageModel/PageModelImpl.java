@@ -41,11 +41,15 @@ public class PageModelImpl extends Observable implements PageModel {
     private ArrayList<Page> pageList = new ArrayList<Page>();
     private boolean configured = false;
 
+    // constructor of pageModelImpl. It requires an observer. It will receives update from the PagemodelImpl
     public PageModelImpl(Observer presenter) {
         addObserver(presenter);
     }
+
+    //it returns true if the pageModel has been already defined
     public boolean isConfigured(){return configured; }
 
+    //this method let set attributes that are related to a page, using a json object.
     public void setPageModel(JSONObject data, String signal) {
         JSONParser(data, signal);
         setChanged();
@@ -195,30 +199,37 @@ public class PageModelImpl extends Observable implements PageModel {
         }
     }
 
+    //it returns the name of a page
     public String getName() {
         return name;
     }
 
+    //this method returns the list of pages
     public ArrayList<Page> getPageList() {
         return pageList;
     }
 
+    //this method returns the size of the pages list
     public int getPageListSize() {
         return pageList.size();
     }
 
+    //this method returns the size of a page, the number of charts on it.
     public int getItemListSize(int page) {
         return pageList.get(page).getItemListSize();
     }
 
+    //this method returns the list of item in a page
     public ArrayList<PageItem> getItemList(int page) {
         return pageList.get(page).getPageItemList();
     }
 
+    //this method returns a page for a given index
     public Page getPage(int index) {
         return this.getPageList().get(index);
     }
 
+    //it removes all the observers attached to a pageModel implementation.
     @Override
     public void removeObservers() {
         deleteObservers();

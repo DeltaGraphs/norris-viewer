@@ -23,11 +23,24 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface MapChart {
+    //it returns the latitude of the center of the mapChart
     public float getLatitude();
+
+    //it returns the longitude of the center of the mapChart
     public float getLongitude();
+
+    //it returns the width of the center of the mapChart
     public float getMapWidth();
+
+    //it returns the height of the center of the mapChart
     public float getMapHeight();
+
+    //it returns true if the legend on point exists
     public Boolean getLegendOnPoint();
+
+    //it returns the type of map.
     public String getMapType();
+
+    //it returns the flow list of the chart
     public ArrayList<FlowModel> getFlowList();
 }
