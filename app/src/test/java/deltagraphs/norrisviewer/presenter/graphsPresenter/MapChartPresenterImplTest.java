@@ -107,6 +107,7 @@ public class MapChartPresenterImplTest extends TestCase {
         Assert.assertEquals((boolean) mapChartPresenter.getGraphSocket().isConnected(), false);
     }
 
+
     @Test
     public void testSetGraphParameters() throws Exception{
         mapChartPresenter.mapChartInstance = new MapChartMock(mapChartPresenter);
