@@ -86,9 +86,10 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
 
     // exclude auto-generated classes and tests
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
-                      'android/**/*.*', '**/Convert.*', '**/deltagraphs/norrisviewer/presenter/Convert*.*', '**/SampleTableAdapter.*', '**/MatrixTableAdapter.*', '**/Hsl.*', '**/TableFixHeaders.*',
-                      '**/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/ChartType.*', '**/RecordListAdapter.*',
-                      '**/RecordList.*', '**/Record.*']
+                      'android/**/*.*', '**/Convert.*', '**/deltagraphs/norrisviewer/presenter/Convert*.*', '**/deltagraphs/norrisviewer/view/graphsView/SampleTableAdapter*.*',
+                      '**/deltagraphs/norrisviewer/view/graphsView/MatrixTableAdapter.*', '**/Hsl.*', '**/TableFixHeaders.*',
+                      '**/deltagraphs/norrisviewer/view/mainView/MainActivity/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/ChartType.*', '**/deltagraphs/norrisviewer/view/graphsView/RecordListAdapter.*',
+                      '**/deltagraphs/norrisviewer/view/graphsView/RecordList.*', '**/deltagraphs/norrisviewer/view/graphsView/Record.*']
     def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
     def mainSrc = "${project.projectDir}/src/main/java"
 
