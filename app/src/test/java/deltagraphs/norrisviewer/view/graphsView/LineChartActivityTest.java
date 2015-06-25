@@ -16,5 +16,34 @@ package deltagraphs.norrisviewer.view.graphsView;/*
  *
  */
 
-public class LineChartActivityTest {
+
+import android.os.Bundle;
+import android.test.ActivityInstrumentationTestCase2;
+import android.view.Menu;
+
+import junit.framework.TestResult;
+
+import org.junit.Before;
+import org.junit.Test;
+
+public class LineChartActivityTest extends ActivityInstrumentationTestCase2 {
+
+    LineChartActivity mLineChartActivity;
+
+    public LineChartActivityTest(Class activityClass) {
+        super(activityClass);
+    }
+
+    @Before
+    protected void setUp() throws Exception {
+        super.setUp();
+        setActivityInitialTouchMode(true);
+        mLineChartActivity = (LineChartActivity)getActivity();
+        mLineChartActivity.onCreate(new Bundle());
+    }
+
+    @Test
+    public void testOnCreateOptionsMenu(){
+       // mLineChartActivity.onCreateOptionsMenu()
+    }
 }
