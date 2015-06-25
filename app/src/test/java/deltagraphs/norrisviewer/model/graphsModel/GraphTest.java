@@ -35,7 +35,12 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
  *
  */
 class MockFlow extends FlowModel{
-
+    public boolean createFlow = false;
+    public boolean updateFlow = false;
+    public boolean addRecords = false;
+    public boolean deleteRecord = false;
+    public boolean updateRecord = false;
+    public boolean deleteRecordList = false;
 
     MockFlow(JSONObject x){
         try {
@@ -49,21 +54,17 @@ class MockFlow extends FlowModel{
 
     @Override
     public void createFlow(JSONObject data) {
-
+        createFlow = true;
     }
 
     @Override
     public void updateFlow(JSONObject data) {
-        try {
-            flowName = data.getString("name");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        updateFlow = true;
     }
 
     @Override
     public void deleteRecordList() {
-
+        deleteRecordList = true;
     }
 
     @Override
@@ -73,20 +74,23 @@ class MockFlow extends FlowModel{
 
     @Override
     public void addRecords(JSONArray data, boolean insertOnTop) {
-
+        addRecords = true;
     }
 
     @Override
     public void updateRecord(JSONObject data) {
-
+        updateRecord = true;
     }
 
     @Override
     public void deleteRecord(JSONObject data) {
-
+        deleteRecord = true;
     }
 }
+
 class Mock extends Graph{
+    public boolean updateParameters = false;
+
     @Override
     public void setParameters(JSONObject data) {
     try {
@@ -98,7 +102,9 @@ class Mock extends Graph{
         }
     }
     @Override
-    public void updateParameters(JSONObject data) {}
+    public void updateParameters(JSONObject data) {
+        updateParameters = true;
+    }
 
     @Override
     public void addFlow(JSONObject flow) {
@@ -123,11 +129,45 @@ public class GraphTest extends TestCase {
 
     @Test
     public void testSetGraph() throws Exception {
-        jsonFlow = new JSONObject("{properties:{flows:[{ID: \"ciao\"}]} }");
+        jsonFlow = new JSONObject("{properties:{flows:[{ID: \"ciao\"}]}, data:[{ID:\"norrisID1\"}]}");
         assertEquals(mockGraph.isConfigured(), false);
         mockGraph.setGraph(jsonFlow, "configGraph");
         assertEquals(mockGraph.getFlowList().size(), 1);
         assertEquals(mockGraph.isConfigured(), true);
+
+        mockGraph.setGraph(jsonFlow, "updateGraphProp");
+        assertTrue(mockGraph.updateParameters);
+
+        jsonFlow = new JSONObject("{properties:{ID: \"ola\"} }");
+        mockGraph.setGraph(jsonFlow, "insertFlow");
+        assertEquals(mockGraph.getFlowList().size(), 2);
+        assertTrue(((MockFlow) mockGraph.flowList.get(1)).createFlow);
+
+        jsonFlow = new JSONObject("{ID: \"ciao\"}");
+        mockGraph.setGraph(jsonFlow, "updateFlowProp");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).updateFlow);
+
+        jsonFlow = new JSONObject("{action:\"insertRecords\", ID:\"ciao\", records:[{}] }");
+        mockGraph.setGraph(jsonFlow, "updateFlowData");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).addRecords);
+
+        jsonFlow = new JSONObject("{action:\"deleteRecord\", ID:\"ciao\", records:[{}] }");
+        mockGraph.setGraph(jsonFlow, "updateFlowData");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).deleteRecord);
+
+        jsonFlow = new JSONObject("{action:\"updateRecord\", ID:\"ciao\", records:[{}] }");
+        mockGraph.setGraph(jsonFlow, "updateFlowData");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).updateRecord);
+
+        ((MockFlow) mockGraph.flowList.get(0)).createFlow = false;
+        jsonFlow = new JSONObject("{action:\"replaceData\", ID:\"ciao\", records:[{}] }");
+        mockGraph.setGraph(jsonFlow, "updateFlowData");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).createFlow);
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).deleteRecordList);
+
+        jsonFlow = new JSONObject("{ID: \"ciao\"}");
+        mockGraph.setGraph(jsonFlow, "deleteFlow");
+        assertEquals(mockGraph.getFlowList().size(), 1);
     }
 
     @Test
@@ -143,7 +183,7 @@ public class GraphTest extends TestCase {
         mockGraph.addFlow(jsonFlow);
         jsonFlow = new JSONObject("{ID: \"ciao\", name:\"nuovoNome\"}");
         mockGraph.updateFlow(jsonFlow);
-        Assert.assertEquals(mockGraph.flowList.get(0).getFlowName(), "nuovoNome");
+        assertTrue(((MockFlow) mockGraph.flowList.get(0)).updateFlow);
     }
 
 

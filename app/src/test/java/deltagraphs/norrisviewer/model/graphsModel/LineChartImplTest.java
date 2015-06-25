@@ -51,6 +51,7 @@ public class LineChartImplTest extends TestCase {
                 "\"color\":\"#000000\",\"maxIndex\":null,\"minIndex\":null,\"ticks\":10,\"scale\":\"linear\"},\"flows\":[]},\"data\":[]}";
         data = new JSONObject(dataString);
         lineChart.setParameters(data);
+        Assert.assertEquals(lineChart.getTitle(), "LINEE");
         Assert.assertEquals(lineChart.getViewFinder(), true);
         Assert.assertEquals(lineChart.getVerticalGrid(), true);
         Assert.assertEquals(lineChart.getHorizontalGrid(), true);
