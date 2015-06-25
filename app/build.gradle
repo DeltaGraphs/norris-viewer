@@ -88,7 +88,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
                       'android/**/*.*', '**/Convert.*', '**/deltagraphs/norrisviewer/presenter/Convert*.*', '**/deltagraphs/norrisviewer/view/graphsView/SampleTableAdapter*.*',
                       '**/deltagraphs/norrisviewer/view/graphsView/MatrixTableAdapter.*', '**/Hsl.*',
-                      '**/deltagraphs/norrisviewer/view/mainView/MainActivity/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/deltagraphs/norrisviewer/view/mainView/MainActivity/*.*', '**/deltagraphs/norrisviewer/view/graphsView/*RecordListAdapter.*',
+                      '**/deltagraphs/norrisviewer/view/mainView/MainActivity/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/deltagraphs/norrisviewer/view/mainView/MainActivity$*.*', '**/deltagraphs/norrisviewer/view/graphsView/*RecordListAdapter.*',
                       '**/deltagraphs/norrisviewer/view/graphsView/*RecordList.*', '**/deltagraphs/norrisviewer/view/graphsView/*Record.*', '**/deltagraphs/norrisviewer/view/graphsView/TableActivity/*Record.*',
                       '**/com/inqbarna/tablefixheaders*.*', '**/com/inqbarna/tablefixheaders*/*.*', '**/com/inqbarna/tablefixheaders*/adapters*/*.*']
     def debugTree = fileTree(dir: "${project.buildDir}/intermediates/classes/debug", excludes: fileFilter)
