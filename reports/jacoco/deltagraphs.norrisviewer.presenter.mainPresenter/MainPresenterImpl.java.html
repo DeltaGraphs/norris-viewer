@@ -44,9 +44,9 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 
 public class MainPresenterImpl implements MainPresenter, Observer {
 
-    private SocketManager mainSocket;
+    protected SocketManager mainSocket;
     public MainView mainView;
-<span class="fc" id="L49">    private PageModel pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L49">    protected PageModel pageModel = new PageModelImpl(this);</span>
 
 <span class="fc" id="L51">    public MainPresenterImpl(MainView view) {</span>
 <span class="fc" id="L52">        mainSocket = new SocketManager();</span>
@@ -64,8 +64,8 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 <span class="fc" id="L64">    }</span>
 
     public void reinitializePageList() {
-<span class="nc" id="L67">        pageModel = new PageModelImpl(this);</span>
-<span class="nc" id="L68">    }</span>
+<span class="fc" id="L67">        pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L68">    }</span>
 
     public AlertDialog showDialog(final Context context) {
 <span class="nc" id="L71">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
@@ -107,33 +107,33 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     @Override
     public void stopConnection() {
-<span class="nc" id="L110">        mainSocket.stopConnection();</span>
-<span class="nc" id="L111">    }</span>
+<span class="fc" id="L110">        mainSocket.stopConnection();</span>
+<span class="fc" id="L111">    }</span>
 
     @Override
     public void destroyConnection() {
-<span class="nc" id="L115">        mainSocket.destroyConnection();</span>
-<span class="nc" id="L116">    }</span>
+<span class="fc" id="L115">        mainSocket.destroyConnection();</span>
+<span class="fc" id="L116">    }</span>
 
     @Override
     public void startConnection() {
-<span class="nc" id="L120">        mainSocket.startConnection();</span>
-<span class="nc" id="L121">    }</span>
+<span class="fc" id="L120">        mainSocket.startConnection();</span>
+<span class="fc" id="L121">    }</span>
 
     @Override
     public boolean isConnected() {
-<span class="nc" id="L125">        return mainSocket.isConnected();</span>
+<span class="fc" id="L125">        return mainSocket.isConnected();</span>
     }
 
     @Override
     public boolean isSocketNull() {
-<span class="nc" id="L130">        return mainSocket.isNull();</span>
+<span class="fc" id="L130">        return mainSocket.isNull();</span>
     }
 
     @Override
     public void update(Observable observable, Object data) {
-<span class="nc" id="L135">        mainView.updatePagesList(pageModel);</span>
-<span class="nc" id="L136">    }</span>
+<span class="fc" id="L135">        mainView.updatePagesList(pageModel);</span>
+<span class="fc" id="L136">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
