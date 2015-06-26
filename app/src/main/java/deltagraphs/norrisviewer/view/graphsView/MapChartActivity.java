@@ -64,6 +64,12 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     private boolean hasLegend = true;
     private List<Marker> markers;
 
+    /*
+    This method is called on the creation of the activity
+    and its job is to get information from
+    previous activity to get title and URL.
+     It also initialize the map and the marker's list.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,36 +94,61 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         toast.show();
     }
 
+    /*
+    This method is called when the activity is show back form a pause state.
+     */
     @Override
     public void onResume() {
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         super.onResume();
     }
 
+    /*
+    The following method is called when this activity
+    is stopped and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onStop() {
         mapChartPresenter.destroyConnection();
         super.onStop();
     }
 
+    /*
+    The following method is called when this activity
+    is hidden to the user and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onPause() {
         mapChartPresenter.destroyConnection();
         super.onPause();
     }
 
+    /*
+    The following method is called when the activity
+    is restarted
+ */
     @Override
     public void onRestart() {
         //mapChartPresenter.startConnection();
         super.onRestart();
     }
 
+    /*
+    This method is called when the activity is destroyed and provides
+    to destroy the connection with the socket
+     */
     @Override
     public void onDestroy() {
         mapChartPresenter.destroyConnection();
         super.onDestroy();
     }
 
+    /*
+    This method istantiates the map if
+    it has not been already initialized.
+     */
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (map == null) {
@@ -127,6 +158,11 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
+    /*
+    This method creates a new marker or updates an existing one.
+    It belongs to an id, a pair of coordinates, a type with a property and
+    optionally a color.
+    */
     private Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
         MarkerOptions mMarkerOptions = newMarkerOpt(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
@@ -136,6 +172,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return m;
     }
 
+    /*
+    This method delete a marker if it exists.
+    It also remove the marker from the arrayList.
+     */
     private void removeMarker(String id) {
         for (int i = 0; i < markers.size(); i++) {
             //if in ID already exists, it's removed from the list
@@ -146,11 +186,19 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
+    /*
+    This method sets the position of the camera
+    on the Google map.
+     */
     public void cameraPosition(float lat, float lng) {
         center = new LatLng(lat, lng);
         map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
 
+    /*
+    This method parse a color and tranform it from a string
+    to a float type.
+     */
     private float getHueFromString(String c) {
         String color = c;
 
@@ -163,6 +211,9 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
 
+    /*
+    This method create a custom marker with its own options.
+     */
     private MarkerOptions newMarkerOpt(String id, float lat, float lng, String type, String property, String color) {
 
         MarkerOptions m = new MarkerOptions();
@@ -221,7 +272,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return m;
     }
 
-    //Gestione della traccia
+    /*
+    This method menages the trace and its options
+    like the color.
+     */
 
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color) {
 
@@ -241,6 +295,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return mPolyline;
     }
 
+    /*
+    The followiong method set the zoom on the map
+    and move the camere to the center position of the map zoomed
+     */
     public void setZoom(float width, float height) {
         if (center != null) {
             double[] ref = getBoundingBox(center.latitude, center.longitude, (int) width, (int) height);
@@ -250,6 +308,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
+    /*
+    This method provides an algorithm that calculate
+    the bounding box of the zoomed map
+     */
     private double[] getBoundingBox(final double pLatitude, final double pLongitude, final int widthInMeters, final int heightInMeters) {
 
         double[] boundingBox = new double[4];
@@ -274,6 +336,14 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return boundingBox;
     }
 
+    /*
+    This method set the type of the map.
+    Possible types are:
+        -road map
+        -satellite map
+        -hybrid map
+        -terrain map
+     */
     @Override
     public void setMapType(String type) {
         //satellite, hybrid, terrain
@@ -296,11 +366,19 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
+    /*
+    This method enable or disable the legend on point.
+     */
     @Override
     public void setLegendOnPoint(Boolean legend) {
         hasLegend = legend;
     }
 
+    /*
+    This is the main method of the class.
+    The method set the data on the view when
+    an update has arrived.
+     */
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         boolean isMapCleared = false;
@@ -332,6 +410,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
+    /*
+    This method generate a custom menu for the
+    action bar on the top of the activity
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -339,6 +421,10 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return true;
     }
 
+    /*
+    This method menage the actions user can perform
+    on the menu
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

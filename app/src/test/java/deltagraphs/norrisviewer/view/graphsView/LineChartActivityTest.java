@@ -33,7 +33,7 @@ public class LineChartActivityTest extends ActivityInstrumentationTestCase2 {
     public LineChartActivityTest(Class activityClass) {
         super(activityClass);
     }
-/*
+
     @Before
     protected void setUp() throws Exception {
         super.setUp();
@@ -41,7 +41,7 @@ public class LineChartActivityTest extends ActivityInstrumentationTestCase2 {
         mLineChartActivity = (LineChartActivity)getActivity();
         mLineChartActivity.onCreate(new Bundle());
     }
-
+/*
     @Test
     public void testOnCreateOptionsMenu(){
        // mLineChartActivity.onCreateOptionsMenu()
