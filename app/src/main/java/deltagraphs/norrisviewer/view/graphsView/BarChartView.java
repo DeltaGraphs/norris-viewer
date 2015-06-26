@@ -25,6 +25,9 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface BarChartView {
+    //This method call the initialize method depending on the orientation set.
     void setBarOrientation(String orientation);
+
+    //The following method is called on an update and retrieves data from the model to configure the bar chart.
     void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers);
 }

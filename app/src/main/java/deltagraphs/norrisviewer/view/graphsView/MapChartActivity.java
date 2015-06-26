@@ -128,7 +128,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     /*
     The following method is called when the activity
     is restarted
- */
+     */
     @Override
     public void onRestart() {
         //mapChartPresenter.startConnection();
@@ -196,8 +196,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
     /*
-    This method parse a color and tranform it from a string
-    to a float type.
+    This method parse a color and tranform it from a string to a float type.
      */
     private float getHueFromString(String c) {
         String color = c;
@@ -276,7 +275,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     This method menages the trace and its options
     like the color.
      */
-
     public Polyline setPolyline(ArrayList<LatLng> polyline, String color) {
 
         PolylineOptions mPolylineOptions = new PolylineOptions();
@@ -296,8 +294,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
     /*
-    The followiong method set the zoom on the map
-    and move the camere to the center position of the map zoomed
+    The followiong method set the zoom on the map and move the camere to the center position of the map zoomed
      */
     public void setZoom(float width, float height) {
         if (center != null) {
@@ -308,10 +305,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
-    /*
-    This method provides an algorithm that calculate
-    the bounding box of the zoomed map
-     */
+    /* This method provides an algorithm that calculate
+    the bounding box of the zoomed map */
     private double[] getBoundingBox(final double pLatitude, final double pLongitude, final int widthInMeters, final int heightInMeters) {
 
         double[] boundingBox = new double[4];
@@ -410,10 +405,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         }
     }
 
-    /*
-    This method generate a custom menu for the
-    action bar on the top of the activity
-     */
+    /* This method generate a custom menu for the
+    action bar on the top of the activity  */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -421,10 +414,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         return true;
     }
 
-    /*
-    This method menage the actions user can perform
-    on the menu
-     */
+    /* This method menage the actions user can perform
+    on the menu */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will

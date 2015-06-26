@@ -67,6 +67,11 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private String headers[];
     private int rows = 0;
 
+    /*
+    This method is called on the creation of the activity
+    and its job is to get information from
+    previous activity to get title and URL.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,36 +90,59 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tablePresenter = new TablePresenterImpl(this, sourceURL);
     }
 
+    /*
+    This method is called when the activity is show back form a pause state.
+     */
     @Override
     public void onResume() {
         tablePresenter = new TablePresenterImpl(this, sourceURL);
         super.onResume();
     }
 
+    /*
+    The following method is called when this activity
+    is stopped and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onStop() {
         tablePresenter.destroyConnection();
         super.onStop();
     }
 
+    /*
+    The following method is called when this activity
+    is hidden to the user and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onPause() {
         tablePresenter.destroyConnection();
         super.onPause();
     }
 
+    /*
+   The following method is called when the activity
+   is restarted
+    */
     @Override
     public void onRestart() {
         //mapChartPresenter.startConnection();
         super.onRestart();
     }
 
+    /*
+    This method is called when the activity is destroyed and provides
+    to destroy the connection with the socket
+    */
     @Override
     public void onDestroy() {
         tablePresenter.destroyConnection();
         super.onDestroy();
     }
 
+    /* This method generate a custom menu for the
+    action bar on the top of the activity  */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -122,6 +150,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return true;
     }
 
+    /* This method menage the actions user can perform
+    on the menu */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -137,7 +167,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return super.onOptionsItemSelected(item);
     }
 
-
+    // set the table to be sorted by a defined column
     @Override
     public void setSortByCol(String sortingColumn) {
         int col = 0;
@@ -148,16 +178,21 @@ public class TableActivity extends ActionBarActivity implements TableView {
         this.sortingColumn = col;
     }
 
+    // set if the table must be sorted in ascendent or descendent order
     @Override
     public void setSortOrder(String sortOrder) {
         order = sortOrder;
     }
 
+    // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
     }
 
+
+    // the following method is used to sort the table. It uses java library's methods and at the end of it
+    // the list of records is defined on the ordered table.
     private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
         ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
         for (int i = 0; i < flowList.size(); i++) {
@@ -190,6 +225,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         rows = table.size();
     }
 
+    //set the data in the table. It is extracted from the table model
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
         rows = 0;
@@ -214,6 +250,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tableFixHeaders.animate();
     }
 
+    //classes added from the table library
 
     private class RecordList {
         private final String name;

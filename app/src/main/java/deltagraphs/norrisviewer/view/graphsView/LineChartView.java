@@ -23,9 +23,12 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface LineChartView {
+    //This method configures a single axis for the line chart
     void setAxis(char axisXorY, String name, int ticks);
 
+    //This method sets a grid if the option is enabled by the two variables
     void setGrid(Boolean horizontal, Boolean vertical);
 
+    //It's the main method. It update the view by getting data from the model and set the values on the graph
     void setData(ArrayList<FlowModel> flowList, String signal);
 }

@@ -233,7 +233,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     }
 
     /*
-    This method call the initialize method depending on the orientation setted.
+    This method call the initialize method depending on the orientation set.
      */
 
     @Override
