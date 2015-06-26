@@ -42,8 +42,7 @@ public class SocketManager {
     private Socket mSocket;
     private String url = "";
 
-
-    //Constructor
+    //Constructor of SocketManager. A new socket is created without an url.
     public SocketManager() {
         try {
             mSocket = IO.socket("");
@@ -52,12 +51,12 @@ public class SocketManager {
         }
     }
 
-    //Constructor
+    //Constructor of SocketManager. A new socket is created with a given url.
     public SocketManager(String url) {
         setSocketUrl(url);
     }
 
-    //setter method
+    //The following method uses the given url to set up a connection.
     public void setSocketUrl(String url) {
         this.url = url;
         try {
@@ -67,35 +66,37 @@ public class SocketManager {
         }
     }
 
-    //getter method
+    //The following method returns the socket url
     public String getSocketUrl() {
         return url;
     }
 
-    //start the connection with socket
-    public void startConnection() {
-        mSocket.connect();
+    //when called, the socket connection is started
+    public void startConnection() { mSocket.connect(); }
 
-    }
-
+    // it returns true if the socket hasn't been instatiated.
     public Boolean isNull() {
         return (mSocket == null);
     }
 
+    // it returns true if the socket is connected.
     public Boolean isConnected() {
         return mSocket.connected();
     }
 
-    //stop the connection with the socket
+    //when called, the socket connection is stopped
     public void stopConnection() {
         mSocket.disconnect();
     }
 
-    //close the connection with the socket
+    //when called, the socket and its connection are destroyed
     public void destroyConnection() {
         mSocket.close();
     }
 
+    // the following method creates a thread that will be put on a listening mode for defined events.
+    // The socket is connected to an url that sends events. When an event arrives, the method decides
+    // where to send the json that has arrived.
     public void startListening(final String signal, final Activity activity, final Object model) {
         mSocket.on(signal, new Emitter.Listener() {
             @Override

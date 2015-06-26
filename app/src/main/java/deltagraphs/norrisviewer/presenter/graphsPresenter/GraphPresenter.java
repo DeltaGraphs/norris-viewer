@@ -32,10 +32,16 @@ import deltagraphs.norrisviewer.presenter.SocketManager;
 public abstract class GraphPresenter implements Observer {
     protected SocketManager graphSocket;
 
+    // constructor of the abstract class GraphPresenter. It requires an url to be instatiated properly.
+    // A new connection will be established with the given url.
     public GraphPresenter(String url) {
         this.graphSocket = new SocketManager(url);
     }
 
+    /* This method is called when a new socket is created and a new connection must be established.
+    The socket is put to listen for some events that will arrive when the connection is started.
+    For each type of event a different path of instructions will be executed, in order to set,
+    update or delete some informations. */
     public void startSocket(Activity graphActivity, Object graphModel) {
         graphSocket.startConnection();
         graphSocket.startListening("configGraph", graphActivity, graphModel);
@@ -46,14 +52,17 @@ public abstract class GraphPresenter implements Observer {
         graphSocket.startListening("updateFlowData", graphActivity, graphModel);
     }
 
+    //when called, the socket connection is stopped
     public void stopSocket() {
         graphSocket.stopConnection();
     }
 
+    // it returns the socket of the class that extends GraphPresenter
     public SocketManager getGraphSocket(){
         return graphSocket;
     }
 
+    //when called, the socket and its connection are destroyed
     public void destroySocket() {
         graphSocket.destroyConnection();
     }

@@ -19,9 +19,12 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface MapChartPresenter {
+    //when called, the socket connection is stopped
     void stopConnection();
 
-    void destroyConnection();
-
+    //when called, the socket connection is started
     void startConnection();
+
+    //when called, the socket and its connection are destroyed
+    void destroyConnection();
 }

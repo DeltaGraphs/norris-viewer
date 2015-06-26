@@ -31,6 +31,10 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     protected LineChartView graphView;
     protected LineChart lineChartInstance;
 
+    /* constructor of LineChartPresenterImpl. It requires an activity and an url to be instatiated properly.
+    The object will be associated to the activity and a new connection will be established with the
+    given url. Furthermore, an instance of linechart model will be created. The object will observe the
+    changes on it, according to the observer design pattern. */
     public LineChartPresenterImpl(LineChartView view, String url) {
         super(url);
         graphView = view;
@@ -38,6 +42,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         startSocket((LineChartActivity) view, lineChartInstance);
     }
 
+    /* This object is an observer of the line chart model. When there are some changes on it, a signal is sent
+    to this object and the following method is called. Its aim is to set or update informations that are
+    shown on the activity. Data is always updated on it. In some cases, when a signal arrives with the value
+    "configGraph" or "updateGraphProp", there is also an update of the graph parameters, on the activity.
+    All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
         if (observable instanceof LineChartImpl) {
@@ -49,6 +58,8 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         }
     }
 
+    /* this method is always called by the method "update".
+    Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
         graphView.setAxis('x',
                 lineChartInstance.getAxisX().getName(),
@@ -62,12 +73,19 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
     }
 
+    //when called, the socket connection is stopped
+    public void stopConnection() {
+        stopSocket();
+    }
+
+    //when called, the socket connection is started
+    public void startConnection() {
+        startSocket((LineChartActivity) graphView, lineChartInstance);
+    }
+
+    //when called, the socket and its connection are destroyed
     public void destroyConnection() {
         destroySocket();
     }
-
-    public void startConnection(){startSocket((LineChartActivity) graphView, lineChartInstance);}
-
-    public void stopConnection(){stopSocket();}
 
 }

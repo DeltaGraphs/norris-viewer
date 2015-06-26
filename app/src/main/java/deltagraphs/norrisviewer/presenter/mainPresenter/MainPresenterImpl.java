@@ -46,13 +46,21 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     protected SocketManager mainSocket;
     public MainView mainView;
+
+    /* MainPresenterImpl will observe the changes on PageModel, according to the observer design pattern.*/
     protected PageModel pageModel = new PageModelImpl(this);
 
+    /* constructor of MainPresenterImpl. It requires an activity to be instatiated properly.
+    The object will be associated to the activity. A new socket is created. */
     public MainPresenterImpl(MainView view) {
         mainSocket = new SocketManager();
         mainView = view;
     }
 
+    /* This method is called when a new connection must be established.
+    The socket is put to listen for some events that will arrive when the connection is started.
+    For each type of event a different path of instructions will be executed, in order to set,
+    update or delete some informations. */
     public void setUpSocket(String url) {
         mainSocket.setSocketUrl(url);
         mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
@@ -63,10 +71,14 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         mainSocket.startConnection();
     }
 
+    // the pageModel will be reinitialized.
     public void reinitializePageList() {
         pageModel = new PageModelImpl(this);
     }
 
+    /* the following method is used to create a new dialog. An URL is set as default.
+    when the user will press the "ok" button of this dialog on the app activity, a new socket
+    connection will be established. */
     public AlertDialog showDialog(final Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Insert source URL");
@@ -105,31 +117,39 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         return dialog;
     }
 
+    //when called, the socket connection is stopped
     @Override
     public void stopConnection() {
         mainSocket.stopConnection();
     }
 
-    @Override
-    public void destroyConnection() {
-        mainSocket.destroyConnection();
-    }
-
+    //when called, the socket connection is started
     @Override
     public void startConnection() {
         mainSocket.startConnection();
     }
 
+    //when called, the socket and its connection are destroyed
+    @Override
+    public void destroyConnection() {
+        mainSocket.destroyConnection();
+    }
+
+    // it returns true if the socket is connected.
     @Override
     public boolean isConnected() {
         return mainSocket.isConnected();
     }
 
+    // it returns true if the socket hasn't been instatiated.
     @Override
     public boolean isSocketNull() {
         return mainSocket.isNull();
     }
 
+    /* This object is an observer of the page model. When there are some changes on it, a signal is sent
+    to this object and the following method is called. Its aim is to set or update informations that are
+    shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
         mainView.updatePagesList(pageModel);

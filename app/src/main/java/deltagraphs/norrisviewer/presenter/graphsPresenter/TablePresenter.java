@@ -19,9 +19,13 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface TablePresenter {
-
+    //when called, the socket connection is paused
     void stopConnection();
-    void destroyConnection();
+
+    //when called, the socket connection is stopped
     void startConnection();
+
+    //when called, the socket and its connection are destroyed
+    void destroyConnection();
 
 }

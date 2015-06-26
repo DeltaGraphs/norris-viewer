@@ -19,10 +19,13 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  */
 
 public interface BarChartPresenter {
+    //when called, the socket connection is stopped
     void stopConnection();
 
+    //when called, the socket connection is started
     void startConnection();
 
+    //when called, the socket and its connection are destroyed
     void destroyConnection();
 
 }
