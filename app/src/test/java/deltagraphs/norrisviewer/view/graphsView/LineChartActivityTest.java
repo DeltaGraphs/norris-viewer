@@ -26,9 +26,12 @@ import junit.framework.TestResult;
 import org.junit.Before;
 import org.junit.Test;
 
-public class LineChartActivityTest extends ActivityInstrumentationTestCase2 {
+public class LineChartActivityTest extends ActivityInstrumentationTestCase2<LineChartActivity> {
 
     LineChartActivity mLineChartActivity;
+    public LineChartActivityTest() {
+        super(LineChartActivity.class);
+    }
 
     public LineChartActivityTest(Class activityClass) {
         super(activityClass);
@@ -37,9 +40,15 @@ public class LineChartActivityTest extends ActivityInstrumentationTestCase2 {
     @Before
     protected void setUp() throws Exception {
         super.setUp();
-        setActivityInitialTouchMode(true);
-        mLineChartActivity = (LineChartActivity)getActivity();
-        mLineChartActivity.onCreate(new Bundle());
+        //setActivityInitialTouchMode(true);
+        //mLineChartActivity = (LineChartActivity)getActivity();
+        //mLineChartActivity.onCreate(new Bundle());
+    }
+
+    public void testOnCreate() throws Exception {
+        LineChartActivity activity = getActivity();
+        activity.onCreate(new Bundle());
+        assertNotNull(activity);
     }
 /*
     @Test

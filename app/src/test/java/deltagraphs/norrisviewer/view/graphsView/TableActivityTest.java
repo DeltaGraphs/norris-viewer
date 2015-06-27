@@ -1,6 +1,7 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.test.ActivityTestCase;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
@@ -25,24 +26,25 @@ import junit.framework.TestCase;
  *
  */
 
-public class TableActivityTest extends ActivityInstrumentationTestCase2 {
+public class TableActivityTest extends ActivityInstrumentationTestCase2<TableActivity> {
 
-    public TableActivityTest(String pkg, Class activityClass) {
-        super( activityClass);
+    public TableActivityTest() {
+        super(TableActivity.class);
     }
-/*
     public void setUp() throws Exception {
         super.setUp();
         Intent intent = new Intent();
-        TableActivity tableActivity = new TableActivity();
-        tableActivity.setIntent(intent);
 
     }
 
     public void testOnResume() throws Exception {
-
+        TableActivity activity = getActivity();
+        activity.onCreate(new Bundle());
+        activity.onPause();
+        activity.onResume();
+        assertNotNull(activity);
     }
-
+/*
     public void testOnStop() throws Exception {
 
     }
