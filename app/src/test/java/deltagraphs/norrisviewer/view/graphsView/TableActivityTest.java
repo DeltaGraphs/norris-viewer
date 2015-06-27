@@ -37,7 +37,7 @@ import deltagraphs.norrisviewer.model.graphsModel.Table;
  *
  */
 @Config(emulateSdk = 18)
-//@Config(manifest = "app/src/main/AndroidManifest.xml")
+//manifest = "app/src/main/AndroidManifest.xml")
 @RunWith(RobolectricGradleTestRunner.class)
 public class TableActivityTest extends ActivityInstrumentationTestCase2<TableActivity> {
 
@@ -51,7 +51,8 @@ public class TableActivityTest extends ActivityInstrumentationTestCase2<TableAct
     public void setUp() throws Exception {
         super.setUp();
         table = new TableActivity();
-        table = Robolectric.buildActivity(TableActivity.class).create().get();
+
+        //table = Robolectric.buildActivity(TableActivity.class).create().get();
 
         //TableActivity activity = getActivity();
         //Intent intent = new Intent();
