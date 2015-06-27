@@ -101,7 +101,7 @@ public class SocketManager {
 <span class="fc" id="L101">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="nc" id="L104">                activity.runOnUiThread(new Runnable() {</span>
+<span class="fc" id="L104">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
 <span class="nc" id="L107">                        JSONObject obj = (JSONObject) args[0];</span>
@@ -118,7 +118,7 @@ public class SocketManager {
 <span class="nc" id="L118">                            ((Graph) model).setGraph(obj, signal);</span>
 <span class="nc" id="L119">                    }</span>
                 });
-<span class="nc" id="L121">            }</span>
+<span class="fc" id="L121">            }</span>
         });
 <span class="fc" id="L123">    }</span>
 }

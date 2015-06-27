@@ -95,22 +95,22 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 <span class="nc" id="L95">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc bnc" id="L98" title="All 2 branches missed.">                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {</span>
-<span class="nc bnc" id="L99" title="All 4 branches missed.">                    if ((!mainSocket.isNull()) &amp;&amp; (mainSocket.isConnected())) {</span>
-<span class="nc" id="L100">                        pageModel.removeObservers();</span>
-<span class="nc" id="L101">                        mainSocket.stopConnection();</span>
-<span class="nc" id="L102">                        mainSocket = new SocketManager();</span>
-<span class="nc" id="L103">                        reinitializePageList();</span>
+                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {
+                    if ((!mainSocket.isNull()) &amp;&amp; (mainSocket.isConnected())) {
+                        pageModel.removeObservers();
+                        mainSocket.stopConnection();
+                        mainSocket = new SocketManager();
+                        reinitializePageList();
                     }
-<span class="nc" id="L105">                    setUpSocket(input.getText().toString());</span>
+                    setUpSocket(input.getText().toString());
                 }
-<span class="nc" id="L107">            }</span>
+            }
         });
 <span class="nc" id="L109">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc" id="L112">                dialog.cancel();</span>
-<span class="nc" id="L113">            }</span>
+                dialog.cancel();
+            }
         });
 
 <span class="nc" id="L116">        AlertDialog dialog = builder.show();</span>
