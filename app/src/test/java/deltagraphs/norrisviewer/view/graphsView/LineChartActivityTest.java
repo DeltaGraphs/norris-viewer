@@ -21,38 +21,45 @@ import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.Menu;
 
+import com.example.app.test.RobolectricGradleTestRunner;
+
 import junit.framework.TestResult;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.annotation.Config;
 
+@Config(emulateSdk = 18, manifest = "AndroidManifest.xml")
+@RunWith(RobolectricGradleTestRunner.class)
 public class LineChartActivityTest extends ActivityInstrumentationTestCase2<LineChartActivity> {
 
     LineChartActivity mLineChartActivity;
+
     public LineChartActivityTest() {
         super(LineChartActivity.class);
     }
 
-    public LineChartActivityTest(Class activityClass) {
-        super(activityClass);
-    }
-
     @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        mLineChartActivity = new LineChartActivity();
+        mLineChartActivity = Robolectric.buildActivity(LineChartActivity.class).create().get();
+    }
+/*
+        @Before
     protected void setUp() throws Exception {
         super.setUp();
         //setActivityInitialTouchMode(true);
         //mLineChartActivity = (LineChartActivity)getActivity();
         //mLineChartActivity.onCreate(new Bundle());
     }
-
-    public void testOnCreate() throws Exception {
-        LineChartActivity activity = getActivity();
-        activity.onCreate(new Bundle());
-        assertNotNull(activity);
-    }
-/*
+*/
     @Test
-    public void testOnCreateOptionsMenu(){
-       // mLineChartActivity.onCreateOptionsMenu()
-    }*/
+    public void testOnCreate() throws Exception {
+        mLineChartActivity.onCreate(new Bundle());
+        assertNotNull(mLineChartActivity);
+    }
+
 }
