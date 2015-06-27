@@ -6,7 +6,18 @@ import android.test.ActivityTestCase;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 
+import com.example.app.test.RobolectricGradleTestRunner;
+
 import junit.framework.TestCase;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
+
+import deltagraphs.norrisviewer.model.graphsModel.Table;
 
 /*
  * Name : { Nome del file }.java
@@ -25,15 +36,44 @@ import junit.framework.TestCase;
  * ===============================================================
  *
  */
-
+@Config(emulateSdk = 18)
+//@Config(manifest = "app/src/main/AndroidManifest.xml")
+@RunWith(RobolectricGradleTestRunner.class)
 public class TableActivityTest extends ActivityInstrumentationTestCase2<TableActivity> {
+
+    TableActivity table;
 
     public TableActivityTest() {
         super(TableActivity.class);
     }
+
+    @Before
     public void setUp() throws Exception {
         super.setUp();
-        Intent intent = new Intent();
+        table = new TableActivity();
+        table = Robolectric.buildActivity(TableActivity.class).create().get();
+
+        //TableActivity activity = getActivity();
+        //Intent intent = new Intent();
+        //setActivityInitialTouchMode(true);
+        //mLineChartActivity = (LineChartActivity)getActivity();
+        //intent = new Intent(getActivity(), TableActivity.class);
+    }
+
+    @Test
+    public void testOnCreate() throws Exception {
+        /*TableActivity activity = getActivity();
+        Intent intent = new Intent(getActivity(), TableActivity.class);
+        intent.putExtra("EXTRA_SOURCE_URL", "");
+        intent.putExtra("EXTRA_SOURCE_TITLE", "table");
+        Bundle bundle = activity.getIntent().getExtras();
+        //startActivity(intent);
+        activity.onCreate(bundle);
+        assertNotNull(activity);*/
+        assertNotNull(table);
+        //TableActivity activity = Robolectric.setupActivity(TableActivity.class);
+        //assertNotNull(activity);
+       // table.
 
     }
 
