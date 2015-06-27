@@ -31,44 +31,62 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     protected LineChartView graphView;
     protected LineChart lineChartInstance;
 
+    /* constructor of LineChartPresenterImpl. It requires an activity and an url to be instatiated properly.
+    The object will be associated to the activity and a new connection will be established with the
+    given url. Furthermore, an instance of linechart model will be created. The object will observe the
+    changes on it, according to the observer design pattern. */
     public LineChartPresenterImpl(LineChartView view, String url) {
-<span class="fc" id="L35">        super(url);</span>
-<span class="fc" id="L36">        graphView = view;</span>
-<span class="fc" id="L37">        lineChartInstance = new LineChartImpl(this);</span>
-<span class="fc" id="L38">        startSocket((LineChartActivity) view, lineChartInstance);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L39">        super(url);</span>
+<span class="fc" id="L40">        graphView = view;</span>
+<span class="fc" id="L41">        lineChartInstance = new LineChartImpl(this);</span>
+<span class="fc" id="L42">        startSocket((LineChartActivity) view, lineChartInstance);</span>
+<span class="fc" id="L43">    }</span>
 
+    /* This object is an observer of the line chart model. When there are some changes on it, a signal is sent
+    to this object and the following method is called. Its aim is to set or update informations that are
+    shown on the activity. Data is always updated on it. In some cases, when a signal arrives with the value
+    &quot;configGraph&quot; or &quot;updateGraphProp&quot;, there is also an update of the graph parameters, on the activity.
+    All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
-<span class="fc" id="L44">            String signal = (String) data;</span>
-<span class="pc bpc" id="L45" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L46">                setGraphParameters();</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
+<span class="fc" id="L53">            String signal = (String) data;</span>
+<span class="pc bpc" id="L54" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L55">                setGraphParameters();</span>
 
-<span class="fc" id="L48">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
+<span class="fc" id="L57">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
         }
-<span class="fc" id="L50">    }</span>
+<span class="fc" id="L59">    }</span>
 
+    /* this method is always called by the method &quot;update&quot;.
+    Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L53">        graphView.setAxis('x',</span>
+<span class="fc" id="L64">        graphView.setAxis('x',</span>
                 lineChartInstance.getAxisX().getName(),
                 lineChartInstance.getAxisX().getTicks()
         );
-<span class="fc" id="L57">        graphView.setAxis('y',</span>
+<span class="fc" id="L68">        graphView.setAxis('y',</span>
                 lineChartInstance.getAxisY().getName(),
                 lineChartInstance.getAxisY().getTicks()
         );
         //graphView.setViewFinder(lineChartInstance.getViewFinder());
-<span class="fc" id="L62">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
-<span class="fc" id="L63">    }</span>
+<span class="fc" id="L73">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
+<span class="fc" id="L74">    }</span>
 
+    //when called, the socket connection is stopped
+    public void stopConnection() {
+<span class="fc" id="L78">        stopSocket();</span>
+<span class="fc" id="L79">    }</span>
+
+    //when called, the socket connection is started
+    public void startConnection() {
+<span class="fc" id="L83">        startSocket((LineChartActivity) graphView, lineChartInstance);</span>
+<span class="fc" id="L84">    }</span>
+
+    //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="fc" id="L66">        destroySocket();</span>
-<span class="fc" id="L67">    }</span>
-
-<span class="fc" id="L69">    public void startConnection(){startSocket((LineChartActivity) graphView, lineChartInstance);}</span>
-
-<span class="fc" id="L71">    public void stopConnection(){stopSocket();}</span>
+<span class="fc" id="L88">        destroySocket();</span>
+<span class="fc" id="L89">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

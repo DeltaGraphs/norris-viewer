@@ -67,153 +67,190 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
     private String headers[];
 <span class="fc" id="L68">    private int rows = 0;</span>
 
+    /*
+    This method is called on the creation of the activity
+    and its job is to get information from
+    previous activity to get title and URL.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L72">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L77">        super.onCreate(savedInstanceState);</span>
 
-<span class="nc" id="L74">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+<span class="nc" id="L79">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-<span class="nc" id="L77">        Bundle extras = getIntent().getExtras();</span>
-<span class="nc bnc" id="L78" title="All 2 branches missed.">        if (extras != null) {</span>
-<span class="nc" id="L79">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
-<span class="nc" id="L80">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
+<span class="nc" id="L82">        Bundle extras = getIntent().getExtras();</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (extras != null) {</span>
+<span class="nc" id="L84">            sourceURL = extras.getString(&quot;EXTRA_SOURCE_URL&quot;);</span>
+<span class="nc" id="L85">            sourceTitle = extras.getString(&quot;EXTRA_SOURCE_TITLE&quot;);</span>
         }
-<span class="nc" id="L82">        baseTableAdapter = new RecordListAdapter(this);</span>
-<span class="nc" id="L83">        setContentView(R.layout.table);</span>
-<span class="nc" id="L84">        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);</span>
-<span class="nc" id="L85">        tablePresenter = new TablePresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L87">        baseTableAdapter = new RecordListAdapter(this);</span>
+<span class="nc" id="L88">        setContentView(R.layout.table);</span>
+<span class="nc" id="L89">        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);</span>
+<span class="nc" id="L90">        tablePresenter = new TablePresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L91">    }</span>
 
+    /*
+    This method is called when the activity is show back form a pause state.
+     */
     @Override
     public void onResume() {
-<span class="nc" id="L90">        tablePresenter = new TablePresenterImpl(this, sourceURL);</span>
-<span class="nc" id="L91">        super.onResume();</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L98">        tablePresenter = new TablePresenterImpl(this, sourceURL);</span>
+<span class="nc" id="L99">        super.onResume();</span>
+<span class="nc" id="L100">    }</span>
 
+    /*
+    The following method is called when this activity
+    is stopped and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onStop() {
-<span class="nc" id="L96">        tablePresenter.destroyConnection();</span>
-<span class="nc" id="L97">        super.onStop();</span>
-<span class="nc" id="L98">    }</span>
+<span class="nc" id="L109">        tablePresenter.destroyConnection();</span>
+<span class="nc" id="L110">        super.onStop();</span>
+<span class="nc" id="L111">    }</span>
 
+    /*
+    The following method is called when this activity
+    is hidden to the user and put on the background and
+    it's in charge of destroying the socket connection
+     */
     @Override
     public void onPause() {
-<span class="nc" id="L102">        tablePresenter.destroyConnection();</span>
-<span class="nc" id="L103">        super.onPause();</span>
-<span class="nc" id="L104">    }</span>
+<span class="nc" id="L120">        tablePresenter.destroyConnection();</span>
+<span class="nc" id="L121">        super.onPause();</span>
+<span class="nc" id="L122">    }</span>
 
+    /*
+   The following method is called when the activity
+   is restarted
+    */
     @Override
     public void onRestart() {
         //mapChartPresenter.startConnection();
-<span class="nc" id="L109">        super.onRestart();</span>
-<span class="nc" id="L110">    }</span>
+<span class="nc" id="L131">        super.onRestart();</span>
+<span class="nc" id="L132">    }</span>
 
+    /*
+    This method is called when the activity is destroyed and provides
+    to destroy the connection with the socket
+    */
     @Override
     public void onDestroy() {
-<span class="nc" id="L114">        tablePresenter.destroyConnection();</span>
-<span class="nc" id="L115">        super.onDestroy();</span>
-<span class="nc" id="L116">    }</span>
+<span class="nc" id="L140">        tablePresenter.destroyConnection();</span>
+<span class="nc" id="L141">        super.onDestroy();</span>
+<span class="nc" id="L142">    }</span>
 
+    /* This method generate a custom menu for the
+    action bar on the top of the activity  */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L121">        getMenuInflater().inflate(R.menu.menu_table, menu);</span>
-<span class="nc" id="L122">        return true;</span>
+<span class="nc" id="L149">        getMenuInflater().inflate(R.menu.menu_table, menu);</span>
+<span class="nc" id="L150">        return true;</span>
     }
 
+    /* This method menage the actions user can perform
+    on the menu */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L130">        int id = item.getItemId();</span>
+<span class="nc" id="L160">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L133" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L134">            return true;</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L164">            return true;</span>
         }
 
-<span class="nc" id="L137">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L167">        return super.onOptionsItemSelected(item);</span>
     }
 
-
+    // set the table to be sorted by a defined column
     @Override
     public void setSortByCol(String sortingColumn) {
-<span class="nc" id="L143">        int col = 0;</span>
-<span class="nc bnc" id="L144" title="All 4 branches missed.">        for (col = 0; (!(headers[col].equals(sortingColumn)) &amp;&amp; (col &lt; headers.length)); col++) ;</span>
+<span class="nc" id="L173">        int col = 0;</span>
+<span class="nc bnc" id="L174" title="All 4 branches missed.">        for (col = 0; (!(headers[col].equals(sortingColumn)) &amp;&amp; (col &lt; headers.length)); col++) ;</span>
         //while(!(headers[col].equals(sortingColumn)))
-<span class="nc bnc" id="L146" title="All 2 branches missed.">        if (col &gt;= headers.length)</span>
-<span class="nc" id="L147">            col = -1;</span>
-<span class="nc" id="L148">        this.sortingColumn = col;</span>
-<span class="nc" id="L149">    }</span>
+<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (col &gt;= headers.length)</span>
+<span class="nc" id="L177">            col = -1;</span>
+<span class="nc" id="L178">        this.sortingColumn = col;</span>
+<span class="nc" id="L179">    }</span>
 
+    // set if the table must be sorted in ascendent or descendent order
     @Override
     public void setSortOrder(String sortOrder) {
-<span class="nc" id="L153">        order = sortOrder;</span>
-<span class="nc" id="L154">    }</span>
+<span class="nc" id="L184">        order = sortOrder;</span>
+<span class="nc" id="L185">    }</span>
 
+    // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {
-<span class="nc" id="L158">        this.headers = headers;</span>
-<span class="nc" id="L159">    }</span>
+<span class="nc" id="L190">        this.headers = headers;</span>
+<span class="nc" id="L191">    }</span>
 
+
+    // the following method is used to sort the table. It uses java library's methods and at the end of it
+    // the list of records is defined on the ordered table.
     private void sort(ArrayList&lt;FlowModel&gt; flowList, int numOfColumns) {
-<span class="nc" id="L162">        ArrayList&lt;ArrayList&lt;String&gt;&gt; table = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span>
-<span class="nc bnc" id="L163" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
-<span class="nc" id="L164">            TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
-<span class="nc bnc" id="L165" title="All 2 branches missed.">            for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L166">                tableFlow.getRecordId(j);</span>
-<span class="nc" id="L167">                ArrayList&lt;String&gt; row = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L168" title="All 2 branches missed.">                for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
-<span class="nc" id="L169">                    row.add(tableFlow.getCellData(j, indexCol));</span>
+<span class="nc" id="L197">        ArrayList&lt;ArrayList&lt;String&gt;&gt; table = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
+<span class="nc" id="L199">            TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">            for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L201">                tableFlow.getRecordId(j);</span>
+<span class="nc" id="L202">                ArrayList&lt;String&gt; row = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">                for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
+<span class="nc" id="L204">                    row.add(tableFlow.getCellData(j, indexCol));</span>
                 }
-<span class="nc" id="L171">                table.add(row);</span>
+<span class="nc" id="L206">                table.add(row);</span>
             }
         }
 
-<span class="nc" id="L175">        Collections.sort(table, new Comparator&lt;ArrayList&lt;String&gt;&gt;() {</span>
+<span class="nc" id="L210">        Collections.sort(table, new Comparator&lt;ArrayList&lt;String&gt;&gt;() {</span>
             @Override
             public int compare(ArrayList&lt;String&gt; a, ArrayList&lt;String&gt; b) {
-<span class="nc" id="L178">                return a.get(sortingColumn).compareTo(b.get(sortingColumn));</span>
+<span class="nc" id="L213">                return a.get(sortingColumn).compareTo(b.get(sortingColumn));</span>
             }
         });
 
-<span class="nc bnc" id="L182" title="All 2 branches missed.">        for (int j = 0; j &lt; table.size(); j++) {</span>
-<span class="nc" id="L183">            String[] values = new String[numOfColumns];</span>
-<span class="nc bnc" id="L184" title="All 2 branches missed.">            for (int i = 0; i &lt; numOfColumns; i++) {</span>
-<span class="nc" id="L185">                values[i] = table.get(j).get(i);</span>
+<span class="nc bnc" id="L217" title="All 2 branches missed.">        for (int j = 0; j &lt; table.size(); j++) {</span>
+<span class="nc" id="L218">            String[] values = new String[numOfColumns];</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">            for (int i = 0; i &lt; numOfColumns; i++) {</span>
+<span class="nc" id="L220">                values[i] = table.get(j).get(i);</span>
             }
-<span class="nc" id="L187">            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
+<span class="nc" id="L222">            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
 
         }
-<span class="nc" id="L190">        rows = table.size();</span>
-<span class="nc" id="L191">    }</span>
+<span class="nc" id="L225">        rows = table.size();</span>
+<span class="nc" id="L226">    }</span>
 
+    //set the data in the table. It is extracted from the table model
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, int numOfColumns) {
-<span class="nc" id="L195">        rows = 0;</span>
-<span class="nc" id="L196">        baseTableAdapter = new RecordListAdapter(this);</span>
-<span class="nc bnc" id="L197" title="All 2 branches missed.">        if (sortingColumn == -1) {</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">            for (int i = 0; i &lt; flowList.size(); i++) {</span>
-<span class="nc" id="L199">                TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
-<span class="nc bnc" id="L200" title="All 2 branches missed.">                for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L201">                    String[] values = new String[numOfColumns];</span>
-<span class="nc bnc" id="L202" title="All 2 branches missed.">                    for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
-<span class="nc" id="L203">                        values[indexCol] = tableFlow.getCellData(j, indexCol);</span>
+<span class="nc" id="L231">        rows = 0;</span>
+<span class="nc" id="L232">        baseTableAdapter = new RecordListAdapter(this);</span>
+<span class="nc bnc" id="L233" title="All 2 branches missed.">        if (sortingColumn == -1) {</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">            for (int i = 0; i &lt; flowList.size(); i++) {</span>
+<span class="nc" id="L235">                TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">                for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L237">                    String[] values = new String[numOfColumns];</span>
+<span class="nc bnc" id="L238" title="All 2 branches missed.">                    for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
+<span class="nc" id="L239">                        values[indexCol] = tableFlow.getCellData(j, indexCol);</span>
                     }
-<span class="nc" id="L205">                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
-<span class="nc" id="L206">                    rows++;</span>
+<span class="nc" id="L241">                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
+<span class="nc" id="L242">                    rows++;</span>
                 }
             }
         } else {
-<span class="nc" id="L210">            sort(flowList, numOfColumns);</span>
+<span class="nc" id="L246">            sort(flowList, numOfColumns);</span>
         }
-<span class="nc" id="L212">        tableFixHeaders.setAdapter(baseTableAdapter);</span>
-<span class="nc" id="L213">        baseTableAdapter.notifyDataSetChanged();</span>
-<span class="nc" id="L214">        tableFixHeaders.animate();</span>
-<span class="nc" id="L215">    }</span>
+<span class="nc" id="L248">        tableFixHeaders.setAdapter(baseTableAdapter);</span>
+<span class="nc" id="L249">        baseTableAdapter.notifyDataSetChanged();</span>
+<span class="nc" id="L250">        tableFixHeaders.animate();</span>
+<span class="nc" id="L251">    }</span>
 
+    //classes added from the table library
 
     private class RecordList {
         private final String name;
@@ -243,7 +280,7 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
     }
 
 
-<span class="fc" id="L246">    public class RecordListAdapter extends BaseTableAdapter {</span>
+<span class="fc" id="L283">    public class RecordListAdapter extends BaseTableAdapter {</span>
 
         RecordList families[];
 

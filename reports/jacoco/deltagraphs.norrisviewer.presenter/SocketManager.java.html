@@ -42,83 +42,84 @@ public class SocketManager {
     private Socket mSocket;
 <span class="fc" id="L43">    private String url = &quot;&quot;;</span>
 
-
-    //Constructor
-<span class="fc" id="L47">    public SocketManager() {</span>
+    //Constructor of SocketManager. A new socket is created without an url.
+<span class="fc" id="L46">    public SocketManager() {</span>
         try {
-<span class="fc" id="L49">            mSocket = IO.socket(&quot;&quot;);</span>
-<span class="nc" id="L50">        } catch (URISyntaxException e) {</span>
-<span class="nc" id="L51">            e.printStackTrace();</span>
-<span class="fc" id="L52">        }</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L48">            mSocket = IO.socket(&quot;&quot;);</span>
+<span class="nc" id="L49">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L50">            e.printStackTrace();</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">    }</span>
 
-    //Constructor
-<span class="fc" id="L56">    public SocketManager(String url) {</span>
-<span class="fc" id="L57">        setSocketUrl(url);</span>
-<span class="fc" id="L58">    }</span>
+    //Constructor of SocketManager. A new socket is created with a given url.
+<span class="fc" id="L55">    public SocketManager(String url) {</span>
+<span class="fc" id="L56">        setSocketUrl(url);</span>
+<span class="fc" id="L57">    }</span>
 
-    //setter method
+    //The following method uses the given url to set up a connection.
     public void setSocketUrl(String url) {
-<span class="fc" id="L62">        this.url = url;</span>
+<span class="fc" id="L61">        this.url = url;</span>
         try {
-<span class="fc" id="L64">            mSocket = IO.socket(url);</span>
-<span class="nc" id="L65">        } catch (URISyntaxException e) {</span>
-<span class="nc" id="L66">            e.printStackTrace();</span>
-<span class="fc" id="L67">        }</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L63">            mSocket = IO.socket(url);</span>
+<span class="nc" id="L64">        } catch (URISyntaxException e) {</span>
+<span class="nc" id="L65">            e.printStackTrace();</span>
+<span class="fc" id="L66">        }</span>
+<span class="fc" id="L67">    }</span>
 
-    //getter method
+    //The following method returns the socket url
     public String getSocketUrl() {
-<span class="nc" id="L72">        return url;</span>
+<span class="nc" id="L71">        return url;</span>
     }
 
-    //start the connection with socket
-    public void startConnection() {
-<span class="fc" id="L77">        mSocket.connect();</span>
+    //when called, the socket connection is started
+<span class="fc" id="L75">    public void startConnection() { mSocket.connect(); }</span>
 
-<span class="fc" id="L79">    }</span>
-
+    // it returns true if the socket hasn't been instatiated.
     public Boolean isNull() {
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        return (mSocket == null);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        return (mSocket == null);</span>
     }
 
+    // it returns true if the socket is connected.
     public Boolean isConnected() {
-<span class="fc" id="L86">        return mSocket.connected();</span>
+<span class="fc" id="L84">        return mSocket.connected();</span>
     }
 
-    //stop the connection with the socket
+    //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L91">        mSocket.disconnect();</span>
-<span class="fc" id="L92">    }</span>
+<span class="fc" id="L89">        mSocket.disconnect();</span>
+<span class="fc" id="L90">    }</span>
 
-    //close the connection with the socket
+    //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L96">        mSocket.close();</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L94">        mSocket.close();</span>
+<span class="nc" id="L95">    }</span>
 
+    // the following method creates a thread that will be put on a listening mode for defined events.
+    // The socket is connected to an url that sends events. When an event arrives, the method decides
+    // where to send the json that has arrived.
     public void startListening(final String signal, final Activity activity, final Object model) {
-<span class="fc" id="L100">        mSocket.on(signal, new Emitter.Listener() {</span>
+<span class="fc" id="L101">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="nc" id="L103">                activity.runOnUiThread(new Runnable() {</span>
+<span class="nc" id="L104">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
-<span class="nc" id="L106">                        JSONObject obj = (JSONObject) args[0];</span>
+<span class="nc" id="L107">                        JSONObject obj = (JSONObject) args[0];</span>
                         //try {
-<span class="nc bnc" id="L108" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
-<span class="nc" id="L109">                            ((PageModel) model).setPageModel(obj, signal);</span>
-<span class="nc bnc" id="L110" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView)</span>
-<span class="nc" id="L111">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L112" title="All 2 branches missed.">                        else if (activity instanceof LineChartView)</span>
-<span class="nc" id="L113">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L114" title="All 2 branches missed.">                        else if (activity instanceof MapChartView) {</span>
-<span class="nc" id="L115">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L116" title="All 2 branches missed.">                        } else if (activity instanceof TableView)</span>
-<span class="nc" id="L117">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc" id="L118">                    }</span>
+<span class="nc bnc" id="L109" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
+<span class="nc" id="L110">                            ((PageModel) model).setPageModel(obj, signal);</span>
+<span class="nc bnc" id="L111" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView)</span>
+<span class="nc" id="L112">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">                        else if (activity instanceof LineChartView)</span>
+<span class="nc" id="L114">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">                        else if (activity instanceof MapChartView) {</span>
+<span class="nc" id="L116">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">                        } else if (activity instanceof TableView)</span>
+<span class="nc" id="L118">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc" id="L119">                    }</span>
                 });
-<span class="nc" id="L120">            }</span>
+<span class="nc" id="L121">            }</span>
         });
-<span class="fc" id="L122">    }</span>
+<span class="fc" id="L123">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

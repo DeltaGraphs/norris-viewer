@@ -46,94 +46,114 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
     protected SocketManager mainSocket;
     public MainView mainView;
-<span class="fc" id="L49">    protected PageModel pageModel = new PageModelImpl(this);</span>
 
-<span class="fc" id="L51">    public MainPresenterImpl(MainView view) {</span>
-<span class="fc" id="L52">        mainSocket = new SocketManager();</span>
-<span class="fc" id="L53">        mainView = view;</span>
-<span class="fc" id="L54">    }</span>
+    /* MainPresenterImpl will observe the changes on PageModel, according to the observer design pattern.*/
+<span class="fc" id="L51">    protected PageModel pageModel = new PageModelImpl(this);</span>
 
+    /* constructor of MainPresenterImpl. It requires an activity to be instatiated properly.
+    The object will be associated to the activity. A new socket is created. */
+<span class="fc" id="L55">    public MainPresenterImpl(MainView view) {</span>
+<span class="fc" id="L56">        mainSocket = new SocketManager();</span>
+<span class="fc" id="L57">        mainView = view;</span>
+<span class="fc" id="L58">    }</span>
+
+    /* This method is called when a new connection must be established.
+    The socket is put to listen for some events that will arrive when the connection is started.
+    For each type of event a different path of instructions will be executed, in order to set,
+    update or delete some informations. */
     public void setUpSocket(String url) {
-<span class="fc" id="L57">        mainSocket.setSocketUrl(url);</span>
-<span class="fc" id="L58">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L59">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L60">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L61">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L62">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L63">        mainSocket.startConnection();</span>
-<span class="fc" id="L64">    }</span>
+<span class="fc" id="L65">        mainSocket.setSocketUrl(url);</span>
+<span class="fc" id="L66">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L67">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L68">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L69">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L70">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L71">        mainSocket.startConnection();</span>
+<span class="fc" id="L72">    }</span>
 
+    // the pageModel will be reinitialized.
     public void reinitializePageList() {
-<span class="fc" id="L67">        pageModel = new PageModelImpl(this);</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L76">        pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L77">    }</span>
 
+    /* the following method is used to create a new dialog. An URL is set as default.
+    when the user will press the &quot;ok&quot; button of this dialog on the app activity, a new socket
+    connection will be established. */
     public AlertDialog showDialog(final Context context) {
-<span class="nc" id="L71">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
-<span class="nc" id="L72">        builder.setTitle(&quot;Insert source URL&quot;);</span>
+<span class="nc" id="L83">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
+<span class="nc" id="L84">        builder.setTitle(&quot;Insert source URL&quot;);</span>
 
         // Set up the input
-<span class="nc" id="L75">        final EditText input = new EditText(context);</span>
+<span class="nc" id="L87">        final EditText input = new EditText(context);</span>
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-<span class="nc" id="L77">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
+<span class="nc" id="L89">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
         //input.setText(&quot;http://norris-nrti-dev.herokuapp.com/page1/map1&quot;);
-<span class="nc" id="L79">        input.setText(&quot;http://norris-nrti-dev.herokuapp.com/norris&quot;);</span>
-<span class="nc" id="L80">        builder.setView(input);</span>
+<span class="nc" id="L91">        input.setText(&quot;http://norris-nrti-dev.herokuapp.com/norris&quot;);</span>
+<span class="nc" id="L92">        builder.setView(input);</span>
 
         // Set up the buttons
-<span class="nc" id="L83">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L95">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc bnc" id="L86" title="All 2 branches missed.">                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {</span>
-<span class="nc bnc" id="L87" title="All 4 branches missed.">                    if ((!mainSocket.isNull()) &amp;&amp; (mainSocket.isConnected())) {</span>
-<span class="nc" id="L88">                        pageModel.removeObservers();</span>
-<span class="nc" id="L89">                        mainSocket.stopConnection();</span>
-<span class="nc" id="L90">                        mainSocket = new SocketManager();</span>
-<span class="nc" id="L91">                        reinitializePageList();</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {</span>
+<span class="nc bnc" id="L99" title="All 4 branches missed.">                    if ((!mainSocket.isNull()) &amp;&amp; (mainSocket.isConnected())) {</span>
+<span class="nc" id="L100">                        pageModel.removeObservers();</span>
+<span class="nc" id="L101">                        mainSocket.stopConnection();</span>
+<span class="nc" id="L102">                        mainSocket = new SocketManager();</span>
+<span class="nc" id="L103">                        reinitializePageList();</span>
                     }
-<span class="nc" id="L93">                    setUpSocket(input.getText().toString());</span>
+<span class="nc" id="L105">                    setUpSocket(input.getText().toString());</span>
                 }
-<span class="nc" id="L95">            }</span>
+<span class="nc" id="L107">            }</span>
         });
-<span class="nc" id="L97">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L109">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<span class="nc" id="L100">                dialog.cancel();</span>
-<span class="nc" id="L101">            }</span>
+<span class="nc" id="L112">                dialog.cancel();</span>
+<span class="nc" id="L113">            }</span>
         });
 
-<span class="nc" id="L104">        AlertDialog dialog = builder.show();</span>
-<span class="nc" id="L105">        return dialog;</span>
+<span class="nc" id="L116">        AlertDialog dialog = builder.show();</span>
+<span class="nc" id="L117">        return dialog;</span>
     }
 
+    //when called, the socket connection is stopped
     @Override
     public void stopConnection() {
-<span class="fc" id="L110">        mainSocket.stopConnection();</span>
-<span class="fc" id="L111">    }</span>
+<span class="fc" id="L123">        mainSocket.stopConnection();</span>
+<span class="fc" id="L124">    }</span>
 
-    @Override
-    public void destroyConnection() {
-<span class="fc" id="L115">        mainSocket.destroyConnection();</span>
-<span class="fc" id="L116">    }</span>
-
+    //when called, the socket connection is started
     @Override
     public void startConnection() {
-<span class="fc" id="L120">        mainSocket.startConnection();</span>
-<span class="fc" id="L121">    }</span>
+<span class="fc" id="L129">        mainSocket.startConnection();</span>
+<span class="fc" id="L130">    }</span>
 
+    //when called, the socket and its connection are destroyed
+    @Override
+    public void destroyConnection() {
+<span class="fc" id="L135">        mainSocket.destroyConnection();</span>
+<span class="fc" id="L136">    }</span>
+
+    // it returns true if the socket is connected.
     @Override
     public boolean isConnected() {
-<span class="fc" id="L125">        return mainSocket.isConnected();</span>
+<span class="fc" id="L141">        return mainSocket.isConnected();</span>
     }
 
+    // it returns true if the socket hasn't been instatiated.
     @Override
     public boolean isSocketNull() {
-<span class="fc" id="L130">        return mainSocket.isNull();</span>
+<span class="fc" id="L147">        return mainSocket.isNull();</span>
     }
 
+    /* This object is an observer of the page model. When there are some changes on it, a signal is sent
+    to this object and the following method is called. Its aim is to set or update informations that are
+    shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="fc" id="L135">        mainView.updatePagesList(pageModel);</span>
-<span class="fc" id="L136">    }</span>
+<span class="fc" id="L155">        mainView.updatePagesList(pageModel);</span>
+<span class="fc" id="L156">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
