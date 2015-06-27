@@ -31,7 +31,8 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.annotation.Config;
 
-@Config(emulateSdk = 18, manifest = "AndroidManifest.xml")
+@Config(emulateSdk = 18)
+//@Config(manifest = "app/src/main/AndroidManifest.xml")
 @RunWith(RobolectricGradleTestRunner.class)
 public class LineChartActivityTest extends ActivityInstrumentationTestCase2<LineChartActivity> {
 
@@ -56,10 +57,11 @@ public class LineChartActivityTest extends ActivityInstrumentationTestCase2<Line
         //mLineChartActivity.onCreate(new Bundle());
     }
 */
-    @Test
+
     public void testOnCreate() throws Exception {
-        mLineChartActivity.onCreate(new Bundle());
-        assertNotNull(mLineChartActivity);
+        LineChartActivity activity = getActivity();
+        activity.onCreate(new Bundle());
+        assertNotNull(activity);
     }
 
 }
