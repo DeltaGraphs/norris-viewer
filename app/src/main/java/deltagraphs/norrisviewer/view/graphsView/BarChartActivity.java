@@ -125,8 +125,9 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         //set values above bars
         hBarChart.setDrawValueAboveBar(true);
 
-        hBarChart.setDescription("");
+        hBarChart.setTouchEnabled(false);
 
+        hBarChart.setDescription("");
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
         hBarChart.setMaxVisibleValueCount(60);
@@ -175,7 +176,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         vBarChart.setDrawValueAboveBar(true);
 
         vBarChart.setDescription("");
-
+        vBarChart.setTouchEnabled(false);
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
         vBarChart.setMaxVisibleValueCount(60);
