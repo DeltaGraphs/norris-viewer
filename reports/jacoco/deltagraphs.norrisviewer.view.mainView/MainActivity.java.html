@@ -85,17 +85,23 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
 <span class="nc" id="L85">    }</span>
 
     @Override
-    public void onRestart(){
-<span class="nc" id="L89">        super.onRestart();</span>
-<span class="nc" id="L90">        presenter.startConnection();</span>
+    public void onPause(){
+<span class="nc" id="L89">        super.onPause();</span>
+<span class="nc" id="L90">        presenter.stopConnection();</span>
 <span class="nc" id="L91">    }</span>
+
+    @Override
+    public void onRestart(){
+<span class="nc" id="L95">        super.onRestart();</span>
+<span class="nc" id="L96">        presenter.startConnection();</span>
+<span class="nc" id="L97">    }</span>
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L97">        getMenuInflater().inflate(R.menu.main, menu);</span>
-<span class="nc" id="L98">        return true;</span>
+<span class="nc" id="L103">        getMenuInflater().inflate(R.menu.main, menu);</span>
+<span class="nc" id="L104">        return true;</span>
     }
 
     @Override
@@ -103,49 +109,49 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L106">        int id = item.getItemId();</span>
+<span class="nc" id="L112">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L109" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L110">            showDialog();</span>
-<span class="nc" id="L111">            return true;</span>
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L116">            showDialog();</span>
+<span class="nc" id="L117">            return true;</span>
         }
 
-<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (id == R.id.action_credits) {</span>
-<span class="nc" id="L115">            Context context = getApplicationContext();</span>
-<span class="nc" id="L116">            CharSequence text = &quot;Credits to DeltaGraphs 2015&quot;;</span>
-<span class="nc" id="L117">            int duration = Toast.LENGTH_SHORT;</span>
+<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (id == R.id.action_credits) {</span>
+<span class="nc" id="L121">            Context context = getApplicationContext();</span>
+<span class="nc" id="L122">            CharSequence text = &quot;Credits to DeltaGraphs 2015&quot;;</span>
+<span class="nc" id="L123">            int duration = Toast.LENGTH_SHORT;</span>
 
-<span class="nc" id="L119">            Toast toast = Toast.makeText(context, text, duration);</span>
-<span class="nc" id="L120">            toast.show();</span>
+<span class="nc" id="L125">            Toast toast = Toast.makeText(context, text, duration);</span>
+<span class="nc" id="L126">            toast.show();</span>
 
-<span class="nc" id="L122">            return true;</span>
+<span class="nc" id="L128">            return true;</span>
         }
 
-<span class="nc" id="L125">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L131">        return super.onOptionsItemSelected(item);</span>
     }
 
 
     @Override
     public void onBackPressed() {
-<span class="nc" id="L131">        Toast.makeText(getApplicationContext(),&quot;Press HOME button to exit the application&quot;,Toast.LENGTH_SHORT).show();</span>
-<span class="nc" id="L132">    }</span>
+<span class="nc" id="L137">        Toast.makeText(getApplicationContext(),&quot;Press HOME button to exit the application&quot;,Toast.LENGTH_SHORT).show();</span>
+<span class="nc" id="L138">    }</span>
 
     public void setTitle(String title) {
-<span class="nc" id="L135">        this.setTitle((CharSequence) title);</span>
-<span class="nc" id="L136">    }</span>
+<span class="nc" id="L141">        this.setTitle((CharSequence) title);</span>
+<span class="nc" id="L142">    }</span>
 
     public void showDialog() {
-<span class="nc" id="L139">        presenter.showDialog(this);</span>
-<span class="nc" id="L140">    }</span>
+<span class="nc" id="L145">        presenter.showDialog(this);</span>
+<span class="nc" id="L146">    }</span>
 
     @Override
     public void updatePagesList(PageModel pageModel) {
-<span class="nc" id="L144">        fragmentManager = getSupportFragmentManager();</span>
-<span class="nc" id="L145">        fragmentManager.beginTransaction()</span>
+<span class="nc" id="L150">        fragmentManager = getSupportFragmentManager();</span>
+<span class="nc" id="L151">        fragmentManager.beginTransaction()</span>
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
                 .commit();
-<span class="nc" id="L148">    }</span>
+<span class="nc" id="L154">    }</span>
 
 
     public static class PlaceholderFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -341,7 +347,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         LINE_CHART, COLUMN_CHART, MAP_CHART, TABLE
     }
 
-<span class="fc" id="L344">    public static class ChartDescription {</span>
+<span class="fc" id="L350">    public static class ChartDescription {</span>
         private String name;
         private String type;
         private String url;
