@@ -171,84 +171,87 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
     @Override
     public void setSortByCol(String sortingColumn) {
 <span class="nc" id="L173">        int col = 0;</span>
-<span class="nc bnc" id="L174" title="All 4 branches missed.">        for (col = 0; (!(headers[col].equals(sortingColumn)) &amp;&amp; (col &lt; headers.length)); col++) ;</span>
+<span class="nc bnc" id="L174" title="All 2 branches missed.">        if (col &gt;= headers.length)</span>
+<span class="nc" id="L175">            col = -1;</span>
+        else{
+<span class="nc bnc" id="L177" title="All 4 branches missed.">            for (col = 0; (!(headers[col].equals(sortingColumn)) &amp;&amp; (col &lt; headers.length)); col++) ;</span>
+        }
         //while(!(headers[col].equals(sortingColumn)))
-<span class="nc bnc" id="L176" title="All 2 branches missed.">        if (col &gt;= headers.length)</span>
-<span class="nc" id="L177">            col = -1;</span>
-<span class="nc" id="L178">        this.sortingColumn = col;</span>
-<span class="nc" id="L179">    }</span>
+
+<span class="nc" id="L181">        this.sortingColumn = col;</span>
+<span class="nc" id="L182">    }</span>
 
     // set if the table must be sorted in ascendent or descendent order
     @Override
     public void setSortOrder(String sortOrder) {
-<span class="nc" id="L184">        order = sortOrder;</span>
-<span class="nc" id="L185">    }</span>
+<span class="nc" id="L187">        order = sortOrder;</span>
+<span class="nc" id="L188">    }</span>
 
     // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {
-<span class="nc" id="L190">        this.headers = headers;</span>
-<span class="nc" id="L191">    }</span>
+<span class="nc" id="L193">        this.headers = headers;</span>
+<span class="nc" id="L194">    }</span>
 
 
     // the following method is used to sort the table. It uses java library's methods and at the end of it
     // the list of records is defined on the ordered table.
     private void sort(ArrayList&lt;FlowModel&gt; flowList, int numOfColumns) {
-<span class="nc" id="L197">        ArrayList&lt;ArrayList&lt;String&gt;&gt; table = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span>
-<span class="nc bnc" id="L198" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
-<span class="nc" id="L199">            TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
-<span class="nc bnc" id="L200" title="All 2 branches missed.">            for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L201">                tableFlow.getRecordId(j);</span>
-<span class="nc" id="L202">                ArrayList&lt;String&gt; row = new ArrayList&lt;String&gt;();</span>
-<span class="nc bnc" id="L203" title="All 2 branches missed.">                for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
-<span class="nc" id="L204">                    row.add(tableFlow.getCellData(j, indexCol));</span>
+<span class="nc" id="L200">        ArrayList&lt;ArrayList&lt;String&gt;&gt; table = new ArrayList&lt;ArrayList&lt;String&gt;&gt;();</span>
+<span class="nc bnc" id="L201" title="All 2 branches missed.">        for (int i = 0; i &lt; flowList.size(); i++) {</span>
+<span class="nc" id="L202">            TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
+<span class="nc bnc" id="L203" title="All 2 branches missed.">            for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L204">                tableFlow.getRecordId(j);</span>
+<span class="nc" id="L205">                ArrayList&lt;String&gt; row = new ArrayList&lt;String&gt;();</span>
+<span class="nc bnc" id="L206" title="All 2 branches missed.">                for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
+<span class="nc" id="L207">                    row.add(tableFlow.getCellData(j, indexCol));</span>
                 }
-<span class="nc" id="L206">                table.add(row);</span>
+<span class="nc" id="L209">                table.add(row);</span>
             }
         }
 
-<span class="nc" id="L210">        Collections.sort(table, new Comparator&lt;ArrayList&lt;String&gt;&gt;() {</span>
+<span class="nc" id="L213">        Collections.sort(table, new Comparator&lt;ArrayList&lt;String&gt;&gt;() {</span>
             @Override
             public int compare(ArrayList&lt;String&gt; a, ArrayList&lt;String&gt; b) {
-<span class="nc" id="L213">                return a.get(sortingColumn).compareTo(b.get(sortingColumn));</span>
+<span class="nc" id="L216">                return a.get(sortingColumn).compareTo(b.get(sortingColumn));</span>
             }
         });
 
-<span class="nc bnc" id="L217" title="All 2 branches missed.">        for (int j = 0; j &lt; table.size(); j++) {</span>
-<span class="nc" id="L218">            String[] values = new String[numOfColumns];</span>
-<span class="nc bnc" id="L219" title="All 2 branches missed.">            for (int i = 0; i &lt; numOfColumns; i++) {</span>
-<span class="nc" id="L220">                values[i] = table.get(j).get(i);</span>
+<span class="nc bnc" id="L220" title="All 2 branches missed.">        for (int j = 0; j &lt; table.size(); j++) {</span>
+<span class="nc" id="L221">            String[] values = new String[numOfColumns];</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">            for (int i = 0; i &lt; numOfColumns; i++) {</span>
+<span class="nc" id="L223">                values[i] = table.get(j).get(i);</span>
             }
-<span class="nc" id="L222">            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
+<span class="nc" id="L225">            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
 
         }
-<span class="nc" id="L225">        rows = table.size();</span>
-<span class="nc" id="L226">    }</span>
+<span class="nc" id="L228">        rows = table.size();</span>
+<span class="nc" id="L229">    }</span>
 
     //set the data in the table. It is extracted from the table model
     @Override
     public void setData(ArrayList&lt;FlowModel&gt; flowList, int numOfColumns) {
-<span class="nc" id="L231">        rows = 0;</span>
-<span class="nc" id="L232">        baseTableAdapter = new RecordListAdapter(this);</span>
-<span class="nc bnc" id="L233" title="All 2 branches missed.">        if (sortingColumn == -1) {</span>
-<span class="nc bnc" id="L234" title="All 2 branches missed.">            for (int i = 0; i &lt; flowList.size(); i++) {</span>
-<span class="nc" id="L235">                TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
-<span class="nc bnc" id="L236" title="All 2 branches missed.">                for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
-<span class="nc" id="L237">                    String[] values = new String[numOfColumns];</span>
-<span class="nc bnc" id="L238" title="All 2 branches missed.">                    for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
-<span class="nc" id="L239">                        values[indexCol] = tableFlow.getCellData(j, indexCol);</span>
+<span class="nc" id="L234">        rows = 0;</span>
+<span class="nc" id="L235">        baseTableAdapter = new RecordListAdapter(this);</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">        if (sortingColumn == -1) {</span>
+<span class="nc bnc" id="L237" title="All 2 branches missed.">            for (int i = 0; i &lt; flowList.size(); i++) {</span>
+<span class="nc" id="L238">                TableFlow tableFlow = (TableFlow) flowList.get(i);</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">                for (int j = 0; j &lt; tableFlow.getRecordSize(); j++) {</span>
+<span class="nc" id="L240">                    String[] values = new String[numOfColumns];</span>
+<span class="nc bnc" id="L241" title="All 2 branches missed.">                    for (int indexCol = 0; indexCol &lt; numOfColumns; indexCol++) {</span>
+<span class="nc" id="L242">                        values[indexCol] = tableFlow.getCellData(j, indexCol);</span>
                     }
-<span class="nc" id="L241">                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
-<span class="nc" id="L242">                    rows++;</span>
+<span class="nc" id="L244">                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));</span>
+<span class="nc" id="L245">                    rows++;</span>
                 }
             }
         } else {
-<span class="nc" id="L246">            sort(flowList, numOfColumns);</span>
+<span class="nc" id="L249">            sort(flowList, numOfColumns);</span>
         }
-<span class="nc" id="L248">        tableFixHeaders.setAdapter(baseTableAdapter);</span>
-<span class="nc" id="L249">        baseTableAdapter.notifyDataSetChanged();</span>
-<span class="nc" id="L250">        tableFixHeaders.animate();</span>
-<span class="nc" id="L251">    }</span>
+<span class="nc" id="L251">        tableFixHeaders.setAdapter(baseTableAdapter);</span>
+<span class="nc" id="L252">        baseTableAdapter.notifyDataSetChanged();</span>
+<span class="nc" id="L253">        tableFixHeaders.animate();</span>
+<span class="nc" id="L254">    }</span>
 
     //classes added from the table library
 
@@ -280,7 +283,7 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
     }
 
 
-<span class="fc" id="L283">    public class RecordListAdapter extends BaseTableAdapter {</span>
+<span class="fc" id="L286">    public class RecordListAdapter extends BaseTableAdapter {</span>
 
         RecordList families[];
 
