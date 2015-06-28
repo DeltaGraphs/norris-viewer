@@ -6,7 +6,6 @@ import android.test.ActivityTestCase;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 
-import com.example.app.test.RobolectricGradleTestRunner;
 
 import junit.framework.TestCase;
 
@@ -38,7 +37,7 @@ import deltagraphs.norrisviewer.model.graphsModel.Table;
  */
 @Config(emulateSdk = 18)
 //manifest = "app/src/main/AndroidManifest.xml")
-@RunWith(RobolectricGradleTestRunner.class)
+@RunWith(RobolectricTestRunner.class)
 public class TableActivityTest extends ActivityInstrumentationTestCase2<TableActivity> {
 
     TableActivity table;

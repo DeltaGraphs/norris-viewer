@@ -191,6 +191,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
+        if(this.headers.length == 0)
+            this.headers[0]="La tabella è vuota";
     }
 
 
