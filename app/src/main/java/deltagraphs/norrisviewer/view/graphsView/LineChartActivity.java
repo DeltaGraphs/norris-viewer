@@ -172,7 +172,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
      */
     @Override
     public void setAxis(char axisXorY, String name, int ticks) {
-       /* if (hasAxes) {
+        axisX = new Axis().setHasLines(true);
+        axisY = new Axis().setHasLines(true);
+        /*if (hasAxes) {
 
             float step = (maxIndex - minIndex) / ticks;
 

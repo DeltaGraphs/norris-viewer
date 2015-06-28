@@ -78,6 +78,18 @@ public class MainActivity extends ActionBarActivity implements MainView {
         showDialog();
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        presenter.stopConnection();
+    }
+
+    @Override
+    public void onRestart(){
+        super.onRestart();
+        presenter.startConnection();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

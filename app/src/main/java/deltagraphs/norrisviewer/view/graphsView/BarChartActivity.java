@@ -3,6 +3,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -276,7 +277,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
             BarDataSet set1 = new BarDataSet(yVals1, name);
             set1.setBarSpacePercent(35f);
-            set1.setColor(Color.parseColor(color));
+            if(color != "null" && color != null)
+                set1.setColor(Color.parseColor(color));
             dataSets.add(set1);
 
             data.setValueTextSize(10f);
