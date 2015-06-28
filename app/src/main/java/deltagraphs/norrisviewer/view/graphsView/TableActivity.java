@@ -171,10 +171,13 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void setSortByCol(String sortingColumn) {
         int col = 0;
-        for (col = 0; (!(headers[col].equals(sortingColumn)) && (col < headers.length)); col++) ;
-        //while(!(headers[col].equals(sortingColumn)))
         if (col >= headers.length)
             col = -1;
+        else{
+            for (col = 0; (!(headers[col].equals(sortingColumn)) && (col < headers.length)); col++) ;
+        }
+        //while(!(headers[col].equals(sortingColumn)))
+
         this.sortingColumn = col;
     }
 
