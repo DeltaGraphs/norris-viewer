@@ -34,7 +34,10 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
 import lecho.lib.hellocharts.view.AbstractChartView;
+import lecho.lib.hellocharts.view.BubbleChartView;
 import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.view.LineChartView;
+import lecho.lib.hellocharts.view.PreviewColumnChartView;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 /*
@@ -302,28 +305,30 @@ public class MainActivity extends ActionBarActivity implements MainView {
             holder.chartLayout.setVisibility(View.VISIBLE);
             holder.chartLayout.removeAllViews();
             AbstractChartView chart;
-            switch (item.chartType) {
+            /*switch (item.chartType) {
                 case COLUMN_CHART:
                     chart = new ColumnChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
                 case LINE_CHART:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new LineChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
                 case MAP_CHART:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for map Chart
+                    chart = new PreviewLineChartView(getContext());
+                    ((PreviewLineChartView)chart).setPreviewColor( -16711936);
                     holder.chartLayout.addView(chart);
                     break;
                 case TABLE:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for table
+                    chart = new PreviewColumnChartView(getContext());
+                    ((PreviewColumnChartView)chart).setPreviewColor(200);
                     holder.chartLayout.addView(chart);
                     break;
-                default:
+                default:*/
                     chart = null;
                     holder.chartLayout.setVisibility(View.GONE);
-                    break;
-            }
+                    //break;
+            //}
 
             if (null != chart) {
                 chart.setInteractive(false);// Disable touch handling for chart on the ListView.
