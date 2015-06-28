@@ -34,8 +34,8 @@ public class LineChartImpl extends Graph implements LineChart {
     private AxisModel axisX;
     private AxisModel axisY;
     private Boolean viewFinder;
-    private Boolean horizontalGrid;
-    private Boolean verticalGrid;
+    private Boolean horizontalGrid = new Boolean(true);
+    private Boolean verticalGrid = new Boolean(true);
 
     //it returns the properties of the x axis
     public AxisModel getAxisX() {

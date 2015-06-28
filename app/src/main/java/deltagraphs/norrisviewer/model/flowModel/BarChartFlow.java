@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel {
 
-    private String flowColour = "random"; /* 'random' is the default colour */
+    private String flowColour = "null"; /* 'random' is the default colour */
     private ArrayList<BarChartRecord> records = new ArrayList<BarChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow

@@ -40,7 +40,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager {
 
     private Socket mSocket;
-    private String url = "";
+    private String url = "http://norris-nrti-dev.herokuapp.com/norris";
 
     //Constructor of SocketManager. A new socket is created without an url.
     public SocketManager() {
@@ -81,6 +81,8 @@ public class SocketManager {
 
     // it returns true if the socket is connected.
     public Boolean isConnected() {
+        if(mSocket == null)
+            return false;
         return mSocket.connected();
     }
 
