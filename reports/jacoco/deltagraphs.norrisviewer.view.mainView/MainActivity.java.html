@@ -34,7 +34,10 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
 import lecho.lib.hellocharts.view.AbstractChartView;
+import lecho.lib.hellocharts.view.BubbleChartView;
 import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.view.LineChartView;
+import lecho.lib.hellocharts.view.PreviewColumnChartView;
 import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 /*
@@ -63,45 +66,45 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
  *
  */
 
-<span class="fc" id="L66">public class MainActivity extends ActionBarActivity implements MainView {</span>
+<span class="fc" id="L69">public class MainActivity extends ActionBarActivity implements MainView {</span>
 
     private MainPresenter presenter;
     private FragmentManager fragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-<span class="nc" id="L73">        super.onCreate(savedInstanceState);</span>
-<span class="nc" id="L74">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
+<span class="nc" id="L76">        super.onCreate(savedInstanceState);</span>
+<span class="nc" id="L77">        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,</span>
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-<span class="nc" id="L76">        setContentView(R.layout.activity_main);</span>
-<span class="nc" id="L77">        presenter = new MainPresenterImpl(this);</span>
-<span class="nc" id="L78">        showDialog();</span>
-<span class="nc" id="L79">    }</span>
+<span class="nc" id="L79">        setContentView(R.layout.activity_main);</span>
+<span class="nc" id="L80">        presenter = new MainPresenterImpl(this);</span>
+<span class="nc" id="L81">        showDialog();</span>
+<span class="nc" id="L82">    }</span>
 
     @Override
     public void onStop(){
-<span class="nc" id="L83">        super.onStop();</span>
-<span class="nc" id="L84">        presenter.stopConnection();</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L86">        super.onStop();</span>
+<span class="nc" id="L87">        presenter.stopConnection();</span>
+<span class="nc" id="L88">    }</span>
 
     @Override
     public void onPause(){
-<span class="nc" id="L89">        super.onPause();</span>
-<span class="nc" id="L90">        presenter.stopConnection();</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L92">        super.onPause();</span>
+<span class="nc" id="L93">        presenter.stopConnection();</span>
+<span class="nc" id="L94">    }</span>
 
     @Override
     public void onRestart(){
-<span class="nc" id="L95">        super.onRestart();</span>
-<span class="nc" id="L96">        presenter.startConnection();</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L98">        super.onRestart();</span>
+<span class="nc" id="L99">        presenter.startConnection();</span>
+<span class="nc" id="L100">    }</span>
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-<span class="nc" id="L103">        getMenuInflater().inflate(R.menu.main, menu);</span>
-<span class="nc" id="L104">        return true;</span>
+<span class="nc" id="L106">        getMenuInflater().inflate(R.menu.main, menu);</span>
+<span class="nc" id="L107">        return true;</span>
     }
 
     @Override
@@ -109,49 +112,49 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-<span class="nc" id="L112">        int id = item.getItemId();</span>
+<span class="nc" id="L115">        int id = item.getItemId();</span>
 
         //noinspection SimplifiableIfStatement
-<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
-<span class="nc" id="L116">            showDialog();</span>
-<span class="nc" id="L117">            return true;</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">        if (id == R.id.action_settings) {</span>
+<span class="nc" id="L119">            showDialog();</span>
+<span class="nc" id="L120">            return true;</span>
         }
 
-<span class="nc bnc" id="L120" title="All 2 branches missed.">        if (id == R.id.action_credits) {</span>
-<span class="nc" id="L121">            Context context = getApplicationContext();</span>
-<span class="nc" id="L122">            CharSequence text = &quot;Credits to DeltaGraphs 2015&quot;;</span>
-<span class="nc" id="L123">            int duration = Toast.LENGTH_SHORT;</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (id == R.id.action_credits) {</span>
+<span class="nc" id="L124">            Context context = getApplicationContext();</span>
+<span class="nc" id="L125">            CharSequence text = &quot;Credits to DeltaGraphs 2015&quot;;</span>
+<span class="nc" id="L126">            int duration = Toast.LENGTH_SHORT;</span>
 
-<span class="nc" id="L125">            Toast toast = Toast.makeText(context, text, duration);</span>
-<span class="nc" id="L126">            toast.show();</span>
+<span class="nc" id="L128">            Toast toast = Toast.makeText(context, text, duration);</span>
+<span class="nc" id="L129">            toast.show();</span>
 
-<span class="nc" id="L128">            return true;</span>
+<span class="nc" id="L131">            return true;</span>
         }
 
-<span class="nc" id="L131">        return super.onOptionsItemSelected(item);</span>
+<span class="nc" id="L134">        return super.onOptionsItemSelected(item);</span>
     }
 
 
     @Override
     public void onBackPressed() {
-<span class="nc" id="L137">        Toast.makeText(getApplicationContext(),&quot;Press HOME button to exit the application&quot;,Toast.LENGTH_SHORT).show();</span>
-<span class="nc" id="L138">    }</span>
+<span class="nc" id="L140">        Toast.makeText(getApplicationContext(),&quot;Press HOME button to exit the application&quot;,Toast.LENGTH_SHORT).show();</span>
+<span class="nc" id="L141">    }</span>
 
     public void setTitle(String title) {
-<span class="nc" id="L141">        this.setTitle((CharSequence) title);</span>
-<span class="nc" id="L142">    }</span>
+<span class="nc" id="L144">        this.setTitle((CharSequence) title);</span>
+<span class="nc" id="L145">    }</span>
 
     public void showDialog() {
-<span class="nc" id="L145">        presenter.showDialog(this);</span>
-<span class="nc" id="L146">    }</span>
+<span class="nc" id="L148">        presenter.showDialog(this);</span>
+<span class="nc" id="L149">    }</span>
 
     @Override
     public void updatePagesList(PageModel pageModel) {
-<span class="nc" id="L150">        fragmentManager = getSupportFragmentManager();</span>
-<span class="nc" id="L151">        fragmentManager.beginTransaction()</span>
+<span class="nc" id="L153">        fragmentManager = getSupportFragmentManager();</span>
+<span class="nc" id="L154">        fragmentManager.beginTransaction()</span>
                 .replace(R.id.container, PlaceholderFragment.newInstance(1, pageModel))
                 .commit();
-<span class="nc" id="L154">    }</span>
+<span class="nc" id="L157">    }</span>
 
 
     public static class PlaceholderFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -302,28 +305,30 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
             holder.chartLayout.setVisibility(View.VISIBLE);
             holder.chartLayout.removeAllViews();
             AbstractChartView chart;
-            switch (item.chartType) {
+            /*switch (item.chartType) {
                 case COLUMN_CHART:
                     chart = new ColumnChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
                 case LINE_CHART:
-                    chart = new PreviewLineChartView(getContext());
+                    chart = new LineChartView(getContext());
                     holder.chartLayout.addView(chart);
                     break;
                 case MAP_CHART:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for map Chart
+                    chart = new PreviewLineChartView(getContext());
+                    ((PreviewLineChartView)chart).setPreviewColor( -16711936);
                     holder.chartLayout.addView(chart);
                     break;
                 case TABLE:
-                    chart = new PreviewLineChartView(getContext()); //change to put a different icon for table
+                    chart = new PreviewColumnChartView(getContext());
+                    ((PreviewColumnChartView)chart).setPreviewColor(200);
                     holder.chartLayout.addView(chart);
                     break;
-                default:
+                default:*/
                     chart = null;
                     holder.chartLayout.setVisibility(View.GONE);
-                    break;
-            }
+                    //break;
+            //}
 
             if (null != chart) {
                 chart.setInteractive(false);// Disable touch handling for chart on the ListView.
@@ -347,7 +352,7 @@ import lecho.lib.hellocharts.view.PreviewLineChartView;
         LINE_CHART, COLUMN_CHART, MAP_CHART, TABLE
     }
 
-<span class="fc" id="L350">    public static class ChartDescription {</span>
+<span class="fc" id="L355">    public static class ChartDescription {</span>
         private String name;
         private String type;
         private String url;
