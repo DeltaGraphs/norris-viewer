@@ -91,6 +91,40 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     </issue>
 
     <issue
+        id="UseValueOf"
+        severity="Warning"
+        message="Use `Boolean.valueOf(true)` instead"
+        category="Performance"
+        priority="4"
+        summary="Should use `valueOf` instead of `new`"
+        explanation="You should not call the constructor for wrapper classes directly, such as`new Integer(42)`. Instead, call the `valueOf` factory method, such as `Integer.valueOf(42)`. This will typically use less memory because common integers such as 0 and 1 will share a single instance."
+        errorLine1="    private Boolean horizontalGrid = new Boolean(true);"
+        errorLine2="                                     ~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java"
+            line="37"
+            column="38"/>
+    </issue>
+
+    <issue
+        id="UseValueOf"
+        severity="Warning"
+        message="Use `Boolean.valueOf(true)` instead"
+        category="Performance"
+        priority="4"
+        summary="Should use `valueOf` instead of `new`"
+        explanation="You should not call the constructor for wrapper classes directly, such as`new Integer(42)`. Instead, call the `valueOf` factory method, such as `Integer.valueOf(42)`. This will typically use less memory because common integers such as 0 and 1 will share a single instance."
+        errorLine1="    private Boolean verticalGrid = new Boolean(true);"
+        errorLine2="                                   ~~~~~~~~~~~~~~~~~"
+        quickfix="studio">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java"
+            line="38"
+            column="36"/>
+    </issue>
+
+    <issue
         id="Overdraw"
         severity="Warning"
         message="Possible overdraw: Root element paints background `#c526a69a` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"

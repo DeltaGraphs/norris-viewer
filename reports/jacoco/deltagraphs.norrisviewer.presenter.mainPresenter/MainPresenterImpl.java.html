@@ -88,63 +88,65 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
 <span class="nc" id="L89">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
         //input.setText(&quot;http://norris-nrti-dev.herokuapp.com/page1/map1&quot;);
-<span class="nc" id="L91">        input.setText(&quot;http://norris-nrti-dev.herokuapp.com/norris&quot;);</span>
+<span class="nc" id="L91">        input.setText(mainSocket.getSocketUrl());</span>
 <span class="nc" id="L92">        builder.setView(input);</span>
 
         // Set up the buttons
 <span class="nc" id="L95">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (!(input.getText().toString().equals(mainSocket.getSocketUrl()))) {
-                    if ((!mainSocket.isNull()) &amp;&amp; (mainSocket.isConnected())) {
-                        pageModel.removeObservers();
-                        mainSocket.stopConnection();
-                        mainSocket = new SocketManager();
-                        reinitializePageList();
-                    }
+                String newUrl = input.getText().toString();
+                String oldUrl = mainSocket.getSocketUrl();
+                if ((!mainSocket.isConnected()) ||
+                        ((mainSocket.isConnected()) &amp;&amp; (!(newUrl.equals(oldUrl))))) {
+                    pageModel.removeObservers();
+                    mainSocket.stopConnection();
+                    mainSocket = new SocketManager();
+                    reinitializePageList();
                     setUpSocket(input.getText().toString());
                 }
+
             }
         });
-<span class="nc" id="L109">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L111">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
-<span class="nc" id="L116">        AlertDialog dialog = builder.show();</span>
-<span class="nc" id="L117">        return dialog;</span>
+<span class="nc" id="L118">        AlertDialog dialog = builder.show();</span>
+<span class="nc" id="L119">        return dialog;</span>
     }
 
     //when called, the socket connection is stopped
     @Override
     public void stopConnection() {
-<span class="fc" id="L123">        mainSocket.stopConnection();</span>
-<span class="fc" id="L124">    }</span>
+<span class="fc" id="L125">        mainSocket.stopConnection();</span>
+<span class="fc" id="L126">    }</span>
 
     //when called, the socket connection is started
     @Override
     public void startConnection() {
-<span class="fc" id="L129">        mainSocket.startConnection();</span>
-<span class="fc" id="L130">    }</span>
+<span class="fc" id="L131">        mainSocket.startConnection();</span>
+<span class="fc" id="L132">    }</span>
 
     //when called, the socket and its connection are destroyed
     @Override
     public void destroyConnection() {
-<span class="fc" id="L135">        mainSocket.destroyConnection();</span>
-<span class="fc" id="L136">    }</span>
+<span class="fc" id="L137">        mainSocket.destroyConnection();</span>
+<span class="fc" id="L138">    }</span>
 
     // it returns true if the socket is connected.
     @Override
     public boolean isConnected() {
-<span class="fc" id="L141">        return mainSocket.isConnected();</span>
+<span class="fc" id="L143">        return mainSocket.isConnected();</span>
     }
 
     // it returns true if the socket hasn't been instatiated.
     @Override
     public boolean isSocketNull() {
-<span class="fc" id="L147">        return mainSocket.isNull();</span>
+<span class="fc" id="L149">        return mainSocket.isNull();</span>
     }
 
     /* This object is an observer of the page model. When there are some changes on it, a signal is sent
@@ -152,8 +154,8 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="fc" id="L155">        mainView.updatePagesList(pageModel);</span>
-<span class="fc" id="L156">    }</span>
+<span class="fc" id="L157">        mainView.updatePagesList(pageModel);</span>
+<span class="fc" id="L158">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
