@@ -85,6 +85,12 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+        presenter.stopConnection();
+    }
+
+    @Override
     public void onRestart(){
         super.onRestart();
         presenter.startConnection();
