@@ -90,8 +90,4 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         startSocket((BarChartActivity) graphView, barChartInstance);
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-        destroySocket();
-    }
 }

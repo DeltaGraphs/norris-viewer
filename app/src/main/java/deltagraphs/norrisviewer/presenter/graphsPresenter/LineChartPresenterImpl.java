@@ -86,9 +86,4 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         startSocket((LineChartActivity) graphView, lineChartInstance);
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-        destroySocket();
-    }
-
 }

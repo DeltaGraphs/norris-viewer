@@ -32,9 +32,6 @@ public interface MainPresenter {
     //when called, the socket connection is started.
     void startConnection();
 
-    //when called, the socket and its connection are destroyed.
-    void destroyConnection();
-
     // it returns true if the socket is connected.
     boolean isConnected();
 

@@ -79,9 +79,4 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     public void startConnection() {
         startSocket((TableActivity) graphView, tableInstance);
     }
-
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-        destroySocket();
-    }
 }

@@ -76,7 +76,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         setTitle(sourceTitle);
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
     }
-/*
+
     //manage the resuming action from another activity
     @Override
     public void onResume() {
@@ -110,7 +110,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         barChartPresenter.destroyConnection();
         super.onDestroy();
     }
-    */
+
 
     /*
     Initialize a vertical bar chart with its configuration

@@ -94,10 +94,6 @@ public class SocketManager {
         mSocket.disconnect();
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-        mSocket.close();
-    }
 
     // the following method creates a thread that will be put on a listening mode for defined events.
     // The socket is connected to an url that sends events. When an event arrives, the method decides

@@ -82,14 +82,13 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        //mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
-
+        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         Context context = getApplicationContext();
         CharSequence text = "Loading may take a few moments...";
         int duration = Toast.LENGTH_SHORT;
-        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
     }
@@ -97,59 +96,52 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     /*
     This method is called when the activity is show back form a pause state.
      */
-    /*
     @Override
     public void onResume() {
-
         super.onResume();
     }
-*/
+
     /*
     The following method is called when this activity
     is stopped and put on the background and
     it's in charge of destroying the socket connection
      */
-    /*
     @Override
     public void onStop() {
         mapChartPresenter.stopConnection();
         super.onStop();
     }
-*/
+
     /*
     The following method is called when this activity
     is hidden to the user and put on the background and
     it's in charge of destroying the socket connection
      */
-    /*
     @Override
     public void onPause() {
         mapChartPresenter.stopConnection();
         super.onPause();
     }
-*/
+
     /*
     The following method is called when the activity
     is restarted
      */
-    /*
     @Override
     public void onRestart() {
-        //mapChartPresenter.startConnection();
         super.onRestart();
     }
-*/
+
     /*
     This method is called when the activity is destroyed and provides
     to destroy the connection with the socket
      */
-    /*
     @Override
     public void onDestroy() {
         mapChartPresenter.destroyConnection();
         super.onDestroy();
     }
-*/
+
     /*
     This method istantiates the map if
     it has not been already initialized.
@@ -223,8 +215,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
         m.title(id);
+        if(!hasLegend){
 
-        if (hasLegend) {
         }
         switch (type) {
             // shape marker
@@ -371,6 +363,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
      */
     @Override
     public void setLegendOnPoint(Boolean legend) {
+        if(legend == false)
+            map.setOnMarkerClickListener(null);
         hasLegend = legend;
     }
 

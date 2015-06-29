@@ -132,12 +132,6 @@ public class MainPresenterImpl implements MainPresenter, Observer {
         mainSocket.startConnection();
     }
 
-    //when called, the socket and its connection are destroyed
-    @Override
-    public void destroyConnection() {
-        mainSocket.destroyConnection();
-    }
-
     // it returns true if the socket is connected.
     @Override
     public boolean isConnected() {

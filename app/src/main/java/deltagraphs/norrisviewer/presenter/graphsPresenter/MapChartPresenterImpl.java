@@ -80,9 +80,5 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         startSocket((MapChartActivity) graphView, mapChartInstance);
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-        destroySocket();
-    }
 }
 

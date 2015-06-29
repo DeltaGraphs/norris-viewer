@@ -25,7 +25,4 @@ public interface TablePresenter {
     //when called, the socket connection is stopped
     void startConnection();
 
-    //when called, the socket and its connection are destroyed
-    void destroyConnection();
-
 }
