@@ -79,4 +79,9 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     public void startConnection() {
         startSocket((TableActivity) graphView, tableInstance);
     }
+
+    @Override
+    public void startListening() {
+        super.startListening((NewTableActivity)graphView, tableInstance);
+    }
 }

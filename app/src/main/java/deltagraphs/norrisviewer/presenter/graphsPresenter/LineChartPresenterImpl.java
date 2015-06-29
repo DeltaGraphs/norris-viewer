@@ -86,4 +86,9 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         startSocket((LineChartActivity) graphView, lineChartInstance);
     }
 
+    @Override
+    public void startListening() {
+        super.startListening((LineChartActivity)graphView, lineChartInstance);
+    }
+
 }

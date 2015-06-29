@@ -90,4 +90,9 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         startSocket((BarChartActivity) graphView, barChartInstance);
     }
 
+    @Override
+    public void startListening() {
+        super.startListening((BarChartActivity)graphView, barChartInstance);
+    }
+
 }
