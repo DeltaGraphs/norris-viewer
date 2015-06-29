@@ -198,6 +198,16 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         }*/
     }
 
+    public void setViewFinder(Boolean isVisible){
+        if(!isVisible){
+            previewChart.setVisibility(View.GONE);
+        }
+        else{
+            previewChart.setVisibility(View.VISIBLE);
+        }
+    }
+
+
     /*
     This method sets a grid if the option is enabled by the two variables
      */

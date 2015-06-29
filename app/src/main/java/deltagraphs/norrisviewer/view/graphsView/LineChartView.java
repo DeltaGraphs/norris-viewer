@@ -31,4 +31,7 @@ public interface LineChartView {
 
     //It's the main method. It update the view by getting data from the model and set the values on the graph
     void setData(ArrayList<FlowModel> flowList, String signal);
+
+    //This method
+    void setViewFinder(Boolean isVisible);
 }

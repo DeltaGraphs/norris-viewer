@@ -69,7 +69,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
                 lineChartInstance.getAxisY().getName(),
                 lineChartInstance.getAxisY().getTicks()
         );
-        //graphView.setViewFinder(lineChartInstance.getViewFinder());
+        graphView.setViewFinder(lineChartInstance.getViewFinder());
         graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());
     }
 

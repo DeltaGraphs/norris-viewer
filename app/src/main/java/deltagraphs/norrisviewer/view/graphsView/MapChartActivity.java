@@ -110,7 +110,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
      */
     @Override
     public void onStop() {
-        mapChartPresenter.destroyConnection();
+        mapChartPresenter.stopConnection();
         super.onStop();
     }
 
@@ -121,7 +121,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
      */
     @Override
     public void onPause() {
-        mapChartPresenter.destroyConnection();
+        mapChartPresenter.stopConnection();
         super.onPause();
     }
 
