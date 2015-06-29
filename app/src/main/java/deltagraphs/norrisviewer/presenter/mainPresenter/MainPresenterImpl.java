@@ -64,11 +64,7 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     update or delete some informations. */
     public void setUpSocket(String url) {
         mainSocket.setSocketUrl(url);
-        mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
-        mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
-        mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
-        mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
-        mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
+        startListening();
         mainSocket.startConnection();
     }
 
@@ -118,6 +114,22 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
         AlertDialog dialog = builder.show();
         return dialog;
+    }
+
+    public void stopListening(){
+        mainSocket.stopListening("configPageList");
+        mainSocket.stopListening("insertPage");
+        mainSocket.stopListening("updatePage");
+        mainSocket.stopListening("insertGraph");
+        mainSocket.stopListening("updateGraph");
+    }
+
+    public void startListening(){
+        mainSocket.startListening("configPageList", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("insertPage", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("updatePage", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("insertGraph", (MainActivity) mainView, pageModel);
+        mainSocket.startListening("updateGraph", (MainActivity) mainView, pageModel);
     }
 
     //when called, the socket connection is stopped

@@ -95,6 +95,10 @@ public class SocketManager {
     }
 
 
+    public void stopListening(final String signal){
+        mSocket.off(signal);
+    }
+
     // the following method creates a thread that will be put on a listening mode for defined events.
     // The socket is connected to an url that sends events. When an event arrives, the method decides
     // where to send the json that has arrived.

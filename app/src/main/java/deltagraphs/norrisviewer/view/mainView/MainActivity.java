@@ -85,7 +85,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     @Override
     public void onStop(){
         super.onStop();
-        presenter.stopConnection();
+        presenter.stopListening();
     }
 
     @Override
@@ -97,7 +97,14 @@ public class MainActivity extends ActionBarActivity implements MainView {
     @Override
     public void onRestart(){
         super.onRestart();
-        presenter.startConnection();
+        presenter.startListening();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        presenter = new MainPresenterImpl(this);
+        presenter.startListening();
     }
 
 

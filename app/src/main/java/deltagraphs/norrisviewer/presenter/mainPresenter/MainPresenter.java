@@ -37,4 +37,7 @@ public interface MainPresenter {
 
     // it returns true if the socket hasn't been instatiated.
     boolean isSocketNull();
+
+    void startListening();
+    void stopListening();
 }
