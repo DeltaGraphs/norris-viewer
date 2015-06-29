@@ -277,7 +277,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     Set the color for a particular line
      */
     private void setLineColor(Line line, String color) {
-        if (color != null && color != "random")
+        if (color != null && color != "null")
             line.setColor(Color.parseColor(color));
         else
             line.setColor(ChartUtils.DEFAULT_COLOR);

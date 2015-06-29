@@ -78,8 +78,8 @@ public class MainActivity extends ActionBarActivity implements MainView {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        presenter = new MainPresenterImpl(this);
-        showDialog();
+        //presenter = new MainPresenterImpl(this);
+
     }
 
     @Override
@@ -104,6 +104,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     public void onResume(){
         super.onResume();
         presenter = new MainPresenterImpl(this);
+        showDialog();
         presenter.startListening();
     }
 
