@@ -46,7 +46,7 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        //tablePresenter = new TablePresenterImpl(this, sourceURL);
+        tablePresenter = new TablePresenterImpl(this, sourceURL);
         setContentView(R.layout.activity_new_table);
     }
 
@@ -54,7 +54,6 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
     @Override
     public void onResume() {
         super.onResume();
-        tablePresenter = new TablePresenterImpl(this, sourceURL);
         tablePresenter.startListening();
         tableRowParams.weight = 1;
     }
@@ -62,20 +61,25 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
     //manage the onStop event
     @Override
     public void onStop() {
-        super.onStop();
+        tablePresenter.stopConnection();
         tablePresenter.stopListening();
+        super.onStop();
     }
 
     //manage the onPause event
     @Override
     public void onPause() {
         super.onPause();
+        tablePresenter.stopConnection();
+        tablePresenter.stopListening();
     }
 
     //manage the onRestart event
     @Override
     public void onRestart() {
         super.onRestart();
+        tablePresenter.startConnection();
+        tablePresenter.startListening();
     }
 
     //manage the onDestroy event
@@ -83,8 +87,6 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
     public void onDestroy() {
         super.onDestroy();
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
