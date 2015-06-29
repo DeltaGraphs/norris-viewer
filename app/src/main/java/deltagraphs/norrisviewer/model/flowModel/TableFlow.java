@@ -103,7 +103,6 @@ public class TableFlow extends FlowModel {
             }
         }
 
-        // This inner class contains all the attributes of a value
         class Value {
             private String data;
             private String background = "FFFFFFFF";
