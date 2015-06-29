@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -56,6 +58,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
         }
+        Log.d("", "update line");
     }
 
     /* this method is always called by the method "update".

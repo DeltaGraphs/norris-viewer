@@ -18,6 +18,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -52,6 +54,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
                 setGraphParameters();
             graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());
         }
+        Log.d("", "update table");
     }
 
     /* this method is always called by the method "update".

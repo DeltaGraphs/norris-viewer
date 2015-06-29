@@ -20,6 +20,8 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -65,6 +67,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
                 setGraphParameters();
             graphView.setData(mapChartInstance.getFlowList(), signal);
         }
+        Log.d("", "update map");
     }
 
     //when called, the socket connection is stopped

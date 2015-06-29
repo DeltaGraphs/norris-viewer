@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -59,6 +61,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 setGraphParameters();
             graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());
         }
+        Log.d("", "update bar");
     }
 
     /* this method is always called by the method "update".

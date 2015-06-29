@@ -3,6 +3,7 @@ package deltagraphs.norrisviewer.presenter;
 import java.net.URISyntaxException;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -72,7 +73,9 @@ public class SocketManager {
     }
 
     //when called, the socket connection is started
-    public void startConnection() { mSocket.connect(); }
+    public void startConnection() {
+        mSocket.connect();
+    }
 
     // it returns true if the socket hasn't been instatiated.
     public Boolean isNull() {
@@ -81,7 +84,7 @@ public class SocketManager {
 
     // it returns true if the socket is connected.
     public Boolean isConnected() {
-        if(mSocket == null)
+        if (mSocket == null)
             return false;
         return mSocket.connected();
     }
@@ -110,14 +113,20 @@ public class SocketManager {
                         //try {
                         if (activity instanceof MainView) {
                             ((PageModel) model).setPageModel(obj, signal);
-                        } else if (activity instanceof BarChartView)
+                            Log.d("", "arrivo page");
+                        } else if (activity instanceof BarChartView) {
                             ((Graph) model).setGraph(obj, signal);
-                        else if (activity instanceof LineChartView)
+                            Log.d("update", "arrivo bar");
+                        } else if (activity instanceof LineChartView) {
                             ((Graph) model).setGraph(obj, signal);
-                        else if (activity instanceof MapChartView) {
+                            Log.d("update", "arrivo line");
+                        } else if (activity instanceof MapChartView) {
+                            Log.d("update", "arrivo map");
                             ((Graph) model).setGraph(obj, signal);
-                        } else if (activity instanceof TableView)
+                        } else if (activity instanceof TableView) {
                             ((Graph) model).setGraph(obj, signal);
+                            Log.d("update", "arrivo table");
+                        }else Log.d("LOL", "fail");
                     }
                 });
             }

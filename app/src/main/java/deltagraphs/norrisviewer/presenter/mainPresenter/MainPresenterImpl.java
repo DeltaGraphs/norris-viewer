@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.util.Observable;
@@ -154,7 +155,7 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-        mainView.updatePagesList(pageModel);
+        mainView.updatePagesList(pageModel); Log.d("", "updatePage");
     }
 
 }

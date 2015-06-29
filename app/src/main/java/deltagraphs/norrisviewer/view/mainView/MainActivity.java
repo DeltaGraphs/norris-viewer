@@ -328,7 +328,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                     chart = null;
                     holder.chartLayout.setVisibility(View.GONE);
                     //break;
-            //}
+            //  }
 
             if (null != chart) {
                 chart.setInteractive(false);// Disable touch handling for chart on the ListView.
