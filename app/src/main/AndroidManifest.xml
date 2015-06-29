@@ -37,8 +37,7 @@
         <activity
             android:name=".view.graphsView.LineChartActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_line_chart"
-            android:launchMode="singleTask" >
+            android:label="@string/title_activity_line_chart" >
         </activity>
         <activity
             android:name=".view.graphsView.TableActivity"
@@ -61,8 +60,7 @@
         <activity
             android:name=".view.graphsView.BarChartActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_horizontal_bar_chart"
-            android:launchMode="singleTask" >
+            android:label="@string/title_activity_horizontal_bar_chart">
         </activity>
         <activity
             android:name=".view.graphsView.NewTableActivity"

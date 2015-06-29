@@ -74,48 +74,55 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        //barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-    }
-
-    //manage the resuming action from another activity
-    @Override
-    public void onResume() {
-        super.onResume();
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        barChartPresenter.startListening();
+        //barChartPresenter.startListening();
     }
+    /*
+        @Override
+        public void onBackPressed(){
+            barChartPresenter.stopListening();
+            super.onBackPressed();
+        }
 
-    //manage the onStop event
-    @Override
-    public void onStop() {
-        super.onStop();
-        barChartPresenter.stopConnection();
-        barChartPresenter.stopListening();
-    }
+        //manage the resuming action from another activity
+        @Override
+        public void onResume() {
+            super.onResume();
+            barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+            barChartPresenter.startListening();
+        }
 
-    //manage the onPause event
-    @Override
-    public void onPause() {
-        super.onPause();
-        barChartPresenter.stopConnection();
-        barChartPresenter.stopListening();
-    }
+        //manage the onStop event
+        @Override
+        public void onStop() {
+            super.onStop();
+            barChartPresenter.stopConnection();
+            barChartPresenter.stopListening();
+        }
 
-    //manage the onRestart event
-    @Override
-    public void onRestart() {
-        super.onRestart();
-    }
+        //manage the onPause event
+        @Override
+        public void onPause() {
+            super.onPause();
+            barChartPresenter.stopConnection();
+            barChartPresenter.stopListening();
+        }
 
-    //manage the onDestroy event
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        barChartPresenter.stopConnection();
-        barChartPresenter.stopListening();
-    }
+        //manage the onRestart event
+        @Override
+        public void onRestart() {
+            super.onRestart();
+        }
 
+        //manage the onDestroy event
+        @Override
+        public void onDestroy() {
+            barChartPresenter.stopConnection();
+            barChartPresenter.stopListening();
+            super.onDestroy();
+        }
 
+    */
     /*
     Initialize a vertical bar chart with its configuration
     */
