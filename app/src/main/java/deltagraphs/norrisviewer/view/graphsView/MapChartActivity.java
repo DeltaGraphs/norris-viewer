@@ -138,7 +138,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
      */
     @Override
     public void onDestroy() {
-        mapChartPresenter.destroyConnection();
         super.onDestroy();
     }
 

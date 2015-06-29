@@ -62,10 +62,6 @@ public abstract class GraphPresenter implements Observer {
         return graphSocket;
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroySocket() {
-        graphSocket.destroyConnection();
-    }
 /*
     @Override
     public void update(Observable observable, Object data) {

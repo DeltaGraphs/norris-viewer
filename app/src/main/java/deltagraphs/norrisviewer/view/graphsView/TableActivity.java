@@ -106,7 +106,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
      */
     @Override
     public void onStop() {
-        tablePresenter.destroyConnection();
         super.onStop();
     }
 
@@ -117,7 +116,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
      */
     @Override
     public void onPause() {
-        tablePresenter.destroyConnection();
         super.onPause();
     }
 
@@ -137,7 +135,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
     */
     @Override
     public void onDestroy() {
-        tablePresenter.destroyConnection();
         super.onDestroy();
     }
 

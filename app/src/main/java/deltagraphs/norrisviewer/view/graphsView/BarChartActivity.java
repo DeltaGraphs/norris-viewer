@@ -87,14 +87,12 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     //manage the onStop event
     @Override
     public void onStop() {
-        barChartPresenter.destroyConnection();
         super.onStop();
     }
 
     //manage the onPause event
     @Override
     public void onPause() {
-        barChartPresenter.destroyConnection();
         super.onPause();
     }
 
@@ -107,7 +105,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     //manage the onDestroy event
     @Override
     public void onDestroy() {
-        barChartPresenter.destroyConnection();
         super.onDestroy();
     }
 
