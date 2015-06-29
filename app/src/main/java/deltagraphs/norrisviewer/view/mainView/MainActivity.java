@@ -98,7 +98,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
     public void onRestart(){
         super.onRestart();
         Log.d("", "ti trollo");
-        presenter.startListening();
+        //presenter.startListening();
     }
 
     @Override
