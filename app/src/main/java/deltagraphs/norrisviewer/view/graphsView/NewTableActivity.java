@@ -155,7 +155,6 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
 
         tableLayout.removeAllViews();
 
-
         TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
 
         TableRow headerRow = new TableRow(this);
