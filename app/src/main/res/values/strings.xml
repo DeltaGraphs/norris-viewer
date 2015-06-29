@@ -21,5 +21,8 @@
     <string name="title_activity_maps">Map</string>
     <string name="ok">OK</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_new_table">NewTableActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

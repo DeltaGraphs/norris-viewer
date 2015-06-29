@@ -32,6 +32,7 @@ import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
+import deltagraphs.norrisviewer.view.graphsView.NewTableActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
 import lecho.lib.hellocharts.view.AbstractChartView;
 import lecho.lib.hellocharts.view.BubbleChartView;
@@ -226,7 +227,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                     startActivity(intent);
                     break;
                 case TABLE:
-                    intent = new Intent(getActivity(), TableActivity.class);
+                    intent = new Intent(getActivity(), NewTableActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);

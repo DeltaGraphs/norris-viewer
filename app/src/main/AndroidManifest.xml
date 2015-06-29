@@ -30,24 +30,27 @@
             android:label="Chart Norris" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".view.graphsView.LineChartActivity"
             android:configChanges="orientation|screenSize"
-            android:launchMode="singleTask"
-            android:label="@string/title_activity_line_chart" >
+            android:label="@string/title_activity_line_chart"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name=".view.graphsView.TableActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_table" >
+            android:label="@string/title_activity_table"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name=".view.graphsView.MapChartActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_map_chart">
+            android:label="@string/title_activity_map_chart"
+            android:launchMode="singleTask" >
         </activity>
 
         <meta-data
@@ -60,7 +63,14 @@
         <activity
             android:name=".view.graphsView.BarChartActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_horizontal_bar_chart" >
+            android:label="@string/title_activity_horizontal_bar_chart"
+            android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name=".view.graphsView.NewTableActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_new_table"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 
