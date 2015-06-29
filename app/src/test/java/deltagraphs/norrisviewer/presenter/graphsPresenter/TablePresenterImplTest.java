@@ -96,13 +96,6 @@ public class TablePresenterImplTest extends TestCase {
     }
 
     @Test
-    public void testDestroyConnection() throws Exception{
-        tablePresenter.startConnection();
-        tablePresenter.destroyConnection();
-        Assert.assertEquals((boolean) tablePresenter.getGraphSocket().isConnected(), false);
-    }
-
-    @Test
     public void testSetGraphParameters() throws Exception{
         tablePresenter.tableInstance = new TableMock(tablePresenter);
         String signal = "configGraph";

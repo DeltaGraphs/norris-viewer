@@ -30,6 +30,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -131,6 +132,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     public void onStop() {
         super.onStop();
+        lineChartPresenter.stopConnection();
         lineChartPresenter.stopListening();
     }
 
@@ -138,6 +140,8 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     public void onPause() {
         super.onPause();
+        lineChartPresenter.stopConnection();
+        lineChartPresenter.stopListening();
     }
 
     //manage the onRestart event
@@ -263,7 +267,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
 
             color = lineChartFlow.getFlowColour();
-
+            Log.d("", color);
             List<PointValue> values = new ArrayList<PointValue>();
             //for each flow get the values.
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
@@ -280,7 +284,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             setLineColor(line, color);
 
             Line previewLine = new Line(values);
-            setLineColor(previewLine, "random");
+            setLineColor(previewLine, "default");
 
             //set labels for chart and view finder
             previewLine.setHasLabels(hasLabels);
@@ -306,7 +310,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     Set the color for a particular line
      */
     private void setLineColor(Line line, String color) {
-        if (color != null && color != "null")
+        if (color != null && color != "null" && color != "default")
             line.setColor(Color.parseColor(color));
         else
             line.setColor(ChartUtils.DEFAULT_COLOR);

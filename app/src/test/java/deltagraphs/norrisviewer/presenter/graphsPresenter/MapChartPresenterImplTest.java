@@ -100,13 +100,6 @@ public class MapChartPresenterImplTest extends TestCase {
         Assert.assertEquals((boolean) mapChartPresenter.getGraphSocket().isConnected(), false);
     }
 
-    @Test
-    public void testDestroyConnection() throws Exception{
-        mapChartPresenter.startConnection();
-        mapChartPresenter.destroyConnection();
-        Assert.assertEquals((boolean) mapChartPresenter.getGraphSocket().isConnected(), false);
-    }
-
 
     @Test
     public void testSetGraphParameters() throws Exception{

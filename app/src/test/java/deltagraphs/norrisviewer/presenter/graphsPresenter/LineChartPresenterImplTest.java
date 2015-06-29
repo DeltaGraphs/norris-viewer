@@ -144,14 +144,6 @@ public class LineChartPresenterImplTest extends TestCase {
     }
 
     @Test
-    public void testDestroyConnection() throws Exception{
-        lineChartPresenter.startConnection();
-        lineChartPresenter.destroyConnection();
-        Assert.assertEquals((boolean) lineChartPresenter.getGraphSocket().isNull(), false);
-        Assert.assertEquals((boolean) lineChartPresenter.getGraphSocket().isConnected(), false);
-    }
-
-    @Test
     public void testSetGraphParameters() throws Exception{
         lineChartPresenter.lineChartInstance = new LineChartMock(lineChartPresenter);
         String signal = "configGraph";

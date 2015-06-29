@@ -89,6 +89,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     public void onStop() {
         super.onStop();
+        barChartPresenter.stopConnection();
         barChartPresenter.stopListening();
     }
 
@@ -96,6 +97,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     public void onPause() {
         super.onPause();
+        barChartPresenter.stopConnection();
+        barChartPresenter.stopListening();
     }
 
     //manage the onRestart event
@@ -109,6 +112,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        barChartPresenter.stopConnection();
+        barChartPresenter.stopListening();
     }
 
 

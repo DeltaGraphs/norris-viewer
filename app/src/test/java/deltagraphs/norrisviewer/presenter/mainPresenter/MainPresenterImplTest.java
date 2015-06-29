@@ -64,10 +64,6 @@ class SocketMock extends SocketManager {
         connected = false;
     }
 
-    @Override
-    public void destroyConnection(){
-        connected = false;
-    }
 }
 
 class MockMainActivity extends MainActivity{
@@ -112,13 +108,6 @@ public class MainPresenterImplTest extends TestCase {
     public void testStopConnection() throws Exception {
         mainPresenter.startConnection();
         mainPresenter.stopConnection();
-        Assert.assertFalse(mainPresenter.isConnected());
-    }
-
-    @Test
-    public void testDestroyConnection() throws Exception {
-        mainPresenter.startConnection();
-        mainPresenter.destroyConnection();
         Assert.assertFalse(mainPresenter.isConnected());
     }
 

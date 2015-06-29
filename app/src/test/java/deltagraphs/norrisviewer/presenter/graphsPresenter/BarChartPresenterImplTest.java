@@ -67,11 +67,6 @@ class SocketMock extends SocketManager{
     public void stopConnection(){
         connected = false;
     }
-
-    @Override
-    public void destroyConnection(){
-        connected = false;
-    }
 }
 
 class BarChartMock extends BarChartImpl {
@@ -141,13 +136,6 @@ public class BarChartPresenterImplTest extends TestCase {
     public void testStopConnection() throws Exception{
         barChartPresenter.startConnection();
         barChartPresenter.stopConnection();
-        Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isConnected(), false);
-    }
-
-    @Test
-    public void testDestroyConnection() throws Exception{
-        barChartPresenter.startConnection();
-        barChartPresenter.destroyConnection();
         Assert.assertEquals((boolean) barChartPresenter.getGraphSocket().isConnected(), false);
     }
 
