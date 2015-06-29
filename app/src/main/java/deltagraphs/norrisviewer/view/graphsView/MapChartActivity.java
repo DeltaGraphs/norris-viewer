@@ -120,7 +120,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onRestart() {
         super.onRestart();
-        mapChartPresenter.startListening();
     }
 
     //manage the onDestroy event

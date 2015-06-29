@@ -105,7 +105,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     public void onRestart() {
         super.onRestart();
-        barChartPresenter.startListening();
     }
 
     //manage the onDestroy event

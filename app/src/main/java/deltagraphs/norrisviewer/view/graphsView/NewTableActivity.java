@@ -73,7 +73,6 @@ public class NewTableActivity extends ActionBarActivity implements TableView {
     @Override
     public void onRestart() {
         super.onRestart();
-        tablePresenter.startListening();
     }
 
     //manage the onDestroy event

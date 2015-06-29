@@ -148,7 +148,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     @Override
     public void onRestart() {
         super.onRestart();
-        lineChartPresenter.startListening();
     }
 
 
