@@ -43,14 +43,12 @@
         <activity
             android:name=".view.graphsView.TableActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_table"
-            android:launchMode="singleTask" >
+            android:label="@string/title_activity_table" >
         </activity>
         <activity
             android:name=".view.graphsView.MapChartActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_map_chart"
-            android:launchMode="singleTask" >
+            android:label="@string/title_activity_map_chart">
         </activity>
 
         <meta-data
@@ -69,8 +67,7 @@
         <activity
             android:name=".view.graphsView.NewTableActivity"
             android:configChanges="orientation|screenSize"
-            android:label="@string/title_activity_new_table"
-            android:launchMode="singleTask" >
+            android:label="@string/title_activity_new_table" >
         </activity>
     </application>
 

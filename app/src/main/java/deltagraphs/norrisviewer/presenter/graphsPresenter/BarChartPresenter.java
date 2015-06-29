@@ -25,4 +25,8 @@ public interface BarChartPresenter {
     //when called, the socket connection is started
     void startConnection();
 
+    void startListening();
+
+    void stopListening();
+
 }

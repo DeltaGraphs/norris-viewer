@@ -84,7 +84,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         setTitle(sourceTitle);
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
-        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+        //mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         Context context = getApplicationContext();
         CharSequence text = "Loading may take a few moments...";
         int duration = Toast.LENGTH_SHORT;
@@ -99,47 +99,36 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onResume() {
         super.onResume();
+        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+        mapChartPresenter.startListening();
     }
 
-    /*
-    The following method is called when this activity
-    is stopped and put on the background and
-    it's in charge of destroying the socket connection
-     */
+    //manage the onStop event
     @Override
     public void onStop() {
-        mapChartPresenter.stopConnection();
         super.onStop();
+        mapChartPresenter.stopListening();
     }
 
-    /*
-    The following method is called when this activity
-    is hidden to the user and put on the background and
-    it's in charge of destroying the socket connection
-     */
+    //manage the onPause event
     @Override
     public void onPause() {
-        mapChartPresenter.stopConnection();
         super.onPause();
     }
 
-    /*
-    The following method is called when the activity
-    is restarted
-     */
+    //manage the onRestart event
     @Override
     public void onRestart() {
         super.onRestart();
+        mapChartPresenter.startListening();
     }
 
-    /*
-    This method is called when the activity is destroyed and provides
-    to destroy the connection with the socket
-     */
+    //manage the onDestroy event
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
+
 
     /*
     This method istantiates the map if

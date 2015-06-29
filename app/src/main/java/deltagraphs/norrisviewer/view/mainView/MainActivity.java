@@ -71,6 +71,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     private MainPresenter presenter;
     private FragmentManager fragmentManager;
+    private Boolean first_initialization = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,8 +91,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onPause(){
-        super.onPause();
-        presenter.stopConnection();
+        onStop();
     }
 
     @Override
@@ -125,7 +125,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            showDialog();
+            presenter.showDialog(this);
             return true;
         }
 
@@ -154,7 +154,10 @@ public class MainActivity extends ActionBarActivity implements MainView {
     }
 
     public void showDialog() {
-        presenter.showDialog(this);
+        if(first_initialization == false) {
+            presenter.showDialog(this);
+            first_initialization = true;
+        }
     }
 
     @Override

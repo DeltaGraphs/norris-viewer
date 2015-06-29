@@ -74,20 +74,22 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        //barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
     }
 
     //manage the resuming action from another activity
     @Override
     public void onResume() {
-
         super.onResume();
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        barChartPresenter.startListening();
     }
 
     //manage the onStop event
     @Override
     public void onStop() {
         super.onStop();
+        barChartPresenter.stopListening();
     }
 
     //manage the onPause event
@@ -100,6 +102,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     @Override
     public void onRestart() {
         super.onRestart();
+        barChartPresenter.startListening();
     }
 
     //manage the onDestroy event
