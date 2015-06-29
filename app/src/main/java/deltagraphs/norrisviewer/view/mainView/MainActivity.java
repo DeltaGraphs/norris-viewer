@@ -80,32 +80,40 @@ public class MainActivity extends ActionBarActivity implements MainView {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         //presenter = new MainPresenterImpl(this);
+        presenter = new MainPresenterImpl(this);
+        showDialog();
 
     }
 
     @Override
     public void onStop(){
-        super.onStop();
+        Log.d("", "onStop");
+        presenter.stopConnection();
         presenter.stopListening();
+        super.onStop();
     }
-
+/*
     @Override
     public void onPause(){
-        onStop();
+        onPause();
+        Log.d("", "onPause");
+        //presenter.stopConnection();
+       // presenter.stopListening();
     }
-
+*/
     @Override
     public void onRestart(){
         super.onRestart();
         Log.d("", "ti trollo");
-        //presenter.startListening();
+        presenter.startConnection();
+        presenter.startListening();
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        presenter = new MainPresenterImpl(this);
-        showDialog();
+        //presenter = new MainPresenterImpl(this);
+        //showDialog();
         presenter.startListening();
     }
 

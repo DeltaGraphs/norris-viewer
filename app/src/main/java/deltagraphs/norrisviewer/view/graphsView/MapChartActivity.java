@@ -107,6 +107,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onStop() {
         super.onStop();
+        mapChartPresenter.stopConnection();
         mapChartPresenter.stopListening();
     }
 
@@ -114,11 +115,12 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onPause() {
         super.onPause();
+        mapChartPresenter.stopConnection();
+        mapChartPresenter.stopListening();
     }
 
-    //manage the onRestart event
     @Override
-    public void onRestart() {
+    public void onRestart(){
         super.onRestart();
     }
 
