@@ -74,41 +74,43 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
     }
-
-    //menage the resuming action from another activity
+/*
+    //manage the resuming action from another activity
     @Override
     public void onResume() {
-        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+
         super.onResume();
     }
 
-    //menage the onStop event
+    //manage the onStop event
     @Override
     public void onStop() {
         barChartPresenter.destroyConnection();
         super.onStop();
     }
 
-    //menage the onPause event
+    //manage the onPause event
     @Override
     public void onPause() {
         barChartPresenter.destroyConnection();
         super.onPause();
     }
 
-    //menage the onRestart event
+    //manage the onRestart event
     @Override
     public void onRestart() {
         super.onRestart();
     }
 
-    //menage the onDestroy event
+    //manage the onDestroy event
     @Override
     public void onDestroy() {
         barChartPresenter.destroyConnection();
         super.onDestroy();
     }
+    */
 
     /*
     Initialize a vertical bar chart with its configuration

@@ -32,7 +32,7 @@ public class MapChartImpl extends Graph implements MapChart {
     private float mapHeight;
     private float latitude;
     private float longitude;
-    private Boolean legendOnPoint;
+    private Boolean legendOnPoint = true;
     private String mapType;
 
     //it returns the latitude of the center of the mapChart
