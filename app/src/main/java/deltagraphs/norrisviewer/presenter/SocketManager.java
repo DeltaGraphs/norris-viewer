@@ -75,7 +75,8 @@ public class SocketManager {
     //when called, the socket connection is started
     public void startConnection() {
         Log.d("","new connection");
-        mSocket.connect();
+        if(!mSocket.connected())
+            mSocket.connect();
     }
 
     // it returns true if the socket hasn't been instatiated.

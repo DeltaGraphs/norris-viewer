@@ -60,14 +60,12 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     /* this method is always called by the method "update".
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-        graphView.setSortOrder(tableInstance.getSortOrder());
         String[] headers = new String[tableInstance.getNumberOfColumns()];
         //column parameters
         for (int index = 0; index < tableInstance.getNumberOfColumns(); index++) {
             headers[index]=tableInstance.getHeaderValue(index);
         }
         graphView.setHeaders(headers);
-        graphView.setSortByCol(tableInstance.sortByCol());
     }
 
     //when called, the socket connection is stopped
