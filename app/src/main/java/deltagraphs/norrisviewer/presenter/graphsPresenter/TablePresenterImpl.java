@@ -38,7 +38,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         super(url);
         graphView = view;
         tableInstance = new TableImpl(this);
-        startSocket((NewTableActivity) view, tableInstance);
+        startSocket((TableActivity) view, tableInstance);
     }
 
     /* This object is an observer of the table model. When there are some changes on it, a signal is sent
@@ -82,6 +82,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 
     @Override
     public void startListening() {
-        super.startListening((NewTableActivity)graphView, tableInstance);
+        super.startListening((TableActivity)graphView, tableInstance);
     }
 }

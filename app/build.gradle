@@ -86,8 +86,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['test']) {
 
     // exclude auto-generated classes and tests
     def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*',
-                      'android/**/*.*', '**/Convert.*', '**/deltagraphs/norrisviewer/presenter/Convert*.*', '**/deltagraphs/norrisviewer/view/graphsView/SampleTableAdapter*.*',
-                      '**/deltagraphs/norrisviewer/view/graphsView/MatrixTableAdapter.*', '**/Hsl.*',
+                      'android/**/*.*', '**/Convert.*', '**/deltagraphs/norrisviewer/presenter/Convert*.*', '**/Hsl.*',
                       '**/deltagraphs/norrisviewer/view/mainView/MainActivity/PlaceholderFragment.*', '**/ChartAdapter.*', '**/ChartDescription.*', '**/deltagraphs/norrisviewer/view/mainView/MainActivity$*.*',
                       '**/deltagraphs/norrisviewer/view/graphView/LineChartActivity$*ValueTouchListener*.*', '**/deltagraphs/norrisviewer/view/graphView/LineChartActivity$*ViewportListener*.*',
                       '**/deltagraphs/norrisviewer/view/graphsView/*RecordListAdapter.*', '**/deltagraphs/norrisviewer/presenter/mainPresenter/MainPresenter*$*.*',

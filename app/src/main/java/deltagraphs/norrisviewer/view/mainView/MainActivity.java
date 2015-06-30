@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,14 +31,8 @@ import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.LineChartActivity;
 import deltagraphs.norrisviewer.view.graphsView.MapChartActivity;
-import deltagraphs.norrisviewer.view.graphsView.NewTableActivity;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
 import lecho.lib.hellocharts.view.AbstractChartView;
-import lecho.lib.hellocharts.view.BubbleChartView;
-import lecho.lib.hellocharts.view.ColumnChartView;
-import lecho.lib.hellocharts.view.LineChartView;
-import lecho.lib.hellocharts.view.PreviewColumnChartView;
-import lecho.lib.hellocharts.view.PreviewLineChartView;
 
 /*
  * Name : MainActivity.java
@@ -239,7 +232,7 @@ public class MainActivity extends ActionBarActivity implements MainView {
                     startActivity(intent);
                     break;
                 case TABLE:
-                    intent = new Intent(getActivity(), NewTableActivity.class);
+                    intent = new Intent(getActivity(), TableActivity.class);
                     intent.putExtra("EXTRA_SOURCE_URL", graphsList.get(position).getUrl());
                     intent.putExtra("EXTRA_SOURCE_TITLE", graphsList.get(position).getName());
                     startActivity(intent);

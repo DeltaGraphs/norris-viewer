@@ -106,7 +106,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
+        //lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         data = new LineChartData();
         previewData = new LineChartData();
 
@@ -119,15 +119,14 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         //set the line color for the view finder
         previewChart.setPreviewColor(Color.parseColor("#80CBC4"));
     }
-/*
+
     //manage the resuming action from another activity
     @Override
     public void onResume() {
         super.onResume();
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
-        lineChartPresenter.startListening();
     }
-
+/*
     //manage the onStop event
     @Override
     public void onStop() {

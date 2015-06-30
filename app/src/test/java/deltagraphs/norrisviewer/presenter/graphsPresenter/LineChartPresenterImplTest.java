@@ -98,10 +98,12 @@ class mockLineChartActivity extends LineChartActivity{
     boolean axis = false;
     boolean grid = false;
     boolean data = false;
+    boolean viewFinder = false;
 
     boolean getAxis(){ return axis; }
     boolean getGrid(){ return grid; }
     boolean getData(){ return data; }
+    boolean getViewFinder(){ return viewFinder; }
 
     public void setAxis(char axisXorY, String name, int ticks){
         axis = true;
@@ -114,6 +116,8 @@ class mockLineChartActivity extends LineChartActivity{
     public void setData(ArrayList<FlowModel> flowList, String signal) {
         data = true;
     }
+
+    public void setViewFinder(Boolean viewFinder){ this.viewFinder = true; }
 }
 
 public class LineChartPresenterImplTest extends TestCase {
@@ -151,5 +155,6 @@ public class LineChartPresenterImplTest extends TestCase {
         Assert.assertTrue(((mockLineChartActivity) lineChartPresenter.graphView).getAxis());
         Assert.assertTrue(((mockLineChartActivity)lineChartPresenter.graphView).getData());
         Assert.assertTrue(((mockLineChartActivity)lineChartPresenter.graphView).getGrid());
+        Assert.assertTrue(((mockLineChartActivity)lineChartPresenter.graphView).getViewFinder());
     }
 }

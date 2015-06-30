@@ -1,22 +1,20 @@
 package deltagraphs.norrisviewer.view.graphsView;
 
-import android.content.Context;
-import android.os.Bundle;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
-
-import com.inqbarna.tablefixheaders.TableFixHeaders;
-import com.inqbarna.tablefixheaders.adapters.BaseTableAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
@@ -24,41 +22,8 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
-/*
- * Name : TableActivity.java
- * Module : norrisviewer::view::graphsView
- * Location : norrisviewer\view\graphsView
- *
- * History :
-
- * Version Date Programmer Description
- * ===============================================================
- *
- * 0.5.1 2015-06-15 Davide Trivellato Fixes to table settings
- *
- * 0.5.0 2015-06-15 Davide Trivellato Several changes to setData(ArrayList<FlowModel> flowList, int numOfColumns)
- *
- * 0.4.0 2015-06-14 Davide Trivellato Several changes to sort(ArrayList<FlowModel> flowList, int numOfColumns)
- *
- * 0.3.0 2015-06-13 Davide Trivellato Add sort(ArrayList<FlowModel> flowList, int numOfColumns)
- *
- * 0.2.0 2015-06-12 Davide Trivellato Update setData(ArrayList<FlowModel> flowList, int numOfColumns)
- *
- * 0.1.1 2015-06-11 Davide Trivellato Update setData(ArrayList<FlowModel> flowList) to setData(ArrayList<FlowModel> flowList, int numOfColumns)
- *
- * 0.1.0 2015-06-11 Davide Trivellato Coding of methods and attributes
- *
- * 0.0.1 2015-06-09 Davide Trivellato Creation of the file
- *
- * ===============================================================
- *
- */
-
-
 public class TableActivity extends ActionBarActivity implements TableView {
 
-    private TableFixHeaders tableFixHeaders;
-    private BaseTableAdapter baseTableAdapter;
     private String sourceURL;
     private String sourceTitle;
     private String order = null;
@@ -67,79 +32,62 @@ public class TableActivity extends ActionBarActivity implements TableView {
     private String headers[];
     private int rows = 0;
 
-    /*
-    This method is called on the creation of the activity
-    and its job is to get information from
-    previous activity to get title and URL.
-     */
+    TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-               WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        baseTableAdapter = new RecordListAdapter(this);
-        setContentView(R.layout.table);
-        tableFixHeaders = (TableFixHeaders) findViewById(R.id.table);
         tablePresenter = new TablePresenterImpl(this, sourceURL);
+        setContentView(R.layout.activity_table);
     }
 
-    /*
-    This method is called when the activity is show back form a pause state.
-     */
+    //manage the resuming action from another activity
     @Override
     public void onResume() {
-        tablePresenter = new TablePresenterImpl(this, sourceURL);
         super.onResume();
+        tablePresenter.startListening();
+        tableRowParams.weight = 1;
     }
 
-    /*
-    The following method is called when this activity
-    is stopped and put on the background and
-    it's in charge of destroying the socket connection
-     */
+    //manage the onStop event
     @Override
     public void onStop() {
+        tablePresenter.stopConnection();
+        tablePresenter.stopListening();
         super.onStop();
     }
 
-    /*
-    The following method is called when this activity
-    is hidden to the user and put on the background and
-    it's in charge of destroying the socket connection
-     */
+    //manage the onPause event
     @Override
     public void onPause() {
         super.onPause();
+        tablePresenter.stopConnection();
+        tablePresenter.stopListening();
     }
 
-    /*
-   The following method is called when the activity
-   is restarted
-    */
+    //manage the onRestart event
     @Override
     public void onRestart() {
-        //mapChartPresenter.startConnection();
         super.onRestart();
+        tablePresenter.startConnection();
+        tablePresenter.startListening();
     }
 
-    /*
-    This method is called when the activity is destroyed and provides
-    to destroy the connection with the socket
-    */
+    //manage the onDestroy event
     @Override
     public void onDestroy() {
         super.onDestroy();
     }
 
-    /* This method generate a custom menu for the
-    action bar on the top of the activity  */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -147,8 +95,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return true;
     }
 
-    /* This method menage the actions user can perform
-    on the menu */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -171,7 +117,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         if (col >= headers.length)
             col = -1;
         else{
-            for (col = 0; (!(headers[col].equals(sortingColumn)) && (col < headers.length)); col++) ;
+            for (col = 0;((col < headers.length)) && (!(headers[col].equals(sortingColumn))); col++) ;
         }
         //while(!(headers[col].equals(sortingColumn)))
 
@@ -184,272 +130,157 @@ public class TableActivity extends ActionBarActivity implements TableView {
         order = sortOrder;
     }
 
-    // set the headers of the table
+
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
-        if(this.headers.length == 0)
-            this.headers[0]="La tabella è vuota";
+        if(this.headers.length == 0) {
+            this.headers = new String[1];
+            this.headers[0] = "La tabella e' vuota";
+        }for(int i=0; i<headers.length; i++)
+            Log.d("", headers[i]);
     }
 
+    @Override
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
+       // if (sortingColumn != -1) {
+       //     setSortedTable(flowList, numOfColumns);
+       // }else{
+            setTable(flowList, numOfColumns);
+       // }
+    }
 
-    // the following method is used to sort the table. It uses java library's methods and at the end of it
-    // the list of records is defined on the ordered table.
-    private void sort(ArrayList<FlowModel> flowList, int numOfColumns) {
-        ArrayList<ArrayList<String>> table = new ArrayList<ArrayList<String>>();
+    private void setTable(ArrayList<FlowModel> flowList, int numOfColumns) {
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
+
+        tableLayout.removeAllViews();
+
+        TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
+
+        TableRow headerRow = new TableRow(this);
+        for (int j = 0; j < headers.length; j++) {
+            // 4) create textView
+            TextView textView = new TextView(this);
+            //  textView.setText(String.valueOf(j));
+            textView.setBackgroundColor(Color.LTGRAY);
+            textView.setGravity(Gravity.CENTER);
+            textView.setText(headers[j]);
+
+            // 5) add textView to tableRow
+            headerRow.addView(textView, tableRowParams);
+        }
+        tableLayout.addView(headerRow, tableLayoutParams);
+
         for (int i = 0; i < flowList.size(); i++) {
             TableFlow tableFlow = (TableFlow) flowList.get(i);
             for (int j = 0; j < tableFlow.getRecordSize(); j++) {
-                tableFlow.getRecordId(j);
-                ArrayList<String> row = new ArrayList<String>();
+
+                TableRow tableRow = new TableRow(this);
+
+                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {//for each column
+                    // 4) create textView
+                    TextView textView = new TextView(this);
+
+                    textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
+                    Log.d("", tableFlow.getCellTColour(j, indexCol));
+                    textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setText(tableFlow.getCellData(j, indexCol));
+                    Log.d("", j + " " + indexCol + " " + tableFlow.getCellData(j, indexCol));
+                    // 5) add textView to tableRow
+                    tableRow.addView(textView, tableRowParams);
+                }
+                // 6) add tableRow to tableLayout
+                tableLayout.addView(tableRow, tableLayoutParams);
+            }
+        }
+    }
+
+
+    class Value {
+        private String data;
+        private String background = "FFFFFFFF";
+        private String textColour = "00000000";
+
+        // Value constructor.
+        // It's used when a new Value is added to the record list
+        // The new marker type is initialized with the passed parameters.
+        Value(String data, String bg, String tC) {
+            this.data = data;
+            background = bg;
+            textColour = tC;
+        }
+    }
+
+    // the following method is used to sort the table. It uses java library's methods and at the end of it
+    // the list of records is defined on the ordered table.
+    private void setSortedTable(ArrayList<FlowModel> flowList, int numOfColumns) {
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
+        tableLayout.removeAllViews();
+
+
+        TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
+
+        TableRow headerRow = new TableRow(this);
+        for (int j = 0; j < headers.length; j++) {
+            // 4) create textView
+            TextView textView = new TextView(this);
+            //  textView.setText(String.valueOf(j));
+            textView.setBackgroundColor(Color.LTGRAY);
+            textView.setGravity(Gravity.CENTER);
+            textView.setText(headers[j]);
+
+            // 5) add textView to tableRow
+            headerRow.addView(textView, tableRowParams);
+        }
+        tableLayout.addView(headerRow, tableLayoutParams);
+
+
+        ArrayList<ArrayList<Value>> table = new ArrayList<ArrayList<Value>>();
+        for (int i = 0; i < flowList.size(); i++) {
+            TableFlow tableFlow = (TableFlow) flowList.get(i);
+            for (int j = 0; j < tableFlow.getRecordSize(); j++) {
+                ArrayList<Value> row = new ArrayList<Value>();
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
-                    row.add(tableFlow.getCellData(j, indexCol));
+                    String data = tableFlow.getCellData(j, indexCol);
+                    String bg = tableFlow.getCellBGColour(j, indexCol);
+                    String tc = tableFlow.getCellTColour(j, indexCol);
+                    row.add(new Value(data, bg, tc));
                 }
                 table.add(row);
             }
         }
 
-        Collections.sort(table, new Comparator<ArrayList<String>>() {
+        Collections.sort(table, new Comparator<ArrayList<Value>>() {
             @Override
-            public int compare(ArrayList<String> a, ArrayList<String> b) {
-                return a.get(sortingColumn).compareTo(b.get(sortingColumn));
+            public int compare(ArrayList<Value> a, ArrayList<Value> b) {
+                return a.get(sortingColumn).data.compareTo(b.get(sortingColumn).data);
             }
         });
 
-        for (int j = 0; j < table.size(); j++) {
-            String[] values = new String[numOfColumns];
-            for (int i = 0; i < numOfColumns; i++) {
-                values[i] = table.get(j).get(i);
-            }
-            ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));
+        int rows = table.size() / headers.length;
+        for (int i = 0; i < table.size(); i++) {
+            for (int j = 0; j < table.get(i).size(); j++) {
 
-        }
-        rows = table.size();
-    }
+                TableRow tableRow = new TableRow(this);
 
-    //set the data in the table. It is extracted from the table model
-    @Override
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
-        rows = 0;
-        baseTableAdapter = new RecordListAdapter(this);
-        if (sortingColumn == -1) {
-            for (int i = 0; i < flowList.size(); i++) {
-                TableFlow tableFlow = (TableFlow) flowList.get(i);
-                for (int j = 0; j < tableFlow.getRecordSize(); j++) {
-                    String[] values = new String[numOfColumns];
-                    for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
-                        values[indexCol] = tableFlow.getCellData(j, indexCol);
-                    }
-                    ((RecordListAdapter) baseTableAdapter).families[0].list.add(new Record(values));
-                    rows++;
+                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {//for each column
+                    // 4) create textView
+                    TextView textView = new TextView(this);
+
+                    textView.setBackgroundColor(Color.parseColor(table.get(i).get(j).background));
+                    textView.setTextColor(Color.parseColor(table.get(i).get(j).textColour));
+
+                    textView.setGravity(Gravity.CENTER);
+                    textView.setText(table.get(i).get(j).data);
+
+                    // 5) add textView to tableRow
+                    tableRow.addView(textView, tableRowParams);
                 }
+                // 6) add tableRow to tableLayout
+                tableLayout.addView(tableRow, tableLayoutParams);
             }
-        } else {
-            sort(flowList, numOfColumns);
-        }
-        tableFixHeaders.setAdapter(baseTableAdapter);
-        baseTableAdapter.notifyDataSetChanged();
-        tableFixHeaders.animate();
-    }
-
-    //classes added from the table library
-
-    private class RecordList {
-        private final String name;
-        private final List<Record> list;
-
-        RecordList(String name) {
-            this.name = name;
-            list = new ArrayList<Record>();
-        }
-
-        public int size() {
-            return list.size();
-        }
-
-        public Record get(int i) {
-            return list.get(i);
         }
     }
-
-    private class Record {
-        private final String[] data;
-
-        private Record(String[] values) {
-            data = values;
-        }
-
-    }
-
-
-    public class RecordListAdapter extends BaseTableAdapter {
-
-        RecordList families[];
-
-        private final int[] widths = {
-                80
-        };
-        private final float density;
-
-        public RecordListAdapter(Context context) {
-            families = new RecordList[]{
-                    new RecordList("")
-            };
-
-            density = context.getResources().getDisplayMetrics().density;
-        }
-
-        @Override
-        public int getRowCount() {
-            return rows;
-        }
-
-        @Override
-        public int getColumnCount() {
-            return headers.length - 1;
-        }
-
-        @Override
-        public View getView(int row, int column, View convertView, ViewGroup parent) {
-            final View view;
-            switch (getItemViewType(row, column)) {
-                case 0:
-                    view = getFirstHeader(row, column, convertView, parent);
-                    break;
-                case 1:
-                    view = getHeader(row, column, convertView, parent);
-                    break;
-                case 2:
-                    view = getFirstBody(row, column, convertView, parent);
-                    break;
-                case 3:
-                    view = getBody(row, column, convertView, parent);
-                    break;
-                case 4:
-                    view = getFamilyView(row, column, convertView, parent);
-                    break;
-                default:
-                    throw new RuntimeException("wtf?");
-            }
-            return view;
-        }
-
-        private View getFirstHeader(int row, int column, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_table_header_first, parent, false);
-            }
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[0]);
-            return convertView;
-        }
-
-        private View getHeader(int row, int column, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_table_header, parent, false);
-            }
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(headers[column + 1]);
-            return convertView;
-        }
-
-        private View getFirstBody(int row, int column, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_table_first, parent, false);
-            }
-            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);
-            return convertView;
-        }
-
-        private View getBody(int row, int column, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_table, parent, false);
-            }
-            convertView.setBackgroundResource(row % 2 == 0 ? R.drawable.bg_table_color1 : R.drawable.bg_table_color2);
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(getDevice(row).data[column + 1]);
-            return convertView;
-        }
-
-        private View getFamilyView(int row, int column, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.item_table_family, parent, false);
-            }
-            final String string;
-            if (column == -1) {
-                string = getFamily(0).name;
-            } else {
-                string = "";
-            }
-            ((TextView) convertView.findViewById(android.R.id.text1)).setText(string);
-            return convertView;
-        }
-
-        @Override
-        public int getWidth(int column) {
-            return Math.round(80 * density);
-        }
-
-        @Override
-        public int getHeight(int row) {
-            /*final int height;
-            if (row == -1) {
-                height = 35;
-            } else if (isFamily(row)) {
-                height = 25;
-            } else {
-                height = 45;
-            }*/
-            return Math.round(35 * density);
-        }
-
-        @Override
-        public int getItemViewType(int row, int column) {
-            final int itemViewType;
-            if (row == -1 && column == -1) {
-                itemViewType = 0;
-            } else if (row == -1) {
-                itemViewType = 1;
-            } else if (isFamily(row)) {
-                itemViewType = 4;
-            } else if (column == -1) {
-                itemViewType = 2;
-            } else {
-                itemViewType = 3;
-            }
-            return itemViewType;
-        }
-
-        private boolean isFamily(int row) {
-            int family = 0;
-            while (row > 0) {
-                row -= families[family].size() + 1;
-                family++;
-            }
-            return row == 0;
-        }
-
-        private RecordList getFamily(int row) {
-            int family = 0;
-            while (row >= 0) {
-                row -= families[family].size() + 1;
-                family++;
-            }
-            return families[family - 1];
-        }
-
-        private Record getDevice(int row) {
-            int family = 0;
-            while (row >= 0) {
-                row -= families[family].size() + 1;
-                family++;
-            }
-            family--;
-            return families[family].get(row + families[family].size());
-        }
-
-        @Override
-        public int getViewTypeCount() {
-            return 5;
-        }
-    }
-
 
 }

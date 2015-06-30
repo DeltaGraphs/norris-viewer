@@ -94,8 +94,12 @@ public class TableFlow extends FlowModel {
                 for (int i = 0; i < listLength; i++) {
                     Log.d("", "c");
                     String value = valueList.getString(i);
-                    String bg = appearance.getJSONObject(i).getString("bg");
-                    String text = appearance.getJSONObject(i).getString("text");
+                    String bg = "FFFFFFFF";
+                    String text = "00000000";
+                    if (appearance != null) {
+                        bg = appearance.getJSONObject(i).getString("bg");
+                        text = appearance.getJSONObject(i).getString("text");
+                    }
                     values.add(new Value(value, bg, text));
                 }
             } catch (JSONException e) {
@@ -119,136 +123,146 @@ public class TableFlow extends FlowModel {
         }
     }
 
-        // The following method create a new flow.
-        // The record list is created and is initialized with the jsonobject data.
-        // The Json object data must contain a record list.
-        @Override
-        public void createFlow(JSONObject data) {
-            records = new LinkedList<TableRecord>();
-            try {
-                JSONArray recordList = data.getJSONArray("records");
-                addRecords(recordList, false);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+    // The following method create a new flow.
+    // The record list is created and is initialized with the jsonobject data.
+    // The Json object data must contain a record list.
+    @Override
+    public void createFlow(JSONObject data) {
+        records = new LinkedList<TableRecord>();
+        try {
+            JSONArray recordList = data.getJSONArray("records");
+            addRecords(recordList, false);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        // The following method updates all the flow attributes.
-        // The Jsonobject data must contain a value for each of them.
-        @Override
-        public void updateFlow(JSONObject data) {
-            try {
-                flowName = data.getString("name");
-                //maxItems = data.getInt("maxItemsPage");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+    // The following method updates all the flow attributes.
+    // The Jsonobject data must contain a value for each of them.
+    @Override
+    public void updateFlow(JSONObject data) {
+        try {
+            flowName = data.getString("name");
+            //maxItems = data.getInt("maxItemsPage");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        // Used to delete the whole flow list. Params of the flow will remain.
-        @Override
-        public void deleteRecordList() {
-            records = null;
+    // Used to delete the whole flow list. Params of the flow will remain.
+    @Override
+    public void deleteRecordList() {
+        records = null;
+    }
+
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
+    @Override
+    public void addRecord(JSONObject data) {
+        try {
+            String id = data.getString("norrisRecordID");
+            JSONArray jsonValues = data.getJSONArray("value");
+            JSONArray appearance = null;
+            if (data.has("appearance"))
+                appearance = data.getJSONArray("appearance");
+            records.add(new TableRecord(id, jsonValues, appearance));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        // The following method insert a record in the flow.
-        // The record is build with the JsonObject's informations.
-        @Override
-        public void addRecord(JSONObject data) {
-            try {
-                String id = data.getString("norrisRecordID");
-                JSONArray jsonValues = data.getJSONArray("value");
-                JSONArray appearance = data.getJSONArray("appearance");
-                records.add(new TableRecord(id, jsonValues, appearance));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+    // The following method insert a record in the flow.
+    // The record is build with the JsonObject's informations.
+    // Differently from the method 'addRecord(JSONObject data)', the new record will be added on Top.
+    public void addFirstRecord(JSONObject data) {
+        try {
+            String id = data.getString("norrisRecordID");
+            JSONArray jsonValues = data.getJSONArray("value");
+            JSONArray appearance = null;
+            if (data.has("appearance"))
+                appearance = data.getJSONArray("appearance");
+            records.addFirst(new TableRecord(id, jsonValues, appearance));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        // The following method insert a record in the flow.
-        // The record is build with the JsonObject's informations.
-        // Differently from the method 'addRecord(JSONObject data)', the new record will be added on Top.
-        public void addFirstRecord(JSONObject data) {
-            try {
-                String id = data.getString("norrisRecordID");
-                JSONArray jsonValues = data.getJSONArray("value");
-                JSONArray appearance = data.getJSONArray("appearance");
-                records.addFirst(new TableRecord(id, jsonValues, appearance));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        // Used to insert some records in the flow.
-        // The JsonObject data must contain the a JsonArray with the records that must be inserted.
-        // This method will use the method 'addRecord(record)' for each record adding.
-        // If the boolean variable 'insertOnTop' is set on 'true', the new records will be added on the top of the list.
-        @Override
-        public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
-            try {
-                int recordLength = jsonRecords.length();
-                if (insertOnTop) {
-                    for (int i = 0; i < recordLength; i++) {
-                        JSONObject record = jsonRecords.getJSONObject(i);
-                        addFirstRecord(record);
-                    }
-                } else {
-                    for (int i = 0; i < recordLength; i++) {
-                        JSONObject record = jsonRecords.getJSONObject(i);
-                        addRecord(record);
-                    }
+    // Used to insert some records in the flow.
+    // The JsonObject data must contain the a JsonArray with the records that must be inserted.
+    // This method will use the method 'addRecord(record)' for each record adding.
+    // If the boolean variable 'insertOnTop' is set on 'true', the new records will be added on the top of the list.
+    @Override
+    public void addRecords(JSONArray jsonRecords, boolean insertOnTop) {
+        try {
+            int recordLength = jsonRecords.length();
+            if (insertOnTop) {
+                for (int i = 0; i < recordLength; i++) {
+                    JSONObject record = jsonRecords.getJSONObject(i);
+                    addFirstRecord(record);
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } else {
+                for (int i = 0; i < recordLength; i++) {
+                    JSONObject record = jsonRecords.getJSONObject(i);
+                    addRecord(record);
+                }
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        // Used to update a record of the flow.
-        // The JsonObject data must contain the ID of the record that will be updated.
-        // The method will search for the record Index in the flowList, using its ID.
-        // After that, all the parameters of the record will be updated.
-        @Override
-        public void updateRecord(JSONObject data) {
-            try {
-                String recordId = data.getString("norrisRecordID");
-                int recordIndex = searchRecordIndex(recordId);
-                JSONArray valueList = data.getJSONArray("values");
-                JSONArray appearance = data.getJSONArray("appearance");
+    // Used to update a record of the flow.
+    // The JsonObject data must contain the ID of the record that will be updated.
+    // The method will search for the record Index in the flowList, using its ID.
+    // After that, all the parameters of the record will be updated.
+    @Override
+    public void updateRecord(JSONObject data) {
+        try {
+            String recordId = data.getString("norrisRecordID");
+            int recordIndex = searchRecordIndex(recordId);
+            if (recordIndex != -1) {
+                JSONArray valueList = data.getJSONArray("value");
+                JSONArray appearance = null;
+                if (data.has("appearance"))
+                    appearance = data.getJSONArray("appearance");
                 int listLength = valueList.length();
                 for (int i = 0; i < listLength; i++) {
                     records.get(recordIndex).values.get(i).data = valueList.getString(i);
-                    records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
-                    records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
+                    if (appearance != null) {
+                        records.get(recordIndex).values.get(i).background = appearance.getJSONObject(i).getString("bg");
+                        records.get(recordIndex).values.get(i).textColour = appearance.getJSONObject(i).getString("text");
+                    }
                 }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
-        }
-
-
-        // It searches the record index in the list of records.
-        // A record's id must be provided.
-        protected int searchRecordIndex(String id) {
-            int index = 0;
-            while (index < records.size()) {
-                if (records.get(index).recordId.equals(id))
-                    return index;
-                index++;
-            }
-            return -1;
-        }
-
-        // Used to delete a record from the flow.
-        // The JsonObject data must contain the ID of the record that will be deleted.
-        // The method will search for the record Index in the flowList, using its ID.
-        @Override
-        public void deleteRecord(JSONObject data) {
-            try {
-                String recordId = data.getString("norrisRecordID");
-                int recordIndex = searchRecordIndex(recordId);
-                records.remove(recordIndex);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
+
+
+    // It searches the record index in the list of records.
+    // A record's id must be provided.
+    protected int searchRecordIndex(String id) {
+        int index = 0;
+        while (index < records.size()) {
+            if (records.get(index).recordId.equals(id))
+                return index;
+            index++;
+        }
+        return -1;
+    }
+
+    // Used to delete a record from the flow.
+    // The JsonObject data must contain the ID of the record that will be deleted.
+    // The method will search for the record Index in the flowList, using its ID.
+    @Override
+    public void deleteRecord(JSONObject data) {
+        try {
+            String recordId = data.getString("norrisRecordID");
+            int recordIndex = searchRecordIndex(recordId);
+            records.remove(recordIndex);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+}
