@@ -94,8 +94,8 @@ public class TableFlow extends FlowModel {
                 for (int i = 0; i < listLength; i++) {
                     Log.d("", "c");
                     String value = valueList.getString(i);
-                    String bg = "#FFFFFFFF";
-                    String text = "#00000000";
+                    String bg = "#FFFFFF";
+                    String text = "#000000";
                     if (appearance != null) {
                         bg = appearance.getJSONObject(i).getString("bg");
                         text = appearance.getJSONObject(i).getString("text");
@@ -109,8 +109,8 @@ public class TableFlow extends FlowModel {
 
         class Value {
             private String data;
-            private String background = "#FFFFFFFF";
-            private String textColour = "#00000000";
+            private String background = "#FFFFFF";
+            private String textColour = "#000000";
 
             // Value constructor.
             // It's used when a new Value is added to the record list

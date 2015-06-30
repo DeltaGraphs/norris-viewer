@@ -81,7 +81,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
         super.onRestart();
         //tablePresenter = new TablePresenterImpl(this, sourceURL);
         //tablePresenter.startListening();
-        Log.d("", "");
     }
 
     //manage the onDestroy event
@@ -141,8 +140,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         if(this.headers.length == 0) {
             this.headers = new String[1];
             this.headers[0] = "La tabella e' vuota";
-        }for(int i=0; i<headers.length; i++)
-            Log.d("", headers[i]);
+        }
     }
 
     @Override
@@ -184,13 +182,10 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {//for each column
                     // 4) create textView
                     TextView textView = new TextView(this);
-                    Log.d("",tableFlow.getCellBGColour(j, indexCol));
                     textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
-                    Log.d("", tableFlow.getCellTColour(j, indexCol));
                     textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));
                     textView.setGravity(Gravity.CENTER);
                     textView.setText(tableFlow.getCellData(j, indexCol));
-                    Log.d("", j + " " + indexCol + " " + tableFlow.getCellData(j, indexCol));
                     // 5) add textView to tableRow
                     tableRow.addView(textView, tableRowParams);
                 }

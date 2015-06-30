@@ -74,6 +74,7 @@ public class SocketManager {
 
     //when called, the socket connection is started
     public void startConnection() {
+        Log.d("","new connection");
         mSocket.connect();
     }
 
