@@ -539,18 +539,6 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     </issue>
 
     <issue
-        id="UnusedResources"
-        severity="Warning"
-        message="The resource `R.layout.table` appears to be unused"
-        category="Performance"
-        priority="3"
-        summary="Unused resources"
-        explanation="Unused resources make applications larger and slow down builds.">
-        <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/table.xml"/>
-    </issue>
-
-    <issue
         id="UselessLeaf"
         severity="Warning"
         message="This `RelativeLayout` view is useless (no children, no `background`, no `id`, no `style`)"
