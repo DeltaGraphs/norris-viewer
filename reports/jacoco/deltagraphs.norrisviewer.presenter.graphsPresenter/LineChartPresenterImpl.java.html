@@ -88,8 +88,12 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
     @Override
     public void startListening() {
-<span class="nc" id="L91">        super.startListening((LineChartActivity)graphView, lineChartInstance);</span>
+<span class="nc" id="L91">        super.startListening((LineChartActivity) graphView, lineChartInstance);</span>
 <span class="nc" id="L92">    }</span>
 
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+<span class="nc" id="L96">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L97">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

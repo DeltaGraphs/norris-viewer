@@ -82,7 +82,12 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 
     @Override
     public void startListening() {
-<span class="nc" id="L85">        super.startListening((TableActivity)graphView, tableInstance);</span>
+<span class="nc" id="L85">        super.startListening((TableActivity) graphView, tableInstance);</span>
 <span class="nc" id="L86">    }</span>
+
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+<span class="nc" id="L90">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L91">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

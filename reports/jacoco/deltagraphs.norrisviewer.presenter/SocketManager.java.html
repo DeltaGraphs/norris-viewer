@@ -94,43 +94,48 @@ public class SocketManager {
 <span class="fc" id="L94">        mSocket.disconnect();</span>
 <span class="fc" id="L95">    }</span>
 
-
-    public void stopListening(final String signal){
-<span class="nc" id="L99">        mSocket.off(signal);</span>
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+<span class="nc" id="L99">        mSocket.close();</span>
 <span class="nc" id="L100">    }</span>
+
+
+    public void stopListening(final String signal) {
+<span class="nc" id="L104">        mSocket.off(signal);</span>
+<span class="nc" id="L105">    }</span>
 
     // the following method creates a thread that will be put on a listening mode for defined events.
     // The socket is connected to an url that sends events. When an event arrives, the method decides
     // where to send the json that has arrived.
     public void startListening(final String signal, final Activity activity, final Object model) {
-<span class="fc" id="L106">        mSocket.on(signal, new Emitter.Listener() {</span>
+<span class="fc" id="L111">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="fc" id="L109">                activity.runOnUiThread(new Runnable() {</span>
+<span class="fc" id="L114">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
-<span class="nc" id="L112">                        JSONObject obj = (JSONObject) args[0];</span>
+<span class="nc" id="L117">                        JSONObject obj = (JSONObject) args[0];</span>
                         //try {
-<span class="nc bnc" id="L114" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
-<span class="nc" id="L115">                            ((PageModel) model).setPageModel(obj, signal);</span>
-<span class="nc" id="L116">                            Log.d(&quot;&quot;, &quot;arrivo page&quot;);</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView) {</span>
-<span class="nc" id="L118">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc" id="L119">                            Log.d(&quot;update&quot;, &quot;arrivo bar&quot;);</span>
-<span class="nc bnc" id="L120" title="All 2 branches missed.">                        } else if (activity instanceof LineChartView) {</span>
-<span class="nc" id="L121">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc" id="L122">                            Log.d(&quot;update&quot;, &quot;arrivo line&quot;);</span>
-<span class="nc bnc" id="L123" title="All 2 branches missed.">                        } else if (activity instanceof MapChartView) {</span>
-<span class="nc" id="L124">                            Log.d(&quot;update&quot;, &quot;arrivo map&quot;);</span>
-<span class="nc" id="L125">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc bnc" id="L126" title="All 2 branches missed.">                        } else if (activity instanceof TableView) {</span>
-<span class="nc" id="L127">                            ((Graph) model).setGraph(obj, signal);</span>
-<span class="nc" id="L128">                            Log.d(&quot;update&quot;, &quot;arrivo table&quot;);</span>
-<span class="nc" id="L129">                        }else Log.d(&quot;LOL&quot;, &quot;fail&quot;);</span>
-<span class="nc" id="L130">                    }</span>
+<span class="nc bnc" id="L119" title="All 2 branches missed.">                        if (activity instanceof MainView) {</span>
+<span class="nc" id="L120">                            ((PageModel) model).setPageModel(obj, signal);</span>
+<span class="nc" id="L121">                            Log.d(&quot;&quot;, &quot;arrivo page&quot;);</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                        } else if (activity instanceof BarChartView) {</span>
+<span class="nc" id="L123">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc" id="L124">                            Log.d(&quot;update&quot;, &quot;arrivo bar&quot;);</span>
+<span class="nc bnc" id="L125" title="All 2 branches missed.">                        } else if (activity instanceof LineChartView) {</span>
+<span class="nc" id="L126">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc" id="L127">                            Log.d(&quot;update&quot;, &quot;arrivo line&quot;);</span>
+<span class="nc bnc" id="L128" title="All 2 branches missed.">                        } else if (activity instanceof MapChartView) {</span>
+<span class="nc" id="L129">                            Log.d(&quot;update&quot;, &quot;arrivo map&quot;);</span>
+<span class="nc" id="L130">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc bnc" id="L131" title="All 2 branches missed.">                        } else if (activity instanceof TableView) {</span>
+<span class="nc" id="L132">                            ((Graph) model).setGraph(obj, signal);</span>
+<span class="nc" id="L133">                            Log.d(&quot;update&quot;, &quot;arrivo table&quot;);</span>
+<span class="nc" id="L134">                        } else Log.d(&quot;LOL&quot;, &quot;fail&quot;);</span>
+<span class="nc" id="L135">                    }</span>
                 });
-<span class="fc" id="L132">            }</span>
+<span class="fc" id="L137">            }</span>
         });
-<span class="fc" id="L134">    }</span>
+<span class="fc" id="L139">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

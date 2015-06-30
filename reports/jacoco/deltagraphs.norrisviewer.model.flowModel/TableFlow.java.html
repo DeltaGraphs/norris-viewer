@@ -94,8 +94,8 @@ public class TableFlow extends FlowModel {
 <span class="fc bfc" id="L94" title="All 2 branches covered.">                for (int i = 0; i &lt; listLength; i++) {</span>
 <span class="fc" id="L95">                    Log.d(&quot;&quot;, &quot;c&quot;);</span>
 <span class="fc" id="L96">                    String value = valueList.getString(i);</span>
-<span class="fc" id="L97">                    String bg = &quot;FFFFFFFF&quot;;</span>
-<span class="fc" id="L98">                    String text = &quot;00000000&quot;;</span>
+<span class="fc" id="L97">                    String bg = &quot;#FFFFFFFF&quot;;</span>
+<span class="fc" id="L98">                    String text = &quot;#00000000&quot;;</span>
 <span class="fc bfc" id="L99" title="All 2 branches covered.">                    if (appearance != null) {</span>
 <span class="fc" id="L100">                        bg = appearance.getJSONObject(i).getString(&quot;bg&quot;);</span>
 <span class="fc" id="L101">                        text = appearance.getJSONObject(i).getString(&quot;text&quot;);</span>
@@ -109,8 +109,8 @@ public class TableFlow extends FlowModel {
 
         class Value {
             private String data;
-<span class="fc" id="L112">            private String background = &quot;FFFFFFFF&quot;;</span>
-<span class="fc" id="L113">            private String textColour = &quot;00000000&quot;;</span>
+<span class="fc" id="L112">            private String background = &quot;#FFFFFFFF&quot;;</span>
+<span class="fc" id="L113">            private String textColour = &quot;#00000000&quot;;</span>
 
             // Value constructor.
             // It's used when a new Value is added to the record list

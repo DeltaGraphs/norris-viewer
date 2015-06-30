@@ -95,5 +95,10 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
 <span class="nc" id="L95">        super.startListening((BarChartActivity)graphView, barChartInstance);</span>
 <span class="nc" id="L96">    }</span>
 
+    //when called, the socket and its connection are destroyed
+        public void destroyConnection() {
+<span class="nc" id="L100">                graphSocket.destroyConnection();</span>
+<span class="nc" id="L101">            }</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
