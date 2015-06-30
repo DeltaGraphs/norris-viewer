@@ -140,7 +140,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onPause() {
         super.onPause();
         lineChartPresenter.stopConnection();
-        lineChartPresenter.destroyConnection();
     }
 
     //manage the onRestart event

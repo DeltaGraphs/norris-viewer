@@ -115,7 +115,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public void onPause() {
         super.onPause();
         mapChartPresenter.stopConnection();
-        mapChartPresenter.destroyConnection();
     }
 
     @Override

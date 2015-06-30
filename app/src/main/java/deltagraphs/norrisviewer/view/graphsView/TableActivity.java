@@ -71,7 +71,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
     public void onPause() {
         super.onPause();
         tablePresenter.stopConnection();
-        tablePresenter.destroyConnection();
     }
 
     //manage the onRestart event
