@@ -85,7 +85,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     public void onResume() {
         super.onResume();
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        barChartPresenter.startListening();
         Log.d("", "bar resume");
     }
 

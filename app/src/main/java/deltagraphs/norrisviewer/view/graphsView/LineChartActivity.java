@@ -125,7 +125,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onResume() {
         super.onResume();
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
-        lineChartPresenter.startListening();
     }
 
     //manage the onStop event

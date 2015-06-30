@@ -100,7 +100,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public void onResume() {
         super.onResume();
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
-        mapChartPresenter.startListening();
     }
 
     //manage the onStop event
@@ -239,6 +238,9 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                         break;
                     case "woman":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.woman_marker));
+                        break;
+                    case "plane":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.plane_marker));
                         break;
                 }
                 break;
