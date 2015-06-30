@@ -55,7 +55,6 @@ public class TableActivity extends ActionBarActivity implements TableView {
     public void onResume() {
         super.onResume();
         tablePresenter = new TablePresenterImpl(this, sourceURL);
-        tablePresenter.startListening();
         tableRowParams.weight = 1;
     }
 
