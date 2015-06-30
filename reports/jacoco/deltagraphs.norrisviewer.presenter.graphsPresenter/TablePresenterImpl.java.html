@@ -60,34 +60,32 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L63">        graphView.setSortOrder(tableInstance.getSortOrder());</span>
-<span class="fc" id="L64">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
+<span class="fc" id="L63">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
         //column parameters
-<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
-<span class="nc" id="L67">            headers[index]=tableInstance.getHeaderValue(index);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
+<span class="nc" id="L66">            headers[index]=tableInstance.getHeaderValue(index);</span>
         }
-<span class="fc" id="L69">        graphView.setHeaders(headers);</span>
-<span class="fc" id="L70">        graphView.setSortByCol(tableInstance.sortByCol());</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L68">        graphView.setHeaders(headers);</span>
+<span class="fc" id="L69">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L75">        stopSocket();</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L73">        stopSocket();</span>
+<span class="fc" id="L74">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L80">        startSocket((TableActivity) graphView, tableInstance);</span>
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L78">        startSocket((TableActivity) graphView, tableInstance);</span>
+<span class="fc" id="L79">    }</span>
 
     @Override
     public void startListening() {
-<span class="nc" id="L85">        super.startListening((TableActivity) graphView, tableInstance);</span>
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L83">        super.startListening((TableActivity) graphView, tableInstance);</span>
+<span class="nc" id="L84">    }</span>
 
     //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L90">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L88">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L89">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
