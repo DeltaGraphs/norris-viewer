@@ -18,7 +18,7 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Tue Jun 30 17:13:37 UTC 2015.<br/>
+Check performed at Tue Jun 30 22:37:12 UTC 2015.<br/>
 0 errors and 51 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
@@ -233,21 +233,21 @@ The given layout_param is not defined for the given layout, meaning it has no ef
 <div class="id"><a href="#" title="Return to top">UseValueOf: Should use <code>valueOf</code> instead of <code>new</code></a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java">../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java</a>:37</span>: <span class="message">Use <code>Boolean.valueOf(true)</code> instead</span><br /><pre class="errorlines">
-<span class="lineno">  34</span>     private AxisModel axisX;
-<span class="lineno">  35</span>     private AxisModel axisY;
-<span class="lineno">  36</span>     private Boolean viewFinder;
-<span class="lineno">  37</span>     private Boolean horizontalGrid = <span class="errorspan">new Boolean(true);</span>
-<span class="lineno">  38</span>     private Boolean verticalGrid = new Boolean(true);
-<span class="lineno">  39</span> 
+<span class="location"><a href="../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java">../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java</a>:41</span>: <span class="message">Use <code>Boolean.valueOf(true)</code> instead</span><br /><pre class="errorlines">
+<span class="lineno">  38</span>     private AxisModel axisX;
+<span class="lineno">  39</span>     private AxisModel axisY;
+<span class="lineno">  40</span>     private Boolean viewFinder;
+<span class="lineno">  41</span>     private Boolean horizontalGrid = <span class="errorspan">new Boolean(true);</span>
+<span class="lineno">  42</span>     private Boolean verticalGrid = new Boolean(true);
+<span class="lineno">  43</span> 
 </pre>
-<span class="location"><a href="../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java">../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java</a>:38</span>: <span class="message">Use <code>Boolean.valueOf(true)</code> instead</span><br /><pre class="errorlines">
-<span class="lineno">  35</span>     private AxisModel axisY;
-<span class="lineno">  36</span>     private Boolean viewFinder;
-<span class="lineno">  37</span>     private Boolean horizontalGrid = new Boolean(true);
-<span class="lineno">  38</span>     private Boolean verticalGrid = <span class="errorspan">new Boolean(true);</span>
-<span class="lineno">  39</span> 
-<span class="lineno">  40</span>     //it returns the properties of the x axis
+<span class="location"><a href="../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java">../../src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java</a>:42</span>: <span class="message">Use <code>Boolean.valueOf(true)</code> instead</span><br /><pre class="errorlines">
+<span class="lineno">  39</span>     private AxisModel axisY;
+<span class="lineno">  40</span>     private Boolean viewFinder;
+<span class="lineno">  41</span>     private Boolean horizontalGrid = new Boolean(true);
+<span class="lineno">  42</span>     private Boolean verticalGrid = <span class="errorspan">new Boolean(true);</span>
+<span class="lineno">  43</span> 
+<span class="lineno">  44</span>     //it returns the properties of the x axis
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />

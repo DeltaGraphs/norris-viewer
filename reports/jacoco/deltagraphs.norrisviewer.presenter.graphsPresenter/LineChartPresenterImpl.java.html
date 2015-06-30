@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>LineChartPresenterImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">LineChartPresenterImpl.java</span></div><h1>LineChartPresenterImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -17,6 +16,10 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
  *
  * 0.1.1 2015-05-31 Davide Trivellato Fix and update method update(Observable observable, Object data)
  *
@@ -38,11 +41,11 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     given url. Furthermore, an instance of linechart model will be created. The object will observe the
     changes on it, according to the observer design pattern. */
     public LineChartPresenterImpl(LineChartView view, String url) {
-<span class="fc" id="L41">        super(url);</span>
-<span class="fc" id="L42">        graphView = view;</span>
-<span class="fc" id="L43">        lineChartInstance = new LineChartImpl(this);</span>
-<span class="fc" id="L44">        startSocket((LineChartActivity) view, lineChartInstance);</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L44">        super(url);</span>
+<span class="fc" id="L45">        graphView = view;</span>
+<span class="fc" id="L46">        lineChartInstance = new LineChartImpl(this);</span>
+<span class="fc" id="L47">        startSocket((LineChartActivity) view, lineChartInstance);</span>
+<span class="fc" id="L48">    }</span>
 
     /* This object is an observer of the line chart model. When there are some changes on it, a signal is sent
     to this object and the following method is called. Its aim is to set or update informations that are
@@ -51,49 +54,49 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
     All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
-<span class="fc" id="L55">            String signal = (String) data;</span>
-<span class="pc bpc" id="L56" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L57">                setGraphParameters();</span>
+<span class="pc bpc" id="L57" title="1 of 2 branches missed.">        if (observable instanceof LineChartImpl) {</span>
+<span class="fc" id="L58">            String signal = (String) data;</span>
+<span class="pc bpc" id="L59" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L60">                setGraphParameters();</span>
 
-<span class="fc" id="L59">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
+<span class="fc" id="L62">            graphView.setData(lineChartInstance.getFlowList(), signal);</span>
         }
-<span class="fc" id="L61">        Log.d(&quot;&quot;, &quot;update line&quot;);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L64">    }</span>
 
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L67">        graphView.setAxis('x',</span>
+<span class="fc" id="L69">        graphView.setAxis('x',</span>
                 lineChartInstance.getAxisX().getName(),
                 lineChartInstance.getAxisX().getTicks()
         );
-<span class="fc" id="L71">        graphView.setAxis('y',</span>
+<span class="fc" id="L73">        graphView.setAxis('y',</span>
                 lineChartInstance.getAxisY().getName(),
                 lineChartInstance.getAxisY().getTicks()
         );
-<span class="fc" id="L75">        graphView.setViewFinder(lineChartInstance.getViewFinder());</span>
-<span class="fc" id="L76">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L77">        graphView.setViewFinder(lineChartInstance.getViewFinder());</span>
+<span class="fc" id="L78">        graphView.setGrid(lineChartInstance.getHorizontalGrid(), lineChartInstance.getVerticalGrid());</span>
+<span class="fc" id="L79">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L81">        stopSocket();</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L83">        stopSocket();</span>
+<span class="fc" id="L84">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L86">        startSocket((LineChartActivity) graphView, lineChartInstance);</span>
-<span class="fc" id="L87">    }</span>
+<span class="fc" id="L88">        startSocket((LineChartActivity) graphView, lineChartInstance);</span>
+<span class="fc" id="L89">    }</span>
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
-<span class="nc" id="L91">        super.startListening((LineChartActivity) graphView, lineChartInstance);</span>
-<span class="nc" id="L92">    }</span>
+<span class="nc" id="L94">        super.startListening((LineChartActivity) graphView, lineChartInstance);</span>
+<span class="nc" id="L95">    }</span>
 
     //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L96">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L97">    }</span>
+<span class="nc" id="L99">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L100">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

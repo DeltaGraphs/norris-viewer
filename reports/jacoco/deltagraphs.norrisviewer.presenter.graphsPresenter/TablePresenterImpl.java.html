@@ -10,6 +10,10 @@
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
+ *
  * 0.1.0 2015-05-10 Davide Trivellato Coding of all methods and attributes
  *
  * 0.0.1 2015-05-09 Davide Trivellato Creation of the file
@@ -18,7 +22,6 @@
  *
  */
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -35,11 +38,11 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
      given url. Furthermore, an instance of table model will be created. The object will observe the
      changes on it, according to the observer design pattern. */
     public TablePresenterImpl(TableView view, String url) {
-<span class="fc" id="L38">        super(url);</span>
-<span class="fc" id="L39">        graphView = view;</span>
-<span class="fc" id="L40">        tableInstance = new TableImpl(this);</span>
-<span class="fc" id="L41">        startSocket((TableActivity) view, tableInstance);</span>
-<span class="fc" id="L42">    }</span>
+<span class="fc" id="L41">        super(url);</span>
+<span class="fc" id="L42">        graphView = view;</span>
+<span class="fc" id="L43">        tableInstance = new TableImpl(this);</span>
+<span class="fc" id="L44">        startSocket((TableActivity) view, tableInstance);</span>
+<span class="fc" id="L45">    }</span>
 
     /* This object is an observer of the table model. When there are some changes on it, a signal is sent
     to this object and the following method is called. Its aim is to set or update informations that are
@@ -48,45 +51,45 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (observable instanceof TableImpl) {</span>
-<span class="fc" id="L52">            String signal = (String) data;</span>
-<span class="pc bpc" id="L53" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L54">                setGraphParameters();</span>
-<span class="fc" id="L55">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (observable instanceof TableImpl) {</span>
+<span class="fc" id="L55">            String signal = (String) data;</span>
+<span class="pc bpc" id="L56" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L57">                setGraphParameters();</span>
+<span class="fc" id="L58">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
         }
-<span class="fc" id="L57">        Log.d(&quot;&quot;, &quot;update table&quot;);</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L60">    }</span>
 
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L63">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
+<span class="fc" id="L65">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
         //column parameters
-<span class="pc bpc" id="L65" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
-<span class="nc" id="L66">            headers[index]=tableInstance.getHeaderValue(index);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
+<span class="nc" id="L68">            headers[index]=tableInstance.getHeaderValue(index);</span>
         }
-<span class="fc" id="L68">        graphView.setHeaders(headers);</span>
-<span class="fc" id="L69">        graphView.setBorder(tableInstance.getHorizontalBorder(), tableInstance.getVerticalBorder());</span>
-<span class="fc" id="L70">    }</span>
+<span class="fc" id="L70">        graphView.setHeaders(headers);</span>
+<span class="fc" id="L71">        graphView.setBorder(tableInstance.getHorizontalBorder(), tableInstance.getVerticalBorder());</span>
+<span class="fc" id="L72">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L74">        stopSocket();</span>
-<span class="fc" id="L75">    }</span>
+<span class="fc" id="L76">        stopSocket();</span>
+<span class="fc" id="L77">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L79">        startSocket((TableActivity) graphView, tableInstance);</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L81">        startSocket((TableActivity) graphView, tableInstance);</span>
+<span class="fc" id="L82">    }</span>
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
-<span class="nc" id="L84">        super.startListening((TableActivity) graphView, tableInstance);</span>
-<span class="nc" id="L85">    }</span>
+<span class="nc" id="L87">        super.startListening((TableActivity) graphView, tableInstance);</span>
+<span class="nc" id="L88">    }</span>
 
     //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L89">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L92">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L93">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

@@ -10,6 +10,10 @@
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-02 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-05-30 Davide Trivellato Verify
+ *
  * 0.2.0 2015-05-24 Enrico Savoca Update startSocket(Activity graphActivity) to  startSocket(Activity graphActivity, Object graphModel)
  *
  * 0.1.1 2015-05-23 Enrico Savoca Fix method startSocket(Activity graphActivity)
@@ -34,51 +38,48 @@ public abstract class GraphPresenter implements Observer {
 
     // constructor of the abstract class GraphPresenter. It requires an url to be instatiated properly.
     // A new connection will be established with the given url.
-<span class="fc" id="L37">    public GraphPresenter(String url) {</span>
-<span class="fc" id="L38">        this.graphSocket = new SocketManager(url);</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L41">    public GraphPresenter(String url) {</span>
+<span class="fc" id="L42">        this.graphSocket = new SocketManager(url);</span>
+<span class="fc" id="L43">    }</span>
 
     /* This method is called when a new socket is created and a new connection must be established.
     The socket is put to listen for some events that will arrive when the connection is started.
     For each type of event a different path of instructions will be executed, in order to set,
     update or delete some informations. */
     public void startSocket(Activity graphActivity, Object graphModel) {
-<span class="fc" id="L46">        graphSocket.startConnection();</span>
-<span class="fc" id="L47">        startListening(graphActivity, graphModel);</span>
-<span class="fc" id="L48">    }</span>
+<span class="fc" id="L50">        graphSocket.startConnection();</span>
+<span class="fc" id="L51">        startListening(graphActivity, graphModel);</span>
+<span class="fc" id="L52">    }</span>
 
+    //when called, the socket stop listening to some events
     public void stopListening(){
-<span class="nc" id="L51">        graphSocket.stopListening(&quot;configGraph&quot;);</span>
-<span class="nc" id="L52">        graphSocket.stopListening(&quot;updateGraphProp&quot;);</span>
-<span class="nc" id="L53">        graphSocket.stopListening(&quot;insertFlow&quot;);</span>
-<span class="nc" id="L54">        graphSocket.stopListening(&quot;deleteFlow&quot;);</span>
-<span class="nc" id="L55">        graphSocket.stopListening(&quot;updateFlowProp&quot;);</span>
-<span class="nc" id="L56">        graphSocket.stopListening(&quot;updateFlowData&quot;);</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L56">        graphSocket.stopListening(&quot;configGraph&quot;);</span>
+<span class="nc" id="L57">        graphSocket.stopListening(&quot;updateGraphProp&quot;);</span>
+<span class="nc" id="L58">        graphSocket.stopListening(&quot;insertFlow&quot;);</span>
+<span class="nc" id="L59">        graphSocket.stopListening(&quot;deleteFlow&quot;);</span>
+<span class="nc" id="L60">        graphSocket.stopListening(&quot;updateFlowProp&quot;);</span>
+<span class="nc" id="L61">        graphSocket.stopListening(&quot;updateFlowData&quot;);</span>
+<span class="nc" id="L62">    }</span>
 
+    //when called, the socket begins listening to some events
     public void startListening(Activity graphActivity, Object graphModel){
-<span class="fc" id="L60">        graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L61">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L62">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L63">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L64">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L65">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L66">        graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L67">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L68">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L69">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L70">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L71">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L72">    }</span>
 
     //when called, the socket connection is stopped
     public void stopSocket() {
-<span class="fc" id="L70">        graphSocket.stopConnection();</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L76">        graphSocket.stopConnection();</span>
+<span class="fc" id="L77">    }</span>
 
     // it returns the socket of the class that extends GraphPresenter
     public SocketManager getGraphSocket(){
-<span class="fc" id="L75">        return graphSocket;</span>
+<span class="fc" id="L81">        return graphSocket;</span>
     }
 
-/*
-    @Override
-    public void update(Observable observable, Object data) {
-    }
-    */
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

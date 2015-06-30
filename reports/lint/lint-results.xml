@@ -154,7 +154,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java"
-            line="37"
+            line="41"
             column="38"/>
     </issue>
 
@@ -171,7 +171,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/java/deltagraphs/norrisviewer/model/graphsModel/LineChartImpl.java"
-            line="38"
+            line="42"
             column="36"/>
     </issue>
 

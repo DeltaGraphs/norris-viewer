@@ -10,6 +10,10 @@
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
+ *
  * 0.1.1 2015-06-05 Davide Trivellato Update method update(Observable observable, Object data)
  *
  * 0.1.0 2015-06-04 Davide Trivellato Coding of all methods and attributes
@@ -20,7 +24,6 @@
  *
  */
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -37,22 +40,22 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     given url. Furthermore, an instance of mapchart model will be created. The object will observe the
     changes on it, according to the observer design pattern. */
     public MapChartPresenterImpl(MapChartView view, String url) {
-<span class="fc" id="L40">        super(url);</span>
-<span class="fc" id="L41">        graphView = view;</span>
-<span class="fc" id="L42">        mapChartInstance = new MapChartImpl(this);</span>
-<span class="fc" id="L43">        startSocket((MapChartActivity) view, mapChartInstance);</span>
-<span class="fc" id="L44">    }</span>
+<span class="fc" id="L43">        super(url);</span>
+<span class="fc" id="L44">        graphView = view;</span>
+<span class="fc" id="L45">        mapChartInstance = new MapChartImpl(this);</span>
+<span class="fc" id="L46">        startSocket((MapChartActivity) view, mapChartInstance);</span>
+<span class="fc" id="L47">    }</span>
 
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L49">        graphView.cameraPosition(mapChartInstance.getLatitude(),</span>
+<span class="fc" id="L52">        graphView.cameraPosition(mapChartInstance.getLatitude(),</span>
                 mapChartInstance.getLongitude()
         );
-<span class="fc" id="L52">        graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());</span>
-<span class="fc" id="L53">        graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
-<span class="fc" id="L54">        graphView.setMapType(mapChartInstance.getMapType());</span>
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L55">        graphView.setZoom(mapChartInstance.getMapWidth(), mapChartInstance.getMapHeight());</span>
+<span class="fc" id="L56">        graphView.setLegendOnPoint(mapChartInstance.getLegendOnPoint());</span>
+<span class="fc" id="L57">        graphView.setMapType(mapChartInstance.getMapType());</span>
+<span class="fc" id="L58">    }</span>
 
     /* This object is an observer of the map chart model. When there are some changes on it, a signal is sent
     to this object and the following method is called. Its aim is to set or update informations that are
@@ -61,34 +64,34 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
     All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
-<span class="fc" id="L65">            String signal = (String) data;</span>
-<span class="pc bpc" id="L66" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L67">                setGraphParameters();</span>
-<span class="fc" id="L68">            graphView.setData(mapChartInstance.getFlowList(), signal);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        if (observable instanceof MapChartImpl) {</span>
+<span class="fc" id="L68">            String signal = (String) data;</span>
+<span class="pc bpc" id="L69" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L70">                setGraphParameters();</span>
+<span class="fc" id="L71">            graphView.setData(mapChartInstance.getFlowList(), signal);</span>
         }
-<span class="fc" id="L70">        Log.d(&quot;&quot;, &quot;update map&quot;);</span>
-<span class="fc" id="L71">    }</span>
+<span class="fc" id="L73">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L75">        stopSocket();</span>
-<span class="fc" id="L76">    }</span>
+<span class="fc" id="L77">        stopSocket();</span>
+<span class="fc" id="L78">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L80">        startSocket((MapChartActivity) graphView, mapChartInstance);</span>
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L82">        startSocket((MapChartActivity) graphView, mapChartInstance);</span>
+<span class="fc" id="L83">    }</span>
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
-<span class="nc" id="L85">        super.startListening((MapChartActivity) graphView, mapChartInstance);</span>
-<span class="nc" id="L86">    }</span>
+<span class="nc" id="L88">        super.startListening((MapChartActivity) graphView, mapChartInstance);</span>
+<span class="nc" id="L89">    }</span>
 
     //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L90">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L91">    }</span>
+<span class="nc" id="L93">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L94">    }</span>
 }
 
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

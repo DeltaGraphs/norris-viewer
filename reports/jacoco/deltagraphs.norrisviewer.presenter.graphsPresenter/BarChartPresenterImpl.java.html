@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../resources/report.css" type="text/css"/><link rel="shortcut icon" href="../resources/report.gif" type="image/gif"/><title>BarChartPresenterImpl.java</title><link rel="stylesheet" href="../resources/prettify.css" type="text/css"/><script type="text/javascript" src="../resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">deltagraphs.norrisviewer.presenter.graphsPresenter</a> &gt; <span class="el_source">BarChartPresenterImpl.java</span></div><h1>BarChartPresenterImpl.java</h1><pre class="source lang-java linenums">package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -17,6 +16,10 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-20 Enrico Savoca Verify
  *
  * 0.3.1 2015-05-26 Davide Trivellato Fix and update method update(Observable observable, Object data)
  *
@@ -42,11 +45,11 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
     given url. Furthermore, an instance of barchart model will be created. The object will observe the
     changes on it, according to the observer design pattern. */
     public BarChartPresenterImpl(BarChartView view, String url) {
-<span class="fc" id="L45">        super(url);</span>
-<span class="fc" id="L46">        graphView = view;</span>
-<span class="fc" id="L47">        barChartInstance = new BarChartImpl(this);</span>
-<span class="fc" id="L48">        startSocket((BarChartActivity) view, barChartInstance);</span>
-<span class="fc" id="L49">    }</span>
+<span class="fc" id="L48">        super(url);</span>
+<span class="fc" id="L49">        graphView = view;</span>
+<span class="fc" id="L50">        barChartInstance = new BarChartImpl(this);</span>
+<span class="fc" id="L51">        startSocket((BarChartActivity) view, barChartInstance);</span>
+<span class="fc" id="L52">    }</span>
 
     /* This object is an observer of the bar chart model. When there are some changes on it, a signal is sent
     to this object and the following method is called. Its aim is to set or update informations that are
@@ -55,19 +58,18 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
     All of these informations are extracted from the model. */
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
-<span class="fc" id="L59">            String signal = (String) data;</span>
-<span class="pc bpc" id="L60" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L61">                setGraphParameters();</span>
-<span class="fc" id="L62">            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());</span>
+<span class="pc bpc" id="L61" title="1 of 2 branches missed.">        if (observable instanceof BarChartImpl) {</span>
+<span class="fc" id="L62">            String signal = (String) data;</span>
+<span class="pc bpc" id="L63" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L64">                setGraphParameters();</span>
+<span class="fc" id="L65">            graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());</span>
         }
-<span class="fc" id="L64">        Log.d(&quot;&quot;, &quot;update bar&quot;);</span>
-<span class="fc" id="L65">    }</span>
+<span class="fc" id="L67">    }</span>
 
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L70">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
+<span class="fc" id="L72">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
         /*
         graphView.setAxis('x',
                 barChartInstance.getAxisX().getName(),
@@ -78,27 +80,28 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 barChartInstance.getAxisY().getTicks()
         );
         */
-<span class="fc" id="L81">    }</span>
+<span class="fc" id="L83">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L85">        stopSocket();</span>
-<span class="fc" id="L86">    }</span>
+<span class="fc" id="L87">        stopSocket();</span>
+<span class="fc" id="L88">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L90">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
-<span class="fc" id="L91">    }</span>
+<span class="fc" id="L92">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
+<span class="fc" id="L93">    }</span>
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
-<span class="nc" id="L95">        super.startListening((BarChartActivity)graphView, barChartInstance);</span>
-<span class="nc" id="L96">    }</span>
+<span class="nc" id="L98">        super.startListening((BarChartActivity)graphView, barChartInstance);</span>
+<span class="nc" id="L99">    }</span>
 
     //when called, the socket and its connection are destroyed
         public void destroyConnection() {
-<span class="nc" id="L100">                graphSocket.destroyConnection();</span>
-<span class="nc" id="L101">            }</span>
+<span class="nc" id="L103">                graphSocket.destroyConnection();</span>
+<span class="nc" id="L104">            }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

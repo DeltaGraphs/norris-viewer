@@ -19,6 +19,10 @@ import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-21 Davide Trivellato Verify
+ *
  * 0.1.1 2015-05-30 Enrico Savoca Change to updateParameters(JSONObject data). Json is read better than before.
  *
  * 0.1.0 2015-05-30 Enrico Savoca Coding of all methods and attributes
@@ -34,64 +38,64 @@ public class LineChartImpl extends Graph implements LineChart {
     private AxisModel axisX;
     private AxisModel axisY;
     private Boolean viewFinder;
-<span class="fc" id="L37">    private Boolean horizontalGrid = new Boolean(true);</span>
-<span class="fc" id="L38">    private Boolean verticalGrid = new Boolean(true);</span>
+<span class="fc" id="L41">    private Boolean horizontalGrid = new Boolean(true);</span>
+<span class="fc" id="L42">    private Boolean verticalGrid = new Boolean(true);</span>
 
     //it returns the properties of the x axis
     public AxisModel getAxisX() {
-<span class="fc" id="L42">        return axisX;</span>
+<span class="fc" id="L46">        return axisX;</span>
     }
 
     //it returns the properties of the y axis
     public AxisModel getAxisY() {
-<span class="fc" id="L47">        return axisY;</span>
+<span class="fc" id="L51">        return axisY;</span>
     }
 
     //it returns true if the viewFinder is set
     public Boolean getViewFinder() {
-<span class="fc" id="L52">        return viewFinder;</span>
+<span class="fc" id="L56">        return viewFinder;</span>
     }
 
     //it returns true if the horizontal grid must exists on the graph
     public Boolean getHorizontalGrid() {
-<span class="fc" id="L57">        return horizontalGrid;</span>
+<span class="fc" id="L61">        return horizontalGrid;</span>
     }
 
     //it returns true if the vertical grid must exists on the graph
-<span class="fc" id="L61">    public Boolean getVerticalGrid() { return verticalGrid; }</span>
+<span class="fc" id="L65">    public Boolean getVerticalGrid() { return verticalGrid; }</span>
 
     // constructor of LineChartImpl. It requires an observer. It will receives update from LineChartImpl
-<span class="fc" id="L64">    public LineChartImpl(Observer chartPresenter) {</span>
-<span class="fc" id="L65">        addObserver(chartPresenter);</span>
-<span class="fc" id="L66">    }</span>
+<span class="fc" id="L68">    public LineChartImpl(Observer chartPresenter) {</span>
+<span class="fc" id="L69">        addObserver(chartPresenter);</span>
+<span class="fc" id="L70">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to set the attributes of the chart
     // It's used to set all the parameters of the chart and to create its flows.
     public void setParameters(JSONObject data) {
         try {
-<span class="fc" id="L73">            title = data.getString(&quot;title&quot;);</span>
-<span class="fc" id="L74">            viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
-<span class="fc" id="L75">            horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
-<span class="fc" id="L76">            verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
+<span class="fc" id="L77">            title = data.getString(&quot;title&quot;);</span>
+<span class="fc" id="L78">            viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
+<span class="fc" id="L79">            horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
+<span class="fc" id="L80">            verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
 
             //changes to axises
-<span class="fc" id="L79">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="fc" id="L80">            axisX = new AxisModel(xAxis);</span>
-<span class="fc" id="L81">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="fc" id="L82">            axisY = new AxisModel(yAxis);</span>
+<span class="fc" id="L83">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L84">            axisX = new AxisModel(xAxis);</span>
+<span class="fc" id="L85">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L86">            axisY = new AxisModel(yAxis);</span>
 
             //changes to flow params
-<span class="fc" id="L85">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="fc" id="L86">            int flowLenght = jsonFlows.length();</span>
-<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="nc" id="L88">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="nc" id="L89">                addFlow(flow);</span>
+<span class="fc" id="L89">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="fc" id="L90">            int flowLenght = jsonFlows.length();</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="nc" id="L92">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="nc" id="L93">                addFlow(flow);</span>
             }
-<span class="nc" id="L91">        } catch (JSONException e) {</span>
-<span class="nc" id="L92">            e.printStackTrace();</span>
-<span class="fc" id="L93">        }</span>
-<span class="fc" id="L94">    }</span>
+<span class="nc" id="L95">        } catch (JSONException e) {</span>
+<span class="nc" id="L96">            e.printStackTrace();</span>
+<span class="fc" id="L97">        }</span>
+<span class="fc" id="L98">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to update the attributes of the chart
@@ -100,34 +104,34 @@ public class LineChartImpl extends Graph implements LineChart {
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="pc bpc" id="L103" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="fc" id="L104">                title = data.getString(&quot;title&quot;);</span>
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
-<span class="fc" id="L106">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
-<span class="fc" id="L108">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
-<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
-<span class="fc" id="L110">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="fc" id="L108">                title = data.getString(&quot;title&quot;);</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (data.has(&quot;viewFinder&quot;))</span>
+<span class="fc" id="L110">                viewFinder = data.getBoolean(&quot;viewFinder&quot;);</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (data.has(&quot;horizontalGrid&quot;))</span>
+<span class="fc" id="L112">                horizontalGrid = data.getBoolean(&quot;horizontalGrid&quot;);</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">            if (data.has(&quot;verticalGrid&quot;))</span>
+<span class="fc" id="L114">                verticalGrid = data.getBoolean(&quot;verticalGrid&quot;);</span>
             //changes to axises
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
-<span class="fc" id="L113">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="fc" id="L114">                axisX = new AxisModel(xAxis);</span>
+<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
+<span class="fc" id="L117">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L118">                axisX = new AxisModel(xAxis);</span>
             }
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
-<span class="fc" id="L117">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="fc" id="L118">                axisY = new AxisModel(yAxis);</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
+<span class="fc" id="L121">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L122">                axisY = new AxisModel(yAxis);</span>
             }
-<span class="nc" id="L120">        } catch (Exception e) {</span>
-<span class="nc" id="L121">            e.printStackTrace();</span>
-<span class="fc" id="L122">        }</span>
-<span class="fc" id="L123">    }</span>
+<span class="nc" id="L124">        } catch (Exception e) {</span>
+<span class="nc" id="L125">            e.printStackTrace();</span>
+<span class="fc" id="L126">        }</span>
+<span class="fc" id="L127">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
-<span class="fc" id="L129">        flowList.add(new LineChartFlow(flow));</span>
-<span class="fc" id="L130">    }</span>
+<span class="fc" id="L133">        flowList.add(new LineChartFlow(flow));</span>
+<span class="fc" id="L134">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

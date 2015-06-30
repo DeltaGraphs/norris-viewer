@@ -19,6 +19,10 @@ import deltagraphs.norrisviewer.model.flowModel.BarChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-21 Davide Trivellato Verify
+ *
  * 0.1.1 2015-05-26 Enrico Savoca Several changes to Constructor
  *
  * 0.1.0 2015-05-25 Enrico Savoca Coding of all methods and attributes
@@ -33,33 +37,33 @@ public class BarChartImpl extends Graph implements BarChart {
 
     private AxisModel axisX;
     private AxisModel axisY;
-<span class="fc" id="L36">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L37">    private String barOrientation = &quot;V&quot;;</span>
+<span class="fc" id="L40">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L41">    private String barOrientation = &quot;V&quot;;</span>
 
     //it returns the properties of the x axis
     public AxisModel getAxisX() {
-<span class="fc" id="L41">        return axisX;</span>
+<span class="fc" id="L45">        return axisX;</span>
     }
 
     //it returns the properties of the y axis
     public AxisModel getAxisY() {
-<span class="fc" id="L46">        return axisY;</span>
+<span class="fc" id="L50">        return axisY;</span>
     }
 
     //it returns the list of values of the headers of the bar chart
     public ArrayList&lt;String&gt; getHeaders() {
-<span class="fc" id="L51">        return headers;</span>
+<span class="fc" id="L55">        return headers;</span>
     }
 
     //it returns the orientation of bars in the chart
     public String getBarOrientation() {
-<span class="fc" id="L56">        return barOrientation;</span>
+<span class="fc" id="L60">        return barOrientation;</span>
     }
 
     // constructor of BarChartImpl. It requires an observer. It will receives update from BarChartImpl
-<span class="fc" id="L60">    public BarChartImpl(Observer chartPresenter) {</span>
-<span class="fc" id="L61">        addObserver(chartPresenter);</span>
-<span class="fc" id="L62">    }</span>
+<span class="fc" id="L64">    public BarChartImpl(Observer chartPresenter) {</span>
+<span class="fc" id="L65">        addObserver(chartPresenter);</span>
+<span class="fc" id="L66">    }</span>
 
 
     // The following method is called when a new update arrives from the socket.
@@ -68,32 +72,32 @@ public class BarChartImpl extends Graph implements BarChart {
     @Override
     public void setParameters(JSONObject data) {
         try {
-<span class="fc" id="L71">            title = data.getString(&quot;title&quot;);</span>
-<span class="fc" id="L72">            barOrientation = data.getString(&quot;barOrientation&quot;);</span>
-<span class="fc" id="L73">            JSONArray jsonHeaders = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="fc" id="L74">            int length = jsonHeaders.length();</span>
-<span class="pc bpc" id="L75" title="1 of 2 branches missed.">            if (length &gt; 0) {</span>
-<span class="fc bfc" id="L76" title="All 2 branches covered.">                for (int i = 0; i &lt; length; i++) {</span>
-<span class="fc" id="L77">                    headers.add(jsonHeaders.getString(i));</span>
+<span class="fc" id="L75">            title = data.getString(&quot;title&quot;);</span>
+<span class="fc" id="L76">            barOrientation = data.getString(&quot;barOrientation&quot;);</span>
+<span class="fc" id="L77">            JSONArray jsonHeaders = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L78">            int length = jsonHeaders.length();</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">            if (length &gt; 0) {</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L81">                    headers.add(jsonHeaders.getString(i));</span>
                 }
             }
             //changes to axises
-<span class="fc" id="L81">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="fc" id="L82">            axisX = new AxisModel(xAxis);</span>
-<span class="fc" id="L83">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="fc" id="L84">            axisY = new AxisModel(yAxis);</span>
+<span class="fc" id="L85">            JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L86">            axisX = new AxisModel(xAxis);</span>
+<span class="fc" id="L87">            JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L88">            axisY = new AxisModel(yAxis);</span>
 
             //changes to flow params
-<span class="fc" id="L87">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="fc" id="L88">            int flowLenght = jsonFlows.length();</span>
-<span class="fc bfc" id="L89" title="All 2 branches covered.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="fc" id="L90">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="fc" id="L91">                addFlow(flow);</span>
+<span class="fc" id="L91">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="fc" id="L92">            int flowLenght = jsonFlows.length();</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="fc" id="L94">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="fc" id="L95">                addFlow(flow);</span>
             }
-<span class="nc" id="L93">        } catch (JSONException e) {</span>
-<span class="nc" id="L94">            e.printStackTrace();</span>
-<span class="fc" id="L95">        }</span>
-<span class="fc" id="L96">    }</span>
+<span class="nc" id="L97">        } catch (JSONException e) {</span>
+<span class="nc" id="L98">            e.printStackTrace();</span>
+<span class="fc" id="L99">        }</span>
+<span class="fc" id="L100">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to update the attributes of the chart
@@ -102,41 +106,41 @@ public class BarChartImpl extends Graph implements BarChart {
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="pc bpc" id="L105" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="fc" id="L106">                title = data.getString(&quot;title&quot;);</span>
-<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if (data.has(&quot;barOrientation&quot;))</span>
-<span class="fc" id="L108">                barOrientation = data.getString(&quot;barOrientation&quot;);</span>
-<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
-<span class="fc" id="L110">                headers=new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L111">                JSONArray jsonHeaders = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="fc" id="L112">                int length = jsonHeaders.length();</span>
-<span class="pc bpc" id="L113" title="1 of 2 branches missed.">                if (length &gt; 0) {</span>
-<span class="fc bfc" id="L114" title="All 2 branches covered.">                    for (int i = 0; i &lt; length; i++) {</span>
-<span class="fc" id="L115">                        headers.add(jsonHeaders.getString(i));</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="fc" id="L110">                title = data.getString(&quot;title&quot;);</span>
+<span class="pc bpc" id="L111" title="1 of 2 branches missed.">            if (data.has(&quot;barOrientation&quot;))</span>
+<span class="fc" id="L112">                barOrientation = data.getString(&quot;barOrientation&quot;);</span>
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
+<span class="fc" id="L114">                headers=new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L115">                JSONArray jsonHeaders = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L116">                int length = jsonHeaders.length();</span>
+<span class="pc bpc" id="L117" title="1 of 2 branches missed.">                if (length &gt; 0) {</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">                    for (int i = 0; i &lt; length; i++) {</span>
+<span class="fc" id="L119">                        headers.add(jsonHeaders.getString(i));</span>
                     }
                 }
             }
             //changes to axises
-<span class="pc bpc" id="L120" title="1 of 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
-<span class="fc" id="L121">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
-<span class="fc" id="L122">                axisX = new AxisModel(xAxis);</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            if (data.has(&quot;xAxis&quot;)) {</span>
+<span class="fc" id="L125">                JSONObject xAxis = data.getJSONObject(&quot;xAxis&quot;);</span>
+<span class="fc" id="L126">                axisX = new AxisModel(xAxis);</span>
             }
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
-<span class="fc" id="L125">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
-<span class="fc" id="L126">                axisY = new AxisModel(yAxis);</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">            if (data.has(&quot;yAxis&quot;)) {</span>
+<span class="fc" id="L129">                JSONObject yAxis = data.getJSONObject(&quot;yAxis&quot;);</span>
+<span class="fc" id="L130">                axisY = new AxisModel(yAxis);</span>
             }
 
-<span class="nc" id="L129">        } catch (Exception e) {</span>
-<span class="nc" id="L130">            e.printStackTrace();</span>
-<span class="fc" id="L131">        }</span>
-<span class="fc" id="L132">    }</span>
+<span class="nc" id="L133">        } catch (Exception e) {</span>
+<span class="nc" id="L134">            e.printStackTrace();</span>
+<span class="fc" id="L135">        }</span>
+<span class="fc" id="L136">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
-<span class="fc" id="L138">        flowList.add(new BarChartFlow(flow));</span>
-<span class="fc" id="L139">    }</span>
+<span class="fc" id="L142">        flowList.add(new BarChartFlow(flow));</span>
+<span class="fc" id="L143">    }</span>
 
 
 }
