@@ -44,9 +44,7 @@ public class TablePresenterImplTest extends TestCase {
 
     class MockTableActivity extends TableActivity {
         Boolean data = new Boolean(false);
-        Boolean order = new Boolean(false);
         Boolean headers = new Boolean(false);
-        Boolean sortedByCol = new Boolean(false);
 
 
         @Override
@@ -60,8 +58,6 @@ public class TablePresenterImplTest extends TestCase {
         }
 
         public Boolean getData(){ return data; }
-        public Boolean getSortOrder(){ return order; }
-        public Boolean getSortedByCol(){ return sortedByCol; }
         public Boolean getHeaders(){ return headers; }
 
     }
@@ -93,7 +89,5 @@ public class TablePresenterImplTest extends TestCase {
         tablePresenter.update((Observable) tablePresenter.tableInstance, signal);
         Assert.assertTrue(((MockTableActivity) tablePresenter.graphView).getData());
         Assert.assertTrue(((MockTableActivity) tablePresenter.graphView).getHeaders());
-        Assert.assertTrue(((MockTableActivity) tablePresenter.graphView).getSortedByCol());
-        Assert.assertTrue(((MockTableActivity) tablePresenter.graphView).getSortOrder());
     }
 }
