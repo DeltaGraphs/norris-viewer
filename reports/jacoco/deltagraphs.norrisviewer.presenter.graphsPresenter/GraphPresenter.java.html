@@ -44,28 +44,37 @@ public abstract class GraphPresenter implements Observer {
     update or delete some informations. */
     public void startSocket(Activity graphActivity, Object graphModel) {
 <span class="fc" id="L46">        graphSocket.startConnection();</span>
-<span class="fc" id="L47">        graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L48">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L49">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L50">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L51">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L52">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L47">        startListening(graphActivity, graphModel);</span>
+<span class="fc" id="L48">    }</span>
+
+    public void stopListening(){
+<span class="nc" id="L51">        graphSocket.stopListening(&quot;configGraph&quot;);</span>
+<span class="nc" id="L52">        graphSocket.stopListening(&quot;updateGraphProp&quot;);</span>
+<span class="nc" id="L53">        graphSocket.stopListening(&quot;insertFlow&quot;);</span>
+<span class="nc" id="L54">        graphSocket.stopListening(&quot;deleteFlow&quot;);</span>
+<span class="nc" id="L55">        graphSocket.stopListening(&quot;updateFlowProp&quot;);</span>
+<span class="nc" id="L56">        graphSocket.stopListening(&quot;updateFlowData&quot;);</span>
+<span class="nc" id="L57">    }</span>
+
+    public void startListening(Activity graphActivity, Object graphModel){
+<span class="fc" id="L60">        graphSocket.startListening(&quot;configGraph&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L61">        graphSocket.startListening(&quot;updateGraphProp&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L62">        graphSocket.startListening(&quot;insertFlow&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L63">        graphSocket.startListening(&quot;deleteFlow&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L64">        graphSocket.startListening(&quot;updateFlowProp&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L65">        graphSocket.startListening(&quot;updateFlowData&quot;, graphActivity, graphModel);</span>
+<span class="fc" id="L66">    }</span>
 
     //when called, the socket connection is stopped
     public void stopSocket() {
-<span class="fc" id="L57">        graphSocket.stopConnection();</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L70">        graphSocket.stopConnection();</span>
+<span class="fc" id="L71">    }</span>
 
     // it returns the socket of the class that extends GraphPresenter
     public SocketManager getGraphSocket(){
-<span class="fc" id="L62">        return graphSocket;</span>
+<span class="fc" id="L75">        return graphSocket;</span>
     }
 
-    //when called, the socket and its connection are destroyed
-    public void destroySocket() {
-<span class="fc" id="L67">        graphSocket.destroyConnection();</span>
-<span class="fc" id="L68">    }</span>
 /*
     @Override
     public void update(Observable observable, Object data) {

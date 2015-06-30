@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
+import android.util.Log;
 import android.widget.EditText;
 
 import java.util.Observable;
@@ -48,51 +49,47 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     public MainView mainView;
 
     /* MainPresenterImpl will observe the changes on PageModel, according to the observer design pattern.*/
-<span class="fc" id="L51">    protected PageModel pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L52">    protected PageModel pageModel = new PageModelImpl(this);</span>
 
     /* constructor of MainPresenterImpl. It requires an activity to be instatiated properly.
     The object will be associated to the activity. A new socket is created. */
-<span class="fc" id="L55">    public MainPresenterImpl(MainView view) {</span>
-<span class="fc" id="L56">        mainSocket = new SocketManager();</span>
-<span class="fc" id="L57">        mainView = view;</span>
-<span class="fc" id="L58">    }</span>
+<span class="fc" id="L56">    public MainPresenterImpl(MainView view) {</span>
+<span class="fc" id="L57">        mainSocket = new SocketManager();</span>
+<span class="fc" id="L58">        mainView = view;</span>
+<span class="fc" id="L59">    }</span>
 
     /* This method is called when a new connection must be established.
     The socket is put to listen for some events that will arrive when the connection is started.
     For each type of event a different path of instructions will be executed, in order to set,
     update or delete some informations. */
     public void setUpSocket(String url) {
-<span class="fc" id="L65">        mainSocket.setSocketUrl(url);</span>
-<span class="fc" id="L66">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L67">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L68">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L69">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L70">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
-<span class="fc" id="L71">        mainSocket.startConnection();</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L66">        mainSocket.setSocketUrl(url);</span>
+<span class="fc" id="L67">        startListening();</span>
+<span class="fc" id="L68">        mainSocket.startConnection();</span>
+<span class="fc" id="L69">    }</span>
 
     // the pageModel will be reinitialized.
     public void reinitializePageList() {
-<span class="fc" id="L76">        pageModel = new PageModelImpl(this);</span>
-<span class="fc" id="L77">    }</span>
+<span class="fc" id="L73">        pageModel = new PageModelImpl(this);</span>
+<span class="fc" id="L74">    }</span>
 
     /* the following method is used to create a new dialog. An URL is set as default.
     when the user will press the &quot;ok&quot; button of this dialog on the app activity, a new socket
     connection will be established. */
     public AlertDialog showDialog(final Context context) {
-<span class="nc" id="L83">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
-<span class="nc" id="L84">        builder.setTitle(&quot;Insert source URL&quot;);</span>
+<span class="nc" id="L80">        AlertDialog.Builder builder = new AlertDialog.Builder(context);</span>
+<span class="nc" id="L81">        builder.setTitle(&quot;Insert source URL&quot;);</span>
 
         // Set up the input
-<span class="nc" id="L87">        final EditText input = new EditText(context);</span>
+<span class="nc" id="L84">        final EditText input = new EditText(context);</span>
         // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-<span class="nc" id="L89">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
+<span class="nc" id="L86">        input.setInputType(InputType.TYPE_CLASS_TEXT);</span>
         //input.setText(&quot;http://norris-nrti-dev.herokuapp.com/page1/map1&quot;);
-<span class="nc" id="L91">        input.setText(mainSocket.getSocketUrl());</span>
-<span class="nc" id="L92">        builder.setView(input);</span>
+<span class="nc" id="L88">        input.setText(mainSocket.getSocketUrl());</span>
+<span class="nc" id="L89">        builder.setView(input);</span>
 
         // Set up the buttons
-<span class="nc" id="L95">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L92">        builder.setPositiveButton(&quot;OK&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newUrl = input.getText().toString();
@@ -108,45 +105,55 @@ public class MainPresenterImpl implements MainPresenter, Observer {
 
             }
         });
-<span class="nc" id="L111">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
+<span class="nc" id="L108">        builder.setNegativeButton(&quot;Cancel&quot;, new DialogInterface.OnClickListener() {</span>
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
 
-<span class="nc" id="L118">        AlertDialog dialog = builder.show();</span>
-<span class="nc" id="L119">        return dialog;</span>
+<span class="nc" id="L115">        AlertDialog dialog = builder.show();</span>
+<span class="nc" id="L116">        return dialog;</span>
     }
+
+    public void stopListening(){
+<span class="nc" id="L120">        mainSocket.stopListening(&quot;configPageList&quot;);</span>
+<span class="nc" id="L121">        mainSocket.stopListening(&quot;insertPage&quot;);</span>
+<span class="nc" id="L122">        mainSocket.stopListening(&quot;updatePage&quot;);</span>
+<span class="nc" id="L123">        mainSocket.stopListening(&quot;insertGraph&quot;);</span>
+<span class="nc" id="L124">        mainSocket.stopListening(&quot;updateGraph&quot;);</span>
+<span class="nc" id="L125">    }</span>
+
+    public void startListening(){
+<span class="fc" id="L128">        mainSocket.startListening(&quot;configPageList&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L129">        mainSocket.startListening(&quot;insertPage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L130">        mainSocket.startListening(&quot;updatePage&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L131">        mainSocket.startListening(&quot;insertGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L132">        mainSocket.startListening(&quot;updateGraph&quot;, (MainActivity) mainView, pageModel);</span>
+<span class="fc" id="L133">    }</span>
 
     //when called, the socket connection is stopped
     @Override
     public void stopConnection() {
-<span class="fc" id="L125">        mainSocket.stopConnection();</span>
-<span class="fc" id="L126">    }</span>
+<span class="fc" id="L138">        mainSocket.stopConnection();</span>
+<span class="fc" id="L139">    }</span>
 
     //when called, the socket connection is started
     @Override
     public void startConnection() {
-<span class="fc" id="L131">        mainSocket.startConnection();</span>
-<span class="fc" id="L132">    }</span>
-
-    //when called, the socket and its connection are destroyed
-    @Override
-    public void destroyConnection() {
-<span class="fc" id="L137">        mainSocket.destroyConnection();</span>
-<span class="fc" id="L138">    }</span>
+<span class="fc" id="L144">        mainSocket.startConnection();</span>
+<span class="fc" id="L145">    }</span>
 
     // it returns true if the socket is connected.
     @Override
     public boolean isConnected() {
-<span class="fc" id="L143">        return mainSocket.isConnected();</span>
+<span class="fc" id="L150">        return mainSocket.isConnected();</span>
     }
 
     // it returns true if the socket hasn't been instatiated.
     @Override
     public boolean isSocketNull() {
-<span class="fc" id="L149">        return mainSocket.isNull();</span>
+<span class="fc" id="L156">        return mainSocket.isNull();</span>
     }
 
     /* This object is an observer of the page model. When there are some changes on it, a signal is sent
@@ -154,8 +161,8 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="fc" id="L157">        mainView.updatePagesList(pageModel);</span>
-<span class="fc" id="L158">    }</span>
+<span class="fc" id="L164">        mainView.updatePagesList(pageModel); Log.d(&quot;&quot;, &quot;updatePage&quot;);</span>
+<span class="fc" id="L165">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

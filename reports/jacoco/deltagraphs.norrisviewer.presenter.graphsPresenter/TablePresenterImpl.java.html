@@ -18,6 +18,8 @@
  *
  */
 
+import android.util.Log;
+
 import java.util.Observable;
 
 import deltagraphs.norrisviewer.model.graphsModel.*;
@@ -33,11 +35,11 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
      given url. Furthermore, an instance of table model will be created. The object will observe the
      changes on it, according to the observer design pattern. */
     public TablePresenterImpl(TableView view, String url) {
-<span class="fc" id="L36">        super(url);</span>
-<span class="fc" id="L37">        graphView = view;</span>
-<span class="fc" id="L38">        tableInstance = new TableImpl(this);</span>
-<span class="fc" id="L39">        startSocket((TableActivity) view, tableInstance);</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L38">        super(url);</span>
+<span class="fc" id="L39">        graphView = view;</span>
+<span class="fc" id="L40">        tableInstance = new TableImpl(this);</span>
+<span class="fc" id="L41">        startSocket((TableActivity) view, tableInstance);</span>
+<span class="fc" id="L42">    }</span>
 
     /* This object is an observer of the table model. When there are some changes on it, a signal is sent
     to this object and the following method is called. Its aim is to set or update informations that are
@@ -46,40 +48,41 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
     All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-<span class="pc bpc" id="L49" title="1 of 2 branches missed.">        if (observable instanceof TableImpl) {</span>
-<span class="fc" id="L50">            String signal = (String) data;</span>
-<span class="pc bpc" id="L51" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
-<span class="fc" id="L52">                setGraphParameters();</span>
-<span class="fc" id="L53">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">        if (observable instanceof TableImpl) {</span>
+<span class="fc" id="L52">            String signal = (String) data;</span>
+<span class="pc bpc" id="L53" title="3 of 4 branches missed.">            if ((signal == &quot;configGraph&quot;) || (signal == &quot;updateGraphProp&quot;))</span>
+<span class="fc" id="L54">                setGraphParameters();</span>
+<span class="fc" id="L55">            graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());</span>
         }
-<span class="fc" id="L55">    }</span>
+<span class="fc" id="L57">        Log.d(&quot;&quot;, &quot;update table&quot;);</span>
+<span class="fc" id="L58">    }</span>
 
     /* this method is always called by the method &quot;update&quot;.
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
-<span class="fc" id="L60">        graphView.setSortOrder(tableInstance.getSortOrder());</span>
-<span class="fc" id="L61">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
+<span class="fc" id="L63">        graphView.setSortOrder(tableInstance.getSortOrder());</span>
+<span class="fc" id="L64">        String[] headers = new String[tableInstance.getNumberOfColumns()];</span>
         //column parameters
-<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
-<span class="nc" id="L64">            headers[index]=tableInstance.getHeaderValue(index);</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">        for (int index = 0; index &lt; tableInstance.getNumberOfColumns(); index++) {</span>
+<span class="nc" id="L67">            headers[index]=tableInstance.getHeaderValue(index);</span>
         }
-<span class="fc" id="L66">        graphView.setHeaders(headers);</span>
-<span class="fc" id="L67">        graphView.setSortByCol(tableInstance.sortByCol());</span>
-<span class="fc" id="L68">    }</span>
+<span class="fc" id="L69">        graphView.setHeaders(headers);</span>
+<span class="fc" id="L70">        graphView.setSortByCol(tableInstance.sortByCol());</span>
+<span class="fc" id="L71">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L72">        stopSocket();</span>
-<span class="fc" id="L73">    }</span>
+<span class="fc" id="L75">        stopSocket();</span>
+<span class="fc" id="L76">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L77">        startSocket((TableActivity) graphView, tableInstance);</span>
-<span class="fc" id="L78">    }</span>
+<span class="fc" id="L80">        startSocket((TableActivity) graphView, tableInstance);</span>
+<span class="fc" id="L81">    }</span>
 
-    //when called, the socket and its connection are destroyed
-    public void destroyConnection() {
-<span class="fc" id="L82">        destroySocket();</span>
-<span class="fc" id="L83">    }</span>
+    @Override
+    public void startListening() {
+<span class="nc" id="L85">        super.startListening((TableActivity)graphView, tableInstance);</span>
+<span class="nc" id="L86">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

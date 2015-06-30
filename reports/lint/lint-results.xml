@@ -91,6 +91,57 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     </issue>
 
     <issue
+        id="ObsoleteLayoutParam"
+        severity="Warning"
+        message="Invalid layout param in a `ScrollView`: `layout_alignParentLeft`"
+        category="Performance"
+        priority="6"
+        summary="Obsolete layout params"
+        explanation="The given layout_param is not defined for the given layout, meaning it has no effect. This usually happens when you change the parent layout or move view code around without updating the layout params. This will cause useless attribute processing at runtime, and is misleading for others reading the layout so the parameter should be removed."
+        errorLine1="            android:layout_alignParentLeft=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio,adt">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
+            line="16"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        severity="Warning"
+        message="Invalid layout param in a `ScrollView`: `layout_alignParentStart`"
+        category="Performance"
+        priority="6"
+        summary="Obsolete layout params"
+        explanation="The given layout_param is not defined for the given layout, meaning it has no effect. This usually happens when you change the parent layout or move view code around without updating the layout params. This will cause useless attribute processing at runtime, and is misleading for others reading the layout so the parameter should be removed."
+        errorLine1="            android:layout_alignParentStart=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio,adt">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
+            line="17"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        severity="Warning"
+        message="Invalid layout param in a `ScrollView`: `layout_below`"
+        category="Performance"
+        priority="6"
+        summary="Obsolete layout params"
+        explanation="The given layout_param is not defined for the given layout, meaning it has no effect. This usually happens when you change the parent layout or move view code around without updating the layout params. This will cause useless attribute processing at runtime, and is misleading for others reading the layout so the parameter should be removed."
+        errorLine1="            android:layout_below=&quot;@+id/tableTitle&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+        quickfix="studio,adt">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
+            line="19"
+            column="13"/>
+    </issue>
+
+    <issue
         id="UseValueOf"
         severity="Warning"
         message="Use `Boolean.valueOf(true)` instead"
@@ -150,13 +201,25 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
-        message="The resource `R.layout.activity_table` appears to be unused"
+        message="The resource `R.drawable.bg_table_color1` appears to be unused"
         category="Performance"
         priority="3"
         summary="Unused resources"
         explanation="Unused resources make applications larger and slow down builds.">
         <location
-            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"/>
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/bg_table_color1.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.bg_table_color2` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/bg_table_color2.xml"/>
     </issue>
 
     <issue
@@ -238,6 +301,18 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.layout.item_table` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.drawable.item_table1` appears to be unused"
         category="Performance"
         priority="3"
@@ -257,6 +332,54 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         explanation="Unused resources make applications larger and slow down builds.">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/item_table1_header.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.item_table_family` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_family.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.item_table_first` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_first.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.item_table_header` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_header.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.item_table_header_first` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_header_first.xml"/>
     </issue>
 
     <issue
@@ -338,6 +461,22 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.string.title_activity_table` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;title_activity_table&quot;>TableActivity&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="17"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.string.title_activity_maps` appears to be unused"
         category="Performance"
         priority="3"
@@ -384,6 +523,34 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     </issue>
 
     <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.string.hello_world` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;string name=&quot;hello_world&quot;>Hello world!&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/strings.xml"
+            line="26"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.layout.table` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/table.xml"/>
+    </issue>
+
+    <issue
         id="UselessLeaf"
         severity="Warning"
         message="This `RelativeLayout` view is useless (no children, no `background`, no `id`, no `style`)"
@@ -397,6 +564,23 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_main.xml"
             line="21"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UselessParent"
+        severity="Warning"
+        message="This `ScrollView` layout or its `RelativeLayout` parent is possibly useless"
+        category="Performance"
+        priority="2"
+        summary="Useless parent layout"
+        explanation="A layout with children that has no siblings, is not a scrollview or a root layout, and does not have a background, can be removed and have its children moved directly into the parent for a flatter and more efficient layout hierarchy."
+        errorLine1="    &lt;ScrollView"
+        errorLine2="    ^"
+        quickfix="adt">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
+            line="6"
             column="5"/>
     </issue>
 
