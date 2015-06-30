@@ -36,12 +36,25 @@ public class TableImpl extends Graph implements Table {
     private String addRowOn;  // top or bottom
     private String sortOrder = null; //ascendent or descendent
     private String sortColumn = null; // sorted by column "sortColumn"
+    private Boolean horizontalBorder = false; // horizontal border
+    private Boolean verticalBorder = false; // vertical border
+
 
     private ArrayList<String> headers = new ArrayList<String>();
 
     //it returns the position where new records will be inserted in table flows
     public String getAddRowOn() {
         return addRowOn;
+    }
+
+    // returns true if the table has an horizontal border
+    public Boolean getHorizontalBorder() {
+        return horizontalBorder;
+    }
+
+    // returns true if the table has a vertical border
+    public Boolean getVerticalBorder() {
+        return verticalBorder;
     }
 
     //if not null, it returns the name of a header of the table. In this case
@@ -88,6 +101,11 @@ public class TableImpl extends Graph implements Table {
                 headers.add(jsonColumns.getString(i));
             }
 
+            if (data.getJSONObject("appearance").getJSONObject("horizontalGrid").getInt("width") > 0)
+                horizontalBorder = true;
+            if (data.getJSONObject("appearance").getJSONObject("verticalGrid").getInt("width") > 0)
+                verticalBorder = true;
+
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
@@ -131,6 +149,16 @@ public class TableImpl extends Graph implements Table {
                 }
             }
 
+            if (data.has("appearance")){
+                if (data.getJSONObject("appearance").has("horizontalGrid"))
+                    if (data.getJSONObject("appearance").getJSONObject("horizontalGrid").getInt("width") > 0)
+                        horizontalBorder = true;
+                    else horizontalBorder = false;
+                if (data.getJSONObject("appearance").has("verticalGrid"))
+                    if (data.getJSONObject("appearance").getJSONObject("verticalGrid").getInt("width") > 0)
+                        verticalBorder = true;
+                    else verticalBorder = false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

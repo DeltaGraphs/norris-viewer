@@ -41,4 +41,10 @@ public interface Table {
 
     //it returns the flow list of the chart
     public ArrayList<FlowModel> getFlowList();
+
+    // returns true if the table has an horizontal border
+    public Boolean getHorizontalBorder();
+
+    // returns true if the table has a vertical border
+    public Boolean getVerticalBorder();
 }

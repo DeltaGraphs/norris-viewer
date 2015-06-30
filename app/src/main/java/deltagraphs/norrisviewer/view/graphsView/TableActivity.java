@@ -112,19 +112,32 @@ public class TableActivity extends ActionBarActivity implements TableView {
     }
 
 
-
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
-        if(this.headers.length == 0) {
+        if (this.headers.length == 0) {
             this.headers = new String[1];
             this.headers[0] = "La tabella e' vuota";
         }
     }
 
+    /**
+     * This method provides the ability to view or not border lines of the cells of the table.
+     */
     @Override
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns){
-       TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
+    public void setBorder(boolean hBorder, boolean vBorder) {
+        int xBorder = 0;
+        int yBorder = 0;
+        if (hBorder == true)
+            xBorder = 1;
+        if (vBorder == true)
+            yBorder = 1;
+        tableRowParams.setMargins(yBorder, xBorder, yBorder, xBorder);
+    }
+
+    @Override
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
+        TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         tableLayout.removeAllViews();
         TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
         TableRow headerRow = new TableRow(this);

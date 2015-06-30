@@ -29,4 +29,6 @@ public interface TableView {
 
     //set the data in the table. It is extracted from the table model
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns);
+
+    void setBorder(boolean hBorder, boolean vBorder);
 }

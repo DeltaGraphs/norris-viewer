@@ -66,6 +66,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
             headers[index]=tableInstance.getHeaderValue(index);
         }
         graphView.setHeaders(headers);
+        graphView.setBorder(tableInstance.getHorizontalBorder(), tableInstance.getVerticalBorder());
     }
 
     //when called, the socket connection is stopped
