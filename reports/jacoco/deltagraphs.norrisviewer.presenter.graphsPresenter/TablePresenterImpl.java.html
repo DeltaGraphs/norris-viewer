@@ -66,26 +66,27 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 <span class="nc" id="L66">            headers[index]=tableInstance.getHeaderValue(index);</span>
         }
 <span class="fc" id="L68">        graphView.setHeaders(headers);</span>
-<span class="fc" id="L69">    }</span>
+<span class="fc" id="L69">        graphView.setBorder(tableInstance.getHorizontalBorder(), tableInstance.getVerticalBorder());</span>
+<span class="fc" id="L70">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L73">        stopSocket();</span>
-<span class="fc" id="L74">    }</span>
+<span class="fc" id="L74">        stopSocket();</span>
+<span class="fc" id="L75">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L78">        startSocket((TableActivity) graphView, tableInstance);</span>
-<span class="fc" id="L79">    }</span>
+<span class="fc" id="L79">        startSocket((TableActivity) graphView, tableInstance);</span>
+<span class="fc" id="L80">    }</span>
 
     @Override
     public void startListening() {
-<span class="nc" id="L83">        super.startListening((TableActivity) graphView, tableInstance);</span>
-<span class="nc" id="L84">    }</span>
+<span class="nc" id="L84">        super.startListening((TableActivity) graphView, tableInstance);</span>
+<span class="nc" id="L85">    }</span>
 
     //when called, the socket and its connection are destroyed
     public void destroyConnection() {
-<span class="nc" id="L88">        graphSocket.destroyConnection();</span>
-<span class="nc" id="L89">    }</span>
+<span class="nc" id="L89">        graphSocket.destroyConnection();</span>
+<span class="nc" id="L90">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
