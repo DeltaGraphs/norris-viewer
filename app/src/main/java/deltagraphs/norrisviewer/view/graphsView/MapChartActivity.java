@@ -84,7 +84,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         setTitle(sourceTitle);
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
-        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
+        //mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         Context context = getApplicationContext();
         CharSequence text = "Loading may take a few moments...";
         int duration = Toast.LENGTH_SHORT;
@@ -99,6 +99,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onResume() {
         super.onResume();
+        mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         mapChartPresenter.startListening();
     }
 
@@ -106,8 +107,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     @Override
     public void onStop() {
         super.onStop();
-        mapChartPresenter.stopConnection();
-        mapChartPresenter.stopListening();
+        //mapChartPresenter.stopConnection();
+        //mapChartPresenter.stopListening();
     }
 
     //manage the onPause event
@@ -115,19 +116,21 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     public void onPause() {
         super.onPause();
         mapChartPresenter.stopConnection();
-        mapChartPresenter.stopListening();
+        mapChartPresenter.destroyConnection();
     }
 
     @Override
     public void onRestart(){
         super.onRestart();
-        mapChartPresenter.startConnection();
-        mapChartPresenter.startListening();
+        //mapChartPresenter.startConnection();
+        //mapChartPresenter.startListening();
     }
 
     //manage the onDestroy event
     @Override
     public void onDestroy() {
+        mapChartPresenter.stopConnection();
+        mapChartPresenter.stopListening();
         super.onDestroy();
     }
 

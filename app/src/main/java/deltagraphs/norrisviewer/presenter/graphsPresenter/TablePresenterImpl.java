@@ -82,6 +82,11 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
 
     @Override
     public void startListening() {
-        super.startListening((TableActivity)graphView, tableInstance);
+        super.startListening((TableActivity) graphView, tableInstance);
+    }
+
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+        graphSocket.destroyConnection();
     }
 }

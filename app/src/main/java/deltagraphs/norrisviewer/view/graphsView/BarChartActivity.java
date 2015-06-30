@@ -75,52 +75,67 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         }
         setTitle(sourceTitle);
        // barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        //barChartPresenter.startListening();
+       // barChartPresenter.startListening();
+        Log.d("", "bar create");
     }
 
 
+    //manage the resuming action from another activity
+    @Override
+    public void onResume() {
+        super.onResume();
+        barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        barChartPresenter.startListening();
+        Log.d("", "bar resume");
+    }
 
-        //manage the resuming action from another activity
-        @Override
-        public void onResume() {
-            super.onResume();
-            barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-            barChartPresenter.startListening();
-        }
-    /*
-           //manage the onStop event
-           @Override
-           public void onStop() {
-               super.onStop();
-               barChartPresenter.stopConnection();
-               barChartPresenter.stopListening();
-           }
+    //manage the onStop event
+    @Override
+    public void onStop() {
+        super.onStop();
+        //barChartPresenter.stopConnection();
+        //barChartPresenter.destroyConnection();
+        Log.d("", "bar stop");
+    }
 
-           //manage the onPause event
-           @Override
-           public void onPause() {
-               super.onPause();
-               barChartPresenter.stopConnection();
-               barChartPresenter.stopListening();
-           }
-*/
-           //manage the onRestart event
-           @Override
-           public void onRestart() {
-               super.onRestart();
-           barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-            barChartPresenter.startListening();
-           }
-/*
-           //manage the onDestroy event
-           @Override
-           public void onDestroy() {
-               barChartPresenter.stopConnection();
-               barChartPresenter.stopListening();
-               super.onDestroy();
-           }
+    //manage the onBackPressed() event
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        //barChartPresenter.stopConnection();
+        //barChartPresenter.destroyConnection();
+        Log.d("", "bar back");
+    }
 
-       */
+    //manage the onPause event
+    @Override
+    public void onPause() {
+        super.onPause();
+        barChartPresenter.stopConnection();
+        barChartPresenter.destroyConnection();
+        Log.d("", "bar pause");
+    }
+
+    //manage the onRestart event
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        //barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
+        //barChartPresenter.startListening();
+        Log.d("", "bar restart");
+    }
+
+
+    //manage the onDestroy event
+    @Override
+    public void onDestroy() {
+        barChartPresenter.stopConnection();
+        barChartPresenter.stopListening();
+        super.onDestroy();
+        Log.d("", "bar destroy");
+    }
+
+
     /*
     Initialize a vertical bar chart with its configuration
     */
@@ -289,7 +304,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
             BarDataSet set1 = new BarDataSet(yVals1, name);
             set1.setBarSpacePercent(35f);
-            if(color != "null" && color != null)
+            if (color != "null" && color != null)
                 set1.setColor(Color.parseColor(color));
             dataSets.add(set1);
 

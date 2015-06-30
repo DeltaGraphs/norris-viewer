@@ -28,4 +28,7 @@ public interface LineChartPresenter {
     void startListening();
 
     void stopListening();
+
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection();
 }

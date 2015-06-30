@@ -40,13 +40,13 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+        setTitle(sourceTitle);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-        tablePresenter = new TablePresenterImpl(this, sourceURL);
+
         setContentView(R.layout.activity_table);
     }
 
@@ -54,6 +54,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
     @Override
     public void onResume() {
         super.onResume();
+        tablePresenter = new TablePresenterImpl(this, sourceURL);
         tablePresenter.startListening();
         tableRowParams.weight = 1;
     }
@@ -61,8 +62,8 @@ public class TableActivity extends ActionBarActivity implements TableView {
     //manage the onStop event
     @Override
     public void onStop() {
-        tablePresenter.stopConnection();
-        tablePresenter.stopListening();
+        //tablePresenter.stopConnection();
+        //tablePresenter.stopListening();
         super.onStop();
     }
 
@@ -71,20 +72,23 @@ public class TableActivity extends ActionBarActivity implements TableView {
     public void onPause() {
         super.onPause();
         tablePresenter.stopConnection();
-        tablePresenter.stopListening();
+        tablePresenter.destroyConnection();
     }
 
     //manage the onRestart event
     @Override
     public void onRestart() {
         super.onRestart();
-        tablePresenter.startConnection();
-        tablePresenter.startListening();
+        //tablePresenter = new TablePresenterImpl(this, sourceURL);
+        //tablePresenter.startListening();
+        Log.d("", "");
     }
 
     //manage the onDestroy event
     @Override
     public void onDestroy() {
+        tablePresenter.stopConnection();
+        tablePresenter.stopListening();
         super.onDestroy();
     }
 
@@ -180,7 +184,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {//for each column
                     // 4) create textView
                     TextView textView = new TextView(this);
-
+                    Log.d("",tableFlow.getCellBGColour(j, indexCol));
                     textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
                     Log.d("", tableFlow.getCellTColour(j, indexCol));
                     textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));

@@ -25,6 +25,9 @@ public interface BarChartPresenter {
     //when called, the socket connection is started
     void startConnection();
 
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection();
+
     void startListening();
 
     void stopListening();

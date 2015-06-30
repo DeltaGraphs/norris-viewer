@@ -94,8 +94,13 @@ public class SocketManager {
         mSocket.disconnect();
     }
 
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+        mSocket.close();
+    }
 
-    public void stopListening(final String signal){
+
+    public void stopListening(final String signal) {
         mSocket.off(signal);
     }
 
@@ -126,7 +131,7 @@ public class SocketManager {
                         } else if (activity instanceof TableView) {
                             ((Graph) model).setGraph(obj, signal);
                             Log.d("update", "arrivo table");
-                        }else Log.d("LOL", "fail");
+                        } else Log.d("LOL", "fail");
                     }
                 });
             }

@@ -82,8 +82,12 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
 
     @Override
     public void startListening() {
-        super.startListening((MapChartActivity)graphView, mapChartInstance);
+        super.startListening((MapChartActivity) graphView, mapChartInstance);
     }
 
+    //when called, the socket and its connection are destroyed
+    public void destroyConnection() {
+        graphSocket.destroyConnection();
+    }
 }
 

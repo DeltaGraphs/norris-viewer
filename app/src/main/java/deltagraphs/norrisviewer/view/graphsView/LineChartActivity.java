@@ -125,14 +125,15 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onResume() {
         super.onResume();
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
+        lineChartPresenter.startListening();
     }
-/*
+
     //manage the onStop event
     @Override
     public void onStop() {
         super.onStop();
-        lineChartPresenter.stopConnection();
-        lineChartPresenter.stopListening();
+        //lineChartPresenter.stopConnection();
+        //lineChartPresenter.stopListening();
     }
 
     //manage the onPause event
@@ -140,7 +141,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onPause() {
         super.onPause();
         lineChartPresenter.stopConnection();
-        lineChartPresenter.stopListening();
+        lineChartPresenter.destroyConnection();
     }
 
     //manage the onRestart event
@@ -148,7 +149,14 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void onRestart() {
         super.onRestart();
     }
-*/
+
+    //manage the onDestroy event
+    @Override
+    public void onDestroy() {
+        lineChartPresenter.stopConnection();
+        lineChartPresenter.stopListening();
+        super.onDestroy();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -345,11 +353,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
         }
 
-    }
-
-    public void onDestroy() {
-        // Otherwise defer to system default behavior.
-        super.onDestroy();
     }
 
     private void previewY() {
