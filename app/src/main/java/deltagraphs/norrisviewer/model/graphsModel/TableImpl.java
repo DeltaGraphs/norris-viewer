@@ -78,6 +78,7 @@ public class TableImpl extends Graph implements Table {
         try {
             title = data.getString("title");
 
+            addRowOn = data.getString("addRowOn");
             JSONArray jsonColumns = data.getJSONArray("headers");
             int jsonColumnsSize = jsonColumns.length();
             for (int i = 0; i < jsonColumnsSize; i++) {
