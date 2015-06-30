@@ -48,15 +48,6 @@ public class TablePresenterImplTest extends TestCase {
         Boolean headers = new Boolean(false);
         Boolean sortedByCol = new Boolean(false);
 
-        @Override
-        public void setSortByCol(String sortingColumn) {
-            sortedByCol = true;
-        }
-
-        @Override
-        public void setSortOrder(String sortOrder) {
-            order = true;
-        }
 
         @Override
         public void setHeaders(String[] headers) {
