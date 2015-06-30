@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.flowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.3.0 2015-06-15 Davide Trivellato Verify
+ *
  * 0.2.1 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
  * 0.2.0 2015-06-04 Enrico Savoca Add classes TraceModel and Marker
@@ -33,8 +37,8 @@ import java.util.ArrayList;
 
 public class MapChartFlow extends FlowModel {
 
-    private Marker markerProperties;
-    private TraceModel trace;
+    private Marker markerProperties; /* it contains the marker's properties */
+    private TraceModel trace; /* it contains the trace's properties */
     private ArrayList<MapChartRecord> records = new ArrayList<MapChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the record length

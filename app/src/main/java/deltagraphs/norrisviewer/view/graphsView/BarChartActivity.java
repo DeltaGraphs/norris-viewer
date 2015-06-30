@@ -36,6 +36,10 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.BarChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-29 Matteo Furlan Approve
+ *
+ * 0.5.0 2015-06-27 Enrico Savoca Verify
+ *
  * 0.4.0 2015-05-28 Davide Trivellato Create the legend panel
  *
  * 0.3.0 2015-05-27 Davide Trivellato Managing bar orientation
@@ -74,9 +78,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-       // barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-       // barChartPresenter.startListening();
-        Log.d("", "bar create");
     }
 
 
@@ -85,25 +86,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
     public void onResume() {
         super.onResume();
         barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        Log.d("", "bar resume");
-    }
-
-    //manage the onStop event
-    @Override
-    public void onStop() {
-        super.onStop();
-        //barChartPresenter.stopConnection();
-        //barChartPresenter.destroyConnection();
-        Log.d("", "bar stop");
-    }
-
-    //manage the onBackPressed() event
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        //barChartPresenter.stopConnection();
-        //barChartPresenter.destroyConnection();
-        Log.d("", "bar back");
     }
 
     //manage the onPause event
@@ -112,18 +94,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         super.onPause();
         barChartPresenter.stopConnection();
         barChartPresenter.destroyConnection();
-        Log.d("", "bar pause");
     }
-
-    //manage the onRestart event
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        //barChartPresenter = new BarChartPresenterImpl(this, sourceURL);
-        //barChartPresenter.startListening();
-        Log.d("", "bar restart");
-    }
-
 
     //manage the onDestroy event
     @Override
@@ -131,7 +102,6 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         barChartPresenter.stopConnection();
         barChartPresenter.stopListening();
         super.onDestroy();
-        Log.d("", "bar destroy");
     }
 
 

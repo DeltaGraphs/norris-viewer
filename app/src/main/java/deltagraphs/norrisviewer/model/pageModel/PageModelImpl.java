@@ -18,6 +18,10 @@ import java.util.Observer;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-02 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-01 Davide Trivellato Verify
+ *
  * 0.2.3 2015-05-23 Enrico Savoca Add variable "configured" and some related methods to avoid configuration problems
  *
  * 0.2.2 2015-05-22 Enrico Savoca Changes to constructor

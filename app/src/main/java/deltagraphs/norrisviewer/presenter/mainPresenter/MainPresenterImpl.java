@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.InputType;
-import android.util.Log;
 import android.widget.EditText;
 
 import java.util.Observable;
@@ -26,6 +25,10 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-18 Enrico Savoca Verify
  *
  * 0.3.2 2015-05-21 Davide Trivellato Added methods isConnected() and boolean isSocketNull()
  *
@@ -161,7 +164,7 @@ public class MainPresenterImpl implements MainPresenter, Observer {
     shown on the activity. All of these informations are extracted from the model.*/
     @Override
     public void update(Observable observable, Object data) {
-        mainView.updatePagesList(pageModel); Log.d("", "updatePage");
+        mainView.updatePagesList(pageModel);
     }
 
 }

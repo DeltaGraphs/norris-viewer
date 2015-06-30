@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
+ *
  * 0.1.0 2015-05-10 Davide Trivellato Coding of all methods and attributes
  *
  * 0.0.1 2015-05-09 Davide Trivellato Creation of the file
@@ -18,7 +22,6 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -54,7 +57,6 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
                 setGraphParameters();
             graphView.setData(tableInstance.getFlowList(), tableInstance.getNumberOfColumns());
         }
-        Log.d("", "update table");
     }
 
     /* this method is always called by the method "update".
@@ -79,6 +81,7 @@ public class TablePresenterImpl extends GraphPresenter implements TablePresenter
         startSocket((TableActivity) graphView, tableInstance);
     }
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
         super.startListening((TableActivity) graphView, tableInstance);

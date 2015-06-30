@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
+ *
  * 0.1.1 2015-06-05 Davide Trivellato Update method update(Observable observable, Object data)
  *
  * 0.1.0 2015-06-04 Davide Trivellato Coding of all methods and attributes
@@ -20,7 +24,6 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  *
  */
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -67,7 +70,6 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
                 setGraphParameters();
             graphView.setData(mapChartInstance.getFlowList(), signal);
         }
-        Log.d("", "update map");
     }
 
     //when called, the socket connection is stopped
@@ -80,6 +82,7 @@ public class MapChartPresenterImpl extends GraphPresenter implements MapChartPre
         startSocket((MapChartActivity) graphView, mapChartInstance);
     }
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
         super.startListening((MapChartActivity) graphView, mapChartInstance);

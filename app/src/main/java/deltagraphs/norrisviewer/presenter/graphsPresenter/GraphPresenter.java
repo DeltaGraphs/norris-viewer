@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-02 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-05-30 Davide Trivellato Verify
+ *
  * 0.2.0 2015-05-24 Enrico Savoca Update startSocket(Activity graphActivity) to  startSocket(Activity graphActivity, Object graphModel)
  *
  * 0.1.1 2015-05-23 Enrico Savoca Fix method startSocket(Activity graphActivity)
@@ -47,6 +51,7 @@ public abstract class GraphPresenter implements Observer {
         startListening(graphActivity, graphModel);
     }
 
+    //when called, the socket stop listening to some events
     public void stopListening(){
         graphSocket.stopListening("configGraph");
         graphSocket.stopListening("updateGraphProp");
@@ -56,6 +61,7 @@ public abstract class GraphPresenter implements Observer {
         graphSocket.stopListening("updateFlowData");
     }
 
+    //when called, the socket begins listening to some events
     public void startListening(Activity graphActivity, Object graphModel){
         graphSocket.startListening("configGraph", graphActivity, graphModel);
         graphSocket.startListening("updateGraphProp", graphActivity, graphModel);
@@ -75,9 +81,4 @@ public abstract class GraphPresenter implements Observer {
         return graphSocket;
     }
 
-/*
-    @Override
-    public void update(Observable observable, Object data) {
-    }
-    */
 }

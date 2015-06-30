@@ -1,6 +1,5 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -17,6 +16,10 @@ import deltagraphs.norrisviewer.view.graphsView.LineChartView;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-20 Enrico Savoca Verify
  *
  * 0.1.1 2015-05-31 Davide Trivellato Fix and update method update(Observable observable, Object data)
  *
@@ -58,7 +61,6 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
 
             graphView.setData(lineChartInstance.getFlowList(), signal);
         }
-        Log.d("", "update line");
     }
 
     /* this method is always called by the method "update".
@@ -86,6 +88,7 @@ public class LineChartPresenterImpl extends GraphPresenter implements LineChartP
         startSocket((LineChartActivity) graphView, lineChartInstance);
     }
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
         super.startListening((LineChartActivity) graphView, lineChartInstance);

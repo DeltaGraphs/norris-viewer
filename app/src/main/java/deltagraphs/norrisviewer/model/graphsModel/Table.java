@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-19 Davide Trivellato Verify
+ *
  * 0.1.0 2015-06-09 Enrico Savoca Coding of all methods
  *
  * 0.0.1 2015-06-09 Enrico Savoca Creation of the file
@@ -25,13 +29,6 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 public interface Table {
     //it returns the position where new records will be inserted in table flows
     public String getAddRowOn();
-
-    //if not null, it returns the name of a header of the table. In this case
-    //the table will be ordered by values contained in its column.
-    public String sortByCol();
-
-    //if sortbyCol isn't null, it will return the type of ordering: ascendent or descendent.
-    public String getSortOrder();
 
     //it returns the number of columns of the table
     public int getNumberOfColumns();

@@ -36,6 +36,10 @@ import deltagraphs.norrisviewer.presenter.graphsPresenter.MapChartPresenterImpl;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-29 Matteo Furlan Approve
+ *
+ * 0.6.0 2015-06-27 Enrico Savoca Verify
+ *
  * 0.5.0 2015-06-09 Davide Trivellato Coding of method setData(ArrayList<FlowModel> flowList, String signal)
  *
  * 0.4.0 2015-06-07 Davide Trivellato Coding of method setPolyline(ArrayList<LatLng> polyline, String color)
@@ -84,7 +88,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         setTitle(sourceTitle);
         markers = new ArrayList<Marker>();
         setUpMapIfNeeded();
-        //mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
         Context context = getApplicationContext();
         CharSequence text = "Loading may take a few moments...";
         int duration = Toast.LENGTH_SHORT;
@@ -102,26 +105,11 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         mapChartPresenter = new MapChartPresenterImpl(this, sourceURL);
     }
 
-    //manage the onStop event
-    @Override
-    public void onStop() {
-        super.onStop();
-        //mapChartPresenter.stopConnection();
-        //mapChartPresenter.stopListening();
-    }
-
     //manage the onPause event
     @Override
     public void onPause() {
         super.onPause();
         mapChartPresenter.stopConnection();
-    }
-
-    @Override
-    public void onRestart(){
-        super.onRestart();
-        //mapChartPresenter.startConnection();
-        //mapChartPresenter.startListening();
     }
 
     //manage the onDestroy event
@@ -131,7 +119,6 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
         mapChartPresenter.stopListening();
         super.onDestroy();
     }
-
 
     /*
     This method istantiates the map if

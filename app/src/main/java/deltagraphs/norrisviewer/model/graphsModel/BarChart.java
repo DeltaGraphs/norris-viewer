@@ -15,6 +15,10 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-19 Davide Trivellato Verify
+ *
  * 0.1.0 2015-05-22 Enrico Savoca Coding of all methods
  *
  * 0.0.1 2015-05-22 Enrico Savoca Creation of the file

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +43,10 @@ import lecho.lib.hellocharts.view.AbstractChartView;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-29 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-27 Enrico Savoca Verify
+ *
  * 0.3.1 2015-05-23 Davide Trivellato update method updatePagesList(PageModel pageModel)
  *
  * 0.3.0 2015-05-22 Davide Trivellato Add settings
@@ -72,7 +75,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        //presenter = new MainPresenterImpl(this);
         presenter = new MainPresenterImpl(this);
         showDialog();
 
@@ -80,8 +82,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
 
     @Override
     public void onStop(){
-        Log.d("", "onStop");
-        //presenter.stopConnection();
         presenter.stopListening();
         super.onStop();
     }
@@ -89,7 +89,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
     @Override
     public void onRestart(){
         super.onRestart();
-        Log.d("", "ti trollo");
         presenter.startConnection();
         presenter.startListening();
     }
@@ -97,8 +96,6 @@ public class MainActivity extends ActionBarActivity implements MainView {
     @Override
     public void onResume(){
         super.onResume();
-        //presenter = new MainPresenterImpl(this);
-        //showDialog();
         presenter.startListening();
     }
 

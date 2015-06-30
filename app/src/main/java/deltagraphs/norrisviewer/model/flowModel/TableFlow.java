@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.flowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlano Approve
+ *
+ * 0.4.0 2015-06-15 Davide Trivellato Verify
+ *
  * 0.3.2 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
  * 0.3.1 2015-06-11 Enrico Savoca Fix some JSON-reading bugs
@@ -27,7 +31,7 @@ package deltagraphs.norrisviewer.model.flowModel;
  */
 
 
-import android.util.Log;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -92,7 +96,6 @@ public class TableFlow extends FlowModel {
             try {
                 int listLength = valueList.length();
                 for (int i = 0; i < listLength; i++) {
-                    Log.d("", "c");
                     String value = valueList.getString(i);
                     String bg = "#FFFFFF";
                     String text = "#000000";
@@ -107,6 +110,7 @@ public class TableFlow extends FlowModel {
             }
         }
 
+        /* The following class contains properties of a cell: data, background and text colour */
         class Value {
             private String data;
             private String background = "#FFFFFF";

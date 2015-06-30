@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.presenter.graphsPresenter;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-02 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-01 Enrico Savoca Verify
+ *
  * 0.1.0 2015-05-23 Davide Trivellato Coding of all methods
  *
  * 0.0.1 2015-05-23 Davide Trivellato Creation of the file
@@ -26,10 +30,12 @@ public interface BarChartPresenter {
     void startConnection();
 
     //when called, the socket and its connection are destroyed
-    public void destroyConnection();
+    void destroyConnection();
 
+    //when called, the socket begins listening to some events
     void startListening();
 
+    //when called, the socket stop listening to some events
     void stopListening();
 
 }

@@ -1,6 +1,5 @@
 package deltagraphs.norrisviewer.model.graphsModel;
 
-import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +13,12 @@ import org.json.JSONObject;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-22 Enrico Savoca Verify
+ *
+ * 0.1.3 2015-06-19 Davide Trivellato Delete some attributes
  *
  * 0.1.2 2015-05-23 Davide Trivellato Fix method AxisModel(JSONObject params)
  *
@@ -50,16 +55,6 @@ public class AxisModel {
         return name;
     }
 
-    /*it returns the maximum index on an axis.
-    public Float getMaxIndex() {
-        return maxIndex;
-    }
-
-    //it returns the minimum index on an axis.
-    public Float getMinIndex() {
-        return minIndex;
-    }
-*/
     //it returns the number of ticks on an axis.
     public int getTicks() {
         return ticks;

@@ -1,6 +1,5 @@
 package deltagraphs.norrisviewer.presenter.graphsPresenter;
 
-import android.util.Log;
 
 import java.util.Observable;
 
@@ -17,6 +16,10 @@ import deltagraphs.norrisviewer.view.graphsView.BarChartView;
 
  * Version Date Programmer Description
  * ===============================================================
+ *
+ * 1.0.0 2015-06-21 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-20 Enrico Savoca Verify
  *
  * 0.3.1 2015-05-26 Davide Trivellato Fix and update method update(Observable observable, Object data)
  *
@@ -61,7 +64,6 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
                 setGraphParameters();
             graphView.setData(barChartInstance.getFlowList(), signal, barChartInstance.getHeaders());
         }
-        Log.d("", "update bar");
     }
 
     /* this method is always called by the method "update".
@@ -90,6 +92,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
         startSocket((BarChartActivity) graphView, barChartInstance);
     }
 
+    //when called, the socket begins listening to some events
     @Override
     public void startListening() {
         super.startListening((BarChartActivity)graphView, barChartInstance);

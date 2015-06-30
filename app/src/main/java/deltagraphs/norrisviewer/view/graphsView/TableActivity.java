@@ -3,7 +3,6 @@ package deltagraphs.norrisviewer.view.graphsView;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,8 +12,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
@@ -22,15 +19,46 @@ import deltagraphs.norrisviewer.model.flowModel.TableFlow;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
+/*
+* Name : TableActivity.java
+* Module : norrisviewer::view::graphsView
+* Location : norrisviewer\view\graphsView
+*
+* History :
+
+* Version Date Programmer Description
+* ===============================================================
+*
+* 1.0.0 2015-06-29 Matteo Furlan Approve
+*
+* 0.6.0 2015-06-27 Enrico Savoca Verify
+*
+* 0.5.1 2015-06-15 Davide Trivellato Fixes to table settings
+*
+* 0.5.0 2015-06-15 Davide Trivellato Several changes to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+*
+* 0.4.0 2015-06-14 Davide Trivellato Several changes to sort(ArrayList<FlowModel> flowList, int numOfColumns)
+*
+* 0.3.0 2015-06-13 Davide Trivellato Add sort(ArrayList<FlowModel> flowList, int numOfColumns)
+*
+* 0.2.0 2015-06-12 Davide Trivellato Update setData(ArrayList<FlowModel> flowList, int numOfColumns)
+*
+* 0.1.1 2015-06-11 Davide Trivellato Update setData(ArrayList<FlowModel> flowList) to setData(ArrayList<FlowModel> flowList, int numOfColumns)
+*
+* 0.1.0 2015-06-11 Davide Trivellato Coding of methods and attributes
+*
+* 0.0.1 2015-06-09 Davide Trivellato Creation of the file
+*
+* ===============================================================
+*
+*/
+
 public class TableActivity extends ActionBarActivity implements TableView {
 
     private String sourceURL;
     private String sourceTitle;
-    private String order = null;
-    private int sortingColumn = -1;
     private TablePresenter tablePresenter;
     private String headers[];
-    private int rows = 0;
 
     TableRow.LayoutParams tableRowParams = new TableRow.LayoutParams();
 
@@ -58,27 +86,11 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tableRowParams.weight = 1;
     }
 
-    //manage the onStop event
-    @Override
-    public void onStop() {
-        //tablePresenter.stopConnection();
-        //tablePresenter.stopListening();
-        super.onStop();
-    }
-
     //manage the onPause event
     @Override
     public void onPause() {
         super.onPause();
         tablePresenter.stopConnection();
-    }
-
-    //manage the onRestart event
-    @Override
-    public void onRestart() {
-        super.onRestart();
-        //tablePresenter = new TablePresenterImpl(this, sourceURL);
-        //tablePresenter.startListening();
     }
 
     //manage the onDestroy event
@@ -111,7 +123,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         return super.onOptionsItemSelected(item);
     }
 
-
+    // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {
         this.headers = headers;
@@ -135,6 +147,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tableRowParams.setMargins(yBorder, xBorder, yBorder, xBorder);
     }
 
+    //set the data in the table. It is extracted from the table model
     @Override
     public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
@@ -153,19 +166,19 @@ public class TableActivity extends ActionBarActivity implements TableView {
         for (int i = 0; i < flowList.size(); i++) {
             TableFlow tableFlow = (TableFlow) flowList.get(i);
             for (int j = 0; j < tableFlow.getRecordSize(); j++) {
-
+                // creation of a new row
                 TableRow tableRow = new TableRow(this);
 
-                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {//for each column
+                for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                     TextView textView = new TextView(this);
                     textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
                     textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));
                     textView.setGravity(Gravity.CENTER);
                     textView.setText(tableFlow.getCellData(j, indexCol));
-                    // add textView to tableRow
+                    // add a cell to the new row
                     tableRow.addView(textView, tableRowParams);
                 }
-                // add tableRow to tableLayout
+                // the new row is added to the table
                 tableLayout.addView(tableRow, tableLayoutParams);
             }
         }

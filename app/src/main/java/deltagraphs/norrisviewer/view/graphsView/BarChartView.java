@@ -9,7 +9,11 @@ package deltagraphs.norrisviewer.view.graphsView;
 
  * Version Date Programmer Description
  * ===============================================================
- * 
+ *
+ * 1.0.0 2015-06-27 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-26 Enrico Savoca Verify
+ *
  * 0.1.0 2015-05-23 Davide Trivellato Coding of methods
  *
  * 0.0.1 2015-05-23 Davide Trivellato Creation of the file

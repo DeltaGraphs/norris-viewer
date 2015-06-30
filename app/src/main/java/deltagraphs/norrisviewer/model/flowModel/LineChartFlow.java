@@ -16,6 +16,10 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.3.0 2015-06-15 Davide Trivellato Verify
+ *
  * 0.2.1 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
  * 0.2.0 2015-06-01 Enrico Savoca Remove useless methods

@@ -16,6 +16,12 @@ import java.util.ArrayList;
  * Version Date Programmer Description
  * ===============================================================
  *
+ *
+ *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-15 Davide Trivellato Verify
+ *
  * 0.1.2 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
  * 0.1.1 2015-05-27 Enrico Savoca Add a default value for the attribute "flowColour"
@@ -30,7 +36,7 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel {
 
-    private String flowColour = "null"; /* 'random' is the default colour */
+    private String flowColour = "null"; /* 'null' is the default colour */
     private ArrayList<BarChartRecord> records = new ArrayList<BarChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow

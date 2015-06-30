@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-21 Davide Trivellato Verify
+ *
  * 0.1.1 2015-06-12 Enrico Savoca Add some default value for sortOrder, sortColumn and borderWidth
  *
  * 0.1.0 2015-06-09 Enrico Savoca Coding of all methods and attributes
@@ -20,7 +24,6 @@ package deltagraphs.norrisviewer.model.graphsModel;
  *
  */
 
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,8 +37,6 @@ import deltagraphs.norrisviewer.model.flowModel.*;
 public class TableImpl extends Graph implements Table {
 
     private String addRowOn;  // top or bottom
-    private String sortOrder = null; //ascendent or descendent
-    private String sortColumn = null; // sorted by column "sortColumn"
     private Boolean horizontalBorder = false; // horizontal border
     private Boolean verticalBorder = false; // vertical border
 
@@ -53,20 +54,7 @@ public class TableImpl extends Graph implements Table {
     }
 
     // returns true if the table has a vertical border
-    public Boolean getVerticalBorder() {
-        return verticalBorder;
-    }
-
-    //if not null, it returns the name of a header of the table. In this case
-    //the table will be ordered by values contained in its column.
-    public String sortByCol() {
-        return sortColumn;
-    }
-
-    //if sortbyCol isn't null, it will return the type of ordering: ascendent or descendent.
-    public String getSortOrder() {
-        return sortOrder;
-    }
+    public Boolean getVerticalBorder() { return verticalBorder; }
 
     //it returns the number of columns of the table
     public int getNumberOfColumns() {
@@ -89,11 +77,6 @@ public class TableImpl extends Graph implements Table {
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
-            addRowOn = data.getString("addRowOn");
-            if (data.has("sort") && (!(data.isNull("sort")))) {
-                sortOrder = data.getJSONObject("sort").getJSONArray("ordering").getString(0);
-                sortColumn = data.getJSONObject("sort").getJSONArray("column").getString(0);
-            }
 
             JSONArray jsonColumns = data.getJSONArray("headers");
             int jsonColumnsSize = jsonColumns.length();
@@ -130,15 +113,7 @@ public class TableImpl extends Graph implements Table {
 
             if (data.has("addRowOn")) {
                 addRowOn = data.getString("addRowOn");
-                Log.d("", addRowOn);
             }
-            if ((data.has("sort")) && (data.getJSONObject("sort").has("ordering")))
-                sortOrder = data.getJSONObject("sort").getJSONArray("ordering").getString(0);
-
-            if ((data.has("sort")) && (data.getJSONObject("sort").has("column")))
-                if (!(data.isNull("sort")))
-                    sortColumn = data.getJSONObject("sort").getJSONArray("column").getString(0);
-                else sortColumn = null;
 
             if (data.has("headers")) {
                 headers = new ArrayList<String>();

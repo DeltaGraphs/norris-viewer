@@ -19,6 +19,10 @@ import deltagraphs.norrisviewer.model.flowModel.LineChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-21 Davide Trivellato Verify
+ *
  * 0.1.1 2015-05-30 Enrico Savoca Change to updateParameters(JSONObject data). Json is read better than before.
  *
  * 0.1.0 2015-05-30 Enrico Savoca Coding of all methods and attributes

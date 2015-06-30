@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.graphsModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-22 Davide Trivellato Verify
+ *
  * 0.3.2 2015-06-12 Enrico Savoca Update method addRecords(JSONArray data, boolean insertOnTop)
  *
  * 0.3.1 2015-06-11 Enrico Savoca fix some bugs of  initial configuration, added attribute "configured"

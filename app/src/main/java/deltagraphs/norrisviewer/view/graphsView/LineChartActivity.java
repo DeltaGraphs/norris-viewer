@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.view.graphsView;
  * Version   Date       Programmer              Description
  * ==========================================================================================
  *
+ * 1.0.0 2015-06-29 Matteo Furlan Approve
+ *
+ * 0.4.0 2015-06-27 Enrico Savoca Verify
+ *
  * 0.3.2 2015-06-15 Davide Trivellato Update legend style
  *
  * 0.3.1 2015-06-03 Davide Trivellato Fix ViewFinder
@@ -30,7 +34,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -106,7 +109,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
         setTitle(sourceTitle);
-        //lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
         data = new LineChartData();
         previewData = new LineChartData();
 
@@ -127,25 +129,11 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
         lineChartPresenter = new LineChartPresenterImpl(this, sourceURL);
     }
 
-    //manage the onStop event
-    @Override
-    public void onStop() {
-        super.onStop();
-        //lineChartPresenter.stopConnection();
-        //lineChartPresenter.stopListening();
-    }
-
     //manage the onPause event
     @Override
     public void onPause() {
         super.onPause();
         lineChartPresenter.stopConnection();
-    }
-
-    //manage the onRestart event
-    @Override
-    public void onRestart() {
-        super.onRestart();
     }
 
     //manage the onDestroy event
@@ -211,28 +199,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
     public void setAxis(char axisXorY, String name, int ticks) {
         axisX = new Axis().setHasLines(true);
         axisY = new Axis().setHasLines(true);
-        /*if (hasAxes) {
-
-            float step = (maxIndex - minIndex) / ticks;
-
-            if (axisXorY == 'x') {
-                axisX = new Axis().setHasLines(true);
-                axisX.generateAxisFromRange(minIndex, maxIndex, step);
-                if (hasAxesNames) {
-                    axisX.setName(name);
-                }
-            }
-            if (axisXorY == 'y') {
-                axisY = new Axis().setHasLines(true);
-                axisY.generateAxisFromRange(minIndex, maxIndex, step);
-                if (hasAxesNames) {
-                    axisY.setName(name);
-                }
-            }
-        } else {
-            data.setAxisXBottom(null);
-            data.setAxisYLeft(null);
-        }*/
     }
 
     public void setViewFinder(Boolean isVisible){
@@ -271,11 +237,9 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
 
             color = lineChartFlow.getFlowColour();
-            Log.d("", color);
             List<PointValue> values = new ArrayList<PointValue>();
             //for each flow get the values.
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
-                //lineChartFlow.getRecordId(j);
                 float x = lineChartFlow.getRecordValueX(j);
                 float y = lineChartFlow.getRecordValueY(j);
                 //Create a point value

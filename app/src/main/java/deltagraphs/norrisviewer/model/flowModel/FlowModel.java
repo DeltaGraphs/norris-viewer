@@ -10,6 +10,10 @@ package deltagraphs.norrisviewer.model.flowModel;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-20 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-15 Davide Trivellato Verify
+ *
  * 0.1.1 2015-06-12 Enrico Savoca Add and Update method addRecords(JSONArray data, boolean insertOnTop);
  *
  * 0.1.0 2015-05-22 Enrico Savoca Coding of all methods and attributes

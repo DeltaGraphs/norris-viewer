@@ -18,6 +18,10 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
  * Version Date Programmer Description
  * ===============================================================
  *
+ * 1.0.0 2015-06-22 Matteo Furlan Approve
+ *
+ * 0.2.0 2015-06-21 Davide Trivellato Verify
+ *
  * 0.1.0 2015-06-03 Enrico Savoca Coding of all methods and attributes
  *
  * 0.0.1 2015-06-01 Enrico Savoca Creation of the file

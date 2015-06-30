@@ -49,8 +49,6 @@ import java.util.Observer;
         Assert.assertEquals(table.getAddRowOn(), "bottom");
         Assert.assertEquals(table.getNumberOfColumns(), 3);
         Assert.assertEquals(table.getHeaderValue(0) , "IDMezzo");
-        Assert.assertEquals(table.sortByCol(), "IDMezzo");
-        Assert.assertEquals(table.getSortOrder(), "DESC");
         Assert.assertEquals(table.getFlowList().get(0).getFlowId(), "flow1");
     }
 
@@ -63,8 +61,6 @@ import java.util.Observer;
         Assert.assertEquals(table.getAddRowOn(), "top");
         Assert.assertEquals(table.getNumberOfColumns(), 4);
         Assert.assertEquals(table.getHeaderValue(3) , "ciaoo");
-        Assert.assertEquals(table.sortByCol(), "ciaoo");
-        Assert.assertEquals(table.getSortOrder(), "ASC");
         Assert.assertEquals(table.getFlowList().get(0).getFlowId(), "flow1");
     }
 
