@@ -40,13 +40,13 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setTitle(sourceTitle);
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             sourceURL = extras.getString("EXTRA_SOURCE_URL");
             sourceTitle = extras.getString("EXTRA_SOURCE_TITLE");
         }
-
+        setTitle(sourceTitle);
         setContentView(R.layout.activity_table);
     }
 
