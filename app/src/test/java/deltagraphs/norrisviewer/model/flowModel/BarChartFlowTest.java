@@ -1,6 +1,8 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
 
+import android.graphics.Color;
+
 import junit.framework.TestCase;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,8 +51,9 @@ import org.junit.Test;
         JSONObject data2 = new JSONObject(a);
         flow.createFlow(data);
         flow.updateFlow(data2);
+        Integer colour = Color.parseColor("blue");
         Assert.assertEquals(flow.getFlowName(), "ciao");
-        Assert.assertEquals(flow.getFlowColour(), "blue");
+        Assert.assertEquals(flow.getFlowColour(), colour);
 
     }
 
