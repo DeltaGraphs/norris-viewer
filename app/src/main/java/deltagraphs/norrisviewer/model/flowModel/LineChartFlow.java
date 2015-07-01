@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
+import android.graphics.Color;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,15 +38,18 @@ import java.util.ArrayList;
 
 public class LineChartFlow extends FlowModel {
 
-    private String flowColour="null"; /* the colour of the points of the flow in the chart */
+    /* there is a random colur as default */
+    private Integer flowColour = (Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
     private ArrayList<LineChartRecord> records = new ArrayList<LineChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow
-    public String getFlowColour() { return flowColour; }
+    public Integer getFlowColour() {
+        return flowColour;
+    }
 
     //it returns the record length
     public int getRecordSize() {
-        if(records==null)
+        if (records == null)
             return 0;
         return records.size();
     }
@@ -75,10 +80,13 @@ public class LineChartFlow extends FlowModel {
                 this.flowName = data.getString("name");
             else
                 this.flowName = "";
-            if (data.has("flowColor"))
-                this.flowColour = data.getString("flowColor");
-            else
-                this.flowColour = "random";
+            if (data.has("flowColor")) {
+                String colour = data.getString("flowColor");
+                if (!colour.equals("null")) {
+                    flowColour = Color.parseColor(colour);
+                } else
+                    flowColour = (Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
+            }
             if (data.has("records")) {
                 JSONArray recordList = data.getJSONArray("records");
                 addRecords(recordList, false);
@@ -124,7 +132,11 @@ public class LineChartFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            flowColour = data.getString("flowColor");
+            if (data.has("flowColor")) {
+                String colour = data.getString("flowColor");
+                if (!colour.equals("null"))
+                    flowColour = Color.parseColor(colour);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -177,7 +189,7 @@ public class LineChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            if(recordIndex!=-1){
+            if (recordIndex != -1) {
                 JSONArray jsonValues = data.getJSONArray("value");
                 records.get(recordIndex).xValue = jsonValues.getInt(0);
                 records.get(recordIndex).yValue = jsonValues.getInt(1);

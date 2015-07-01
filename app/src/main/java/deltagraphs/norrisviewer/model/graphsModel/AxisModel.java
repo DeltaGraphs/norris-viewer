@@ -33,7 +33,7 @@ import org.json.JSONObject;
  */
 
 public class AxisModel {
-    private String name;
+    private String name ="";
     private int ticks;
 
     // Axis constructor.

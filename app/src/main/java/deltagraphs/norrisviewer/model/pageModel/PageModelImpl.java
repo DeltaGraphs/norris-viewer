@@ -181,7 +181,7 @@ public class PageModelImpl extends Observable implements PageModel {
                     data = data.getJSONObject("data");
                     if (pageIndex != -1) {
                         int graphIndex = -1;
-                        for (int j = 0; j < pageList.size(); j++) {
+                        for (int j = 0; j < pageList.get(pageIndex).getItemListSize(); j++) {
                             if (pageList.get(pageIndex).getPageItemList().get(j).getId().equals(data.getString("ID")))
                                 graphIndex = j;
                         }

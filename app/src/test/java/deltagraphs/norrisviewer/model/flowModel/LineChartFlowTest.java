@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
+import android.graphics.Color;
+
 import junit.framework.TestCase;
 
 import org.json.JSONObject;
@@ -40,11 +42,12 @@ import org.junit.Assert;
     }
 
     public void testUpdateFlow() throws Exception {
-        String dataString = "{\"ID\":\"flow1\", name:\"ora\", flowColor:\"giallo\", \"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}]}";
+        String dataString = "{\"ID\":\"flow1\", name:\"ora\", flowColor:\"blue\", \"records\":[{\"norrisRecordID\":\"flow1_1435142614086_1\",\"value\":[2,20]}]}";
         data = new JSONObject(dataString);
         flow.updateFlow(data);
+        Integer colour = Color.parseColor("blue");
         Assert.assertEquals(1, flow.getRecordSize());
-        Assert.assertEquals(flow.getFlowColour(),"giallo");
+        Assert.assertEquals(flow.getFlowColour(), colour);
 
         Assert.assertEquals(flow.getRecordSize(), 1);
         Assert.assertEquals(flow.getFlowId(), "flow1");

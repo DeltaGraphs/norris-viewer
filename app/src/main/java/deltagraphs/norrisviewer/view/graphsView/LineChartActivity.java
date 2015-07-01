@@ -240,7 +240,6 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
      */
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal) {
-        String color = "";
         lines = new ArrayList<Line>();
         previewLines = new ArrayList<Line>();
         for (int i = 0; i < flowList.size(); i++) {
@@ -251,7 +250,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
 
             LineChartFlow lineChartFlow = (LineChartFlow) flowList.get(i);
 
-            color = lineChartFlow.getFlowColour();
+            Integer color = lineChartFlow.getFlowColour();
             List<PointValue> values = new ArrayList<PointValue>();
             //for each flow get the values.
             for (int j = 0; j < lineChartFlow.getRecordSize(); j++) {
@@ -264,10 +263,11 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             }
 
             Line line = new Line(values);
-            setLineColor(line, color);
-
+            //setLineColor(line, color);
+            line.setColor(color);
             Line previewLine = new Line(values);
-            setLineColor(previewLine, "default");
+            //setLineColor(previewLine, "default");
+            previewLine.setColor(color);
 
             //set labels for chart and view finder
             previewLine.setHasLabels(hasLabels);
