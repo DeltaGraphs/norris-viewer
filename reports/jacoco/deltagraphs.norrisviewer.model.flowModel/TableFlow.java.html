@@ -97,8 +97,8 @@ public class TableFlow extends FlowModel {
 <span class="fc" id="L97">                int listLength = valueList.length();</span>
 <span class="fc bfc" id="L98" title="All 2 branches covered.">                for (int i = 0; i &lt; listLength; i++) {</span>
 <span class="fc" id="L99">                    String value = valueList.getString(i);</span>
-<span class="fc" id="L100">                    String bg = &quot;#FFFFFF&quot;;</span>
-<span class="fc" id="L101">                    String text = &quot;#000000&quot;;</span>
+<span class="fc" id="L100">                    String bg = &quot;null&quot;; //&quot;#FFFFFF&quot;;</span>
+<span class="fc" id="L101">                    String text = &quot;null&quot;; //&quot;#000000&quot;;</span>
 <span class="fc bfc" id="L102" title="All 2 branches covered.">                    if (appearance != null) {</span>
 <span class="fc" id="L103">                        bg = appearance.getJSONObject(i).getString(&quot;bg&quot;);</span>
 <span class="fc" id="L104">                        text = appearance.getJSONObject(i).getString(&quot;text&quot;);</span>
@@ -113,8 +113,8 @@ public class TableFlow extends FlowModel {
         /* The following class contains properties of a cell: data, background and text colour */
         class Value {
             private String data;
-<span class="fc" id="L116">            private String background = &quot;#FFFFFF&quot;;</span>
-<span class="fc" id="L117">            private String textColour = &quot;#000000&quot;;</span>
+<span class="fc" id="L116">            private String background = &quot;null&quot;; //&quot;#FFFFFF&quot;;</span>
+<span class="fc" id="L117">            private String textColour = &quot;null&quot;; // &quot;#000000&quot;;</span>
 
             // Value constructor.
             // It's used when a new Value is added to the record list

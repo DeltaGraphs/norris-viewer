@@ -35,29 +35,30 @@ import org.json.JSONObject;
 public class AxisModel {
 <span class="fc" id="L36">    private String name =&quot;&quot;;</span>
     private int ticks;
+    // here can be inserted other properties
 
     // Axis constructor.
     // It's used when a new axis must be built.
     // The Jsonobject 'params' must be contain the attributes, in order to initialize the class.
-<span class="fc" id="L42">    public AxisModel(JSONObject params) {</span>
+<span class="fc" id="L43">    public AxisModel(JSONObject params) {</span>
         try {
-<span class="fc bfc" id="L44" title="All 2 branches covered.">            if (params.has(&quot;name&quot;))</span>
-<span class="fc" id="L45">                name = params.getString(&quot;name&quot;);</span>
-<span class="fc bfc" id="L46" title="All 2 branches covered.">            if (params.has(&quot;ticks&quot;))</span>
-<span class="fc" id="L47">                ticks = params.getInt(&quot;ticks&quot;);</span>
-<span class="nc" id="L48">        } catch (JSONException e) {</span>
-<span class="nc" id="L49">            e.printStackTrace();</span>
-<span class="fc" id="L50">        }</span>
-<span class="fc" id="L51">    }</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">            if (params.has(&quot;name&quot;))</span>
+<span class="fc" id="L46">                name = params.getString(&quot;name&quot;);</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (params.has(&quot;ticks&quot;))</span>
+<span class="fc" id="L48">                ticks = params.getInt(&quot;ticks&quot;);</span>
+<span class="nc" id="L49">        } catch (JSONException e) {</span>
+<span class="nc" id="L50">            e.printStackTrace();</span>
+<span class="fc" id="L51">        }</span>
+<span class="fc" id="L52">    }</span>
 
     //it returns the name of an axis.
     public String getName() {
-<span class="fc" id="L55">        return name;</span>
+<span class="fc" id="L56">        return name;</span>
     }
 
     //it returns the number of ticks on an axis.
     public int getTicks() {
-<span class="fc" id="L60">        return ticks;</span>
+<span class="fc" id="L61">        return ticks;</span>
     }
 
 }

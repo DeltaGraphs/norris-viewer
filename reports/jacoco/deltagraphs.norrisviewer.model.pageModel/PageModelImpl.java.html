@@ -190,54 +190,57 @@ public class PageModelImpl extends Observable implements PageModel {
 
 <span class="pc bpc" id="L191" title="1 of 2 branches missed.">                        if (graphIndex != -1) {</span>
 <span class="fc" id="L192">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString(&quot;ID&quot;));</span>
-<span class="fc" id="L193">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString(&quot;title&quot;));</span>
-<span class="fc" id="L194">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString(&quot;type&quot;));</span>
-<span class="fc" id="L195">                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString(&quot;socketURL&quot;));</span>
+<span class="pc bpc" id="L193" title="1 of 2 branches missed.">                            if(data.has(&quot;title&quot;))</span>
+<span class="fc" id="L194">                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString(&quot;title&quot;));</span>
+<span class="pc bpc" id="L195" title="1 of 2 branches missed.">                            if(data.has(&quot;type&quot;))</span>
+<span class="fc" id="L196">                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString(&quot;type&quot;));</span>
+<span class="pc bpc" id="L197" title="1 of 2 branches missed.">                            if(data.has(&quot;socketURL&quot;))</span>
+<span class="fc" id="L198">                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString(&quot;socketURL&quot;));</span>
                         }//else exception
-<span class="fc" id="L197">                    }</span>
+<span class="fc" id="L200">                    }</span>
                     break;
                 }
             }
-<span class="nc" id="L201">        } catch (JSONException e) {</span>
-<span class="nc" id="L202">            e.printStackTrace();</span>
-<span class="fc" id="L203">        }</span>
-<span class="fc" id="L204">    }</span>
+<span class="nc" id="L204">        } catch (JSONException e) {</span>
+<span class="nc" id="L205">            e.printStackTrace();</span>
+<span class="fc" id="L206">        }</span>
+<span class="fc" id="L207">    }</span>
 
     //it returns the name of a page
     public String getName() {
-<span class="fc" id="L208">        return name;</span>
+<span class="fc" id="L211">        return name;</span>
     }
 
     //this method returns the list of pages
     public ArrayList&lt;Page&gt; getPageList() {
-<span class="fc" id="L213">        return pageList;</span>
+<span class="fc" id="L216">        return pageList;</span>
     }
 
     //this method returns the size of the pages list
     public int getPageListSize() {
-<span class="fc" id="L218">        return pageList.size();</span>
+<span class="fc" id="L221">        return pageList.size();</span>
     }
 
     //this method returns the size of a page, the number of charts on it.
     public int getItemListSize(int page) {
-<span class="fc" id="L223">        return pageList.get(page).getItemListSize();</span>
+<span class="fc" id="L226">        return pageList.get(page).getItemListSize();</span>
     }
 
     //this method returns the list of item in a page
     public ArrayList&lt;PageItem&gt; getItemList(int page) {
-<span class="fc" id="L228">        return pageList.get(page).getPageItemList();</span>
+<span class="fc" id="L231">        return pageList.get(page).getPageItemList();</span>
     }
 
     //this method returns a page for a given index
     public Page getPage(int index) {
-<span class="fc" id="L233">        return this.getPageList().get(index);</span>
+<span class="fc" id="L236">        return this.getPageList().get(index);</span>
     }
 
     //it removes all the observers attached to a pageModel implementation.
     @Override
     public void removeObservers() {
-<span class="fc" id="L239">        deleteObservers();</span>
-<span class="fc" id="L240">    }</span>
+<span class="fc" id="L242">        deleteObservers();</span>
+<span class="fc" id="L243">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

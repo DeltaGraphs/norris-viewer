@@ -39,68 +39,121 @@ public class TableImpl extends Graph implements Table {
     private String addRowOn;  // top or bottom
 <span class="fc" id="L40">    private Boolean horizontalBorder = false; // horizontal border</span>
 <span class="fc" id="L41">    private Boolean verticalBorder = false; // vertical border</span>
-
-
-<span class="fc" id="L44">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L42">    private ArrayList&lt;Column&gt; columns = new ArrayList&lt;Column&gt;(); // properties for each column</span>
+<span class="fc" id="L43">    private ArrayList&lt;String&gt; headers = new ArrayList&lt;String&gt;(); // values of headers</span>
 
     //it returns the position where new records will be inserted in table flows
     public String getAddRowOn() {
-<span class="fc" id="L48">        return addRowOn;</span>
+<span class="fc" id="L47">        return addRowOn;</span>
     }
 
     // returns true if the table has an horizontal border
     public Boolean getHorizontalBorder() {
-<span class="fc" id="L53">        return horizontalBorder;</span>
+<span class="fc" id="L52">        return horizontalBorder;</span>
     }
 
     // returns true if the table has a vertical border
-<span class="fc" id="L57">    public Boolean getVerticalBorder() { return verticalBorder; }</span>
+    public Boolean getVerticalBorder() {
+<span class="fc" id="L57">        return verticalBorder;</span>
+    }
 
     //it returns the number of columns of the table
     public int getNumberOfColumns() {
-<span class="fc" id="L61">        return headers.size();</span>
+<span class="fc" id="L62">        return headers.size();</span>
     }
 
     //it returns the value of a header for a given index. The index represents the number of the column
     public String getHeaderValue(int index) {
-<span class="fc" id="L66">        return headers.get(index);</span>
+<span class="fc" id="L67">        return headers.get(index);</span>
+    }
+
+    @Override
+    public String getRowEvenTC(int index) {
+<span class="nc" id="L72">        return columns.get(index).rowEvenTextColour;</span>
+    }
+
+    @Override
+    public String getRowEvenBGColour(int index) {
+<span class="nc" id="L77">        return columns.get(index).rowEvenBGColour;</span>
+    }
+
+    @Override
+    public String getRowOddTC(int index) {
+<span class="nc" id="L82">        return columns.get(index).rowOddTextColour;</span>
+    }
+
+    @Override
+    public String getRowOddBGColour(int index) {
+<span class="nc" id="L87">        return columns.get(index).rowOddBGColour;</span>
     }
 
     // constructor of TableImpl. It requires an observer. It will receives update from TableImpl
-<span class="fc" id="L70">    public TableImpl(Observer chartPresenter) {</span>
-<span class="fc" id="L71">        addObserver(chartPresenter);</span>
-<span class="fc" id="L72">    }</span>
+<span class="fc" id="L91">    public TableImpl(Observer chartPresenter) {</span>
+<span class="fc" id="L92">        addObserver(chartPresenter);</span>
+<span class="fc" id="L93">    }</span>
+
+
+    class Column {
+        //text and background colour of even row
+<span class="fc" id="L98">        private String rowEvenTextColour = &quot;#000000&quot;;</span>
+<span class="fc" id="L99">        private String rowEvenBGColour = &quot;#FFFFFF&quot;;</span>
+        //text and background colour of odd row
+<span class="fc" id="L101">        private String rowOddTextColour = &quot;#000000&quot;;</span>
+<span class="fc" id="L102">        private String rowOddBGColour = &quot;#FFFFFF&quot;;</span>
+
+<span class="fc" id="L104">        Column(JSONObject data, int index) {</span>
+            try {
+<span class="fc bfc" id="L106" title="All 2 branches covered.">                if (index &lt; data.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;textColor&quot;).length())</span>
+<span class="fc" id="L107">                    rowEvenTextColour = data.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;textColor&quot;).getString(index);</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">                if (index &lt; data.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;backgroundColor&quot;).length())</span>
+<span class="fc" id="L109">                    rowEvenBGColour = data.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;backgroundColor&quot;).getString(index);</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">                if (index &lt; data.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;textColor&quot;).length())</span>
+<span class="fc" id="L111">                    rowOddTextColour = data.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;textColor&quot;).getString(index);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">                if (index &lt; data.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;backgroundColor&quot;).length())</span>
+<span class="fc" id="L113">                    rowOddBGColour = data.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;backgroundColor&quot;).getString(index);</span>
+<span class="nc" id="L114">            } catch (JSONException e) {</span>
+<span class="nc" id="L115">                e.printStackTrace();</span>
+<span class="fc" id="L116">            }</span>
+<span class="fc" id="L117">        }</span>
+    }
+
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to set the attributes of the chart
     // It's used to set all the parameters of the chart and to create its flows.
     public void setParameters(JSONObject data) {
         try {
-<span class="fc" id="L79">            title = data.getString(&quot;title&quot;);</span>
+<span class="fc" id="L126">            title = data.getString(&quot;title&quot;);</span>
 
-<span class="fc" id="L81">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
-<span class="fc" id="L82">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="fc" id="L83">            int jsonColumnsSize = jsonColumns.length();</span>
-<span class="fc bfc" id="L84" title="All 2 branches covered.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="fc" id="L85">                headers.add(jsonColumns.getString(i));</span>
+<span class="fc" id="L128">            addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="fc" id="L129">            JSONObject appearance = data.getJSONObject(&quot;appearance&quot;);</span>
+            // for each column a value of header and of colours are taken from the json
+<span class="fc" id="L131">            JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L132">            int jsonColumnsSize = jsonColumns.length();</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">            for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="fc" id="L134">                headers.add(jsonColumns.getString(i));</span>
+<span class="fc" id="L135">                columns.add(new Column(appearance, i));</span>
             }
 
-<span class="pc bpc" id="L88" title="1 of 2 branches missed.">            if (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;horizontalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
-<span class="fc" id="L89">                horizontalBorder = true;</span>
-<span class="pc bpc" id="L90" title="1 of 2 branches missed.">            if (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;verticalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
-<span class="fc" id="L91">                verticalBorder = true;</span>
-
+<span class="pc bpc" id="L138" title="1 of 2 branches missed.">            if (appearance.getJSONObject(&quot;horizontalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
+<span class="fc" id="L139">                horizontalBorder = true;</span>
+            else
+<span class="nc" id="L141">                horizontalBorder = false;</span>
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">            if (appearance.getJSONObject(&quot;verticalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
+<span class="fc" id="L143">                verticalBorder = true;</span>
+            else
+<span class="nc" id="L145">                verticalBorder = false;</span>
             //changes to flow params
-<span class="fc" id="L94">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
-<span class="fc" id="L95">            int flowLenght = jsonFlows.length();</span>
-<span class="fc bfc" id="L96" title="All 2 branches covered.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
-<span class="fc" id="L97">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
-<span class="fc" id="L98">                addFlow(flow);</span>
+<span class="fc" id="L147">            JSONArray jsonFlows = data.getJSONArray(&quot;flows&quot;);</span>
+<span class="fc" id="L148">            int flowLenght = jsonFlows.length();</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">            for (int i = 0; i &lt; flowLenght; i++) {</span>
+<span class="fc" id="L150">                JSONObject flow = jsonFlows.getJSONObject(i);</span>
+<span class="fc" id="L151">                addFlow(flow);</span>
             }
-<span class="nc" id="L100">        } catch (JSONException e) {</span>
-<span class="nc" id="L101">            e.printStackTrace();</span>
-<span class="fc" id="L102">        }</span>
-<span class="fc" id="L103">    }</span>
+<span class="nc" id="L153">        } catch (JSONException e) {</span>
+<span class="nc" id="L154">            e.printStackTrace();</span>
+<span class="fc" id="L155">        }</span>
+<span class="fc" id="L156">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to update the attributes of the chart
@@ -109,42 +162,54 @@ public class TableImpl extends Graph implements Table {
     @Override
     public void updateParameters(JSONObject data) {
         try {
-<span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
-<span class="fc" id="L113">                title = data.getString(&quot;title&quot;);</span>
+<span class="pc bpc" id="L165" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
+<span class="fc" id="L166">                title = data.getString(&quot;title&quot;);</span>
 
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
-<span class="fc" id="L116">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
+<span class="pc bpc" id="L168" title="1 of 2 branches missed.">            if (data.has(&quot;addRowOn&quot;)) {</span>
+<span class="fc" id="L169">                addRowOn = data.getString(&quot;addRowOn&quot;);</span>
             }
 
-<span class="pc bpc" id="L119" title="1 of 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
-<span class="fc" id="L120">                headers = new ArrayList&lt;String&gt;();</span>
-<span class="fc" id="L121">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
-<span class="fc" id="L122">                int jsonColumnsSize = jsonColumns.length();</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
-<span class="fc" id="L124">                    headers.add(jsonColumns.getString(i));</span>
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">            if (data.has(&quot;headers&quot;)) {</span>
+<span class="fc" id="L173">                headers = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L174">                JSONArray jsonColumns = data.getJSONArray(&quot;headers&quot;);</span>
+<span class="fc" id="L175">                int jsonColumnsSize = jsonColumns.length();</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">                for (int i = 0; i &lt; jsonColumnsSize; i++) {</span>
+<span class="fc" id="L177">                    headers.add(jsonColumns.getString(i));</span>
                 }
             }
 
-<span class="pc bpc" id="L128" title="1 of 2 branches missed.">            if (data.has(&quot;appearance&quot;)){</span>
-<span class="pc bpc" id="L129" title="1 of 2 branches missed.">                if (data.getJSONObject(&quot;appearance&quot;).has(&quot;horizontalGrid&quot;))</span>
-<span class="nc bnc" id="L130" title="All 2 branches missed.">                    if (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;horizontalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
-<span class="nc" id="L131">                        horizontalBorder = true;</span>
-<span class="nc" id="L132">                    else horizontalBorder = false;</span>
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">                if (data.getJSONObject(&quot;appearance&quot;).has(&quot;verticalGrid&quot;))</span>
-<span class="nc bnc" id="L134" title="All 2 branches missed.">                    if (data.getJSONObject(&quot;appearance&quot;).getJSONObject(&quot;verticalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
-<span class="nc" id="L135">                        verticalBorder = true;</span>
-<span class="nc" id="L136">                    else verticalBorder = false;</span>
+<span class="pc bpc" id="L181" title="1 of 2 branches missed.">            if (data.has(&quot;appearance&quot;)) {</span>
+<span class="fc" id="L182">                JSONObject appearance = data.getJSONObject(&quot;appearance&quot;);</span>
+<span class="pc bpc" id="L183" title="1 of 2 branches missed.">                if (appearance.has(&quot;horizontalGrid&quot;))</span>
+<span class="nc bnc" id="L184" title="All 2 branches missed.">                    if (appearance.getJSONObject(&quot;horizontalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
+<span class="nc" id="L185">                        horizontalBorder = true;</span>
+<span class="nc" id="L186">                    else horizontalBorder = false;</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">                if (appearance.has(&quot;verticalGrid&quot;))</span>
+<span class="nc bnc" id="L188" title="All 2 branches missed.">                    if (appearance.getJSONObject(&quot;verticalGrid&quot;).getInt(&quot;width&quot;) &gt; 0)</span>
+<span class="nc" id="L189">                        verticalBorder = true;</span>
+<span class="nc" id="L190">                    else verticalBorder = false;</span>
+
+<span class="fc bfc" id="L192" title="All 2 branches covered.">                for (int i = 0; i &lt; columns.size(); i++) {</span>
+<span class="fc bfc" id="L193" title="All 2 branches covered.">                    if (i &lt; appearance.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;textColor&quot;).length())</span>
+<span class="fc" id="L194">                        columns.get(i).rowEvenTextColour = appearance.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;textColor&quot;).getString(i);</span>
+<span class="fc bfc" id="L195" title="All 2 branches covered.">                    if (i &lt; appearance.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;backgroundColor&quot;).length())</span>
+<span class="fc" id="L196">                        columns.get(i).rowEvenBGColour = appearance.getJSONObject(&quot;rowEven&quot;).getJSONArray(&quot;backgroundColor&quot;).getString(i);</span>
+<span class="fc bfc" id="L197" title="All 2 branches covered.">                    if (i &lt; appearance.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;textColor&quot;).length())</span>
+<span class="fc" id="L198">                        columns.get(i).rowOddTextColour = appearance.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;textColor&quot;).getString(i);</span>
+<span class="fc bfc" id="L199" title="All 2 branches covered.">                    if (i &lt; appearance.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;backgroundColor&quot;).length())</span>
+<span class="fc" id="L200">                        columns.get(i).rowOddBGColour = appearance.getJSONObject(&quot;rowOdd&quot;).getJSONArray(&quot;backgroundColor&quot;).getString(i);</span>
+                }
             }
-<span class="nc" id="L138">        } catch (Exception e) {</span>
-<span class="nc" id="L139">            e.printStackTrace();</span>
-<span class="fc" id="L140">        }</span>
-<span class="fc" id="L141">    }</span>
+<span class="nc" id="L203">        } catch (Exception e) {</span>
+<span class="nc" id="L204">            e.printStackTrace();</span>
+<span class="fc" id="L205">        }</span>
+<span class="fc" id="L206">    }</span>
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to add a flow to the chart.
     @Override
     public void addFlow(JSONObject flow) {
-<span class="fc" id="L147">        flowList.add(new TableFlow(flow));</span>
-<span class="fc" id="L148">    }</span>
+<span class="fc" id="L212">        flowList.add(new TableFlow(flow));</span>
+<span class="fc" id="L213">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>
