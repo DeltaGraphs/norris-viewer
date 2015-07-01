@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Wed Jul 01 17:43:32 UTC 2015.<br/>
-0 errors and 55 warnings found:<br/><br/>
+Check performed at Wed Jul 01 19:31:27 UTC 2015.<br/>
+0 errors and 62 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -46,7 +46,7 @@ Check performed at Wed Jul 01 17:43:32 UTC 2015.<br/>
 <a href="#UseValueOf">UseValueOf: Should use <code>valueOf</code> instead of <code>new</code></a>
 </td></tr>
 <tr>
-<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">6</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
@@ -80,8 +80,12 @@ Check performed at Wed Jul 01 17:43:32 UTC 2015.<br/>
 <a href="#RtlSymmetry">RtlSymmetry: Padding and margin symmetry</a>
 </td></tr>
 <tr>
-<td class="countColumn">9</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">10</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#RtlHardcoded">RtlHardcoded: Using left/right instead of start/end attributes</a>
+</td></tr>
+<tr>
+<td class="countColumn">1</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<a href="#RtlEnabled">RtlEnabled: Using RTL attributes without enabling RTL support</a>
 </td></tr>
 <tr><td></td><td class="categoryColumn"><a href="#MissingIssues">Disabled Checks (11)</a>
 </td></tr></table>
@@ -192,29 +196,29 @@ Using <code>+</code> in dependencies lets you automatically pick up the latest a
 <div class="id"><a href="#" title="Return to top">ObsoleteLayoutParam: Obsolete layout params</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:16</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_alignParentLeft</code></span><br /><pre class="errorlines">
-<span class="lineno">  13</span>         &lt;TableLayout
-<span class="lineno">  14</span>             android:layout_width="match_parent"
-<span class="lineno">  15</span>             android:layout_height="wrap_content"
-<span class="lineno">  16</span>             <span class="errorspan">android:layout_alignParentLeft="true"</span>
-<span class="lineno">  17</span>             android:layout_alignParentStart="true"
-<span class="lineno">  18</span>             android:id="@+id/table"
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:17</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_alignParentLeft</code></span><br /><pre class="errorlines">
+<span class="lineno">  14</span>         &lt;TableLayout
+<span class="lineno">  15</span>             android:layout_width="match_parent"
+<span class="lineno">  16</span>             android:layout_height="wrap_content"
+<span class="lineno">  17</span>             <span class="errorspan">android:layout_alignParentLeft="true"</span>
+<span class="lineno">  18</span>             android:layout_alignParentStart="true"
+<span class="lineno">  19</span>             android:id="@+id/table"
 </pre>
-<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:17</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_alignParentStart</code></span><br /><pre class="errorlines">
-<span class="lineno">  14</span>             android:layout_width="match_parent"
-<span class="lineno">  15</span>             android:layout_height="wrap_content"
-<span class="lineno">  16</span>             android:layout_alignParentLeft="true"
-<span class="lineno">  17</span>             <span class="errorspan">android:layout_alignParentStart="true"</span>
-<span class="lineno">  18</span>             android:id="@+id/table"
-<span class="lineno">  19</span>             android:layout_below="@+id/tableTitle"
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:18</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_alignParentStart</code></span><br /><pre class="errorlines">
+<span class="lineno">  15</span>             android:layout_width="match_parent"
+<span class="lineno">  16</span>             android:layout_height="wrap_content"
+<span class="lineno">  17</span>             android:layout_alignParentLeft="true"
+<span class="lineno">  18</span>             <span class="errorspan">android:layout_alignParentStart="true"</span>
+<span class="lineno">  19</span>             android:id="@+id/table"
+<span class="lineno">  20</span>             android:layout_below="@+id/tableTitle"
 </pre>
-<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:19</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_below</code></span><br /><pre class="errorlines">
-<span class="lineno">  16</span>             android:layout_alignParentLeft="true"
-<span class="lineno">  17</span>             android:layout_alignParentStart="true"
-<span class="lineno">  18</span>             android:id="@+id/table"
-<span class="lineno">  19</span>             <span class="errorspan">android:layout_below="@+id/tableTitle"</span>
-<span class="lineno">  20</span>             android:background="#ff000000">&lt;/TableLayout>
-<span class="lineno">  21</span>     &lt;/ScrollView>
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:20</span>: <span class="message">Invalid layout param in a <code>ScrollView</code>: <code>layout_below</code></span><br /><pre class="errorlines">
+<span class="lineno">  17</span>             android:layout_alignParentLeft="true"
+<span class="lineno">  18</span>             android:layout_alignParentStart="true"
+<span class="lineno">  19</span>             android:id="@+id/table"
+<span class="lineno">  20</span>             <span class="errorspan">android:layout_below="@+id/tableTitle"</span>
+<span class="lineno">  21</span>             android:background="#ff000000">&lt;/TableLayout>
+<span class="lineno">  22</span>     &lt;/ScrollView>
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT & Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -266,6 +270,38 @@ You should not call the constructor for wrapper classes directly, such as`new In
 <div class="id"><a href="#" title="Return to top">Overdraw: Overdraw: Painting regions more than once</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:4</span>: <span class="message">Possible overdraw: Root element paints background <code>@android:color/white</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
+<span class="lineno">   1</span> &lt;?xml version="1.0" encoding="utf-8"?>
+<span class="lineno">   2</span> &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<span class="lineno">   3</span>     android:layout_width="match_parent"
+<span class="lineno">   4</span>     <span class="errorspan">android:background="@android:color/white"</span>
+<span class="lineno">   5</span>     android:layout_height="match_parent" >
+<span class="lineno">   6</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_horizontal_bar_chart.xml">../../src/main/res/layout/activity_horizontal_bar_chart.xml</a>:4</span>: <span class="message">Possible overdraw: Root element paints background <code>@android:color/white</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
+<span class="lineno">   1</span> &lt;?xml version="1.0" encoding="utf-8"?>
+<span class="lineno">   2</span> &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<span class="lineno">   3</span>     android:layout_width="match_parent"
+<span class="lineno">   4</span>     <span class="errorspan">android:background="@android:color/white"</span>
+<span class="lineno">   5</span>     android:layout_height="match_parent" >
+<span class="lineno">   6</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_main.xml">../../src/main/res/layout/activity_main.xml</a>:5</span>: <span class="message">Possible overdraw: Root element paints background <code>@android:color/white</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
+<span class="lineno">   2</span> &lt;android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<span class="lineno">   3</span>     xmlns:tools="http://schemas.android.com/tools" android:id="@+id/drawer_layout"
+<span class="lineno">   4</span>     android:layout_width="match_parent" android:layout_height="match_parent"
+<span class="lineno">   5</span>     <span class="errorspan">android:background="@android:color/white"</span>
+<span class="lineno">   6</span>     tools:context=".MainActivity">
+<span class="lineno">   7</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:4</span>: <span class="message">Possible overdraw: Root element paints background <code>@android:color/white</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
+<span class="lineno">   1</span> &lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<span class="lineno">   2</span>     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<span class="lineno">   3</span>     android:layout_height="match_parent"
+<span class="lineno">   4</span>     <span class="errorspan">android:background="@android:color/white"</span>
+<span class="lineno">   5</span>     tools:context="deltagraphs.norrisviewer.view.graphsView.TableActivity">
+<span class="lineno">   6</span> 
+</pre>
 <span class="location"><a href="../../src/main/res/layout/custom_toast.xml">../../src/main/res/layout/custom_toast.xml</a>:7</span>: <span class="message">Possible overdraw: Root element paints background <code>#c526a69a</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
 <span class="lineno">   4</span>     android:layout_width="wrap_content"
 <span class="lineno">   5</span>     android:layout_height="wrap_content"
@@ -273,6 +309,14 @@ You should not call the constructor for wrapper classes directly, such as`new In
 <span class="lineno">   7</span>     <span class="errorspan">android:background="#c526a69a"</span>
 <span class="lineno">   8</span>     >
 <span class="lineno">   9</span> 
+</pre>
+<span class="location"><a href="../../src/main/res/layout/line_chart.xml">../../src/main/res/layout/line_chart.xml</a>:26</span>: <span class="message">Possible overdraw: Root element paints background <code>@android:color/white</code> with a theme that also paints a background (inferred theme is <code>@style/AppTheme</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  23</span>     android:paddingLeft="@dimen/activity_horizontal_margin"
+<span class="lineno">  24</span>     android:paddingRight="@dimen/activity_horizontal_margin"
+<span class="lineno">  25</span>     android:paddingTop="@dimen/activity_vertical_margin"
+<span class="lineno">  26</span>     <span class="errorspan">android:background="@android:color/white"</span>
+<span class="lineno">  27</span> tools:context="lecho.lib.hellocharts.samples.PreviewLineChartActivity$PlaceholderFragment" >
+<span class="lineno">  28</span> 
 </pre>
 </div>
 <div class="metadata">Priority: 3 / 10<br/>
@@ -456,13 +500,13 @@ Unused resources make applications larger and slow down builds.
 <div class="id"><a href="#" title="Return to top">UselessLeaf: Useless leaf layout</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="../../src/main/res/layout/activity_main.xml">../../src/main/res/layout/activity_main.xml</a>:21</span>: <span class="message">This <code>RelativeLayout</code> view is useless (no children, no <code>background</code>, no <code>id</code>, no <code>style</code>)</span><br /><pre class="errorlines">
-<span class="lineno">  18</span>          the container. -->
-<span class="lineno">  19</span> 
+<span class="location"><a href="../../src/main/res/layout/activity_main.xml">../../src/main/res/layout/activity_main.xml</a>:22</span>: <span class="message">This <code>RelativeLayout</code> view is useless (no children, no <code>background</code>, no <code>id</code>, no <code>style</code>)</span><br /><pre class="errorlines">
+<span class="lineno">  19</span>          the container. -->
 <span class="lineno">  20</span> 
-<span class="lineno">  21</span>     <span class="errorspan">&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"</span>
-<span class="lineno">  22</span>         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-<span class="lineno">  23</span>         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<span class="lineno">  21</span> 
+<span class="lineno">  22</span>     <span class="errorspan">&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"</span>
+<span class="lineno">  23</span>         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<span class="lineno">  24</span>         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT & Android Studio/IntelliJ&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -481,13 +525,13 @@ A layout that has no children or no background can often be removed (since it is
 <div class="id"><a href="#" title="Return to top">UselessParent: Useless parent layout</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
-<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:6</span>: <span class="message">This <code>ScrollView</code> layout or its <code>RelativeLayout</code> parent is possibly useless</span><br /><pre class="errorlines">
-<span class="lineno">   3</span>     android:layout_height="match_parent"
-<span class="lineno">   4</span>     tools:context="deltagraphs.norrisviewer.view.graphsView.TableActivity">
-<span class="lineno">   5</span> 
-<span class="lineno">   6</span>     <span class="errorspan">&lt;ScrollView</span>
-<span class="lineno">   7</span>         android:layout_width="match_parent"
-<span class="lineno">   8</span>         android:layout_height="fill_parent"
+<span class="location"><a href="../../src/main/res/layout/activity_table.xml">../../src/main/res/layout/activity_table.xml</a>:7</span>: <span class="message">This <code>ScrollView</code> layout or its <code>RelativeLayout</code> parent is possibly useless; transfer the <code>background</code> attribute to the other view</span><br /><pre class="errorlines">
+<span class="lineno">   4</span>     android:background="@android:color/white"
+<span class="lineno">   5</span>     tools:context="deltagraphs.norrisviewer.view.graphsView.TableActivity">
+<span class="lineno">   6</span> 
+<span class="lineno">   7</span>     <span class="errorspan">&lt;ScrollView</span>
+<span class="lineno">   8</span>         android:layout_width="match_parent"
+<span class="lineno">   9</span>         android:layout_height="fill_parent"
 </pre>
 </div>
 <div class="metadata">Note: This issue has an associated quickfix operation in Eclipse/ADT&nbsp;<img alt="Fix" border="0" align="top" src="lint-results_files/lint-run.png" />
@@ -606,6 +650,14 @@ If you specify padding or margin on the left side of a layout, you should probab
 <div class="id"><a href="#" title="Return to top">RtlHardcoded: Using left/right instead of start/end attributes</a><div class="issueSeparator"></div>
 </div>
 <div class="warningslist">
+<span class="location"><a href="../../src/main/res/layout/activity_bar_chart.xml">../../src/main/res/layout/activity_bar_chart.xml</a>:20</span>: <span class="message">Use "<code>end</code>" instead of "<code>right</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
+<span class="lineno">  17</span>         android:layout_width="wrap_content"
+<span class="lineno">  18</span>         android:layout_height="wrap_content"
+<span class="lineno">  19</span>         android:id="@+id/ylabelbar"
+<span class="lineno">  20</span>         <span class="errorspan">android:gravity="right"</span>
+<span class="lineno">  21</span>         android:layout_centerVertical="true"
+<span class="lineno">  22</span>         android:layout_alignParentRight="true"
+</pre>
 <span class="location"><a href="../../src/main/res/layout/item_table_first.xml">../../src/main/res/layout/item_table_first.xml</a>:12</span>: <span class="message">Use "<code>start</code>" instead of "<code>left</code>" to ensure correct behavior in right-to-left locales</span><br /><pre class="errorlines">
 <span class="lineno">   9</span>         android:layout_width="0dip"
 <span class="lineno">  10</span>         android:layout_height="match_parent"
@@ -638,6 +690,8 @@ If you specify padding or margin on the left side of a layout, you should probab
 <span class="lineno">  15</span> 
 <span class="lineno">  16</span>     &lt;View
 </pre>
+<button id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 5 More Occurrences...</button>
+<div id="RtlHardcodedDiv" style="display: none">
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:11</span>: <span class="message">Consider adding <code>android:layout_alignParentStart="true"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">   8</span>         android:id="@+id/name"
 <span class="lineno">   9</span>         android:layout_width="wrap_content"
@@ -646,8 +700,6 @@ If you specify padding or margin on the left side of a layout, you should probab
 <span class="lineno">  12</span>         android:layout_alignParentTop="true"
 <span class="lineno">  13</span>         android:layout_toLeftOf="@+id/chart_layout"
 </pre>
-<button id="RtlHardcodedDivLink" onclick="reveal('RtlHardcodedDiv');" />+ 4 More Occurrences...</button>
-<div id="RtlHardcodedDiv" style="display: none">
 <span class="location"><a href="../../src/main/res/layout/list_item_sample.xml">../../src/main/res/layout/list_item_sample.xml</a>:13</span>: <span class="message">Consider adding <code>android:layout_toStartOf="@+id/chart_layout"</code> to better support right-to-left layouts</span><br /><pre class="errorlines">
 <span class="lineno">  10</span>         android:layout_height="wrap_content"
 <span class="lineno">  11</span>         android:layout_alignParentLeft="true"
@@ -692,6 +744,23 @@ For XML attributes such as paddingLeft and <code>layout_marginLeft</code>, use <
 (Note: For <code>Gravity#LEFT</code> and <code>Gravity#START</code>, you can use these constants even when targeting older platforms, because the <code>start</code> bitmask is a superset of the <code>left</code> bitmask. Therefore, you can use <code>gravity="start"</code> rather than <code>gravity="left|start"</code>.)
 </div>
 <br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlHardcoded" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
+</div>
+<a name="RtlEnabled"></a>
+<div class="issue">
+<div class="id"><a href="#" title="Return to top">RtlEnabled: Using RTL attributes without enabling RTL support</a><div class="issueSeparator"></div>
+</div>
+<div class="warningslist">
+<span class="location"><a href="../../src/main/AndroidManifest.xml">../../src/main/AndroidManifest.xml</a></span>: <span class="message">The project references RTL attributes, but does not explicitly enable or disable RTL support with <code>android:supportsRtl</code> in the manifest</span><br />
+</div>
+<div class="metadata">Priority: 3 / 10<br/>
+Category: Bi-directional Text</div>
+Severity: <span class="warning">Warning</span><div class="summary">
+Explanation: Using RTL attributes without enabling RTL support.</div>
+<div class="explanation">
+To enable right-to-left support, when running on API 17 and higher, you must set the <code>android:supportsRtl</code> attribute in the manifest <code>&lt;application></code> element.<br/>
+If you have started adding RTL attributes, but have not yet finished the migration, you can set the attribute to false to satisfy this lint check.
+</div>
+<br/><div class="moreinfo">More info: </div><br/>To suppress this error, use the issue id "RtlEnabled" as explained in the <a href="#SuppressInfo">Suppressing Warnings and Errors</a> section.<br/>
 </div>
 
 <a name="MissingIssues"></a>

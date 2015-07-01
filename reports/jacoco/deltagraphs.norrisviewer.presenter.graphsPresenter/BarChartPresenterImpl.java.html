@@ -70,38 +70,29 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
 <span class="fc" id="L72">        graphView.setBarOrientation(barChartInstance.getBarOrientation());</span>
-        /*
-        graphView.setAxis('x',
-                barChartInstance.getAxisX().getName(),
-                barChartInstance.getAxisX().getTicks()
-        );
-        graphView.setAxis('y',
-                barChartInstance.getAxisY().getName(),
-                barChartInstance.getAxisY().getTicks()
-        );
-        */
-<span class="fc" id="L83">    }</span>
+<span class="fc" id="L73">        graphView.setAxisName(barChartInstance.getAxisX().getName(),barChartInstance.getAxisY().getName());</span>
+<span class="fc" id="L74">    }</span>
 
     //when called, the socket connection is stopped
     public void stopConnection() {
-<span class="fc" id="L87">        stopSocket();</span>
-<span class="fc" id="L88">    }</span>
+<span class="fc" id="L78">        stopSocket();</span>
+<span class="fc" id="L79">    }</span>
 
     //when called, the socket connection is started
     public void startConnection() {
-<span class="fc" id="L92">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
-<span class="fc" id="L93">    }</span>
+<span class="fc" id="L83">        startSocket((BarChartActivity) graphView, barChartInstance);</span>
+<span class="fc" id="L84">    }</span>
 
     //when called, the socket begins listening to some events
     @Override
     public void startListening() {
-<span class="nc" id="L98">        super.startListening((BarChartActivity)graphView, barChartInstance);</span>
-<span class="nc" id="L99">    }</span>
+<span class="nc" id="L89">        super.startListening((BarChartActivity)graphView, barChartInstance);</span>
+<span class="nc" id="L90">    }</span>
 
     //when called, the socket and its connection are destroyed
         public void destroyConnection() {
-<span class="nc" id="L103">                graphSocket.destroyConnection();</span>
-<span class="nc" id="L104">            }</span>
+<span class="nc" id="L94">                graphSocket.destroyConnection();</span>
+<span class="nc" id="L95">            }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.4.201502262128</span></div></body></html>

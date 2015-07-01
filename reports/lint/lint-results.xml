@@ -103,7 +103,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio,adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
-            line="16"
+            line="17"
             column="13"/>
     </issue>
 
@@ -120,7 +120,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio,adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
-            line="17"
+            line="18"
             column="13"/>
     </issue>
 
@@ -137,7 +137,7 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
         quickfix="studio,adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
-            line="19"
+            line="20"
             column="13"/>
     </issue>
 
@@ -178,6 +178,98 @@ To fix this issue, set the `targetSdkVersion` to the highest available value. Th
     <issue
         id="Overdraw"
         severity="Warning"
+        message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        category="Performance"
+        priority="3"
+        summary="Overdraw: Painting regions more than once"
+        explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+        errorLine1="    android:background=&quot;@android:color/white&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
+            line="4"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        severity="Warning"
+        message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        category="Performance"
+        priority="3"
+        summary="Overdraw: Painting regions more than once"
+        explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+        errorLine1="    android:background=&quot;@android:color/white&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_horizontal_bar_chart.xml"
+            line="4"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        severity="Warning"
+        message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        category="Performance"
+        priority="3"
+        summary="Overdraw: Painting regions more than once"
+        explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+        errorLine1="    android:background=&quot;@android:color/white&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_main.xml"
+            line="5"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        severity="Warning"
+        message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        category="Performance"
+        priority="3"
+        summary="Overdraw: Painting regions more than once"
+        explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+        errorLine1="    android:background=&quot;@android:color/white&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
+            line="4"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        severity="Warning"
         message="Possible overdraw: Root element paints background `#c526a69a` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
         category="Performance"
         priority="3"
@@ -195,6 +287,29 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/custom_toast.xml"
             line="7"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        severity="Warning"
+        message="Possible overdraw: Root element paints background `@android:color/white` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        category="Performance"
+        priority="3"
+        summary="Overdraw: Painting regions more than once"
+        explanation="If you set a background drawable on a root view, then you should use a custom theme where the theme background is null. Otherwise, the theme background will be painted first, only to have your custom background completely cover it; this is called &quot;overdraw&quot;.
+
+NOTE: This detector relies on figuring out which layouts are associated with which activities based on scanning the Java code, and it&apos;s currently doing that using an inexact pattern matching algorithm. Therefore, it can incorrectly conclude which activity the layout is associated with and then wrongly complain that a background-theme is hidden.
+
+If you want your custom background on multiple pages, then you should consider making a custom theme with your custom background and just using that theme instead of a root element background.
+
+Of course it&apos;s possible that your custom drawable is translucent and you want it to be mixed with the background. However, you will get better performance if you pre-mix the background with your drawable and use that resulting image or color as a custom theme background instead.
+"
+        errorLine1="    android:background=&quot;@android:color/white&quot;"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/line_chart.xml"
+            line="26"
             column="5"/>
     </issue>
 
@@ -607,14 +722,14 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         quickfix="studio,adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_main.xml"
-            line="21"
+            line="22"
             column="5"/>
     </issue>
 
     <issue
         id="UselessParent"
         severity="Warning"
-        message="This `ScrollView` layout or its `RelativeLayout` parent is possibly useless"
+        message="This `ScrollView` layout or its `RelativeLayout` parent is possibly useless; transfer the `background` attribute to the other view"
         category="Performance"
         priority="2"
         summary="Useless parent layout"
@@ -624,7 +739,7 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         quickfix="adt">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_table.xml"
-            line="6"
+            line="7"
             column="5"/>
     </issue>
 
@@ -718,6 +833,24 @@ In Android Studio and Eclipse there are quickfixes to automatically extract this
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/item_table_header_first.xml"
             line="14"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        severity="Warning"
+        message="Use &quot;`end`&quot; instead of &quot;`right`&quot; to ensure correct behavior in right-to-left locales"
+        category="Bi-directional Text"
+        priority="5"
+        summary="Using left/right instead of start/end attributes"
+        explanation="Using `Gravity#LEFT` and `Gravity#RIGHT` can lead to problems when a layout is rendered in locales where text flows from right to left. Use `Gravity#START` and `Gravity#END` instead. Similarly, in XML `gravity` and `layout_gravity` attributes, use `start` rather than `left`.
+For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStart` and `layout_marginStart`. *NOTE*: If your `minSdkVersion` is less than 17, you should add *both* the older left/right attributes *as well as* the new start/right attributes. On older platforms, where RTL is not supported and the start/right attributes are unknown and therefore ignored, you need the older left/right attributes. There is a separate lint check which catches that type of error.
+(Note: For `Gravity#LEFT` and `Gravity#START`, you can use these constants even when targeting older platforms, because the `start` bitmask is a superset of the `left` bitmask. Therefore, you can use `gravity=&quot;start&quot;` rather than `gravity=&quot;left|start&quot;`.)"
+        errorLine1="        android:gravity=&quot;right&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/activity_bar_chart.xml"
+            line="20"
             column="9"/>
     </issue>
 
@@ -881,6 +1014,19 @@ For XML attributes such as paddingLeft and `layout_marginLeft`, use `paddingStar
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/layout/list_item_sample.xml"
             line="31"
             column="9"/>
+    </issue>
+
+    <issue
+        id="RtlEnabled"
+        severity="Warning"
+        message="The project references RTL attributes, but does not explicitly enable or disable RTL support with `android:supportsRtl` in the manifest"
+        category="Bi-directional Text"
+        priority="3"
+        summary="Using RTL attributes without enabling RTL support"
+        explanation="To enable right-to-left support, when running on API 17 and higher, you must set the `android:supportsRtl` attribute in the manifest `&lt;application>` element.
+If you have started adding RTL attributes, but have not yet finished the migration, you can set the attribute to false to satisfy this lint check.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/AndroidManifest.xml"/>
     </issue>
 
 </issues>
