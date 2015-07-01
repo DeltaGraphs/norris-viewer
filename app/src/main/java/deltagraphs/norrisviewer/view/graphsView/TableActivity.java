@@ -100,7 +100,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tablePresenter.stopListening();
         super.onDestroy();
     }
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -122,7 +122,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {

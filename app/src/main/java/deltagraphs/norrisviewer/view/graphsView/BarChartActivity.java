@@ -206,7 +206,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
     }
 
-
+/*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -228,7 +228,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     /*
     This method call the initialize method depending on the orientation set.
      */

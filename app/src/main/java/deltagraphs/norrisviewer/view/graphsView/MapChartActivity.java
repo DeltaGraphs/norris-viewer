@@ -399,9 +399,9 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
             }
         }
     }
-
+/*
     /* This method generate a custom menu for the
-    action bar on the top of the activity  */
+    action bar on the top of the activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -410,7 +410,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     }
 
     /* This method menage the actions user can perform
-    on the menu */
+    on the menu
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -431,7 +431,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
         return super.onOptionsItemSelected(item);
     }
-
+*/
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
