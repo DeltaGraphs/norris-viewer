@@ -39,9 +39,8 @@ public class TableImpl extends Graph implements Table {
     private String addRowOn;  // top or bottom
     private Boolean horizontalBorder = false; // horizontal border
     private Boolean verticalBorder = false; // vertical border
-
-
-    private ArrayList<String> headers = new ArrayList<String>();
+    private ArrayList<Column> columns = new ArrayList<Column>(); // properties for each column
+    private ArrayList<String> headers = new ArrayList<String>(); // values of headers
 
     //it returns the position where new records will be inserted in table flows
     public String getAddRowOn() {
@@ -54,7 +53,9 @@ public class TableImpl extends Graph implements Table {
     }
 
     // returns true if the table has a vertical border
-    public Boolean getVerticalBorder() { return verticalBorder; }
+    public Boolean getVerticalBorder() {
+        return verticalBorder;
+    }
 
     //it returns the number of columns of the table
     public int getNumberOfColumns() {
@@ -66,10 +67,56 @@ public class TableImpl extends Graph implements Table {
         return headers.get(index);
     }
 
+    @Override
+    public String getRowEvenTC(int index) {
+        return columns.get(index).rowEvenTextColour;
+    }
+
+    @Override
+    public String getRowEvenBGColour(int index) {
+        return columns.get(index).rowEvenBGColour;
+    }
+
+    @Override
+    public String getRowOddTC(int index) {
+        return columns.get(index).rowOddTextColour;
+    }
+
+    @Override
+    public String getRowOddBGColour(int index) {
+        return columns.get(index).rowOddBGColour;
+    }
+
     // constructor of TableImpl. It requires an observer. It will receives update from TableImpl
     public TableImpl(Observer chartPresenter) {
         addObserver(chartPresenter);
     }
+
+
+    class Column {
+        //text and background colour of even row
+        private String rowEvenTextColour = "#000000";
+        private String rowEvenBGColour = "#FFFFFF";
+        //text and background colour of odd row
+        private String rowOddTextColour = "#000000";
+        private String rowOddBGColour = "#FFFFFF";
+
+        Column(JSONObject data, int index) {
+            try {
+                if (index < data.getJSONObject("rowEven").getJSONArray("textColor").length())
+                    rowEvenTextColour = data.getJSONObject("rowEven").getJSONArray("textColor").getString(index);
+                if (index < data.getJSONObject("rowEven").getJSONArray("backgroundColor").length())
+                    rowEvenBGColour = data.getJSONObject("rowEven").getJSONArray("backgroundColor").getString(index);
+                if (index < data.getJSONObject("rowOdd").getJSONArray("textColor").length())
+                    rowOddTextColour = data.getJSONObject("rowOdd").getJSONArray("textColor").getString(index);
+                if (index < data.getJSONObject("rowOdd").getJSONArray("backgroundColor").length())
+                    rowOddBGColour = data.getJSONObject("rowOdd").getJSONArray("backgroundColor").getString(index);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     // The following method is called when a new update arrives from the socket.
     // The arriving Json Object contains the informations to set the attributes of the chart
@@ -79,17 +126,23 @@ public class TableImpl extends Graph implements Table {
             title = data.getString("title");
 
             addRowOn = data.getString("addRowOn");
+            JSONObject appearance = data.getJSONObject("appearance");
+            // for each column a value of header and of colours are taken from the json
             JSONArray jsonColumns = data.getJSONArray("headers");
             int jsonColumnsSize = jsonColumns.length();
             for (int i = 0; i < jsonColumnsSize; i++) {
                 headers.add(jsonColumns.getString(i));
+                columns.add(new Column(appearance, i));
             }
 
-            if (data.getJSONObject("appearance").getJSONObject("horizontalGrid").getInt("width") > 0)
+            if (appearance.getJSONObject("horizontalGrid").getInt("width") > 0)
                 horizontalBorder = true;
-            if (data.getJSONObject("appearance").getJSONObject("verticalGrid").getInt("width") > 0)
+            else
+                horizontalBorder = false;
+            if (appearance.getJSONObject("verticalGrid").getInt("width") > 0)
                 verticalBorder = true;
-
+            else
+                verticalBorder = false;
             //changes to flow params
             JSONArray jsonFlows = data.getJSONArray("flows");
             int flowLenght = jsonFlows.length();
@@ -125,15 +178,27 @@ public class TableImpl extends Graph implements Table {
                 }
             }
 
-            if (data.has("appearance")){
-                if (data.getJSONObject("appearance").has("horizontalGrid"))
-                    if (data.getJSONObject("appearance").getJSONObject("horizontalGrid").getInt("width") > 0)
+            if (data.has("appearance")) {
+                JSONObject appearance = data.getJSONObject("appearance");
+                if (appearance.has("horizontalGrid"))
+                    if (appearance.getJSONObject("horizontalGrid").getInt("width") > 0)
                         horizontalBorder = true;
                     else horizontalBorder = false;
-                if (data.getJSONObject("appearance").has("verticalGrid"))
-                    if (data.getJSONObject("appearance").getJSONObject("verticalGrid").getInt("width") > 0)
+                if (appearance.has("verticalGrid"))
+                    if (appearance.getJSONObject("verticalGrid").getInt("width") > 0)
                         verticalBorder = true;
                     else verticalBorder = false;
+
+                for (int i = 0; i < columns.size(); i++) {
+                    if (i < appearance.getJSONObject("rowEven").getJSONArray("textColor").length())
+                        columns.get(i).rowEvenTextColour = appearance.getJSONObject("rowEven").getJSONArray("textColor").getString(i);
+                    if (i < appearance.getJSONObject("rowEven").getJSONArray("backgroundColor").length())
+                        columns.get(i).rowEvenBGColour = appearance.getJSONObject("rowEven").getJSONArray("backgroundColor").getString(i);
+                    if (i < appearance.getJSONObject("rowOdd").getJSONArray("textColor").length())
+                        columns.get(i).rowOddTextColour = appearance.getJSONObject("rowOdd").getJSONArray("textColor").getString(i);
+                    if (i < appearance.getJSONObject("rowOdd").getJSONArray("backgroundColor").length())
+                        columns.get(i).rowOddBGColour = appearance.getJSONObject("rowOdd").getJSONArray("backgroundColor").getString(i);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

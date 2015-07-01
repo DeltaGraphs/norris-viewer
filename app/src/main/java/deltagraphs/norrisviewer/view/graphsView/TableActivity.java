@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import deltagraphs.norrisviewer.R;
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.flowModel.TableFlow;
+import deltagraphs.norrisviewer.model.graphsModel.Table;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenter;
 import deltagraphs.norrisviewer.presenter.graphsPresenter.TablePresenterImpl;
 
@@ -100,29 +101,30 @@ public class TableActivity extends ActionBarActivity implements TableView {
         tablePresenter.stopListening();
         super.onDestroy();
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_table, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+    /*
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_table, menu);
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-*/
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
+    */
     // set the headers of the table
     @Override
     public void setHeaders(String[] headers) {
@@ -149,7 +151,7 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
     //set the data in the table. It is extracted from the table model
     @Override
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns, Table tableInstance) {
         TableLayout tableLayout = (TableLayout) findViewById(R.id.table);
         tableLayout.removeAllViews();
         TableLayout.LayoutParams tableLayoutParams = new TableLayout.LayoutParams();
@@ -171,8 +173,19 @@ public class TableActivity extends ActionBarActivity implements TableView {
 
                 for (int indexCol = 0; indexCol < numOfColumns; indexCol++) {
                     TextView textView = new TextView(this);
-                    textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
-                    textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));
+                    if ((indexCol % 2) == 0) {
+                        textView.setBackgroundColor(Color.parseColor(tableInstance.getRowEvenBGColour(indexCol)));
+                        textView.setTextColor(Color.parseColor(tableInstance.getRowEvenTC(indexCol)));
+                    } else {
+                        textView.setBackgroundColor(Color.parseColor(tableInstance.getRowOddBGColour(indexCol)));
+                        textView.setTextColor(Color.parseColor(tableInstance.getRowOddTC(indexCol)));
+                    }
+                    String bg =  tableFlow.getCellBGColour(j, indexCol);
+                    String tc =  tableFlow.getCellTColour(j, indexCol);
+                    if(!bg.equals("null"))
+                        textView.setBackgroundColor(Color.parseColor(tableFlow.getCellBGColour(j, indexCol)));
+                    if(!tc.equals("null"))
+                        textView.setTextColor(Color.parseColor(tableFlow.getCellTColour(j, indexCol)));
                     textView.setGravity(Gravity.CENTER);
                     textView.setText(tableFlow.getCellData(j, indexCol));
                     // add a cell to the new row

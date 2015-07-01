@@ -25,6 +25,7 @@ package deltagraphs.norrisviewer.view.graphsView;
 import java.util.ArrayList;
 
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.graphsModel.Table;
 
 public interface TableView {
 
@@ -32,7 +33,7 @@ public interface TableView {
     public void setHeaders(String[] headers);
 
     //set the data in the table. It is extracted from the table model
-    public void setData(ArrayList<FlowModel> flowList, int numOfColumns);
+    public void setData(ArrayList<FlowModel> flowList, int numOfColumns, Table tableInstance);
 
     void setBorder(boolean hBorder, boolean vBorder);
 }

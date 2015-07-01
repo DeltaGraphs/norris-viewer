@@ -35,6 +35,7 @@ import org.json.JSONObject;
 public class AxisModel {
     private String name ="";
     private int ticks;
+    // here can be inserted other properties
 
     // Axis constructor.
     // It's used when a new axis must be built.

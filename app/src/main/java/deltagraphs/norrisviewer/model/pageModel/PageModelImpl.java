@@ -190,9 +190,12 @@ public class PageModelImpl extends Observable implements PageModel {
 
                         if (graphIndex != -1) {
                             pageList.get(pageIndex).getPageItemList().get(graphIndex).setId(data.getString("ID"));
-                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString("title"));
-                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString("type"));
-                            pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString("socketURL"));
+                            if(data.has("title"))
+                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setName(data.getString("title"));
+                            if(data.has("type"))
+                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setType(data.getString("type"));
+                            if(data.has("socketURL"))
+                                pageList.get(pageIndex).getPageItemList().get(graphIndex).setUrl(data.getString("socketURL"));
                         }//else exception
                     }
                     break;

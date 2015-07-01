@@ -201,7 +201,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             if (axisXorY == 'x') {
                 axisX = new Axis().setHasLines(true);
                 if (hasAxesNames) {
-                    if(name!="")
+                    if(!name.equals(""))
                         axisX.setName(name);
                     else
                         axisX.setName("x");
@@ -210,7 +210,7 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
             if (axisXorY == 'y') {
                 axisY = new Axis().setHasLines(true);
                 if (hasAxesNames) {
-                    if(name!="")
+                    if(!name.equals(""))
                         axisY.setName(name);
                     else
                         axisY.setName("y");

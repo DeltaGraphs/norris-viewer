@@ -33,9 +33,6 @@ public interface Table {
     //it returns the number of columns of the table
     public int getNumberOfColumns();
 
-    //it returns the value of a header for a given index. The index represents the number of the column
-    public String getHeaderValue(int index);
-
     //it returns the flow list of the chart
     public ArrayList<FlowModel> getFlowList();
 
@@ -44,4 +41,15 @@ public interface Table {
 
     // returns true if the table has a vertical border
     public Boolean getVerticalBorder();
+
+    //it returns the value of a header for a given index. The index represents the number of the column
+    public String getHeaderValue(int index);
+
+    public String getRowEvenTC(int index);
+
+    public String getRowEvenBGColour(int index);
+
+    public String getRowOddTC(int index);
+
+    public String getRowOddBGColour(int index);
 }

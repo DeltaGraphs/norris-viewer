@@ -27,6 +27,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import deltagraphs.norrisviewer.model.flowModel.FlowModel;
+import deltagraphs.norrisviewer.model.graphsModel.Table;
 import deltagraphs.norrisviewer.model.graphsModel.TableImpl;
 import deltagraphs.norrisviewer.view.graphsView.TableActivity;
 
@@ -53,7 +54,7 @@ public class TablePresenterImplTest extends TestCase {
         }
 
         @Override
-        public void setData(ArrayList<FlowModel> flowList, int numOfColumns) {
+        public void setData(ArrayList<FlowModel> flowList, int numOfColumns, Table tableInstance) {
             data = true;
         }
 

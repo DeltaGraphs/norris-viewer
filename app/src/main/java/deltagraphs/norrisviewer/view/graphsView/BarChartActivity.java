@@ -264,7 +264,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         List<String> lLabels = new ArrayList<String>();
         for (int i = 0; i < flowList.size(); i++) {
             flowList.get(i).getFlowId();
-            //aggiunge una label alla legenda
+            //adds a label to the legend
             String name = flowList.get(i).getFlowName();
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
             Integer color = barChartFlow.getFlowColour();
