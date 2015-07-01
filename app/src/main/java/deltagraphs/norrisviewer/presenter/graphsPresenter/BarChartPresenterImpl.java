@@ -70,16 +70,7 @@ public class BarChartPresenterImpl extends GraphPresenter implements BarChartPre
     Its objective is to set graph parameters, extracting the informations from the model. */
     private void setGraphParameters() {
         graphView.setBarOrientation(barChartInstance.getBarOrientation());
-        /*
-        graphView.setAxis('x',
-                barChartInstance.getAxisX().getName(),
-                barChartInstance.getAxisX().getTicks()
-        );
-        graphView.setAxis('y',
-                barChartInstance.getAxisY().getName(),
-                barChartInstance.getAxisY().getTicks()
-        );
-        */
+        graphView.setAxisName(barChartInstance.getAxisX().getName(),barChartInstance.getAxisY().getName());
     }
 
     //when called, the socket connection is stopped

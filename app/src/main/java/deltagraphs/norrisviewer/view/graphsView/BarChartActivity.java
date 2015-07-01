@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -240,22 +241,25 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             initializeHorizontalBarChart();
     }
 
+    @Override
+    public void setAxisName(String x, String y) {
+        if (orientation.equals("V")) {
+            ((TextView) findViewById(R.id.xlabelbar)).setText(x);
+            ((TextView) findViewById(R.id.ylabelbar)).setText(y.replace("", "\n"));
+        }
+        else{
+            ((TextView) findViewById(R.id.xlabelbarh)).setText(y);
+            ((TextView) findViewById(R.id.ylabelbarh)).setText(x.replace("", "\n"));
+
+        }
+    }
+
     /*
     The following method is called on an update and retrieves data from the model to configure the bar chart.
      */
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
-        if(orientation == "V")
-            if(flowList.size()== 0)
-                vBarChart.setTouchEnabled(false);
-            else
-                vBarChart.setTouchEnabled(true);
-        else
-        if(flowList.size()== 0)
-                hBarChart.setTouchEnabled(false);
-            else
-                hBarChart.setTouchEnabled(true);
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         BarData data = new BarData();
         //create a list to contain every flow color

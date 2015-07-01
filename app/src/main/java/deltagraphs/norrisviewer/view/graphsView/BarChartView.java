@@ -34,4 +34,6 @@ public interface BarChartView {
 
     //The following method is called on an update and retrieves data from the model to configure the bar chart.
     void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers);
+
+    void setAxisName(String x, String y);
 }
