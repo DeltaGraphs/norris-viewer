@@ -115,7 +115,7 @@ public class SocketManager {
 <span class="fc" id="L115">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="fc" id="L118">                activity.runOnUiThread(new Runnable() {</span>
+<span class="nc" id="L118">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
 <span class="nc" id="L121">                        JSONObject obj = (JSONObject) args[0];</span>
@@ -133,7 +133,7 @@ public class SocketManager {
                         }
 <span class="nc" id="L134">                    }</span>
                 });
-<span class="fc" id="L136">            }</span>
+<span class="nc" id="L136">            }</span>
         });
 <span class="fc" id="L138">    }</span>
 }
