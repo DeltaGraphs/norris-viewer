@@ -260,7 +260,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             //aggiunge una label alla legenda
             String name = flowList.get(i).getFlowName();
             BarChartFlow barChartFlow = (BarChartFlow) flowList.get(i);
-            String color = barChartFlow.getFlowColour();
+            Integer color = barChartFlow.getFlowColour();
 
             ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
 
@@ -273,10 +273,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
             BarDataSet set1 = new BarDataSet(yVals1, name);
             set1.setBarSpacePercent(35f);
-            if (color != "null" && color != null)
-                set1.setColor(Color.parseColor(color));
-            else
-                set1.setColor(Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),(int)(Math.random()*255)));
+            set1.setColor(color);
             dataSets.add(set1);
 
             data.setValueTextSize(10f);

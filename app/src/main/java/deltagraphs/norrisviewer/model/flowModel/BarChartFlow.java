@@ -1,5 +1,7 @@
 package deltagraphs.norrisviewer.model.flowModel;
 
+import android.graphics.Color;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,11 +38,12 @@ import java.util.ArrayList;
 
 public class BarChartFlow extends FlowModel {
 
-    private String flowColour = "null"; /* 'null' is the default colour */
+    /* there is a random colur as default */
+    private Integer flowColour = (Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
     private ArrayList<BarChartRecord> records = new ArrayList<BarChartRecord>(); /* a list that contains all the records of the flow */
 
     //it returns the colour of the flow
-    public String getFlowColour() {
+    public Integer getFlowColour() {
         return flowColour;
     }
 
@@ -75,8 +78,13 @@ public class BarChartFlow extends FlowModel {
         try {
             flowId = data.getString("ID");
             flowName = data.getString("name");
-            if (data.has("flowColor"))
-                flowColour = data.getString("flowColor");
+            if (data.has("flowColor")) {
+                String colour = data.getString("flowColor");
+                if (!colour.equals("null")) {
+                    flowColour = Color.parseColor(colour);
+                } else
+                    flowColour = (Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255)));
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -119,7 +127,11 @@ public class BarChartFlow extends FlowModel {
     public void updateFlow(JSONObject data) {
         try {
             flowName = data.getString("name");
-            flowColour = data.getString("color");
+            if (data.has("flowColor")) {
+                String colour = data.getString("flowColor");
+                if (!colour.equals("null"))
+                    flowColour = Color.parseColor(colour);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -175,7 +187,7 @@ public class BarChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             int recordIndex = searchRecordIndex(recordId);
-            if(recordIndex!=-1){
+            if (recordIndex != -1) {
                 JSONArray jsonValues = data.getJSONArray("value");
                 records.get(recordIndex).index = jsonValues.getString(0);
                 records.get(recordIndex).value = jsonValues.getInt(1);
