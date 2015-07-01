@@ -417,6 +417,42 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.menu.menu_horizontal_bar_chart` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/menu_horizontal_bar_chart.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.menu.menu_map_chart` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/menu_map_chart.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.menu.menu_table` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/menu_table.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.string.navigation_drawer_open` appears to be unused"
         category="Performance"
         priority="3"
