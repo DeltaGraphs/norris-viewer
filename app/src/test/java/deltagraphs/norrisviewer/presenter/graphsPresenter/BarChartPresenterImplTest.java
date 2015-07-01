@@ -31,10 +31,7 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 import deltagraphs.norrisviewer.model.graphsModel.AxisModel;
 import deltagraphs.norrisviewer.model.graphsModel.BarChartImpl;
 import deltagraphs.norrisviewer.presenter.SocketManager;
-import deltagraphs.norrisviewer.presenter.mainPresenter.MainPresenterImpl;
 import deltagraphs.norrisviewer.view.graphsView.BarChartActivity;
-import deltagraphs.norrisviewer.view.graphsView.BarChartView;
-import deltagraphs.norrisviewer.view.mainView.MainActivity;
 
 class SocketMock extends SocketManager{
     Boolean connected;
@@ -92,6 +89,7 @@ class mockBarChartActivity extends BarChartActivity{
 
     String orientation;
     boolean data = false;
+    Boolean axis = false;
 
     @Override
     public void setBarOrientation(String orientation) {
@@ -100,6 +98,14 @@ class mockBarChartActivity extends BarChartActivity{
 
     public String getBarOrientation(){
         return orientation;
+    }
+
+    public Boolean getAxis() {
+        return axis;
+    }
+
+    public void setAxisName(String x, String y) {
+        axis = true;
     }
 
     @Override
@@ -146,5 +152,6 @@ public class BarChartPresenterImplTest extends TestCase {
         barChartPresenter.update((Observable) barChartPresenter.barChartInstance, signal);
         Assert.assertEquals(((mockBarChartActivity) barChartPresenter.graphView).getBarOrientation(), "V");
         Assert.assertTrue(((mockBarChartActivity) barChartPresenter.graphView).getData());
+        Assert.assertTrue(((mockBarChartActivity) barChartPresenter.graphView).getAxis());
     }
 }
