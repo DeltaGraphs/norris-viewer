@@ -197,8 +197,23 @@ public class LineChartActivity extends ActionBarActivity implements deltagraphs.
      */
     @Override
     public void setAxis(char axisXorY, String name, int ticks) {
-        axisX = new Axis().setHasLines(true);
-        axisY = new Axis().setHasLines(true);
+        if (hasAxes) {
+            if (axisXorY == 'x') {
+                axisX = new Axis().setHasLines(true);
+                if (hasAxesNames) {
+                    axisX.setName(name);
+                }
+            }
+            if (axisXorY == 'y') {
+                axisY = new Axis().setHasLines(true);
+                if (hasAxesNames) {
+                    axisY.setName(name);
+                }
+            }
+        } else {
+            data.setAxisXBottom(null);
+            data.setAxisYLeft(null);
+        }
     }
 
     public void setViewFinder(Boolean isVisible){

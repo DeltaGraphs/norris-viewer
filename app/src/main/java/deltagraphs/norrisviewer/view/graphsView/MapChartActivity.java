@@ -207,6 +207,15 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                     case "circle":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.red_circle_marker));
                         break;
+                    case "square":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.square_marker));
+                        break;
+                    case "diamond":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.diamond_marker));
+                        break;
+                    case "triangle":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.triangle_marker));
+                        break;
                     case "bus":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.bus_marker));
                         break;
@@ -215,6 +224,12 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
                         break;
                     case "car":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car_marker));
+                        break;
+                    case "ship":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ship_marker));
+                        break;
+                    case "truck":
+                        m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.truck_marker));
                         break;
                     case "house":
                         m.icon(BitmapDescriptorFactory.fromResource(R.mipmap.house_marker));
