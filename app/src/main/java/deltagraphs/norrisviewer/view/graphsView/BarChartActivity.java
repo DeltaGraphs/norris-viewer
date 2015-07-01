@@ -275,6 +275,8 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
             set1.setBarSpacePercent(35f);
             if (color != "null" && color != null)
                 set1.setColor(Color.parseColor(color));
+            else
+                set1.setColor(Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255),(int)(Math.random()*255)));
             dataSets.add(set1);
 
             data.setValueTextSize(10f);
