@@ -120,12 +120,9 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         //set values above bars
         hBarChart.setDrawValueAboveBar(true);
 
-        hBarChart.setTouchEnabled(false);
+        //hBarChart.setTouchEnabled(false);
 
         hBarChart.setDescription("");
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        hBarChart.setMaxVisibleValueCount(60);
 
         // scaling can now only be done on x- and y-axis separately
         hBarChart.setPinchZoom(false);
@@ -171,7 +168,7 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
         vBarChart.setDrawValueAboveBar(true);
 
         vBarChart.setDescription("");
-        vBarChart.setTouchEnabled(false);
+        //vBarChart.setTouchEnabled(false);
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
         vBarChart.setMaxVisibleValueCount(60);
@@ -249,6 +246,16 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
+        if(orientation == "V")
+            if(flowList.size()== 0)
+                vBarChart.setTouchEnabled(false);
+            else
+                vBarChart.setTouchEnabled(true);
+        else
+        if(flowList.size()== 0)
+                hBarChart.setTouchEnabled(false);
+            else
+                hBarChart.setTouchEnabled(true);
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         BarData data = new BarData();
         //create a list to contain every flow color
