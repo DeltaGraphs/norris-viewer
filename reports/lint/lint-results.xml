@@ -301,6 +301,26 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.mipmap.ic_home` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/mipmap-hdpi/ic_home.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/mipmap-mdpi/ic_home.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/mipmap-xhdpi/ic_home.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/mipmap-xxhdpi/ic_home.png"/>
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/mipmap-xxxhdpi/ic_home.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.layout.item_table` appears to be unused"
         category="Performance"
         priority="3"

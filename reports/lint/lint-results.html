@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Tue Jun 30 22:37:12 UTC 2015.<br/>
-0 errors and 51 warnings found:<br/><br/>
+Check performed at Wed Jul 01 10:04:15 UTC 2015.<br/>
+0 errors and 52 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -50,7 +50,7 @@ Check performed at Tue Jun 30 22:37:12 UTC 2015.<br/>
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
-<td class="countColumn">24</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">25</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr>
@@ -322,7 +322,7 @@ Additional locations: <ul>
 </td></tr><tr><th>xhdpi</th><th>hdpi</th><th>mdpi</th><th>xxhdpi</th></tr>
 </table>
 <span class="location"><a href="../../src/main/res/menu/global.xml">../../src/main/res/menu/global.xml</a></span>: <span class="message">The resource <code>R.menu.global</code> appears to be unused</span><br />
-<button id="UnusedResourcesDivLink" onclick="reveal('UnusedResourcesDiv');" />+ 19 More Occurrences...</button>
+<button id="UnusedResourcesDivLink" onclick="reveal('UnusedResourcesDiv');" />+ 20 More Occurrences...</button>
 <div id="UnusedResourcesDiv" style="display: none">
 <span class="location"><a href="../../src/main/res/drawable/green_square.xml">../../src/main/res/drawable/green_square.xml</a></span>: <span class="message">The resource <code>R.drawable.green_square</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable-hdpi/ic_drawer.png">../../src/main/res/drawable-hdpi/ic_drawer.png</a></span>: <span class="message">The resource <code>R.drawable.ic_drawer</code> appears to be unused</span><br />
@@ -339,6 +339,23 @@ Additional locations: <ul>
 </td><td><a href="../../src/main/res/drawable-mdpi/ic_drawer.png"><img border="0" align="top" src="../../src/main/res/drawable-mdpi/ic_drawer.png" /></a>
 </td><td><a href="../../src/main/res/drawable-xxhdpi/ic_drawer.png"><img border="0" align="top" src="../../src/main/res/drawable-xxhdpi/ic_drawer.png" /></a>
 </td></tr><tr><th>xhdpi</th><th>hdpi</th><th>mdpi</th><th>xxhdpi</th></tr>
+</table>
+<span class="location"><a href="../../src/main/res/mipmap-hdpi/ic_home.png">../../src/main/res/mipmap-hdpi/ic_home.png</a></span>: <span class="message">The resource <code>R.mipmap.ic_home</code> appears to be unused</span><br />
+<ul></ul><button id="Location8DivLink" onclick="reveal('Location8Div');" />+ 4 Additional Locations...</button>
+<div id="Location8Div" style="display: none">
+Additional locations: <ul>
+<li> <span class="location"><a href="../../src/main/res/mipmap-mdpi/ic_home.png">../../src/main/res/mipmap-mdpi/ic_home.png</a></span>
+<li> <span class="location"><a href="../../src/main/res/mipmap-xhdpi/ic_home.png">../../src/main/res/mipmap-xhdpi/ic_home.png</a></span>
+<li> <span class="location"><a href="../../src/main/res/mipmap-xxhdpi/ic_home.png">../../src/main/res/mipmap-xxhdpi/ic_home.png</a></span>
+<li> <span class="location"><a href="../../src/main/res/mipmap-xxxhdpi/ic_home.png">../../src/main/res/mipmap-xxxhdpi/ic_home.png</a></span>
+</ul>
+</div><br/><br/>
+<table><tr><td><a href="../../src/main/res/mipmap-xhdpi/ic_home.png"><img border="0" align="top" src="../../src/main/res/mipmap-xhdpi/ic_home.png" /></a>
+</td><td><a href="../../src/main/res/mipmap-hdpi/ic_home.png"><img border="0" align="top" src="../../src/main/res/mipmap-hdpi/ic_home.png" /></a>
+</td><td><a href="../../src/main/res/mipmap-mdpi/ic_home.png"><img border="0" align="top" src="../../src/main/res/mipmap-mdpi/ic_home.png" /></a>
+</td><td><a href="../../src/main/res/mipmap-xxhdpi/ic_home.png"><img border="0" align="top" src="../../src/main/res/mipmap-xxhdpi/ic_home.png" /></a>
+</td><td><a href="../../src/main/res/mipmap-xxxhdpi/ic_home.png"><img border="0" align="top" src="../../src/main/res/mipmap-xxxhdpi/ic_home.png" /></a>
+</td></tr><tr><th></th><th></th><th></th><th></th><th></th></tr>
 </table>
 <span class="location"><a href="../../src/main/res/layout/item_table.xml">../../src/main/res/layout/item_table.xml</a></span>: <span class="message">The resource <code>R.layout.item_table</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable/item_table1.xml">../../src/main/res/drawable/item_table1.xml</a></span>: <span class="message">The resource <code>R.drawable.item_table1</code> appears to be unused</span><br />
@@ -386,18 +403,18 @@ Additional locations: <ul>
 <span class="lineno">  16</span>     &lt;string name="title_activity_bar_chart">BarChartActivity&lt;/string>
 <span class="lineno">  17</span>     &lt;string <span class="errorspan">name="title_activity_table">TableActivity&lt;/string></span>
 <span class="lineno">  18</span> 
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 </pre>
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:21</span>: <span class="message">The resource <code>R.string.title_activity_maps</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  18</span> 
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 <span class="lineno">  20</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
 <span class="lineno">  21</span>     &lt;string <span class="errorspan">name="title_activity_maps">Map&lt;/string></span>
 <span class="lineno">  22</span>     &lt;string name="ok">OK&lt;/string>
 <span class="lineno">  23</span>     &lt;string name="title_activity_main">MainActivity&lt;/string>
 </pre>
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:22</span>: <span class="message">The resource <code>R.string.ok</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 <span class="lineno">  20</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
 <span class="lineno">  21</span>     &lt;string name="title_activity_maps">Map&lt;/string>
 <span class="lineno">  22</span>     &lt;string <span class="errorspan">name="ok">OK&lt;/string></span>
