@@ -228,6 +228,21 @@ public class BarChartActivity extends ActionBarActivity implements BarChartView 
 
     @Override
     public void setData(ArrayList<FlowModel> flowList, String signal, ArrayList<String> headers) {
+        /*
+        if the flow list is empty, the touch listener is disabled
+        else it will be enabled
+         */
+        if(orientation.equals("V")){
+            if(flowList.size() == 0)
+                vBarChart.setTouchEnabled(false);
+            else
+                vBarChart.setTouchEnabled(true);
+        }
+        else
+            if(flowList.size() == 0)
+                hBarChart.setTouchEnabled(false);
+            else
+                hBarChart.setTouchEnabled(true);
         ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         BarData data = new BarData();
         //create a list to contain every flow color
