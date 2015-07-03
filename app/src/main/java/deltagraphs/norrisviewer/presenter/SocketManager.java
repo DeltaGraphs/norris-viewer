@@ -44,7 +44,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager {
 
     private Socket mSocket;
-    private String url = "http://5.231.33.217:3000/norris";
+    private String url = "http://norris-nrti-dev.herokuapp.com/norris";
 
     //Constructor of SocketManager. A new socket is created without an url.
     public SocketManager() {
