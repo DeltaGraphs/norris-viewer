@@ -356,6 +356,22 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
     <issue
         id="UnusedResources"
         severity="Warning"
+        message="The resource `R.dimen.shadow_size` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds."
+        errorLine1="    &lt;dimen name=&quot;shadow_size&quot;>8dip&lt;/dimen>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/values/dimens.xml"
+            line="10"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
         message="The resource `R.drawable.drawer_shadow` appears to be unused"
         category="Performance"
         priority="3"
@@ -563,6 +579,54 @@ Of course it&apos;s possible that your custom drawable is translucent and you wa
         explanation="Unused resources make applications larger and slow down builds.">
         <location
             file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/menu/menu_table.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.shadow_bottom` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/shadow_bottom.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.shadow_left` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/shadow_left.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.shadow_right` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/shadow_right.xml"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        severity="Warning"
+        message="The resource `R.drawable.shadow_top` appears to be unused"
+        category="Performance"
+        priority="3"
+        summary="Unused resources"
+        explanation="Unused resources make applications larger and slow down builds.">
+        <location
+            file="/home/travis/build/DeltaGraphs/norris-viewer/app/src/main/res/drawable/shadow_top.xml"/>
     </issue>
 
     <issue

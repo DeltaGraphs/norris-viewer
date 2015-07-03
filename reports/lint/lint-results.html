@@ -18,8 +18,8 @@ document.getElementById(id+'Link').style.display = 'none';
 <body>
 <h1>Lint Report</h1>
 <div class="titleSeparator"></div>
-Check performed at Thu Jul 02 14:08:11 UTC 2015.<br/>
-0 errors and 62 warnings found:<br/><br/>
+Check performed at Fri Jul 03 15:56:23 UTC 2015.<br/>
+0 errors and 67 warnings found:<br/><br/>
 <table class="overview">
 <tr><td></td><td class="categoryColumn"><a href="#Correctness">Correctness</a>
 </td></tr>
@@ -50,7 +50,7 @@ Check performed at Thu Jul 02 14:08:11 UTC 2015.<br/>
 <a href="#Overdraw">Overdraw: Overdraw: Painting regions more than once</a>
 </td></tr>
 <tr>
-<td class="countColumn">28</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
+<td class="countColumn">33</td><td class="issueColumn"><img border="0" align="top" src="lint-results_files/lint-warning.png" alt="Warning" />
 <a href="#UnusedResources">UnusedResources: Unused resources</a>
 </td></tr>
 <tr>
@@ -350,9 +350,17 @@ Of course it's possible that your custom drawable is translucent and you want it
 <span class="lineno">   9</span> 
 <span class="lineno">  10</span>     &lt;dimen name="shadow_size">8dip&lt;/dimen>
 </pre>
+<span class="location"><a href="../../src/main/res/values/dimens.xml">../../src/main/res/values/dimens.xml</a>:10</span>: <span class="message">The resource <code>R.dimen.shadow_size</code> appears to be unused</span><br /><pre class="errorlines">
+<span class="lineno">   7</span>          https://developer.android.com/design/patterns/navigation-drawer.html -->
+<span class="lineno">   8</span>     &lt;dimen name="navigation_drawer_width">240dp&lt;/dimen>
+<span class="lineno">   9</span> 
+<span class="lineno">  10</span>     &lt;dimen <span class="errorspan">name="shadow_size">8dip&lt;/dimen></span>
+<span class="lineno">  11</span> &lt;/resources>
+<span class="lineno">  12</span> 
+</pre>
 <span class="location"><a href="../../src/main/res/drawable-hdpi/drawer_shadow.png">../../src/main/res/drawable-hdpi/drawer_shadow.png</a></span>: <span class="message">The resource <code>R.drawable.drawer_shadow</code> appears to be unused</span><br />
-<ul></ul><button id="Location4DivLink" onclick="reveal('Location4Div');" />+ 3 Additional Locations...</button>
-<div id="Location4Div" style="display: none">
+<ul></ul><button id="Location5DivLink" onclick="reveal('Location5Div');" />+ 3 Additional Locations...</button>
+<div id="Location5Div" style="display: none">
 Additional locations: <ul>
 <li> <span class="location"><a href="../../src/main/res/drawable-mdpi/drawer_shadow.png">../../src/main/res/drawable-mdpi/drawer_shadow.png</a></span>
 <li> <span class="location"><a href="../../src/main/res/drawable-xhdpi/drawer_shadow.png">../../src/main/res/drawable-xhdpi/drawer_shadow.png</a></span>
@@ -365,13 +373,13 @@ Additional locations: <ul>
 </td><td><a href="../../src/main/res/drawable-xxhdpi/drawer_shadow.png"><img border="0" align="top" src="../../src/main/res/drawable-xxhdpi/drawer_shadow.png" /></a>
 </td></tr><tr><th>xhdpi</th><th>hdpi</th><th>mdpi</th><th>xxhdpi</th></tr>
 </table>
-<span class="location"><a href="../../src/main/res/menu/global.xml">../../src/main/res/menu/global.xml</a></span>: <span class="message">The resource <code>R.menu.global</code> appears to be unused</span><br />
-<button id="UnusedResourcesDivLink" onclick="reveal('UnusedResourcesDiv');" />+ 23 More Occurrences...</button>
+<button id="UnusedResourcesDivLink" onclick="reveal('UnusedResourcesDiv');" />+ 28 More Occurrences...</button>
 <div id="UnusedResourcesDiv" style="display: none">
+<span class="location"><a href="../../src/main/res/menu/global.xml">../../src/main/res/menu/global.xml</a></span>: <span class="message">The resource <code>R.menu.global</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable/green_square.xml">../../src/main/res/drawable/green_square.xml</a></span>: <span class="message">The resource <code>R.drawable.green_square</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/drawable-hdpi/ic_drawer.png">../../src/main/res/drawable-hdpi/ic_drawer.png</a></span>: <span class="message">The resource <code>R.drawable.ic_drawer</code> appears to be unused</span><br />
-<ul></ul><button id="Location7DivLink" onclick="reveal('Location7Div');" />+ 3 Additional Locations...</button>
-<div id="Location7Div" style="display: none">
+<ul></ul><button id="Location8DivLink" onclick="reveal('Location8Div');" />+ 3 Additional Locations...</button>
+<div id="Location8Div" style="display: none">
 Additional locations: <ul>
 <li> <span class="location"><a href="../../src/main/res/drawable-mdpi/ic_drawer.png">../../src/main/res/drawable-mdpi/ic_drawer.png</a></span>
 <li> <span class="location"><a href="../../src/main/res/drawable-xhdpi/ic_drawer.png">../../src/main/res/drawable-xhdpi/ic_drawer.png</a></span>
@@ -385,8 +393,8 @@ Additional locations: <ul>
 </td></tr><tr><th>xhdpi</th><th>hdpi</th><th>mdpi</th><th>xxhdpi</th></tr>
 </table>
 <span class="location"><a href="../../src/main/res/mipmap-hdpi/ic_home.png">../../src/main/res/mipmap-hdpi/ic_home.png</a></span>: <span class="message">The resource <code>R.mipmap.ic_home</code> appears to be unused</span><br />
-<ul></ul><button id="Location8DivLink" onclick="reveal('Location8Div');" />+ 4 Additional Locations...</button>
-<div id="Location8Div" style="display: none">
+<ul></ul><button id="Location9DivLink" onclick="reveal('Location9Div');" />+ 4 Additional Locations...</button>
+<div id="Location9Div" style="display: none">
 Additional locations: <ul>
 <li> <span class="location"><a href="../../src/main/res/mipmap-mdpi/ic_home.png">../../src/main/res/mipmap-mdpi/ic_home.png</a></span>
 <li> <span class="location"><a href="../../src/main/res/mipmap-xhdpi/ic_home.png">../../src/main/res/mipmap-xhdpi/ic_home.png</a></span>
@@ -412,6 +420,10 @@ Additional locations: <ul>
 <span class="location"><a href="../../src/main/res/menu/menu_horizontal_bar_chart.xml">../../src/main/res/menu/menu_horizontal_bar_chart.xml</a></span>: <span class="message">The resource <code>R.menu.menu_horizontal_bar_chart</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/menu/menu_map_chart.xml">../../src/main/res/menu/menu_map_chart.xml</a></span>: <span class="message">The resource <code>R.menu.menu_map_chart</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/menu/menu_table.xml">../../src/main/res/menu/menu_table.xml</a></span>: <span class="message">The resource <code>R.menu.menu_table</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/shadow_bottom.xml">../../src/main/res/drawable/shadow_bottom.xml</a></span>: <span class="message">The resource <code>R.drawable.shadow_bottom</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/shadow_left.xml">../../src/main/res/drawable/shadow_left.xml</a></span>: <span class="message">The resource <code>R.drawable.shadow_left</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/shadow_right.xml">../../src/main/res/drawable/shadow_right.xml</a></span>: <span class="message">The resource <code>R.drawable.shadow_right</code> appears to be unused</span><br />
+<span class="location"><a href="../../src/main/res/drawable/shadow_top.xml">../../src/main/res/drawable/shadow_top.xml</a></span>: <span class="message">The resource <code>R.drawable.shadow_top</code> appears to be unused</span><br />
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:4</span>: <span class="message">The resource <code>R.string.navigation_drawer_open</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">   1</span> &lt;resources>
 <span class="lineno">   2</span>     &lt;string name="app_name">NorrisViewer&lt;/string>
@@ -450,18 +462,18 @@ Additional locations: <ul>
 <span class="lineno">  16</span>     &lt;string name="title_activity_bar_chart">BarChartActivity&lt;/string>
 <span class="lineno">  17</span>     &lt;string <span class="errorspan">name="title_activity_table">TableActivity&lt;/string></span>
 <span class="lineno">  18</span> 
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 </pre>
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:21</span>: <span class="message">The resource <code>R.string.title_activity_maps</code> appears to be unused</span><br /><pre class="errorlines">
 <span class="lineno">  18</span> 
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 <span class="lineno">  20</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
 <span class="lineno">  21</span>     &lt;string <span class="errorspan">name="title_activity_maps">Map&lt;/string></span>
 <span class="lineno">  22</span>     &lt;string name="ok">OK&lt;/string>
 <span class="lineno">  23</span>     &lt;string name="title_activity_main">MainActivity&lt;/string>
 </pre>
 <span class="location"><a href="../../src/main/res/values/strings.xml">../../src/main/res/values/strings.xml</a>:22</span>: <span class="message">The resource <code>R.string.ok</code> appears to be unused</span><br /><pre class="errorlines">
-<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyA-hxPHTIfJQSwF7WDPrSXkK3FlC_O-RSo&lt;/string>
+<span class="lineno">  19</span>     &lt;string name="google_maps_key">AIzaSyDpUT5XTFcUfVp-wGK4seBRcpVESQhsYqM&lt;/string>
 <span class="lineno">  20</span>     &lt;string name="title_activity_horizontal_bar_chart">HorizontalBarChart&lt;/string>
 <span class="lineno">  21</span>     &lt;string name="title_activity_maps">Map&lt;/string>
 <span class="lineno">  22</span>     &lt;string <span class="errorspan">name="ok">OK&lt;/string></span>

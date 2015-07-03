@@ -44,7 +44,7 @@ import deltagraphs.norrisviewer.view.mainView.MainView;
 public class SocketManager {
 
     private Socket mSocket;
-<span class="fc" id="L47">    private String url = &quot;http://5.231.33.217:3000/norris&quot;;</span>
+<span class="fc" id="L47">    private String url = &quot;http://norris-nrti-dev.herokuapp.com/norris&quot;;</span>
 
     //Constructor of SocketManager. A new socket is created without an url.
 <span class="fc" id="L50">    public SocketManager() {</span>
@@ -115,7 +115,7 @@ public class SocketManager {
 <span class="fc" id="L115">        mSocket.on(signal, new Emitter.Listener() {</span>
             @Override
             public void call(final Object... args) {
-<span class="nc" id="L118">                activity.runOnUiThread(new Runnable() {</span>
+<span class="fc" id="L118">                activity.runOnUiThread(new Runnable() {</span>
                     @Override
                     public void run() {
 <span class="nc" id="L121">                        JSONObject obj = (JSONObject) args[0];</span>
@@ -133,7 +133,7 @@ public class SocketManager {
                         }
 <span class="nc" id="L134">                    }</span>
                 });
-<span class="nc" id="L136">            }</span>
+<span class="fc" id="L136">            }</span>
         });
 <span class="fc" id="L138">    }</span>
 }
