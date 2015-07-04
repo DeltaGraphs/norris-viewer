@@ -59,12 +59,12 @@ public class MapChartFlow extends FlowModel {
     }
 
     //it returns the latitude value of the record at the position 'index' in the list
-    public float getRecordLatitude(int index) {
+    public double getRecordLatitude(int index) {
         return records.get(index).latitude;
     }
 
     //it returns the longitude value of the record at the position 'index' in the list
-    public float getRecordLongitude(int index) {
+    public double getRecordLongitude(int index) {
         return records.get(index).longitude;
     }
 
@@ -138,13 +138,13 @@ public class MapChartFlow extends FlowModel {
     class MapChartRecord {
         private String recordId;
         private String markerId;
-        private float latitude;
-        private float longitude;
+        private double latitude;
+        private double longitude;
 
         // Record constructor.
         // It's used when a new record is added to a record list.
         // The new record is initialized with the passed parameters.
-        public MapChartRecord(String rId, String mId, float lat, float longit) {
+        public MapChartRecord(String rId, String mId, double lat, double longit) {
             recordId = rId;
             markerId = mId;
             latitude = lat;
@@ -197,7 +197,7 @@ public class MapChartFlow extends FlowModel {
                 JSONArray line = data.getJSONArray("coordinates");
                 for (int i = 0; i < line.length(); i++) {
                     JSONArray coordinates = line.getJSONArray(i);
-                    coords.add(new LatLng((float) coordinates.getDouble(0), (float) coordinates.getDouble(1)));
+                    coords.add(new LatLng(coordinates.getDouble(0), coordinates.getDouble(1)));
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -249,8 +249,8 @@ public class MapChartFlow extends FlowModel {
                     JSONArray jsonCoordinates = data.getJSONObject("trace").getJSONArray("coordinates");
                     trace.coords = new ArrayList<LatLng>();
                     for (int i = 0; i < jsonCoordinates.length(); i++) {
-                        trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),
-                                (float) jsonCoordinates.getJSONArray(i).getDouble(1)));
+                        trace.coords.add(new LatLng(jsonCoordinates.getJSONArray(i).getDouble(0),
+                                jsonCoordinates.getJSONArray(i).getDouble(1)));
                     }
                 }
             }
@@ -272,8 +272,8 @@ public class MapChartFlow extends FlowModel {
         try {
             String recordId = data.getString("norrisRecordID");
             String markerId = data.getString("markerID");
-            float latitude = (float) data.getJSONArray("value").getDouble(0);
-            float longitude = (float) data.getJSONArray("value").getDouble(1);
+            Double latitude = data.getJSONArray("value").getDouble(0);
+            Double longitude = data.getJSONArray("value").getDouble(1);
             records.add(new MapChartRecord(recordId, markerId, latitude, longitude));
         } catch (JSONException e) {
             e.printStackTrace();
@@ -308,8 +308,8 @@ public class MapChartFlow extends FlowModel {
             int recordIndex = searchRecordIndex(recordId);
             if(recordIndex!=-1){
                 records.get(recordIndex).markerId = data.getString("markerID");
-                records.get(recordIndex).latitude = (float) data.getJSONArray("value").getDouble(0);
-                records.get(recordIndex).longitude = (float) data.getJSONArray("value").getDouble(1);
+                records.get(recordIndex).latitude = data.getJSONArray("value").getDouble(0);
+                records.get(recordIndex).longitude = data.getJSONArray("value").getDouble(1);
             }
         } catch (JSONException e) {
             e.printStackTrace();

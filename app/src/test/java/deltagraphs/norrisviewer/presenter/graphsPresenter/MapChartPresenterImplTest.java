@@ -49,7 +49,7 @@ class MockMapChartActivity extends MapChartActivity{
     }
 
     @Override
-    public void setZoom(float width, float height) {
+    public void setZoom(double width, double height) {
         zoom = true;
     }
 
@@ -59,7 +59,7 @@ class MockMapChartActivity extends MapChartActivity{
     }
 
     @Override
-    public void cameraPosition(float lat, float lng) {
+    public void cameraPosition(double lat, double lng) {
         cameraPosition = true;
     }
 

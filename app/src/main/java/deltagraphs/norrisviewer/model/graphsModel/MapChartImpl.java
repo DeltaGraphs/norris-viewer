@@ -32,30 +32,30 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 public class MapChartImpl extends Graph implements MapChart {
 
-    private float mapWidth;
-    private float mapHeight;
-    private float latitude;
-    private float longitude;
+    private double mapWidth;
+    private double mapHeight;
+    private double latitude;
+    private double longitude;
     private Boolean legendOnPoint = true;
     private String mapType;
 
     //it returns the latitude of the center of the mapChart
-    public float getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
 
     //it returns the longitude of the center of the mapChart
-    public float getLongitude() {
+    public double getLongitude() {
         return longitude;
     }
 
     //it returns the width of the center of the mapChart
-    public float getMapWidth() {
+    public double getMapWidth() {
         return mapWidth;
     }
 
     //it returns the height of the center of the mapChart
-    public float getMapHeight() {
+    public double getMapHeight() {
         return mapHeight;
     }
 
@@ -80,10 +80,10 @@ public class MapChartImpl extends Graph implements MapChart {
     public void setParameters(JSONObject data) {
         try {
             title = data.getString("title");
-            mapWidth = (float) data.getDouble("mapWidth");
-            mapHeight = (float) data.getDouble("mapHeight");
-            latitude = (float) data.getDouble("latitude");
-            longitude = (float) data.getDouble("longitude");
+            mapWidth = data.getDouble("mapWidth");
+            mapHeight = data.getDouble("mapHeight");
+            latitude = data.getDouble("latitude");
+            longitude = data.getDouble("longitude");
             legendOnPoint = data.getBoolean("legendOnPoint");
             mapType = data.getString("mapType");
             //changes to flow params
@@ -108,13 +108,13 @@ public class MapChartImpl extends Graph implements MapChart {
             if (data.has("title"))
                 title = data.getString("title");
             if (data.has("mapWidth"))
-                mapWidth = (float) data.getDouble("mapWidth");
+                mapWidth = data.getDouble("mapWidth");
             if (data.has("mapHeight"))
-                mapHeight = (float) data.getDouble("mapHeight");
+                mapHeight = data.getDouble("mapHeight");
             if (data.has("latitude"))
-                latitude = (float) data.getDouble("latitude");
+                latitude = data.getDouble("latitude");
             if (data.has("longitude"))
-                longitude = (float) data.getDouble("longitude");
+                longitude = data.getDouble("longitude");
             if (data.has("legendOnPoint"))
                 legendOnPoint = data.getBoolean("legendOnPoint");
             if (data.has("mapType"))

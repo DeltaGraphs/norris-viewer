@@ -28,7 +28,7 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface MapChartView {
     // This method sets the position of the camera on the Google map.
-    public void cameraPosition(float latitude, float longitude);
+    public void cameraPosition(double latitude, double longitude);
 
     // This method set the type of the map.
     public void setMapType(String type);
@@ -37,7 +37,7 @@ public interface MapChartView {
     public void setLegendOnPoint(Boolean legend);
 
     // The followiong method set the zoom on the map and move the camere to the center position of the map zoomed
-    public void setZoom(float width, float height);
+    public void setZoom(double width, double height);
 
     //This is the main method of the class. The method set the data on the view when an update has arrived.
     public void setData(ArrayList<FlowModel> flowList, String signal);

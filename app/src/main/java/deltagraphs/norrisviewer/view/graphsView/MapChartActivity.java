@@ -144,7 +144,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     It belongs to an id, a pair of coordinates, a type with a property and
     optionally a color.
     */
-    private Marker addMapMarker(String id, float lat, float lng, String type, String property, String color) {
+    private Marker addMapMarker(String id, double lat, double lng, String type, String property, String color) {
         MarkerOptions mMarkerOptions = newMarkerOpt(id, lat, lng, type, property, color);
         setUpMapIfNeeded();
         removeMarker(id);
@@ -171,7 +171,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     This method sets the position of the camera
     on the Google map.
      */
-    public void cameraPosition(float lat, float lng) {
+    public void cameraPosition(double lat, double lng) {
         center = new LatLng(lat, lng);
         map.moveCamera(CameraUpdateFactory.newLatLng(center));
     }
@@ -194,7 +194,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     /*
     This method create a custom marker with its own options.
      */
-    private MarkerOptions newMarkerOpt(String id, float lat, float lng, String type, String property, String color) {
+    private MarkerOptions newMarkerOpt(String id, double lat, double lng, String type, String property, String color) {
 
         MarkerOptions m = new MarkerOptions();
         m.position(new LatLng(lat, lng));
@@ -295,7 +295,7 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
     /*
     The followiong method set the zoom on the map and move the camere to the center position of the map zoomed
      */
-    public void setZoom(float width, float height) {
+    public void setZoom(double width, double height) {
         if (center != null) {
             double[] ref = getBoundingBox(center.latitude, center.longitude, (int) width, (int) height);
             LatLngBounds bounds = new LatLngBounds(new LatLng(ref[0], ref[1]), new LatLng(ref[2], ref[3]));
@@ -398,8 +398,8 @@ public class MapChartActivity extends ActionBarActivity implements OnMapReadyCal
 
             for (int j = 0; j < mapChartFlow.getRecordSize(); j++) {
                 String id = idLine + " - " + mapChartFlow.getRecordMarkerId(j);
-                float lat = mapChartFlow.getRecordLatitude(j);
-                float lng = mapChartFlow.getRecordLongitude(j);
+                double lat = mapChartFlow.getRecordLatitude(j);
+                double lng = mapChartFlow.getRecordLongitude(j);
                 String recordId = mapChartFlow.getRecordId(j);
                 addMapMarker(id, lat, lng, markerType, markerProperty, color);
             }

@@ -28,16 +28,16 @@ import deltagraphs.norrisviewer.model.flowModel.FlowModel;
 
 public interface MapChart {
     //it returns the latitude of the center of the mapChart
-    public float getLatitude();
+    public double getLatitude();
 
     //it returns the longitude of the center of the mapChart
-    public float getLongitude();
+    public double getLongitude();
 
     //it returns the width of the center of the mapChart
-    public float getMapWidth();
+    public double getMapWidth();
 
     //it returns the height of the center of the mapChart
-    public float getMapHeight();
+    public double getMapHeight();
 
     //it returns true if the legend on point exists
     public Boolean getLegendOnPoint();
