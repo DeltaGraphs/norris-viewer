@@ -59,12 +59,12 @@ public class MapChartFlow extends FlowModel {
     }
 
     //it returns the latitude value of the record at the position 'index' in the list
-    public float getRecordLatitude(int index) {
+    public double getRecordLatitude(int index) {
 <span class="fc" id="L63">        return records.get(index).latitude;</span>
     }
 
     //it returns the longitude value of the record at the position 'index' in the list
-    public float getRecordLongitude(int index) {
+    public double getRecordLongitude(int index) {
 <span class="fc" id="L68">        return records.get(index).longitude;</span>
     }
 
@@ -138,13 +138,13 @@ public class MapChartFlow extends FlowModel {
     class MapChartRecord {
         private String recordId;
         private String markerId;
-        private float latitude;
-        private float longitude;
+        private double latitude;
+        private double longitude;
 
         // Record constructor.
         // It's used when a new record is added to a record list.
         // The new record is initialized with the passed parameters.
-<span class="fc" id="L147">        public MapChartRecord(String rId, String mId, float lat, float longit) {</span>
+<span class="fc" id="L147">        public MapChartRecord(String rId, String mId, double lat, double longit) {</span>
 <span class="fc" id="L148">            recordId = rId;</span>
 <span class="fc" id="L149">            markerId = mId;</span>
 <span class="fc" id="L150">            latitude = lat;</span>
@@ -197,7 +197,7 @@ public class MapChartFlow extends FlowModel {
 <span class="fc" id="L197">                JSONArray line = data.getJSONArray(&quot;coordinates&quot;);</span>
 <span class="fc bfc" id="L198" title="All 2 branches covered.">                for (int i = 0; i &lt; line.length(); i++) {</span>
 <span class="fc" id="L199">                    JSONArray coordinates = line.getJSONArray(i);</span>
-<span class="fc" id="L200">                    coords.add(new LatLng((float) coordinates.getDouble(0), (float) coordinates.getDouble(1)));</span>
+<span class="fc" id="L200">                    coords.add(new LatLng(coordinates.getDouble(0), coordinates.getDouble(1)));</span>
                 }
 <span class="nc" id="L202">            } catch (JSONException e) {</span>
 <span class="nc" id="L203">                e.printStackTrace();</span>
@@ -249,8 +249,8 @@ public class MapChartFlow extends FlowModel {
 <span class="fc" id="L249">                    JSONArray jsonCoordinates = data.getJSONObject(&quot;trace&quot;).getJSONArray(&quot;coordinates&quot;);</span>
 <span class="fc" id="L250">                    trace.coords = new ArrayList&lt;LatLng&gt;();</span>
 <span class="fc bfc" id="L251" title="All 2 branches covered.">                    for (int i = 0; i &lt; jsonCoordinates.length(); i++) {</span>
-<span class="fc" id="L252">                        trace.coords.add(new LatLng((float) jsonCoordinates.getJSONArray(i).getDouble(0),</span>
-                                (float) jsonCoordinates.getJSONArray(i).getDouble(1)));
+<span class="fc" id="L252">                        trace.coords.add(new LatLng(jsonCoordinates.getJSONArray(i).getDouble(0),</span>
+                                jsonCoordinates.getJSONArray(i).getDouble(1)));
                     }
                 }
             }
@@ -272,8 +272,8 @@ public class MapChartFlow extends FlowModel {
         try {
 <span class="fc" id="L273">            String recordId = data.getString(&quot;norrisRecordID&quot;);</span>
 <span class="fc" id="L274">            String markerId = data.getString(&quot;markerID&quot;);</span>
-<span class="fc" id="L275">            float latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
-<span class="fc" id="L276">            float longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
+<span class="fc" id="L275">            Double latitude = data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
+<span class="fc" id="L276">            Double longitude = data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
 <span class="fc" id="L277">            records.add(new MapChartRecord(recordId, markerId, latitude, longitude));</span>
 <span class="nc" id="L278">        } catch (JSONException e) {</span>
 <span class="nc" id="L279">            e.printStackTrace();</span>
@@ -308,8 +308,8 @@ public class MapChartFlow extends FlowModel {
 <span class="fc" id="L308">            int recordIndex = searchRecordIndex(recordId);</span>
 <span class="fc bfc" id="L309" title="All 2 branches covered.">            if(recordIndex!=-1){</span>
 <span class="fc" id="L310">                records.get(recordIndex).markerId = data.getString(&quot;markerID&quot;);</span>
-<span class="fc" id="L311">                records.get(recordIndex).latitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
-<span class="fc" id="L312">                records.get(recordIndex).longitude = (float) data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
+<span class="fc" id="L311">                records.get(recordIndex).latitude = data.getJSONArray(&quot;value&quot;).getDouble(0);</span>
+<span class="fc" id="L312">                records.get(recordIndex).longitude = data.getJSONArray(&quot;value&quot;).getDouble(1);</span>
             }
 <span class="nc" id="L314">        } catch (JSONException e) {</span>
 <span class="nc" id="L315">            e.printStackTrace();</span>

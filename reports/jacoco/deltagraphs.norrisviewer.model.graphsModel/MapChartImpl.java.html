@@ -32,30 +32,30 @@ import deltagraphs.norrisviewer.model.flowModel.MapChartFlow;
 
 public class MapChartImpl extends Graph implements MapChart {
 
-    private float mapWidth;
-    private float mapHeight;
-    private float latitude;
-    private float longitude;
+    private double mapWidth;
+    private double mapHeight;
+    private double latitude;
+    private double longitude;
 <span class="fc" id="L39">    private Boolean legendOnPoint = true;</span>
     private String mapType;
 
     //it returns the latitude of the center of the mapChart
-    public float getLatitude() {
+    public double getLatitude() {
 <span class="fc" id="L44">        return latitude;</span>
     }
 
     //it returns the longitude of the center of the mapChart
-    public float getLongitude() {
+    public double getLongitude() {
 <span class="fc" id="L49">        return longitude;</span>
     }
 
     //it returns the width of the center of the mapChart
-    public float getMapWidth() {
+    public double getMapWidth() {
 <span class="fc" id="L54">        return mapWidth;</span>
     }
 
     //it returns the height of the center of the mapChart
-    public float getMapHeight() {
+    public double getMapHeight() {
 <span class="fc" id="L59">        return mapHeight;</span>
     }
 
@@ -80,10 +80,10 @@ public class MapChartImpl extends Graph implements MapChart {
     public void setParameters(JSONObject data) {
         try {
 <span class="fc" id="L82">            title = data.getString(&quot;title&quot;);</span>
-<span class="fc" id="L83">            mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
-<span class="fc" id="L84">            mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
-<span class="fc" id="L85">            latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
-<span class="fc" id="L86">            longitude = (float) data.getDouble(&quot;longitude&quot;);</span>
+<span class="fc" id="L83">            mapWidth = data.getDouble(&quot;mapWidth&quot;);</span>
+<span class="fc" id="L84">            mapHeight = data.getDouble(&quot;mapHeight&quot;);</span>
+<span class="fc" id="L85">            latitude = data.getDouble(&quot;latitude&quot;);</span>
+<span class="fc" id="L86">            longitude = data.getDouble(&quot;longitude&quot;);</span>
 <span class="fc" id="L87">            legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
 <span class="fc" id="L88">            mapType = data.getString(&quot;mapType&quot;);</span>
             //changes to flow params
@@ -108,13 +108,13 @@ public class MapChartImpl extends Graph implements MapChart {
 <span class="pc bpc" id="L108" title="1 of 2 branches missed.">            if (data.has(&quot;title&quot;))</span>
 <span class="fc" id="L109">                title = data.getString(&quot;title&quot;);</span>
 <span class="pc bpc" id="L110" title="1 of 2 branches missed.">            if (data.has(&quot;mapWidth&quot;))</span>
-<span class="fc" id="L111">                mapWidth = (float) data.getDouble(&quot;mapWidth&quot;);</span>
+<span class="fc" id="L111">                mapWidth = data.getDouble(&quot;mapWidth&quot;);</span>
 <span class="pc bpc" id="L112" title="1 of 2 branches missed.">            if (data.has(&quot;mapHeight&quot;))</span>
-<span class="fc" id="L113">                mapHeight = (float) data.getDouble(&quot;mapHeight&quot;);</span>
+<span class="fc" id="L113">                mapHeight = data.getDouble(&quot;mapHeight&quot;);</span>
 <span class="pc bpc" id="L114" title="1 of 2 branches missed.">            if (data.has(&quot;latitude&quot;))</span>
-<span class="fc" id="L115">                latitude = (float) data.getDouble(&quot;latitude&quot;);</span>
+<span class="fc" id="L115">                latitude = data.getDouble(&quot;latitude&quot;);</span>
 <span class="pc bpc" id="L116" title="1 of 2 branches missed.">            if (data.has(&quot;longitude&quot;))</span>
-<span class="fc" id="L117">                longitude = (float) data.getDouble(&quot;longitude&quot;);</span>
+<span class="fc" id="L117">                longitude = data.getDouble(&quot;longitude&quot;);</span>
 <span class="pc bpc" id="L118" title="1 of 2 branches missed.">            if (data.has(&quot;legendOnPoint&quot;))</span>
 <span class="fc" id="L119">                legendOnPoint = data.getBoolean(&quot;legendOnPoint&quot;);</span>
 <span class="pc bpc" id="L120" title="1 of 2 branches missed.">            if (data.has(&quot;mapType&quot;))</span>
